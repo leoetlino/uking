@@ -24,13 +24,13 @@ class ImageResourceMgr {
 };
 class ResourceHolder;
 class Scene {
-    void exportFileBinary();
-};
-class System {
 public:
-    static System* instance();
+    static Scene* instance();
     void allocateApertureMapsCollectorImage(sead::Heap* heap);
     void loadScene();
+
+private:
+    void exportFileBinary();
 };
 class Water {
     void setUpAttributeTable();
