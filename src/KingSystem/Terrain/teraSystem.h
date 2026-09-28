@@ -26,7 +26,7 @@ class ResourceHolder;
 class Scene {
 public:
     static Scene* instance();
-    void allocateApertureMapsCollectorImage(sead::Heap* heap);
+    void allocateApertureMapImagesForAllAreas(sead::Heap* heap);
     void loadScene();
 
 private:
