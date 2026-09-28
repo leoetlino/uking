@@ -141,7 +141,7 @@ util::DualHeap* OverlayArena::makeDualHeap(u32 size, const sead::SafeString& nam
         if (res::returnFalse())
             res::stubbedLogFunction();
 
-        if (!x_1(size))
+        if (!clearCachedResources(size))
             return nullptr;
 
         heap = util::DualHeap::tryCreate(size, name, mHeap, mHeap2, alignment, direction, false);
