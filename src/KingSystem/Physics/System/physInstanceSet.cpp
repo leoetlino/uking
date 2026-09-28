@@ -91,7 +91,7 @@ void InstanceSet::sub_7100FBA9BC() {
     }
 
     if (mCharacterController != nullptr)
-        mCharacterController->sub_7100F5EC30();
+        mCharacterController->addRigidBodyToWorld();
 }
 
 void InstanceSet::sub_7100FBACE0(phys::ContactLayer layer) {
@@ -107,7 +107,7 @@ void InstanceSet::sub_7100FBACE0(phys::ContactLayer layer) {
         mRagdollInstance->disableContactLayer(layer);
 
     if (mCharacterController != nullptr)
-        mCharacterController->disableContactLayer(layer);
+        mCharacterController->enableContactLayer(layer);
 }
 
 void InstanceSet::sub_7100FBAD74() {
@@ -118,7 +118,7 @@ void InstanceSet::sub_7100FBAD74() {
         mRagdollInstance->setContactNone();
     }
     if (mCharacterController != nullptr) {
-        mCharacterController->sub_7100F60604();
+        mCharacterController->setContactNone();
     }
 }
 
