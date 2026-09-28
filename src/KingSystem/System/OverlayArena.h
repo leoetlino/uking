@@ -86,7 +86,7 @@ private:
 
     void setBloodyMoonReasonForOom_() const;
 
-    bool x_1(s32 size);
+    bool clearCachedResources(s32 size);
 
     sead::ListNode mListNode;
     sead::TypedBitFlag<Flag> mFlags = [] {

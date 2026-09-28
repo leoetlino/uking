@@ -7,8 +7,8 @@
 #include "prim/seadSafeString.h"
 
 /* Not yet attempted:
- * E3Mgr::calc - Requires SeadController and globals
- * sub_71008A6EE8 - Requires SeadController
+ * E3Mgr::calc - Requires Controller and globals
+ * sub_71008A6EE8 - Requires Controller
  * sub_71008A7094 - Requires RTTI from not decompiled classes
  */
 
