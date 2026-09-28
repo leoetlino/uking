@@ -590,7 +590,7 @@ void TimeMgr::AnimalMasterController::calc() {
 
         if (!player_accessor.hasProc())
             break;
-        if (act::isInSatoriMountainArea(player_accessor.getPreviousPos()))
+        if (act::isInSatoriMountainArea(player_accessor.getAttentionPos()))
             break;
 
         appearance_hour = sead::GlobalRandom::instance()->getU32(23);
@@ -602,7 +602,7 @@ void TimeMgr::AnimalMasterController::calc() {
         if (!player_accessor.hasProc())
             break;
 
-        if (act::isInSatoriMountainArea(player_accessor.getPreviousPos())) {
+        if (act::isInSatoriMountainArea(player_accessor.getAttentionPos())) {
             state = 0;
             break;
         }
