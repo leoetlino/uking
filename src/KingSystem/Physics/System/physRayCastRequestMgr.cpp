@@ -120,7 +120,7 @@ bool RayCastRequestMgr::isRequestFinished(const RayCastForRequest& ray_cast) con
 }
 
 void RayCastRequestMgr::scheduleRequestProcessing() {
-    if (!isGameOver())
+    if (!isUnloadStageForGameOver())
         frm::WorkerSupportThreadMgr::instance()->submitRequest(5, &mWorkerFunction);
 }
 
