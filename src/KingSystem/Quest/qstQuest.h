@@ -20,7 +20,7 @@ public:
 
     bool x_6(act::Actor* actor) const;
     void initFlags(gdt::Manager* gdm);
-    bool flagStuff() const;
+    bool isActive() const;
     void setField31();
     ActorData* sub_7100FDA5F8(int idx);
 
@@ -29,7 +29,7 @@ public:
     bool x_7() const;
     bool x_8(act::Actor* actor);
     void x_9(act::Actor* actor);
-    void x_10(const sead::SafeString& s);
+    bool getDisplayName(sead::BufferedSafeString* out);
     const char* x_11();
 
     u32 _8 = 0;

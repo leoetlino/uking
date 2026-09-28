@@ -51,7 +51,7 @@ void Manager::auto0(act::Actor* actor) {
 
     for (int i = 0; i < mQuests.size(); ++i) {
         Quest* quest = mQuests[i];
-        if (quest->_c != 2 && quest->flagStuff())
+        if (quest->_c != 2 && quest->isActive())
             quest->x_9(actor);
     }
 }
@@ -59,7 +59,7 @@ void Manager::auto0(act::Actor* actor) {
 bool Manager::auto4(act::Actor* actor) const {
     auto end = mQuests.end();
     for (auto it = mQuests.begin(); it != end; ++it) {
-        if (it->_c != 2 && it->flagStuff() && !it->x_8(actor))
+        if (it->_c != 2 && it->isActive() && !it->x_8(actor))
             return false;
     }
     return true;
