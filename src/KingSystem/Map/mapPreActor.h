@@ -26,7 +26,7 @@ struct ObjectLink;
 struct ObjectLinkArray;
 class LinkTag;
 
-class Object {
+class PreActor {
 public:
     // TODO: rename
     enum class Flag0 : u32 {
@@ -91,8 +91,8 @@ public:
         DisableRankup = 0x8,
     };
 
-    Object();
-    ~Object();
+    PreActor();
+    ~PreActor();
 
     void initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data);
     void free();
@@ -149,8 +149,8 @@ public:
     const char* getUnitConfigNameFromByaml() const;
     void getUniqueName(const char** out) const;
 
-    Object* findPlacementLODLinkObject(const PlacementActors* unused) const;
-    Object* findPlacementLODLinkObject_0(const PlacementActors* unused) const;
+    PreActor* findPlacementLODLinkObject(const PlacementActors* unused) const;
+    PreActor* findPlacementLODLinkObject_0(const PlacementActors* unused) const;
 
     const char* getHashIdStringDebug() const;
     const char* getHashIdStringDebug_0() const;
@@ -160,11 +160,11 @@ public:
     s32 x_22() const;
 
     bool hasGenGroup() const;
-    void spawnGenGroupActorsIfNeeded(Object* obj);
+    void spawnGenGroupActorsIfNeeded(PreActor* obj);
 
     void* getRails() const;
     void* getRails_0() const;
-    bool setupTargetLinks(Object* src, ObjectLink* link, sead::Heap* heap);
+    bool setupTargetLinks(PreActor* src, ObjectLink* link, sead::Heap* heap);
     bool allocLinkData(sead::Heap* heap);
     void incrementLinkNum();
     void decrementLinkNum();
@@ -176,7 +176,7 @@ public:
     // TODO:
     void initRevivalGameDataFlagAndMiscFlags(ActorData* data, bool zero);
     f32 getLoadDistance(bool get_diameter) const;
-    Object* findSrcLODLinkObject() const;
+    PreActor* findSrcLODLinkObject() const;
 
     const auto& getFlags0() const { return mFlags0; }
     void setFlags0(Flag0 bit) { mFlags0.set(bit); }
@@ -232,6 +232,6 @@ private:
     u16 mTraverseDistInt = 0;
     sead::TypedBitFlag<HardModeFlag, u8> mHardModeFlags;
 };
-KSYS_CHECK_SIZE_NX150(Object, 0x70);
+KSYS_CHECK_SIZE_NX150(PreActor, 0x70);
 
 }  // namespace ksys::map

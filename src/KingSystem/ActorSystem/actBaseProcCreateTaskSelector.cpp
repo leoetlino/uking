@@ -1,7 +1,7 @@
 #include "KingSystem/ActorSystem/actBaseProcCreateTaskSelector.h"
 #include <limits>
 #include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 
 namespace ksys::act {
 
@@ -20,7 +20,7 @@ Task* BaseProcCreateTaskSelector::selectTask(const TaskSelectionContext& context
         if (task->getLaneId() == u8(BaseProcCreateTask::LaneId::_2))
             return &it;
 
-        if (task->mMapObject && task->mMapObject->getFlags0().isOff(map::Object::Flag0::_4))
+        if (task->mMapObject && task->mMapObject->getFlags0().isOff(map::PreActor::Flag0::_4))
             return &it;
 
         if (task->mDistanceToLoadSphere >= 0.0 && min > task->mDistanceToLoadSphere)

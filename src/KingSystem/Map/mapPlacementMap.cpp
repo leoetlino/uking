@@ -2,7 +2,7 @@
 #include <prim/seadScopedLock.h>
 #include <thread/seadReadWriteLock.h>
 #include "KingSystem/AOC/aocManager.h"
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Physics/System/physStaticCompound.h"
 #include "KingSystem/Physics/System/physStaticCompoundRigidBodyGroup.h"
 #include "KingSystem/Resource/resLoadRequest.h"
@@ -71,7 +71,7 @@ bool PlacementMap::clearStaticCompoundActorId(int idx) {
     return true;
 }
 
-void PlacementMap::updateObjectCollisionAndId(int index, Object* obj) {
+void PlacementMap::updateObjectCollisionAndId(int index, PreActor* obj) {
     if (PlacementMgr::instance()->auto17(obj)) {
         return;
     }
@@ -98,11 +98,11 @@ void PlacementMap::updateObjectCollisionAndId(int index, Object* obj) {
     bool enabled = false;
     if (obj->shouldSkipSpawn() ||
         (obj->checkActorDataFlag(mPa, map::ActorData::Flag::MapConstPassive) &&
-         obj->getFlags0().isOn(Object::Flag0::_800))) {
-        obj->resetFlags0(Object::Flag0::StaticCompoundInstanceEnabled);
+         obj->getFlags0().isOn(PreActor::Flag0::_800))) {
+        obj->resetFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
         enabled = false;
     } else {
-        obj->setFlags0(Object::Flag0::StaticCompoundInstanceEnabled);
+        obj->setFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
         enabled = true;
     }
     sc->setInstanceEnabled(idx, enabled);
@@ -120,7 +120,7 @@ bool PlacementMap::parseStaticMap_(sead::Heap* heap, u8* data) {
     mStaticMapLoaded = true;
     return false;
 }
-int PlacementMap::getStaticCompoundIdFromPosition(const Object& object) const {
+int PlacementMap::getStaticCompoundIdFromPosition(const PreActor& object) const {
     if (mMgr->isShrineOrDivineBeast()) {
         return 0;
     }
@@ -154,14 +154,14 @@ bool PlacementMap::x_6() {
     int num_objs = mPa->getNumObjs(mDynamicGroupIdx);
 
     for (int i = 0; i < num_objs; i++) {
-        Object* obj = mPa->getObj(mDynamicGroupIdx, i);
-        obj->setFlags0(Object::Flag0::_4000);
+        PreActor* obj = mPa->getObj(mDynamicGroupIdx, i);
+        obj->setFlags0(PreActor::Flag0::_4000);
 
         const auto& flags = obj->getFlags0();
-        if (flags.isOn(Object::Flag0::_2) || flags.isOn(Object::Flag0::_4)) {
-            ret &= flags.isOn(Object::Flag0::_80);
+        if (flags.isOn(PreActor::Flag0::_2) || flags.isOn(PreActor::Flag0::_4)) {
+            ret &= flags.isOn(PreActor::Flag0::_80);
         }
-        if (flags.isOn(Object::Flag0::_10000) || flags.isOn(Object::Flag0::_80000000)) {
+        if (flags.isOn(PreActor::Flag0::_10000) || flags.isOn(PreActor::Flag0::_80000000)) {
             ret = false;
         }
     }
@@ -235,19 +235,19 @@ PlacementMap::MapObjStatus PlacementMap::x_2(int hksc_idx) {
     return MapObjStatus::Loading;
 }
 
-void PlacementMap::setStaticCompoundInstanceEnabled(Object* obj, bool enabled) {
+void PlacementMap::setStaticCompoundInstanceEnabled(PreActor* obj, bool enabled) {
     if (obj->getStaticCompoundActorId() < 0) {
         return;
     }
     const auto lock = sead::makeScopedLock(mCs);
 
-    if (enabled == obj->getFlags0().isOn(Object::Flag0::StaticCompoundInstanceEnabled)) {
+    if (enabled == obj->getFlags0().isOn(PreActor::Flag0::StaticCompoundInstanceEnabled)) {
         return;
     }
     if (enabled) {
-        obj->setFlags0(Object::Flag0::StaticCompoundInstanceEnabled);
+        obj->setFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
     } else {
-        obj->resetFlags0(Object::Flag0::StaticCompoundInstanceEnabled);
+        obj->resetFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
     }
 
     int idx = getStaticCompoundIdFromPosition(obj->getTranslate());

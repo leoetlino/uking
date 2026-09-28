@@ -3,7 +3,7 @@
 
 namespace ksys::map {
 
-bool printDebugMsg(Object* object, const sead::SafeString& msg, const char* config_name) {
+bool printDebugMsg(PreActor* object, const sead::SafeString& msg, const char* config_name) {
     if (object == nullptr)
         return false;
 
@@ -12,7 +12,7 @@ bool printDebugMsg(Object* object, const sead::SafeString& msg, const char* conf
 }
 
 bool printDebugMsg(ksys::act::Actor* actor, const sead::SafeString& msg, const char* config_name) {
-    Object* o = actor->getMapObject();
+    PreActor* o = actor->getMapObject();
     if (o == nullptr)
         return false;
 
