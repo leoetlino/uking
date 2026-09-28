@@ -295,7 +295,7 @@ void OverlayArenaSystem::createTeraWorkHeap() {
         mTeraWorkHeap = sead::ExpHeap::tryCreate(0, "TeraWork", mFixedHeap, sizeof(void*),
                                                  sead::Heap::cHeapDirection_Forward, false);
         if (mTeraWorkHeap) {
-            tera::Scene::instance()->allocateApertureMapsCollectorImage(mTeraWorkHeap);
+            tera::Scene::instance()->allocateApertureMapImagesForAllAreas(mTeraWorkHeap);
             mTeraWorkHeap->adjust();
             res::stubbedLogFunction();
         }
