@@ -161,7 +161,7 @@ bool LevelSensor::scaleWeapon(const sead::SafeString& weapon, WeaponModifier min
     return false;
 }
 
-bool LevelSensor::scaleActor(const sead::SafeString& name, map::Object* obj,
+bool LevelSensor::scaleActor(const sead::SafeString& name, map::PreActor* obj,
                              const char** scaled_weapon, act::InstParamPack* pack,
                              const sead::Vector3f& position) const {
     if (!isScalingAllowed(position))
