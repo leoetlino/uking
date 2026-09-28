@@ -96,8 +96,8 @@ public:
     void release(PreActor* obj, bool a1);
     bool allocLinksToSelf(s32 num_links, sead::Heap* heap);
 
-    bool sub_7100D4EC40(PreActor* src, ObjectLink* link, PreActor* dest);
-    void sub_7100D4FB78(PreActor* obj);
+    bool addTargetLinkAndReadParams(PreActor* src, ObjectLink* link, PreActor* dest);
+    void spawnGenGroupActors(PreActor* obj);
     bool checkCreateLinkObjRevival() const;
     bool checkDeleteLinkObjRevival() const;
 
