@@ -202,7 +202,7 @@ public:
     // 0x0000007100f8e110
     void removeFromWorldImmediatelyAndResetLinks();
     // 0x0000007100f8e3fc
-    void x_11();
+    void x_11_addToWorld();
 
     CollisionInfo* getCollisionInfo() const { return mCollisionInfo; }
     void setCollisionInfo(CollisionInfo* info);
@@ -510,7 +510,7 @@ public:
 
     bool hasConstraintWithUserData();
     // 0x0000007100f94e80
-    bool x_103(int a);
+    bool isConnectedToNonDynamicBody(int a);
     // 0x0000007100f94f18
     bool x_104(RigidBody* other_body, int a, int b);
     // 0x0000007100f950ac
@@ -526,7 +526,7 @@ public:
     void clearFlag4000000(bool clear);
     void clearFlag8000000(bool clear);
     // 0x0000007100f95f8c
-    void x_114(bool unk);
+    void setContactListenerEnabledMaybe(bool unk);
 
     void lock();
     void lock(AlsoLockWorld also_lock_world);

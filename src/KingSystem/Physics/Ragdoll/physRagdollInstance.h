@@ -82,7 +82,7 @@ public:
     void setUserTag(UserTag* tag);
     void setSystemGroupHandler(SystemGroupHandler* handler);
     // 0x0000007101221424
-    void x_22(int index, float value);
+    void setBoneWeightMaybe(int index, float value);
     void setContactPointInfo(ContactPointInfo* info);
     void enableContactLayer(ContactLayer layer);
     void disableContactLayer(ContactLayer layer);
