@@ -35,7 +35,7 @@ void ActorCreator::onTaskRemoved(const TaskRemoveCallbackContext& context) {
 ActorCreator::~ActorCreator() = default;
 
 bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
-                                         map::MubinIter* mubin_iter, map::Object* map_object,
+                                         map::MubinIter* mubin_iter, map::PreActor* map_object,
                                          BaseProcHandle* handle, int task_lane_id,
                                          InstParamPack* params) {
     const char* actor_profile;
@@ -105,7 +105,7 @@ Actor* ActorCreator::createActor(const char* name, sead::Heap* heap, InstParamPa
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                       map::MubinIter* mubin_iter, map::Object* map_object,
+                                       map::MubinIter* mubin_iter, map::PreActor* map_object,
                                        BaseProcHandle* handle, int task_lane_id,
                                        InstParamPack* params) {
     BaseProcCreateTaskData data;
@@ -129,7 +129,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                       map::Object* map_object, BaseProcHandle* handle,
+                                       map::PreActor* map_object, BaseProcHandle* handle,
                                        int task_lane_id, InstParamPack* params) {
     BaseProcCreateTaskData data;
     data.mHeap = heap;
@@ -151,7 +151,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 }
 
 bool ActorCreator::requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
-                                      InstParamPack* params, map::Object* map_object,
+                                      InstParamPack* params, map::PreActor* map_object,
                                       int task_lane_id) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
