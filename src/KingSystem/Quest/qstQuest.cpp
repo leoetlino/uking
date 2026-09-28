@@ -104,7 +104,7 @@ bool Quest::x_8(act::Actor* actor) {
 
 void Quest::x_9(act::Actor* actor) {
     if (isStepUnderCapacity())
-        mSteps[_140]->sub_7100FDB794(actor);
+        mSteps[_140]->acquireIndicatorActorLink(actor);
 }
 
 const char* Quest::x_11() {
