@@ -27,7 +27,7 @@ public:
     static bool isExposureZero();
     void loadInfo();
     WeatherType rollNewWeather(Climate climate);
-    bool x_0();
+    bool saveClimateWeathersToGameData();
 
     u8 _20[0x24 - 0x20];
     float _24;
