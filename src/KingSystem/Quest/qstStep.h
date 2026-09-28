@@ -37,7 +37,7 @@ struct Step {
 
     bool sub_7100FDB89C(act::Actor* actor) const;
     bool sub_7100FDB538(act::Actor* actor, const sead::SafeString& name) const;
-    bool sub_7100FDB794(act::Actor* actor) const;
+    bool acquireIndicatorActorLink(act::Actor* actor) const;
     bool initActorData(u32 unused, sead::BufferedSafeString* out_message);
     bool initIndicator(u32 unused, sead::BufferedSafeString* out_message);
     bool sub_7100FDC2A4(al::ByamlIter* iter);
