@@ -62,7 +62,7 @@ const char* Actor::getUniqueName() const {
 }
 
 void Actor::handleAck(const MessageAck& ack) {
-    if (m80())
+    if (handleAck_())
         return;
 
     if (mRootAi)
