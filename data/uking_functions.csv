@@ -49137,7 +49137,7 @@ Address,Quality,Size,Name
 0x00000071007b79a8,U,000976,StageBinder::initAndReportDungeonLeaveEnter
 0x00000071007b7d78,U,000016,
 0x00000071007b7d88,U,000028,GameScene::setInstance2
-0x00000071007b7da4,U,000016,_Z18isStageSelectStatev
+0x00000071007b7da4,U,000016,_ZN5uking18isStageSelectStateEv
 0x00000071007b7db4,U,000012,sceneStartEventReady
 0x00000071007b7dc0,U,000016,setSceneStartEventReady
 0x00000071007b7dd0,U,000012,setSceneStartEventNotReady
