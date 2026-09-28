@@ -166,7 +166,7 @@ bool AutoPlacement::sub_7100650144(PlacementGroup* grp, bool check_exposure) {
         return true;
     }
 
-    if (object->getProc() == nullptr && object->getFlags0().isOn(ksys::map::Object::Flag0::_80))
+    if (object->getProc() == nullptr && object->getFlags0().isOn(ksys::map::PreActor::Flag0::_80))
         return true;
 
     if (grp->_1d != 2)
