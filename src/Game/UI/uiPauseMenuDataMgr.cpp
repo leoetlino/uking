@@ -2542,7 +2542,7 @@ bool PauseMenuDataMgr::getFromShop(const sead::SafeString& name, int value,
     } else if (type > PouchItemType::Shield || type == PouchItemType::Arrow) {
         addToPouch(name, type, lists, 1, false, modifier);
     } else {
-        int life = getItemGeneralLife(name.cstr());
+        int life = getWeaponGeneralLife(name.cstr());
         if (modifier)
             life += modifier->flags.isOn(uking::act::WeaponModifier::AddLife) ? modifier->value : 0;
         addToPouch(name, type, lists, life, false, modifier);
