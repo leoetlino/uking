@@ -2,9 +2,9 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
-#include "KingSystem/Map/mapObject.h"
 #include "KingSystem/Map/mapPlacementAreaMgr.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/Actor/resResourceLod.h"
 #include "KingSystem/System/OcclusionQueryCylinder.h"
 

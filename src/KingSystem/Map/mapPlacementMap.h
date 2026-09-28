@@ -21,7 +21,7 @@ class StaticCompoundRigidBodyGroup;
 
 namespace ksys::map {
 
-class Object;
+class PreActor;
 class PlacementMapMgr;
 class PlacementActors;
 
@@ -90,14 +90,14 @@ private:
     void cleanupPhysics();
     bool loadStaticCompound(int hksc_idx, bool is_auto_gen_mu, bool req_arg_8);
     MapObjStatus x_2(int hksc_idx);
-    void updateObjectCollisionAndId(int id, Object* obj);
+    void updateObjectCollisionAndId(int id, PreActor* obj);
     void unloadHksc(int hksc_idx);
     bool clearStaticCompoundActorId(int id);
     int x_1(int id);
     bool staticCompoundStuff(int sc_id, bool cleanup);
     int doSomethingStaticCompound(int hksc_idx);
     bool isDynamicLoaded(const sead::Vector3f& pos);
-    void setStaticCompoundInstanceEnabled(Object* obj, bool enabled);
+    void setStaticCompoundInstanceEnabled(PreActor* obj, bool enabled);
     void x_9();
 
     void x_7(int idx, int unknown, s8 column, s8 row, const sead::SafeString& mubin_path,
@@ -105,7 +105,7 @@ private:
 
     int getStaticCompoundIdFromPosition(const sead::Vector3f& pos) const;
     int getStaticCompoundIdFromPosition(float x, float z) const;
-    int getStaticCompoundIdFromPosition(const Object& object) const;
+    int getStaticCompoundIdFromPosition(const PreActor& object) const;
 
     u8 _0;
     u8 mSkipLoadStaticMap;

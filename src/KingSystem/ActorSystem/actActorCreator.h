@@ -11,7 +11,7 @@
 
 namespace ksys::map {
 class MubinIter;
-class Object;
+class PreActor;
 }  // namespace ksys::map
 
 namespace ksys::act {
@@ -36,12 +36,12 @@ class ActorCreator {
 
 public:
     bool requestCreateMapActor(const char* name, sead::Heap* heap, map::MubinIter* mubin_iter,
-                               map::Object* map_object, BaseProcHandle* handle, int task_lane_id,
+                               map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
                                InstParamPack* params);
     Actor* createActor(const char* name, sead::Heap* heap, InstParamPack* params,
                        bool sleep_after_init, bool block_other_synchronous_spawns);
     bool requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
-                            InstParamPack* params, map::Object* map_object, int task_lane_id);
+                            InstParamPack* params, map::PreActor* map_object, int task_lane_id);
 
     void enableDistanceUnloadChecks();
     void eraseActor(Actor* actor);
@@ -65,10 +65,10 @@ public:
 
 private:
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                             map::MubinIter* mubin_iter, map::Object* map_object,
+                             map::MubinIter* mubin_iter, map::PreActor* map_object,
                              BaseProcHandle* handle, int task_lane_id, InstParamPack* params);
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                             map::Object* map_object, BaseProcHandle* handle, int task_lane_id,
+                             map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
                              InstParamPack* params);
     BaseProc* createActor_(const char* actor_class, const char* name, sead::Heap* heap,
                            InstParamPack* params, bool sleep_after_init, bool = false);

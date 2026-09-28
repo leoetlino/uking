@@ -18,7 +18,7 @@ namespace ksys::map {
 
 class LazyTraverseList;
 class MubinIter;
-class Object;
+class PreActor;
 
 class PlacementAreaMgr {
     // not "Axis" and probably not in this class but I dunno what it does
@@ -186,9 +186,9 @@ public:
     void loadDemoCulling(const sead::SafeString& demo_name);
     void unloadDemoCulling();
     // d1fe78
-    bool shouldSkipSpawnOneHitChallengeActor(const Object& obj);
+    bool shouldSkipSpawnOneHitChallengeActor(const PreActor& obj);
     // d20bcc
-    bool shouldSkipSpawn(const Object& obj, bool a3);
+    bool shouldSkipSpawn(const PreActor& obj, bool a3);
     bool insideInnerHideBase(const sead::Vector3f& pos, const float& dist_from_face,
                              const int& idx);
     bool isPlayerInsideNpc(const sead::Vector3f& pos);

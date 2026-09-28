@@ -8,10 +8,10 @@ class Actor;
 
 namespace ksys::map {
 
-class Object;
+class PreActor;
 
-void* makeProjectMapMuuntPath(const sead::SafeString& path, Object* object);
-bool printDebugMsg(Object* object, const sead::SafeString& msg, const char* config_name);
+void* makeProjectMapMuuntPath(const sead::SafeString& path, PreActor* object);
+bool printDebugMsg(PreActor* object, const sead::SafeString& msg, const char* config_name);
 bool printDebugMsg(ksys::act::Actor* actor, const sead::SafeString& msg, const char* config_name);
 
 }  // namespace ksys::map
