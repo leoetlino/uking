@@ -297,7 +297,7 @@ void BaseProcMgr::removeSpecialJobTypes(u16 mask) {
 }
 
 void BaseProcMgr::calc() {
-    ActorSystem::instance()->onBaseProcMgrCalc();
+    ActorSystem::instance()->updatePlayerPosAndCameraPos();
     mProcInitializer->deleteThreadIfPaused();
 
     if (mIsInitialisingQuestMgrMaybe)
