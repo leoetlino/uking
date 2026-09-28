@@ -14,7 +14,7 @@ class ActorSystem {
     ActorSystem();
 
 public:
-    void onBaseProcMgrCalc();
+    void updatePlayerPosAndCameraPos();
 
     bool getPlayer(ActorConstDataAccess* accessor);
 

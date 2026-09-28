@@ -412,7 +412,7 @@ void Manager::onStageInit(StageType stage_type, bool is_demo, bool is_main_field
         act::ActorConstDataAccess accessor;
         act::ActorSystem::instance()->getPlayer(&accessor);
         if (accessor.hasProc()) {
-            mPlayerPos = accessor.getPreviousPos();
+            mPlayerPos = accessor.getAttentionPos();
             mPrevPlayerPos = mPlayerPos;
         }
         mPrevClimate = mCurrentClimate;

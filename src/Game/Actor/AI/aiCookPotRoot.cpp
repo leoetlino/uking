@@ -24,7 +24,7 @@ bool CookPotRoot::init_(sead::Heap* heap) {
     if (*mInitBurnState_m) {
         // TODO
     }
-    mActor->getChemicalStuff();
+    mActor->getMainChemical();
     mProcLink.reset();
     return true;
 }

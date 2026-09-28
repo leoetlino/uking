@@ -70,7 +70,7 @@ public:
     bool checkFlag2B() const;
 
     bool deleteLater(BaseProc::DeleteReason reason) const;
-    bool deleteEx(BaseProc::DeleteReason reason) const;
+    bool fadeoutDelete(BaseProc::DeleteReason reason) const;
     bool sleep(BaseProc::SleepWakeReason reason) const;
     bool wakeUp(BaseProc::SleepWakeReason reason) const;
     bool setProperties(int x, const sead::Matrix34f& mtx, const sead::Vector3f& vel,
@@ -103,7 +103,7 @@ public:
     bool checkFlag18() const;
     bool isPlayerTheConnectedParent() const;
 
-    const sead::Vector3f& getPreviousPos() const;
+    const sead::Vector3f& getAttentionPos() const;
 
     void setThisActorAsParent(BaseProc* child, bool delete_parent_on_delete);
     void setThisActorAsChild(BaseProc* parent, bool delete_child_on_delete);

@@ -174,11 +174,11 @@ bool ActorConstDataAccess::deleteLater(BaseProc::DeleteReason reason) const {
     return actor->deleteLater(reason);
 }
 
-bool ActorConstDataAccess::deleteEx(BaseProc::DeleteReason reason) const {
+bool ActorConstDataAccess::fadeoutDelete(BaseProc::DeleteReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
-    return actor->deleteEx(Actor::DeleteType::_1, reason);
+    return actor->fadeoutDelete(Actor::DeleteType::_1, reason);
 }
 
 bool ActorConstDataAccess::sleep(BaseProc::SleepWakeReason reason) const {
