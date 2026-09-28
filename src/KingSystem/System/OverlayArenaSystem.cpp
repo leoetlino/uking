@@ -288,14 +288,14 @@ void OverlayArenaSystem::createJpegHeap() {
 void OverlayArenaSystem::createTeraWorkHeap() {
     res::stubbedLogFunction();
 
-    if (tera::System::instance()) {
+    if (tera::Scene::instance()) {
         if (mTeraWorkHeap)
             return;
 
         mTeraWorkHeap = sead::ExpHeap::tryCreate(0, "TeraWork", mFixedHeap, sizeof(void*),
                                                  sead::Heap::cHeapDirection_Forward, false);
         if (mTeraWorkHeap) {
-            tera::System::instance()->allocateApertureMapsCollectorImage(mTeraWorkHeap);
+            tera::Scene::instance()->allocateApertureMapsCollectorImage(mTeraWorkHeap);
             mTeraWorkHeap->adjust();
             res::stubbedLogFunction();
         }
