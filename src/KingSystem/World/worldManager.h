@@ -211,8 +211,8 @@ public:
 
     bool worldInfoLoaded() const { return mWorldInfoLoadStatus != WorldInfoLoadStatus::NotLoaded; }
 
-    u8 sub_71010F337C(const sead::Vector3f& pos);  // TODO implement this : 0x71010F337C - maybe has
-                                                   // a different parameter type
+    u8 getWeatherTypeAtPos(const sead::Vector3f& pos);  // TODO implement this : 0x71010F337C -
+                                                        // maybe has a different parameter type
 
 private:
     enum class WorldInfoLoadStatus : u8 {
