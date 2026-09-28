@@ -198,7 +198,7 @@ public:
     virtual void receivesStasisDamage();
     virtual void getBodyCenterPos();
     virtual void isInStasis();
-    virtual void onPreFadeOutDelete();
+    virtual void onPreFadeoutDelete();
     virtual void onFadeOutSleep();
     virtual void onCancelFadeOutSleep();
     virtual void onModelOpacityApplied();
@@ -441,7 +441,7 @@ protected:
     /* 0x68f */ sead::Atomic<bool> _68f = false;
     /* 0x690 */ bool _690 = false;
     /* 0x691 */ bool _691 = false;
-    /* 0x694 */ sead::Atomic<int> mFadeOutDeleteType = 0;
+    /* 0x694 */ sead::Atomic<int> mFadeoutDeleteType = 0;
     /* 0x698 */ sead::Atomic<u32> mFadeOutSleepFlags;
     /* 0x6a0 */ void* _6a0 = nullptr;
     /* 0x6a8 */ Chemical* mChemical = nullptr;
