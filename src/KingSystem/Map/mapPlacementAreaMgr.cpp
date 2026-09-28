@@ -2,8 +2,8 @@
 
 #include "KingSystem/Map/mapLazyTraverseList.h"
 #include "KingSystem/Map/mapMubinIter.h"
-#include "KingSystem/Map/mapObject.h"
 #include "KingSystem/Map/mapObjectLink.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/MathUtil.h"
 
 #include <math/seadMatrix.h>
