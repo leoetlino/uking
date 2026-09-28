@@ -95,7 +95,7 @@ void Object::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* da
 
     auto* fr = StagePreActorCache::instance()->getForestRenderer();
     if (fr != nullptr) {
-        if (fr->x_7(mTranslate) != -1) {
+        if (fr->findTreeIdxByPos(mTranslate) != -1) {
             mFlags0.set(Flag0::_10);
         }
     }
