@@ -13,3 +13,12 @@ jobs:
         source: 'src'
         exclude: 'lib'
         clangFormatVersion: 19
+  function-groups:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+    - run: pip install pyyaml
+    - run: python tools/check_function_groups.py
