@@ -14,9 +14,9 @@ struct InitParams {
 };
 
 // 0x0000007100f3a4e4
-bool isGameOver();
+bool isUnloadStageForGameOver();
 // 0x0000007100f3a4f0
-void setIsGameOver(bool is_game_over);
+void setIsUnloadStageForGameOver(bool is_unload_stage_for_game_over);
 
 void initBaseProcMgr(sead::Heap* heap);
 
