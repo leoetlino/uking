@@ -1,29 +1,6 @@
 #include "Game/Actor/Damage/dmgStruct20.h"
 
-namespace uking::dmg {
-
-void Struct20::reset() {
-    mField_8 = 0;
-    mField_C = 0;
-    mField_10 = 0;
-    mField_14 = -1;
-    mField_18 = -1;
-}
-
-void Struct20::combineMaybe(Struct20Base* other) {
-    Struct20* otherStruct = sead::DynamicCast<Struct20>(other);
-    if (!otherStruct) {
-        return;
-    }
-
-    mField_8 += otherStruct->mField_8;
-    mField_C += otherStruct->mField_C;
-    mField_10 += otherStruct->mField_10;
-    if (mField_18 < otherStruct->mField_18) {
-        mField_14 = otherStruct->mField_14;
-        mField_18 = otherStruct->mField_18;
-    }
-}
+namespace uking::act {
 
 void Struct20_2::reset() {
     mField_1C = 0;
@@ -32,7 +9,7 @@ void Struct20_2::reset() {
     Struct20::reset();
 }
 
-void Struct20_2::combineMaybe(Struct20Base* other) {
+void Struct20_2::combineMaybe(ksys::act::Struct20Base* other) {
     Struct20_2* otherStruct = sead::DynamicCast<Struct20_2>(other);
     if (!otherStruct) {
         Struct20::combineMaybe(other);
@@ -50,4 +27,4 @@ void Struct20_2::combineMaybe(Struct20Base* other) {
     }
 }
 
-}  // namespace uking::dmg
+}  // namespace uking::act

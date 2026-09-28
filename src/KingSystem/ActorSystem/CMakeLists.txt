@@ -101,6 +101,8 @@ target_sources(uking PRIVATE
     actDebug.h
     actGlobalParameter.cpp
     actGlobalParameter.h
+    actIncomingDamageHandler.cpp
+    actIncomingDamageHandler.h
     actInfoCommon.cpp
     actInfoCommon.h
     actInfoData.cpp
@@ -112,6 +114,7 @@ target_sources(uking PRIVATE
     actPhysicsConstraints.h
     actPhysicsUserTag.cpp
     actPhysicsUserTag.h
+    actProcAcquire.cpp
     actTag.h
 
     actionDummyAction.cpp
