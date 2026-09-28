@@ -6,7 +6,7 @@
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttack.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemy.h"
@@ -290,7 +290,7 @@ map::ObjectLinkData* ActorConstDataAccess::getMapObjectLinkData() const {
     return object->getLinkData();
 }
 
-map::Object* ActorConstDataAccess::getMapObject() const {
+map::PreActor* ActorConstDataAccess::getMapObject() const {
     auto* actor = getActor();
     if (!actor)
         return nullptr;

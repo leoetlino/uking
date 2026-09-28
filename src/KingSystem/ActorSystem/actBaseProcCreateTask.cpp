@@ -1,7 +1,7 @@
 #include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/actBaseProcHandle.h"
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 
 namespace ksys::act {
 

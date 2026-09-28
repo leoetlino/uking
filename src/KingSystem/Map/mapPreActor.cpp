@@ -1,4 +1,4 @@
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
@@ -13,7 +13,7 @@
 namespace ksys::map {
 
 // NON_MATCHING
-Object::Object() {
+PreActor::PreActor() {
     mHardModeFlags.makeAllZero();
     _b = 0xFF;
     _18 = nullptr;
@@ -22,14 +22,14 @@ Object::Object() {
     mLinkData = nullptr;
 }
 
-Object::~Object() {
+PreActor::~PreActor() {
     if (mLinkData != nullptr) {
         mLinkData->release(this, true);
         mLinkData = nullptr;
     }
 }
 
-void Object::free() {
+void PreActor::free() {
     mId = 0;
     _10 = nullptr;
     _18 = nullptr;
@@ -51,7 +51,7 @@ void Object::free() {
 }
 
 // NON_MATCHING
-void Object::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data) {
+void PreActor::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data) {
     mActorDataIdx = 0xFFFF;
     mFlags0.makeAllZero();
     mRevivalGameDataFlagHash = gdt::InvalidHandle;
@@ -102,7 +102,7 @@ void Object::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* da
     initRevivalGameDataFlagAndMiscFlags(data, false);
 }
 
-act::BaseProc* Object::tryGetProc(bool force) {
+act::BaseProc* PreActor::tryGetProc(bool force) {
     auto* bpm = act::BaseProcMgr::instance();
     if (bpm == nullptr || !bpm->isHighPriorityThread())
         return nullptr;
@@ -120,12 +120,12 @@ act::BaseProc* Object::tryGetProc(bool force) {
     return mProc;
 }
 
-act::Actor* Object::tryGetActor(bool force) {
+act::Actor* PreActor::tryGetActor(bool force) {
     auto* proc = tryGetProc(force);
     return sead::DynamicCast<act::Actor>(proc);
 }
 
-bool Object::getActorWithAccessor(act::ActorLinkConstDataAccess& accessor) {
+bool PreActor::getActorWithAccessor(act::ActorLinkConstDataAccess& accessor) {
     act::BaseProcMgr* instance = act::BaseProcMgr::instance();
 
     if (instance == nullptr || !instance->isHighPriorityThread() || mProc == nullptr)
@@ -137,11 +137,11 @@ bool Object::getActorWithAccessor(act::ActorLinkConstDataAccess& accessor) {
     return accessor.acquire(nullptr);
 }
 
-act::Actor* Object::getActor() {
+act::Actor* PreActor::getActor() {
     return sead::DynamicCast<act::Actor>(mProc);
 }
 
-void Object::registerBaseProc(act::BaseProc* proc) {
+void PreActor::registerBaseProc(act::BaseProc* proc) {
     static const char* sActorStateStrings[4] = {"Init", "Calc", "Sleep", "Delete"};
 
     if (mProc != nullptr && mProc != proc) {
@@ -159,15 +159,15 @@ void Object::registerBaseProc(act::BaseProc* proc) {
     mHardModeFlags.set(HardModeFlag::ActorCreated);
 }
 
-void Object::setBaseProcDirect(act::BaseProc* proc) {
+void PreActor::setBaseProcDirect(act::BaseProc* proc) {
     mProc = proc;
 }
 
-bool Object::checkActorDataFlag(const PlacementActors* pa, ActorData::Flag flag) const {
+bool PreActor::checkActorDataFlag(const PlacementActors* pa, ActorData::Flag flag) const {
     return pa->mActorData[mActorDataIdx].mFlags.isOnBit(flag);
 }
 
-bool Object::isEnemyOrNpcOrActiveOrMapPassive() const {
+bool PreActor::isEnemyOrNpcOrActiveOrMapPassive() const {
     if (mActorFlags8.isOn(ActorFlag8::EnemyOrNpcOrActiveOrAreaOrAirWall))
         return true;
 
@@ -178,7 +178,7 @@ bool Object::isEnemyOrNpcOrActiveOrMapPassive() const {
     return !checkActorDataFlag(pa, ActorData::Flag::MapPassiveOrFlag1);
 }
 
-bool Object::isNpcOrActiveOrMapPassiveOrFlag1() const {
+bool PreActor::isNpcOrActiveOrMapPassiveOrFlag1() const {
     auto actFlags = mActorFlags8;
     if (isFlags8Cleared())
         return true;
@@ -194,7 +194,7 @@ bool Object::isNpcOrActiveOrMapPassiveOrFlag1() const {
     return checkActorDataFlag(pa, ActorData::Flag::MapPassiveOrFlag1);
 }
 
-bool Object::isMapPassive(const PlacementActors* pa) const {
+bool PreActor::isMapPassive(const PlacementActors* pa) const {
     if (isFlags8Cleared())
         return true;
 
@@ -208,16 +208,16 @@ bool Object::isMapPassive(const PlacementActors* pa) const {
     return checkActorDataFlag(pa, ActorData::Flag::MapPassiveOrFlag1);
 }
 
-bool Object::isEnemyOrNpc(const PlacementActors* pa) const {
+bool PreActor::isEnemyOrNpc(const PlacementActors* pa) const {
     return checkActorDataFlag(pa, ActorData::Flag::EnemyOrNpc_DisableFlashback);
 }
 
-bool Object::isFlags8Cleared() const {
+bool PreActor::isFlags8Cleared() const {
     return mActorFlags8.isZero();
 }
 
-f32 Object::getDispDistance(const ActorData* data, bool get_diameter, u32 unused,
-                            bool ignore_radius) const {
+f32 PreActor::getDispDistance(const ActorData* data, bool get_diameter, u32 unused,
+                              bool ignore_radius) const {
     if (data->mFlags.isOnBit(ActorData::Flag::TraverseDistReset))
         return 0.0;
 
@@ -230,19 +230,19 @@ f32 Object::getDispDistance(const ActorData* data, bool get_diameter, u32 unused
         return 100.0 * mult;
 }
 
-f32 Object::getDispDistance(const PlacementActors* pa, bool get_diameter,
-                            bool ignore_radius) const {
+f32 PreActor::getDispDistance(const PlacementActors* pa, bool get_diameter,
+                              bool ignore_radius) const {
     auto* dat = &pa->mActorData[mActorDataIdx];
     return getDispDistance(dat, get_diameter, 0, ignore_radius);
 }
 
-f32 Object::getDispDistance(bool get_diameter, bool ignore_radius) const {
+f32 PreActor::getDispDistance(bool get_diameter, bool ignore_radius) const {
     auto pa = PlacementMgr::instance()->mPlacementActors;
     return getDispDistance(pa, get_diameter, ignore_radius);
 }
 
-[[gnu::noinline]] f32 Object::getTraverseDist(const ActorData* data, bool get_diameter, u32,
-                                              bool ignore_radius) const {
+[[gnu::noinline]] f32 PreActor::getTraverseDist(const ActorData* data, bool get_diameter, u32,
+                                                bool ignore_radius) const {
     using DFlag = ActorData::Flag;
     f32 dist = 0.0;
 
@@ -268,7 +268,7 @@ f32 Object::getDispDistance(bool get_diameter, bool ignore_radius) const {
     return mTraverseDist;
 }
 
-f32 Object::getTraverseDistForLOD() const {
+f32 PreActor::getTraverseDistForLOD() const {
     using DFlag = ActorData::Flag;
     auto* data = &PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx];
     f32 dist = 0.0;
@@ -295,13 +295,13 @@ f32 Object::getTraverseDistForLOD() const {
         return 100.0 * mult;
 }
 
-sead::Vector3f Object::getScale() const {
+sead::Vector3f PreActor::getScale() const {
     sead::Vector3f vec;
     mMubinIter.getScale(&vec);
     return vec;
 }
 
-const char* Object::getUnitConfigName() const {
+const char* PreActor::getUnitConfigName() const {
     auto* mgr = PlacementMgr::instance();
 
     if (mgr != nullptr && mgr->mPlacementActors != nullptr)
@@ -310,14 +310,14 @@ const char* Object::getUnitConfigName() const {
     return getUnitConfigNameFromByaml();
 }
 
-const char* Object::getUnitConfigNameFromByaml() const {
+const char* PreActor::getUnitConfigNameFromByaml() const {
     const char* result;
     if (!mMubinIter.tryGetParamStringByKey(&result, "UnitConfigName"))
         result = "";
     return result;
 }
 
-Object* Object::findPlacementLODLinkObject(const PlacementActors*) const {
+PreActor* PreActor::findPlacementLODLinkObject(const PlacementActors*) const {
     if (!mLinkData)
         return nullptr;
 
@@ -327,7 +327,7 @@ Object* Object::findPlacementLODLinkObject(const PlacementActors*) const {
     return nullptr;
 }
 
-Object* Object::findPlacementLODLinkObject_0(const PlacementActors*) const {
+PreActor* PreActor::findPlacementLODLinkObject_0(const PlacementActors*) const {
     if (!mLinkData)
         return nullptr;
 
@@ -337,11 +337,11 @@ Object* Object::findPlacementLODLinkObject_0(const PlacementActors*) const {
     return nullptr;
 }
 
-const char* Object::getHashIdStringDebug() const {
+const char* PreActor::getHashIdStringDebug() const {
     return getHashIdStringDebug_0();
 }
 
-const char* Object::getHashIdStringDebug_0() const {
+const char* PreActor::getHashIdStringDebug_0() const {
     act::ActorDebug::HashUnused t;
     const char* terminator;
 
@@ -352,7 +352,7 @@ const char* Object::getHashIdStringDebug_0() const {
     return terminator;
 }
 
-void Object::unlinkProc(bool force) {
+void PreActor::unlinkProc(bool force) {
     bool set = false;
     auto flag = Flag0::ResetOnUnlinkFailed;
 
@@ -375,7 +375,7 @@ void Object::unlinkProc(bool force) {
     mProc = nullptr;
 }
 
-bool Object::checkRevivalFlag(ActorData::Flag bit) const {
+bool PreActor::checkRevivalFlag(ActorData::Flag bit) const {
     if (bit == ActorData::Flag::RevivalEnable || bit == ActorData::Flag::RevivalForUsed ||
         bit == ActorData::Flag::RevivalForDrop) {
         if (getActorData().mFlags.isOffBit(bit))
@@ -385,13 +385,13 @@ bool Object::checkRevivalFlag(ActorData::Flag bit) const {
     return false;
 }
 
-bool Object::isRevivalGameDataFlagOn() const {
+bool PreActor::isRevivalGameDataFlagOn() const {
     bool x = false;
     gdt::Manager::instance()->getBool(mRevivalGameDataFlagHash, &x, true);
     return x;
 }
 
-void Object::setRevivalFlagValueIf(ActorData::Flag bit, bool value) {
+void PreActor::setRevivalFlagValueIf(ActorData::Flag bit, bool value) {
     if (bit == ActorData::Flag::RevivalEnable || bit == ActorData::Flag::RevivalForUsed ||
         bit == ActorData::Flag::RevivalForDrop) {
         if (getActorData().mFlags.isOnBit(bit)) {
@@ -400,12 +400,12 @@ void Object::setRevivalFlagValueIf(ActorData::Flag bit, bool value) {
     }
 }
 
-void Object::setRevivalFlagValue(bool value) {
+void PreActor::setRevivalFlagValue(bool value) {
     gdt::Manager::instance()->setBoolNoCheck(value, mRevivalGameDataFlagHash);
 }
 
 // NON_MATCHING
-bool Object::x_18() const {
+bool PreActor::x_18() const {
     act::InfoData::InvalidLifeConditions info;
     const char* s;
     auto* id = act::InfoData::instance();
@@ -421,7 +421,7 @@ bool Object::x_18() const {
     return !id->sub_7100D30DF8(info, temp);
 }
 
-bool Object::setupTargetLinks(Object* src, ObjectLink* link, sead::Heap* heap) {
+bool PreActor::setupTargetLinks(PreActor* src, ObjectLink* link, sead::Heap* heap) {
     if (mNumLinksPointingToMe == 0)
         return false;
 
@@ -439,24 +439,24 @@ bool Object::setupTargetLinks(Object* src, ObjectLink* link, sead::Heap* heap) {
     return mLinkData->sub_7100D4EC40(src, link, this);
 }
 
-bool Object::checkCreateOrDeleteLinkObjRevival() const {
+bool PreActor::checkCreateOrDeleteLinkObjRevival() const {
     if (mLinkData != nullptr)
         return mLinkData->checkCreateOrDeleteLinkObjRevival();
     return false;
 }
 
-bool Object::shouldSkipSpawn() const {
+bool PreActor::shouldSkipSpawn() const {
     if (checkTraverseFlags() || shouldSkipSpawn_(false))
         return true;
     return checkCreateOrDeleteLinkObjRevival();
 }
 
-bool Object::checkTraverseFlags() const {
+bool PreActor::checkTraverseFlags() const {
     return mFlags0.isOn(Flag0::_500400);
 }
 
 // NON_MATCHING
-bool Object::x_20() const {
+bool PreActor::x_20() const {
     if (getActorData().mFlags.isOffBit(ActorData::Flag::RevivalEnable))
         return false;
 
@@ -469,7 +469,7 @@ bool Object::x_20() const {
     return false;
 }
 
-void Object::onBaseProcCreated(act::BaseProc* actor) {
+void PreActor::onBaseProcCreated(act::BaseProc* actor) {
     if (actor != nullptr) {
         registerBaseProc(actor);
         mFlags0.set(Flag0::ActorCreated);
@@ -478,12 +478,12 @@ void Object::onBaseProcCreated(act::BaseProc* actor) {
     }
 }
 
-void Object::spawnGenGroupActorsIfNeeded(Object* obj) {
+void PreActor::spawnGenGroupActorsIfNeeded(PreActor* obj) {
     if (mLinkData != nullptr)
         mLinkData->sub_7100D4FB78(obj);
 }
 
-void Object::setFieldATrue() {
+void PreActor::setFieldATrue() {
     if (mActorFlags8.isOn(ActorFlag8::MapPassive) || mActorFlags8.isOn(ActorFlag8::_8)) {
         mActorFlags8.reset(ActorFlag8::MapPassive);
         mActorFlags8.reset(ActorFlag8::_8);
@@ -491,28 +491,28 @@ void Object::setFieldATrue() {
     }
 }
 
-void* Object::getRails() const {
+void* PreActor::getRails() const {
     return getRails_0();
 }
 
-void* Object::getRails_0() const {
+void* PreActor::getRails_0() const {
     if (mLinkData == nullptr)
         return nullptr;
     return mLinkData->mRails;
 }
 
-bool Object::allocLinkData(sead::Heap* heap) {
+bool PreActor::allocLinkData(sead::Heap* heap) {
     mLinkData = new (heap) ObjectLinkData;
     return mLinkData != nullptr;
 }
 
-bool Object::hasGenGroup() const {
+bool PreActor::hasGenGroup() const {
     if (!mLinkData)
         return false;
     return mLinkData->mGenGroup != nullptr;
 }
 
-void Object::incrementLinkNum() {
+void PreActor::incrementLinkNum() {
     if (mNumLinksPointingToMe != 0xFF) {
         mNumLinksPointingToMe++;
         return;
@@ -533,19 +533,19 @@ void Object::incrementLinkNum() {
     printDebugMsg(this, "リンクの想定数を越えました。テストで無ければプログラマに相談", nullptr);
 }
 
-void Object::decrementLinkNum() {
+void PreActor::decrementLinkNum() {
     if (mNumLinksPointingToMe != 0)
         --mNumLinksPointingToMe;
 }
 
-sead::Vector3f Object::getRotate() const {
+sead::Vector3f PreActor::getRotate() const {
     sead::Vector3f result;
     mMubinIter.getRotate(&result);
     return result;
 }
 
 // NON_MATCHING: Vec3f copy incorrect
-void Object::getTraversePosAndLoadDistance(sead::Vector3f* traverse_pos, f32* load_dist) const {
+void PreActor::getTraversePosAndLoadDistance(sead::Vector3f* traverse_pos, f32* load_dist) const {
     if (mFlags.isOn(Flag::HasTraversePos))
         mMubinIter.tryGetFloatArrayByKey(&traverse_pos->x, "TraversePos");
     else
@@ -553,12 +553,12 @@ void Object::getTraversePosAndLoadDistance(sead::Vector3f* traverse_pos, f32* lo
     *load_dist = getLoadDistance(false);
 }
 
-void Object::getUniqueName(const char** out) const {
+void PreActor::getUniqueName(const char** out) const {
     if (mFlags.isOff(Flag::HasUniqueName) || !mMubinIter.tryGetParamStringByKey(out, "UniqueName"))
         *out = "";
 }
 
-void Object::setTranslate(const sead::Vector3f& translate) {
+void PreActor::setTranslate(const sead::Vector3f& translate) {
     mTranslate = translate;
 }
 

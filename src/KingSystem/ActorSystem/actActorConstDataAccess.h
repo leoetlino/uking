@@ -9,7 +9,7 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::map {
-class Object;
+class PreActor;
 class ObjectLinkData;
 }  // namespace ksys::map
 
@@ -94,7 +94,7 @@ public:
 
     bool checkLinkTagActivated(bool a, bool b);
     map::ObjectLinkData* getMapObjectLinkData() const;
-    map::Object* getMapObject() const;
+    map::PreActor* getMapObject() const;
 
     s32 getEnemyRank() const;
 

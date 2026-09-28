@@ -4,7 +4,7 @@
 #include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
 #include "KingSystem/ActorSystem/actBaseProcHandle.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
-#include "KingSystem/Map/mapObject.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/resGameResourceSystem.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/SafeDelete.h"

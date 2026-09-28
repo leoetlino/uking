@@ -13,7 +13,7 @@ class ActorLinkConstDataAccess;
 namespace ksys::map {
 
 class GenGroup;
-class Object;
+class PreActor;
 class Rail;
 
 enum class MapLinkDefType {
@@ -72,7 +72,7 @@ struct ObjectLink {
     static bool sub_7100D4E310(MapLinkDefType t);
     static bool isPlacementLODOrForSaleLink(MapLinkDefType t);
 
-    Object* other_obj = nullptr;
+    PreActor* other_obj = nullptr;
     MapLinkDefType type = MapLinkDefType::Invalid;
     MubinIter iter{};
 };
@@ -93,11 +93,11 @@ public:
     ObjectLinkData();
 
     void deleteArrays();
-    void release(Object* obj, bool a1);
+    void release(PreActor* obj, bool a1);
     bool allocLinksToSelf(s32 num_links, sead::Heap* heap);
 
-    bool sub_7100D4EC40(Object* src, ObjectLink* link, Object* dest);
-    void sub_7100D4FB78(Object* obj);
+    bool sub_7100D4EC40(PreActor* src, ObjectLink* link, PreActor* dest);
+    void sub_7100D4FB78(PreActor* obj);
     bool checkCreateLinkObjRevival() const;
     bool checkDeleteLinkObjRevival() const;
 
@@ -110,10 +110,10 @@ public:
         return checkDeleteLinkObjRevival() || checkCreateLinkObjRevival();
     }
 
-    Object* mCreateLinksSrcObj = nullptr;
-    Object* mDeleteLinksSrcObj = nullptr;
+    PreActor* mCreateLinksSrcObj = nullptr;
+    PreActor* mDeleteLinksSrcObj = nullptr;
 
-    sead::Buffer<Object*> mObjects;
+    sead::Buffer<PreActor*> mObjects;
     ObjectLinkArray mLinksOther{};
     ObjectLinkArray mLinksCs{};
     ObjectLinkArray mLinksToSelf{};

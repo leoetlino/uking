@@ -12,7 +12,7 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::map {
-class Object;
+class PreActor;
 }
 
 namespace ksys::act {
@@ -27,7 +27,7 @@ struct BaseProcCreateArg {
     sead::SafeString proc_class;
     sead::SafeString proc_name;
     map::MubinIter* mubin_iter;
-    map::Object* map_object;
+    map::PreActor* map_object;
     InstParamPack::Buffer* params;
     BaseProcLink proc_link;
 };
@@ -46,7 +46,7 @@ public:
     sead::IDelegate1R<BaseProcCreateArg&, BaseProc*>* mCreateDelegate{};
     BaseProcHandle* mProcHandle{};
     map::MubinIter* mMubinIter{};
-    map::Object* mMapObject{};
+    map::PreActor* mMapObject{};
     InstParamPack::Buffer* mParams{};
     BaseProc* mOtherProc{};
     bool mSleepAfterInit{};
@@ -91,7 +91,7 @@ private:
     map::MubinIter mMubinIter;
     sead::IDelegate1R<BaseProcCreateArg&, BaseProc*>* mCreateDelegate{};
     BaseProcUnit* mUnit{};
-    map::Object* mMapObject{};
+    map::PreActor* mMapObject{};
     TaskDelegateT<BaseProcCreateTask> mTaskDelegate{this,
                                                     &BaseProcCreateTask::onTaskDelegateInvoked};
     BaseProcLink mLink;

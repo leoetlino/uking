@@ -1,6 +1,6 @@
 #pragma once
 
-#include <KingSystem/Map/mapObject.h>
+#include <KingSystem/Map/mapPreActor.h>
 #include <basis/seadTypes.h>
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
@@ -15,7 +15,7 @@ class InstParamPack;
 }  // namespace ksys::act
 
 namespace ksys::map {
-class Object;
+class PreActor;
 }
 
 namespace ksys::eco {
@@ -41,7 +41,7 @@ public:
                      const char** scaled_weapon, WeaponModifier* scaled_modifier,
                      act::Actor* actor) const;
 
-    bool scaleActor(const sead::SafeString& name, map::Object* obj, const char** scaled_weapon,
+    bool scaleActor(const sead::SafeString& name, map::PreActor* obj, const char** scaled_weapon,
                     act::InstParamPack* pack, const sead::Vector3f& position) const;
 
     void calculatePoints();

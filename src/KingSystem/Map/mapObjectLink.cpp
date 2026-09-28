@@ -1,8 +1,8 @@
 #include "KingSystem/Map/mapObjectLink.h"
 #include <container/seadBuffer.h>
 #include "KingSystem/ActorSystem/actActorConstDataAccess.h"
-#include "KingSystem/Map/mapObject.h"
 #include "KingSystem/Map/mapObjectGenGroup.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Map/mapRail.h"
 
 namespace ksys::map {

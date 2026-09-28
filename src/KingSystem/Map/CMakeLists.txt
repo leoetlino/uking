@@ -6,8 +6,6 @@ target_sources(uking PRIVATE
   mapLazyTraverseList.h
   mapMubinIter.cpp
   mapMubinIter.h
-  mapObject.cpp
-  mapObject.h
   mapObjectGenGroup.cpp
   mapObjectGenGroup.h
   mapObjectLink.cpp
@@ -24,6 +22,8 @@ target_sources(uking PRIVATE
   mapPlacementMgr.h
   mapPlacementTree.cpp
   mapPlacementTree.h
+  mapPreActor.cpp
+  mapPreActor.h
   mapRail.cpp
   mapRail.h
 )

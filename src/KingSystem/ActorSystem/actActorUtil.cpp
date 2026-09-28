@@ -11,8 +11,8 @@
 #include "KingSystem/ActorSystem/actTag.h"
 #include "KingSystem/Ecosystem/ecoSystem.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/Map/mapObject.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/Actor/resResourceActorLink.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectNpc.h"
@@ -116,8 +116,8 @@ bool hasOneTagAtLeast(const ActorConstDataAccess& accessor, const sead::SafeStri
 }
 
 // NON_MATCHING: this version doesn't have unnecessary register moves.
-bool shouldSkipSpawnWhenRaining(map::Object* obj) {
-    if (obj->getFlags().isOff(map::Object::Flag::CreateNotRain))
+bool shouldSkipSpawnIfNotRaining(map::PreActor* obj) {
+    if (obj->getFlags().isOff(map::PreActor::Flag::CreateNotRain))
         return false;
 
     if (!world::Manager::instance())
@@ -127,18 +127,18 @@ bool shouldSkipSpawnWhenRaining(map::Object* obj) {
     return !world::Manager::instance()->isRaining(pos);
 }
 
-bool shouldSkipSpawnIfGodForestOff(map::Object* obj) {
+bool shouldSkipSpawnIfGodForestOff(map::PreActor* obj) {
     bool value = false;
-    if (obj->getFlags().isOff(map::Object::Flag::UnderGodForestOff))
+    if (obj->getFlags().isOff(map::PreActor::Flag::UnderGodForestOff))
         return false;
     if (!gdt::Manager::instance()->getBool(sAnimalMasterAppearanceHandle, &value, true))
         return false;
     return value != 0;
 }
 
-bool shouldSkipSpawnGodForestActor(map::Object* obj) {
+bool shouldSkipSpawnGodForestActor(map::PreActor* obj) {
     bool value = false;
-    if (obj->getFlags().isOn(map::Object::Flag::UnderGodForest) &&
+    if (obj->getFlags().isOn(map::PreActor::Flag::UnderGodForest) &&
         gdt::Manager::instance()->getBool(sAnimalMasterAppearanceHandle, &value, true) && !value) {
         return true;
     }
@@ -150,7 +150,7 @@ static bool isFairyCountCheckEnabled() {
     return gdt::Manager::instance()->getBool(sFairyCountCheckHandle, &value, true) && value;
 }
 
-bool shouldSkipSpawnFairy(map::Object* obj) {
+bool shouldSkipSpawnFairy(map::PreActor* obj) {
     const map::ActorData& actor_data = obj->getActorData();
     if (!actor_data.mFlags.isOnBit(map::ActorData::Flag::Fairy))
         return false;

@@ -12,7 +12,7 @@ enum class AreaItemType;
 }
 
 namespace ksys::map {
-class Object;
+class PreActor;
 }
 
 namespace ksys::act {
@@ -65,10 +65,10 @@ bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags);
 bool hasOneTagAtLeast(BaseProcLink* link, const sead::SafeString& tags);
 bool hasOneTagAtLeast(const ActorConstDataAccess& accessor, const sead::SafeString& tags);
 
-bool shouldSkipSpawnWhenRaining(map::Object* obj);
-bool shouldSkipSpawnIfGodForestOff(map::Object* obj);
-bool shouldSkipSpawnGodForestActor(map::Object* obj);
-bool shouldSkipSpawnFairy(map::Object* obj);
+bool shouldSkipSpawnIfNotRaining(map::PreActor* obj);
+bool shouldSkipSpawnIfGodForestOff(map::PreActor* obj);
+bool shouldSkipSpawnGodForestActor(map::PreActor* obj);
+bool shouldSkipSpawnFairy(map::PreActor* obj);
 bool shouldSkipSpawnFairy(const sead::SafeString& actor);
 
 /// Must be called before using any of the "should skip" functions above.

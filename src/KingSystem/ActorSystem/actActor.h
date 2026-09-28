@@ -30,7 +30,7 @@ class ASList;
 }  // namespace as
 
 namespace map {
-class Object;
+class PreActor;
 }  // namespace map
 
 namespace mii {
@@ -136,7 +136,7 @@ public:
 
     ai::RootAi* getRootAi() const { return mRootAi; }
     const ActorParam* getParam() const { return mActorParam; }
-    map::Object* getMapObject() const { return mMapObject; }
+    map::PreActor* getMapObject() const { return mMapObject; }
     const map::MubinIter& getMapObjIter() const { return mMapObjIter; }
     as::ASList* getASList() const { return mASList; }
 
@@ -479,7 +479,7 @@ protected:
 
     /* 0x7b0 */ ActorCreator* mCreator{};
     /* 0x7b8 */ sead::ListNode mCreatorActorListNode;
-    /* 0x7c8 */ map::Object* mMapObject{};
+    /* 0x7c8 */ map::PreActor* mMapObject{};
 
     /* 0x7d0 */ void* _7d0 = nullptr;
     /* 0x7d8 */ bool _7d8 = false;

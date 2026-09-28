@@ -1,8 +1,8 @@
 #include "Game/Actor/actDragon.h"
 #include <math/seadVector.h>
 #include <random/seadGlobalRandom.h>
-#include "KingSystem/Map/mapObject.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
+#include "KingSystem/Map/mapPreActor.h"
 
 namespace uking::act {
 
