@@ -79196,7 +79196,7 @@ Address,Quality,Size,Name
 0x0000007100e66c7c,U,000228,uking::act::HorseBase::preDelete2_
 0x0000007100e66d60,U,000300,uking::act::HorseBase::onEnterSleep_
 0x0000007100e66e8c,U,000388,uking::act::HorseBase::onDeleteRequested_
-0x0000007100e67010,U,000388,uking::act::HorseBase::onPreFadeOutDelete
+0x0000007100e67010,U,000388,uking::act::HorseBase::onPreFadeoutDelete
 0x0000007100e67194,U,000004,uking::act::HorseBase::canWakeUp_
 0x0000007100e67198,U,000152,uking::act::HorseBase::enterCalcSetup
 0x0000007100e67230,U,000384,uking::act::HorseBase::startWarpAppear
@@ -92566,7 +92566,7 @@ Address,Quality,Size,Name
 0x00000071011c7a98,U,000012,ksys::act::Actor::hasActorFlag8
 0x00000071011c7aa4,U,000540,ksys::act::Actor::onEnterSleep_
 0x00000071011c7cc0,U,000004,ksys::act::Actor::onDeleteRequested_
-0x00000071011c7cc4,U,000004,ksys::act::Actor::onPreFadeOutDelete
+0x00000071011c7cc4,U,000004,ksys::act::Actor::onPreFadeoutDelete
 0x00000071011c7cc8,U,000004,ksys::act::Actor::onFadeOutSleep
 0x00000071011c7ccc,U,000004,ksys::act::Actor::onCancelFadeOutSleep
 0x00000071011c7cd0,U,000508,ksys::act::Actor::becomePreActor
