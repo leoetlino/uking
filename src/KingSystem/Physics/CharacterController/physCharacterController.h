@@ -5,9 +5,9 @@ namespace ksys::phys {
 
 class CharacterController {
 public:
-    void sub_7100F5EC30();
-    void sub_7100F60604();
-    void disableContactLayer(ContactLayer);
+    void addRigidBodyToWorld();
+    void setContactNone();
+    void enableContactLayer(ContactLayer);
 };
 
 }  // namespace ksys::phys
