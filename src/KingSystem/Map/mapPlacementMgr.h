@@ -17,7 +17,7 @@ class InstParamPack;
 
 namespace ksys::map {
 
-class Object;
+class PreActor;
 class PlacementTree;
 class PlacementActors;
 
@@ -33,7 +33,7 @@ class PlacementMgr {
         sead::PtrArray<u32> _30;
         sead::PtrArray<u32> _40;
         sead::PtrArray<u32> _50;
-        sead::PtrArray<map::Object> dragon_item_drop_targets;
+        sead::PtrArray<map::PreActor> dragon_item_drop_targets;
         sead::PtrArray<u32> _70;
     };
     KSYS_CHECK_SIZE_NX150(TraverseResults, 0x80);
@@ -47,7 +47,7 @@ public:
     bool auto1();
     void x_0(sead::Vector3f* pos, act::InstParamPack* pack);
     void printDebugInfo();
-    void loadModel(Object* obj);
+    void loadModel(PreActor* obj);
     void incrementCounter();
     void x();
     void auto5();
@@ -56,7 +56,7 @@ public:
 
     void threadFn(sead::Thread* thread, sead::MessageQueue::Element msg);
     // 0x00000071011eb4dc
-    bool auto17(Object* obj);
+    bool auto17(PreActor* obj);
 
     enum class MgrFlag {
         _1 = 0x1,
