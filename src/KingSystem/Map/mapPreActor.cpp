@@ -436,7 +436,7 @@ bool PreActor::setupTargetLinks(PreActor* src, ObjectLink* link, sead::Heap* hea
             return false;
     }
 
-    return mLinkData->sub_7100D4EC40(src, link, this);
+    return mLinkData->addTargetLinkAndReadParams(src, link, this);
 }
 
 bool PreActor::checkCreateOrDeleteLinkObjRevival() const {
@@ -480,7 +480,7 @@ void PreActor::onBaseProcCreated(act::BaseProc* actor) {
 
 void PreActor::spawnGenGroupActorsIfNeeded(PreActor* obj) {
     if (mLinkData != nullptr)
-        mLinkData->sub_7100D4FB78(obj);
+        mLinkData->spawnGenGroupActors(obj);
 }
 
 void PreActor::setFieldATrue() {

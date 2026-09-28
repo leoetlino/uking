@@ -106,7 +106,7 @@ void PlacementMgr::x() {
     if (mFlags.isOn(MgrFlag::_2))
         return;
 
-    mPlacementActors->x_9();
+    mPlacementActors->disableAndClearUnkObjs();
     mIntTime++;
 
     f32 last_time = mTime;
