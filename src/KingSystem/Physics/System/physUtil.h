@@ -7,7 +7,7 @@ class hkpCollidable;
 class hkpShape;
 
 namespace ksys::map {
-class Object;
+class PreActor;
 }
 
 namespace ksys::phys {
@@ -25,7 +25,7 @@ bool getMaterialMaskFromCollidable(RigidBodyCollisionMasks* p_masks, u32* p_coll
 
 // 0x0000007100fd09d0
 void getBodyGroupAndObjectFromSCShape(StaticCompoundRigidBodyGroup** p_body_group,
-                                      map::Object** p_object, const hkpShape& shape,
+                                      map::PreActor** p_object, const hkpShape& shape,
                                       const u32* shape_key);
 
 // 0x0000007100fd0a1c
