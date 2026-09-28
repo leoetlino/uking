@@ -27,7 +27,7 @@ public:
     static bool isExposureZero();
     void loadInfo();
     WeatherType rollNewWeather(Climate climate);
-    bool x_0();
+    bool saveClimateWeathersToGameData();
 
     WeatherType getWeather() const;
     WeatherType getWeather2() const { return mWeather2; }
