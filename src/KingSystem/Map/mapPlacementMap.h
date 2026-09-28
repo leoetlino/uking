@@ -33,7 +33,7 @@ class PlacementMap {
             _1 = 1,
             _2 = 2,  // Call cleanupHkscMaybe(), if ok, set to 3
             _3 = 3,
-            _4 = 4,  // Call staticCompoundStuff, if ok, set to 5
+            _4 = 4,  // Call removeStaticCompoundFromWorld, if ok, set to 5
             _5 = 5,
         };
 
@@ -84,7 +84,7 @@ private:
     void unloadStaticMubin();
     bool x_6();
     void x_5();
-    int traverseStuff(sead::Vector3f* vec, PlacementActors* pa, int id);
+    int traverseStaticObjsForFarActors(sead::Vector3f* vec, PlacementActors* pa, int id);
 
     phys::StaticCompoundRigidBodyGroup* getFieldBodyGroup(int field_group_idx);
     void cleanupPhysics();
@@ -93,8 +93,8 @@ private:
     void updateObjectCollisionAndId(int id, PreActor* obj);
     void unloadHksc(int hksc_idx);
     bool clearStaticCompoundActorId(int id);
-    int x_1(int id);
-    bool staticCompoundStuff(int sc_id, bool cleanup);
+    int isPosNearQuadrantCenter(int id);
+    bool removeStaticCompoundFromWorld(int sc_id, bool cleanup);
     int doSomethingStaticCompound(int hksc_idx);
     bool isDynamicLoaded(const sead::Vector3f& pos);
     void setStaticCompoundInstanceEnabled(PreActor* obj, bool enabled);
