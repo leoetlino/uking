@@ -7,8 +7,8 @@ target_sources(uking PRIVATE
   sndMusicDefinition.h
   sndMusicInfo.cpp
   sndMusicInfo.h
-  sndResource.cpp
-  sndResource.h
   sndMgr.cpp
   sndMgr.h
+  sndSound.cpp
+  sndSound.h
 )

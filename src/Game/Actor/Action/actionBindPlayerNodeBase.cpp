@@ -1,8 +1,9 @@
 #include "Game/Actor/Action/actionBindPlayerNodeBase.h"
+#include "Game/Actor/Action/actionBindPlayerNodeEx.h"
 
 namespace uking::action {
 
-BindPlayerNodeBase::BindPlayerNodeBase(const InitArg& arg) : ActionEx(arg) {}
+[[gnu::noinline]] BindPlayerNodeBase::BindPlayerNodeBase(const InitArg& arg) : ActionEx(arg) {}
 
 BindPlayerNodeBase::~BindPlayerNodeBase() = default;
 
@@ -24,5 +25,7 @@ void BindPlayerNodeBase::calc_() {
     if (isFinishedAS(0, 0))
         setFinished();
 }
+
+BindPlayerNodeEx::BindPlayerNodeEx(const InitArg& arg) : BindPlayerNodeBase(arg) {}
 
 }  // namespace uking::action
