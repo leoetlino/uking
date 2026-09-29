@@ -7,7 +7,7 @@
 #include "Game/Actor/Player/actPlayerBase.h"
 #include "Game/Actor/Player/actPlayerInfo.h"
 #include "Game/Actor/actPlayerCreateMgr.h"
-#include "Game/Actor/actPlayerCreateUtils.h"
+#include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/Cooking/cookManager.h"
 #include "Game/Scene/gameScene.h"
@@ -2542,7 +2542,7 @@ bool PauseMenuDataMgr::getFromShop(const sead::SafeString& name, int value,
     } else if (type > PouchItemType::Shield || type == PouchItemType::Arrow) {
         addToPouch(name, type, lists, 1, false, modifier);
     } else {
-        int life = getWeaponGeneralLife(name.cstr());
+        int life = uking::act::getWeaponGeneralLife(name.cstr());
         if (modifier)
             life += modifier->flags.isOn(uking::act::WeaponModifier::AddLife) ? modifier->value : 0;
         addToPouch(name, type, lists, life, false, modifier);
@@ -2936,32 +2936,32 @@ void PauseMenuDataMgr::initInventoryForOpenWorldDemo() {
     }
 
     if (!ksys::util::getDebugHeap()) {
-        addItemForDebug("Obj_BombArrow_A_01", 100);
-        addItemForDebug("Obj_AncientArrow_A_01", 100);
-        addItemForDebug("Obj_FireArrow_A_01", 100);
-        addItemForDebug("Obj_ElectricArrow_A_01", 100);
-        addItemForDebug("Obj_IceArrow_A_01", 100);
-        addItemForDebug("PlayerStole2", 1);
-        addItemForDebug("Obj_DRStone_Get", 1);
-        addItemForDebug("GameRomHorseSaddle_01", 1);
-        addItemForDebug("GameRomHorseSaddle_02", 1);
-        addItemForDebug("GameRomHorseSaddle_03", 1);
-        addItemForDebug("GameRomHorseSaddle_04", 1);
-        addItemForDebug("GameRomHorseSaddle_05", 1);
-        addItemForDebug("GameRomHorseReins_01", 1);
-        addItemForDebug("GameRomHorseReins_02", 1);
-        addItemForDebug("GameRomHorseReins_03", 1);
-        addItemForDebug("GameRomHorseReins_04", 1);
-        addItemForDebug("GameRomHorseReins_05", 1);
-        addItemForDebug("Weapon_Lsword_056", 1);
-        addItemForDebug("Weapon_Spear_001", 1);
-        addItemForDebug("Weapon_Lsword_032", 1);
-        addItemForDebug("Weapon_Shield_002", 1);
-        addItemForDebug("Weapon_Bow_002", 1);
-        addItemForDebug("Weapon_Bow_027", 1);
-        addItemForDebug("Weapon_Sword_070", 1);
-        addItemForDebug("Weapon_Sword_043", 1);
-        addItemForDebug("Weapon_Sword_006", 1);
+        uking::act::addItemForDebug("Obj_BombArrow_A_01", 100);
+        uking::act::addItemForDebug("Obj_AncientArrow_A_01", 100);
+        uking::act::addItemForDebug("Obj_FireArrow_A_01", 100);
+        uking::act::addItemForDebug("Obj_ElectricArrow_A_01", 100);
+        uking::act::addItemForDebug("Obj_IceArrow_A_01", 100);
+        uking::act::addItemForDebug("PlayerStole2", 1);
+        uking::act::addItemForDebug("Obj_DRStone_Get", 1);
+        uking::act::addItemForDebug("GameRomHorseSaddle_01", 1);
+        uking::act::addItemForDebug("GameRomHorseSaddle_02", 1);
+        uking::act::addItemForDebug("GameRomHorseSaddle_03", 1);
+        uking::act::addItemForDebug("GameRomHorseSaddle_04", 1);
+        uking::act::addItemForDebug("GameRomHorseSaddle_05", 1);
+        uking::act::addItemForDebug("GameRomHorseReins_01", 1);
+        uking::act::addItemForDebug("GameRomHorseReins_02", 1);
+        uking::act::addItemForDebug("GameRomHorseReins_03", 1);
+        uking::act::addItemForDebug("GameRomHorseReins_04", 1);
+        uking::act::addItemForDebug("GameRomHorseReins_05", 1);
+        uking::act::addItemForDebug("Weapon_Lsword_056", 1);
+        uking::act::addItemForDebug("Weapon_Spear_001", 1);
+        uking::act::addItemForDebug("Weapon_Lsword_032", 1);
+        uking::act::addItemForDebug("Weapon_Shield_002", 1);
+        uking::act::addItemForDebug("Weapon_Bow_002", 1);
+        uking::act::addItemForDebug("Weapon_Bow_027", 1);
+        uking::act::addItemForDebug("Weapon_Sword_070", 1);
+        uking::act::addItemForDebug("Weapon_Sword_043", 1);
+        uking::act::addItemForDebug("Weapon_Sword_006", 1);
     }
 
     const auto lock = sead::makeScopedLock(mCritSection);
@@ -3074,7 +3074,7 @@ void PauseMenuDataMgr::grabbedItemStuff(PouchItem* item) {
                     info.item = item;
                     info._8 = true;
                     info._9 = false;
-                    spawnDroppedInventoryItem(
+                    uking::act::spawnDroppedInventoryItem(
                         item->getName().cstr(),
                         ksys::act::ActorHeapUtil::instance()->getBaseProcHeap(), -1,
                         SleepAfterInit::No, nullptr, SpawnViaCarryBox::Yes, 0.8, -0.8);
