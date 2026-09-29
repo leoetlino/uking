@@ -361,7 +361,7 @@ protected:
     /* 0x460 */ sead::Vector3f _460{0, 0, 0};
     /* 0x46c */ sead::Vector3f _46c{0, 0, 0};
     /* 0x478 */ sead::Vector3f _478;
-    /* 0x484 */ sead::Vector3f mPreviousPos3{0, 0, 0};
+    /* 0x484 */ sead::Vector3f mObstacleCheckPos{0, 0, 0};
     /* 0x490 */ float _490 = 0.0;
     /* 0x494 */ float _494 = 0.0;
     /* 0x498 */ Unk2 _498;
