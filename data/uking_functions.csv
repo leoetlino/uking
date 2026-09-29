@@ -87635,7 +87635,7 @@ Address,Quality,Size,Name
 0x0000007101056388,U,000112,ksys::snd::OcclusionMgr::finalize
 0x00000071010563f8,U,000968,ksys::snd::OcclusionMgr::calc
 0x00000071010567c0,U,000168,ksys::snd::OcclusionMgr::updateEventState
-0x0000007101056868,U,000020,
+0x0000007101056868,U,000020,ksys::snd::OcclusionMgr::requestOcclusionLevelOverride
 0x000000710105687c,U,000464,ksys::snd::OcclusionMgr::isPosInDoor
 0x0000007101056a4c,U,000028,
 0x0000007101056a68,U,000028,
