@@ -2,6 +2,7 @@
 #include "Game/AOC/aocHardModeManager.h"
 #include "Game/Actor/Damage/dmgInfoManager.h"
 #include "Game/Actor/actPlayerCreateMgr.h"
+#include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
@@ -68,7 +69,7 @@ void getWeaponStats(const PouchItem& item, WeaponStats* stats) {
         }
         stats->power = power;
 
-    } else if (isOneHitObliteratorActorName(item.getName())) {
+    } else if (act::isOneHitObliteratorActorName(item.getName())) {
         stats->power = act::DamageInfoMgr::instance()->isOneHitObliteratorActive() ? 99999 : 1;
     } else {
         stats->power =

@@ -7,10 +7,6 @@ namespace uking::act {
 enum class CreateEquipmentSlot : u8;
 }
 
-namespace uking {
-int getWeaponGeneralLife(const char* name);
-}
-
 namespace uking::ui {
 
 enum class EquipmentSlot;
@@ -35,13 +31,6 @@ int getBowActorInfoAddValue(const sead::SafeString& name);
 
 int getWeaponInventoryLife(const sead::SafeString& name);
 bool isMasterSwordActorName(const sead::SafeString& name);
-
-// TODO: move these to another translation unit (TBD)
-// Do not implement until the location is figured out
-bool isOneHitObliteratorActorName(const sead::SafeString& name);
-
-// TODO: move this to yet another translation unit (TBD but not the same one as the above)
-void addItemForDebug(const sead::SafeString& name, int value);
 
 void setShowCheckPoint(s32 icon_type, const sead::SafeString& counter_name);
 void setShowFlyDistance(const sead::SafeString& distance);
