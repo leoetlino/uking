@@ -9,13 +9,13 @@
 #include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
+#include "Game/ActorHeapUtil.h"
 #include "Game/Cooking/cookManager.h"
 #include "Game/Scene/gameScene.h"
 #include "Game/UI/uiUtils.h"
 #include "Game/gameItemUtils.h"
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/ActorSystem/actActorConstDataAccess.h"
-#include "KingSystem/ActorSystem/actActorHeapUtil.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
@@ -3075,8 +3075,7 @@ void PauseMenuDataMgr::grabbedItemStuff(PouchItem* item) {
                     info._8 = true;
                     info._9 = false;
                     uking::act::spawnDroppedInventoryItem(
-                        item->getName().cstr(),
-                        ksys::act::ActorHeapUtil::instance()->getBaseProcHeap(), -1,
+                        item->getName().cstr(), ActorHeapUtil::instance()->getBaseProcHeap(), -1,
                         SleepAfterInit::No, nullptr, SpawnViaCarryBox::Yes, 0.8, -0.8);
                     break;
                 }

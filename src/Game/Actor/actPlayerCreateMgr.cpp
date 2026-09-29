@@ -5,11 +5,11 @@
 #include "Game/Actor/Player/actPlayerInfo.h"
 #include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
+#include "Game/ActorHeapUtil.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/ActorSystem/Profiles/actWeaponBase.h"
 #include "KingSystem/ActorSystem/actActorConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorCreator.h"
-#include "KingSystem/ActorSystem/actActorHeapUtil.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
@@ -160,7 +160,7 @@ void CreatePlayerEquipActorMgr::requestCreateWeapon(s32 slot_idx, const sead::Sa
     pos.makeT(player->getMtx().getTranslation());
 
     requestCreateWeaponByRawLife(name.cstr(), pos, 1.0,
-                                 ksys::act::ActorHeapUtil::instance()->getBaseProcHeap(),
+                                 ActorHeapUtil::instance()->getBaseProcHeap(),
                                  &mProcHandles[slot_idx], value, false, modifier, 2, 2);
 
     onSlotLoadingRequested(slot_idx, name);
@@ -219,8 +219,8 @@ void CreatePlayerEquipActorMgr::requestCreateArmor(s32 slot_idx, const sead::Saf
         params->addPosition(pos);
         params->addResourceLane(2);
         ksys::act::ActorCreator::instance()->requestCreateActor(
-            name.cstr(), ksys::act::ActorHeapUtil::instance()->getBaseProcHeap(),
-            &mProcHandles[slot_idx], &params, nullptr, 2);
+            name.cstr(), ActorHeapUtil::instance()->getBaseProcHeap(), &mProcHandles[slot_idx],
+            &params, nullptr, 2);
     }
 
     onSlotLoadingRequested(slot_idx, name);
