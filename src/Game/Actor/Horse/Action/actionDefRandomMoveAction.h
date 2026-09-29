@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRandomMoveAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionRandomMoveAction.h"
 
 namespace uking::action {
 
-class DefRandomMoveAction : public RandomMoveAction {
-    SEAD_RTTI_OVERRIDE(DefRandomMoveAction, RandomMoveAction)
+class DefRandomMoveAction : public ksys::act::ai::RandomMoveAction {
+    SEAD_RTTI_OVERRIDE(DefRandomMoveAction, ksys::act::ai::RandomMoveAction)
 public:
     explicit DefRandomMoveAction(const InitArg& arg);
 

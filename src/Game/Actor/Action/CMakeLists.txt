@@ -514,8 +514,6 @@ target_sources(uking PRIVATE
   actionDemoForceSetPlayerSavePosAngle.h
   actionDemoGetItemAnimStop.cpp
   actionDemoGetItemAnimStop.h
-  actionDemoGetItem.cpp
-  actionDemoGetItem.h
   actionDemoGetWeapon.cpp
   actionDemoGetWeapon.h
   actionDemoKokkoAngry.cpp
@@ -524,18 +522,12 @@ target_sources(uking PRIVATE
   actionDemoMotorcyclePutMaterials.h
   actionDemoNoAnimDrivenTurn.cpp
   actionDemoNoAnimDrivenTurn.h
-  actionDemoResetActor.cpp
-  actionDemoResetActor.h
-  actionDemoResetBoneCtrl.cpp
-  actionDemoResetBoneCtrl.h
   actionDemoSweep.cpp
   actionDemoSweep.h
   actionDemoTriggerToggleVisible.cpp
   actionDemoTriggerToggleVisible.h
   actionDemoTurnToActor.cpp
   actionDemoTurnToActor.h
-  actionDemoVisibleOff.cpp
-  actionDemoVisibleOff.h
   actionDemoVisibleOn.cpp
   actionDemoVisibleOn.h
   actionDemoVoiceTrigger.cpp
@@ -628,10 +620,6 @@ target_sources(uking PRIVATE
   actionDropWeapon.h
   actionDrowningDeath.cpp
   actionDrowningDeath.h
-  actionDummyDropTable.cpp
-  actionDummyDropTable.h
-  actionDummyTriggerAction.cpp
-  actionDummyTriggerAction.h
   actionDunegonRotateWait.cpp
   actionDunegonRotateWait.h
   actionDungeonEntranceASPlay.cpp
@@ -1014,8 +1002,6 @@ target_sources(uking PRIVATE
   actionForbidComeback.h
   actionForbidSettingInstEventFlag.cpp
   actionForbidSettingInstEventFlag.h
-  actionForceChangeAction.cpp
-  actionForceChangeAction.h
   actionForceEndPlayerSlow.cpp
   actionForceEndPlayerSlow.h
   actionForceGetUpFreeze.cpp
@@ -1754,8 +1740,6 @@ target_sources(uking PRIVATE
   actionIchigekiHeartUiClose.h
   actionIchigekiHeartUiOpen.cpp
   actionIchigekiHeartUiOpen.h
-  actionIdleAction.cpp
-  actionIdleAction.h
   actionIgniteActorReloadBase.cpp
   actionIgniteActorReloadBase.h
   actionIgnitedThrown.cpp
@@ -2374,8 +2358,6 @@ target_sources(uking PRIVATE
   actionRailMove.h
   actionRandomJump.cpp
   actionRandomJump.h
-  actionRandomMoveAction.cpp
-  actionRandomMoveAction.h
   actionRebound.cpp
   actionRebound.h
   actionReboundHit.cpp
@@ -2518,8 +2500,6 @@ target_sources(uking PRIVATE
   actionSendNoticeMessageBase.h
   actionSendPlayerNoticeMessage.cpp
   actionSendPlayerNoticeMessage.h
-  actionSendSignalAction.cpp
-  actionSendSignalAction.h
   actionSendSignalForSignalFlowAct.cpp
   actionSendSignalForSignalFlowAct.h
   actionSendTargetActorMessageBase.cpp
@@ -2652,8 +2632,6 @@ target_sources(uking PRIVATE
   actionSimpleLineBeam.h
   actionForkBasicMessageDialogCtrl.cpp
   actionForkBasicMessageDialogCtrl.h
-  actionSimpleOpenMessageDialogAction.cpp
-  actionSimpleOpenMessageDialogAction.h
   actionSimpleUniqueTalk.cpp
   actionSimpleUniqueTalk.h
   actionSiteBossAvoid.cpp
@@ -2954,8 +2932,6 @@ target_sources(uking PRIVATE
   actionTerrainCalcCenter.h
   actionTerrainHideCenter.cpp
   actionTerrainHideCenter.h
-  actionTestAction.cpp
-  actionTestAction.h
   actionThrow.cpp
   actionThrow.h
   actionThrowLeft.cpp
@@ -3018,10 +2994,6 @@ target_sources(uking PRIVATE
   actionTurnGiantAttack.h
   actionTurnIgnite.cpp
   actionTurnIgnite.h
-  actionTurnToActorBase.cpp
-  actionTurnToActorBase.h
-  actionTurnToActor.cpp
-  actionTurnToActor.h
   actionTurnToEmptySpace.cpp
   actionTurnToEmptySpace.h
   actionTurnWithAS.cpp
@@ -3032,8 +3004,6 @@ target_sources(uking PRIVATE
   actionUnarmedAttack.h
   actionUnarmedLargeAttack.cpp
   actionUnarmedLargeAttack.h
-  actionUpdateDataByGetDemoAction.cpp
-  actionUpdateDataByGetDemoAction.h
   actionUseNavMeshConnectAction.cpp
   actionUseNavMeshConnectAction.h
   actionVacuumedItemShootToTarget.cpp
@@ -3186,14 +3156,8 @@ target_sources(uking PRIVATE
   actionWolfLinkAmiiboWarp.h
   actionWolfLinkEvent.cpp
   actionWolfLinkEvent.h
-  actionXLinkEventCreateAction.cpp
-  actionXLinkEventCreateAction.h
   actionXLinkEventEnable.cpp
   actionXLinkEventEnable.h
-  actionXLinkEventFadeAction.cpp
-  actionXLinkEventFadeAction.h
-  actionXLinkEventKillAction.cpp
-  actionXLinkEventKillAction.h
   actionZoraHeroRescuePlayer.cpp
   actionZoraHeroRescuePlayer.h
   actionZoraHeroWaterFallJump.cpp

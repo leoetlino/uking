@@ -112,8 +112,44 @@ target_sources(uking PRIVATE
     actProcAcquire.cpp
     actTag.h
 
+    actionDemoGetItem.cpp
+    actionDemoGetItem.h
+    actionDemoResetActor.cpp
+    actionDemoResetActor.h
+    actionDemoResetBoneCtrl.cpp
+    actionDemoResetBoneCtrl.h
+    actionDemoVisibleOff.cpp
+    actionDemoVisibleOff.h
     actionDummyAction.cpp
     actionDummyAction.h
+    actionDummyDropTable.cpp
+    actionDummyDropTable.h
+    actionDummyTriggerAction.cpp
+    actionDummyTriggerAction.h
+    actionForceChangeAction.cpp
+    actionForceChangeAction.h
+    actionIdleAction.cpp
+    actionIdleAction.h
+    actionRandomMoveAction.cpp
+    actionRandomMoveAction.h
+    actionSendSignalAction.cpp
+    actionSendSignalAction.h
+    actionSimpleOpenMessageDialogAction.cpp
+    actionSimpleOpenMessageDialogAction.h
+    actionTestAction.cpp
+    actionTestAction.h
+    actionTurnToActor.cpp
+    actionTurnToActor.h
+    actionTurnToActorBase.cpp
+    actionTurnToActorBase.h
+    actionUpdateDataByGetDemoAction.cpp
+    actionUpdateDataByGetDemoAction.h
+    actionXLinkEventCreateAction.cpp
+    actionXLinkEventCreateAction.h
+    actionXLinkEventFadeAction.cpp
+    actionXLinkEventFadeAction.h
+    actionXLinkEventKillAction.cpp
+    actionXLinkEventKillAction.h
     aiDemoRootAI.cpp
     aiDemoRootAI.h
     aiDummyAi.cpp
