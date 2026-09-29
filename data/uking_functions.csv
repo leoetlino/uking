@@ -75781,8 +75781,8 @@ Address,Quality,Size,Name
 0x0000007100d9fea8,U,001224,ksys::eft::EffectModelMgr::entry
 0x0000007100da0370,U,000216,ksys::eft::EffectModelMgr::requestDeleteModel
 0x0000007100da0448,U,000208,ksys::eft::EffectModelMgr::release
-0x0000007100da0518,U,000132,
-0x0000007100da059c,U,000220,
+0x0000007100da0518,U,000132,ksys::eft::EffectModelMgr::findModelByName
+0x0000007100da059c,U,000220,ksys::eft::EffectModelMgr::findSubModelIndexByName
 0x0000007100da0678,U,000040,ksys::eft::EffectModelMgr::drawDebugInfo
 0x0000007100da06a0,U,000348,ksys::eft::updatePlayerWaterSurfaceXLinkProperties
 0x0000007100da07fc,U,000164,ksys::eft::searchAndEmitELink
@@ -82985,7 +82985,7 @@ Address,Quality,Size,Name
 0x0000007100f6c5b4,U,000144,ksys::phys::makeBreakableConstraintData
 0x0000007100f6c644,U,000004,nullsub_4205
 0x0000007100f6c648,U,000004,j__ZdlPv_992
-0x0000007100f6c64c,U,000012,
+0x0000007100f6c64c,U,000012,ksys::phys::setBreakableConstraintThreshold
 0x0000007100f6c658,U,000032,ksys::phys::isBreakableConstraintBroken
 0x0000007100f6c678,U,000160,ksys::phys::destroyBreakableConstraintDataMaybe
 0x0000007100f6c718,U,000020,
@@ -90988,8 +90988,8 @@ Address,Quality,Size,Name
 0x000000710114882c,U,000092,ksys::tera::QuadrantFloatGridMesh::getRuntimeTypeInfo
 0x0000007101148888,U,000036,ksys::tera::QuadrantFloatGridMesh::dtorDelete
 0x00000071011488ac,U,000352,ksys::tera::QuadrantFloatGridMesh::buildMesh
-0x0000007101148a0c,U,000188,
-0x0000007101148ac8,U,000220,
+0x0000007101148a0c,U,000188,ksys::tera::QuadrantFloatGridMesh::getVertexCount
+0x0000007101148ac8,U,000220,ksys::tera::QuadrantFloatGridMesh::getIndexCount
 0x0000007101148ba4,U,000008,ksys::tera::FloatGridMesh::getCellCountX
 0x0000007101148bac,U,000008,ksys::tera::FloatGridMesh::getCellCountY
 0x0000007101148bb4,U,000288,ksys::tera::FloatGridMesh::checkDerivedRuntimeTypeInfoStatic
@@ -94097,7 +94097,7 @@ Address,Quality,Size,Name
 0x0000007101217cf4,O,000152,_ZN4ksys3res12EntryFactoryINS_4phys24RagdollControllerKeyListEE12newResource_EPN4sead4HeapEi
 0x0000007101217d8c,O,000008,_ZNK4ksys3res12EntryFactoryINS_4phys24RagdollControllerKeyListEE15getResourceSizeEv
 0x0000007101217d94,O,000008,_ZNK4ksys3res12EntryFactoryINS_4phys24RagdollControllerKeyListEE20getLoadDataAlignmentEv
-0x0000007101217d9c,U,000044,
+0x0000007101217d9c,U,000044,sinitPhysSystem
 0x0000007101217dc8,L,000204,_ZN13hclCollidableD0Ev
 0x0000007101217e94,L,000144,_ZN13hclCollidableD1Ev
 0x0000007101217f24,U,000268,ksys::phys::ClothSet::make
@@ -95037,7 +95037,7 @@ Address,Quality,Size,Name
 0x000000710126fa80,U,000172,ksys::eft::countUndispCutFlowersCb
 0x000000710126fb2c,U,000416,ksys::eft::updateButterflyDummyEffect
 0x000000710126fccc,U,000232,ksys::eft::resetAmbientEffectParams
-0x000000710126fdb4,U,000048,
+0x000000710126fdb4,U,000048,ksys::eft::resetMothDummyEffect
 0x000000710126fde4,U,000056,
 0x000000710126fe1c,U,000068,
 0x000000710126fe60,U,000052,
@@ -95760,8 +95760,8 @@ Address,Quality,Size,Name
 0x00000071012a33c0,U,000032,_ZN4ksys3gfx4StarD1Ev
 0x00000071012a33e0,U,000356,_ZN4ksys3gfx4Star8finalizeEv
 0x00000071012a3544,U,001384,_ZN4ksys3gfx4Star10initializeERKNS1_13InitializeArgE
-0x00000071012a3aac,U,000480,_ZN3agl3eft4Star12allocateUnitEPN4sead4HeapEj
-0x00000071012a3c8c,U,000736,_ZN3agl3eft4Star10updateUnitEff
+0x00000071012a3aac,U,000480,_ZN4ksys3gfx4Star12allocateUnitEPN4sead4HeapEj
+0x00000071012a3c8c,U,000736,_ZN4ksys3gfx4Star10updateUnitEff
 0x00000071012a3f6c,U,001172,_ZN4ksys3gfx4Star9updateUBOEjRKN4sead8Matrix44IfEERKNS2_8Matrix34IfEE
 0x00000071012a4400,U,000528,_ZNK4ksys3gfx4Star4drawEPN3agl11DrawContextEj
 0x00000071012a4610,U,000056,ksys::MovieDecoderMgrMaybe::SingletonDisposer_::dtor
