@@ -21146,7 +21146,7 @@ Address,Quality,Size,Name
 0x0000007100320b1c,O,000372,_ZN5uking2ai22TargetHeightAreaSelect33checkDerivedRuntimeTypeInfoStaticEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x0000007100320c90,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN5uking2ai22TargetHeightAreaSelectEE9isDerivedEPKNS0_9InterfaceE
 0x0000007100320d1c,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN5uking2ai18TargetInAreaSelectEE9isDerivedEPKNS0_9InterfaceE
-0x0000007100320da8,U,000200,
+0x0000007100320da8,U,000200,uking::ai::AssassinMiddleRootBoneHandle::applyToModel
 0x0000007100320e70,U,000224,uking::ai::AssassinMiddleRoot::ctor
 0x0000007100320f50,W,000172,_ZN5uking2ai18AssassinMiddleRootD1Ev
 0x0000007100320ffc,W,000180,_ZN5uking2ai18AssassinMiddleRootD0Ev
@@ -60753,7 +60753,7 @@ Address,Quality,Size,Name
 0x0000007100a52c88,U,000296,uking::ui::ScreenShopInfo::updatePanelsForMode
 0x0000007100a52db0,U,000176,uking::ui::ScreenShopInfo::setInfoTextMode
 0x0000007100a52e60,U,000888,uking::ui::ScreenShopInfo::setRecipeMaterials
-0x0000007100a531d8,U,000100,_ZN3aal11GroupDucker6Target10initializeEPNS_5GroupERKNS0_14TargetSettingsE
+0x0000007100a531d8,U,000100,uking::ui::ScreenShopInfo::updateRecipeMaterials
 0x0000007100a5323c,U,000212,uking::ui::setPorchNumText
 0x0000007100a53310,U,000024,uking::ui::ScreenShopInfo::hidePorchNum
 0x0000007100a53328,U,000220,uking::ui::ScreenShopInfo::setHaveNum
