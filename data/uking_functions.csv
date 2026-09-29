@@ -81045,10 +81045,10 @@ Address,Quality,Size,Name
 0x0000007100eef60c,U,000132,ksys::map::getRailPointMoveSpeed
 0x0000007100eef690,U,000284,ksys::map::findNearestRailPointIndex
 0x0000007100eef7ac,U,001032,ksys::map::findNearestRailPosition
-0x0000007100eefbb4,U,000004,j__ZdlPv_963
-0x0000007100eefbb8,U,000004,j__ZdlPv_964
-0x0000007100eefbbc,U,000004,nullsub_4072
-0x0000007100eefbc0,U,000004,j__ZdlPv_965
+0x0000007100eefbb4,U,000004,ksys::map::RailMover::dtorDelete
+0x0000007100eefbb8,U,000004,ksys::map::RailRouteMover::dtorDelete
+0x0000007100eefbbc,U,000004,ksys::map::TravelerRouteMover::dtor
+0x0000007100eefbc0,U,000004,ksys::map::TravelerRouteMover::dtorDelete
 0x0000007100eefbc4,U,000008,ksys::res::GParamListObjectTraveler::getRoutePoint0to1WaitFrame
 0x0000007100eefbcc,U,000008,ksys::res::GParamListObjectTraveler::getRoutePoint1to2WaitFrame
 0x0000007100eefbd4,U,000008,ksys::res::GParamListObjectTraveler::getRoutePoint2to3WaitFrame
@@ -93033,7 +93033,7 @@ Address,Quality,Size,Name
 0x00000071011edd98,U,001824,ksys::map::PlacementTree::collectPreActorsToSpawn
 0x00000071011ee4b8,U,000008,ksys::util::toSignedAngleIdx
 0x00000071011ee4c0,U,000032,ksys::util::getAngleDistanceU32
-0x00000071011ee4e0,U,000012,
+0x00000071011ee4e0,U,000012,ksys::util::getZeroAngleIdxMaybe
 0x00000071011ee4ec,U,000188,ksys::util::chaseAngleIdx
 0x00000071011ee5a8,U,000340,ksys::util::chaseAngleIdxWithMinMaxStep
 0x00000071011ee6fc,U,000016,ksys::util::chaseVecUnclamped
