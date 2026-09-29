@@ -21158,9 +21158,9 @@ Address,Quality,Size,Name
 0x000000710032138c,W,000164,_ZN5uking2ai18AssassinMiddleRoot11loadParams_Ev
 0x0000007100321430,U,000324,_ZN5uking2ai18AssassinMiddleRoot14handleMessage_ERKN4ksys7MessageE
 0x0000007100321574,U,000452,uking::ai::AssassinMiddleRoot::updateSilentKillAttClients
-0x0000007100321738,U,000004,j__ZdlPv_93
-0x000000710032173c,U,000036,
-0x0000007100321760,U,000008,
+0x0000007100321738,U,000004,uking::ai::AssassinMiddleRootBoneHandle::dtorDelete
+0x000000710032173c,U,000036,uking::ai::AssassinMiddleRootBoneHandle::searchBone
+0x0000007100321760,U,000008,uking::ai::AssassinMiddleRootBoneHandle::getBoneAccessKey
 0x0000007100321768,O,000008,_ZNK5uking2ai18AssassinMiddleRoot27checkDerivedRuntimeTypeInfoEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x0000007100321770,O,000092,_ZNK5uking2ai18AssassinMiddleRoot18getRuntimeTypeInfoEv
 0x00000071003217cc,U,000116,uking::ai::AssassinRoot::ctor
@@ -46429,7 +46429,7 @@ Address,Quality,Size,Name
 0x00000071007171cc,U,000140,
 0x0000007100717258,U,000020,
 0x000000710071726c,U,000044,uking::act::PriestBossNavCostModifier::getMaterialCost
-0x0000007100717298,U,000132,
+0x0000007100717298,U,000132,uking::act::PriestBossNavCostModifier::isEdgeUsable
 0x000000710071731c,U,000004,j__ZdlPv_312
 0x0000007100717320,U,000008,
 0x0000007100717328,U,000100,uking::act::PriestBossPhaseSecondSearch::ctor
@@ -47004,7 +47004,7 @@ Address,Quality,Size,Name
 0x000000710073d584,U,000632,uking::act::isActorInEnemyTeamOfLink
 0x000000710073d7fc,U,000920,uking::act::selectYigaAssassinNameAndWeapon
 0x000000710073db94,U,000148,uking::act::requestCreateActorOrCheckReady
-0x000000710073dc28,U,000140,
+0x000000710073dc28,U,000140,uking::act::getSpeedTerrorEmitter
 0x000000710073dcb4,U,000340,uking::act::setDeadWithInitialDamageStatus
 0x000000710073de08,U,000060,uking::act::clearActorStasisFlags10And4
 0x000000710073de44,U,000060,uking::act::setActorStasisFlags10And4
@@ -52961,14 +52961,14 @@ Address,Quality,Size,Name
 0x0000007100894740,U,000036,uking::BgmCtrl::dtor
 0x0000007100894764,U,000036,uking::BgmCtrl::dtorDelete
 0x0000007100894788,U,000804,uking::BgmCtrl::updateFieldBgm
-0x0000007100894aac,U,000008,
+0x0000007100894aac,U,000008,uking::BgmCtrl::resetFlags
 0x0000007100894ab4,U,000204,uking::BgmCtrl::requestRemainsFireBattleBgm
 0x0000007100894b80,U,000148,uking::BgmCtrl::getCurrentRemainsTerminalCounter
 0x0000007100894c14,U,000136,uking::BgmCtrl::isCurrentRemainsPGanonDead
 0x0000007100894c9c,U,000144,uking::BgmCtrl::isDemo70xPlayedForCurrentType
 0x0000007100894d2c,U,000056,uking::BgmCtrl::isNakedIslandChallengeInProgress
 0x0000007100894d64,U,000124,uking::BgmCtrl::getMakeVillageInviteProgress
-0x0000007100894de0,U,000008,
+0x0000007100894de0,U,000008,uking::BgmCtrl::isFinalTrialFirstMessageFlagSet
 0x0000007100894de8,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN4ksys3snd3BgmEE9isDerivedEPKNS0_9InterfaceE
 0x0000007100894e74,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN4ksys3snd14PrioritizedBgmEE9isDerivedEPKNS0_9InterfaceE
 0x0000007100894f00,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN4ksys3snd25EventBgmRemainsBattleBaseEE9isDerivedEPKNS0_9InterfaceE
@@ -53006,7 +53006,7 @@ Address,Quality,Size,Name
 0x00000071008978e8,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveINS_15ResourceFactoryEE9isDerivedEPKNS0_9InterfaceE
 0x0000007100897974,U,000036,uking::ButtonComboChecker::ctor
 0x0000007100897998,U,000020,uking::ButtonComboChecker::dtor
-0x00000071008979ac,U,000004,j__ZdlPv_374
+0x00000071008979ac,U,000004,uking::ButtonComboChecker::dtorDelete
 0x00000071008979b0,U,000028,uking::ButtonComboChecker::setupPadCombo
 0x00000071008979cc,U,000024,uking::ButtonComboChecker::resetPadCombo
 0x00000071008979e4,U,000124,uking::ButtonComboChecker::updatePadComboCounter
