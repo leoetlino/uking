@@ -196,7 +196,7 @@ void InstanceSet::sub_7100FBD284(const sead::Matrix34f& mtx) {
         sub_7100FBC890(mtx, false, false);
 }
 
-s32 InstanceSet::sub_7100FBDA2C(const sead::SafeString& name) const {
+s32 InstanceSet::findRagdollControllerIdx(const sead::SafeString& name) const {
     if (mRagdollBlendWt == nullptr)
         return -1;
 

@@ -80,7 +80,7 @@ public:
     s32 findCollisionInfo(const sead::SafeString& name) const;
     void sub_7100FBD284(const sead::Matrix34f& mtx);
     void sub_7100FBC890(const sead::Matrix34f& mtx, bool a2, bool a3);
-    s32 sub_7100FBDA2C(const sead::SafeString& name) const;
+    s32 findRagdollControllerIdx(const sead::SafeString& name) const;
 
 private:
     struct Unk1 {
