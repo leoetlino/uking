@@ -53000,8 +53000,8 @@ Address,Quality,Size,Name
 0x00000071008977dc,O,000088,_ZN5uking13ActorHeapUtil14deleteInstanceEv
 0x0000007100897834,O,000004,_ZN5uking13ActorHeapUtilD1Ev
 0x0000007100897838,O,000004,_ZN5uking13ActorHeapUtilD0Ev
-0x000000710089783c,U,000012,StageSelectData::callSomeFnOnMemberx28
-0x0000007100897848,U,000020,StageSelectData::callSomeFnOnMemberx28_b
+0x000000710089783c,U,000012,uking::StageSelectData::callSomeFnOnMemberx28
+0x0000007100897848,U,000020,uking::StageSelectData::callSomeFnOnMemberx28_b
 0x000000710089785c,U,000140,
 0x00000071008978e8,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveINS_15ResourceFactoryEE9isDerivedEPKNS0_9InterfaceE
 0x0000007100897974,U,000036,uking::ButtonComboChecker::ctor
