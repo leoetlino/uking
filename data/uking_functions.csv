@@ -3210,7 +3210,7 @@ Address,Quality,Size,Name
 0x000000710009e748,W,000100,_ZN5uking6action23AreaActorObserveByGroup5init_EPN4sead4HeapE
 0x000000710009e7ac,U,000020,uking::action::AreaActorObserveByGroup::isArrow
 0x000000710009e7c0,U,000008,uking::action::AreaActorObserveByGroup::isWeapon
-0x000000710009e7c8,U,000008,
+0x000000710009e7c8,U,000008,uking::action::AreaActorObserveByGroup::actorIsStruckByLightning
 0x000000710009e7d0,U,000120,uking::action::AreaActorObserveByGroup::isIdleRideableAnimalMaybe
 0x000000710009e848,U,000092,uking::action::AreaActorObserveByGroup::isUnheldFlyingArrow
 0x000000710009e8a4,U,000064,uking::action::AreaActorObserveByGroup::loadMapUnitParams
@@ -3220,9 +3220,9 @@ Address,Quality,Size,Name
 0x000000710009eab4,O,000132,_ZNK5uking6action23AreaActorObserveByGroup27checkDerivedRuntimeTypeInfoEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x000000710009eb38,O,000092,_ZNK5uking6action23AreaActorObserveByGroup18getRuntimeTypeInfoEv
 0x000000710009eb94,U,000052,sead::Delegate1R_AreaActorObserveByGroup::invoke
-0x000000710009ebc8,U,000092,
+0x000000710009ebc8,U,000092,sead::Delegate1R_AreaActorObserveByGroup::clone
 0x000000710009ec24,U,000008,sead::IDelegate1R::isNoDummy_7038
-0x000000710009ec2c,U,000008,
+0x000000710009ec2c,U,000008,sead::IDelegate1R::clone_7038
 0x000000710009ec34,O,000052,_ZN5uking6action8AreaBaseC1ERKN4ksys3act2ai10ActionBase7InitArgE
 0x000000710009ec68,W,000184,_ZN5uking6action8AreaBase5calc_Ev
 0x000000710009ed20,O,000064,_ZN5uking6action8AreaBase11loadParams_Ev
@@ -78017,7 +78017,7 @@ Address,Quality,Size,Name
 0x0000007100e2814c,U,000028,uking::act::ActorObserverBase::ctor
 0x0000007100e28168,U,000036,uking::act::ActorObserverBase::enterAndResetContactLayersSent
 0x0000007100e2818c,U,000288,uking::act::ActorObserverBase::reportMissingAreaColLink
-0x0000007100e282ac,U,000068,
+0x0000007100e282ac,U,000068,uking::act::ActorObserverBase::calc
 0x0000007100e282f0,U,000252,uking::act::ActorObserverBase::sendContactLayers
 0x0000007100e283ec,U,001164,uking::act::ActorObserverBase::observe
 0x0000007100e28878,U,000328,uking::act::ActorObserverBase::getAreaCol
