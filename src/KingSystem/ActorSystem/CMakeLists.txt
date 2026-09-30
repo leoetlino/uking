@@ -15,10 +15,6 @@ target_sources(uking PRIVATE
     Awareness/actAwarenessMiscUtils.h
 
 
-    Profiles/actRopeBase.cpp
-    Profiles/actRopeBase.h
-    Profiles/actWeaponBase.cpp
-    Profiles/actWeaponBase.h
 
     actActor.cpp
     actActor.h
@@ -91,8 +87,6 @@ target_sources(uking PRIVATE
     actDebug.h
     actDebugFinder.cpp
     actDebugFinder.h
-    actGlobalParameter.cpp
-    actGlobalParameter.h
     actIDamageManager.cpp
     actIDamageManager.h
     actInfoCommon.cpp
