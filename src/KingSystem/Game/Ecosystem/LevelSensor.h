@@ -18,7 +18,7 @@ namespace ksys::map {
 class PreActor;
 }
 
-namespace ksys::eco {
+namespace ksys::game {
 
 enum class WeaponModifier {
     None = 0,
@@ -57,4 +57,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(LevelSensor, 0x78);
 
-}  // namespace ksys::eco
+}  // namespace ksys::game
