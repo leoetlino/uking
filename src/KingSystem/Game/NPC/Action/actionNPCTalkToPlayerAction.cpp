@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCTalkToPlayerAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCTalkToPlayerAction::NPCTalkToPlayerAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -11,4 +11,4 @@ void NPCTalkToPlayerAction::loadParams_() {
     getDynamicParam(&mASKeyName_d, "ASKeyName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
