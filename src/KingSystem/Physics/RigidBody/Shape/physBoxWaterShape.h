@@ -3,8 +3,8 @@
 #include <math/seadVector.h>
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 class hkpPlaneShape;
 
