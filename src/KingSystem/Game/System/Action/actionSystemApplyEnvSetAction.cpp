@@ -1,6 +1,6 @@
 #include "KingSystem/Game/System/Action/actionSystemApplyEnvSetAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 SystemApplyEnvSetAction::SystemApplyEnvSetAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -22,4 +22,4 @@ void SystemApplyEnvSetAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

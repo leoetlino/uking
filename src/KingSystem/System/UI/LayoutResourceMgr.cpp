@@ -45,7 +45,7 @@ u8* LayoutResourceMgr::loadMsgPack(u32* size) {
     req._21 = true;
     req.mLoadDataAlignment = 0x80;
     req._26 = false;
-    req.mPackHandle = StarterPackMgr::instance()->getBootupLangPack();
+    req.mPackHandle = game::StarterPackMgr::instance()->getBootupLangPack();
 
     sead::FixedSafeString<0x20> path;
     path.format("Message/Msg_%s.product.sarc", sead::EnvUtil::getRegionLanguage().text());

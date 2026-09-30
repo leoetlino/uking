@@ -1629,13 +1629,14 @@ int TriggerParam::resetFlagsAccordingToPolicy(sead::BitFlag32 policy, int skip) 
     int row1 = 0;
     int col2 = 0;
     int row2 = 0;
-    const bool main_field = StageInfo::sIsMainField;
+    const bool main_field = game::StageInfo::sIsMainField;
 
     if (policy.isOnBit(int(ResetType::ResetAtMidnight))) {
         act::getRevivalGridPosition(act::ActorSystem::instance()->getPlayerPos(), &col1, &row1,
                                     &col2, &row2);
         for (int i = 0; i < 6; ++i)
-            arrows[i] = ui::getPorchNum(act::arrowTypeToString(static_cast<act::ArrowType>(i)));
+            arrows[i] =
+                ksys::game::getPorchNum(act::arrowTypeToString(static_cast<act::ArrowType>(i)));
     }
     sead::Buffer<int> arrow_counts(arrows);
 

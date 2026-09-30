@@ -241,7 +241,7 @@ void EnvMgr::updateTimeDivision() {
     float transition = 1.0;
     u32 division = 0;
 
-    if (wm->getStageType() == StageType::Indoor) {
+    if (wm->getStageType() == game::StageType::Indoor) {
         division = 0;
 
     } else if (time >= 3_h && time < 4_h) {
