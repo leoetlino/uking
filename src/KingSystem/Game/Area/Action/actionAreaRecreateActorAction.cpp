@@ -1,4 +1,4 @@
-#include "Game/Actor/Area/Action/actionAreaRecreateActorAction.h"
+#include "KingSystem/Game/Area/Action/actionAreaRecreateActorAction.h"
 
 namespace uking::action {
 

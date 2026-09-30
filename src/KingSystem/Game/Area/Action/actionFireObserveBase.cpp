@@ -1,4 +1,4 @@
-#include "Game/Actor/Area/Action/actionFireObserveBase.h"
+#include "KingSystem/Game/Area/Action/actionFireObserveBase.h"
 
 namespace uking::action {
 
