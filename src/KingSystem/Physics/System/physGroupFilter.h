@@ -6,7 +6,7 @@
 #include <container/seadSafeArray.h>
 #include <prim/seadRuntimeTypeInfo.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 
 namespace ksys::phys {
 

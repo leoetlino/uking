@@ -6,8 +6,8 @@
 #include <prim/seadDelegate.h>
 #include <prim/seadRuntimeTypeInfo.h>
 #include <thread/seadAtomic.h>
-#include "KingSystem/Physics/physDefines.h"
-#include "KingSystem/Physics/physMaterialMask.h"
+#include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 
 class hkpCollidable;
 class hkpShape;

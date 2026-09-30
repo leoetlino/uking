@@ -9,9 +9,9 @@
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyAccessor.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyContactEvent.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Utils/Types.h"
 
 enum hkpCollidableQualityType : int;

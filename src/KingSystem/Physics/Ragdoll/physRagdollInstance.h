@@ -6,8 +6,8 @@
 #include <math/seadMatrix.h>
 #include <math/seadVector.h>
 #include <prim/seadTypedBitFlag.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/System/physSystem.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Utils/Types.h"
 
 class hkaRagdollInstance;
