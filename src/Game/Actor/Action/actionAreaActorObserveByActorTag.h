@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/Area/Action/actionAreaActorObserve.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/Game/Area/Action/actionAreaActorObserve.h"
 
 namespace uking::action {
 

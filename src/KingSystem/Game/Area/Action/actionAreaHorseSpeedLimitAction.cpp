@@ -1,4 +1,4 @@
-#include "Game/Actor/Area/Action/actionAreaHorseSpeedLimitAction.h"
+#include "KingSystem/Game/Area/Action/actionAreaHorseSpeedLimitAction.h"
 
 namespace uking::action {
 
