@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCWaitAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCWaitAction::NPCWaitAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -23,4 +23,4 @@ void NPCWaitAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
