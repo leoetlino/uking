@@ -1,10 +1,10 @@
-#include "KingSystem/Game/actGlobalParameter.h"
+#include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/resResourceArchive.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 SEAD_SINGLETON_DISPOSER_IMPL(GlobalParameter)
 
@@ -14,7 +14,7 @@ bool GlobalParameter::init(sead::Heap* heap) {
 
 void GlobalParameter::finalize() {
     if (mActorParam) {
-        ActorParamMgr::instance()->unloadParam(mActorParam);
+        act::ActorParamMgr::instance()->unloadParam(mActorParam);
         mActorParam = nullptr;
     }
 
@@ -25,7 +25,7 @@ void GlobalParameter::finalize() {
 }
 
 void GlobalParameter::loadActorPack(sead::Heap* heap) {
-    ActorParamMgr::instance()->requestLoadActorPack(&mResHandle, "GlobalParameter", 1);
+    act::ActorParamMgr::instance()->requestLoadActorPack(&mResHandle, "GlobalParameter", 1);
 }
 
 bool GlobalParameter::isActorPackReady() const {
@@ -42,7 +42,7 @@ bool GlobalParameter::loadActorParams_() {
         return false;
 
     void* x;
-    mActorParam = ActorParamMgr::instance()->loadParam("GlobalParameter", &mResHandle, &x, 1);
+    mActorParam = act::ActorParamMgr::instance()->loadParam("GlobalParameter", &mResHandle, &x, 1);
 
     if (mActorParam->getRes().mGParamList)
         mGlobalParam = mActorParam->getRes().mGParamList->getGlobal();
@@ -50,4 +50,4 @@ bool GlobalParameter::loadActorParams_() {
     return mGlobalParam != nullptr;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::game
