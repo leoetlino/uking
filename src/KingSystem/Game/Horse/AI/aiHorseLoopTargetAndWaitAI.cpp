@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseLoopTargetAndWaitAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseLoopTargetAndWaitAI::HorseLoopTargetAndWaitAI(const InitArg& arg) : HorseLoopTarget(arg) {}
 
@@ -25,4 +25,4 @@ void HorseLoopTargetAndWaitAI::loadParams_() {
     getStaticParam(&mMinWaitTime_s, "MinWaitTime");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

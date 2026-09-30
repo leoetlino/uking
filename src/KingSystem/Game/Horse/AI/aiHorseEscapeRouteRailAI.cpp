@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseEscapeRouteRailAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseEscapeRouteRailAI::HorseEscapeRouteRailAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -24,4 +24,4 @@ void HorseEscapeRouteRailAI::loadParams_() {
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

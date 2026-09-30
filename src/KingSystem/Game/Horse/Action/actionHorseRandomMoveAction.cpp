@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseRandomMoveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseRandomMoveAction::HorseRandomMoveAction(const InitArg& arg) : AnimalMoveGuidedBase(arg) {}
 
@@ -18,4 +18,4 @@ void HorseRandomMoveAction::loadParams_() {
     getStaticParam(&mIsCancelRequestedPathFirst_s, "IsCancelRequestedPathFirst");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
