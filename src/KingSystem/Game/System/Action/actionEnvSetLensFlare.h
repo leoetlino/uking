@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EnvSetLensFlare : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EnvSetLensFlare, ksys::act::ai::Action)
@@ -21,4 +21,4 @@ protected:
     int* mPresetIndex_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

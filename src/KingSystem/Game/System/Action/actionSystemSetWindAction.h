@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class SystemSetWindAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(SystemSetWindAction, ksys::act::ai::Action)
@@ -31,4 +31,4 @@ protected:
     bool* mIsAutoWind_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
