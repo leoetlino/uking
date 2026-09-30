@@ -1,4 +1,4 @@
-#include "Game/Actor/NPC/Action/actionNPCTurnAction.h"
+#include "KingSystem/Game/NPC/Action/actionNPCTurnAction.h"
 
 namespace uking::action {
 
