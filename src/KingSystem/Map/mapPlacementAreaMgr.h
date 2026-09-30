@@ -225,7 +225,7 @@ public:
     sead::Vector3f mPlayerPos;
     f32 mCameraAngleMaybe = 50.0f;  // fov?
     s32 mActiveNpc;                 // 0 - 25
-    LazyTraverseList* mObjects = StagePreActorCache::instance()->getObjects();
+    LazyTraverseList* mObjects = game::StagePreActorCache::instance()->getObjects();
     sead::SafeArray<JudgeArea, 16> mJudgeArea{};
     s32 mJudgeAreaCount;
     sead::SafeArray<char, 128> _2a468{};  // probably not char
