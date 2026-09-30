@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AnimalNavMeshMove : public AnimalMoveGuidedBase {
-    SEAD_RTTI_OVERRIDE(AnimalNavMeshMove, AnimalMoveGuidedBase)
+class AnimalNavMeshMove : public ksys::game::AnimalMoveGuidedBase {
+    SEAD_RTTI_OVERRIDE(AnimalNavMeshMove, ksys::game::AnimalMoveGuidedBase)
 public:
     explicit AnimalNavMeshMove(const InitArg& arg);
     ~AnimalNavMeshMove() override;
