@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class NPCTalkASyncAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(NPCTalkASyncAction, ksys::act::ai::Action)
@@ -22,4 +22,4 @@ protected:
     sead::SafeString mMessageId_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
