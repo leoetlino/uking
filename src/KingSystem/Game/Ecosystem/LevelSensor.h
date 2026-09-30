@@ -18,7 +18,7 @@ namespace ksys::map {
 class PreActor;
 }
 
-namespace ksys::eco {
+namespace ksys::game {
 
 enum class WeaponModifier {
     None = 0,
@@ -30,7 +30,7 @@ enum class WeaponModifier {
     NoneForced = 4,
 };
 
-// TODO Find out where this goes. It is currently used by ksys::eco::LevelSensor::scaleActor.
+// TODO Find out where this goes. It is currently used by ksys::game::LevelSensor::scaleActor.
 WeaponModifier getRandomWeaponModifier(s32 judge_type, const sead::SafeString& unit_config_name);
 
 class LevelSensor {
@@ -63,4 +63,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(LevelSensor, 0x78);
 
-}  // namespace ksys::eco
+}  // namespace ksys::game
