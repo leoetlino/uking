@@ -2250,8 +2250,6 @@ target_sources(uking PRIVATE
   actionPlayASForTimeline.h
   actionPlayASForTimelineWithSword.cpp
   actionPlayASForTimelineWithSword.h
-  actionPlayerActionClimb.cpp
-  actionPlayerActionClimb.h
   actionPlayerAreaInOutSendMessage.cpp
   actionPlayerAreaInOutSendMessage.h
   actionPlayerBeamMove.cpp
@@ -2260,8 +2258,6 @@ target_sources(uking PRIVATE
   actionPlayerInAreaAutoEnemyForbidTag.h
   actionPlayerLookAtObjectNow.cpp
   actionPlayerLookAtObjectNow.h
-  actionPlayerSlippingDown.cpp
-  actionPlayerSlippingDown.h
   actionPlayerStoleOpen.cpp
   actionPlayerStoleOpen.h
   actionPlayerTurnAndLookToObjectNow.cpp
