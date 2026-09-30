@@ -1,6 +1,6 @@
 target_sources(uking PRIVATE
-  ecoLevelSensor.cpp
-  ecoLevelSensor.h
-  ecoSystem.cpp
-  ecoSystem.h
+  Ecosystem.cpp
+  Ecosystem.h
+  LevelSensor.cpp
+  LevelSensor.h
 )
