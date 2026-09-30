@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class WildHorseDefWanderAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(WildHorseDefWanderAI, ksys::act::ai::Ai)
@@ -24,4 +24,4 @@ protected:
     const float* mMinWaitTime_s{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

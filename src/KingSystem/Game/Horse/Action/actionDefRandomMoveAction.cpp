@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionDefRandomMoveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 DefRandomMoveAction::DefRandomMoveAction(const InitArg& arg) : RandomMoveAction(arg) {}
 
@@ -28,4 +28,4 @@ void DefRandomMoveAction::calc_() {
     RandomMoveAction::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

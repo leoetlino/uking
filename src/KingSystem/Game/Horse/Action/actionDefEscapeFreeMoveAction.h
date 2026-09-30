@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class DefEscapeFreeMoveAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(DefEscapeFreeMoveAction, ksys::act::ai::Action)
@@ -42,4 +42,4 @@ protected:
     sead::Vector3f* mTargetPos_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

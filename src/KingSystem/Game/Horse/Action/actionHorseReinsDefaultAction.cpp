@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseReinsDefaultAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseReinsDefaultAction::HorseReinsDefaultAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -20,4 +20,4 @@ void HorseReinsDefaultAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

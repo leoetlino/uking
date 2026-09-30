@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseRiddenByEnemyAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseRiddenByEnemyAI::HorseRiddenByEnemyAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -23,4 +23,4 @@ void HorseRiddenByEnemyAI::loadParams_() {
     getStaticParam(&mFramesRetryNormalActionAtFailed_s, "FramesRetryNormalActionAtFailed");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

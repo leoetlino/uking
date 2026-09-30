@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class DefWanderAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(DefWanderAI, ksys::act::ai::Ai)
@@ -26,4 +26,4 @@ protected:
     const bool* mCheckWaitIsChangable_s{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

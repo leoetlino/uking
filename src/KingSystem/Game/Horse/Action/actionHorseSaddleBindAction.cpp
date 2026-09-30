@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseSaddleBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseSaddleBindAction::HorseSaddleBindAction(const InitArg& arg) : HorseSaddleDefaultAction(arg) {}
 
@@ -31,4 +31,4 @@ void HorseSaddleBindAction::calc_() {
     HorseSaddleDefaultAction::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

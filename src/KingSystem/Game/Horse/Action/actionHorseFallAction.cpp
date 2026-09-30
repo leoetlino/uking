@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseFallAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseFallAction::HorseFallAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void HorseFallAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

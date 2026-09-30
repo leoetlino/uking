@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseKickBackAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(HorseKickBackAction, ksys::act::ai::Action)
@@ -24,4 +24,4 @@ protected:
     sead::SafeString mASName_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

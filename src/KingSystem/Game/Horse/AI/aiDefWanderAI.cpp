@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiDefWanderAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 DefWanderAI::DefWanderAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -18,4 +18,4 @@ void DefWanderAI::loadParams_() {
     getStaticParam(&mCheckWaitIsChangable_s, "CheckWaitIsChangable");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

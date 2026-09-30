@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseGoToEatAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseGoToEatAI::HorseGoToEatAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -23,4 +23,4 @@ void HorseGoToEatAI::loadParams_() {
     getDynamicParam(&mTargetActor_d, "TargetActor");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game
