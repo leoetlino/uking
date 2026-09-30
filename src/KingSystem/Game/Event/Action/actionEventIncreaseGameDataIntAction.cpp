@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventIncreaseGameDataIntAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventIncreaseGameDataIntAction::EventIncreaseGameDataIntAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -16,4 +16,4 @@ void EventIncreaseGameDataIntAction::loadParams_() {
     getDynamicParam(&mGameDataIntName_d, "GameDataIntName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

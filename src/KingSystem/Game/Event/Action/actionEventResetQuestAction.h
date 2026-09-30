@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventResetQuestAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventResetQuestAction, ksys::act::ai::Action)
@@ -18,4 +18,4 @@ protected:
     sead::SafeString mQuestName_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

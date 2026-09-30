@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventPlayUiScreenAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventPlayUiScreenAction, ksys::act::ai::Action)
@@ -24,4 +24,4 @@ protected:
     sead::SafeString mScreenName_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

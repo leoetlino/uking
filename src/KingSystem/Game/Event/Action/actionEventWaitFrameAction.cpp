@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventWaitFrameAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventWaitFrameAction::EventWaitFrameAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -26,4 +26,4 @@ void EventWaitFrameAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

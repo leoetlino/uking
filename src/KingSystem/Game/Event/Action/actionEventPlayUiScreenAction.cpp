@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventPlayUiScreenAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventPlayUiScreenAction::EventPlayUiScreenAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -27,4 +27,4 @@ void EventPlayUiScreenAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

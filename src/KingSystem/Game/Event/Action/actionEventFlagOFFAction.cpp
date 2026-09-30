@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventFlagOFFAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventFlagOFFAction::EventFlagOFFAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void EventFlagOFFAction::loadParams_() {
     getDynamicParam(&mFlagName_d, "FlagName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
