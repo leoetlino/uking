@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class PlayerActionClimb : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(PlayerActionClimb, ksys::act::ai::Action)
@@ -114,4 +114,4 @@ protected:
     bool* mFromParashawl_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
