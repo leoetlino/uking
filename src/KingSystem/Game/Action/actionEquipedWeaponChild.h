@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Action/actionBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EquipedWeaponChild : public BindAction {
     SEAD_RTTI_OVERRIDE(EquipedWeaponChild, BindAction)
@@ -19,4 +19,4 @@ protected:
     const bool* mIsChangeScale_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
