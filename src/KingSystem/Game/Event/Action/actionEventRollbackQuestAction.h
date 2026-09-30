@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventRollbackQuestAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventRollbackQuestAction, ksys::act::ai::Action)
@@ -20,4 +20,4 @@ protected:
     sead::SafeString mStepName_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

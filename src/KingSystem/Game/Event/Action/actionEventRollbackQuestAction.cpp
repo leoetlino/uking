@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventRollbackQuestAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventRollbackQuestAction::EventRollbackQuestAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -16,4 +16,4 @@ void EventRollbackQuestAction::loadParams_() {
     getDynamicParam(&mStepName_d, "StepName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventPlayMovieAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventPlayMovieAction::EventPlayMovieAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -26,4 +26,4 @@ void EventPlayMovieAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

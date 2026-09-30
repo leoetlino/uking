@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventSetGameDataStringAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventSetGameDataStringAction::EventSetGameDataStringAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -16,4 +16,4 @@ void EventSetGameDataStringAction::loadParams_() {
     getDynamicParam(&mValue_d, "Value");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

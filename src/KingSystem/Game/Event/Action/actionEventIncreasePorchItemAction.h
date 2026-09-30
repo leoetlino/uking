@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventIncreasePorchItemAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventIncreasePorchItemAction, ksys::act::ai::Action)
@@ -19,4 +19,4 @@ protected:
     sead::SafeString mPorchItemName_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

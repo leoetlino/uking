@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventIncreaseRupeeAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventIncreaseRupeeAction, ksys::act::ai::Action)
@@ -19,4 +19,4 @@ protected:
     int* mValue_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
