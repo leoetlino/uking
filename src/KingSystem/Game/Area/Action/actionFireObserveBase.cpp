@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionFireObserveBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 FireObserveBase::FireObserveBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void FireObserveBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
