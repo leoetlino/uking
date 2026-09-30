@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionOwnedHorseObserveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 OwnedHorseObserveAction::OwnedHorseObserveAction(const InitArg& arg) : AreaActionBase(arg) {}
 
@@ -22,4 +22,4 @@ void OwnedHorseObserveAction::calc_() {
     AreaActionBase::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

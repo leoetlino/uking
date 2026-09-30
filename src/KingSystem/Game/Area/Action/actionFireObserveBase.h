@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class FireObserveBase : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(FireObserveBase, ksys::act::ai::Action)
@@ -16,4 +16,4 @@ protected:
     void calc_() override;
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

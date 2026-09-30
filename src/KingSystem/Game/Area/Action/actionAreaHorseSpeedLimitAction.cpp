@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionAreaHorseSpeedLimitAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AreaHorseSpeedLimitAction::AreaHorseSpeedLimitAction(const InitArg& arg) : AreaActionBase(arg) {}
 
@@ -10,4 +10,4 @@ bool AreaHorseSpeedLimitAction::init_(sead::Heap* heap) {
     return AreaActionBase::init_(heap);
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
