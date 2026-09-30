@@ -1,8 +1,8 @@
 #pragma once
 
 #include <container/seadOffsetList.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/System/physCollisionInfo.h"
-#include "KingSystem/Physics/physDefines.h"
 
 namespace ksys::phys {
 

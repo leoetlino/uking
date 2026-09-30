@@ -1,6 +1,7 @@
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
 #include <basis/seadRawPrint.h>
 #include <functional>
+#include "KingSystem/Game/Physics/System/physShapeParamObj.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxWaterShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
@@ -8,7 +9,6 @@
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderWaterShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physPolytopeShape.h"
-#include "KingSystem/Physics/RigidBody/Shape/physShapeParamObj.h"
 #include "KingSystem/Physics/RigidBody/Shape/physSphereShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBox.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBoxWater.h"

@@ -5,8 +5,8 @@
 #include <utility/aglParameter.h>
 #include <utility/aglParameterList.h>
 #include <utility/aglParameterObj.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::phys {

@@ -2,6 +2,7 @@
 #include <Havok/Physics2012/Dynamics/Entity/hkpRigidBody.h>
 #include <Havok/Physics2012/Dynamics/Entity/hkpRigidBodyCinfo.h>
 #include <basis/seadRawPrint.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxWaterShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
@@ -22,7 +23,6 @@
 #include "KingSystem/Physics/RigidBody/physRigidBodySphere.h"
 #include "KingSystem/Physics/System/physGroupFilter.h"
 #include "KingSystem/Physics/physConversions.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
 namespace ksys::phys {

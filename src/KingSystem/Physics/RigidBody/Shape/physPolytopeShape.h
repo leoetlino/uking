@@ -6,9 +6,9 @@
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 class hkpConvexTransformShape;
 class hkpConvexVerticesShape;

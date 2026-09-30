@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/RigidBody/Shape/physShapeParamObj.h"
+#include "KingSystem/Game/Physics/System/physShapeParamObj.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCharacterPrismShape.h"

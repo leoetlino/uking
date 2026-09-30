@@ -5,7 +5,7 @@
 #include <math/seadMatrix.h>
 #include <prim/seadNamable.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 
 namespace ksys::phys {
 

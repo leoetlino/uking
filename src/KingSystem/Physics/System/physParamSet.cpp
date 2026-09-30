@@ -1,12 +1,12 @@
 #include "KingSystem/Physics/System/physParamSet.h"
+#include "KingSystem/Game/Physics/System/physCharacterControllerParam.h"
+#include "KingSystem/Game/Physics/System/physContactInfoParam.h"
 #include "KingSystem/Physics/Cloth/physClothParam.h"
 #include "KingSystem/Physics/Ragdoll/physRagdollParam.h"
 #include "KingSystem/Physics/RigidBody/physEdgeRigidBodyParam.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodySetParam.h"
 #include "KingSystem/Physics/SupportBone/physSupportBoneParam.h"
-#include "KingSystem/Physics/System/physCharacterControllerParam.h"
-#include "KingSystem/Physics/System/physContactInfoParam.h"
 #include "KingSystem/Resource/Actor/resResourcePhysics.h"
 
 namespace ksys::phys {

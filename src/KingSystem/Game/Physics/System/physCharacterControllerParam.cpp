@@ -1,5 +1,6 @@
-#include "KingSystem/Physics/System/physCharacterControllerParam.h"
+#include "KingSystem/Game/Physics/System/physCharacterControllerParam.h"
 #include <basis/seadRawPrint.h>
+#include "KingSystem/Game/Physics/System/physShapeParamObj.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCharacterPrismShape.h"
@@ -7,7 +8,6 @@
 #include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physPolytopeShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
-#include "KingSystem/Physics/RigidBody/Shape/physShapeParamObj.h"
 #include "KingSystem/Physics/RigidBody/Shape/physSphereShape.h"
 #include "KingSystem/Utils/SafeDelete.h"
 

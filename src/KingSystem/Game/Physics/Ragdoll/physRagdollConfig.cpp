@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/Ragdoll/physRagdollConfig.h"
+#include "KingSystem/Game/Physics/Ragdoll/physRagdollConfig.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
 
 namespace ksys::phys {

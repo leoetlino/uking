@@ -9,8 +9,6 @@ target_sources(uking PRIVATE
     Constraint/physConstraint.cpp
     Constraint/physConstraint.h
 
-    Ragdoll/physRagdollConfig.cpp
-    Ragdoll/physRagdollConfig.h
     Ragdoll/physRagdollController.cpp
     Ragdoll/physRagdollController.h
     Ragdoll/physRagdollControllerKeyList.h
@@ -98,8 +96,6 @@ target_sources(uking PRIVATE
     RigidBody/Shape/physPolytopeShape.cpp
     RigidBody/Shape/physPolytopeShape.h
     RigidBody/Shape/physShape.h
-    RigidBody/Shape/physShapeParamObj.cpp
-    RigidBody/Shape/physShapeParamObj.h
     RigidBody/Shape/physSphereShape.cpp
     RigidBody/Shape/physSphereShape.h
 
@@ -116,16 +112,12 @@ target_sources(uking PRIVATE
     SupportBone/physSupportBoneResource.h
     SupportBone/physSupportBoneResourceMainBone.cpp
 
-    System/physCharacterControllerParam.cpp
-    System/physCharacterControllerParam.h
     System/physClosestPointQuery.cpp
     System/physClosestPointQuery.h
     System/physClosestPointQueryWithInfo.cpp
     System/physClosestPointQueryWithInfo.h
     System/physCollisionInfo.cpp
     System/physCollisionInfo.h
-    System/physContactInfoParam.cpp
-    System/physContactInfoParam.h
     System/physContactLayerCollisionInfo.cpp
     System/physContactLayerCollisionInfo.h
     System/physContactLayerCollisionInfoGroup.cpp
@@ -190,10 +182,6 @@ target_sources(uking PRIVATE
     System/physUtil.h
 
     physConversions.h
-    physDefines.cpp
-    physDefines.h
     physHeapUtil.h
     physLayerMaskBuilder.h
-    physMaterialMask.cpp
-    physMaterialMask.h
     )

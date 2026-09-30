@@ -2,10 +2,10 @@
 
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 
