@@ -4,10 +4,10 @@
 #include <Havok/Physics2012/Dynamics/World/hkpPhysicsSystem.h>
 #include <Havok/Physics2012/Utilities/Dynamics/ScaleSystem/hkpSystemScalingUtility.h>
 #include <math/seadMathCalcCommon.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
 #include "KingSystem/Physics/System/physStaticCompoundUtil.h"
 #include "KingSystem/Physics/physConversions.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 

@@ -9,8 +9,6 @@ target_sources(uking PRIVATE
     Constraint/physConstraint.cpp
     Constraint/physConstraint.h
 
-    Ragdoll/physRagdollConfig.cpp
-    Ragdoll/physRagdollConfig.h
     Ragdoll/physRagdollController.cpp
     Ragdoll/physRagdollController.h
     Ragdoll/physRagdollControllerKeyList.h
@@ -186,10 +184,6 @@ target_sources(uking PRIVATE
     System/physUserTag.h
 
     physConversions.h
-    physDefines.cpp
-    physDefines.h
     physHeapUtil.h
     physLayerMaskBuilder.h
-    physMaterialMask.cpp
-    physMaterialMask.h
     )

@@ -3,7 +3,7 @@
 #include <container/seadTList.h>
 #include <hostio/seadHostIONode.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Utils/Thread/Task.h"
 
 namespace ksys::phys {

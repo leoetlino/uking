@@ -11,8 +11,8 @@
 #include <prim/seadNamable.h>
 #include <prim/seadSafeString.h>
 #include <thread/seadAtomic.h>
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Physics/physLayerMaskBuilder.h"
 #include "KingSystem/Utils/Types.h"
 
