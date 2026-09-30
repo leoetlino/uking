@@ -1,4 +1,4 @@
-#include "Game/Actor/NPC/AI/aiNPCTerrorAI.h"
+#include "KingSystem/Game/NPC/AI/aiNPCTerrorAI.h"
 
 namespace uking::ai {
 
