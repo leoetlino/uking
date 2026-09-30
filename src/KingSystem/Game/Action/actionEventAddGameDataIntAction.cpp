@@ -1,7 +1,7 @@
 #include "KingSystem/Game/Action/actionEventAddGameDataIntAction.h"
 #include "KingSystem/GameData/gdtManager.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventAddGameDataIntAction::EventAddGameDataIntAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -64,4 +64,4 @@ void EventAddGameDataIntAction::calc_() {
     }
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

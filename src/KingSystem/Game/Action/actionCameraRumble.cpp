@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionCameraRumble.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 CameraRumble::CameraRumble(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -11,4 +11,4 @@ void CameraRumble::loadParams_() {
     getDynamicParam_2(&mSideways_d, "Sideways");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
