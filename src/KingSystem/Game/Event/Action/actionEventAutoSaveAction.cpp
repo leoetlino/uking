@@ -1,9 +1,9 @@
 #include "KingSystem/Game/Event/Action/actionEventAutoSaveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventAutoSaveAction::EventAutoSaveAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
 EventAutoSaveAction::~EventAutoSaveAction() = default;
 
-}  // namespace uking::action
+}  // namespace ksys::game
