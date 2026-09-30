@@ -5,7 +5,7 @@
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actPhysicsUserTag.h"
-#include "KingSystem/Ecosystem/ecoSystem.h"
+#include "KingSystem/Game/Ecosystem/ecoSystem.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physRayCastForRequest.h"
 #include "KingSystem/Utils/Byaml/Byaml.h"
