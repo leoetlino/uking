@@ -2,8 +2,8 @@
 #include <nn/pl.h>
 #include <prim/seadScopedLock.h>
 
+#include "KingSystem/Game/System/StarterPackMgr.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/System/StarterPackMgr.h"
 #include "KingSystem/System/UI/ArcResource.h"
 #include "KingSystem/System/UI/LayoutResourceMgr.h"
 
