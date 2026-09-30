@@ -1635,7 +1635,8 @@ int TriggerParam::resetFlagsAccordingToPolicy(sead::BitFlag32 policy, int skip) 
         act::getRevivalGridPosition(act::ActorSystem::instance()->getPlayerPos(), &col1, &row1,
                                     &col2, &row2);
         for (int i = 0; i < 6; ++i)
-            arrows[i] = ui::getPorchNum(act::arrowTypeToString(static_cast<act::ArrowType>(i)));
+            arrows[i] =
+                ksys::game::getPorchNum(act::arrowTypeToString(static_cast<act::ArrowType>(i)));
     }
     sead::Buffer<int> arrow_counts(arrows);
 

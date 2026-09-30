@@ -9,9 +9,10 @@ HasPorchArrow::HasPorchArrow(const InitArg& arg) : ksys::act::ai::Query(arg) {}
 HasPorchArrow::~HasPorchArrow() = default;
 
 int HasPorchArrow::doQuery() {
-    s32 arrow_cnt = ksys::ui::getItemValue("NormalArrow") + ksys::ui::getItemValue("FireArrow") +
-                    ksys::ui::getItemValue("IceArrow") + ksys::ui::getItemValue("ElectricArrow") +
-                    ksys::ui::getItemValue("BombArrow_A") + ksys::ui::getItemValue("AncientArrow");
+    s32 arrow_cnt =
+        ksys::game::getItemValue("NormalArrow") + ksys::game::getItemValue("FireArrow") +
+        ksys::game::getItemValue("IceArrow") + ksys::game::getItemValue("ElectricArrow") +
+        ksys::game::getItemValue("BombArrow_A") + ksys::game::getItemValue("AncientArrow");
     return arrow_cnt < *mCheckNum;
 }
 

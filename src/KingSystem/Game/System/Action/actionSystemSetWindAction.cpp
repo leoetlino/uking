@@ -1,6 +1,6 @@
 #include "KingSystem/Game/System/Action/actionSystemSetWindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 SystemSetWindAction::SystemSetWindAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -28,4 +28,4 @@ void SystemSetWindAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
