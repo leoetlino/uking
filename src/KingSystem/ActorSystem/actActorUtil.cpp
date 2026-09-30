@@ -2,7 +2,6 @@
 #include <container/seadSafeArray.h>
 #include <math/seadMathCalcCommon.h>
 #include <random/seadGlobalRandom.h>
-#include "KingSystem/ActorSystem/Profiles/actRopeBase.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
@@ -10,6 +9,7 @@
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actTag.h"
 #include "KingSystem/Game/Ecosystem/ecoSystem.h"
+#include "KingSystem/Game/Rope/RopeBase.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"

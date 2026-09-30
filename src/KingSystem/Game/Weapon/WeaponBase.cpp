@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/Profiles/actWeaponBase.h"
+#include "KingSystem/Game/Weapon/WeaponBase.h"
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 
