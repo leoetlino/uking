@@ -1,4 +1,4 @@
-#include "KingSystem/System/StageInfo.h"
+#include "KingSystem/Game/StageInfo.h"
 
 namespace ksys {
 

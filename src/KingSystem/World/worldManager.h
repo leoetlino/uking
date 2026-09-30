@@ -10,8 +10,8 @@
 #include <utility/aglParameter.h>
 #include <utility/aglParameterIO.h>
 #include <utility/aglParameterObj.h>
+#include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/System/StageInfo.h"
 #include "KingSystem/Utils/Types.h"
 #include "KingSystem/World/worldChemicalMgr.h"
 #include "KingSystem/World/worldDefines.h"
