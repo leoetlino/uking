@@ -1,8 +1,8 @@
 #include "KingSystem/Physics/Ragdoll/physRagdollRigidBody.h"
 #include "Havok/Physics2012/Collide/Shape/Convex/Capsule/hkpCapsuleShape.h"
 #include "Havok/Physics2012/Dynamics/Entity/hkpRigidBody.h"
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/Ragdoll/physRagdollInstance.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 

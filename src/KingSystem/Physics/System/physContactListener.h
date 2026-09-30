@@ -10,8 +10,8 @@
 #include <prim/seadRuntimeTypeInfo.h>
 #include <thread/seadCriticalSection.h>
 #include <utility>
-#include "KingSystem/Physics/physDefines.h"
-#include "KingSystem/Physics/physMaterialMask.h"
+#include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 
