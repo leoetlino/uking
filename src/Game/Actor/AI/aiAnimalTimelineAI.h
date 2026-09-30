@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/AI/aiTimelineAI.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
+#include "KingSystem/Game/AI/aiTimelineAI.h"
 
 namespace uking::ai {
 
