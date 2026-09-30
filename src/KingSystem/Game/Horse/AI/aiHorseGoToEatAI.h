@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class HorseGoToEatAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(HorseGoToEatAI, ksys::act::ai::Ai)
@@ -22,4 +22,4 @@ protected:
     ksys::act::BaseProcLink* mTargetActor_d{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game
