@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/Action/actionEquipedOptionalWeaponAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/Game/Action/actionEquipedOptionalWeaponAction.h"
 
 namespace uking::action {
 
