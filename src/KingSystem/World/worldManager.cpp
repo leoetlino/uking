@@ -248,7 +248,7 @@ float Manager::getMoistureMin() const {
 sead::Vector3f Manager::getWindDirection() const {
     float x;
     int idx = 0;
-    if (mStageType == StageType::OpenWorld && mFieldType == FieldType::AocField &&
+    if (mStageType == game::StageType::OpenWorld && mFieldType == FieldType::AocField &&
         mScalingMode == ScalingMode::Disabled) {
         x = std::sin(mWindDirections[0]);
     } else {
@@ -294,7 +294,7 @@ sead::Vector3f Manager::getWindDirection(const sead::Vector3f& pos) const {
 }
 
 int Manager::getPaletteSetSelect() const {
-    if (!worldInfoLoaded() || mStageType != StageType::OpenWorld)
+    if (!worldInfoLoaded() || mStageType != game::StageType::OpenWorld)
         return 0;
 
     const auto climate = mCurrentClimate;
@@ -306,7 +306,7 @@ int Manager::getPaletteSetSelect() const {
 }
 
 int Manager::getFogType() const {
-    if (!worldInfoLoaded() || mStageType != StageType::OpenWorld)
+    if (!worldInfoLoaded() || mStageType != game::StageType::OpenWorld)
         return 0;
 
     const auto climate = mCurrentClimate;
@@ -393,7 +393,7 @@ void Manager::loadWorldInfoRes() {
     mInfoRes = mWorldInfo.mResHandle.load("WorldMgr/normal.bwinfo", &req);
 }
 
-void Manager::onStageInit(StageType stage_type, bool is_demo, bool is_main_field) {
+void Manager::onStageInit(game::StageType stage_type, bool is_demo, bool is_main_field) {
     mTimer = 30;
     mTicks = 0;
     _6c8 = 0;
@@ -610,9 +610,9 @@ void Manager::onStageInit(StageType stage_type, bool is_demo, bool is_main_field
             mWorldInfo.applyResParameterArchive(agl::utl::ResParameterArchive(res->getRawData()));
     }
 
-    if (mStageType2 == StageType::Indoor) {
+    if (mStageType2 == game::StageType::Indoor) {
         sead::FixedSafeString<64> path;
-        path.format("Map/DungeonData/CDungeon/%s", StageInfo::getCurrentMapName().cstr());
+        path.format("Map/DungeonData/CDungeon/%s", game::StageInfo::getCurrentMapName().cstr());
         path.appendWithFormat(".bdgnenv");
         auto* ksys_res =
             sead::DynamicCast<res::Resource>(mDungeonEnv.mResHandle.load(path.cstr(), &req));
@@ -686,24 +686,24 @@ void Manager::onStageInit(StageType stage_type, bool is_demo, bool is_main_field
 void Manager::updateFieldType() {
     mScalingMode = ScalingMode::Enabled;
 
-    if (StageInfo::getCurrentMapType().include("MainField")) {
+    if (game::StageInfo::getCurrentMapType().include("MainField")) {
         mFieldType = FieldType::MainField;
-    } else if (StageInfo::getCurrentMapType().include("AocField")) {
+    } else if (game::StageInfo::getCurrentMapType().include("AocField")) {
         mFieldType = FieldType::AocField;
         mScalingMode = ScalingMode::Disabled;
     }
 }
 
 void Manager::updateRemainsType() {
-    if (StageInfo::getCurrentMapName().include("RemainsWind")) {
+    if (game::StageInfo::getCurrentMapName().include("RemainsWind")) {
         mRemainsType = RemainsType::Wind;
-    } else if (StageInfo::getCurrentMapName().include("RemainsElectric")) {
+    } else if (game::StageInfo::getCurrentMapName().include("RemainsElectric")) {
         mRemainsType = RemainsType::Electric;
-    } else if (StageInfo::getCurrentMapName().include("RemainsFire")) {
+    } else if (game::StageInfo::getCurrentMapName().include("RemainsFire")) {
         mRemainsType = RemainsType::Fire;
-    } else if (StageInfo::getCurrentMapName().include("RemainsWater")) {
+    } else if (game::StageInfo::getCurrentMapName().include("RemainsWater")) {
         mRemainsType = RemainsType::Water;
-    } else if (StageInfo::getCurrentMapName().include("FinalTrial")) {
+    } else if (game::StageInfo::getCurrentMapName().include("FinalTrial")) {
         mRemainsType = RemainsType::FinalTrial;
     }
 }

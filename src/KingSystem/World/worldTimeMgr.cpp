@@ -710,7 +710,7 @@ bool TimeMgr::isBloodyDay() const {
 }
 
 float TimeMgr::getTimeForSkyEnv() const {
-    if (Manager::instance()->getStageType() == StageType::OpenWorld &&
+    if (Manager::instance()->getStageType() == game::StageType::OpenWorld &&
         Manager::instance()->getFieldType() == FieldType::AocField &&
         Manager::instance()->getScalingMode() == ScalingMode::Disabled) {
         return mTimeForAocFieldSkyEnv;

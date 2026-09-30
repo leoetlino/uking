@@ -9,7 +9,7 @@ IsCurrentAocFieldStage::IsCurrentAocFieldStage(const InitArg& arg) : ksys::act::
 IsCurrentAocFieldStage::~IsCurrentAocFieldStage() = default;
 
 int IsCurrentAocFieldStage::doQuery() {
-    return ksys::StageInfo::sIsAocField;
+    return ksys::game::StageInfo::sIsAocField;
 }
 
 void IsCurrentAocFieldStage::loadParams(const evfl::QueryArg& arg) {}
