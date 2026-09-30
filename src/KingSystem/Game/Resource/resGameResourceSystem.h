@@ -2,15 +2,15 @@
 
 #include <heap/seadDisposer.h>
 
-namespace ksys::res {
+namespace ksys::game {
 
 class CompactionMgr;
 
 // Also known as game::ResourceSystem (?)
-class GameResourceSystem {
-    SEAD_SINGLETON_DISPOSER(GameResourceSystem)
-    GameResourceSystem() = default;
-    virtual ~GameResourceSystem();
+class ResourceSystem {
+    SEAD_SINGLETON_DISPOSER(ResourceSystem)
+    ResourceSystem() = default;
+    virtual ~ResourceSystem();
 
 public:
     struct InitArg {
@@ -30,12 +30,12 @@ private:
 
 class ScopedCompactionPauser {
 public:
-    ScopedCompactionPauser() { GameResourceSystem::instance()->pauseCompaction(); }
-    ~ScopedCompactionPauser() { GameResourceSystem::instance()->resumeCompaction(); }
+    ScopedCompactionPauser() { ResourceSystem::instance()->pauseCompaction(); }
+    ~ScopedCompactionPauser() { ResourceSystem::instance()->resumeCompaction(); }
     ScopedCompactionPauser(const ScopedCompactionPauser&) = delete;
     ScopedCompactionPauser(ScopedCompactionPauser&&) = delete;
     auto operator=(const ScopedCompactionPauser&) = delete;
     auto operator=(ScopedCompactionPauser&&) = delete;
 };
 
-}  // namespace ksys::res
+}  // namespace ksys::game

@@ -131,7 +131,7 @@ bool BaseProcInitializer::requestCreateBaseProc(const BaseProcCreateRequest& req
 }
 
 BaseProc* BaseProcInitializer::createBaseProc(const BaseProcCreateRequest& req) {
-    res::GameResourceSystem::instance()->pauseCompaction();
+    game::ResourceSystem::instance()->pauseCompaction();
 
     BaseProcCreateArg arg;
     arg.heap = req.task_data->mHeap;
@@ -159,7 +159,7 @@ BaseProc* BaseProcInitializer::createBaseProc(const BaseProcCreateRequest& req) 
     if (proc)
         proc->setInitializedFlag();
 
-    res::GameResourceSystem::instance()->resumeCompaction();
+    game::ResourceSystem::instance()->resumeCompaction();
     return result;
 }
 

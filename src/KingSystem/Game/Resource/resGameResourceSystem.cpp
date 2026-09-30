@@ -1,7 +1,7 @@
 #include "KingSystem/Game/Resource/resGameResourceSystem.h"
 
-namespace ksys::res {
+namespace ksys::game {
 
-SEAD_SINGLETON_DISPOSER_IMPL(GameResourceSystem)
+SEAD_SINGLETON_DISPOSER_IMPL(ResourceSystem)
 
-}  // namespace ksys::res
+}  // namespace ksys::game
