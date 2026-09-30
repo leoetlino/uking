@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/Action/actionBindAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/Game/Action/actionBindAction.h"
 
 namespace uking::action {
 
