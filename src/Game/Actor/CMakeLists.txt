@@ -4,7 +4,6 @@ add_subdirectory(Camera)
 add_subdirectory(Damage)
 add_subdirectory(Player)
 add_subdirectory(Query)
-add_subdirectory(System)
 target_sources(uking PRIVATE
   aiActionFactories.cpp
   aiActionFactories.h
