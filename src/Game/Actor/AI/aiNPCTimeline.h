@@ -5,8 +5,8 @@
 
 namespace uking::ai {
 
-class NPCTimeline : public TimelineAI {
-    SEAD_RTTI_OVERRIDE(NPCTimeline, TimelineAI)
+class NPCTimeline : public ksys::game::TimelineAI {
+    SEAD_RTTI_OVERRIDE(NPCTimeline, ksys::game::TimelineAI)
 public:
     explicit NPCTimeline(const InitArg& arg);
     ~NPCTimeline() override;

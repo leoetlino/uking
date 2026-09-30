@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionSoundTrigger.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 SoundTrigger::SoundTrigger(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void SoundTrigger::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

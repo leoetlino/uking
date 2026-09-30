@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionObservationPointAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 ObservationPointAction::ObservationPointAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -22,4 +22,4 @@ void ObservationPointAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
