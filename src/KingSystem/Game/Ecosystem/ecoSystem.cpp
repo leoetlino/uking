@@ -2,7 +2,7 @@
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Utils/Byaml/Byaml.h"
 
-namespace ksys::eco {
+namespace ksys::game {
 
 constexpr const char* sAreaItemTypeStr[] = {
     "Animal",
@@ -204,7 +204,7 @@ void Ecosystem::getAreaNameByNum(s32 areaNum, const char** out) const {
 
 // NON_MATCHING: Equivalent, minor conditional differences and register usage
 void Ecosystem::getStatusEffectInfo(StatusEffect statusEffectIdx, s32 idx,
-                                    eco::StatusEffectInfo* out) const {
+                                    game::StatusEffectInfo* out) const {
     al::ByamlIter listIter;
     if (!mStatusEffectListIter->tryGetIterByIndex(&listIter, 0))
         return;
@@ -324,4 +324,4 @@ void Ecosystem::getEcoTraitsByNum(s32 areaNum, EcosystemTraits* out) const {
 
 Ecosystem::~Ecosystem() = default;
 
-}  // namespace ksys::eco
+}  // namespace ksys::game

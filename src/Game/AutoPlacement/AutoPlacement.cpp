@@ -88,12 +88,12 @@ void AutoPlacement::sub_710064DA54() {
     _8 = 2;
 }
 
-ksys::eco::AreaItemType sPlacementItemTypesData[] = {
-    ksys::eco::AreaItemType::Enemy,  ksys::eco::AreaItemType::Animal,
-    ksys::eco::AreaItemType::Insect, ksys::eco::AreaItemType::Fish,
-    ksys::eco::AreaItemType::Bird,   ksys::eco::AreaItemType::AutoPlacementMaterial,
+ksys::game::AreaItemType sPlacementItemTypesData[] = {
+    ksys::game::AreaItemType::Enemy,  ksys::game::AreaItemType::Animal,
+    ksys::game::AreaItemType::Insect, ksys::game::AreaItemType::Fish,
+    ksys::game::AreaItemType::Bird,   ksys::game::AreaItemType::AutoPlacementMaterial,
 };
-sead::Buffer<ksys::eco::AreaItemType> sPlacementItemTypes{sPlacementItemTypesData};
+sead::Buffer<ksys::game::AreaItemType> sPlacementItemTypes{sPlacementItemTypesData};
 
 // NON_MATCHING: stack
 bool AutoPlacement::sub_710064E178(const sead::SafeString& name, u32 placement_type,
@@ -101,7 +101,7 @@ bool AutoPlacement::sub_710064E178(const sead::SafeString& name, u32 placement_t
     if (mNearFlag == 0xFE)
         return true;
 
-    auto* eco = ksys::eco::Ecosystem::instance();
+    auto* eco = ksys::game::Ecosystem::instance();
     if (eco == nullptr)
         return false;
 
@@ -109,7 +109,7 @@ bool AutoPlacement::sub_710064E178(const sead::SafeString& name, u32 placement_t
     if (area < 0)
         return false;
 
-    ksys::eco::AreaItemSet item_set;
+    ksys::game::AreaItemSet item_set;
     eco->getAreaItems(area, sPlacementItemTypes[placement_type], &item_set);
 
     for (int i = 0; i < item_set.count; ++i) {

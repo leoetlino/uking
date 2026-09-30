@@ -3,7 +3,7 @@
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Utils/Byaml/Byaml.h"
 
-namespace ksys::eco {
+namespace ksys::game {
 
 LevelSensor::LevelSensor() = default;
 
@@ -70,4 +70,4 @@ void LevelSensor::calculatePoints() {
     }
 }
 
-}  // namespace ksys::eco
+}  // namespace ksys::game

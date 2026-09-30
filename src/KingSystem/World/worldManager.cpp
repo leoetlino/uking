@@ -100,12 +100,12 @@ const char* Manager::getWeatherTypeString(u32 type) {
 }
 
 Climate Manager::getClimate(const sead::Vector3f& pos) const {
-    const auto area = eco::Ecosystem::instance()->getFieldMapArea(pos.x, pos.z);
+    const auto area = game::Ecosystem::instance()->getFieldMapArea(pos.x, pos.z);
     if (area < 0)
         return {};
 
     const char* climate;
-    eco::Ecosystem::instance()->getClimateNameByNum(area, &climate);
+    game::Ecosystem::instance()->getClimateNameByNum(area, &climate);
     if (climate == nullptr)
         return {};
 

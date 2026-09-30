@@ -7,7 +7,7 @@ namespace al {
 class ByamlIter;
 }
 
-namespace ksys::eco {
+namespace ksys::game {
 enum class AreaItemType;
 }
 
@@ -171,7 +171,7 @@ bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& actor
 
 s32 getSelectedChoiceIdx(s32 max, const char* query_name);
 
-bool getRandomAreaItem(sead::SafeString* item, const eco::AreaItemType& type,
+bool getRandomAreaItem(sead::SafeString* item, const game::AreaItemType& type,
                        const sead::Vector3f& pos);
 bool isInSatoriMountainArea(const sead::Vector3f& pos);
 

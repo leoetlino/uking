@@ -11,7 +11,7 @@ namespace al {
 class ByamlIter;
 }
 
-namespace ksys::eco {
+namespace ksys::game {
 
 struct EcoMapHeader {
     /// File magic (0x00112233).
@@ -177,4 +177,4 @@ private:
     u32 mLast;
 };
 
-}  // namespace ksys::eco
+}  // namespace ksys::game

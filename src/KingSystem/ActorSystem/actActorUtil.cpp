@@ -581,14 +581,14 @@ bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& actor
     return true;
 }
 
-bool getRandomAreaItem(sead::SafeString* item, const eco::AreaItemType& type,
+bool getRandomAreaItem(sead::SafeString* item, const game::AreaItemType& type,
                        const sead::Vector3f& pos) {
-    auto* eco = eco::Ecosystem::instance();
+    auto* eco = game::Ecosystem::instance();
     if (!eco)
         return false;
 
     const int area = eco->getFieldMapArea(pos.x, pos.z);
-    eco::AreaItemSet items;
+    game::AreaItemSet items;
     eco->getAreaItems(area, type, &items);
 
     int chosen_idx = -1;
@@ -611,7 +611,7 @@ bool getRandomAreaItem(sead::SafeString* item, const eco::AreaItemType& type,
 }
 
 bool isInSatoriMountainArea(const sead::Vector3f& pos) {
-    return eco::Ecosystem::instance()->getFieldMapArea(pos.x, pos.z) == 64;
+    return game::Ecosystem::instance()->getFieldMapArea(pos.x, pos.z) == 64;
 }
 
 }  // namespace ksys::act
