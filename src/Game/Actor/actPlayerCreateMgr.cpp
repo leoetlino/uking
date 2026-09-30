@@ -7,12 +7,12 @@
 #include "Game/Actor/actWeapon.h"
 #include "Game/ActorHeapUtil.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
-#include "KingSystem/ActorSystem/Profiles/actWeaponBase.h"
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Game/Weapon/actWeaponBase.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 
 namespace uking::act {

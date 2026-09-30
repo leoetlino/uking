@@ -1,6 +1,6 @@
 #include "Game/Actor/Damage/actDamageInfoMgr.h"
 #include "Game/Scene/gameStageInfo.h"
-#include "KingSystem/ActorSystem/actGlobalParameter.h"
+#include "KingSystem/Game/actGlobalParameter.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 

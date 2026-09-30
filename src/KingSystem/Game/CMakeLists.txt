@@ -9,11 +9,15 @@ add_subdirectory(NPC)
 add_subdirectory(Physics)
 add_subdirectory(Player)
 add_subdirectory(Resource)
+add_subdirectory(Rope)
 add_subdirectory(System)
 add_subdirectory(Title)
 add_subdirectory(UI)
+add_subdirectory(Weapon)
 
 target_sources(uking PRIVATE
+  actGlobalParameter.cpp
+  actGlobalParameter.h
   StageInfo.cpp
   StageInfo.h
   StagePreActorCache.cpp
