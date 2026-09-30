@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class CameraRumbleLoop : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(CameraRumbleLoop, ksys::act::ai::Action)
@@ -23,4 +23,4 @@ protected:
     int* mCamVibId_a{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

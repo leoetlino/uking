@@ -1,7 +1,7 @@
 #include "KingSystem/Game/Action/actionEquipedOptionalWeaponAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EquipedOptionalWeaponAction::EquipedOptionalWeaponAction(const InitArg& arg) : BindAction(arg) {}
 
-}  // namespace uking::action
+}  // namespace ksys::game

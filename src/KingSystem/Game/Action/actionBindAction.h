@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class BindAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(BindAction, ksys::act::ai::Action)
@@ -18,4 +18,4 @@ protected:
     void calc_() override;
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

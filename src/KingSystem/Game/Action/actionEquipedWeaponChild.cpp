@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionEquipedWeaponChild.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EquipedWeaponChild::EquipedWeaponChild(const InitArg& arg) : BindAction(arg) {}
 
@@ -17,4 +17,4 @@ void EquipedWeaponChild::loadParams_() {
     getStaticParam(&mIsChangeScale_s, "IsChangeScale");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

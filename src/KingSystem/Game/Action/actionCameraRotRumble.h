@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class CameraRotRumble : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(CameraRotRumble, ksys::act::ai::Action)
@@ -20,4 +20,4 @@ protected:
     float* mPower_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
