@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionAreaRecreateActorAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AreaRecreateActorAction::AreaRecreateActorAction(const InitArg& arg) : AreaActionBase(arg) {}
 
@@ -10,4 +10,4 @@ bool AreaRecreateActorAction::init_(sead::Heap* heap) {
     return AreaActionBase::init_(heap);
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
