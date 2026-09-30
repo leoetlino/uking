@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionDefEscapeFreeMoveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 DefEscapeFreeMoveAction::DefEscapeFreeMoveAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -36,4 +36,4 @@ void DefEscapeFreeMoveAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

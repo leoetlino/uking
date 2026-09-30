@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class HorseWaitAndLookAtNPC : public HorseWaitAction {
-    SEAD_RTTI_OVERRIDE(HorseWaitAndLookAtNPC, HorseWaitAction)
+class HorseWaitAndLookAtNPC : public ksys::game::HorseWaitAction {
+    SEAD_RTTI_OVERRIDE(HorseWaitAndLookAtNPC, ksys::game::HorseWaitAction)
 public:
     explicit HorseWaitAndLookAtNPC(const InitArg& arg);
     ~HorseWaitAndLookAtNPC() override;

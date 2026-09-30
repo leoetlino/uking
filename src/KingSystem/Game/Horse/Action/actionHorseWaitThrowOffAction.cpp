@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseWaitThrowOffAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseWaitThrowOffAction::HorseWaitThrowOffAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -27,4 +27,4 @@ void HorseWaitThrowOffAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

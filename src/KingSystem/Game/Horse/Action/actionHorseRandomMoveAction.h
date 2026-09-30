@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Horse/Action/actionAnimalMoveGuidedBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseRandomMoveAction : public AnimalMoveGuidedBase {
     SEAD_RTTI_OVERRIDE(HorseRandomMoveAction, AnimalMoveGuidedBase)
@@ -28,4 +28,4 @@ protected:
     const bool* mIsCancelRequestedPathFirst_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
