@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseWaitForEventAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(HorseWaitForEventAction, ksys::act::ai::Action)
@@ -30,4 +30,4 @@ protected:
     bool* mIsNoMorph_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class HorseSwimToTargetActor : public HorseSwim {
-    SEAD_RTTI_OVERRIDE(HorseSwimToTargetActor, HorseSwim)
+class HorseSwimToTargetActor : public ksys::game::HorseSwim {
+    SEAD_RTTI_OVERRIDE(HorseSwimToTargetActor, ksys::game::HorseSwim)
 public:
     explicit HorseSwimToTargetActor(const InitArg& arg);
     ~HorseSwimToTargetActor() override;

@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseReinsBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseReinsBindAction::HorseReinsBindAction(const InitArg& arg) : HorseReinsDefaultAction(arg) {}
 
@@ -30,4 +30,4 @@ void HorseReinsBindAction::calc_() {
     HorseReinsDefaultAction::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
