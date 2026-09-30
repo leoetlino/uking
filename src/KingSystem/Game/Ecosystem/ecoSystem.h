@@ -5,7 +5,7 @@
 #include <heap/seadDisposer.h>
 #include <heap/seadExpHeap.h>
 #include <math/seadMathCalcCommon.h>
-#include "KingSystem/Ecosystem/ecoLevelSensor.h"
+#include "KingSystem/Game/Ecosystem/ecoLevelSensor.h"
 
 namespace al {
 class ByamlIter;
