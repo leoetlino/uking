@@ -5,11 +5,10 @@
 
 namespace uking::action {
 
-class LynelNavMeshMove : public AnimalMoveGuidedBase {
-    SEAD_RTTI_OVERRIDE(LynelNavMeshMove, AnimalMoveGuidedBase)
+class HorseMoveToTargetAction : public AnimalMoveGuidedBase {
+    SEAD_RTTI_OVERRIDE(HorseMoveToTargetAction, AnimalMoveGuidedBase)
 public:
-    explicit LynelNavMeshMove(const InitArg& arg);
-    ~LynelNavMeshMove() override;
+    explicit HorseMoveToTargetAction(const InitArg& arg);
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;
@@ -19,7 +18,9 @@ public:
 protected:
     void calc_() override;
 
-    // dynamic_param at offset 0x78
+    // static_param at offset 0x78
+    const bool* mIsCancelRequestedPathFirst_s{};
+    // dynamic_param at offset 0x80
     sead::Vector3f* mTargetPos_d{};
 };
 

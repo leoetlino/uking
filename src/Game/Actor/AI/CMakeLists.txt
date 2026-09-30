@@ -977,8 +977,6 @@ target_sources(uking PRIVATE
   aiHorseFollow.cpp
   aiHorseFollow.h
   aiHorse.h
-  aiHorseLoopTarget.cpp
-  aiHorseLoopTarget.h
   aiHorseMoveToPlayer.cpp
   aiHorseMoveToPlayer.h
   aiHorseNotRidden.cpp
