@@ -987,8 +987,6 @@ target_sources(uking PRIVATE
   aiHorseDamageTypeSelect.h
   aiHorseFollow.cpp
   aiHorseFollow.h
-  aiHorseLoopTarget.cpp
-  aiHorseLoopTarget.h
   aiHorseMoveToPlayer.cpp
   aiHorseMoveToPlayer.h
   aiHorseNotRidden.cpp
