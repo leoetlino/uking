@@ -2,7 +2,7 @@
 
 #include <container/seadSafeArray.h>
 #include <prim/seadBitFlag.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 
 namespace ksys::phys {
 

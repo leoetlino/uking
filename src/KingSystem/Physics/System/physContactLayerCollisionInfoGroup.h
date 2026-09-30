@@ -4,7 +4,7 @@
 #include <container/seadListImpl.h>
 #include <container/seadPtrArray.h>
 #include <prim/seadNamable.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 
 namespace ksys::phys {
 

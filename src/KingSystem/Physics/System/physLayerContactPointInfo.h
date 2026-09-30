@@ -4,9 +4,9 @@
 #include <math/seadVector.h>
 #include <prim/seadDelegate.h>
 #include <prim/seadTypedBitFlag.h>
+#include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/System/physContactPointInfo.h"
-#include "KingSystem/Physics/physDefines.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::phys {
