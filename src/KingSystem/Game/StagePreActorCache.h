@@ -11,7 +11,7 @@ namespace ksys::map {
 class LazyTraverseList;
 }
 
-namespace ksys {
+namespace ksys::game {
 
 // TODO
 class StagePreActorCache {
@@ -28,4 +28,4 @@ private:
     gfx::ForestRenderer* mForestRenderer;
 };
 
-}  // namespace ksys
+}  // namespace ksys::game

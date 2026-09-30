@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class SystemApplyEnvSetAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(SystemApplyEnvSetAction, ksys::act::ai::Action)
@@ -21,4 +21,4 @@ protected:
     sead::SafeString mEnvSetName_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
