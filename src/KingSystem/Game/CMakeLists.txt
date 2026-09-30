@@ -15,8 +15,8 @@ add_subdirectory(Weapon)
 target_sources(uking PRIVATE
   actActorLimiter.cpp
   actActorLimiter.h
-  actGlobalParameter.cpp
-  actGlobalParameter.h
+  GlobalParameter.cpp
+  GlobalParameter.h
   StageInfo.cpp
   StageInfo.h
   StagePreActorCache.cpp

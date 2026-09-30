@@ -1,4 +1,4 @@
 target_sources(uking PRIVATE
-  actWeaponBase.cpp
-  actWeaponBase.h
+  WeaponBase.cpp
+  WeaponBase.h
 )
