@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionAreaActionBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AreaActionBase::AreaActionBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void AreaActionBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

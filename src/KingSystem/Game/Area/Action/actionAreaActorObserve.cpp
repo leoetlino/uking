@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Area/Action/actionAreaActorObserve.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AreaActorObserve::AreaActorObserve(const InitArg& arg) : AreaActionBase(arg) {}
 
@@ -16,4 +16,4 @@ void AreaActorObserve::loadParams_() {
     getMapUnitParam(&mDefaultBasicSignal_m, "DefaultBasicSignal");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

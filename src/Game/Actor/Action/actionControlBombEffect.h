@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class ControlBombEffect : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(ControlBombEffect, AreaActionBase)
+class ControlBombEffect : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(ControlBombEffect, ksys::game::AreaActionBase)
 public:
     explicit ControlBombEffect(const InitArg& arg);
     ~ControlBombEffect() override;
