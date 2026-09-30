@@ -9,7 +9,7 @@ HasPorchItem::HasPorchItem(const InitArg& arg) : ksys::act::ai::Query(arg) {}
 HasPorchItem::~HasPorchItem() = default;
 
 int HasPorchItem::doQuery() {
-    return ksys::ui::getItemValue(mPorchItemName) >= *mCount;
+    return ksys::game::getItemValue(mPorchItemName) >= *mCount;
 }
 
 void HasPorchItem::loadParams(const evfl::QueryArg& arg) {
