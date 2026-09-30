@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionArmorBindNodeAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 ArmorBindNodeAction::ArmorBindNodeAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void ArmorBindNodeAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

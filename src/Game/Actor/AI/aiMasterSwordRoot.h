@@ -5,8 +5,8 @@
 
 namespace uking::ai {
 
-class MasterSwordRoot : public WeaponRootAI {
-    SEAD_RTTI_OVERRIDE(MasterSwordRoot, WeaponRootAI)
+class MasterSwordRoot : public ksys::game::WeaponRootAI {
+    SEAD_RTTI_OVERRIDE(MasterSwordRoot, ksys::game::WeaponRootAI)
 public:
     explicit MasterSwordRoot(const InitArg& arg);
     ~MasterSwordRoot() override;

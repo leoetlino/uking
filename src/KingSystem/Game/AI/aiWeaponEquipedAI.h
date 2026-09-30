@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class WeaponEquipedAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(WeaponEquipedAI, ksys::act::ai::Ai)
@@ -16,4 +16,4 @@ public:
 protected:
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

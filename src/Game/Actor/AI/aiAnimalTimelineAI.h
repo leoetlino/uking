@@ -5,8 +5,8 @@
 
 namespace uking::ai {
 
-class AnimalTimelineAI : public TimelineAI {
-    SEAD_RTTI_OVERRIDE(AnimalTimelineAI, TimelineAI)
+class AnimalTimelineAI : public ksys::game::TimelineAI {
+    SEAD_RTTI_OVERRIDE(AnimalTimelineAI, ksys::game::TimelineAI)
 public:
     explicit AnimalTimelineAI(const InitArg& arg);
     ~AnimalTimelineAI() override;
