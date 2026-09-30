@@ -83,8 +83,6 @@ target_sources(uking PRIVATE
   actionAnimMatrixDriven.h
   actionAnimTimingAttackMove.cpp
   actionAnimTimingAttackMove.h
-  actionAnmArmorBindAction.cpp
-  actionAnmArmorBindAction.h
   actionAnmBackMove.cpp
   actionAnmBackMove.h
   actionAnmBlownOffBackward.cpp
@@ -153,12 +151,6 @@ target_sources(uking PRIVATE
   actionAreaLocation.h
   actionAreaRoot.cpp
   actionAreaRoot.h
-  actionArmorBindAction.cpp
-  actionArmorBindAction.h
-  actionArmorBindNodeAction.cpp
-  actionArmorBindNodeAction.h
-  actionArmorBindWithAS.cpp
-  actionArmorBindWithAS.h
   actionArrowShootHoming.cpp
   actionArrowShootHoming.h
   actionArrowShootMove.cpp
@@ -307,10 +299,8 @@ target_sources(uking PRIVATE
   actionBeltConveyor.h
   actionBikeWarpEffectValueSetter.cpp
   actionBikeWarpEffectValueSetter.h
-  actionBindAction.cpp
   actionBindActionForManyActor.cpp
   actionBindActionForManyActor.h
-  actionBindAction.h
   actionBindActionUseParentPickInfo.cpp
   actionBindActionUseParentPickInfo.h
   actionBindOff.cpp
@@ -360,16 +350,6 @@ target_sources(uking PRIVATE
   actionCalcVecLengthToGameData.h
   actionCallOvserveActorTag.cpp
   actionCallOvserveActorTag.h
-  actionCameraRotRumble.cpp
-  actionCameraRotRumble.h
-  actionCameraRumble.cpp
-  actionCameraRumble.h
-  actionCameraRumbleLoop.cpp
-  actionCameraRumbleLoop.h
-  actionCameraRumbleStop.cpp
-  actionCameraRumbleStop.h
-  actionCameraRumbleStopWithDamping.cpp
-  actionCameraRumbleStopWithDamping.h
   actionCameraVibrate.cpp
   actionCameraVibrate.h
   actionCapturedActElectricParalyisis.cpp
@@ -530,8 +510,6 @@ target_sources(uking PRIVATE
   actionDemoTurnToActor.h
   actionDemoVisibleOn.cpp
   actionDemoVisibleOn.h
-  actionDemoVoiceTrigger.cpp
-  actionDemoVoiceTrigger.h
   actionDestPlayerWarpBase.cpp
   actionDestPlayerWarpBase.h
   actionDestPointMoveBase.cpp
@@ -712,8 +690,6 @@ target_sources(uking PRIVATE
   actionEquipDisplay.h
   actionEquipHornUseBase.cpp
   actionEquipHornUseBase.h
-  actionEquipedAction.cpp
-  actionEquipedAction.h
   actionEquipedASPlay.cpp
   actionEquipedASPlay.h
   actionEquipedChemicalWeapon.cpp
@@ -722,22 +698,16 @@ target_sources(uking PRIVATE
   actionEquipedDeadlyBlowWeapon.h
   actionEquipedDefaultWindWeapon.cpp
   actionEquipedDefaultWindWeapon.h
-  actionEquipedOptionalWeaponAction.cpp
-  actionEquipedOptionalWeaponAction.h
   actionEquipedQuiver.cpp
   actionEquipedQuiver.h
   actionEquipedRod.cpp
   actionEquipedRod.h
-  actionEquipedWeaponChild.cpp
-  actionEquipedWeaponChild.h
   actionEquipedWithScale.cpp
   actionEquipedWithScale.h
   actionEscapeBackTurn.cpp
   actionEscapeBackTurn.h
   actionEscape.cpp
   actionEscape.h
-  actionEventAddGameDataIntAction.cpp
-  actionEventAddGameDataIntAction.h
   actionEventAddGameDataToRupeeAction.cpp
   actionEventAddGameDataToRupeeAction.h
   actionEventAppearCheckPointNum.cpp
@@ -1391,8 +1361,6 @@ target_sources(uking PRIVATE
   actionFreeMovingAction.cpp
   actionFreeMovingAction.h
   actionFreeze.cpp
-  actionFreezedInIce.cpp
-  actionFreezedInIce.h
   actionFreezedInIceWeapon.cpp
   actionFreezedInIceWeapon.h
   actionFreeze.h
@@ -1808,8 +1776,6 @@ target_sources(uking PRIVATE
   actionKick.h
   actionKillSelectActor.cpp
   actionKillSelectActor.h
-  actionKillUIScreenAction.cpp
-  actionKillUIScreenAction.h
   actionKnockBackHitImpactForce.cpp
   actionKnockBackHitImpactForce.h
   actionKokkoCreateDrop.cpp
@@ -1996,8 +1962,6 @@ target_sources(uking PRIVATE
   actionMultiVacuumRotScaleTimeByDist.h
   actionNavMeshBattleWalk.cpp
   actionNavMeshBattleWalk.h
-  actionNavMeshConnectAction.cpp
-  actionNavMeshConnectAction.h
   actionNavMeshEscape.cpp
   actionNavMeshEscape.h
   actionNavMeshFly.cpp
@@ -2178,8 +2142,6 @@ target_sources(uking PRIVATE
   actionNullASPlay.h
   actionObjBoardWoodTriangle01.cpp
   actionObjBoardWoodTriangle01.h
-  actionObservationPointAction.cpp
-  actionObservationPointAction.h
   actionBalloonRopeBase.cpp
   actionBalloonRopeBase.h
   actionOctarockBalloon.cpp
@@ -2760,10 +2722,6 @@ target_sources(uking PRIVATE
   actionSmallDamage.h
   actionSoundOcclusionTagRemainsWater.cpp
   actionSoundOcclusionTagRemainsWater.h
-  actionSoundTrigger.cpp
-  actionSoundTriggerFadeAction.cpp
-  actionSoundTriggerFadeAction.h
-  actionSoundTrigger.h
   actionSpinFlyAttack.cpp
   actionSpinFlyAttack.h
   actionSpreadToEnemy.cpp
@@ -2928,10 +2886,6 @@ target_sources(uking PRIVATE
   actionTeleport.h
   actionTeleportTargetFrontInAir.cpp
   actionTeleportTargetFrontInAir.h
-  actionTerrainCalcCenter.cpp
-  actionTerrainCalcCenter.h
-  actionTerrainHideCenter.cpp
-  actionTerrainHideCenter.h
   actionThrow.cpp
   actionThrow.h
   actionThrowLeft.cpp
@@ -3004,8 +2958,6 @@ target_sources(uking PRIVATE
   actionUnarmedAttack.h
   actionUnarmedLargeAttack.cpp
   actionUnarmedLargeAttack.h
-  actionUseNavMeshConnectAction.cpp
-  actionUseNavMeshConnectAction.h
   actionVacuumedItemShootToTarget.cpp
   actionVacuumedItemShootToTarget.h
   actionVanish.cpp

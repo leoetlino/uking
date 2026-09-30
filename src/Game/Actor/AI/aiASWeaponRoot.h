@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/AI/aiWeaponRootAI.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
+#include "KingSystem/Game/AI/aiWeaponRootAI.h"
 
 namespace uking::ai {
 

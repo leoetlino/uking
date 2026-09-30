@@ -173,10 +173,6 @@ target_sources(uking PRIVATE
   aiBalloonPlantNormal.h
   aiBarrelBomb.cpp
   aiBarrelBomb.h
-  aiBasicStatusRoot.cpp
-  aiBasicStatusRoot.h
-  aiBattleBgmRequestFinishTag.cpp
-  aiBattleBgmRequestFinishTag.h
   aiSimpleBeamExplode.cpp
   aiSimpleBeamExplode.h
   aiBeamExplode.cpp
@@ -651,8 +647,6 @@ target_sources(uking PRIVATE
   aiEscapeOrWaitSelect.h
   aiEternalPlayerTarget.cpp
   aiEternalPlayerTarget.h
-  aiEventTagRootAI.cpp
-  aiEventTagRootAI.h
   aiEventTimeRoot.cpp
   aiEventTimeRoot.h
   aiExceededImpulseCheck.cpp
@@ -1459,8 +1453,6 @@ target_sources(uking PRIVATE
   aiOnNavFaceSelect.h
   aiOnRagdollSelect.cpp
   aiOnRagdollSelect.h
-  aiOptionalWeaponAI.cpp
-  aiOptionalWeaponAI.h
   aiOutOfScreen.cpp
   aiOutOfScreen.h
   aiPartHaveSelect.cpp
@@ -1873,8 +1865,6 @@ target_sources(uking PRIVATE
   aiShootingStarRoot.h
   aiShutterFence.cpp
   aiShutterFence.h
-  aiSignalFlowchartRootAI.cpp
-  aiSignalFlowchartRootAI.h
   aiSignalSendingMagneStickAcceptor.cpp
   aiSignalSendingMagneStickAcceptor.h
   aiSimpleASBridge.cpp
@@ -1977,8 +1967,6 @@ target_sources(uking PRIVATE
   aiSnowBallNormal.h
   aiSnowOctarockBattle.cpp
   aiSnowOctarockBattle.h
-  aiSoundTriggerTag.cpp
-  aiSoundTriggerTag.h
   aiSpearWeaponSelect.cpp
   aiSpearWeaponSelect.h
   aiSleepNormal.cpp
@@ -2209,8 +2197,6 @@ target_sources(uking PRIVATE
   aiTimeControlTagRoot.h
   aiInvincibleNearTarget.cpp
   aiInvincibleNearTarget.h
-  aiTimelineAI.cpp
-  aiTimelineAI.h
   aiTimeredViewWait.cpp
   aiTimeredViewWait.h
   aiTimidityEnemyDrawback.cpp
@@ -2307,8 +2293,6 @@ target_sources(uking PRIVATE
   aiWeakPointRoot.h
   aiWeakStateSelecter.cpp
   aiWeakStateSelecter.h
-  aiWeaponEquipedAI.cpp
-  aiWeaponEquipedAI.h
   aiWeaponEquipEnemyWakeUp.cpp
   aiWeaponEquipEnemyWakeUp.h
   aiWeaponHoldSelector.cpp
@@ -2319,8 +2303,6 @@ target_sources(uking PRIVATE
   aiWeaponPrepareSelect.h
   aiWeaponRangeKindSelect.cpp
   aiWeaponRangeKindSelect.h
-  aiWeaponRootAI.cpp
-  aiWeaponRootAI.h
   aiWeaponSelector.cpp
   aiWeaponSelector.h
   aiWeaponSubTypeSelect.cpp
