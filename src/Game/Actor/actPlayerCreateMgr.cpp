@@ -12,7 +12,7 @@
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
-#include "KingSystem/Game/Weapon/actWeaponBase.h"
+#include "KingSystem/Game/Weapon/WeaponBase.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 
 namespace uking::act {
@@ -107,7 +107,7 @@ bool CreatePlayerEquipActorMgr::areAllWeaponActorsReady() const {
         if (isSlotLoading((s32)i)) {
             return false;
         }
-        auto* weapon = sead::DynamicCast<ksys::act::WeaponBase>(handle->getProc());
+        auto* weapon = sead::DynamicCast<ksys::game::WeaponBase>(handle->getProc());
         if (weapon && !weapon->areExtraActorsReady()) {
             return false;
         }

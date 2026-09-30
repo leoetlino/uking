@@ -9,7 +9,7 @@
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actTag.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
-#include "KingSystem/Game/Rope/actRopeBase.h"
+#include "KingSystem/Game/Rope/RopeBase.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"
@@ -501,12 +501,12 @@ bool isWolfOrBear(BaseProcLink* link) {
 
 bool isRope(Actor* actor) {
     const auto accessor = getAccessor(actor);
-    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
 
 bool isRope(BaseProcLink* link) {
     const auto accessor = getAccessor(link);
-    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
 
 bool isTreeOrScaffoldOrSignboard(Actor* actor) {

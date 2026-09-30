@@ -2,7 +2,7 @@
 #include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
-#include "KingSystem/Game/Weapon/actWeaponBase.h"
+#include "KingSystem/Game/Weapon/WeaponBase.h"
 
 namespace uking::act {
 
@@ -18,8 +18,8 @@ void requestCreateWeaponByRawLife(const char* actor_class, const sead::Matrix34f
     params->add(true, "IsWeaponCreateByRawLife");
     params->addResourceLane(res_lane_id);
 
-    ksys::act::WeaponBase::requestCreateWeaponActor(actor_class, matrix, scale, heap, handle, life,
-                                                    &params, task_lane_id);
+    ksys::game::WeaponBase::requestCreateWeaponActor(actor_class, matrix, scale, heap, handle, life,
+                                                     &params, task_lane_id);
 }
 
 }  // namespace uking::act
