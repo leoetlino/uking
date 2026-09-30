@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Player/Action/actionPlayerActionClimb.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 PlayerActionClimb::PlayerActionClimb(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -71,4 +71,4 @@ void PlayerActionClimb::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
