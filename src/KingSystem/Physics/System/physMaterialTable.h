@@ -6,7 +6,7 @@
 #include <utility/aglParameterList.h>
 #include <utility/aglParameterObj.h>
 #include <utility/aglResParameter.h>
-#include "KingSystem/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::phys {

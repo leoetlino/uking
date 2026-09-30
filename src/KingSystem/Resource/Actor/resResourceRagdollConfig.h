@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "KingSystem/Physics/Ragdoll/physRagdollConfig.h"
+#include "KingSystem/Game/Physics/Ragdoll/physRagdollConfig.h"
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
