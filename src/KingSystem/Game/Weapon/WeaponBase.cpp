@@ -2,7 +2,7 @@
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 void WeaponBase::requestCreateWeaponActor(const char* actor, const sead::Matrix34f& matrix,
                                           f32 scale, sead::Heap* heap,
@@ -20,4 +20,4 @@ void WeaponBase::requestCreateWeaponActor(const char* actor, const sead::Matrix3
                                                             task_lane_id);
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::game
