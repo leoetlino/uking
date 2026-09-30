@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/Horse/AI/aiHorseRiddenByNPCBase.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
+#include "KingSystem/Game/Horse/AI/aiHorseRiddenByNPCBase.h"
 
 namespace uking::ai {
 
