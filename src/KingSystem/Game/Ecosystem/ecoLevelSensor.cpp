@@ -1,8 +1,8 @@
-#include "KingSystem/Ecosystem/ecoLevelSensor.h"
+#include "KingSystem/Game/Ecosystem/ecoLevelSensor.h"
 
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
-#include "KingSystem/Ecosystem/ecoSystem.h"
+#include "KingSystem/Game/Ecosystem/ecoSystem.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Utils/Byaml/Byaml.h"
