@@ -9,11 +9,11 @@ sead::FixedSafeString<256> StageInfo::sStr;
 StageInfo StageInfo::sInfo;
 
 const sead::SafeString& StageInfo::getCurrentMapType() {
-    return ksys::StageInfo::getCurrentMapType();
+    return ksys::game::StageInfo::getCurrentMapType();
 }
 
 const sead::SafeString& StageInfo::getCurrentMapName() {
-    return ksys::StageInfo::getCurrentMapName();
+    return ksys::game::StageInfo::getCurrentMapName();
 }
 
 }  // namespace uking

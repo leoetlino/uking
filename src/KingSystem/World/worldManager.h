@@ -135,9 +135,9 @@ public:
     void init(sead::Heap* heap);
     void resetForStageUnload();
     void loadWorldInfoRes();
-    void onStageInit(StageType stage_type, bool is_demo, bool is_main_field);
+    void onStageInit(game::StageType stage_type, bool is_demo, bool is_main_field);
     void updateRemainsType();
-    void updateGraphicsMap(StageType type);
+    void updateGraphicsMap(game::StageType type);
 
     void initBeforeStageGen();
     void unload2();
@@ -186,15 +186,15 @@ public:
 
     // TODO: more functions
 
-    bool isMainField() const { return mIsMainField && mStageType == StageType::OpenWorld; }
+    bool isMainField() const { return mIsMainField && mStageType == game::StageType::OpenWorld; }
 
     bool isAocField() const {
-        return mStageType == StageType::OpenWorld && mFieldType == FieldType::AocField &&
+        return mStageType == game::StageType::OpenWorld && mFieldType == FieldType::AocField &&
                mScalingMode == ScalingMode::Disabled;
     }
 
     bool isDemo() const { return mIsDemo; }
-    StageType getStageType() const { return mStageType; }
+    game::StageType getStageType() const { return mStageType; }
     FieldType getFieldType() const { return mFieldType; }
     ScalingMode getScalingMode() const { return mScalingMode; }
     CalcType getCalcType() const { return mCalcType; }
@@ -248,8 +248,8 @@ private:
     sead::Vector3f mPlayerPos{0, 0, 0};
     sead::Vector3f mPrevPlayerPos{0, 0, 0};
 
-    StageType mStageType{};
-    StageType mStageType2{};
+    game::StageType mStageType{};
+    game::StageType mStageType2{};
 
     u32 mTicks = 0;
     int mTimer = 30;
