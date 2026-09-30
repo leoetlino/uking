@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class PlayerSlippingDown : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(PlayerSlippingDown, ksys::act::ai::Action)
@@ -36,4 +36,4 @@ protected:
     bool* mIsAddImpulse_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
