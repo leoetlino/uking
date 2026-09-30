@@ -1,6 +1,6 @@
 #include "KingSystem/Game/System/StarterPackMgr.h"
 
-namespace ksys {
+namespace ksys::game {
 SEAD_SINGLETON_DISPOSER_IMPL(StarterPackMgr)
 
 StarterPackMgr::StarterPackMgr() = default;
@@ -233,4 +233,4 @@ res::Handle* StarterPackMgr::getBootupLangPack() {
     return &mBootupLangPack;
 }
 
-}  // namespace ksys
+}  // namespace ksys::game

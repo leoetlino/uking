@@ -19,7 +19,7 @@ void EventAddGameDataToRupeeAction::enter_(ksys::act::ai::InlineParamPack* param
     s32 val = 0;
     auto* gdm = ksys::gdt::Manager::instance();
     if (!gdm->getParam().get().getS32(&val, mGameDataIntAddValueName_d)) {
-        ksys::ui::initRupeeCounter();
+        ksys::game::initRupeeCounter();
         return;
     }
 
@@ -27,7 +27,7 @@ void EventAddGameDataToRupeeAction::enter_(ksys::act::ai::InlineParamPack* param
         val = -val;
     }
     gdm->incrementS32(val, "CurrentRupee");
-    ksys::ui::initRupeeCounter();
+    ksys::game::initRupeeCounter();
 }
 
 void EventAddGameDataToRupeeAction::leave_() {
@@ -42,7 +42,7 @@ void EventAddGameDataToRupeeAction::loadParams_() {
 void EventAddGameDataToRupeeAction::calc_() {
     ksys::act::ai::Action::calc_();
 
-    if (!ksys::ui::isRupeeCounterActive()) {
+    if (!ksys::game::isRupeeCounterActive()) {
         setFinished();
     }
 }

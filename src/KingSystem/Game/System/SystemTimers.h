@@ -4,7 +4,7 @@
 #include <heap/seadHeap.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::game {
 
 class SystemTimers {
     SEAD_SINGLETON_DISPOSER(SystemTimers)
@@ -28,4 +28,4 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(SystemTimers, 0x40);
 
-}  // namespace ksys
+}  // namespace ksys::game

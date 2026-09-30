@@ -1,6 +1,6 @@
 #include "KingSystem/Game/StageInfo.h"
 
-namespace ksys {
+namespace ksys::game {
 
 static sead::Atomic<int> sUnused;
 void (*StageInfo::sChangeScene)(const sead::SafeString& map_name, const sead::SafeString& pos_name,
@@ -46,4 +46,4 @@ void StageInfo::setCurrentMapNameForFieldPos(const sead::Vector3f& pos) {
     sCurrentMapName = name;
 }
 
-}  // namespace ksys
+}  // namespace ksys::game

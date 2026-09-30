@@ -14,7 +14,7 @@
 #include "KingSystem/System/OverlayArena.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::game {
 
 class StarterPackMgr {
     SEAD_SINGLETON_DISPOSER(StarterPackMgr)
@@ -59,4 +59,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(StarterPackMgr, 0x348);
 
-}  // namespace ksys
+}  // namespace ksys::game

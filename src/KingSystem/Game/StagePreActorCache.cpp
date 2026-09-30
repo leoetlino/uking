@@ -1,7 +1,7 @@
 #include "KingSystem/Game/StagePreActorCache.h"
 
-namespace ksys {
+namespace ksys::game {
 
 SEAD_SINGLETON_DISPOSER_IMPL(StagePreActorCache)
 
-}  // namespace ksys
+}  // namespace ksys::game
