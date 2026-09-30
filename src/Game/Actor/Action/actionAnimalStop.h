@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AnimalStop : public HorseWaitAction {
-    SEAD_RTTI_OVERRIDE(AnimalStop, HorseWaitAction)
+class AnimalStop : public ksys::game::HorseWaitAction {
+    SEAD_RTTI_OVERRIDE(AnimalStop, ksys::game::HorseWaitAction)
 public:
     explicit AnimalStop(const InitArg& arg);
     ~AnimalStop() override;
