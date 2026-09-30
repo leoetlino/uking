@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseNavMeshMoveBase : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(HorseNavMeshMoveBase, ksys::act::ai::Action)
@@ -39,4 +39,4 @@ protected:
     const bool* mWaitUntilPathSucceeded_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

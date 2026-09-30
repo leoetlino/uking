@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseRiddenByNPCBase.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseRiddenByNPCBase::HorseRiddenByNPCBase(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -20,4 +20,4 @@ void HorseRiddenByNPCBase::loadParams_() {
     getStaticParam(&mIsEscapeFromSameActorType_s, "IsEscapeFromSameActorType");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

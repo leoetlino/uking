@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseLoopTarget.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseLoopTarget::HorseLoopTarget(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -15,4 +15,4 @@ void HorseLoopTarget::loadParams_() {
     getStaticParam(&mIsFlip_s, "IsFlip");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

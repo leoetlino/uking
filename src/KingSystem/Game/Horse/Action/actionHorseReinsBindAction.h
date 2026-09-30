@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Horse/Action/actionHorseReinsDefaultAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseReinsBindAction : public HorseReinsDefaultAction {
     SEAD_RTTI_OVERRIDE(HorseReinsBindAction, HorseReinsDefaultAction)
@@ -29,4 +29,4 @@ protected:
     ksys::act::BaseProcLink* mHorse_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

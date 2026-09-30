@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionRideHorseForEventAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 RideHorseForEventAction::RideHorseForEventAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void RideHorseForEventAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

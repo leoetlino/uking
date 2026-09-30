@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseWaitAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseWaitAction::HorseWaitAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -31,4 +31,4 @@ void HorseWaitAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

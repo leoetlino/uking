@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiWildHorseDefWanderAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 WildHorseDefWanderAI::WildHorseDefWanderAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -24,4 +24,4 @@ void WildHorseDefWanderAI::loadParams_() {
     getStaticParam(&mMinWaitTime_s, "MinWaitTime");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

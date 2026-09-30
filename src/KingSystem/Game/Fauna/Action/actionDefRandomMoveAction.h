@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/ActorSystem/actionRandomMoveAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class DefRandomMoveAction : public ksys::act::ai::RandomMoveAction {
     SEAD_RTTI_OVERRIDE(DefRandomMoveAction, ksys::act::ai::RandomMoveAction)
@@ -35,4 +35,4 @@ protected:
     sead::Vector3f* mBasePos_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

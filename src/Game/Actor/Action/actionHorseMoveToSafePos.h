@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class HorseMoveToSafePos : public HorseNavMeshMoveBase {
-    SEAD_RTTI_OVERRIDE(HorseMoveToSafePos, HorseNavMeshMoveBase)
+class HorseMoveToSafePos : public ksys::game::HorseNavMeshMoveBase {
+    SEAD_RTTI_OVERRIDE(HorseMoveToSafePos, ksys::game::HorseNavMeshMoveBase)
 public:
     explicit HorseMoveToSafePos(const InitArg& arg);
     ~HorseMoveToSafePos() override;

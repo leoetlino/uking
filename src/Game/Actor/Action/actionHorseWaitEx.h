@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class HorseWaitEx : public HorseWaitAction {
-    SEAD_RTTI_OVERRIDE(HorseWaitEx, HorseWaitAction)
+class HorseWaitEx : public ksys::game::HorseWaitAction {
+    SEAD_RTTI_OVERRIDE(HorseWaitEx, ksys::game::HorseWaitAction)
 public:
     explicit HorseWaitEx(const InitArg& arg);
     ~HorseWaitEx() override;

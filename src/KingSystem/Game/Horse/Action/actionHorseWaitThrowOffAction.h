@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseWaitThrowOffAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(HorseWaitThrowOffAction, ksys::act::ai::Action)
@@ -24,4 +24,4 @@ protected:
     const bool* mSetRideAttentionInvalid_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

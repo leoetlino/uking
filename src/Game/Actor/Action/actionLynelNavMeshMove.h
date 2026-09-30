@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class LynelNavMeshMove : public HorseNavMeshMoveBase {
-    SEAD_RTTI_OVERRIDE(LynelNavMeshMove, HorseNavMeshMoveBase)
+class LynelNavMeshMove : public ksys::game::HorseNavMeshMoveBase {
+    SEAD_RTTI_OVERRIDE(LynelNavMeshMove, ksys::game::HorseNavMeshMoveBase)
 public:
     explicit LynelNavMeshMove(const InitArg& arg);
     ~LynelNavMeshMove() override;

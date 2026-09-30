@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiRideHorseAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 RideHorseAI::RideHorseAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -22,4 +22,4 @@ void RideHorseAI::loadParams_() {
     getDynamicParam_2(&mHasToPlayRidingOnAS_d, "HasToPlayRidingOnAS");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

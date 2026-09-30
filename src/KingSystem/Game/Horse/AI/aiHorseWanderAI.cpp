@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiHorseWanderAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 HorseWanderAI::HorseWanderAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -16,4 +16,4 @@ void HorseWanderAI::leave_() {
 
 void HorseWanderAI::loadParams_() {}
 
-}  // namespace uking::ai
+}  // namespace ksys::game

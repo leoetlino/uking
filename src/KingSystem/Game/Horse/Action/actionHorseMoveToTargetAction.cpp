@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionHorseMoveToTargetAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 HorseMoveToTargetAction::HorseMoveToTargetAction(const InitArg& arg) : HorseNavMeshMoveBase(arg) {}
 
@@ -26,4 +26,4 @@ void HorseMoveToTargetAction::calc_() {
     HorseNavMeshMoveBase::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

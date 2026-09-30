@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAi.h"
 #include "KingSystem/Game/Horse/AI/aiHorseLoopTarget.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class HorseLoopTargetAndWaitAI : public HorseLoopTarget {
     SEAD_RTTI_OVERRIDE(HorseLoopTargetAndWaitAI, HorseLoopTarget)
@@ -25,4 +25,4 @@ protected:
     const float* mMinWaitTime_s{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

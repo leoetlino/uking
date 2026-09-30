@@ -5,8 +5,8 @@
 
 namespace uking::ai {
 
-class HorseRiddenByNPC : public HorseRiddenByNPCBase {
-    SEAD_RTTI_OVERRIDE(HorseRiddenByNPC, HorseRiddenByNPCBase)
+class HorseRiddenByNPC : public ksys::game::HorseRiddenByNPCBase {
+    SEAD_RTTI_OVERRIDE(HorseRiddenByNPC, ksys::game::HorseRiddenByNPCBase)
 public:
     explicit HorseRiddenByNPC(const InitArg& arg);
     ~HorseRiddenByNPC() override;

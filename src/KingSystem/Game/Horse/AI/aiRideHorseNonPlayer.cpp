@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/AI/aiRideHorseNonPlayer.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 RideHorseNonPlayer::RideHorseNonPlayer(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -20,4 +20,4 @@ void RideHorseNonPlayer::leave_() {
 
 void RideHorseNonPlayer::loadParams_() {}
 
-}  // namespace uking::ai
+}  // namespace ksys::game
