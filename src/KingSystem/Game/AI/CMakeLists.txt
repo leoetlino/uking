@@ -1,0 +1,20 @@
+target_sources(uking PRIVATE
+  aiBasicStatusRoot.cpp
+  aiBasicStatusRoot.h
+  aiBattleBgmRequestFinishTag.cpp
+  aiBattleBgmRequestFinishTag.h
+  aiEventTagRootAI.cpp
+  aiEventTagRootAI.h
+  aiOptionalWeaponAI.cpp
+  aiOptionalWeaponAI.h
+  aiSignalFlowchartRootAI.cpp
+  aiSignalFlowchartRootAI.h
+  aiSoundTriggerTag.cpp
+  aiSoundTriggerTag.h
+  aiTimelineAI.cpp
+  aiTimelineAI.h
+  aiWeaponEquipedAI.cpp
+  aiWeaponEquipedAI.h
+  aiWeaponRootAI.cpp
+  aiWeaponRootAI.h
+)
