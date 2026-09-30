@@ -1,4 +1,4 @@
-#include "Game/Actor/Event/Action/actionEventInitTalkAction.h"
+#include "KingSystem/Game/Event/Action/actionEventInitTalkAction.h"
 
 namespace uking::action {
 

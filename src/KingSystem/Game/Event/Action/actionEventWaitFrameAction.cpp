@@ -1,4 +1,4 @@
-#include "Game/Actor/Event/Action/actionEventWaitFrameAction.h"
+#include "KingSystem/Game/Event/Action/actionEventWaitFrameAction.h"
 
 namespace uking::action {
 
