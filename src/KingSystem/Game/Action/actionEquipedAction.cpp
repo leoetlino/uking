@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionEquipedAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EquipedAction::EquipedAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void EquipedAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

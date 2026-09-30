@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionArmorBindWithAS.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 ArmorBindWithAS::ArmorBindWithAS(const InitArg& arg) : ArmorBindAction(arg) {}
 
@@ -19,4 +19,4 @@ void ArmorBindWithAS::loadParams_() {
     getDynamicParam(&mASName_d, "ASName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

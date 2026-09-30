@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiWeaponEquipedAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 WeaponEquipedAI::WeaponEquipedAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -14,4 +14,4 @@ void WeaponEquipedAI::leave_() {
     ksys::act::ai::Ai::leave_();
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

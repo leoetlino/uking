@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiBattleBgmRequestFinishTag.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 BattleBgmRequestFinishTag::BattleBgmRequestFinishTag(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -20,4 +20,4 @@ void BattleBgmRequestFinishTag::leave_() {
 
 void BattleBgmRequestFinishTag::loadParams_() {}
 
-}  // namespace uking::ai
+}  // namespace ksys::game

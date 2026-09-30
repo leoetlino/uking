@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Action/actionArmorBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class AnmArmorBindAction : public ArmorBindAction {
     SEAD_RTTI_OVERRIDE(AnmArmorBindAction, ArmorBindAction)
@@ -20,4 +20,4 @@ protected:
     void calc_() override;
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

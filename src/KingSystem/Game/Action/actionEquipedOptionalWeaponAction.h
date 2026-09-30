@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Action/actionBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EquipedOptionalWeaponAction : public BindAction {
     SEAD_RTTI_OVERRIDE(EquipedOptionalWeaponAction, BindAction)
@@ -13,4 +13,4 @@ public:
 protected:
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
