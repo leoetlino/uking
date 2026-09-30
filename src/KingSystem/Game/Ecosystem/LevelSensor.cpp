@@ -1,14 +1,14 @@
-#include "KingSystem/Game/Ecosystem/ecoLevelSensor.h"
+#include "KingSystem/Game/Ecosystem/LevelSensor.h"
 
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
-#include "KingSystem/Game/Ecosystem/ecoSystem.h"
+#include "KingSystem/Game/Ecosystem/Ecosystem.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/World/worldManager.h"
 
-namespace ksys::eco {
+namespace ksys::game {
 
 LevelSensor::LevelSensor() = default;
 
@@ -305,4 +305,4 @@ void LevelSensor::calculatePoints() {
     }
 }
 
-}  // namespace ksys::eco
+}  // namespace ksys::game
