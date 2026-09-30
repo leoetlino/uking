@@ -1,4 +1,4 @@
-#include "Game/Actor/Event/Action/actionEventOffWaitRevivalAction.h"
+#include "KingSystem/Game/Event/Action/actionEventOffWaitRevivalAction.h"
 
 namespace uking::action {
 
