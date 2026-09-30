@@ -1,4 +1,4 @@
-#include "KingSystem/Resource/resGameResourceSystem.h"
+#include "KingSystem/Game/Resource/resGameResourceSystem.h"
 
 namespace ksys::res {
 
