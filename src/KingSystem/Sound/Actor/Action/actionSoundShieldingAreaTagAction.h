@@ -5,8 +5,8 @@
 
 namespace ksys::snd {
 
-class SoundShieldingAreaTagAction : public uking::action::AreaActionBase {
-    SEAD_RTTI_OVERRIDE(SoundShieldingAreaTagAction, uking::action::AreaActionBase)
+class SoundShieldingAreaTagAction : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(SoundShieldingAreaTagAction, ksys::game::AreaActionBase)
 public:
     explicit SoundShieldingAreaTagAction(const InitArg& arg);
     ~SoundShieldingAreaTagAction() override;

@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class FlyingBalloonObserverTag : public AreaObserveActorAction {
-    SEAD_RTTI_OVERRIDE(FlyingBalloonObserverTag, AreaObserveActorAction)
+class FlyingBalloonObserverTag : public ksys::game::AreaObserveActorAction {
+    SEAD_RTTI_OVERRIDE(FlyingBalloonObserverTag, ksys::game::AreaObserveActorAction)
 public:
     explicit FlyingBalloonObserverTag(const InitArg& arg);
     ~FlyingBalloonObserverTag() override;

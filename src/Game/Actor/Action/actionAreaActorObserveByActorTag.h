@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AreaActorObserveByActorTag : public AreaActorObserve {
-    SEAD_RTTI_OVERRIDE(AreaActorObserveByActorTag, AreaActorObserve)
+class AreaActorObserveByActorTag : public ksys::game::AreaActorObserve {
+    SEAD_RTTI_OVERRIDE(AreaActorObserveByActorTag, ksys::game::AreaActorObserve)
 public:
     explicit AreaActorObserveByActorTag(const InitArg& arg);
     ~AreaActorObserveByActorTag() override;

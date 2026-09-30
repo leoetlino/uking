@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AreaFireObserve : public FireObserveBase {
-    SEAD_RTTI_OVERRIDE(AreaFireObserve, FireObserveBase)
+class AreaFireObserve : public ksys::game::FireObserveBase {
+    SEAD_RTTI_OVERRIDE(AreaFireObserve, ksys::game::FireObserveBase)
 public:
     explicit AreaFireObserve(const InitArg& arg);
 

@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class ForbidComeback : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(ForbidComeback, AreaActionBase)
+class ForbidComeback : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(ForbidComeback, ksys::game::AreaActionBase)
 public:
     explicit ForbidComeback(const InitArg& arg);
     ~ForbidComeback() override;

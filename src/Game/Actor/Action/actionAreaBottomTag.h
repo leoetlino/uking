@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AreaBottomTag : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(AreaBottomTag, AreaActionBase)
+class AreaBottomTag : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(AreaBottomTag, ksys::game::AreaActionBase)
 public:
     explicit AreaBottomTag(const InitArg& arg);
     ~AreaBottomTag() override;
