@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionSetQuestStepAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 SetQuestStepAction::SetQuestStepAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -16,4 +16,4 @@ void SetQuestStepAction::loadParams_() {
     getDynamicParam(&mStepName_d, "StepName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventIncreasePorchItemAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventIncreasePorchItemAction::EventIncreasePorchItemAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -12,4 +12,4 @@ void EventIncreasePorchItemAction::loadParams_() {
     getDynamicParam(&mPorchItemName_d, "PorchItemName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventAutoSaveAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventAutoSaveAction, ksys::act::ai::Action)
@@ -13,4 +13,4 @@ public:
 protected:
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

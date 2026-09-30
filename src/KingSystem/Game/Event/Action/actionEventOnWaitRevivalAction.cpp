@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventOnWaitRevivalAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventOnWaitRevivalAction::EventOnWaitRevivalAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -13,4 +13,4 @@ bool EventOnWaitRevivalAction::init_(sead::Heap* heap) {
 
 void EventOnWaitRevivalAction::loadParams_() {}
 
-}  // namespace uking::action
+}  // namespace ksys::game

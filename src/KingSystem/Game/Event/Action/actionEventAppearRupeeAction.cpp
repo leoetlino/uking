@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventAppearRupeeAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventAppearRupeeAction::EventAppearRupeeAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -8,4 +8,4 @@ void EventAppearRupeeAction::loadParams_() {
     getDynamicParam(&mIsVisible_d, "IsVisible");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
