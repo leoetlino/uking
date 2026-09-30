@@ -42,21 +42,11 @@ target_sources(uking PRIVATE
     ProductReporter.h
     Revision.cpp
     Revision.h
-    StageInfo.cpp
-    StageInfo.h
-    StagePreActorCache.cpp
-    StagePreActorCache.h
-    StarterPackMgr.cpp
-    StarterPackMgr.h
     StringBoard.h
-    SystemTimers.cpp
-    SystemTimers.h
     Terminal.cpp
     Terminal.h
     Timer.cpp
     Timer.h
-    UIGlue.cpp
-    UIGlue.h
     VideoRecorder.cpp
     VideoRecorder.h
     VFR.cpp

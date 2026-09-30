@@ -1,4 +1,4 @@
-#include "KingSystem/System/StarterPackMgr.h"
+#include "KingSystem/Game/System/StarterPackMgr.h"
 
 namespace ksys {
 SEAD_SINGLETON_DISPOSER_IMPL(StarterPackMgr)
