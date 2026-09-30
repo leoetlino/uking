@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class NPCLerpDynAS : public NPCLerpAction {
-    SEAD_RTTI_OVERRIDE(NPCLerpDynAS, NPCLerpAction)
+class NPCLerpDynAS : public ksys::game::NPCLerpAction {
+    SEAD_RTTI_OVERRIDE(NPCLerpDynAS, ksys::game::NPCLerpAction)
 public:
     explicit NPCLerpDynAS(const InitArg& arg);
     ~NPCLerpDynAS() override;

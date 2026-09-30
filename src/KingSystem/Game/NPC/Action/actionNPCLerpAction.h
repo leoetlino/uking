@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class NPCLerpAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(NPCLerpAction, ksys::act::ai::Action)
@@ -31,4 +31,4 @@ protected:
     sead::Vector3f* mTargetRot_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

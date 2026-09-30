@@ -1984,7 +1984,7 @@ static Factory sAiFactories[] = {
     {0xadbfe767, Factory::make<ai::DragonItemRoot>},
     {0xae627961, Factory::make<ai::WaitAndFaceLeader>},
     {0xaec04f32, Factory::make<ai::LynelNoticeTerror>},
-    {0xaefa678f, Factory::make<ai::NPCTerrorAI>},
+    {0xaefa678f, Factory::make<ksys::game::NPCTerrorAI>},
     {0xaf5033ab, Factory::make<ai::KorokFlowerRoot>},
     {0xaf68c91b, Factory::make<ai::SeqAnimalAttack>},
     {0xaf7d90bf, Factory::make<ai::TargetTypeSelector>},
