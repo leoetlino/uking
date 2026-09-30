@@ -1,11 +1,11 @@
 #include "Game/gamePlayReport.h"
 #include <math/seadVector.h>
+#include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/Quest/qstQuest.h"
 #include "KingSystem/System/ProductReporter.h"
-#include "KingSystem/System/StageInfo.h"
 
 namespace uking {
 

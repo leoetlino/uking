@@ -1,6 +1,6 @@
 #include "Game/Actor/Action/actionEventAddGameDataToRupeeAction.h"
+#include "KingSystem/Game/UI/UIGlue.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/System/UIGlue.h"
 
 namespace uking::action {
 

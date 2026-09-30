@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryIsCurrentAocFieldStage.h"
 #include <evfl/Query.h>
-#include "KingSystem/System/StageInfo.h"
+#include "KingSystem/Game/StageInfo.h"
 
 namespace uking::query {
 

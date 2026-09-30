@@ -1,6 +1,6 @@
 #include "Game/UI/uiFadeProgress.h"
 #include "Game/UI/uiUtils.h"
-#include "KingSystem/System/UIGlue.h"
+#include "KingSystem/Game/UI/UIGlue.h"
 
 namespace uking::ui {
 

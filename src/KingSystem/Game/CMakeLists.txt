@@ -6,3 +6,13 @@ add_subdirectory(Fauna)
 add_subdirectory(Horse)
 add_subdirectory(NPC)
 add_subdirectory(Player)
+add_subdirectory(System)
+add_subdirectory(Title)
+add_subdirectory(UI)
+
+target_sources(uking PRIVATE
+  StageInfo.cpp
+  StageInfo.h
+  StagePreActorCache.cpp
+  StagePreActorCache.h
+)
