@@ -1,6 +1,6 @@
 #include "Game/Scene/gameStageInfo.h"
 #include "Game/Scene/gameScene.h"
-#include "KingSystem/System/StageInfo.h"
+#include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace uking {
