@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/AI/aiNPCTerrorAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 NPCTerrorAI::NPCTerrorAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -26,4 +26,4 @@ void NPCTerrorAI::loadParams_() {
     getDynamicParam(&mTerrorEmitter_d, "TerrorEmitter");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game
