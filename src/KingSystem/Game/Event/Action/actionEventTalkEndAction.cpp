@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventTalkEndAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventTalkEndAction::EventTalkEndAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void EventTalkEndAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
