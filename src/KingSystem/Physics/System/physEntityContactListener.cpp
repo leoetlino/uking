@@ -7,6 +7,7 @@
 #include <Havok/Physics2012/Dynamics/World/Util/hkpWorldConstraintUtil.h>
 #include <Havok/Physics2012/Dynamics/World/hkpSimulationIsland.h>
 #include <math/seadMathCalcCommon.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/TerrainHeightField/physTerrainHeightFieldRigidBody.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyMotionEntity.h"
@@ -15,7 +16,6 @@
 #include "KingSystem/Physics/System/physMaterialTable.h"
 #include "KingSystem/Physics/System/physSystem.h"
 #include "KingSystem/Physics/physConversions.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 

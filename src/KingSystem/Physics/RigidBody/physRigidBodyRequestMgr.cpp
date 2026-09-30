@@ -1,10 +1,10 @@
 #include "KingSystem/Physics/RigidBody/physRigidBodyRequestMgr.h"
 #include <Havok/Physics2012/Dynamics/World/hkpWorld.h>
 #include <prim/seadScopedLock.h>
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physSystem.h"
 #include "KingSystem/Physics/System/physUserTag.h"
-#include "KingSystem/Physics/physMaterialMask.h"
 
 namespace ksys::phys {
 
