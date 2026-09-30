@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class SoundTriggerTag : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(SoundTriggerTag, ksys::act::ai::Ai)
@@ -24,4 +24,4 @@ protected:
     sead::SafeString mSLinkInst_m{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

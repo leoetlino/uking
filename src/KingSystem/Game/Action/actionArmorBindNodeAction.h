@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class ArmorBindNodeAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(ArmorBindNodeAction, ksys::act::ai::Action)
@@ -25,4 +25,4 @@ protected:
     sead::Vector3f* mRotOffsetXyz_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

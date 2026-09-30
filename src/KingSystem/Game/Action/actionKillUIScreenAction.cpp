@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionKillUIScreenAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 KillUIScreenAction::KillUIScreenAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void KillUIScreenAction::loadParams_() {
     getDynamicParam(&mScreenName_d, "ScreenName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

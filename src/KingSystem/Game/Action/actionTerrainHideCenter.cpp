@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionTerrainHideCenter.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 TerrainHideCenter::TerrainHideCenter(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void TerrainHideCenter::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

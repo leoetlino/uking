@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EquipedAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EquipedAction, ksys::act::ai::Action)
@@ -25,4 +25,4 @@ protected:
     sead::Vector3f* mTransOffset_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

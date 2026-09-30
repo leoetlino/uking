@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiOptionalWeaponAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 OptionalWeaponAI::OptionalWeaponAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -10,4 +10,4 @@ void OptionalWeaponAI::enter_(ksys::act::ai::InlineParamPack* params) {
 
 void OptionalWeaponAI::loadParams_() {}
 
-}  // namespace uking::ai
+}  // namespace ksys::game

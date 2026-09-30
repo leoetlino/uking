@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class CameraRumbleStopWithDamping : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(CameraRumbleStopWithDamping, ksys::act::ai::Action)
@@ -18,4 +18,4 @@ protected:
     int* mCamVibId_a{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

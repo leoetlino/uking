@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiTimelineAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 TimelineAI::TimelineAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -20,4 +20,4 @@ void TimelineAI::loadParams_() {
     getStaticParam(&mIntervalToCheckSchedule_s, "IntervalToCheckSchedule");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

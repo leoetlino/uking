@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class FreezedInIceWeapon : public FreezedInIce {
-    SEAD_RTTI_OVERRIDE(FreezedInIceWeapon, FreezedInIce)
+class FreezedInIceWeapon : public ksys::game::FreezedInIce {
+    SEAD_RTTI_OVERRIDE(FreezedInIceWeapon, ksys::game::FreezedInIce)
 public:
     explicit FreezedInIceWeapon(const InitArg& arg);
     ~FreezedInIceWeapon() override;

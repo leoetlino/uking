@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiBasicStatusRoot.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 BasicStatusRoot::BasicStatusRoot(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -18,4 +18,4 @@ void BasicStatusRoot::leave_() {
 
 void BasicStatusRoot::loadParams_() {}
 
-}  // namespace uking::ai
+}  // namespace ksys::game

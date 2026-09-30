@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiSignalFlowchartRootAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 SignalFlowchartRootAI::SignalFlowchartRootAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -23,4 +23,4 @@ void SignalFlowchartRootAI::loadParams_() {
     getMapUnitParam(&mEventFlowEntryName_m, "EventFlowEntryName");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

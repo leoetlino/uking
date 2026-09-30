@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionSoundTriggerFadeAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 SoundTriggerFadeAction::SoundTriggerFadeAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void SoundTriggerFadeAction::loadParams_() {
     getDynamicParam(&mSound_d, "Sound");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

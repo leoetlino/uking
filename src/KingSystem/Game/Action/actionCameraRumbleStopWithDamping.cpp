@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionCameraRumbleStopWithDamping.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 CameraRumbleStopWithDamping::CameraRumbleStopWithDamping(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -10,4 +10,4 @@ void CameraRumbleStopWithDamping::loadParams_() {
     getAITreeVariable(&mCamVibId_a, "CamVibId");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

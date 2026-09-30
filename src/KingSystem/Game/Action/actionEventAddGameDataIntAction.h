@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventAddGameDataIntAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventAddGameDataIntAction, ksys::act::ai::Action)
@@ -28,4 +28,4 @@ protected:
     bool mIsReady{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class EquipedRod : public EquipedAction {
-    SEAD_RTTI_OVERRIDE(EquipedRod, EquipedAction)
+class EquipedRod : public ksys::game::EquipedAction {
+    SEAD_RTTI_OVERRIDE(EquipedRod, ksys::game::EquipedAction)
 public:
     explicit EquipedRod(const InitArg& arg);
     ~EquipedRod() override;

@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class EventTagRootAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(EventTagRootAI, ksys::act::ai::Ai)
@@ -30,4 +30,4 @@ protected:
     sead::SafeString mEventFlowEntryName_m{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

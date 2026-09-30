@@ -5,8 +5,8 @@
 
 namespace uking::ai {
 
-class DeadlyBlowWeaponRoot : public WeaponRootAI {
-    SEAD_RTTI_OVERRIDE(DeadlyBlowWeaponRoot, WeaponRootAI)
+class DeadlyBlowWeaponRoot : public ksys::game::WeaponRootAI {
+    SEAD_RTTI_OVERRIDE(DeadlyBlowWeaponRoot, ksys::game::WeaponRootAI)
 public:
     explicit DeadlyBlowWeaponRoot(const InitArg& arg);
     ~DeadlyBlowWeaponRoot() override;
