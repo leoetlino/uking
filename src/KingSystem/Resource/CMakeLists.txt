@@ -96,8 +96,6 @@ target_sources(uking PRIVATE
   resCounter.h
   resEntryFactory.cpp
   resEntryFactory.h
-  resGameResourceSystem.cpp
-  resGameResourceSystem.h
   resHandle.cpp
   resHandle.h
   resInfoContainer.cpp

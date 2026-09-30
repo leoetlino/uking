@@ -7,6 +7,7 @@ add_subdirectory(Horse)
 add_subdirectory(NPC)
 add_subdirectory(Physics)
 add_subdirectory(Player)
+add_subdirectory(Resource)
 add_subdirectory(System)
 
 target_sources(uking PRIVATE
