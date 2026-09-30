@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class GetOffFromHorseAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(GetOffFromHorseAction, ksys::act::ai::Action)
@@ -18,4 +18,4 @@ protected:
     bool* mClearDemoMemberIfNotOwned_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

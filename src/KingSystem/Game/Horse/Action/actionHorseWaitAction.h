@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseWaitAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(HorseWaitAction, ksys::act::ai::Action)
@@ -32,4 +32,4 @@ protected:
     const bool* mIsLight_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionAnimalMoveGuidedBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AnimalMoveGuidedBase::AnimalMoveGuidedBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -33,4 +33,4 @@ void AnimalMoveGuidedBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

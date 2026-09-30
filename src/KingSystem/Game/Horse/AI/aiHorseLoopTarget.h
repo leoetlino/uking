@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class HorseLoopTarget : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(HorseLoopTarget, ksys::act::ai::Ai)
@@ -20,4 +20,4 @@ protected:
     const bool* mIsFlip_s{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

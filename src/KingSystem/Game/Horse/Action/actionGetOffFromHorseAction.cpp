@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Horse/Action/actionGetOffFromHorseAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 GetOffFromHorseAction::GetOffFromHorseAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void GetOffFromHorseAction::loadParams_() {
     getDynamicParam(&mClearDemoMemberIfNotOwned_d, "ClearDemoMemberIfNotOwned");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

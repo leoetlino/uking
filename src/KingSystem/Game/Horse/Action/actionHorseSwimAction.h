@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Horse/Action/actionHorseSwim.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class HorseSwimAction : public HorseSwim {
     SEAD_RTTI_OVERRIDE(HorseSwimAction, HorseSwim)
@@ -33,4 +33,4 @@ protected:
     const float* mResolvePenetrationSearchRadius_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
