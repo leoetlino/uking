@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-HorseMoveToSafePos::HorseMoveToSafePos(const InitArg& arg) : AnimalMoveGuidedBase(arg) {}
+HorseMoveToSafePos::HorseMoveToSafePos(const InitArg& arg) : HorseNavMeshMoveBase(arg) {}
 
 HorseMoveToSafePos::~HorseMoveToSafePos() = default;
 
 bool HorseMoveToSafePos::init_(sead::Heap* heap) {
-    return AnimalMoveGuidedBase::init_(heap);
+    return HorseNavMeshMoveBase::init_(heap);
 }
 
 void HorseMoveToSafePos::enter_(ksys::act::ai::InlineParamPack* params) {
-    AnimalMoveGuidedBase::enter_(params);
+    HorseNavMeshMoveBase::enter_(params);
 }
 
 void HorseMoveToSafePos::leave_() {
-    AnimalMoveGuidedBase::leave_();
+    HorseNavMeshMoveBase::leave_();
 }
 
 void HorseMoveToSafePos::loadParams_() {
-    AnimalMoveGuidedBase::loadParams_();
+    HorseNavMeshMoveBase::loadParams_();
     getStaticParam(&mSearchRadius_s, "SearchRadius");
     getStaticParam(&mAreaThreshold_s, "AreaThreshold");
     getStaticParam(&mResolvePenetrationRadiusScale_s, "ResolvePenetrationRadiusScale");
@@ -28,7 +28,7 @@ void HorseMoveToSafePos::loadParams_() {
 }
 
 void HorseMoveToSafePos::calc_() {
-    AnimalMoveGuidedBase::calc_();
+    HorseNavMeshMoveBase::calc_();
 }
 
 }  // namespace uking::action

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Horse/Action/actionAnimalMoveGuidedBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/Game/Horse/Action/actionHorseNavMeshMoveBase.h"
 
 namespace uking::action {
 
-class AnimalNavMeshMove : public AnimalMoveGuidedBase {
-    SEAD_RTTI_OVERRIDE(AnimalNavMeshMove, AnimalMoveGuidedBase)
+class AnimalNavMeshMove : public HorseNavMeshMoveBase {
+    SEAD_RTTI_OVERRIDE(AnimalNavMeshMove, HorseNavMeshMoveBase)
 public:
     explicit AnimalNavMeshMove(const InitArg& arg);
     ~AnimalNavMeshMove() override;

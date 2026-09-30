@@ -1,0 +1,21 @@
+#include "KingSystem/Game/Horse/Action/actionHorseRandomMoveAction.h"
+
+namespace uking::action {
+
+HorseRandomMoveAction::HorseRandomMoveAction(const InitArg& arg) : HorseNavMeshMoveBase(arg) {}
+
+void HorseRandomMoveAction::enter_(ksys::act::ai::InlineParamPack* params) {
+    HorseNavMeshMoveBase::enter_(params);
+}
+
+void HorseRandomMoveAction::loadParams_() {
+    HorseNavMeshMoveBase::loadParams_();
+    getStaticParam(&mRadiusLimit_s, "RadiusLimit");
+    getStaticParam(&mForwardDirDistCoefficient_s, "ForwardDirDistCoefficient");
+    getStaticParam(&mDirRandomValue_s, "DirRandomValue");
+    getStaticParam(&mDirRangeDegree_s, "DirRangeDegree");
+    getStaticParam(&mRejectDistRatioByNavMeshQuery_s, "RejectDistRatioByNavMeshQuery");
+    getStaticParam(&mIsCancelRequestedPathFirst_s, "IsCancelRequestedPathFirst");
+}
+
+}  // namespace uking::action
