@@ -9,7 +9,7 @@
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actTag.h"
-#include "KingSystem/Ecosystem/ecoSystem.h"
+#include "KingSystem/Game/Ecosystem/ecoSystem.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"

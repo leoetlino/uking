@@ -1,6 +1,7 @@
 add_subdirectory(Action)
 add_subdirectory(AI)
 add_subdirectory(Area)
+add_subdirectory(Ecosystem)
 add_subdirectory(Event)
 add_subdirectory(Horse)
 add_subdirectory(NPC)
