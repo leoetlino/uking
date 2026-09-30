@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionCameraRumbleLoop.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 CameraRumbleLoop::CameraRumbleLoop(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -15,4 +15,4 @@ void CameraRumbleLoop::loadParams_() {
     getAITreeVariable(&mCamVibId_a, "CamVibId");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
