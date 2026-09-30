@@ -1,4 +1,4 @@
 target_sources(uking PRIVATE
-  resGameResourceSystem.cpp
-  resGameResourceSystem.h
+  gameResourceSystem.cpp
+  gameResourceSystem.h
 )
