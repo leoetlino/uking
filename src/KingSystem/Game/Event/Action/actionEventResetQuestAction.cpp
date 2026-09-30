@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Event/Action/actionEventResetQuestAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EventResetQuestAction::EventResetQuestAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -14,4 +14,4 @@ void EventResetQuestAction::loadParams_() {
     getDynamicParam(&mQuestName_d, "QuestName");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

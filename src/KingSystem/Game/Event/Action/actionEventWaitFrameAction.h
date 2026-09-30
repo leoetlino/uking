@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class EventWaitFrameAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EventWaitFrameAction, ksys::act::ai::Action)
@@ -22,4 +22,4 @@ protected:
     int* mFrame_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
