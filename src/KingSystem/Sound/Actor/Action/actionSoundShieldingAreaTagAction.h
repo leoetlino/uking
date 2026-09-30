@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game/Actor/Area/Action/actionAreaActionBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/Game/Area/Action/actionAreaActionBase.h"
 
 namespace ksys::snd {
 
