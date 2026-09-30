@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionTerrainCalcCenter.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 TerrainCalcCenter::TerrainCalcCenter(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -29,4 +29,4 @@ void TerrainCalcCenter::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

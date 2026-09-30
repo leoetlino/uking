@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class TerrainCalcCenter : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(TerrainCalcCenter, ksys::act::ai::Action)
@@ -28,4 +28,4 @@ protected:
     sead::Vector3f* mpos_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

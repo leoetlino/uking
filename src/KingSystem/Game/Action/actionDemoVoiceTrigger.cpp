@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionDemoVoiceTrigger.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 DemoVoiceTrigger::DemoVoiceTrigger(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -28,4 +28,4 @@ void DemoVoiceTrigger::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

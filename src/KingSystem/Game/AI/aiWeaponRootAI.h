@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class WeaponRootAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(WeaponRootAI, ksys::act::ai::Ai)
@@ -30,4 +30,4 @@ protected:
     const bool* mIsEmitLandNoise_m{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 BindAction::BindAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -20,4 +20,4 @@ void BindAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

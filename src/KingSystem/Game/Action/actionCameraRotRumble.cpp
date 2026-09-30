@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionCameraRotRumble.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 CameraRotRumble::CameraRotRumble(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -10,4 +10,4 @@ void CameraRotRumble::loadParams_() {
     getDynamicParam_2(&mPower_d, "Power");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

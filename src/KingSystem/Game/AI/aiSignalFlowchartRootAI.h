@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class SignalFlowchartRootAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(SignalFlowchartRootAI, ksys::act::ai::Ai)
@@ -22,4 +22,4 @@ protected:
     sead::SafeString mEventFlowEntryName_m{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

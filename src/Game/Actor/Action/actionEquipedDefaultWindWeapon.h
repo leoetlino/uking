@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class EquipedDefaultWindWeapon : public EquipedAction {
-    SEAD_RTTI_OVERRIDE(EquipedDefaultWindWeapon, EquipedAction)
+class EquipedDefaultWindWeapon : public ksys::game::EquipedAction {
+    SEAD_RTTI_OVERRIDE(EquipedDefaultWindWeapon, ksys::game::EquipedAction)
 public:
     explicit EquipedDefaultWindWeapon(const InitArg& arg);
 
