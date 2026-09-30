@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCLerpAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCLerpAction::NPCLerpAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -27,4 +27,4 @@ void NPCLerpAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

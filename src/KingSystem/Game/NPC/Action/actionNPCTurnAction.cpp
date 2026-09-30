@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCTurnAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCTurnAction::NPCTurnAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -25,4 +25,4 @@ void NPCTurnAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

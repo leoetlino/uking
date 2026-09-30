@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class NPCTurnAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(NPCTurnAction, ksys::act::ai::Action)
@@ -27,4 +27,4 @@ protected:
     sead::Vector3f* mTargetPos_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
