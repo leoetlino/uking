@@ -2,7 +2,7 @@
 #include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
-#include "KingSystem/ActorSystem/Profiles/actWeaponBase.h"
+#include "KingSystem/Game/Weapon/WeaponBase.h"
 
 namespace uking::act {
 

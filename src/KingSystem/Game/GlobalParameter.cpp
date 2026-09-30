@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/actGlobalParameter.h"
+#include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
