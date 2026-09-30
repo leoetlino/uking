@@ -2,11 +2,11 @@
 
 #include "KingSystem/ActorSystem/actActor.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 // TODO
-class RopeBase : public Actor {
-    SEAD_RTTI_OVERRIDE(RopeBase, Actor)
+class RopeBase : public act::Actor {
+    SEAD_RTTI_OVERRIDE(RopeBase, act::Actor)
 };
 
-}  // namespace ksys::act
+}  // namespace ksys::game

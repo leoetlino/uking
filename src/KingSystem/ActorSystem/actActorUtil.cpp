@@ -501,12 +501,12 @@ bool isWolfOrBear(BaseProcLink* link) {
 
 bool isRope(Actor* actor) {
     const auto accessor = getAccessor(actor);
-    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
 
 bool isRope(BaseProcLink* link) {
     const auto accessor = getAccessor(link);
-    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
 
 bool isTreeOrScaffoldOrSignboard(Actor* actor) {

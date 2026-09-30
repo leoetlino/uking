@@ -3,13 +3,15 @@
 #include <heap/seadDisposer.h>
 #include "KingSystem/Resource/resHandle.h"
 
+namespace ksys::act {
+class ActorParam;
+}
+
 namespace ksys::res {
 class GParamListObjectGlobal;
 }
 
-namespace ksys::act {
-
-class ActorParam;
+namespace ksys::game {
 
 class GlobalParameter {
     SEAD_SINGLETON_DISPOSER(GlobalParameter)
@@ -29,9 +31,9 @@ public:
 private:
     bool loadActorParams_();
 
-    ActorParam* mActorParam{};
+    act::ActorParam* mActorParam{};
     const res::GParamListObjectGlobal* mGlobalParam{};
     res::Handle mResHandle{};
 };
 
-}  // namespace ksys::act
+}  // namespace ksys::game

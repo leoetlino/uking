@@ -108,7 +108,7 @@ bool CreatePlayerEquipActorMgr::areAllWeaponActorsReady() const {
         if (isSlotLoading((s32)i)) {
             return false;
         }
-        auto* weapon = sead::DynamicCast<ksys::act::WeaponBase>(handle->getProc());
+        auto* weapon = sead::DynamicCast<ksys::game::WeaponBase>(handle->getProc());
         if (weapon && !weapon->areExtraActorsReady()) {
             return false;
         }

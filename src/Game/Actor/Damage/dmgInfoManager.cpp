@@ -13,7 +13,7 @@ bool DamageInfoMgr::enableBoomerangRemoteBombs() {
 }
 
 int DamageInfoMgr::getShieldRideBaseFrame() {
-    auto* global = ksys::act::GlobalParameter::instance();
+    auto* global = ksys::game::GlobalParameter::instance();
     if (!global || !global->getGlobalParam())
         return 0;
 
@@ -21,7 +21,7 @@ int DamageInfoMgr::getShieldRideBaseFrame() {
 }
 
 int DamageInfoMgr::getShieldRideHitBaseDamage() {
-    auto* global = ksys::act::GlobalParameter::instance();
+    auto* global = ksys::game::GlobalParameter::instance();
     if (!global || !global->getGlobalParam())
         return 0;
 
@@ -29,7 +29,7 @@ int DamageInfoMgr::getShieldRideHitBaseDamage() {
 }
 
 f32 DamageInfoMgr::getCriticalAttackRatio() {
-    auto* global = ksys::act::GlobalParameter::instance();
+    auto* global = ksys::game::GlobalParameter::instance();
     if (!global || !global->getGlobalParam())
         return 1.0;
 

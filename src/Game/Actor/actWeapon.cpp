@@ -276,9 +276,9 @@ bool WeaponModifierInfo::pickRandomModifierAmiibo(const WeaponModifierRanges& ra
             setModifierFloat(WeaponModifier::AddRapidFire, ranges.addRapidFireMin);
         return true;
     case WeaponModifier::AddSurfMaster: {
-        if (!ksys::act::GlobalParameter::instance())
+        if (!ksys::game::GlobalParameter::instance())
             return true;
-        auto* param = ksys::act::GlobalParameter::instance()->getGlobalParam();
+        auto* param = ksys::game::GlobalParameter::instance()->getGlobalParam();
         if (param && param->mShieldSurfMasterFrictionRatio.ref() > 0.0) {
             setModifierFloat(WeaponModifier::AddSurfMaster,
                              param->mShieldSurfMasterFrictionRatio.ref());
@@ -372,9 +372,9 @@ bool WeaponModifierInfo::pickRandomModifier(const WeaponModifierRanges& ranges) 
         return true;
     }
     case WeaponModifier::AddSurfMaster: {
-        if (!ksys::act::GlobalParameter::instance())
+        if (!ksys::game::GlobalParameter::instance())
             return true;
-        auto* param = ksys::act::GlobalParameter::instance()->getGlobalParam();
+        auto* param = ksys::game::GlobalParameter::instance()->getGlobalParam();
         if (param && param->mShieldSurfMasterFrictionRatio.ref() > 0.0) {
             setModifierFloat(WeaponModifier::AddSurfMaster,
                              param->mShieldSurfMasterFrictionRatio.ref());
