@@ -10,7 +10,7 @@ IsCurrentMainFieldDungeonStage::IsCurrentMainFieldDungeonStage(const InitArg& ar
 IsCurrentMainFieldDungeonStage::~IsCurrentMainFieldDungeonStage() = default;
 
 int IsCurrentMainFieldDungeonStage::doQuery() {
-    return ksys::StageInfo::sIsMainFieldDungeon;
+    return ksys::game::StageInfo::sIsMainFieldDungeon;
 }
 
 void IsCurrentMainFieldDungeonStage::loadParams(const evfl::QueryArg& arg) {}

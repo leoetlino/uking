@@ -93,7 +93,7 @@ void PreActor::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* 
     mLinkData = nullptr;
     mActorFlags8 = data->mActorFlags8;
 
-    auto* fr = StagePreActorCache::instance()->getForestRenderer();
+    auto* fr = game::StagePreActorCache::instance()->getForestRenderer();
     if (fr != nullptr) {
         if (fr->findTreeIdxByPos(mTranslate) != -1) {
             mFlags0.set(Flag0::_10);

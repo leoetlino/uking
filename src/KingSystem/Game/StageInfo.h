@@ -4,7 +4,7 @@
 #include <prim/seadSafeString.h>
 #include <thread/seadAtomic.h>
 
-namespace ksys {
+namespace ksys::game {
 
 enum class StageType {
     Invalid = 0,
@@ -47,4 +47,4 @@ private:
     static sead::FixedSafeString<32> sCurrentMapName;
 };
 
-}  // namespace ksys
+}  // namespace ksys::game

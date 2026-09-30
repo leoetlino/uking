@@ -296,7 +296,7 @@ void PlayReport::addMapType() {
 
     add("IsHardMode"_str, ksys::gdt::getFlag_AoC_HardMode_Enabled());
 
-    const sead::SafeString& current_map = ksys::StageInfo::getCurrentMapType();
+    const sead::SafeString& current_map = ksys::game::StageInfo::getCurrentMapType();
     u32 type = 0;
 
     if (current_map == "MainField")

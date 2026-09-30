@@ -1,6 +1,6 @@
 #include "KingSystem/Game/System/Action/actionEnvSetLensFlare.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 EnvSetLensFlare::EnvSetLensFlare(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void EnvSetLensFlare::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

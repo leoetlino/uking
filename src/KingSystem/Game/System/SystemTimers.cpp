@@ -2,7 +2,7 @@
 
 #include "KingSystem/System/VFR.h"
 
-namespace ksys {
+namespace ksys::game {
 
 SEAD_SINGLETON_DISPOSER_IMPL(SystemTimers)
 
@@ -46,4 +46,4 @@ void SystemTimers::incrementCounters() {
     mFrameCounterB++;
 }
 
-}  // namespace ksys
+}  // namespace ksys::game

@@ -9,7 +9,7 @@ IsCurrentCDungeonStage::IsCurrentCDungeonStage(const InitArg& arg) : ksys::act::
 IsCurrentCDungeonStage::~IsCurrentCDungeonStage() = default;
 
 int IsCurrentCDungeonStage::doQuery() {
-    return ksys::StageInfo::sIsCDungeon;
+    return ksys::game::StageInfo::sIsCDungeon;
 }
 
 void IsCurrentCDungeonStage::loadParams(const evfl::QueryArg& arg) {}
