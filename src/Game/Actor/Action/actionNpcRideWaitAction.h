@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class NpcRideWaitAction : public NPCWaitAction {
-    SEAD_RTTI_OVERRIDE(NpcRideWaitAction, NPCWaitAction)
+class NpcRideWaitAction : public ksys::game::NPCWaitAction {
+    SEAD_RTTI_OVERRIDE(NpcRideWaitAction, ksys::game::NPCWaitAction)
 public:
     explicit NpcRideWaitAction(const InitArg& arg);
     ~NpcRideWaitAction() override;

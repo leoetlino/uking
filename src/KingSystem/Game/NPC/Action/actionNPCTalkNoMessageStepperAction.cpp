@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCTalkNoMessageStepperAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCTalkNoMessageStepperAction::NPCTalkNoMessageStepperAction(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
@@ -19,4 +19,4 @@ void NPCTalkNoMessageStepperAction::loadParams_() {
     getDynamicParam(&mMessageId_d, "MessageId");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

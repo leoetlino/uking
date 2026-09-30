@@ -1,6 +1,6 @@
 #include "KingSystem/Game/NPC/Action/actionNPCTalkASyncAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 NPCTalkASyncAction::NPCTalkASyncAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -16,4 +16,4 @@ void NPCTalkASyncAction::loadParams_() {
     getDynamicParam(&mMessageId_d, "MessageId");
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

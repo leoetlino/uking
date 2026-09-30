@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class NPCWaitAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(NPCWaitAction, ksys::act::ai::Action)
@@ -23,4 +23,4 @@ protected:
     sead::SafeString mASName_s{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
