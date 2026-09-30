@@ -1,9 +1,9 @@
 #include "KingSystem/Game/Area/Action/actionAreaObserveActorAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AreaObserveActorAction::AreaObserveActorAction(const InitArg& arg) : AreaActorObserve(arg) {}
 
 AreaObserveActorAction::~AreaObserveActorAction() = default;
 
-}  // namespace uking::action
+}  // namespace ksys::game

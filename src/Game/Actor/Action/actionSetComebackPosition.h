@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class SetComebackPosition : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(SetComebackPosition, AreaActionBase)
+class SetComebackPosition : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(SetComebackPosition, ksys::game::AreaActionBase)
 public:
     explicit SetComebackPosition(const InitArg& arg);
     ~SetComebackPosition() override;

@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class AreaInOutSendMessage : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(AreaInOutSendMessage, AreaActionBase)
+class AreaInOutSendMessage : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(AreaInOutSendMessage, ksys::game::AreaActionBase)
 public:
     explicit AreaInOutSendMessage(const InitArg& arg);
     ~AreaInOutSendMessage() override;

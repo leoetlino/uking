@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Area/Action/actionAreaActionBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class AreaActorObserve : public AreaActionBase {
     SEAD_RTTI_OVERRIDE(AreaActorObserve, AreaActionBase)
@@ -23,4 +23,4 @@ protected:
     const bool* mDefaultBasicSignal_m{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

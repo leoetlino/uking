@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class SandwichDetectionAreaTag : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(SandwichDetectionAreaTag, AreaActionBase)
+class SandwichDetectionAreaTag : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(SandwichDetectionAreaTag, ksys::game::AreaActionBase)
 public:
     explicit SandwichDetectionAreaTag(const InitArg& arg);
     ~SandwichDetectionAreaTag() override;
