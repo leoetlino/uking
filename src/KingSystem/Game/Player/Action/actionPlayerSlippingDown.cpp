@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Player/Action/actionPlayerSlippingDown.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 PlayerSlippingDown::PlayerSlippingDown(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -33,4 +33,4 @@ void PlayerSlippingDown::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game
