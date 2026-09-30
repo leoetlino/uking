@@ -1,7 +1,7 @@
 #include "KingSystem/Physics/System/physClosestPointQuery.h"
+#include "KingSystem/Game/Physics/physDefines.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physQueryContactPointInfo.h"
-#include "KingSystem/Physics/physDefines.h"
 #include "KingSystem/Physics/physLayerMaskBuilder.h"
 
 namespace ksys::phys {

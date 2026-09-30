@@ -2,8 +2,8 @@
 
 #include <prim/seadRuntimeTypeInfo.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Physics/physDefines.h"
-#include "KingSystem/Physics/physMaterialMask.h"
+#include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/Game/Physics/physMaterialMask.h"
 
 class hkpShape;
 
