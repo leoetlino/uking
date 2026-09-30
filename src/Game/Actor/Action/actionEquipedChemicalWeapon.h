@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class EquipedChemicalWeapon : public EquipedAction {
-    SEAD_RTTI_OVERRIDE(EquipedChemicalWeapon, EquipedAction)
+class EquipedChemicalWeapon : public ksys::game::EquipedAction {
+    SEAD_RTTI_OVERRIDE(EquipedChemicalWeapon, ksys::game::EquipedAction)
 public:
     explicit EquipedChemicalWeapon(const InitArg& arg);
     ~EquipedChemicalWeapon() override;

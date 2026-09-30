@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionUseNavMeshConnectAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 UseNavMeshConnectAction::UseNavMeshConnectAction(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -24,4 +24,4 @@ void UseNavMeshConnectAction::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

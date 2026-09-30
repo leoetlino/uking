@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAi.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 class TimelineAI : public ksys::act::ai::Ai {
     SEAD_RTTI_OVERRIDE(TimelineAI, ksys::act::ai::Ai)
@@ -19,4 +19,4 @@ protected:
     const int* mIntervalToCheckSchedule_s{};
 };
 
-}  // namespace uking::ai
+}  // namespace ksys::game

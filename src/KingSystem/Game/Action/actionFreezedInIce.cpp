@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionFreezedInIce.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 FreezedInIce::FreezedInIce(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
@@ -22,4 +22,4 @@ void FreezedInIce::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

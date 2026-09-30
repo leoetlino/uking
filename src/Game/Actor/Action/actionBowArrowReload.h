@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class BowArrowReload : public BindAction {
-    SEAD_RTTI_OVERRIDE(BowArrowReload, BindAction)
+class BowArrowReload : public ksys::game::BindAction {
+    SEAD_RTTI_OVERRIDE(BowArrowReload, ksys::game::BindAction)
 public:
     explicit BowArrowReload(const InitArg& arg);
 

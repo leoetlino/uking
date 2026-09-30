@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiWeaponRootAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 WeaponRootAI::WeaponRootAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -26,4 +26,4 @@ void WeaponRootAI::loadParams_() {
     getMapUnitParam(&mIsEmitLandNoise_m, "IsEmitLandNoise");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

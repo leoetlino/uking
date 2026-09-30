@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiEventTagRootAI.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 EventTagRootAI::EventTagRootAI(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -26,4 +26,4 @@ void EventTagRootAI::loadParams_() {
     getMapUnitParam(&mEventFlowEntryName_m, "EventFlowEntryName");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game

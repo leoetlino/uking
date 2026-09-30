@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class DemoVoiceTrigger : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(DemoVoiceTrigger, ksys::act::ai::Action)
@@ -26,4 +26,4 @@ protected:
     sead::SafeString mActorInstance_d{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game

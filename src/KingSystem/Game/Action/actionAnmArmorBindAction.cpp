@@ -1,6 +1,6 @@
 #include "KingSystem/Game/Action/actionAnmArmorBindAction.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 AnmArmorBindAction::AnmArmorBindAction(const InitArg& arg) : ArmorBindAction(arg) {}
 
@@ -26,4 +26,4 @@ void AnmArmorBindAction::calc_() {
     ArmorBindAction::calc_();
 }
 
-}  // namespace uking::action
+}  // namespace ksys::game

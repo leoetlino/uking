@@ -1,6 +1,6 @@
 #include "KingSystem/Game/AI/aiSoundTriggerTag.h"
 
-namespace uking::ai {
+namespace ksys::game {
 
 SoundTriggerTag::SoundTriggerTag(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
@@ -24,4 +24,4 @@ void SoundTriggerTag::loadParams_() {
     getMapUnitParam(&mSLinkInst_m, "SLinkInst");
 }
 
-}  // namespace uking::ai
+}  // namespace ksys::game
