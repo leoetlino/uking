@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class ShelterFromRain : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(ShelterFromRain, AreaActionBase)
+class ShelterFromRain : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(ShelterFromRain, ksys::game::AreaActionBase)
 public:
     explicit ShelterFromRain(const InitArg& arg);
     ~ShelterFromRain() override;

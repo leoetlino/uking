@@ -5,8 +5,8 @@
 
 namespace uking::action {
 
-class CollaboShootingStarAreaTag : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(CollaboShootingStarAreaTag, AreaActionBase)
+class CollaboShootingStarAreaTag : public ksys::game::AreaActionBase {
+    SEAD_RTTI_OVERRIDE(CollaboShootingStarAreaTag, ksys::game::AreaActionBase)
 public:
     explicit CollaboShootingStarAreaTag(const InitArg& arg);
     ~CollaboShootingStarAreaTag() override;

@@ -3,7 +3,7 @@
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/Game/Area/Action/actionAreaActionBase.h"
 
-namespace uking::action {
+namespace ksys::game {
 
 class OwnedHorseObserveAction : public AreaActionBase {
     SEAD_RTTI_OVERRIDE(OwnedHorseObserveAction, AreaActionBase)
@@ -22,4 +22,4 @@ protected:
     sead::SafeString mSaveFlag_m{};
 };
 
-}  // namespace uking::action
+}  // namespace ksys::game
