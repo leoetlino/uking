@@ -41,10 +41,13 @@ class UMii;
 namespace phys {
 class StaticCompoundRigidBodyGroup;
 class InstanceSet;
-class Reaction;
 class RigidBody;
 class CharacterController;
 }  // namespace phys
+
+namespace reaction {
+class ActorReactions;
+}  // namespace reaction
 
 namespace res {
 class Handle;
@@ -445,7 +448,7 @@ protected:
     /* 0x698 */ sead::Atomic<u32> mFadeOutSleepFlags;
     /* 0x6a0 */ void* _6a0 = nullptr;
     /* 0x6a8 */ Chemical* mChemical = nullptr;
-    /* 0x6b0 */ phys::Reaction* mReaction = nullptr;
+    /* 0x6b0 */ reaction::ActorReactions* mActorReactions = nullptr;
     /* 0x6b8 */ void* _6b8 = nullptr;
     /* 0x6c0 */ UMiiModelLink mUMiiModelLink{this};
     /* 0x6d0 */ float _6d0 = 0.0;
