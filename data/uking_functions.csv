@@ -638,7 +638,7 @@ Address,Quality,Size,Name
 0x000000710001bacc,U,000288,uking::act::FootAndSpineRotationRideInfo::checkDerivedRuntimeTypeInfo
 0x000000710001bbec,U,000092,uking::act::FootAndSpineRotationRideInfo::getRuntimeTypeInfo
 0x000000710001bc48,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN5uking3act20FootRotationRideInfoEE9isDerivedEPKNS0_9InterfaceE
-0x000000710001bcd4,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveINS_10ProjectionEE9isDerivedEPKNS0_9InterfaceE
+0x000000710001bcd4,U,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN4ksys4game13HorseRideInfoEE9isDerivedEPKNS0_9InterfaceE
 0x000000710001bd60,U,000060,uking::act::DamageMgrWeapon::ctor
 0x000000710001bd9c,U,000288,uking::act::DamageMgrWeapon::checkDerivedRuntimeTypeInfo
 0x000000710001bebc,U,000092,uking::act::DamageMgrWeapon::getRuntimeTypeInfo
@@ -19680,7 +19680,7 @@ Address,Quality,Size,Name
 0x00000071002dcd90,U,000332,uking::act::updateNoticedActorLinks
 0x00000071002dcedc,U,000260,uking::act::findNearestLinkedActorByFlags
 0x00000071002dcfe0,U,000116,uking::act::MapConstActive::construct
-0x00000071002dd054,U,000004,j_MapConst::m0
+0x00000071002dd054,U,000004,j_ksys::game::MapConst::dtor
 0x00000071002dd058,U,000008,
 0x00000071002dd060,U,000008,
 0x00000071002dd068,U,000036,uking::act::MapConstActive::dtorDelete
@@ -19706,7 +19706,7 @@ Address,Quality,Size,Name
 0x00000071002dd7cc,U,000140,
 0x00000071002dd858,U,000140,
 0x00000071002dd8e4,U,000096,uking::act::MapConstPassive::construct
-0x00000071002dd944,U,000004,j_MapConst::m0_0
+0x00000071002dd944,U,000004,j_ksys::game::MapConst::dtor_0
 0x00000071002dd948,U,000008,
 0x00000071002dd950,U,000008,
 0x00000071002dd958,U,000036,uking::act::MapConstPassive::dtorDelete
@@ -19719,7 +19719,7 @@ Address,Quality,Size,Name
 0x00000071002ddab4,U,000372,
 0x00000071002ddc28,U,000140,
 0x00000071002ddcb4,U,000332,uking::act::MergedDungeonParts::construct
-0x00000071002dde00,U,000004,j_MapConst::m0_1
+0x00000071002dde00,U,000004,j_ksys::game::MapConst::dtor_1
 0x00000071002dde04,U,000008,
 0x00000071002dde0c,U,000008,
 0x00000071002dde14,U,000036,uking::act::MergedDungeonParts::dtorDelete
@@ -53154,7 +53154,7 @@ Address,Quality,Size,Name
 0x000000710089c9b4,U,000080,uking::deregisterTransceiverFromDebugBoardBroker1Delete
 0x000000710089ca04,U,000076,uking::registerTransceiverToDebugBoardBroker1
 0x000000710089ca50,U,000020,uking::DebugBoardMessageSender::ctor
-0x000000710089ca64,U,000004,nullsub_2615
+0x000000710089ca64,U,000004,uking::DebugBoardMessageSender::dtor
 0x000000710089ca68,U,000004,j__ZdlPv_387
 0x000000710089ca6c,U,000048,uking::setDebugBoardTransceiverIdGlobal2
 0x000000710089ca9c,U,000088,uking::sendMessageToDebugBoardTransceiver2
@@ -98394,8 +98394,8 @@ Address,Quality,Size,Name
 0x0000007101329a04,U,001848,_ZN2nn4font14TextWriterBaseItE9PrintImplEPKtiiPKfS6_
 0x000000710132a13c,U,000556,_ZN2nn4font14TextWriterBaseItE12AdjustCursorEPfS3_PKti
 0x000000710132a368,U,000088,
-0x000000710132a3c0,U,000760,
-0x000000710132a6b8,U,001040,
+0x000000710132a3c0,U,000760,_ZN2nn4font12WordWrapping13FindLineBreakEPKtS3_RNS0_16WordWrapCallbackERKNS0_14WordWrapConfigE
+0x000000710132a6b8,U,001040,_ZN2nn4font12WordWrapping21CalculateWordWrappingEPjPtjPKtjRNS0_16WordWrapCallbackERKNS0_14WordWrapConfigE
 0x000000710132aac8,U,000028,_ZN2nn4ui2d12ArcExtractorC2EPKv
 0x000000710132aae4,U,000516,_ZN2nn4ui2d12ArcExtractor14PrepareArchiveEPKv
 0x000000710132ace8,U,000004,_ZN2nn4ui2d12ArcExtractorD1Ev
