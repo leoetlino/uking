@@ -14,7 +14,7 @@ namespace ksys::act {
 
 SEAD_SINGLETON_DISPOSER_IMPL(BaseProcMgr)
 
-BaseProcMgr::BaseProcMgr() : mExtraJobLinkArrays() {
+BaseProcMgr::BaseProcMgr() : mJobRequestArrays() {
     mProcPreDeleteList.initOffset(offsetof(BaseProc, mPreDeleteListNode));
     mProcUpdateStateList.initOffset(offsetof(BaseProc, mUpdateStateListNode));
 }
@@ -42,7 +42,7 @@ BaseProcMgr::~BaseProcMgr() {
 
 // NON_MATCHING: mJobLists.allocBufferAssert - BaseProcJobLists ctor
 void BaseProcMgr::init(sead::Heap* heap, s32 num_job_types, u32 main_thread_id,
-                       u32 havok_thread_id1, u32 havok_thread_id2,
+                       u32 worker_thread_id1, u32 worker_thread_id2,
                        const BaseProcInitializerArgs& initializer_args) {
     mProcJobQue = new (heap) BaseProcJobQue;
     mProcJobQue->init(heap);
@@ -60,8 +60,8 @@ void BaseProcMgr::init(sead::Heap* heap, s32 num_job_types, u32 main_thread_id,
     mProcDeleter->init(deleter_arg);
 
     mMainThreadId = main_thread_id;
-    mHavokThreadId1 = havok_thread_id1;
-    mHavokThreadId2 = havok_thread_id2;
+    mWorkerThreadId1 = worker_thread_id1;
+    mWorkerThreadId2 = worker_thread_id2;
 
     BaseProcHeapMgr::createInstance(heap);
     BaseProcLinkDataMgr::createInstance(heap);
@@ -159,32 +159,32 @@ void BaseProcMgr::processPreDeleteList() {
     mStatus = Status::Idle;
 }
 
-BaseProcMgr::ExtraJobLinkArray& BaseProcMgr::getExtraJobs() {
-    return mExtraJobLinkArrays[mCurrentExtraJobArrayIdx];
+BaseProcMgr::JobRequestArray& BaseProcMgr::getCurrentJobRequests() {
+    return mJobRequestArrays[mCurrentJobRequestArrayIdx];
 }
 
-void BaseProcMgr::swapExtraJobArray() {
-    mCurrentExtraJobArrayIdx ^= 1;
-    getExtraJobs().clear();
+void BaseProcMgr::swapJobRequestArrays() {
+    mCurrentJobRequestArrayIdx ^= 1;
+    getCurrentJobRequests().clear();
 }
 
-bool BaseProcMgr::checkJobPushState() const {
-    return mEnableExtraJobPush && mUnk4 != 1;
+bool BaseProcMgr::canPushJobs() const {
+    return mJobPushEnabled && mJobPushSuspended != 1;
 }
 
-void BaseProcMgr::pushJobQueues(sead::WorkerMgr* mgr, JobType type, bool x) {
-    if (!checkJobPushState())
+void BaseProcMgr::pushJobQueues(sead::WorkerMgr* mgr, JobType type, bool skip_access_check) {
+    if (!canPushJobs())
         return;
 
     mJobType = type;
     const auto type_ = mJobType;
     mStatus = Status::ProcessingActorJobs;
     mIsPushingJobs = true;
-    mUnk2 = x;
+    mSkipAccessCheck = skip_access_check;
 
     int i = 0;
     do {
-        mPushActorJobType3InsteadOf6 = false;
+        mRepeatJobPassRequested = false;
 
         auto& lists = getJobLists(type_);
         for (int priority = 0; priority < 8; ++priority) {
@@ -197,21 +197,21 @@ void BaseProcMgr::pushJobQueues(sead::WorkerMgr* mgr, JobType type, bool x) {
 
         mCurrentlyProcessingPrio = 8;
         ++i;
-    } while (mPushActorJobType3InsteadOf6 && i < 8);
+    } while (mRepeatJobPassRequested && i < 8);
 
     mIsPushingJobs = false;
-    mUnk2 = false;
+    mSkipAccessCheck = false;
     mStatus = Status::Idle;
     mJobType = JobType::Invalid;
 }
 
-bool BaseProcMgr::pushExtraJobsEx(sead::FixedSizeJQ* jq, JobType type, u8 priority, bool x,
-                                  bool y) {
-    if (!checkJobPushState())
+bool BaseProcMgr::enqueueJobs(sead::FixedSizeJQ* jq, JobType type, u8 priority, bool begin_phase,
+                              bool skip_access_check) {
+    if (!canPushJobs())
         return false;
 
-    if (x) {
-        mUnk2 = y;
+    if (begin_phase) {
+        mSkipAccessCheck = skip_access_check;
         auto* queue = mProcJobQue;
         mStatus = Status::ProcessingActorJobs;
         mJobType = type;
@@ -221,16 +221,15 @@ bool BaseProcMgr::pushExtraJobsEx(sead::FixedSizeJQ* jq, JobType type, u8 priori
 
     const auto type_ = JobType(u8(type));
     mIsPushingJobs = true;
-    mProcJobQue->pushExtraJobs(jq, &getJobLists(type_), priority, type_);
+    mProcJobQue->enqueueJobs(jq, &getJobLists(type_), priority, type_);
     return true;
 }
 
-bool BaseProcMgr::pushExtraJobsForCurrentTypeAndPrio(sead::FixedSizeJQ* jq,
-                                                     ExtraJobLinkArray* array) {
-    if (!checkJobPushState())
+bool BaseProcMgr::enqueueJobRequests(sead::FixedSizeJQ* jq, JobRequestArray* requests) {
+    if (!canPushJobs())
         return false;
-    if (array)
-        mProcJobQue->pushExtraJobs(jq, *array);
+    if (requests)
+        mProcJobQue->enqueueJobRequests(jq, *requests);
     return true;
 }
 
@@ -239,68 +238,69 @@ void BaseProcMgr::setJobType(JobType type) {
     mJobType = type;
 }
 
-bool BaseProcMgr::pushPreCalcJobs(sead::FixedSizeJQ* jq, JobType type, u8 prio, bool x, bool y) {
-    if (!checkJobPushState())
+bool BaseProcMgr::enqueueMoreJobs(sead::FixedSizeJQ* jq, JobType type, u8 prio, bool begin_phase,
+                                  bool skip_access_check) {
+    if (!canPushJobs())
         return false;
 
-    if (x) {
+    if (begin_phase) {
         mStatus = Status::ProcessingActorJobs;
         mJobType = type;
         mCurrentlyProcessingPrio = prio;
-        mUnk2 = y;
+        mSkipAccessCheck = skip_access_check;
     }
 
     const auto type_ = JobType(u8(type));
-    mProcJobQue->pushExtraJobs(jq, &getJobLists(type_), prio, type_);
+    mProcJobQue->enqueueJobs(jq, &getJobLists(type_), prio, type_);
     return true;
 }
 
-void BaseProcMgr::setActorJobTypeAndPrio(JobType type, s32 prio, bool x) {
+void BaseProcMgr::setActorJobTypeAndPrio(JobType type, s32 prio, bool skip_access_check) {
     mStatus = Status::ProcessingActorJobs;
     mJobType = type;
     mCurrentlyProcessingPrio = prio;
-    mUnk2 = x;
+    mSkipAccessCheck = skip_access_check;
 }
 
 void BaseProcMgr::goIdle() {
     mStatus = Status::Idle;
     mJobType = JobType::Invalid;
     mIsPushingJobs = false;
-    mUnk2 = false;
-    mEnableExtraJobPush = false;
+    mSkipAccessCheck = false;
+    mJobPushEnabled = false;
     mCurrentlyProcessingPrio = 8;
 }
 
-void BaseProcMgr::jobInvoked(BaseProcJobLink* link, s32 required_calc_rounds) {
-    if (required_calc_rounds == 1) {
+void BaseProcMgr::jobInvoked(BaseProcJobLink* link, s32 num_procs) {
+    if (num_procs == 1) {
         link->getProc()->jobInvoked(mJobType);
         return;
     }
 
     const auto& lists = getJobLists(mJobType);
-    for (int i = 0; link && [&] { return i < required_calc_rounds; }(); ++i) {
+    for (int i = 0; link && [&] { return i < num_procs; }(); ++i) {
         link->getProc()->jobInvoked(mJobType);
         link = static_cast<BaseProcJobLink*>(lists.getNextJob(link));
     }
 }
 
-bool BaseProcMgr::isSpecialJobType(JobType type) const {
-    return mSpecialJobTypesMask.isOnBit(int(type));
+bool BaseProcMgr::isJobTypePaused(JobType type) const {
+    return mPausedJobTypesMask.isOnBit(int(type));
 }
 
-void BaseProcMgr::addSpecialJobTypes(u16 mask) {
-    mSpecialJobTypesMask.set(mask);
+void BaseProcMgr::pauseJobTypes(u16 mask) {
+    mPausedJobTypesMask.set(mask);
 }
 
-void BaseProcMgr::removeSpecialJobTypes(u16 mask) {
-    mSpecialJobTypesMask.reset(mask);
+void BaseProcMgr::resumeJobTypes(u16 mask) {
+    mPausedJobTypesMask.reset(mask);
 }
 
 void BaseProcMgr::calc() {
     ActorSystem::instance()->updatePlayerPosAndCameraPos();
     mProcInitializer->deleteThreadIfPaused();
 
-    if (mIsInitialisingQuestMgrMaybe)
+    if (mIsInitializingQuestMgr)
         return;
 
     if (!mProcUpdateStateList.isEmpty()) {
@@ -308,7 +308,7 @@ void BaseProcMgr::calc() {
         mStatus = Status::ProcessingUpdateStateList;
 
         for (auto& proc : mProcUpdateStateList)
-            proc.processStateUpdate(mCounter);
+            proc.processStateUpdate(mStateUpdateCounter);
 
         for (auto& proc : mProcUpdateStateList.robustRange()) {
             proc.afterUpdateState_();
@@ -320,11 +320,11 @@ void BaseProcMgr::calc() {
         mStatus = Status::Idle;
     }
 
-    ++mCounter;
+    ++mStateUpdateCounter;
 }
 
-void BaseProcMgr::clearMode() {
-    mMode = Mode::_0;
+void BaseProcMgr::clearPauseMode() {
+    mPauseMode = PauseMode::None;
 }
 
 sead::CriticalSection* BaseProcMgr::lockProcMap() {
@@ -367,7 +367,7 @@ bool BaseProcMgr::isHighPriorityThread() const {
     if (!current_thread->isDefaultPriority())
         return false;
 
-    return id == mMainThreadId || id == mHavokThreadId1 || id == mHavokThreadId2;
+    return id == mMainThreadId || id == mWorkerThreadId1 || id == mWorkerThreadId2;
 }
 
 bool BaseProcMgr::isAccessingProcSafe(BaseProc* proc, BaseProc* other) const {
@@ -376,7 +376,7 @@ bool BaseProcMgr::isAccessingProcSafe(BaseProc* proc, BaseProc* other) const {
     if (!isHighPriorityThread())
         return true;
 
-    if (mUnk2)
+    if (mSkipAccessCheck)
         return true;
 
     if (other) {
@@ -622,42 +622,42 @@ void BaseProcMgr::setActorGenerationEnabled(bool enabled) {
     mProcInitializer->setActorGenerationEnabled(enabled);
 }
 
-void BaseProcMgr::incrementUnk3() {
-    if (mUnk3 != 0xFF)
-        ++mUnk3;
+void BaseProcMgr::incrementStageUnloadDepth() {
+    if (mStageUnloadDepth != 0xFF)
+        ++mStageUnloadDepth;
 }
 
-void BaseProcMgr::decrementUnk3() {
-    if (mUnk3 != 0)
-        --mUnk3;
+void BaseProcMgr::decrementStageUnloadDepth() {
+    if (mStageUnloadDepth != 0)
+        --mStageUnloadDepth;
 }
 
 // NON_MATCHING: reorderings
-void BaseProcMgr::queueExtraJobPush(BaseProcJobLink* job_link) {
-    getExtraJobs().pushBack(job_link);
+void BaseProcMgr::requestJob(BaseProcJobLink* job_link) {
+    getCurrentJobRequests().pushBack(job_link);
 }
 
 // NON_MATCHING: ???
-void BaseProcMgr::moveExtraJobsToOtherBuffer(JobType type) {
-    const auto old_idx = mCurrentExtraJobArrayIdx;
-    swapExtraJobArray();
-    auto& array = mExtraJobLinkArrays[old_idx];
+void BaseProcMgr::carryOverJobRequests(JobType type) {
+    const auto old_idx = mCurrentJobRequestArrayIdx;
+    swapJobRequestArrays();
+    auto& array = mJobRequestArrays[old_idx];
     for (auto& link : array) {
-        link.getProc()->queueExtraJobPush_(type, mCurrentExtraJobArrayIdx);
+        link.getProc()->carryOverJobRequest_(type, mCurrentJobRequestArrayIdx);
     }
 }
 
-bool BaseProcMgr::hasExtraJobLink(BaseProcJobLink* job_link, s32 idx) {
-    for (auto& ptr : mExtraJobLinkArrays[idx]) {
+bool BaseProcMgr::isJobRequested(BaseProcJobLink* job_link, s32 array_idx) {
+    for (auto& ptr : mJobRequestArrays[array_idx]) {
         if (&ptr == job_link)
             return true;
     }
     return false;
 }
 
-void BaseProcMgr::clearExtraJobArrays() {
-    mExtraJobLinkArrays[0].clear();
-    mExtraJobLinkArrays[1].clear();
+void BaseProcMgr::clearJobRequests() {
+    mJobRequestArrays[0].clear();
+    mJobRequestArrays[1].clear();
 }
 
 }  // namespace ksys::act
