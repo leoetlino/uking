@@ -121,7 +121,7 @@ public:
     const sead::SafeString& getActorName() const { return mActorName; }
     const sead::SafeString& getProfile() const { return mProfile; }
     const char* getClassName() const { return mClassName; }
-    Priority getPriority() const { return mPriority; }
+    CalcPrio getPriority() const { return mPriority; }
     const Resources& getRes() const { return mRes; }
 
     bool isA() const { return _a; }
@@ -168,7 +168,7 @@ private:
     sead::FixedSafeString<64> mActorName;
     sead::SafeString mProfile;
     const char* mClassName{};
-    Priority mPriority = Priority::AllAfter;
+    CalcPrio mPriority = CalcPrio::AllAfter;
     u32 mActiveBufferIdx = 2;
     Resources mRes;
     std::array<sead::Buffer<res::Handle>, 2> mHandles;
