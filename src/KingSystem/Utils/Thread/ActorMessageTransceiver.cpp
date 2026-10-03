@@ -18,7 +18,7 @@ ActorMessageTransceiver::~ActorMessageTransceiver() {
 }
 
 bool ActorMessageTransceiver::getDebugArg(bool ack) const {
-    return mActor && mActor->checkFlag(act::Actor::ActorFlag::_2e) && ack;
+    return mActor && mActor->checkFlag(act::Actor::ActorFlag::ReadyForPreDelete) && ack;
 }
 
 bool ActorMessageTransceiver::sendMessage(const MesTransceiverId& dest, const MessageType& type,
