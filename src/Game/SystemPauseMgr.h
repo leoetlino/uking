@@ -21,7 +21,7 @@ public:
     void restoreMainLayerAndResumeGameScene() override;
     bool hideMainLayer() override;
     void openFadeScreen() override;
-    void showMainLayerAndResumeProcJobs() override;
+    void showMainLayerAndPauseProcJobs() override;
     void clearHideMainLayerAndResumeEvents() override;
 
     bool wasMainLayerVisible() const { return mMainLayerWasVisible; }

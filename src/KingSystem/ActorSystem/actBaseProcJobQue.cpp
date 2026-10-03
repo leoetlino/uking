@@ -81,15 +81,15 @@ bool BaseProcJobQue::pushJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists,
 }
 
 // NON_MATCHING: sxtw + madd -> smaddl
-bool BaseProcJobQue::pushExtraJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists, int priority,
-                                   JobType type) {
+bool BaseProcJobQue::enqueueJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists, int priority,
+                                 JobType type) {
     const auto& list = lists->getList(priority);
     if (list.size() == 0)
         return false;
 
     for (auto* link = static_cast<BaseProcJobLink*>(list.front()); link;
          link = static_cast<BaseProcJobLink*>(lists->getNextJob(link))) {
-        const auto idx = mNumExtraJobs.increment();
+        const auto idx = mNumEnqueuedJobs.increment();
         if (!isIndexValid(idx))
             return false;
 
@@ -106,18 +106,18 @@ bool BaseProcJobQue::pushExtraJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* l
     return true;
 }
 
-bool BaseProcJobQue::pushExtraJobs(sead::FixedSizeJQ* queue,
-                                   const agl::utl::AtomicPtrArray<BaseProcJobLink>& links) {
+bool BaseProcJobQue::enqueueJobRequests(sead::FixedSizeJQ* queue,
+                                        const agl::utl::AtomicPtrArray<BaseProcJobLink>& links) {
     if (links.size() <= 0)
         return false;
 
     for (auto it = links.begin(), end = links.end(); it != end; ++it) {
-        const auto idx = mNumExtraJobs.increment();
+        const auto idx = mNumEnqueuedJobs.increment();
         if (!isIndexValid(idx))
             return false;
 
         mPool[idx].mJobLink = &*it;
-        mPool[idx].mRequiredCalcRounds = 1;
+        mPool[idx].mNumProcs = 1;
         if (!queue->enque(&mPool[idx]))
             return false;
     }
