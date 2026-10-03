@@ -46,7 +46,7 @@ bool ActorLimiter::List::addActor(act::BaseProc* proc, bool allow_evicting_old_a
                     acquireActor(&target_node->proc_link, &acc);
             }
 
-            acc.fadeoutDelete(act::BaseProc::DeleteReason::_f);
+            acc.fadeoutDelete(act::BaseProc::DeleteReason::ActorLimiter);
         }
 
         if (target_node == nullptr)
