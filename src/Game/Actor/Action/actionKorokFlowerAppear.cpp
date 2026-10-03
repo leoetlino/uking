@@ -13,7 +13,7 @@ bool KorokFlowerAppear::init_(sead::Heap* heap) {
 }
 
 void KorokFlowerAppear::enter_(ksys::act::ai::InlineParamPack* params) {
-    mActor->getActorFlags2().reset(ksys::act::Actor::ActorFlag2::_20);
+    mActor->getActorFlags2().reset(ksys::act::Actor::ActorFlag2::Invisible);
 
     auto* main_body = mActor->getMainBody();
     auto* tgt_body = mActor->getTgtBody();

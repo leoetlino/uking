@@ -33,7 +33,8 @@ LodState::LodState(sead::Heap* heap, sead::BitFlag32 flags, Actor* actor,
     }
 
     const bool is_air_octa_platform = isAirOctaPlatform(mActor->getName());
-    if (!mActor->checkFlag(Actor::ActorFlag::_39) || mActor->getProfile().startsWith("Guardian")) {
+    if (!mActor->checkFlag(Actor::ActorFlag::CharacterLike) ||
+        mActor->getProfile().startsWith("Guardian")) {
         if (is_air_octa_platform) {
             mOcclusionQueryCylinder = new (heap) OcclusionQueryCylinder;
             mOcclusionQueryCylinder->init(heap);
@@ -293,7 +294,7 @@ LodState::LodState(sead::Heap* heap, sead::BitFlag32 flags, Actor* actor,
     }
 
     _74 = 0.0f;
-    if (actor->checkFlag(Actor::ActorFlag::_29) && actor->getProfile() == "NPC") {
+    if (actor->checkFlag(Actor::ActorFlag::AutoPlaced) && actor->getProfile() == "NPC") {
         _74 = 900.0f;
     }
 

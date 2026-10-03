@@ -62,12 +62,12 @@ void ActorWaterDepthSelect::loadParams_() {
 }
 
 bool ActorWaterDepthSelect::isDeep() const {
-    return 0.0 < *mDeepDepth_s && mActor->get68f().load();
+    return 0.0 < *mDeepDepth_s && mActor->getInWaterFlags().load();
 }
 
 bool ActorWaterDepthSelect::isUnderwater() const {
     float y_w = mActor->getMtx().m[1][3];
-    return mActor->get6f0() - y_w > *mDeepDepth_s;
+    return mActor->getWaterSurfaceHeight() - y_w > *mDeepDepth_s;
 }
 
 }  // namespace uking::ai
