@@ -25,10 +25,10 @@ void initBaseProcMgr(sead::Heap* heap) {
         heap, u32(act::JobType::Invalid), sead::ThreadMgr::instance()->getMainThread()->getId(),
         worker_mgr->getWorkerThreadId(1), worker_mgr->getWorkerThreadId(2), args);
 
-    act::BaseProcMgr::sConstant0 = u32(act::JobType::PreCalc);
-    act::BaseProcMgr::sConstant1 = u32(act::JobType::Calc1);
-    act::BaseProcMgr::sConstant2 = u32(act::JobType::Calc2);
-    act::BaseProcMgr::sConstant4 = u32(act::JobType::Calc4);
+    act::BaseProcMgr::sPreCalcJobType = u32(act::JobType::PreCalc);
+    act::BaseProcMgr::sPostBgJobType = u32(act::JobType::PostBg);
+    act::BaseProcMgr::sPostSensorJobType = u32(act::JobType::PostSensor);
+    act::BaseProcMgr::sFrameEndJobType = u32(act::JobType::FrameEnd);
 }
 
 void preInitializeApp(const InitParams& params) {

@@ -34,7 +34,7 @@ public:
     virtual void restoreMainLayerAndResumeGameScene() = 0;
     virtual bool hideMainLayer() = 0;
     virtual void openFadeScreen() = 0;
-    virtual void showMainLayerAndResumeProcJobs() = 0;
+    virtual void showMainLayerAndPauseProcJobs() = 0;
     virtual void clearHideMainLayerAndResumeEvents() = 0;
 };
 
