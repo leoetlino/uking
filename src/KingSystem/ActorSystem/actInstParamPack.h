@@ -112,8 +112,8 @@ public:
         void addResourceLane(int arg) { add(arg, "@RL"); }
         // TODO below: name TBD
         void addWait() { add(true, "@W"); }
-        void addPlayerControl() { add(true, "@PC"); }
-        void addNoDisplay() { add(true, "@ND"); }
+        void addPauseMenuActor() { add(true, "@PC"); }
+        void addStartNoDraw() { add(true, "@ND"); }
         void addDisableCapture() { add(true, "@DC"); }
         void addSystemBits() { add(true, "@SB"); }  // 0x7100dc9594 might have a clue
         void addMA(int arg) { add(arg, "@MA"); }    // 0x710090e78c
