@@ -37,20 +37,36 @@ public:
     };
 
     enum class DeleteReason : u32 {
-        _0 = 0,
-        _1 = 1,
-        _2 = 2,
+        Default = 0,
+        InitFailed = 1,
+        ProcUnitReleased = 2,
         BaseProcMgrDeleteAll = 4,
-        _f = 0xf,
-        _15 = 0x15,
-        _16 = 0x16,
-        _17 = 0x17,
-        _18 = 0x18,
-        _19 = 0x19,
+        CreateLinkObjRevival = 6,
+        DeleteLinkObjRevival = 7,
+        ObjectLinkDelete = 8,
+        GodForestOff = 9,
+        _a = 0xa,
+        OutOfDeleteDistance = 0xb,
+        OutOfLoadDistance = 0xc,
+        _d = 0xd,
+        FadeoutDeleteBeforeWake = 0xe,
+        ActorLimiter = 0xf,
+        PreActorHandedOver = 0x10,
+        CreateFailed = 0x11,
+        DebugReloadPlacement = 0x12,
+        DebugUnloadByName = 0x13,
+        NotFarActor = 0x15,
+        ConnectedCalcChildDeleted = 0x16,
+        ConnectedCalcParentDeleted = 0x17,
+        ConnectedCalcChildNewDeleted = 0x18,
+        ConnectedCalcParentNewDeleted = 0x19,
+        HorseEquipment = 0x1a,
+        EventOffWaitRevival = 0x1d,
     };
 
     enum class SleepWakeReason : u32 {
-        _0 = 0,
+        Default = 0,
+        VillagerMgr = 1,
     };
 
     struct ClassInfo {
@@ -61,9 +77,9 @@ public:
 
     struct CreateArg {
         const ClassInfo* class_info;
-        void* _10;
+        void* _8;
+        u32 _10;
         u32 _14;
-        u32 _18;
         sead::SafeString actor_name;
     };
     KSYS_CHECK_SIZE_NX150(CreateArg, 0x28);
@@ -117,10 +133,10 @@ public:
     bool setConnectedCalcChild(BaseProc* child, bool delete_child_on_delete);
     void resetConnectedCalcChild(bool clear_existing_set_request);
 
-    bool isSpecialJobType(JobType type);
+    bool isJobTypePaused(JobType type);
     bool shouldSkipJobPush(JobType type);
-    void setJobPriority(u8 actorparam_priority, JobType type);
-    void setJobPriority2(u8 actorparam_priority, JobType type);
+    void setJobPriority(u8 priority, JobType type);
+    void setJobSubPriority(u8 sub_priority, JobType type);
 
     void setCreatePriorityState1();
     void setCreatePriorityState2();
@@ -151,11 +167,12 @@ protected:
         PreDeleteStarted = 2,
         PreDeleteFailed = 4,
         Destructed = 8,
+        /// Set via the "@SB" create param (resident/system actors).
         DoNotDelete = 0x10,
         DeleteChildOnDelete = 0x20,
         DeleteParentOnDelete = 0x40,
-        _80 = 0x80,
-        _100 = 0x100,
+        WakeUpCheckCached = 0x80,
+        WakeUpCheckResult = 0x100,
         PreDeleting = 0x200,
         SleepWakeReason0 = 0x400,
         SleepWakeReason1 = 0x800,
@@ -167,21 +184,23 @@ protected:
 
     enum class StateFlags : u32 {
         RequestDelete = 1,
+        /// Only ever tested together with RequestWakeUp; never set.
         _2 = 2,
         RequestSleep = 4,
         RequestWakeUp = 8,
         _a = _2 | RequestWakeUp,
         RequestChangeCalcJobPriority = 0x10,
-        _20 = 0x20,
-        _40 = 0x40,
-        _80 = 0x80,
+        _20 = 0x20,  // unused
+        _40 = 0x40,  // unused
+        _80 = 0x80,  // unused
         RequestSetParent = 0x100,
         RequestSetChild = 0x200,
         RequestResetParent = 0x400,
         RequestResetChild = 0x800,
-        _1000 = 0x1000,
-        _2000 = 0x2000,
-        _4000 = 0x4000,
+        _1000 = 0x1000,  // unused
+        _2000 = 0x2000,  // unused
+        /// Never set in 1.5.0.
+        KeepInUpdateStateList = 0x4000,
         RequestDeleteProcUnit = 0x8000,
     };
 
@@ -196,10 +215,10 @@ protected:
         Done = 1,
     };
 
-    enum class IsSpecialJobTypeResult {
-        No = 0,
-        Yes = 1,
-        _2 = 2,
+    enum class JobPauseState {
+        NotPaused = 0,
+        Paused = 1,
+        PausedSelfOnly = 2,
     };
 
     struct InitContext {
@@ -213,17 +232,17 @@ protected:
     };
 
     /// Initialize the actor.
-    /// @return Ok to keep the actor alive, anything else to kill it?
+    /// @return Ok to keep the actor alive, anything else to kill it.
     virtual InitResult init_();
     /// @return whether prepareInit_ and init_ should be called.
     virtual bool shouldInit_();
     /// Finalize the initialization; the actor is deleted if the result is not Ok.
     virtual void finalizeInit_(InitContext* context);
 
-    /// Called every tick to prepare for pre-delete (after startPreparingForPreDelete_).
-    virtual PreDeletePrepareResult prepareForPreDelete_();
-    /// Called to start preparing for pre-delete. Return true to allow pre-delete to go ahead.
-    virtual bool startPreparingForPreDelete_();
+    /// Called once prepareForPreDelete_ returns true. Return Done to request the pre-delete.
+    virtual PreDeletePrepareResult finishPreparingForPreDelete_();
+    /// Polled every frame until it returns true.
+    virtual bool prepareForPreDelete_();
 
     /// Destructs this actor if should_destruct is 1.
     /// @warning The actor must NOT be used after calling this function.
@@ -239,47 +258,47 @@ protected:
     /// Called when a new wakeup operation is queued.
     virtual void onWakeUpRequested_(SleepWakeReason reason);
 
-    virtual bool shouldClearStateFlag4000_() { return true; }
+    virtual bool shouldStopKeepingInUpdateStateList_() { return true; }
 
     /// Called when entering the Delete state.
     virtual void onEnterDelete_();
     /// Called when entering the Sleep state.
     virtual void onEnterSleep_();
 
-    /// Called to actually pre-delete (third and final callback).
-    virtual void preDelete3_(const PreDeleteArg& arg);
+    /// Third and final pre-delete callback.
+    virtual void freeResources_(const PreDeleteArg& arg);
 
     virtual bool prepareInit_(sead::Heap* heap, PrepareArg& arg);
 
     /// Called when pre-delete actually starts (after preparation, before requesting it).
     virtual void onPreDeleteStart_(PrepareArg&);
-    /// Called to actually pre-delete (second callback).
-    virtual void preDelete2_(const PreDeleteArg& arg);
-    /// Called to actually pre-delete (first callback).
+    /// Second pre-delete callback: frees what prepareInit_ allocated.
+    virtual void freePrepareInit_(const PreDeleteArg& arg);
+    /// First pre-delete callback. Empty in every 1.5.0 implementation.
     virtual void preDelete1_();
 
-    virtual IsSpecialJobTypeResult isSpecialJobType_(JobType type);
+    virtual JobPauseState getJobPauseState_(JobType type);
     virtual bool canWakeUp_();
-    virtual void queueExtraJobPush_(JobType type, int idx);
+    virtual void carryOverJobRequest_(JobType type, int new_array_idx);
     virtual bool hasJobType_(JobType type);
     /// Called after processStateUpdate() is called for all actors in the update state list.
     virtual void afterUpdateState_();
 
     virtual bool shouldSkipJobPush_(JobType type);
-    /// Called before pushing a job with the specified job type (first callback).
+    /// Called just before shouldSkipJobPush for each job push (first callback).
     virtual void onJobPush1_(JobType type);
-    /// Called before pushing a job with the specified job type (second and final callback).
+    /// Called just before shouldSkipJobPush for each job push (second and final callback).
     virtual void onJobPush2_(JobType type);
 
-    bool processStateUpdate(u8 counter);
+    bool processStateUpdate(u8 update_counter);
     void processPreDelete();
     void startDelete_();
 
     /// Called from BaseProcMgr when a job for this process is invoked.
     void jobInvoked(JobType type);
 
-    bool isSpecialJobTypeForThisActor_(JobType type) const {
-        return mSpecialJobTypesMask.isOnBit(int(type));
+    bool isJobTypePausedForThisProc_(JobType type) const {
+        return mPausedJobTypesMask.isOnBit(int(type));
     }
 
     BaseProcJobHandler*& getJobHandler(JobType type) { return mJobHandlers[int(type)]; }
@@ -288,17 +307,17 @@ protected:
     bool setStateFlag(u32 flag_bit);
     bool setStateFlag(StateFlags flag) { return setStateFlag(sead::log2(u32(flag))); }
 
-    bool x00000071011ba9fc();
+    bool willWakeUpThisPass();
 
     sead::FixedSafeString<64> mName;
     u32 mId = -1;
     State mState = State::Init;
     u8 mPriority = 0;
     u8 mCreatePriorityState = 0;
-    u8 mCounter = 0;
+    u8 mCalcLinkUpdateCounter = 0;
     BaseProcLinkData* mBaseProcLinkData = nullptr;
     sead::BitFlag16 mSkippedJobTypesMask;
-    sead::BitFlag16 mSpecialJobTypesMask;
+    sead::BitFlag16 mPausedJobTypesMask;
     sead::TypedBitFlag<Flags, sead::Atomic<u32>> mFlags;
     sead::TypedBitFlag<StateFlags, sead::Atomic<u32>> mStateFlags;
     BaseProc* mConnectedCalcParent = nullptr;
@@ -326,8 +345,9 @@ private:
 
     void setJobPriorityDuringCalc_(BaseProcJobHandler*& handler, JobType type);
 
-    bool canWakeUpOrFlagsSet_() {
-        return mFlags.isOn(Flags::_80) ? mFlags.isOn(Flags::_100) : canWakeUp_();
+    bool canWakeUpCached_() {
+        return mFlags.isOn(Flags::WakeUpCheckCached) ? mFlags.isOn(Flags::WakeUpCheckResult) :
+                                                       canWakeUp_();
     }
 };
 KSYS_CHECK_SIZE_NX150(BaseProc, 0x180);

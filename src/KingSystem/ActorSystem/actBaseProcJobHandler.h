@@ -11,7 +11,7 @@ public:
     explicit BaseProcJobHandler(BaseProc* proc);
     virtual ~BaseProcJobHandler() = default;
     virtual void invoke() = 0;
-    virtual void invokeSpecial() {}
+    virtual void invokePaused() {}
 
     BaseProcJobLink& getLink() { return mLink; }
     const BaseProcJobLink& getLink() const { return mLink; }
@@ -37,15 +37,15 @@ private:
 template <typename T>
 class BaseProcJobHandlerDualT : public BaseProcJobHandler {
 public:
-    BaseProcJobHandlerDualT(T* proc, void (T::*fn)(), void (T::*fn_special)())
-        : BaseProcJobHandler(proc), mDelegate(proc, fn), mDelegateSpecial(proc, fn_special) {}
+    BaseProcJobHandlerDualT(T* proc, void (T::*fn)(), void (T::*fn_paused)())
+        : BaseProcJobHandler(proc), mDelegate(proc, fn), mDelegatePaused(proc, fn_paused) {}
 
     void invoke() override { mDelegate.invoke(); }
-    void invokeSpecial() override { mDelegateSpecial.invoke(); }
+    void invokePaused() override { mDelegatePaused.invoke(); }
 
 private:
     sead::Delegate<T> mDelegate;
-    sead::Delegate<T> mDelegateSpecial;
+    sead::Delegate<T> mDelegatePaused;
 };
 
 }  // namespace ksys::act

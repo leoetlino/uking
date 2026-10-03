@@ -26,12 +26,11 @@ public:
     void init(sead::Heap* heap);
     bool pushJobQueue(sead::WorkerMgr* worker_mgr, BaseProcJobLists* lists, int priority,
                       JobType type);
-    bool pushExtraJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists, int priority,
-                       JobType type);
-    bool pushExtraJobs(sead::FixedSizeJQ* queue,
-                       const agl::utl::AtomicPtrArray<BaseProcJobLink>& links);
+    bool enqueueJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists, int priority, JobType type);
+    bool enqueueJobRequests(sead::FixedSizeJQ* queue,
+                            const agl::utl::AtomicPtrArray<BaseProcJobLink>& links);
 
-    void clear() { mNumExtraJobs = 0; }
+    void clear() { mNumEnqueuedJobs = 0; }
 
 private:
     bool pushJobs(sead::FixedSizeJQ* queue, BaseProcJobLists* lists, int priority,
@@ -41,7 +40,7 @@ private:
     int mFreeJobIdx = 0;
     sead::FixedSizeJQ mJobQueue;
     sead::SafeArray<BaseProcJob, 1200> mPool;
-    sead::Atomic<int> mNumExtraJobs = 0;
+    sead::Atomic<int> mNumEnqueuedJobs = 0;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcJobQue, 0xbc38);
 

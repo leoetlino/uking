@@ -117,7 +117,7 @@ BaseProc* BaseProcHandle::releaseAndWakeProc() {
 
         proc = accessor.mProc;
         if (proc)
-            proc->wakeUp(BaseProc::SleepWakeReason::_0);
+            proc->wakeUp(BaseProc::SleepWakeReason::Default);
     }
 
     mUnit = nullptr;
@@ -195,7 +195,7 @@ bool BaseProcUnit::deleteProc([[maybe_unused]] u32 x, BaseProcHandle* handle) {
     }
 
     if (accessor.hasProc())
-        accessor.mProc->deleteLater(BaseProc::DeleteReason::_2);
+        accessor.mProc->deleteLater(BaseProc::DeleteReason::ProcUnitReleased);
 
     return true;
 }

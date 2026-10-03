@@ -138,33 +138,33 @@ void BaseProc::finalizeInit_(InitContext* context) {
         return;
 
     if (context->result != InitResult::Ok) {
-        deleteLater(DeleteReason::_1);
+        deleteLater(DeleteReason::InitFailed);
         return;
     }
 
     if (!mProcUnit) {
         if (context->sleep_after_init)
-            sleep(SleepWakeReason::_0);
+            sleep(SleepWakeReason::Default);
         else
-            wakeUp(SleepWakeReason::_0);
+            wakeUp(SleepWakeReason::Default);
     } else {
-        sleep(SleepWakeReason::_0);
+        sleep(SleepWakeReason::Default);
         if (!mProcUnit->setProc(this))
-            deleteLater(DeleteReason::_2);
+            deleteLater(DeleteReason::ProcUnitReleased);
     }
 }
 
-BaseProc::PreDeletePrepareResult BaseProc::prepareForPreDelete_() {
+BaseProc::PreDeletePrepareResult BaseProc::finishPreparingForPreDelete_() {
     return PreDeletePrepareResult::Done;
 }
 
 // NON_MATCHING: branching
-bool BaseProc::startPreparingForPreDelete_() {
+bool BaseProc::prepareForPreDelete_() {
     if (mUpdateStateListNode.isLinked())
         return false;
 
     return !mBaseProcLinkData || mBaseProcLinkData->refCount() <= 0 ||
-           BaseProcMgr::instance()->getUnk3() || tera::checkTeraSystemStatus();
+           BaseProcMgr::instance()->getStageUnloadDepth() || tera::checkTeraSystemStatus();
 }
 
 void BaseProc::destruct_(int should_destruct) {
@@ -192,7 +192,7 @@ void BaseProc::onEnterDelete_() {}
 
 void BaseProc::onEnterSleep_() {}
 
-void BaseProc::preDelete3_(const PreDeleteArg& arg) {}
+void BaseProc::freeResources_(const PreDeleteArg& arg) {}
 
 bool BaseProc::prepareInit_(sead::Heap*, BaseProc::PrepareArg&) {
     return true;
@@ -200,28 +200,28 @@ bool BaseProc::prepareInit_(sead::Heap*, BaseProc::PrepareArg&) {
 
 void BaseProc::onPreDeleteStart_(PrepareArg&) {}
 
-void BaseProc::preDelete2_(const PreDeleteArg& arg) {}
+void BaseProc::freePrepareInit_(const PreDeleteArg& arg) {}
 
 void BaseProc::preDelete1_() {}
 
-BaseProc::IsSpecialJobTypeResult BaseProc::isSpecialJobType_(JobType type) {
-    if (BaseProcMgr::instance()->isSpecialJobType(type) || isSpecialJobTypeForThisActor_(type))
-        return IsSpecialJobTypeResult::Yes;
+BaseProc::JobPauseState BaseProc::getJobPauseState_(JobType type) {
+    if (BaseProcMgr::instance()->isJobTypePaused(type) || isJobTypePausedForThisProc_(type))
+        return JobPauseState::Paused;
 
-    return IsSpecialJobTypeResult::No;
+    return JobPauseState::NotPaused;
 }
 
-bool BaseProc::isSpecialJobType(JobType type) {
-    if (isSpecialJobType_(type) != IsSpecialJobTypeResult::No)
+bool BaseProc::isJobTypePaused(JobType type) {
+    if (getJobPauseState_(type) != JobPauseState::NotPaused)
         return true;
 
     const auto check = [&](auto self, BaseProc* proc) {
         if (!proc)
             return false;
-        const auto result = proc->isSpecialJobType_(type);
-        if (result == IsSpecialJobTypeResult::Yes)
+        const auto result = proc->getJobPauseState_(type);
+        if (result == JobPauseState::Paused)
             return true;
-        if (result == IsSpecialJobTypeResult::_2)
+        if (result == JobPauseState::PausedSelfOnly)
             return false;
         return self(self, proc->mConnectedCalcParent);
     };
@@ -232,9 +232,9 @@ bool BaseProc::canWakeUp_() {
     return true;
 }
 
-void BaseProc::queueExtraJobPush_(JobType type, int idx) {
+void BaseProc::carryOverJobRequest_(JobType type, int new_array_idx) {
     if (!isDeletedOrDeleting())
-        BaseProcMgr::instance()->queueExtraJobPush(&getJobHandler(type)->getLink());
+        BaseProcMgr::instance()->requestJob(&getJobHandler(type)->getLink());
 }
 
 bool BaseProc::shouldSkipJobPush(JobType type) {
@@ -256,17 +256,17 @@ inline void BaseProc::setJobPriorityDuringCalc_(BaseProcJobHandler*& handler, Jo
     } else {
         BaseProcMgr::instance()->eraseJob(*this, type);
         handler->getLink().loadNewPriority();
-        handler->getLink().loadNewPriority2();
+        handler->getLink().loadNewSubPriority();
         BaseProcMgr::instance()->pushJob(*this, type);
     }
 }
 
-void BaseProc::setJobPriority(u8 actorparam_priority, JobType type) {
+void BaseProc::setJobPriority(u8 priority, JobType type) {
     if (isDeletedOrDeleting())
         return;
 
     auto& handler = getJobHandler(type);
-    handler->getLink().setNewPriority(actorparam_priority);
+    handler->getLink().setNewPriority(priority);
     if (isCalc()) {
         setJobPriorityDuringCalc_(handler, type);
     } else {
@@ -274,16 +274,16 @@ void BaseProc::setJobPriority(u8 actorparam_priority, JobType type) {
     }
 }
 
-void BaseProc::setJobPriority2(u8 actorparam_priority, JobType type) {
+void BaseProc::setJobSubPriority(u8 sub_priority, JobType type) {
     if (isDeletedOrDeleting())
         return;
 
     auto& handler = getJobHandler(type);
-    handler->getLink().setNewPriority2(actorparam_priority);
+    handler->getLink().setNewSubPriority(sub_priority);
     if (isCalc()) {
         setJobPriorityDuringCalc_(handler, type);
     } else {
-        handler->getLink().loadNewPriority2();
+        handler->getLink().loadNewSubPriority();
     }
 }
 
@@ -292,8 +292,8 @@ bool BaseProc::hasJobType_(JobType type) {
 }
 
 void BaseProc::afterUpdateState_() {
-    mFlags.reset(Flags::_80);
-    mFlags.reset(Flags::_100);
+    mFlags.reset(Flags::WakeUpCheckCached);
+    mFlags.reset(Flags::WakeUpCheckResult);
 }
 
 bool BaseProc::shouldSkipJobPush_(JobType) {
@@ -310,17 +310,17 @@ void BaseProc::jobInvoked(JobType type) {
             return;
     }
 
-    IsSpecialJobTypeResult special;
+    JobPauseState pause_state;
 
     if (mStateFlags.isOn(StateFlags::RequestDelete)) {
-        if (type == JobType::Calc4)
-            getJobHandler(JobType::Calc4)->invoke();
-        special = IsSpecialJobTypeResult::Yes;
+        if (type == JobType::FrameEnd)
+            getJobHandler(JobType::FrameEnd)->invoke();
+        pause_state = JobPauseState::Paused;
     } else {
-        special = isSpecialJobType_(type);
+        pause_state = getJobPauseState_(type);
         auto* handler = getJobHandler(type);
-        if (special != IsSpecialJobTypeResult::No)
-            handler->invokeSpecial();
+        if (pause_state != JobPauseState::NotPaused)
+            handler->invokePaused();
         else
             handler->invoke();
     }
@@ -329,28 +329,28 @@ void BaseProc::jobInvoked(JobType type) {
         if (!child->hasJobType_(type) || !child->isCalc())
             continue;
 
-        const auto child_special = child->isSpecialJobType_(type);
+        const auto child_pause_state = child->getJobPauseState_(type);
         if (child->mStateFlags.isOn(StateFlags::RequestDelete)) {
-            if (type == JobType::Calc4)
-                child->getJobHandler(JobType::Calc4)->invoke();
-            special = IsSpecialJobTypeResult::Yes;
+            if (type == JobType::FrameEnd)
+                child->getJobHandler(JobType::FrameEnd)->invoke();
+            pause_state = JobPauseState::Paused;
         } else {
             auto* handler = child->getJobHandler(type);
-            if (special == IsSpecialJobTypeResult::Yes ||
-                child_special != IsSpecialJobTypeResult::No) {
-                handler->invokeSpecial();
-                special = child_special != IsSpecialJobTypeResult::No ? child_special :
-                                                                        IsSpecialJobTypeResult::Yes;
+            if (pause_state == JobPauseState::Paused ||
+                child_pause_state != JobPauseState::NotPaused) {
+                handler->invokePaused();
+                pause_state = child_pause_state != JobPauseState::NotPaused ? child_pause_state :
+                                                                              JobPauseState::Paused;
             } else {
                 handler->invoke();
-                special = IsSpecialJobTypeResult::No;
+                pause_state = JobPauseState::NotPaused;
             }
         }
     }
 }
 
 // NON_MATCHING: branching
-bool BaseProc::processStateUpdate(u8 counter) {
+bool BaseProc::processStateUpdate(u8 update_counter) {
     const bool delete_requested = mStateFlags.isOn(StateFlags::RequestDelete);
     const bool initialized = mFlags.isOn(Flags::Initialized);
 
@@ -376,11 +376,11 @@ bool BaseProc::processStateUpdate(u8 counter) {
         if (new_flags.isOn(StateFlags::RequestDeleteProcUnit))
             unlinkProcUnit_();
 
-        if (mStateFlags.isOn(StateFlags::_4000)) {
-            if (shouldClearStateFlag4000_())
+        if (mStateFlags.isOn(StateFlags::KeepInUpdateStateList)) {
+            if (shouldStopKeepingInUpdateStateList_())
                 new_flags.makeAllZero();
             else
-                new_flags = StateFlags::_4000;
+                new_flags = StateFlags::KeepInUpdateStateList;
         } else {
             new_flags.makeAllZero();
         }
@@ -408,7 +408,7 @@ bool BaseProc::processStateUpdate(u8 counter) {
             if (!flags.isAnyOn({StateFlags::RequestWakeUp, StateFlags::_2}))
                 return true;
 
-            if (canWakeUpOrFlagsSet_()) {
+            if (canWakeUpCached_()) {
                 handleWakeUpRequest_();
                 return true;
             }
@@ -437,10 +437,10 @@ bool BaseProc::processStateUpdate(u8 counter) {
             unlinkCalcParent_();
 
         if (mStateFlags.isOn(StateFlags::RequestSetChild))
-            loadNewCalcChild_(counter);
+            loadNewCalcChild_(update_counter);
 
         if (mStateFlags.isOn(StateFlags::RequestSetParent))
-            loadNewCalcParent_(counter);
+            loadNewCalcParent_(update_counter);
     }
 
     const bool ret = new_flags.isZero();
@@ -459,9 +459,9 @@ void BaseProc::processPreDelete() {
             mFlags.reset(Flags::PreDeleteFailed);
         }
 
-    } else if (!mFlags.isOn(Flags::PreDeleteStarted) && startPreparingForPreDelete_()) {
+    } else if (!mFlags.isOn(Flags::PreDeleteStarted) && prepareForPreDelete_()) {
         mFlags.set(Flags::PreDeleting);
-        if (prepareForPreDelete_() == PreDeletePrepareResult::Done) {
+        if (finishPreparingForPreDelete_() == PreDeletePrepareResult::Done) {
             BaseProcLinkDataMgr::instance()->releaseLink(this);
             PrepareArg arg;
             onPreDeleteStart_(arg);
@@ -480,8 +480,8 @@ void BaseProc::freeLinkData() {
 
 void BaseProc::doPreDelete(const PreDeleteArg& arg) {
     preDelete1_();
-    preDelete2_(arg);
-    preDelete3_(arg);
+    freePrepareInit_(arg);
+    freeResources_(arg);
 
     if (arg.do_not_destruct_immediately)
         return;
@@ -520,7 +520,7 @@ void BaseProc::loadNewCalcChild_(u8 counter) {
         child->mStateFlags.isOff(StateFlags::RequestDelete)) {
         mConnectedCalcChild = child;
         child->mConnectedCalcParent = this;
-        mCounter = counter;
+        mCalcLinkUpdateCounter = counter;
     }
     mConnectedCalcChildNew = nullptr;
 }
@@ -532,7 +532,7 @@ void BaseProc::loadNewCalcParent_(u8 counter) {
         !isDeletedOrDeleting()) {
         parent->mConnectedCalcChild = this;
         mConnectedCalcParent = parent;
-        parent->mCounter = counter;
+        parent->mCalcLinkUpdateCounter = counter;
     }
     mConnectedCalcParentNew = nullptr;
 }
@@ -567,19 +567,19 @@ void BaseProc::handleJobPriorityChangeRequest_() {
 
         BaseProcMgr::instance()->eraseJob(*this, JobType(i));
         mJobHandlers[i]->getLink().loadNewPriority();
-        mJobHandlers[i]->getLink().loadNewPriority2();
+        mJobHandlers[i]->getLink().loadNewSubPriority();
         BaseProcMgr::instance()->pushJob(*this, JobType(i));
     }
 }
 
-bool BaseProc::x00000071011ba9fc() {
+bool BaseProc::willWakeUpThisPass() {
     if (BaseProcMgr::instance()->getStatus() != BaseProcMgr::Status::ProcessingUpdateStateList)
         return false;
 
-    if (mFlags.isOn(Flags::_80))
-        return mFlags.isOn(Flags::_100);
+    if (mFlags.isOn(Flags::WakeUpCheckCached))
+        return mFlags.isOn(Flags::WakeUpCheckResult);
 
-    mFlags.set(Flags::_80);
+    mFlags.set(Flags::WakeUpCheckCached);
 
     if (mFlags.isOff(Flags::Initialized) || mStateFlags.isOn(StateFlags::RequestDelete) ||
         mStateFlags.isOn(StateFlags::RequestSleep) || mStateFlags.isOff(StateFlags::_a) ||
@@ -587,7 +587,7 @@ bool BaseProc::x00000071011ba9fc() {
         return false;
     }
 
-    mFlags.set(Flags::_100);
+    mFlags.set(Flags::WakeUpCheckResult);
     return true;
 }
 
@@ -630,19 +630,19 @@ void BaseProc::startDelete_() {
 
     if (mConnectedCalcChildNew) {
         if (mFlags.isOn(Flags::DeleteChildOnDelete))
-            mConnectedCalcChildNew->deleteLater(DeleteReason::_18);
+            mConnectedCalcChildNew->deleteLater(DeleteReason::ConnectedCalcChildNewDeleted);
         mConnectedCalcChildNew = nullptr;
     }
 
     if (mConnectedCalcParentNew) {
         if (mFlags.isOn(Flags::DeleteParentOnDelete))
-            mConnectedCalcParentNew->deleteLater(DeleteReason::_19);
+            mConnectedCalcParentNew->deleteLater(DeleteReason::ConnectedCalcParentNewDeleted);
         mConnectedCalcParentNew = nullptr;
     }
 
     if (mConnectedCalcChild) {
         if (mFlags.isOn(Flags::DeleteChildOnDelete))
-            mConnectedCalcChild->deleteLater(DeleteReason::_16);
+            mConnectedCalcChild->deleteLater(DeleteReason::ConnectedCalcChildDeleted);
         if (mConnectedCalcChild) {
             mConnectedCalcChild->mConnectedCalcParent = nullptr;
             mConnectedCalcChild = nullptr;
@@ -651,7 +651,7 @@ void BaseProc::startDelete_() {
 
     if (mConnectedCalcParent) {
         if (mFlags.isOn(Flags::DeleteParentOnDelete))
-            mConnectedCalcParent->deleteLater(DeleteReason::_17);
+            mConnectedCalcParent->deleteLater(DeleteReason::ConnectedCalcParentDeleted);
         if (auto& child = mConnectedCalcParent->mConnectedCalcChild) {
             child->mConnectedCalcParent = nullptr;
             child = nullptr;

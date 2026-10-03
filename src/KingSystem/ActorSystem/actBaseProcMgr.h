@@ -53,8 +53,11 @@ public:
         ProcessingUpdateStateList = 4,
     };
 
-    enum class Mode : u8 {
-        _0 = 0,
+    enum class PauseMode : u8 {
+        None = 0,
+        Paused = 1,
+        StageLoad = 4,
+        SystemPause = 5,
     };
 
     enum class ProcFilter {
@@ -68,7 +71,7 @@ public:
     };
 
     using ProcFilters = sead::TypedBitFlag<ProcFilter>;
-    using ExtraJobLinkArray = agl::utl::FixedPtrArray<BaseProcJobLink, 512>;
+    using JobRequestArray = agl::utl::FixedPtrArray<BaseProcJobLink, 512>;
 
     /// Wrapper to simplify BaseProc iteration.
     class ProcIteratorContext {
@@ -85,15 +88,15 @@ public:
         BaseProc* mProc{};
     };
 
-    static u32 getConstant0() { return sConstant0; }
-    static u32 getConstant1() { return sConstant1; }
-    static u32 getConstant2() { return sConstant2; }
-    static u32 getConstant4() { return sConstant4; }
+    static u32 getPreCalcJobType() { return sPreCalcJobType; }
+    static u32 getPostBgJobType() { return sPostBgJobType; }
+    static u32 getPostSensorJobType() { return sPostSensorJobType; }
+    static u32 getFrameEndJobType() { return sFrameEndJobType; }
 
     virtual ~BaseProcMgr();
 
-    void init(sead::Heap* heap, s32 num_job_types, u32 main_thread_id, u32 havok_thread_id1,
-              u32 havok_thread_id2, const BaseProcInitializerArgs& initializer_args);
+    void init(sead::Heap* heap, s32 num_job_types, u32 main_thread_id, u32 worker_thread_id1,
+              u32 worker_thread_id2, const BaseProcInitializerArgs& initializer_args);
 
     // region BaseProc management
 
@@ -122,38 +125,40 @@ public:
     void eraseJob(BaseProc& proc, JobType type);
     void eraseJobs(BaseProc& proc);
 
-    void processExtraJobsDirectly(JobType type, s32 prio, bool);
-    ExtraJobLinkArray& getExtraJobs();
-    void swapExtraJobArray();
+    void invokeJobsDirectly(JobType type, s32 prio, bool invoke_requested_jobs);
+    JobRequestArray& getCurrentJobRequests();
+    void swapJobRequestArrays();
 
-    void queueExtraJobPush(BaseProcJobLink* job_link);
-    void moveExtraJobsToOtherBuffer(JobType type);
-    bool hasExtraJobLink(BaseProcJobLink* job_link, s32 idx);
-    void clearExtraJobArrays();
+    void requestJob(BaseProcJobLink* job_link);
+    void carryOverJobRequests(JobType type);
+    bool isJobRequested(BaseProcJobLink* job_link, s32 array_idx);
+    void clearJobRequests();
 
-    void pushJobQueues(sead::WorkerMgr* mgr, JobType type, bool x);
-    bool pushExtraJobsEx(sead::FixedSizeJQ* jq, JobType type, u8 priority, bool x, bool y);
-    bool pushExtraJobsForCurrentTypeAndPrio(sead::FixedSizeJQ* jq, ExtraJobLinkArray* array);
-    bool pushPreCalcJobs(sead::FixedSizeJQ* jq, JobType type, u8 prio, bool x, bool y);
+    void pushJobQueues(sead::WorkerMgr* mgr, JobType type, bool skip_access_check);
+    bool enqueueJobs(sead::FixedSizeJQ* jq, JobType type, u8 priority, bool begin_phase,
+                     bool skip_access_check);
+    bool enqueueJobRequests(sead::FixedSizeJQ* jq, JobRequestArray* requests);
+    bool enqueueMoreJobs(sead::FixedSizeJQ* jq, JobType type, u8 prio, bool begin_phase,
+                         bool skip_access_check);
 
     void setJobType(JobType type);
-    void setActorJobTypeAndPrio(JobType type, s32 prio, bool);
+    void setActorJobTypeAndPrio(JobType type, s32 prio, bool skip_access_check);
     void goIdle();
     void calc();
-    void clearMode();
+    void clearPauseMode();
     sead::CriticalSection* lockProcMap();
     void unlockProcMap();
     void deleteAllProcs();
     bool hasFinishedDeletingAllProcs();
-    void jobInvoked(BaseProcJobLink* link, s32 required_calc_rounds);
+    void jobInvoked(BaseProcJobLink* link, s32 num_procs);
 
     // endregion
 
     // region Special job types
 
-    bool isSpecialJobType(JobType type) const;
-    void addSpecialJobTypes(u16 mask);
-    void removeSpecialJobTypes(u16 mask);
+    bool isJobTypePaused(JobType type) const;
+    void pauseJobTypes(u16 mask);
+    void resumeJobTypes(u16 mask);
 
     // endregion
 
@@ -206,9 +211,9 @@ public:
 
     // endregion
 
-    auto getUnk3() const { return mUnk3; }
-    void incrementUnk3();
-    void decrementUnk3();
+    auto getStageUnloadDepth() const { return mStageUnloadDepth; }
+    void incrementStageUnloadDepth();
+    void decrementStageUnloadDepth();
 
     void writeResidentActorsCsv(const sead::SafeString& file_path);
 
@@ -223,22 +228,22 @@ public:
     BaseProcJobLists& getJobLists(JobType type) { return mJobLists[u32(type)]; }
     bool isPushingJobs() const { return mIsPushingJobs; }
 
-    static u32 sConstant0;
-    static u32 sConstant1;
-    static u32 sConstant2;
-    static u32 sConstant4;
+    static u32 sPreCalcJobType;
+    static u32 sPostBgJobType;
+    static u32 sPostSensorJobType;
+    static u32 sFrameEndJobType;
 
 private:
     void doAddToUpdateStateList_(BaseProc& proc);
 
-    bool checkJobPushState() const;
+    bool canPushJobs() const;
 
     static sead::BufferedSafeString* sResidentActorListStr;
 
     Status mStatus = Status::Idle;
     sead::SizedEnum<JobType, u8> mJobType = JobType::Invalid;
     u8 mCurrentlyProcessingPrio = 8;
-    u8 mCounter = 0;
+    u8 mStateUpdateCounter = 0;
     sead::CriticalSection mProcMapCS;
     sead::OffsetList<BaseProc> mProcPreDeleteList;
     sead::Buffer<BaseProcJobLists> mJobLists;
@@ -253,19 +258,19 @@ private:
     BaseProcInitializer* mProcInitializer = nullptr;
     BaseProcDeleter* mProcDeleter = nullptr;
     bool mIsPushingJobs = false;
-    sead::Atomic<bool> mPushActorJobType3InsteadOf6 = false;
-    bool mEnableExtraJobPush = false;
-    Mode mMode = Mode::_0;
-    bool mUnk2 = false;
-    bool mIsInitialisingQuestMgrMaybe = false;
-    s8 mCurrentExtraJobArrayIdx = 0;
-    u8 mUnk3 = 0;
-    sead::BitFlag16 mSpecialJobTypesMask = 0;
+    sead::Atomic<bool> mRepeatJobPassRequested = false;
+    bool mJobPushEnabled = false;
+    PauseMode mPauseMode = PauseMode::None;
+    bool mSkipAccessCheck = false;
+    bool mIsInitializingQuestMgr = false;
+    s8 mCurrentJobRequestArrayIdx = 0;
+    u8 mStageUnloadDepth = 0;
+    sead::BitFlag16 mPausedJobTypesMask = 0;
     u32 mMainThreadId = 0;
-    u32 mHavokThreadId1 = 0;
-    u32 mHavokThreadId2 = 0;
-    u32 mUnk4 = 0;
-    sead::SafeArray<ExtraJobLinkArray, 2> mExtraJobLinkArrays{};
+    u32 mWorkerThreadId1 = 0;
+    u32 mWorkerThreadId2 = 0;
+    u32 mJobPushSuspended = 0;
+    sead::SafeArray<JobRequestArray, 2> mJobRequestArrays{};
 };
 KSYS_CHECK_SIZE_NX150(BaseProcMgr, 0x21a0);
 
