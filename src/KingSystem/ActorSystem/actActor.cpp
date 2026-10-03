@@ -16,10 +16,10 @@ BaseProcLink& getDummyBaseProcLink() {
 }
 
 Actor::Actor(const CreateArg& arg) : BaseProc(arg) {
-    mJobHandlers[BaseProcMgr::getConstant0()] = &mJob0;
-    mJobHandlers[BaseProcMgr::getConstant1()] = &mJob1;
-    mJobHandlers[BaseProcMgr::getConstant2()] = &mJob2;
-    mJobHandlers[BaseProcMgr::getConstant4()] = &mJob4;
+    mJobHandlers[BaseProcMgr::getPreCalcJobType()] = &mJob0;
+    mJobHandlers[BaseProcMgr::getPostBgJobType()] = &mJob1;
+    mJobHandlers[BaseProcMgr::getPostSensorJobType()] = &mJob2;
+    mJobHandlers[BaseProcMgr::getFrameEndJobType()] = &mJob4;
 
     mUnk1.actor = this;
     mUnk1._4 = 0;

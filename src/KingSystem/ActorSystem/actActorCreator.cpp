@@ -99,7 +99,7 @@ Actor* ActorCreator::createActor(const char* name, sead::Heap* heap, InstParamPa
 
     auto* actor = sead::DynamicCast<Actor>(proc);
     if (!actor && proc)
-        proc->deleteLater(BaseProc::DeleteReason::_0);
+        proc->deleteLater(BaseProc::DeleteReason::Default);
 
     return actor;
 }
