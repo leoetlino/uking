@@ -9,21 +9,21 @@ namespace ksys::act {
 
 class BaseProc;
 
-enum class Priority {
+enum class CalcPrio {
     PlayerBefore = 0,
-    Player = 2,
+    Player = 1,
     PlayerAfter = 2,
     AllAfter = 3,
 };
 
 enum class JobType {
     PreCalc = 0,
-    Calc1 = 1,
-    Calc2 = 2,
-    Calc3 = 3,
-    Calc4 = 4,
+    PostBg = 1,
+    PostSensor = 2,
+    Signal = 3,
+    FrameEnd = 4,
     AfterMessageDispatch = 5,
-    Calc3Alt = 6,
+    AfterSignal = 6,
     Invalid = 7,
 };
 
@@ -34,23 +34,23 @@ public:
     BaseProc* getProc() const { return mData; }
 
     u8 getPriority() const { return mPriority; }
-    u8 getPriority2() const { return mPriority2; }
+    u8 getSubPriority() const { return mSubPriority; }
 
     void setNewPriority(u8 priority) { mNewPriority = priority; }
-    void setNewPriority2(u8 priority) { mNewPriority2 = priority; }
+    void setNewSubPriority(u8 priority) { mNewSubPriority = priority; }
 
     void loadNewPriority() { mPriority = mNewPriority; }
-    void loadNewPriority2() { mPriority2 = mNewPriority2; }
+    void loadNewSubPriority() { mSubPriority = mNewSubPriority; }
 
     bool hasPriorityChange() const {
-        return mPriority != mNewPriority || mPriority2 != mNewPriority2;
+        return mPriority != mNewPriority || mSubPriority != mNewSubPriority;
     }
 
 private:
     u8 mPriority;
     u8 mNewPriority;
-    u8 mPriority2;
-    u8 mNewPriority2;
+    u8 mSubPriority;
+    u8 mNewSubPriority;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcJobLink, 0x28);
 
@@ -59,7 +59,7 @@ struct BaseProcJobList {
     sead::TListNode<BaseProc*>* next(BaseProcJobLink* link) const;
     int size() const;
 
-    sead::SafeArray<sead::TList<BaseProc*>, 2> lists;
+    sead::SafeArray<sead::TList<BaseProc*>, 2> sub_lists;
 };
 
 class BaseProcJobLists {
@@ -84,16 +84,16 @@ public:
     BaseProcJob() = default;
     void invoke() override;
 
-    void set(BaseProcJobLink* link, int rounds) {
+    void set(BaseProcJobLink* link, int num_procs) {
         mJobLink = link;
-        mRequiredCalcRounds = rounds;
+        mNumProcs = num_procs;
     }
 
 private:
     friend class BaseProcJobQue;
 
     BaseProcJobLink* mJobLink = nullptr;
-    int mRequiredCalcRounds = 0;
+    int mNumProcs = 0;
 };
 
 }  // namespace ksys::act
