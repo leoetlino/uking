@@ -7,11 +7,11 @@ namespace ksys::act {
 static util::InitTimeInfo sInfo;
 
 BaseProcJobLink::BaseProcJobLink(BaseProc* proc, u8 priority)
-    : TListNode(proc), mPriority(priority), mNewPriority(priority), mPriority2(3),
-      mNewPriority2(3) {}
+    : TListNode(proc), mPriority(priority), mNewPriority(priority), mSubPriority(3),
+      mNewSubPriority(3) {}
 
 sead::TListNode<BaseProc*>* BaseProcJobList::front() const {
-    for (const auto& list : lists) {
+    for (const auto& list : sub_lists) {
         if (list.front())
             return list.front();
     }
@@ -19,27 +19,27 @@ sead::TListNode<BaseProc*>* BaseProcJobList::front() const {
 }
 
 sead::TListNode<BaseProc*>* BaseProcJobList::next(BaseProcJobLink* link) const {
-    if (auto* next = lists[link->getPriority2() >> 1].next(link))
+    if (auto* next = sub_lists[link->getSubPriority() >> 1].next(link))
         return next;
 
-    for (int i = (link->getPriority2() >> 1) + 1; i < lists.size(); ++i) {
-        if (lists[i].front())
-            return lists[i].front();
+    for (int i = (link->getSubPriority() >> 1) + 1; i < sub_lists.size(); ++i) {
+        if (sub_lists[i].front())
+            return sub_lists[i].front();
     }
 
     return nullptr;
 }
 
 int BaseProcJobList::size() const {
-    return lists[0].size() + lists[1].size();
+    return sub_lists[0].size() + sub_lists[1].size();
 }
 
 void BaseProcJobLists::pushJob(BaseProcJobLink& link) {
     if (link.isLinked())
         return;
 
-    auto& list = mLists[link.getPriority()].lists[link.getPriority2() >> 1];
-    if (link.getPriority2() % 2 == 0)
+    auto& list = mLists[link.getPriority()].sub_lists[link.getSubPriority() >> 1];
+    if (link.getSubPriority() % 2 == 0)
         list.pushFront(&link);
     else
         list.pushBack(&link);
@@ -76,7 +76,7 @@ sead::TListNode<BaseProc*>* BaseProcJobLists::getNextJob(BaseProcJobLink* link) 
 }
 
 void BaseProcJob::invoke() {
-    BaseProcMgr::instance()->jobInvoked(mJobLink, mRequiredCalcRounds);
+    BaseProcMgr::instance()->jobInvoked(mJobLink, mNumProcs);
 }
 
 }  // namespace ksys::act
