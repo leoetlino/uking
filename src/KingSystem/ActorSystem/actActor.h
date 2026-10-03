@@ -2,6 +2,7 @@
 
 #include <container/seadBuffer.h>
 #include <container/seadListImpl.h>
+#include <gsys/gsysModelAccessKey.h>
 #include <math/seadBoundBox.h>
 #include <math/seadMatrix.h>
 #include <math/seadVector.h>
@@ -29,6 +30,10 @@ namespace as {
 class ASList;
 }  // namespace as
 
+namespace chm {
+class ObjectSet;
+}  // namespace chm
+
 namespace map {
 class PreActor;
 }  // namespace map
@@ -51,6 +56,8 @@ class ActorReactions;
 
 namespace res {
 class Handle;
+class ModelResourceTextureCache;
+class ModelTextureBinding;
 }  // namespace res
 
 namespace xlink {
@@ -68,12 +75,13 @@ class Actor;
 class ActorCreator;
 class ActorParam;
 class Attention;
-class Awareness;
+class AwarenessInstance;
 class BaseProcLink;
 class BoneControl;
 class Chemical;
 class ImpulseBaseProcLink;
 class IncomingDamageHandler;
+class LodState;
 class ModelBindInfo;
 class Schedule;
 
@@ -100,32 +108,123 @@ KSYS_CHECK_SIZE_NX150(ActorUniqueName, 0x30);
 
 class Actor : public BaseProc, public ActorMessageTransceiver::IHandler {
 public:
-    enum class StasisFlag {
-        _1 = 1,
-        _2 = 2,
-        _4 = 4,
+    enum class ModelObjectAttribute {
+        MagneTarget = 0x1,
+        MagneGrabbed = 0x2,
+        CanBeStasised = 0x4,
+        InStasis = 0x8,
+        StasisTargeted = 0x10,
+        IceBlock = 0x40,
+        IceBlockTargeted = 0x80,
+        RadarTarget = 0x800,
+        InfoNotTree = 0x1000,
     };
 
+    // Bit indices into the 64-bit mActorFlags word.
     enum class ActorFlag {
-        _18 = 0x18,
-        _25 = 0x25,
-        _29 = 0x29,
-        _2b = 0x2b,
-        _2e = 0x2e,
-        _39 = 0x39,
+        PhysicsHeldForStaticCompound = 0,
+        UpdatePhysicsPause = 1,
+        SetPhysicsMtx = 2,
+        DisableUpdateMtxFromPhysics = 3,
+        UndispCut = 4,
+        ModelBind = 5,
+        WakeWithCreatorProc = 6,
+        ELinkSleptForDelete = 7,
+        HasUMii = 8,
+        StopTimerReactionPending = 9,
+        UnloadedByDistance = 10,
+        EffectModelDeleteRequested = 11,
+        AlwaysXlinkEmitted = 12,
+        LodPhysicsInactivePrevMaybe = 13,
+        KeepGenGroupAlive = 14,
+        GenGroupWaitingForExec = 15,
+        GenGroupExistCounted = 16,
+        ForbidAttention = 17,
+        EnableForbidPushJob = 18,
+        DisableForbidPushJob = 19,
+        ForceResetPreActorOnUnlink = 20,
+        InInvalidTimeOrWeather = 21,
+        TimeOrWeatherChecked = 22,
+        IsLinkTagComplexTagEventTagAreaManagement = 23,
+        StoppedByEvent = 24,
+        DropsPreloaded = 25,
+        ScheduleCalculated = 26,
+        LodForbidPushJob = 27,
+        ForceCalcInEvent = 28,
+        IsCameraOrEditCamera = 29,
+        WokenUp = 30,
+        DeletedForReset = 31,
+        DisableHideNonDemoMember = 32,
+        FadeOutDeleteRequested = 33,
+        EmitChangeAtnSig = 34,
+        AppearFade = 35,
+        PreDeletePhysicsRemoved = 36,
+        InCarryBox = 37,
+        WakeUpDistanceChecked = 38,
+        WakeUpDistancePassed = 39,
+        FirstDrawDone = 40,
+        AutoPlaced = 41,
+        AutoPlacedUntracked = 42,
+        Invisible = 43,
+        InFlight = 44,
+        DisableForbidJob = 45,
+        ReadyForPreDelete = 46,
+        CreatedWithGenGroup = 47,
+        ScheduleRainState = 48,
+        VillagerMgrRegisterTried = 49,
+        VillagerOutsideLoadArea = 50,
+        AnimalTimeline = 51,
+        NearDoor = 52,
+        CreatedByObjectLink = 53,
+        DeletedByObjectLink = 54,
+        UsesOverlayPlayerAnimation = 55,
+        StartNoDraw = 56,
+        CharacterLike = 57,
+        KeepStandingPosture = 58,
+        MovedFromHome = 59,
+        CalledEventStarted = 60,
+        CalledEventDeferredInAir = 61,
+        FrozenByEvent = 63,
     };
 
-    enum class ActorFlag2 {
-        InstEvent = 0x8,
-        _20 = 0x20,
+    enum class ActorFlag2 : u32 {
+        SystemHide = 0x1,
+        WakeUpReadyChecked = 0x2,
+        InstEventFlag = 0x8,
+        AnimDrivenRoot = 0x10,
+        Invisible = 0x20,
+        InStasis = 0x40,
         NoDistanceCheck = 0x80,
-        Alive = 0x4000000,
+        DisableClipping = 0x100,
+        PauseMenuActor = 0x200,
+        PhysicsPaused = 0x400,
+        ClothJobArmor = 0x800,
+        ClothJobDefault = 0x1000,
+        ForbidSystemDeleteDistance = 0x2000,
+        KeepWhileModelBound = 0x4000,
+        UnloadCountsAsDeath = 0x8000,
+        NoStopTimer = 0x10000,
+        PreparingAppear = 0x20000,
+        NpcTalkTurnPlaying = 0x40000,
+        EventMember = 0x100000,
+        DemoEventMember = 0x200000,
+        ModelObjectAttributesDirty = 0x400000,
+        KeepActiveNearFireOrBowAim = 0x800000,
+        Attention = 0x1000000,
+        Notice = 0x2000000,
+        Dead = 0x4000000,
+        Escape = 0x8000000,
+        GuardJust = 0x10000000,
+        Carried = 0x40000000,
+        InReaction = 0x80000000,
     };
 
     enum class DeleteType {
-        _1 = 1,
-        _2 = 2,
-        _3 = 3,
+        Normal = 1,
+        GenGroup = 2,
+        PreActor = 3,
+        Dead = 4,
+        DeadNoCount = 5,
     };
 
     explicit Actor(const CreateArg& arg);
@@ -169,8 +268,8 @@ public:
     bool fadeoutDelete(DeleteType type, DeleteReason reason, bool* ok = nullptr);
 
     void setProperties(int x, const sead::Matrix34f& mtx, const sead::Vector3f& vel,
-                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale,
-                       bool is_life_infinite, int i, int life) const;
+                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale, bool keep_life,
+                       int i, int life) const;
 
     // FIXME: figure out return types, parameters and names
     virtual s32 getMaxLife();
@@ -189,14 +288,14 @@ public:
     virtual void setRigidBodiesFixed();
     virtual void updateNavMeshCharacter();
     virtual void getNavMeshCharacter();
-    virtual void m46();
+    virtual void* m46();
     virtual void removeExtraPhysicsFromWorld();
     virtual void getAttackerActor();
     virtual void isAlreadyHitOrLinkedActorBody();
     virtual void isStruckByLightning();
     virtual void setIgnoreChemicalElements();
     virtual void getChemicalPos();
-    virtual void m53();
+    virtual bool isDamageStatusUpdateSuspended();
     virtual void killWithDropsAndEffects(int emit_type);
     virtual void receivesStasisDamage();
     virtual void getBodyCenterPos();
@@ -205,7 +304,7 @@ public:
     virtual void onFadeOutSleep();
     virtual void onCancelFadeOutSleep();
     virtual void onModelOpacityApplied();
-    virtual bool shouldUnload();
+    virtual bool shouldUnload(DeleteReason* reason);
     virtual void enterCalcSetup();
     virtual void onEnterCalcInit();
     virtual void takeOverFromLodActor();
@@ -238,7 +337,7 @@ public:
     virtual void onMaxPositionExceeded();
     virtual void requestNoticeUIState(int a1, float a2);
     virtual void getNoticeUIState();
-    virtual void m95();
+    virtual s32 m95(void* arg, s32 value);
     virtual void getReceivedDamage();
     virtual Chemical* getMainChemical();
     virtual void getWeapons();
@@ -249,7 +348,7 @@ public:
     virtual void destroyModelsMaybe();
     int handleMessage(const Message& message) override;
     void handleAck(const MessageAck& ack) override;
-    virtual void m106();
+    virtual bool shouldShareSLinkEmitter();
     virtual void forceJobPushes();
     virtual void initMaterialAnim();
     virtual void getMaxASSlotCount();
@@ -266,7 +365,7 @@ public:
     virtual void playAS();
     virtual void isASFinished();
     virtual void getModelMtx();
-    virtual void m123();
+    virtual bool m123();
     virtual void onPreActorReset();
     virtual void getAtk();
     virtual void getContactCollector();
@@ -292,8 +391,8 @@ public:
     virtual void calcBoneControl();
     virtual void fixupLinkedActorArray();
 
-    sead::Atomic<bool>& get68f() { return _68f; }
-    float get6f0() const { return _6f0; }
+    sead::Atomic<u8>& getInWaterFlags() { return mInWaterFlags; }
+    float getWaterSurfaceHeight() const { return mWaterSurfaceHeight; }
 
     void emitBasicSigOn();
     void emitBasicSigOff();
@@ -301,8 +400,8 @@ public:
 
     void nullsub_4649();  // Some kind of logging which has been excluded from the build?
 
-    sead::TypedBitFlag<ActorFlag2>& getActorFlags2() { return mActorFlags2; }
-    const sead::TypedBitFlag<ActorFlag2>& getActorFlags2() const { return mActorFlags2; }
+    sead::TypedBitFlag<ActorFlag2, s32>& getActorFlags2() { return mActorFlags2; }
+    const sead::TypedBitFlag<ActorFlag2, s32>& getActorFlags2() const { return mActorFlags2; }
 
     void onAiEnter(const char* name, const char* context);
 
@@ -313,36 +412,33 @@ public:
 protected:
     friend class ActorCreator;
 
-    struct Unk1 {
+    struct ModelUserData {
         Actor* actor;
-        u32 _4;
+        u32 model_index;
     };
 
-    struct Unk2 {
-        s16 _0 = -1;
-        s16 _2 = -1;
-    };
-
-    // FIXME: rename
-    void job0_1();
-    void job0_2();
-    void job1_1();
-    void job1_2();
-    void job2_1();
-    void job2_2();
-    void job4();
+    void preCalcJob();
+    void preCalcPausedJob();
+    void postBgJob();
+    void postBgPausedJob();
+    void postSensorJob();
+    void postSensorPausedJob();
+    void frameEndJob();
 
     /* 0x190 */ sead::Atomic<phys::RigidBody*> mMainBody = nullptr;
     /* 0x198 */ sead::Atomic<phys::RigidBody*> mTgtBody = nullptr;
-    /* 0x1a0 */ void* _1a0 = nullptr;
-    /* 0x1a8 */ void* _1a8 = nullptr;
-    /* 0x1b0 */ Unk1 mUnk1;
+    /* 0x1a0 */ void* mEventBindingEntry = nullptr;
+    /* 0x1a8 */ void* mEventFlowActorSlot = nullptr;
+    /* 0x1b0 */ ModelUserData mModelUserData;
     /* 0x1c0 */ u32 _1c0 = 3;
 
-    /* 0x1c8 */ BaseProcJobHandlerDualT<Actor> mJob0{this, &Actor::job0_1, &Actor::job0_2};
-    /* 0x238 */ BaseProcJobHandlerDualT<Actor> mJob1{this, &Actor::job1_1, &Actor::job1_2};
-    /* 0x2a8 */ BaseProcJobHandlerDualT<Actor> mJob2{this, &Actor::job2_1, &Actor::job2_2};
-    /* 0x318 */ BaseProcJobHandlerT<Actor> mJob4{this, &Actor::job4};
+    /* 0x1c8 */ BaseProcJobHandlerDualT<Actor> mPreCalcJob{this, &Actor::preCalcJob,
+                                                           &Actor::preCalcPausedJob};
+    /* 0x238 */ BaseProcJobHandlerDualT<Actor> mPostBgJob{this, &Actor::postBgJob,
+                                                          &Actor::postBgPausedJob};
+    /* 0x2a8 */ BaseProcJobHandlerDualT<Actor> mPostSensorJob{this, &Actor::postSensorJob,
+                                                              &Actor::postSensorPausedJob};
+    /* 0x318 */ BaseProcJobHandlerT<Actor> mFrameEndJob{this, &Actor::frameEndJob};
 
     /* 0x368 */ sead::ListNode mActiveActorListNode;
     /* 0x378 */ sead::ListNode mActorsThatLostPreActorListNode;
@@ -356,65 +452,60 @@ protected:
     /* 0x418 */ sead::Vector3f mScale{1, 1, 1};
     /* 0x424 */ float mDispDistanceSq;
     /* 0x428 */ float mDeleteDistanceSq = -1.0;
-    /* 0x42c */ float mLoadDistance = -1.0;
+    /* 0x42c */ float mLoadDistanceSq = -1.0;
     /* 0x430 */ sead::Vector3f mAttentionPos{0, 0, 0};
     /* 0x43c */ sead::Vector3f mLookAtPos{0, 0, 0};
-    /* 0x448 */ sead::Vector3f _448{0, 0, 0};
-    /* 0x454 */ sead::Vector3f _454{0, 0, 0};
-    /* 0x460 */ sead::Vector3f _460{0, 0, 0};
-    /* 0x46c */ sead::Vector3f _46c{0, 0, 0};
-    /* 0x478 */ sead::Vector3f _478;
+    /* 0x448 */ sead::Vector3f mCursorAIInfoBasePos{0, 0, 0};
+    /* 0x454 */ sead::Vector3f mCutTargetPos{0, 0, 0};
+    /* 0x460 */ sead::Vector3f mGameCameraPos{0, 0, 0};
+    /* 0x46c */ sead::Vector3f mBowCameraPos{0, 0, 0};
+    /* 0x478 */ sead::Vector3f mAttackTargetPos;
     /* 0x484 */ sead::Vector3f mObstacleCheckPos{0, 0, 0};
-    /* 0x490 */ float _490 = 0.0;
-    /* 0x494 */ float _494 = 0.0;
-    /* 0x498 */ Unk2 _498;
-    /* 0x49c */ Unk2 _49c;
-    /* 0x4a0 */ s16 _4a0 = -1;
-    /* 0x4a2 */ s16 _4a2 = -1;
-    /* 0x4a4 */ s16 _4a4 = -1;
-    /* 0x4a6 */ s16 _4a6 = -1;
-    /* 0x4a8 */ s16 _4a8 = -1;
-    /* 0x4aa */ s16 _4aa = -1;
-    /* 0x4ac */ s16 _4ac = -1;
-    /* 0x4ae */ s16 _4ae = -1;
-    /* 0x4b0 */ s16 _4b0 = -1;
-    /* 0x4b2 */ s16 _4b2 = -1;
-    /* 0x4b4 */ sead::Vector3f _4b4{0, 0, 0};
-    /* 0x4c0 */ sead::Vector3f mEnterCalcPos{0, 0, 0};
+    /* 0x490 */ float mCursorOffsetY = 0.0;
+    /* 0x494 */ float mAiInfoOffsetY = 0.0;
+    /* 0x498 */ gsys::BoneAccessKey mLookAtBoneKey;
+    /* 0x49c */ gsys::BoneAccessKey mCursorAIInfoBaseBoneKey;
+    /* 0x4a0 */ gsys::BoneAccessKey mCutTargetBoneKey;
+    /* 0x4a4 */ gsys::BoneAccessKey mGameCameraBoneKey;
+    /* 0x4a8 */ gsys::BoneAccessKey mBowCameraBoneKey;
+    /* 0x4ac */ gsys::BoneAccessKey mAttackTargetBoneKey;
+    /* 0x4b0 */ gsys::BoneAccessKey mObstacleCheckBoneKey;
+    /* 0x4b4 */ sead::Vector3f mMainBodyLocalCenter{0, 0, 0};
+    /* 0x4c0 */ sead::Vector3f mTgtBodyLocalCenter{0, 0, 0};
 
     /* 0x4d0 */ ModelBindInfo* mModelBindInfo = nullptr;
-    /* 0x4d8 */ void* _4d8 = nullptr;
+    /* 0x4d8 */ void* mBoneHandles = nullptr;
     /* 0x4e0 */ gsys::Model* mModel = nullptr;
-    /* 0x4e8 */ float _4e8 = 1.0;
-    /* 0x4ec */ float mStartModelOpacity = 0.0;
-    /* 0x4f0 */ float _4f0 = 1.0;
-    /* 0x4f4 */ float _4f4 = 0.0;
-    /* 0x4f8 */ float _4f8 = 0.0;
+    /* 0x4e8 */ float mCameraHideAlpha = 1.0;
+    /* 0x4ec */ float mFadeOpacity = 0.0;
+    /* 0x4f0 */ float mModelOpacity = 1.0;
+    /* 0x4f4 */ float mWarpEffectValue = 0.0;
+    /* 0x4f8 */ float mFadeInDelay = 0.0;
     /* 0x4fc */ float _4fc = 0.0;
     /* 0x500 */ sead::BoundBox3f mAabb{sead::Vector3f::zero, sead::Vector3f::zero};
 
-    /* 0x518 */ sead::TypedBitFlag<ActorFlag2> mActorFlags2{};
-    /* 0x51c */ sead::TypedBitFlag<ActorFlag2> mActorFlags2Prev{};
+    /* 0x518 */ sead::TypedBitFlag<ActorFlag2, s32> mActorFlags2{};
+    /* 0x51c */ sead::TypedBitFlag<ActorFlag2, s32> mActorFlags2Prev{};
     /* 0x520 */ util::AtomicLongBitFlag<64, ActorFlag> mActorFlags{};
 
     /* 0x528 */ PhysicsUserTag mPhysicsUserTag{this};
-    /* 0x540 */ sead::Atomic<bool> _540 = false;
+    /* 0x540 */ sead::Atomic<bool> mUnloadedOutOfPlacementArea = false;
 
-    /* 0x548 */ void* _548 = nullptr;
-    /* 0x550 */ Awareness* mAwareness = nullptr;
+    /* 0x548 */ void* mAwarenessSourceHolder = nullptr;
+    /* 0x550 */ AwarenessInstance* mAwarenessInstance = nullptr;
     /* 0x558 */ ai::RootAi* mRootAi = nullptr;
     /* 0x560 */ as::ASList* mASList = nullptr;
     /* 0x568 */ xlink::ActorEffects* mActorEffects = nullptr;
     /* 0x570 */ ActorParam* mActorParam = nullptr;
     /* 0x578 */ phys::InstanceSet* mPhysics = nullptr;
     /* 0x580 */ PhysicsConstraints mConstraints;
-    /* 0x598 */ void* _598 = nullptr;
+    /* 0x598 */ LodState* mLodState = nullptr;
     /* 0x5a0 */ BoneControl* mBoneControl = nullptr;
     /* 0x5a8 */ phys::StaticCompoundRigidBodyGroup* mFieldBodyGroup = nullptr;
-    /* 0x5b0 */ void* _5b0 = nullptr;
-    /* 0x5b8 */ sead::Heap* mDualHeap = nullptr;   // TODO: rename
-    /* 0x5c0 */ sead::Heap* mDualHeap2 = nullptr;  // TODO: rename
-    /* 0x5c8 */ sead::Heap* mHeap = nullptr;       // TODO: rename
+    /* 0x5b0 */ void* mExtraAnimResList = nullptr;
+    /* 0x5b8 */ sead::Heap* mActorHeap = nullptr;
+    /* 0x5c0 */ sead::Heap* mActorFrameHeap = nullptr;
+    /* 0x5c8 */ sead::Heap* mParentHeap = nullptr;
     /* 0x5d0 */ ActorUniqueName* mUniqueName = nullptr;
     /* 0x5d8 */ Attention* mAttention = nullptr;
     /* 0x5e0 */ ActorMessageTransceiver mMsgTransceiver{*this, this};
@@ -423,58 +514,58 @@ protected:
     /* 0x640 */ u32 mHashId = 0;
     /* 0x648 */ map::MubinIter mMapObjIter;
 
-    /* 0x658 */ xlink2::Handle _658;
-    /* 0x668 */ xlink2::Handle _668;
-    /* 0x678 */ res::Handle* mModelResMaybe = nullptr;
-    /* 0x680 */ u8 _680 = 0;
-    /* 0x681 */ u8 _681 = 0;
-    /* 0x682 */ u8 _682 = 0;
-    /* 0x683 */ u8 _683 = 0;
-    /* 0x684 */ u8 mSkipJobPushTimer = 0;
-    /* 0x685 */ sead::BitFlag8 mSpecialJobTypesMaskOverride;
-    /* 0x686 */ s8 _686 = -1;
-    /* 0x687 */ sead::Atomic<bool> _687 = false;
-    /* 0x688 */ sead::Atomic<bool> mLifeInfiniteMaybe = false;
-    /* 0x689 */ sead::Atomic<bool> _689 = false;
-    /* 0x68a */ sead::Atomic<bool> _68a = false;
+    /* 0x658 */ res::ModelResourceTextureCache* mModelTextureCache = nullptr;
+    /* 0x660 */ sead::Buffer<res::ModelTextureBinding*> mModelTextureBindings;
+    /* 0x670 */ sead::Buffer<res::Handle> mModelResHandles;
+    /* 0x680 */ u8 mNumLoadedModelRes = 0;
+    /* 0x681 */ u8 mNumModelBfres = 0;
+    /* 0x682 */ u8 mPreDeleteModelReadyFrames = 0;
+    /* 0x683 */ u8 mStableSignalFrames = 0;
+    /* 0x684 */ u8 mForceJobPushTimer = 0;
+    /* 0x685 */ sead::BitFlag8 mJobTypesRunMask;
+    /* 0x686 */ s8 mStasisTraceEffectIdx = -1;
+    /* 0x687 */ sead::Atomic<bool> mRecreateRequested = false;
+    /* 0x688 */ sead::Atomic<bool> mKeepLifeOnEnterCalc = false;
+    /* 0x689 */ sead::Atomic<bool> mAttentionDisabled = false;
+    /* 0x68a */ sead::Atomic<bool> mApplyVelocityOnEnterCalc = false;
     /* 0x68b */ sead::Atomic<bool> mNoFadeInCreate = false;
-    /* 0x68c */ sead::Atomic<bool> _68c = false;
-    /* 0x68d */ sead::Atomic<bool> _68d = false;
-    /* 0x68e */ sead::Atomic<bool> _68e = false;
-    /* 0x68f */ sead::Atomic<bool> _68f = false;
-    /* 0x690 */ bool _690 = false;
-    /* 0x691 */ bool _691 = false;
+    /* 0x68c */ sead::Atomic<u8> mModelFadeOutState = 0;
+    /* 0x68d */ sead::Atomic<u8> mCameraAlphaHideMode = 0;
+    /* 0x68e */ sead::Atomic<bool> mModelOpacityDirty = false;
+    /* 0x68f */ sead::Atomic<u8> mInWaterFlags = 0;
+    /* 0x690 */ u8 mPrevInWaterFlags = 0;
+    /* 0x691 */ u8 mWaterContactFlags = 0;
     /* 0x694 */ sead::Atomic<int> mFadeoutDeleteType = 0;
     /* 0x698 */ sead::Atomic<u32> mFadeOutSleepFlags;
-    /* 0x6a0 */ void* _6a0 = nullptr;
-    /* 0x6a8 */ Chemical* mChemical = nullptr;
+    /* 0x6a0 */ void* mWorldInfo = nullptr;
+    /* 0x6a8 */ chm::ObjectSet* mChemicals = nullptr;
     /* 0x6b0 */ reaction::ActorReactions* mActorReactions = nullptr;
-    /* 0x6b8 */ void* _6b8 = nullptr;
+    /* 0x6b8 */ void* mContactReactionUnit = nullptr;
     /* 0x6c0 */ UMiiModelLink mUMiiModelLink{this};
-    /* 0x6d0 */ float _6d0 = 0.0;
-    /* 0x6d8 */ void* _6d8 = nullptr;
-    /* 0x6e0 */ float _6e0 = 0.0;
-    /* 0x6e4 */ float _6e4 = 0.0;
-    /* 0x6e8 */ float _6e8 = -1.0;
-    /* 0x6ec */ int _6ec = 0;
-    /* 0x6f0 */ float _6f0 = -1.0;
-    /* 0x6f4 */ float _6f4 = 0.0;
-    /* 0x6f8 */ float _6f8 = 0.0;
-    /* 0x6fc */ int _6fc = 0;
-    /* 0x700 */ int _700 = 0;
+    /* 0x6d0 */ float mDeleteEffectWaitTimer = 0.0;
+    /* 0x6d8 */ void* mEffectModelEntry = nullptr;
+    /* 0x6e0 */ float mWaterHitEffectTimer = 0.0;
+    /* 0x6e4 */ float mWaterReactionTimer = 0.0;
+    /* 0x6e8 */ float mLogWaterSplashTimer = -1.0;
+    /* 0x6ec */ int mWaterFlowSplashTimer = 0;
+    /* 0x6f0 */ float mWaterSurfaceHeight = -1.0;
+    /* 0x6f4 */ float mWaterSubmergedRatio = 0.0;
+    /* 0x6f8 */ float mPrevWaterSubmergedRatio = 0.0;
+    /* 0x6fc */ int mWaterMaterial = 0;
+    /* 0x700 */ int mWaterSubMaterial = 0;
     /* 0x708 */ ImpulseBaseProcLink* mImpulseBaseProcLink = nullptr;
-    /* 0x710 */ sead::TypedBitFlag<StasisFlag> mStasisFlags;  // TODO: probably need to rename this
+    /* 0x710 */ sead::TypedBitFlag<ModelObjectAttribute> mModelObjectAttributes;
     /* 0x714 */ float mLodLoadDistanceMultiplier = 1.0;
-    /* 0x718 */ float _718 = 0.0;
+    /* 0x718 */ float mCancelDeleteWaitTimer = 0.0;
     /* 0x71c */ sead::BitFlag32 mSignals;
-    /* 0x720 */ sead::BitFlag32 _720;
-    /* 0x728 */ void* _728 = nullptr;
-    /* 0x730 */ u16 _730 = 0;
+    /* 0x720 */ sead::Atomic<s32> mNumAttachedConstraints = 0;
+    /* 0x728 */ void* mEventExtraAnimHolder = nullptr;
+    /* 0x730 */ u16 mFrustumCullRadius = 0;
     /* 0x732 */ sead::BitFlag16 mDrawDistanceFlags;
-    /* 0x738 */ BaseProcLink _738;
+    /* 0x738 */ BaseProcLink mReplacementActorLink;
     /* 0x748 */ BaseProcLink mCreateArgBaseProcLink;
-    /* 0x758 */ void* _758 = nullptr;
-    /* 0x760 */ xlink2::Handle _760;
+    /* 0x758 */ void* mSpawnerCallback = nullptr;
+    /* 0x760 */ xlink2::Handle mAlwaysEffectHandle;
     /* 0x770 */ xlink2::Handle _770;
     /* 0x780 */ xlink2::Handle mSwordBlurHandle;
     /* 0x790 */ xlink2::Handle _790;
@@ -484,17 +575,17 @@ protected:
     /* 0x7b8 */ sead::ListNode mCreatorActorListNode;
     /* 0x7c8 */ map::PreActor* mMapObject{};
 
-    /* 0x7d0 */ void* _7d0 = nullptr;
-    /* 0x7d8 */ bool _7d8 = false;
+    /* 0x7d0 */ void* mEventTransAnimData = nullptr;
+    /* 0x7d8 */ bool mActorEditorNodeConnected = false;
 
     /* 0x7e0 */ ActorEditorNode mActorEditorNode;
     /* 0x810 */ sead::Buffer<void*> mUMiiBones;  // FIXME: type
     /* 0x820 */ mii::UMii* mUMii = nullptr;
     /* 0x828 */ mii::HylianInfo* mUMiiHylianInfo = nullptr;
 
-    /* 0x830 */ float _830 = 1.0;
-    /* 0x834 */ int _834 = 0;
-    /* 0x838 */ int _838 = 0;
+    /* 0x830 */ float mUMiiRootHeightScale = 1.0;
+    /* 0x834 */ int mUMiiMouthType = 0;
+    /* 0x838 */ int mUMiiEyebrowType = 0;
 
 private:
     enum class HandleMessageResult {

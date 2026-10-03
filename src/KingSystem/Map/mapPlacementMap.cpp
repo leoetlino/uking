@@ -98,7 +98,7 @@ void PlacementMap::updateObjectCollisionAndId(int index, PreActor* obj) {
     bool enabled = false;
     if (obj->shouldSkipSpawn() ||
         (obj->checkActorDataFlag(mPa, map::ActorData::Flag::MapConstPassive) &&
-         obj->getFlags0().isOn(PreActor::Flag0::_800))) {
+         obj->getFlags0().isOn(PreActor::Flag0::ActorInCalc))) {
         obj->resetFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
         enabled = false;
     } else {

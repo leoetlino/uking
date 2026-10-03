@@ -106,7 +106,7 @@ void PlacementMgr::x() {
     if (mFlags.isOn(MgrFlag::_2))
         return;
 
-    mPlacementActors->disableAndClearUnkObjs();
+    mPlacementActors->processHandedBackPreActors();
     mIntTime++;
 
     f32 last_time = mTime;

@@ -109,7 +109,7 @@ public:
     u32 getNumStaticObjs() const;
     PreActor* getStaticObj_2(s32 idx) const;
     bool sub_7100D524B4() const;
-    void disableAndClearUnkObjs();
+    void processHandedBackPreActors();
     PreActor* resetGroup(int group_idx);
     int getNumObjs(int group_idx) const;
     PreActor* getObj(int group_idx, int object_idx);

@@ -14,7 +14,7 @@ bool KorokFlowerVanish::init_(sead::Heap* heap) {
 
 void KorokFlowerVanish::enter_(ksys::act::ai::InlineParamPack* params) {
     mActor->emitBasicSigOn();
-    mActor->getActorFlags2().set(ksys::act::Actor::ActorFlag2::_20);
+    mActor->getActorFlags2().set(ksys::act::Actor::ActorFlag2::Invisible);
 
     auto* main_body = mActor->getMainBody();
     auto* tgt_body = mActor->getTgtBody();

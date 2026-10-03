@@ -160,11 +160,11 @@ bool ActorConstDataAccess::hasConnectedCalcParent() const {
     return proc && sead::DynamicCast<Actor>(proc->getConnectedCalcParent()) != nullptr;
 }
 
-bool ActorConstDataAccess::checkFlag2B() const {
+bool ActorConstDataAccess::isInvisible() const {
     auto* actor = getActor();
     if (!actor)
         return false;
-    return actor->checkFlag(Actor::ActorFlag::_2b);
+    return actor->checkFlag(Actor::ActorFlag::Invisible);
 }
 
 bool ActorConstDataAccess::deleteLater(BaseProc::DeleteReason reason) const {
@@ -178,7 +178,7 @@ bool ActorConstDataAccess::fadeoutDelete(BaseProc::DeleteReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
-    return actor->fadeoutDelete(Actor::DeleteType::_1, reason);
+    return actor->fadeoutDelete(Actor::DeleteType::Normal, reason);
 }
 
 bool ActorConstDataAccess::sleep(BaseProc::SleepWakeReason reason) const {
@@ -199,19 +199,19 @@ bool ActorConstDataAccess::wakeUp(BaseProc::SleepWakeReason reason) const {
 
 bool ActorConstDataAccess::setProperties(int x, const sead::Matrix34f& mtx,
                                          const sead::Vector3f& vel, const sead::Vector3f& ang_vel,
-                                         const sead::Vector3f& scale, bool is_life_infinite, int i,
+                                         const sead::Vector3f& scale, bool keep_life, int i,
                                          int life) const {
     auto* actor = getActor();
     if (!actor)
         return false;
-    actor->setProperties(x, mtx, vel, ang_vel, scale, is_life_infinite, i, life);
+    actor->setProperties(x, mtx, vel, ang_vel, scale, keep_life, i, life);
     return true;
 }
 
 bool ActorConstDataAccess::setProperties(const sead::Matrix34f& mtx, const sead::Vector3f& vel,
                                          const sead::Vector3f& ang_vel, const sead::Vector3f& scale,
-                                         bool is_life_infinite, int i, int life) const {
-    return setProperties(0, mtx, vel, ang_vel, scale, is_life_infinite, i, life);
+                                         bool keep_life, int i, int life) const {
+    return setProperties(0, mtx, vel, ang_vel, scale, keep_life, i, life);
 }
 
 bool ActorConstDataAccess::isStateSleep() const {
@@ -332,9 +332,9 @@ bool ActorConstDataAccess::getSameGroupActorName(sead::SafeString* name) const {
     return true;
 }
 
-bool ActorConstDataAccess::checkFlag18() const {
+bool ActorConstDataAccess::isStoppedByEvent() const {
     auto* actor = getActor();
-    return actor && actor->checkFlag(Actor::ActorFlag::_18);
+    return actor && actor->checkFlag(Actor::ActorFlag::StoppedByEvent);
 }
 
 bool ActorConstDataAccess::isPlayerTheConnectedParent() const {
@@ -381,9 +381,9 @@ u32 ActorConstDataAccess::getBalloonHungActorBaseProcID() const {
     return *value;
 }
 
-bool ActorConstDataAccess::checkFlag25() const {
+bool ActorConstDataAccess::isInCarryBox() const {
     auto* actor = getActor();
-    return actor && actor->checkFlag(Actor::ActorFlag::_25);
+    return actor && actor->checkFlag(Actor::ActorFlag::InCarryBox);
 }
 
 f32 ActorConstDataAccess::getHorseMoveRadius() const {

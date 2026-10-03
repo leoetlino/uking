@@ -67,18 +67,18 @@ public:
     bool acquireConnectedCalcParent(ActorLinkConstDataAccess* accessor) const;
     bool acquireConnectedCalcChild(ActorLinkConstDataAccess* accessor) const;
     bool hasConnectedCalcParent() const;
-    bool checkFlag2B() const;
+    bool isInvisible() const;
 
     bool deleteLater(BaseProc::DeleteReason reason) const;
     bool fadeoutDelete(BaseProc::DeleteReason reason) const;
     bool sleep(BaseProc::SleepWakeReason reason) const;
     bool wakeUp(BaseProc::SleepWakeReason reason) const;
     bool setProperties(int x, const sead::Matrix34f& mtx, const sead::Vector3f& vel,
-                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale,
-                       bool is_life_infinite, int i, int life) const;
+                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale, bool keep_life,
+                       int i, int life) const;
     bool setProperties(const sead::Matrix34f& mtx, const sead::Vector3f& vel,
-                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale,
-                       bool is_life_infinite, int i, int life) const;
+                       const sead::Vector3f& ang_vel, const sead::Vector3f& scale, bool keep_life,
+                       int i, int life) const;
     bool isStateSleep() const;
     bool isStateCalc() const;
     bool isDeletedOrDeleting() const;
@@ -100,7 +100,7 @@ public:
 
     bool getSameGroupActorName(sead::SafeString* name) const;
 
-    bool checkFlag18() const;
+    bool isStoppedByEvent() const;
     bool isPlayerTheConnectedParent() const;
 
     const sead::Vector3f& getAttentionPos() const;
@@ -113,7 +113,7 @@ public:
     bool isFlyingBalloon() const;
     u32 getBalloonHungActorBaseProcID() const;
 
-    bool checkFlag25() const;
+    bool isInCarryBox() const;
 
     f32 getHorseMoveRadius() const;
     f32 getHorseAvoidOffset() const;

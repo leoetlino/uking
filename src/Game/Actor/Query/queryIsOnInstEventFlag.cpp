@@ -9,7 +9,7 @@ IsOnInstEventFlag::IsOnInstEventFlag(const InitArg& arg) : ksys::act::ai::Query(
 IsOnInstEventFlag::~IsOnInstEventFlag() = default;
 
 int IsOnInstEventFlag::doQuery() {
-    return mActor->getActorFlags2().isOn(ksys::act::Actor::ActorFlag2::InstEvent);
+    return mActor->getActorFlags2().isOn(ksys::act::Actor::ActorFlag2::InstEventFlag);
 }
 
 void IsOnInstEventFlag::loadParams(const evfl::QueryArg& arg) {}
