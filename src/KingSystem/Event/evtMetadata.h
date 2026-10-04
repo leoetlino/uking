@@ -2,7 +2,6 @@
 
 #include <basis/seadTypes.h>
 #include <prim/seadSafeString.h>
-#include <prim/seadTypedBitFlag.h>
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
@@ -15,20 +14,17 @@ class OrderParam;
 
 class Metadata {
 public:
-    enum class Flag {
-        _1 = 1,
-        _2 = 2,
-        _4 = 4,
-        _8 = 8,
-        _10 = 0x10,
-        _20 = 0x20,
-        _40 = 0x40,
-        _80 = 0x80,
-        _100 = 0x100,
-
-        DefaultFlags = _4 | _20 | _40,
+    enum class Priority {
+        Timeline = 4,
+        Demo017 = 5,
+        StepStart = 10,
+        Demo = 15,
+        Default = 100,
+        Talk = 400,
+        Near = 410,
+        Async = 500,
+        Background = 510,
     };
-    friend constexpr Flag operator|(Flag a, Flag b) { return Flag(u32(a) | u32(b)); }
 
     Metadata();
     Metadata(const char* event, const char* entry_point, const char* type = "");
@@ -54,13 +50,13 @@ public:
     const sead::SafeString& getEventName() const { return mEventName; }
     const sead::SafeString& getEntryPointName() const { return mEntryPointName; }
     const sead::SafeString& getType() const { return mType; }
-    const sead::TypedBitFlag<Flag>& getFlags() const { return mFlags; }
+    Priority getPriority() const { return mPriority; }
     OrderParam* getOrderParam() const { return mOrderParam; }
     bool isAsync() const { return mIsAsync; }
 
 private:
     void initOrderParam_();
-    void initFlags_();
+    void initPriority_();
     void doAssign_(const Metadata& other);
 
     act::Actor* mCurrentActor;
@@ -74,7 +70,7 @@ private:
     sead::FixedSafeString<64> mEventName;
     sead::FixedSafeString<128> mEntryPointName;
     sead::FixedSafeString<16> mType;
-    sead::TypedBitFlag<Flag> mFlags = Flag::DefaultFlags;
+    Priority mPriority = Priority::Default;
     OrderParam* mOrderParam{};
     bool mIsAsync;
 };
