@@ -50,14 +50,14 @@ void Metadata::init(const char* event, const char* entry_point, const char* type
     mEventName = event;
     mEntryPointName = entry_point;
     mType = type;
-    initFlags_();
+    initPriority_();
 }
 
 void Metadata::reset() {
     mEventName.clear();
     mEntryPointName.clear();
     mType.clear();
-    mFlags = Flag::DefaultFlags;
+    mPriority = Priority::Default;
     _18 = {};
     mIsAsync = false;
     mSetNoDeleteCurrentActor = false;
@@ -85,30 +85,29 @@ void Metadata::initOrderParam_() {
         mOrderParam->initialize(8);
 }
 
-void Metadata::initFlags_() {
+void Metadata::initPriority_() {
     if (mEventName == "Demo006_0") {
-        mFlags = Flag::_4;
+        mPriority = Priority::Timeline;
     } else if (mEventName == "Demo017_0") {
-        mFlags = Flag::_4 | Flag::_1;
+        mPriority = Priority::Demo017;
     } else if (mEventName == "ClearRemains" || mEventName.comparen("Demo", 4) == 0) {
-        mFlags = Flag::_8 | Flag::_4 | Flag::_2 | Flag::_1;
+        mPriority = Priority::Demo;
     } else if (mEventName.comparen("OpenDoor", 8) == 0) {
-        mFlags = Flag::_8 | Flag::_4 | Flag::_2 | Flag::_1;
+        mPriority = Priority::Demo;
     } else if (mType == "Timeline") {
-        mFlags = Flag::_4;
+        mPriority = Priority::Timeline;
     } else if (mType == "Talk") {
-        mFlags = Flag::_100 | Flag::_80 | Flag::_10;
+        mPriority = Priority::Talk;
     } else if (mType == "EachFrame") {
-        mFlags = Flag::_100 | Flag::_80 | Flag::_40 | Flag::_20 | Flag::_10 | Flag::_4;
+        mPriority = Priority::Async;
     } else if (mType == "Near" || mType == "NearActors") {
-        mFlags = Flag::_100 | Flag::_80 | Flag::_10 | Flag::_8 | Flag::_2;
+        mPriority = Priority::Near;
     } else if (mType == "StepStart") {
-        mFlags = Flag::_8 | Flag::_2;
+        mPriority = Priority::StepStart;
     } else if (mType == "Background") {
-        mFlags = Flag::_100 | Flag::_80 | Flag::_40 | Flag::_20 | Flag::_10 | Flag::_8 | Flag::_4 |
-                 Flag::_2;
+        mPriority = Priority::Background;
     } else {
-        mFlags = Flag::_40 | Flag::_20 | Flag::_4;
+        mPriority = Priority::Default;
     }
 }
 
