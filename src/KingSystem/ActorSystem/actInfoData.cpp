@@ -157,7 +157,7 @@ bool InfoData::logFailure(const sead::SafeString& actor_name) const {
 #endif
 
     auto* event = evt::Manager::instance()->getActiveEvent();
-    if (event && event->hasFlag(evt::Event::Flag::_80000000000))
+    if (event && event->hasFlag(evt::Event::Flag::IsMovie))
         return false;
 
     if (!ActorCreator::instance()->get5a())

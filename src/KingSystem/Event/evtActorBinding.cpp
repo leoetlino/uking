@@ -69,7 +69,7 @@ ActorBinding::ActorCreateMode ActorBinding::getActorCreateMode(const act::Actor*
 
     switch (create_mode->value.i) {
     case 0: {
-        if (!mParent->isInitialized())
+        if (!mParent->isFlowchart())
             return ActorCreateMode::k0;
 
         const char* profile_c;

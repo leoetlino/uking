@@ -14,7 +14,7 @@ public:
     virtual ~Event();
 
     enum class Flag : u64 {
-        _80000000000 = 0x80000000000,
+        IsMovie = 0x80000000000,
     };
 
     bool hasFlag(Flag flag) const { return mFlags.isOn(flag); }
