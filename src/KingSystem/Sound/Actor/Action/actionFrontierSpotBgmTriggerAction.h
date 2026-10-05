@@ -4,6 +4,8 @@
 
 namespace ksys::snd {
 
+class SpotBgmEntry;
+
 class FrontierSpotBgmTriggerAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(FrontierSpotBgmTriggerAction, ksys::act::ai::Action)
 public:
@@ -28,6 +30,8 @@ protected:
     sead::SafeString mSound_m{};
     // map_unit_param at offset 0x50
     sead::SafeString mShape_m{};
+    SpotBgmEntry* mSpotBgmEntry{};
 };
+KSYS_CHECK_SIZE_NX150(FrontierSpotBgmTriggerAction, 0x68);
 
 }  // namespace ksys::snd

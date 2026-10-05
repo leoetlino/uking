@@ -4,6 +4,17 @@
 
 namespace ksys::snd {
 
+enum class EnvSeEmitPointBirdType {
+    Temperate,
+    SubTropic,
+    Tropical,
+    Subarctic,
+    Arctic,
+    Ard,
+    Wet,
+    WetSubtropic,
+};
+
 class EnvSeEmitPointBirdPlayAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(EnvSeEmitPointBirdPlayAction, ksys::act::ai::Action)
 public:
@@ -17,6 +28,14 @@ public:
 
 protected:
     void calc_() override;
+
+    float calcPlayFrequency();
+
+    u64 mLastChirpTick;
+    s64 mChirpIntervalTicks{};
+    u64 mChirpHoldUntilTick;
+    EnvSeEmitPointBirdType mBirdType{};
 };
+KSYS_CHECK_SIZE_NX150(EnvSeEmitPointBirdPlayAction, 0x40);
 
 }  // namespace ksys::snd
