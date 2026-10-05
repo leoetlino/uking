@@ -181,7 +181,7 @@ bool ContactListener::regularContactPointCallback(const hkpContactPointEvent& ev
     const bool result = contactPointCallbackImpl(masks_a.ignored_layers, masks_b.ignored_layers,
                                                  body_a, body_b, layer_a, layer_b, event);
     if (result)
-        m11(event, masks_a, masks_b, body_a, body_b);
+        applyContactMaterialProperties(event, masks_a, masks_b, body_a, body_b);
 
     const auto& entries = mTrackedContactPointLayers[i][j];
 
@@ -226,8 +226,8 @@ int ContactListener::notifyContactPointInfo(RigidBody* body_a, RigidBody* body_b
 
     int result = 1;
 
-    if (info_b && info_b->isLayerSubscribed(layer_a) &&
-        info_b->testContactPointDistance(distance) && (info_b->get34() == 0 || !contact_disabled)) {
+    if (info_b && info_b->isLayerSubscribed(layer_a) && info_b->acceptsPointDistance(distance) &&
+        (info_b->getIgnoreDisabledContacts() == 0 || !contact_disabled)) {
         if (should_notify) {
             point.body_a = body_b;
             point.body_b = body_a;
@@ -246,12 +246,12 @@ int ContactListener::notifyContactPointInfo(RigidBody* body_a, RigidBody* body_b
             result = 2;
         }
 
-        if (info_b->isLayerInMask2(layer_a))
+        if (info_b->isNoCallbackDelayLayer(layer_a))
             clearCallbackDelay(event);
     }
 
-    if (info_a && info_a->isLayerSubscribed(layer_b) &&
-        info_a->testContactPointDistance(distance) && (info_a->get34() == 0 || !contact_disabled)) {
+    if (info_a && info_a->isLayerSubscribed(layer_b) && info_a->acceptsPointDistance(distance) &&
+        (info_a->getIgnoreDisabledContacts() == 0 || !contact_disabled)) {
         if (should_notify) {
             point.body_a = body_a;
             point.body_b = body_b;
@@ -273,7 +273,7 @@ int ContactListener::notifyContactPointInfo(RigidBody* body_a, RigidBody* body_b
             result = 2;
         }
 
-        if (info_a->isLayerInMask2(layer_b))
+        if (info_a->isNoCallbackDelayLayer(layer_b))
             clearCallbackDelay(event);
     }
 
@@ -293,10 +293,10 @@ void ContactListener::notifyLayerContactPointInfo(const TrackedContactPointLayer
         return;
 
     const hkReal distance = event.m_contactPoint->getDistance();
-    if (!tracked_layer.info->testContactPointDistance(distance))
+    if (!tracked_layer.info->acceptsPointDistance(distance))
         return;
 
-    if (tracked_layer.info->get34() != 0 && isContactDisabled(event))
+    if (tracked_layer.info->getIgnoreDisabledContacts() != 0 && isContactDisabled(event))
         return;
 
     ContactPoint point;
@@ -424,7 +424,7 @@ ContactLayerCollisionInfo* ContactListener::trackLayerPair(ContactLayer layer_a,
 
 void ContactListener::addLayerPairForContactPointInfo(LayerContactPointInfo* info,
                                                       ContactLayer layer1, ContactLayer layer2,
-                                                      bool enabled) {
+                                                      bool do_not_delay_callback) {
     auto lock = sead::makeScopedLock(mCS);
     const auto [i, j] = convertToRelativeLayer(layer1, layer2);
 
@@ -433,7 +433,7 @@ void ContactListener::addLayerPairForContactPointInfo(LayerContactPointInfo* inf
             return;
         entry->info = info;
         entry->layer = layer1;
-        entry->do_not_delay_callback = enabled;
+        entry->do_not_delay_callback = do_not_delay_callback;
     };
 
     auto& row_i = mTrackedContactPointLayers[i];
