@@ -25,14 +25,16 @@ protected:
                                   RigidBody* body_b, ContactLayer layer_a, ContactLayer layer_b,
                                   const hkpContactPointEvent& event) override;
 
-    void m11(const hkpContactPointEvent& event, const RigidBodyCollisionMasks& masks_a,
-             const RigidBodyCollisionMasks& masks_b, RigidBody* body_a, RigidBody* body_b) override;
+    void applyContactMaterialProperties(const hkpContactPointEvent& event,
+                                        const RigidBodyCollisionMasks& masks_a,
+                                        const RigidBodyCollisionMasks& masks_b, RigidBody* body_a,
+                                        RigidBody* body_b) override;
 
     bool regularContactPointCallback(const hkpContactPointEvent& event, RigidBody* body_a,
                                      RigidBody* body_b,
                                      sead::SafeArray<u32, 2>* out_material_masks) override;
 
-    bool m15(RigidBody* body_a, RigidBody* body_b) override;
+    bool shouldRecordImpulseEntry(RigidBody* body_a, RigidBody* body_b) override;
 
 private:
     void setMagneMassScalingForContactIfNeeded(const hkpCollisionEvent& event, RigidBody* body_a,

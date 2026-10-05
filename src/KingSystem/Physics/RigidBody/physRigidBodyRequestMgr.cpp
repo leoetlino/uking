@@ -69,7 +69,7 @@ void RigidBodyRequestMgr::init(sead::Heap* heap) {
         LayerContactPointInfo::make(heap, 0x1000, 11, "RigidBodyRequestMgr::Water", 0, 0, 0);
 
     mContactPoints->setCallback(&mCallback);
-    mContactPoints->set30(1);
+    mContactPoints->setIgnoreSeparatedPoints(1);
     mContactPoints->registerLayerPair(ContactLayer::EntityWater, ContactLayer::EntityObject);
     mContactPoints->registerLayerPair(ContactLayer::EntityWater, ContactLayer::EntitySmallObject);
     mContactPoints->registerLayerPair(ContactLayer::EntityWater, ContactLayer::EntityGroundObject);

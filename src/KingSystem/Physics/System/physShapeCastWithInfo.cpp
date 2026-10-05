@@ -15,7 +15,7 @@ namespace ksys::phys {
 ShapeCastWithInfo::ShapeCastWithInfo(RigidBody* body, int num_contact_points, Mode mode,
                                      const sead::SafeString& name, LowPriority low_priority)
     : ShapeCast(body, nullptr, mode) {
-    mStatus = Status::_1;
+    mStatus = Status::OwnsContactPointInfo;
     auto* heap = System::instance()->getPhysicsTempHeap(low_priority);
     mContactPointInfo = QueryContactPointInfo::make(heap, num_contact_points, name, 0, 0);
 }
@@ -25,13 +25,14 @@ ShapeCastWithInfo::ShapeCastWithInfo(RigidBody* body, QueryContactPointInfo* con
     : ShapeCast(body, contact_point_info, mode) {}
 
 ShapeCastWithInfo::~ShapeCastWithInfo() {
-    if (mStatus == Status::_1 || mStatus == Status::_3)
+    if (mStatus == Status::OwnsContactPointInfo ||
+        mStatus == Status::OwnsContactPointInfoAndRigidBody)
         QueryContactPointInfo::free(mContactPointInfo);
 }
 
 // NON_MATCHING: mMode test + regalloc
 bool ShapeCastWithInfo::executeQuery(WeldClosestPoints weld_closest_points) {
-    if (mMode == Mode::_1 || mMode == Mode::_0) {
+    if (mMode == Mode::AllStartPointsAndClosest || mMode == Mode::Closest) {
         FilteredClosestCdPointCollector cast_collector{mBody, mContactPointInfo};
         hkpAllCdPointCollector start_collector;
         return doExecuteQuery(cast_collector, &start_collector, weld_closest_points,
@@ -78,11 +79,11 @@ SphereCast::SphereCast(ContactLayer layer, GroundHit ground_hit, SystemGroupHand
 
     mSphere = SphereRigidBody::make(&sphere_param, heap);
     mBody = mSphere;
-    mStatus = Status::_3;
+    mStatus = Status::OwnsContactPointInfoAndRigidBody;
 }
 
 SphereCast::~SphereCast() {
-    if (mStatus == Status::_2 || mStatus == Status::_3)
+    if (mStatus == Status::OwnsRigidBody || mStatus == Status::OwnsContactPointInfoAndRigidBody)
         delete mSphere;
 }
 
