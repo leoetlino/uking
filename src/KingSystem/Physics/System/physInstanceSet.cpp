@@ -8,17 +8,17 @@
 
 namespace ksys::phys {
 
-void InstanceSet::setFlag2() {
-    mFlags.set(Flag::_2);
+void InstanceSet::requestTransformReset() {
+    mFlags.set(Flag::TransformResetRequested);
     if (mClothSet != nullptr) {
-        mFlags.set(Flag::_2);
-        mFlags.set(Flag::DisableDraw);
+        mFlags.set(Flag::TransformResetRequested);
+        mFlags.set(Flag::ClothResetRequested);
     }
 }
 
-void InstanceSet::clothVisibleStuff() {
+void InstanceSet::requestClothReset() {
     if (mClothSet != nullptr) {
-        mFlags.set(Flag::DisableDraw);
+        mFlags.set(Flag::ClothResetRequested);
     }
 }
 
@@ -30,50 +30,50 @@ void InstanceSet::resetInDemo() {
     mFlags.reset(Flag::InDemo);
 }
 
-void InstanceSet::clothVisibleStuff_0(s32 setting) {
+void InstanceSet::setClothResetMode(s32 mode) {
     if (mFlags.isOn(Flag::InDemo))
         return;
 
-    switch (setting) {
+    switch (mode) {
     case -2:
-        mFlags.reset(Flag::Cloth2);
-        mFlags.set(Flag::Cloth1);
+        mFlags.reset(Flag::ClothResetCancelled);
+        mFlags.set(Flag::ClothResetIfMoved);
         break;
     case -1:
-        mFlags.reset(Flag::Cloth3);
-        mFlags.reset(Flag::Cloth2);
-        mFlags.reset(Flag::Cloth1);
-        mFlags.set(Flag::Cloth2);
-        mFlags.set(Flag::Cloth3);
+        mFlags.reset(Flag::ClothTeleportInsteadOfReset);
+        mFlags.reset(Flag::ClothResetCancelled);
+        mFlags.reset(Flag::ClothResetIfMoved);
+        mFlags.set(Flag::ClothResetCancelled);
+        mFlags.set(Flag::ClothTeleportInsteadOfReset);
         break;
     case 0:
-        mFlags.reset(Flag::Cloth1);
-        mFlags.reset(Flag::Cloth2);
-        mFlags.set(Flag::Cloth3);
+        mFlags.reset(Flag::ClothResetIfMoved);
+        mFlags.reset(Flag::ClothResetCancelled);
+        mFlags.set(Flag::ClothTeleportInsteadOfReset);
         break;
     case 1:
-        mFlags.reset(Flag::Cloth1);
-        mFlags.reset(Flag::Cloth2);
-        mFlags.reset(Flag::Cloth3);
+        mFlags.reset(Flag::ClothResetIfMoved);
+        mFlags.reset(Flag::ClothResetCancelled);
+        mFlags.reset(Flag::ClothTeleportInsteadOfReset);
         break;
     }
 }
 
-void InstanceSet::sub_7100FB9BAC(InstanceSet* other) {
+void InstanceSet::copyClothResetModeFrom(InstanceSet* other) {
     if (other == nullptr)
         return;
 
-    u32 idx = other->sub_7100FB9C2C();
-    clothVisibleStuff_0(idx);
+    u32 mode = other->getClothResetMode();
+    setClothResetMode(mode);
 }
 
-u32 InstanceSet::sub_7100FB9C2C() const {
+u32 InstanceSet::getClothResetMode() const {
     u32 idx;
-    if (mFlags.isOn(Flag::Cloth1)) {
+    if (mFlags.isOn(Flag::ClothResetIfMoved)) {
         idx = -2;
-    } else if (mFlags.isOn(Flag::Cloth2)) {
+    } else if (mFlags.isOn(Flag::ClothResetCancelled)) {
         idx = -1;
-    } else if (mFlags.isOn(Flag::Cloth3)) {
+    } else if (mFlags.isOn(Flag::ClothTeleportInsteadOfReset)) {
         idx = 0;
     } else {
         idx = 1;
@@ -81,12 +81,12 @@ u32 InstanceSet::sub_7100FB9C2C() const {
     return idx;
 }
 
-void InstanceSet::sub_7100FBA9BC() {
+void InstanceSet::addToWorld() {
     for (auto& rb : mRigidBodySets) {
         rb.addToWorld();
     }
 
-    for (auto& body : mList) {
+    for (auto& body : mExtraRigidBodies) {
         body->addToWorld();
     }
 
@@ -94,7 +94,7 @@ void InstanceSet::sub_7100FBA9BC() {
         mCharacterController->addRigidBodyToWorld();
 }
 
-void InstanceSet::sub_7100FBACE0(phys::ContactLayer layer) {
+void InstanceSet::disableContactLayer(phys::ContactLayer layer) {
     bool sensor = phys::getContactLayerType(layer) != ContactLayerType::Entity;
 
     for (auto& rb : mRigidBodySets) {
@@ -110,7 +110,7 @@ void InstanceSet::sub_7100FBACE0(phys::ContactLayer layer) {
         mCharacterController->enableContactLayer(layer);
 }
 
-void InstanceSet::sub_7100FBAD74() {
+void InstanceSet::setContactNone() {
     for (auto& rb : mRigidBodySets) {
         rb.disableAllContactLayers();
     }
@@ -122,25 +122,28 @@ void InstanceSet::sub_7100FBAD74() {
     }
 }
 
-void* InstanceSet::sub_7100FBAEDC(s32 idx1, s32 idx2) const {
-    if (mRigidBodySets.size() <= idx1)
+RigidBody* InstanceSet::getRigidBody(s32 rigid_body_set_idx, s32 rigid_body_idx) const {
+    if (mRigidBodySets.size() <= rigid_body_set_idx)
         return nullptr;
-    return mRigidBodySets[idx1]->getRigidBody(idx2);
+    return mRigidBodySets[rigid_body_set_idx]->getRigidBody(rigid_body_idx);
 }
 
-void InstanceSet::sub_7100FBB00C(phys::RigidBody* body, phys::RigidBodyParam* param) {
+void InstanceSet::resetBodyContactSettingsFromParam(phys::RigidBody* body,
+                                                    phys::RigidBodyParam* param) {
     if (body == nullptr)
         return;
 
     phys::RigidBodyInstanceParam instance_params;
     param->makeInstanceParam(&instance_params);
     if (instance_params.contact_layer == phys::ContactLayer::SensorCustomReceiver) {
-        body->setSensorCustomReceiver(instance_params.receiver_mask, _188[body->isSensor()]);
+        body->setSensorCustomReceiver(instance_params.receiver_mask,
+                                      mSystemGroupHandlers[body->isSensor()]);
     } else if (instance_params.groundhit_mask) {
         body->setGroundHitMask(instance_params.contact_layer, instance_params.groundhit_mask);
     } else {
-        body->setContactLayerAndGroundHitAndHandler(
-            instance_params.contact_layer, instance_params.groundhit, _188[body->isSensor()]);
+        body->setContactLayerAndGroundHitAndHandler(instance_params.contact_layer,
+                                                    instance_params.groundhit,
+                                                    mSystemGroupHandlers[body->isSensor()]);
     }
     body->enableGroundCollision(instance_params.no_hit_ground == 0);
     body->enableWaterCollision(instance_params.no_hit_water == 0);
@@ -176,24 +179,24 @@ s32 InstanceSet::findCollisionInfo(const sead::SafeString& name) const {
     return -1;
 }
 
-void InstanceSet::sub_7100FBD284(const sead::Matrix34f& mtx) {
-    if (mFlags.isOff(Flag::_1))
+void InstanceSet::updateBodiesFromModelMatrix(const sead::Matrix34f& mtx) {
+    if (mFlags.isOff(Flag::Active))
         return;
 
-    if (mFlags.isOn(Flag::_80000000)) {
-        sub_7100FBC890(mtx, true, false);
+    if (mFlags.isOn(Flag::PoseSyncedThisFrame)) {
+        updateBoneLinkedBodyTransforms(mtx, true, false);
     } else {
-        mFlags.reset(Flag::_8);
-        if (mFlags.isOn(Flag::_2))
+        mFlags.reset(Flag::TransformResetThisFrame);
+        if (mFlags.isOn(Flag::TransformResetRequested))
             setMtxAndScale(mtx, false, false, mScale);
     }
-    mFlags.reset(Flag::_80000000);
+    mFlags.reset(Flag::PoseSyncedThisFrame);
 
     if (mRagdollInstance == nullptr)
         return;
 
     if (mRagdollInstance->getWorldState() == RagdollInstance::WorldState::AddedToWorld)
-        sub_7100FBC890(mtx, false, false);
+        updateBoneLinkedBodyTransforms(mtx, false, false);
 }
 
 s32 InstanceSet::findRagdollControllerIdx(const sead::SafeString& name) const {

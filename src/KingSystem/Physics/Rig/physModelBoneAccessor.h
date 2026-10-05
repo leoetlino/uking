@@ -45,14 +45,14 @@ public:
     void copyModelPoseToHavok(EnableScale enable_scale) const;
     void copyHavokPoseToModel(EnableScale enable_scale) const;
 
-    static int& getUnkMode();
-    static bool& getUnkFlag();
+    static int& getScaleModeOverride();
+    static bool& getDebugCheckBoneScale();
 
 protected:
     struct BoneAccessKey {
         gsys::BoneAccessKeyEx key;
-        bool _38;
-        bool _39;
+        bool copy_to_havok;
+        bool copy_to_model;
     };
 
     gsys::ModelUnit* getModelUnit(int bone_idx) const;

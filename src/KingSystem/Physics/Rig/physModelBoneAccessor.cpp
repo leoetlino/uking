@@ -163,8 +163,8 @@ bool ModelSkeleton::constructFromModel(ModelBoneAccessor::ModelBoneFilter* bone_
 
 }  // namespace detail
 
-static int sModelBoneAccessorUnkMode;
-static bool sModelBoneAccessorUnkFlag;
+static int sModelBoneAccessorScaleModeOverride;
+static bool sModelBoneAccessorDebugCheckBoneScale;
 
 ModelBoneAccessor::ModelBoneAccessor() = default;
 
@@ -191,8 +191,8 @@ bool ModelBoneAccessor::init(const hkaSkeleton* skeleton, gsys::Model* model, se
             bone_name = bone_name.cstr() + separator_index + 1;
 
         mBoneAccessKeys[i].key.search(model, bone_name);
-        mBoneAccessKeys[i]._38 = true;
-        mBoneAccessKeys[i]._39 = true;
+        mBoneAccessKeys[i].copy_to_havok = true;
+        mBoneAccessKeys[i].copy_to_model = true;
     }
 
     mModel = model;
@@ -251,7 +251,7 @@ const char* ModelBoneAccessor::getBoneName(int index) const {
 void ModelBoneAccessor::copyModelPoseToHavok(EnableScale enable_scale) const {
     auto& hk_bones = getPose()->accessUnsyncedPoseLocalSpace();
 
-    switch (getUnkMode()) {
+    switch (getScaleModeOverride()) {
     case 2:
         enable_scale = EnableScale::Yes;
         break;
@@ -264,7 +264,7 @@ void ModelBoneAccessor::copyModelPoseToHavok(EnableScale enable_scale) const {
         if (!mBoneAccessKeys[bone_idx].key.isValid())
             continue;
 
-        if (!mBoneAccessKeys[bone_idx]._38)
+        if (!mBoneAccessKeys[bone_idx].copy_to_havok)
             continue;
 
         const auto key = mBoneAccessKeys[bone_idx].key.getKey();
@@ -277,9 +277,9 @@ void ModelBoneAccessor::copyModelPoseToHavok(EnableScale enable_scale) const {
         if (util::isMatrixInvalid(transform))
             continue;
 
-        if ((!bool(enable_scale) || getUnkFlag()) &&
+        if ((!bool(enable_scale) || getDebugCheckBoneScale()) &&
             !scale.equals(sead::Vector3f::ones, sead::Mathf::epsilon())) {
-            if (getUnkFlag()) {
+            if (getDebugCheckBoneScale()) {
                 // leftover debug code
                 static_cast<void>(getModelUnit(bone_idx)->getName().include("Link"));
             }
@@ -302,7 +302,7 @@ void ModelBoneAccessor::copyHavokPoseToModel(EnableScale enable_scale) const {
     bool not_first_bone = false;
 
     for (int bone_idx = 0, n = mBoneAccessKeys.getSize(); bone_idx < n; ++bone_idx) {
-        if (!mBoneAccessKeys[bone_idx]._39)
+        if (!mBoneAccessKeys[bone_idx].copy_to_model)
             continue;
 
         if (!mBoneAccessKeys[bone_idx].key.isValid())
@@ -333,9 +333,9 @@ void ModelBoneAccessor::copyHavokPoseToModel(EnableScale enable_scale) const {
         }
 
         if (!util::isMatrixInvalid(transform)) {
-            if ((!bool(enable_scale) || getUnkFlag()) &&
+            if ((!bool(enable_scale) || getDebugCheckBoneScale()) &&
                 !scale.equals(sead::Vector3f::ones, sead::Mathf::epsilon())) {
-                if (getUnkFlag()) {
+                if (getDebugCheckBoneScale()) {
                     // leftover debug code
                     static_cast<void>(getModelUnit(bone_idx)->getName().include("Link"));
                 }
@@ -351,12 +351,12 @@ void ModelBoneAccessor::copyHavokPoseToModel(EnableScale enable_scale) const {
     }
 }
 
-int& ModelBoneAccessor::getUnkMode() {
-    return sModelBoneAccessorUnkMode;
+int& ModelBoneAccessor::getScaleModeOverride() {
+    return sModelBoneAccessorScaleModeOverride;
 }
 
-bool& ModelBoneAccessor::getUnkFlag() {
-    return sModelBoneAccessorUnkFlag;
+bool& ModelBoneAccessor::getDebugCheckBoneScale() {
+    return sModelBoneAccessorDebugCheckBoneScale;
 }
 
 gsys::ModelUnit* ModelBoneAccessor::getModelUnit(int bone_idx) const {

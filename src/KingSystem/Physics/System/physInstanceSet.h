@@ -4,6 +4,7 @@
 #include <container/seadListImpl.h>
 #include <container/seadObjArray.h>
 #include <container/seadPtrArray.h>
+#include <gsys/gsysModelAccessKey.h>
 #include <hostio/seadHostIONode.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
@@ -29,27 +30,58 @@ class CharacterController;
 class CharacterFormSet;
 class ClothSet;
 class CollisionInfo;
+class Constraint;
 class ContactPointInfo;
+class ModelBoneAccessor;
 class NavMeshCharacter;
+class NavMeshObj;
 class ParamSet;
+class RagdollController;
 class RagdollInstance;
 class RigidBodySet;
+class SupportBoneWork;
 class SystemGroupHandler;
 class UserTag;
 
 class InstanceSet : public sead::hostio::Node {
 public:
     enum class Flag : u32 {
-        _1 = 1 << 0,
-        _2 = 1 << 1,
-        _8 = 1 << 3,
-        DisableDraw = 1 << 2,
-        _200000 = 1 << 21,
-        Cloth1 = 1 << 22,
-        Cloth2 = 1 << 23,
-        Cloth3 = 1 << 24,
+        Active = 1 << 0,
+        TransformResetRequested = 1 << 1,
+        ClothResetRequested = 1 << 2,
+        TransformResetThisFrame = 1 << 3,
+        ClothResetThisFrame = 1 << 4,
+        SkipCopyHavokPoseToModel = 1 << 5,
+        OwnsModelBoneAccessor = 1 << 6,
+        IsMapConst = 1 << 7,
+        MapConstPassive = 1 << 8,
+        MapConstActive = 1 << 9,
+        ViewerConstPassive = 1 << 10,
+        DiscardVelocitiesOnFix = 1 << 11,
+        ClothEnabled = 1 << 13,
+        ClothBoneUpdateFailed = 1 << 14,
+        ClothDisabled = 1 << 15,
+        ClothDisabledWithReset = 1 << 16,
+        ClothFrozen = 1 << 17,
+        Fixed = 1 << 18,
+        SupportBonesDisabled = 1 << 19,
+        SupportBonesSuspendedByLod = 1 << 20,
+        SupportBonesActive = 1 << 21,
+        ClothResetIfMoved = 1 << 22,
+        ClothResetCancelled = 1 << 23,
+        ClothTeleportInsteadOfReset = 1 << 24,
         InDemo = 1 << 25,
-        _80000000 = 1u << 31,
+        RagdollFrozen = 1 << 30,
+        PoseSyncedThisFrame = 1u << 31,
+    };
+
+    enum class Flag2 : u32 {
+        AllowMapConstPassiveInit = 1 << 20,
+        ForceInactiveAndFixed = 1 << 21,
+        ClothForceEnabled = 1 << 23,
+        ClothForceDisabled = 1 << 24,
+        SupportBonesIgnoreLod = 1 << 25,
+        DebugDrawRagdollControllerWeights = 1 << 27,
     };
 
     InstanceSet(const sead::SafeString& actor_name, const sead::SafeString& actor_profile,
@@ -60,38 +92,43 @@ public:
     const ParamSet* getParamSet() const { return mParamSet; }
     CharacterController* getCharacterController() const { return mCharacterController; }
 
-    void setFlag2();
-    void clothVisibleStuff();
+    void requestTransformReset();
+    void requestClothReset();
     void setInDemo();
     void resetInDemo();
-    void clothVisibleStuff_0(s32 setting);
-    void sub_7100FB9BAC(InstanceSet* other);
-    u32 sub_7100FB9C2C() const;
-    void sub_7100FBA9BC();
-    void sub_7100FBACE0(ContactLayer layer);
-    void sub_7100FBAD74();
-    void* sub_7100FBAEDC(s32 rigidbody_idx, s32 ragdoll_idx) const;
-    void sub_7100FBB00C(RigidBody* body, RigidBodyParam* param);
+    void setClothResetMode(s32 mode);
+    void copyClothResetModeFrom(InstanceSet* other);
+    u32 getClothResetMode() const;
+    void addToWorld();
+    void disableContactLayer(ContactLayer layer);
+    void setContactNone();
+    RigidBody* getRigidBody(s32 rigid_body_set_idx, s32 rigid_body_idx) const;
+    void resetBodyContactSettingsFromParam(RigidBody* body, RigidBodyParam* param);
     void setMtxAndScale(const sead::Matrix34f& mtx, bool a2, bool a3, f32 scale);
-    void sub_7100FBB4B4();
+    bool hasRagdollContactPoints() const;
     void* findX(const sead::SafeString& a1, const sead::SafeString& a2) const;
     RigidBody* findRigidBody(const sead::SafeString& name) const;
     s32 findContactPointInfo(const sead::SafeString& name) const;
     s32 findCollisionInfo(const sead::SafeString& name) const;
-    void sub_7100FBD284(const sead::Matrix34f& mtx);
-    void sub_7100FBC890(const sead::Matrix34f& mtx, bool a2, bool a3);
+    void updateBodiesFromModelMatrix(const sead::Matrix34f& mtx);
+    void updateBoneLinkedBodyTransforms(const sead::Matrix34f& mtx, bool is_sensor,
+                                        bool set_immediately);
     s32 findRagdollControllerIdx(const sead::SafeString& name) const;
 
 private:
-    struct Unk1 {
-        u8 _0[0x48];
+    struct BodyBoneLink {
+        gsys::BoneAccessKeyEx key;
+        RigidBody* body;
+        int mode;
+        bool force_link;
+        bool link_disabled_by_constraint;
     };
+    KSYS_CHECK_SIZE_NX150(BodyBoneLink, 0x48);
 
     sead::SafeString mName;
     const ParamSet* mParamSet;
     sead::TypedBitFlag<Flag> mFlags;
-    u16 _24{};
-    u16 _26{};
+    sead::TypedBitFlag<Flag2> mFlags2;
     gsys::Model* mModel;
     f32 mScale;
     UserTag* mUserTag;
@@ -104,7 +141,7 @@ private:
     CharacterFormSet* mCharacterFormSet{};
 
     RagdollInstance* mRagdollInstance{};
-    sead::Buffer<void*> _98;
+    sead::Buffer<RagdollController*> mRagdollControllers;
     ContactPointInfo* mRagdollContactPointInfo{};
     res::Handle* mRagdollResHandle{};
     res::RagdollBlendWeight* mRagdollBlendWt;
@@ -115,19 +152,19 @@ private:
     ClothSet* mClothSet;
 
     res::Handle* mSupportBoneResHandle{};
-    void* _e8{};
-    void* _f0{};
+    SupportBoneWork* mSupportBoneWork{};
+    ModelBoneAccessor* mModelBoneAccessor{};
 
     NavMeshCharacter* mNavMeshCharacter;
-    sead::Buffer<void*> _100;
-    u16 _110{};
-    sead::ObjArray<Unk1> mLinkMatricesMaybe;
-    sead::Buffer<void*> _138;
-    sead::TList<RigidBody*> mList;
-    sead::ListNode _160;
-    u32 _170{};
-    SystemGroupHandler* _178[2];
-    SystemGroupHandler* _188[2];
+    sead::Buffer<NavMeshObj> mNavMeshObjs;
+    u16 mNavMeshObjId{};
+    u8 mCurrentRagdollControllerIdx;
+    sead::ObjArray<BodyBoneLink> mBodyBoneLinks;
+    sead::Buffer<void*> mBodyBoneLinksPerModelUnit;
+    sead::TList<RigidBody*> mExtraRigidBodies;
+    sead::TList<Constraint*> mBoneConstraints;
+    SystemGroupHandler* mOwnedSystemGroupHandlers[2];
+    SystemGroupHandler* mSystemGroupHandlers[2];
 };
 KSYS_CHECK_SIZE_NX150(InstanceSet, 0x198);
 

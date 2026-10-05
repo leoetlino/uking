@@ -19,9 +19,10 @@ public:
     enum class Propagate : bool { Yes = true, No = false };
 
     struct Indices {
-        Indices(s16 unk_, s16 havok_index) : unk(unk_), havok_index(havok_index) {}
+        Indices(s16 unit_index, s16 havok_index)
+            : unit_index(unit_index), havok_index(havok_index) {}
 
-        s16 unk;
+        s16 unit_index;
         s16 havok_index;
     };
 
