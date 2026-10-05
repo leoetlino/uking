@@ -55,9 +55,9 @@ void SupportBoneResource::doCreate_(u8* data, u32 actualFileSize, sead::Heap* he
     init(agl::utl::ResParameterArchive(data), heap);
 }
 
-float SupportBoneResource::somethingGetLinearConnection(u32 a2, float a3) {
-    sead::Vector2f slope_intercept = mConnectionLinearBuffer[a2].slope_intercept.ref();
-    float result = slope_intercept.x * a3 + slope_intercept.y;
+float SupportBoneResource::evalConnectionLinear(u32 index, float input) {
+    sead::Vector2f slope_intercept = mConnectionLinearBuffer[index].slope_intercept.ref();
+    float result = slope_intercept.x * input + slope_intercept.y;
     return std::isnan(result) ? 0.0f : result;
 }
 
