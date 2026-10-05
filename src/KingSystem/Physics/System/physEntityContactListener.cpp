@@ -279,7 +279,7 @@ static void updateMotionAccessorFlagsForMagneMassScaling(RigidBody* body_a, Rigi
 void EntityContactListener::setMagneMassScalingForContactIfNeeded(const hkpCollisionEvent& event,
                                                                   RigidBody* body_a,
                                                                   RigidBody* body_b) {
-    if (!System::instance()->getEntityContactListenerField90())
+    if (!System::instance()->isMagneMassScalingActive())
         return;
 
     if (!needsMagneMassScaling(event, body_a, body_b))
@@ -508,7 +508,7 @@ bool EntityContactListener::regularContactPointCallback(const hkpContactPointEve
         auto* modifier = hkpWorldConstraintUtil::findModifier(
             constraint, hkpConstraintAtom::TYPE_MODIFIER_VISCOUS_SURFACE);
 
-        const bool field90 = System::instance()->getEntityContactListenerField90();
+        const bool field90 = System::instance()->isMagneMassScalingActive();
 
         if (modifier && constraint->getUserData() & 1) {
             clearCallbackDelay(event);

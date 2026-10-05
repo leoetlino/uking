@@ -13,7 +13,7 @@ void UserTag::onImpulse(RigidBody* body_a, RigidBody* body_b, float impulse_a) {
 
 void UserTag::onBodyShapeChanged(RigidBody* body) {}
 
-void UserTag::onWaterContact(const FluidContactRequest& request) {}
+void UserTag::onWaterContact(const WaterContactRequest& request) {}
 
 void UserTag::onInvalidParameter(RigidBody* body, int code) {}
 

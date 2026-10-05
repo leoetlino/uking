@@ -726,7 +726,7 @@ void RagdollInstance::updateGravityFactorOverride() {
     if (System::instance() == nullptr)
         return;
 
-    const float factor_divisor = System::instance()->get6c();
+    const float factor_divisor = System::instance()->getDivisorRatio();
     for (int i = 0, n = mBoneRigidBodies.size(); i < n; ++i) {
         mBoneRigidBodies[i]->setGravityFactor(mGravityFactorOverride / factor_divisor);
     }

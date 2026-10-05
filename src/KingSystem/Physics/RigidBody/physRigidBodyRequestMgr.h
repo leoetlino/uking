@@ -10,6 +10,7 @@
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/Physics/RigidBody/physRigidBodyContactEvent.h"
 #include "KingSystem/Physics/System/physLayerContactPointInfo.h"
 #include "KingSystem/Utils/Container/LockFreeQueue.h"
 #include "KingSystem/Utils/Types.h"
@@ -18,21 +19,37 @@ class hkpEntity;
 
 namespace ksys::phys {
 
+class Constraint;
 class MotionAccessor;
 class RigidBody;
+
+struct WaterContactRequest {
+    sead::Vector3f flow_velocity = sead::Vector3f::zero;
+    u8 water_shape_type = 0;
+    u8 water_kind = 0;
+    u8 water_sub_material = 0;
+    bool has_terrain_flow = true;
+    sead::Vector3f contact_position = sead::Vector3f::zero;
+    RigidBody* body{};
+    sead::Vector3f contact_normal = sead::Vector3f::ey;
+    float cylinder_radius{};
+    sead::Vector3f buoyancy_center = sead::Vector3f::zero;
+    float submerged_ratio{};
+};
+KSYS_CHECK_SIZE_NX150(WaterContactRequest, 0x48);
 
 class RigidBodyRequestMgr : public sead::hostio::Node {
 public:
     struct Config {
-        float _0 = 0.6;
-        float _4 = 0.7;
-        float _8 = 1.25;
-        float _c = 1.0;
-        float _10 = 0.2;
-        float _14 = 0.9;
-        float _18 = 0.5;
-        float _1c = 1.0;
-        float _20 = 4.0;
+        float flow_axis_blend = 0.6;
+        float flow_box_strength = 0.7;
+        float tree_aabb_scale = 1.25;
+        float submerged_volume_scale = 1.0;
+        float tree_buoyancy_offset = 0.2;
+        float buoyancy_center_com_blend = 0.9;
+        float delta_time_change_compensation = 0.5;
+        float rope_buoyancy_scale = 1.0;
+        float flow_impulse_scale = 4.0;
         // 5000m/s (squared)
         float linear_velocity_threshold_sq = 2.5e7;
 
@@ -46,7 +63,7 @@ public:
 
     void init(sead::Heap* heap);
 
-    // 0x0000007100fa6ac4
+    // 0x0000007100fa6438
     void calc(ContactLayerType layer_type);
     void calc1(ContactLayerType layer_type, bool paused);
 
@@ -64,13 +81,13 @@ public:
     bool deregisterMotionAccessor(MotionAccessor* accessor);
 
 private:
-    struct Unk1;
-    struct Unk3;
-
-    struct Unk4 {
-        u8 _0[0x10];
+    struct GravitySuspensionRequest {
+        RigidBody* body;
+        u8 num_elapsed_frames;
+        u8 num_frames;
+        float original_gravity_factor;
     };
-    KSYS_CHECK_SIZE_NX150(Unk4, 0x10);
+    KSYS_CHECK_SIZE_NX150(GravitySuspensionRequest, 0x10);
 
     struct ImpulseEntry {
         RigidBody* body_a;
@@ -79,31 +96,19 @@ private:
     };
     KSYS_CHECK_SIZE_NX150(ImpulseEntry, 0x18);
 
-    struct Unk6 {
-        sead::Vector3f _0 = sead::Vector3f::zero;
-        u32 _c = 0x1000000;
-        sead::Vector3f _10 = sead::Vector3f::zero;
-        void* _20{};
-        sead::Vector3f _28 = sead::Vector3f::ey;
-        float _34{};
-        sead::Vector3f _38 = sead::Vector3f::zero;
-        float _44{};
-    };
-    KSYS_CHECK_SIZE_NX150(Unk6, 0x48);
-
     struct PointCallback : LayerContactPointInfo::ContactCallback {
         explicit PointCallback(RigidBodyRequestMgr* mgr_) : mgr(mgr_) {}
 
         bool invoke(const LayerContactPointInfo::ContactEvent& event) override {
-            return mgr->someFunction2(event);
+            return mgr->markWaterContactFlags(event);
         }
 
         RigidBodyRequestMgr* mgr;
     };
 
-    // FIXME: rename, implement
-    bool someFunction2(const LayerContactPointInfo::ContactEvent& event);
-    static void someFunction(void* arg);
+    // FIXME: implement
+    bool markWaterContactFlags(const LayerContactPointInfo::ContactEvent& event);
+    static bool filterTriangleEdgeContact(const RigidBodyContactEvent& event);
 
     void processImpulseEntries();
     void processOobRigidBodyEntries(ContactLayerType layer_type);
@@ -111,36 +116,37 @@ private:
     static constexpr int NumRigidBodyBuffers = 2;
     static constexpr int MaxNumImpulseEntries = 0x100;
 
-    sead::SafeArray<util::LockFreeQueue<RigidBody>, NumRigidBodyBuffers> mRigidBodies1;
-    util::LockFreeQueue<Unk1> _38;
-    util::LockFreeQueue<Unk1> _50;
+    sead::SafeArray<util::LockFreeQueue<RigidBody>, NumRigidBodyBuffers> mPendingUpdateBodies;
+    util::LockFreeQueue<Constraint> mConstraintRequests;
+    util::LockFreeQueue<Constraint> mConstraintsToProcess;
     /// Rigid bodies that are out of bounds.
     sead::SafeArray<util::LockFreeQueue<RigidBody>, NumRigidBodyBuffers> mOobRigidBodies;
     util::LockFreeQueue<ImpulseEntry> mImpulseEntries;
-    util::LockFreeQueue<Unk3> _b0;
-    util::LockFreeQueue<Unk4> _c8;
-    util::LockFreeQueue<Unk4> _e0;
+    util::LockFreeQueue<WaterContactRequest> mWaterContactRequests;
+    util::LockFreeQueue<GravitySuspensionRequest> mGravitySuspensionRequests;
+    util::LockFreeQueue<GravitySuspensionRequest> mFreeGravitySuspensionRequests;
     sead::PtrArray<MotionAccessor> mMotionAccessors;
     sead::Buffer<ImpulseEntry> mImpulseEntriesPool;
     sead::Atomic<int> mNumActiveImpulseEntries;
-    sead::Buffer<Unk6> _120;
-    sead::Atomic<u32> _130;
-    sead::Buffer<Unk4> _138;
+    sead::Buffer<WaterContactRequest> mWaterContactRequestPool;
+    sead::Atomic<u32> mNumWaterContactRequests;
+    sead::Buffer<GravitySuspensionRequest> mGravitySuspensionRequestPool;
     u32 mNumEntitiesInWorld{};
     LayerContactPointInfo* mContactPoints{};
     sead::SafeArray<sead::CriticalSection, NumRigidBodyBuffers> mCriticalSections;
     sead::CriticalSection mCS;
-    float _218 = 1.0;
-    float _21c = 1.0 / 30.0;
-    float _220 = 1.0 / 30.0;
-    float _224 = 1.0 / 30.0;
-    float _228 = 1.0 / 30.0;
+    float mTimeFactor = 1.0;
+    float mDeltaTime = 1.0 / 30.0;
+    float mPrevDeltaTime = 1.0 / 30.0;
+    float mScaledDeltaTime = 1.0 / 30.0;
+    float mPrevScaledDeltaTime = 1.0 / 30.0;
     sead::Atomic<u32> _22c;
     u32 mWaterIceSubmatIdx{};
     u32 mWaterHotSubmatIdx{};
     u32 mWaterPoisonSubmatIdx{};
     PointCallback mCallback{this};
-    sead::Delegate1Func<void*> _250{&RigidBodyRequestMgr::someFunction};
+    sead::Delegate1RFunc<const RigidBodyContactEvent&, bool> mTriangleEdgeContactFilter{
+        &RigidBodyRequestMgr::filterTriangleEdgeContact};
 };
 KSYS_CHECK_SIZE_NX150(RigidBodyRequestMgr, 0x260);
 

@@ -3,14 +3,22 @@
 #include <basis/seadTypes.h>
 #include <container/seadPtrArray.h>
 #include <heap/seadDisposer.h>
+#include <math/seadVector.h>
 #include <thread/seadCriticalSection.h>
+#include <thread/seadMutex.h>
 #include "KingSystem/Game/Physics/physDefines.h"
+#include "KingSystem/System/DebugMessage.h"
 #include "KingSystem/Utils/Types.h"
 
+class hkFreeListAllocator;
+class hkMemorySystem;
+class hkProcess;
+class hkpPhysicsContext;
 class hkpWorld;
 
 namespace ksys::phys {
 
+class CharacterController;
 class CollisionInfo;
 class ContactLayerCollisionInfo;
 class ContactLayerCollisionInfoGroup;
@@ -21,6 +29,7 @@ class GroupFilter;
 class HavokMemoryAllocator;
 class LayerContactPointInfo;
 class MaterialTable;
+class Phantom;
 class RayCastForRequest;
 class RayCastRequestMgr;
 class RagdollControllerKeyList;
@@ -30,6 +39,8 @@ class RigidBodyRequestMgr;
 class StaticCompoundMgr;
 class SystemData;
 class SystemGroupHandler;
+class World;
+struct HkThreadMemorySlot;
 
 enum class IsIndoorStage {
     No,
@@ -45,8 +56,8 @@ class System {
     virtual ~System();
 
 public:
-    float get64() const { return _64; }
-    float get6c() const { return _6c; }
+    float getDeltaTime() const { return mDeltaTime; }
+    float getDivisorRatio() const { return mDivisorRatio; }
     float getTimeFactor() const { return mTimeFactor; }
     ContactMgr* getContactMgr() const { return mContactMgr; }
     StaticCompoundMgr* getStaticCompoundMgr() const { return mStaticCompoundMgr; }
@@ -115,49 +126,53 @@ public:
 
     RagdollControllerKeyList* getRagdollCtrlKeyList() const;
 
-    // TODO: rename
     // 0x0000007101216c60
-    void setEntityContactListenerField90(bool value);
+    void setMagneMassScalingActive(bool value);
     // 0x0000007101216c74
-    bool getEntityContactListenerField90() const;
+    bool isMagneMassScalingActive() const;
 
     // 0x0000007101216ca4
-    bool isActorSystemIdle() const;
+    bool canModifyWorldDirectly() const;
 
     // 0x0000007101216800
-    void setEntityContactListenerField91(bool value);
+    void setIgnoreObjectAndNpcContacts(bool value);
     // 0x0000007101216814
-    bool getEntityContactListenerField91() const;
+    bool isIgnoringObjectAndNpcContacts() const;
 
     // 0x000000710121682c
-    void incrementWorldUnkCounter(ContactLayerType layer_type);
+    void incrementWorldQueryRefCount(ContactLayerType layer_type);
     // 0x000000710121684c
-    void decrementWorldUnkCounter(ContactLayerType layer_type);
+    void decrementWorldQueryRefCount(ContactLayerType layer_type);
 
     bool isHavokMainHeapOom() const;
 
     sead::Heap* getPhysicsTempHeap(LowPriority low_priority) const;
 
 private:
-    u8 _28[0x60 - 0x28];
+    sead::FixedPtrArray<World, 2> mWorlds;
+    sead::Vector3f mGravity;
+    sead::Vector3f mGravityDirection;
     bool mPaused;
-    u8 _61[0x64 - 0x61];
-    float _64 = 1.0 / 30.0;
-    float _68 = 1.0 / 30.0;
-    float _6c = 1.0;
-    float _70 = 1.0 / 30.0;
+    bool mStepSuspended;
+    bool mIsCalculatingRigidBodyRequests;
+    float mDeltaTime = 1.0 / 30.0;
+    float mStepDeltaTime = 1.0 / 30.0;
+    float mDivisorRatio = 1.0;
+    float mSmoothedDeltaTime = 1.0 / 30.0;
     float mTimeFactor{};
     HavokMemoryAllocator* mHavokAllocator{};
-    u8 _80[0xa8 - 0x80];
+    hkFreeListAllocator* mFreeListAllocator{};
+    u8 _88[0x98 - 0x88];
+    sead::PtrArray<HkThreadMemorySlot> mThreadMemorySlots;
     sead::CriticalSection mCS;
-    void* _e8{};
-    void* _f0{};
+    hkMemorySystem* mHkMemorySystem{};
+    hkProcess* mDebugDisplayProcess{};
     GroupFilter* mEntityGroupFilter{};
     GroupFilter* mSensorGroupFilter{};
     sead::FixedPtrArray<GroupFilter, 2> mGroupFilters;
     sead::FixedPtrArray<ContactListener, 2> mContactListeners;
     ContactMgr* mContactMgr;
-    void* _150;
+    void* mPhysSourceListenerMgr;
     StaticCompoundMgr* mStaticCompoundMgr;
     RigidBodyRequestMgr* mRigidBodyRequestMgr;
     RagdollInstanceMgr* mRagdollInstanceMgr;
@@ -165,14 +180,26 @@ private:
     SystemData* mSystemData;
     MaterialTable* mMaterialTable;
     RayCastRequestMgr* mRayCastRequestMgr{};
-    void* _190{};
+    RigidBody* mSystemDummyBody{};
     void* _198{};
-    void* _1a0{};
+    Phantom* mWorldBorderPhantom{};
     sead::Heap* mPhysicsSystemHeap{};
     sead::Heap* mDebugHeap{};
     sead::Heap* mPhysicsTempDefaultHeap{};
     sead::Heap* mPhysicsTempLowHeap{};
-    u8 _1c8[0x480 - 0x1c8];
+    DebugMessage mDebugMessage;
+    u8 _258[0x268 - 0x258];
+    IsIndoorStage mIsIndoorStage;
+    sead::Mutex mCharacterControllerMutex;
+    sead::PtrArray<CharacterController> mCharacterControllers;
+    SystemGroupHandler* mSystemGroupHandlers[2][4];
+    SystemGroupHandler* mLowIndexSystemGroupHandlers[2][2];
+    u8 _320[0x328 - 0x320];
+    hkpPhysicsContext* mPhysicsContext;
+    u8 _330[0x448 - 0x330];
+    int mPerCoreMaxCounters[3];
+    void* mPerCoreScratchBuffers[3];
+    u8 _470[0x480 - 0x470];
 };
 KSYS_CHECK_SIZE_NX150(System, 0x480);
 
