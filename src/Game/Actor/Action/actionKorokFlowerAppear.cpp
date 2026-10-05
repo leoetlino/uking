@@ -19,9 +19,9 @@ void KorokFlowerAppear::enter_(ksys::act::ai::InlineParamPack* params) {
     auto* tgt_body = mActor->getTgtBody();
     if (main_body != nullptr && tgt_body != nullptr) {
         main_body->setContactNone();
-        main_body->resetFlag200();
+        main_body->enableRayHit();
         tgt_body->setContactNone();
-        tgt_body->resetFlag200();
+        tgt_body->enableRayHit();
     }
     mFlags.set(Flag::Changeable);
     setFinished();

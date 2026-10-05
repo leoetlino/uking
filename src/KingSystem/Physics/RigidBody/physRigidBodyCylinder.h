@@ -12,7 +12,7 @@ public:
     static CylinderRigidBody* make(RigidBodyInstanceParam* param, sead::Heap* heap);
 
     CylinderRigidBody(hkpRigidBody* hk_body, CylinderShape* shape, ContactLayerType layer_type,
-                      const sead::SafeString& name, bool set_flag_10, sead::Heap* heap);
+                      const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
     ~CylinderRigidBody() override;
 
     void setRadius(float radius);
@@ -30,7 +30,7 @@ public:
 protected:
     Shape* getShape_() override;
     const Shape* getShape_() const override;
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 
 private:

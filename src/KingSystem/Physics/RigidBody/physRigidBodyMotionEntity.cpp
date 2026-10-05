@@ -573,8 +573,8 @@ bool RigidBodyMotionEntity::registerAccessor(RigidBodyMotionSensor* accessor) {
 
     mLinkedAccessors.pushBack(accessor);
 
-    if (mFlags.isOff(Flag::_2) && mBody->isAddedToWorld())
-        setMotionFlag(RigidBody::MotionFlag::_80000);
+    if (mFlags.isOff(Flag::RegisteredInRequestMgr) && mBody->isAddedToWorld())
+        setMotionFlag(RigidBody::MotionFlag::DirtyLinkedAccessors);
 
     return true;
 }
@@ -587,8 +587,8 @@ bool RigidBodyMotionEntity::deregisterAccessor(RigidBodyMotionSensor* accessor) 
         return false;
 
     // Found the accessor -- now we just need to erase it.
-    if (mFlags.isOn(Flag::_2) && mBody->isAddedToWorld())
-        setMotionFlag(RigidBody::MotionFlag::_80000);
+    if (mFlags.isOn(Flag::RegisteredInRequestMgr) && mBody->isAddedToWorld())
+        setMotionFlag(RigidBody::MotionFlag::DirtyLinkedAccessors);
     mLinkedAccessors.erase(idx);
     return true;
 }
@@ -603,8 +603,8 @@ bool RigidBodyMotionEntity::deregisterAllAccessors() {
         mLinkedAccessors.back()->resetLinkedRigidBody();
     }
 
-    if (mFlags.isOn(Flag::_2) && mBody->isAddedToWorld())
-        setMotionFlag(RigidBody::MotionFlag::_80000);
+    if (mFlags.isOn(Flag::RegisteredInRequestMgr) && mBody->isAddedToWorld())
+        setMotionFlag(RigidBody::MotionFlag::DirtyLinkedAccessors);
     return true;
 }
 
@@ -643,7 +643,7 @@ void RigidBodyMotionEntity::freeze(bool freeze, bool preserve_velocities,
         return;
     }
 
-    const float mass_factor = mFlags.isOn(Flag::_200) ? 20.0 : 1000.0;
+    const float mass_factor = mFlags.isOn(Flag::StopTimerSmallMass) ? 20.0 : 1000.0;
 
     if (preserve_velocities) {
         mLinearVelocity = mBody->getLinearVelocity();

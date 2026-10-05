@@ -27,14 +27,14 @@ void RigidBodySet::setUseSystemTimeFactor(bool use) {
         body.setUseSystemTimeFactor(use);
 }
 
-void RigidBodySet::clearFlag400000(bool clear) {
+void RigidBodySet::setStoppedByEvent(bool stopped) {
     for (auto& body : mRigidBodies)
-        body.clearFlag400000(clear);
+        body.setStoppedByEvent(stopped);
 }
 
-void RigidBodySet::setEntityMotionFlag200(bool set) {
+void RigidBodySet::setStopTimerSmallMass(bool set) {
     for (auto& body : mRigidBodies)
-        body.setEntityMotionFlag200(set);
+        body.setStopTimerSmallMass(set);
 }
 
 void RigidBodySet::setFixed(Fixed fixed, PreserveVelocities preserve_velocities) {
@@ -42,14 +42,14 @@ void RigidBodySet::setFixed(Fixed fixed, PreserveVelocities preserve_velocities)
         body.setFixed(fixed, preserve_velocities);
 }
 
-void RigidBodySet::updateMotionTypeRelatedFlags() {
+void RigidBodySet::saveMotionType() {
     for (auto& body : mRigidBodies)
-        body.updateMotionTypeRelatedFlags();
+        body.saveMotionType();
 }
 
-void RigidBodySet::triggerScheduledMotionTypeChange() {
+void RigidBodySet::restoreSavedMotionType() {
     for (auto& body : mRigidBodies)
-        body.triggerScheduledMotionTypeChange();
+        body.restoreSavedMotionType();
 }
 
 bool RigidBodySet::hasActiveEntityBody() const {
@@ -162,19 +162,19 @@ bool RigidBodySet::removeFromWorldAndResetLinks() {
     return ok;
 }
 
-bool RigidBodySet::hasNoRigidBodyWithFlag8(bool require_motion_flag_1_to_be_unset) {
+bool RigidBodySet::isNoBodyInWorld(bool also_check_pending_add) {
     for (auto it = mRigidBodies.begin(), end = mRigidBodies.end(); it != end; ++it) {
         if (it->isAddedToWorld())
             return false;
-        if (require_motion_flag_1_to_be_unset && it->isAddingBodyToWorld())
+        if (also_check_pending_add && it->isAddingBodyToWorld())
             return false;
     }
     return true;
 }
 
-void RigidBodySet::requestSuspendGravity(u8 type) {
+void RigidBodySet::requestSuspendGravity(u8 num_frames) {
     for (auto& body : mRigidBodies)
-        body.requestSuspendGravity(type);
+        body.requestSuspendGravity(num_frames);
 }
 
 }  // namespace ksys::phys
