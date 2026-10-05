@@ -4,6 +4,8 @@
 
 namespace ksys::snd {
 
+class SpotBgmEntry;
+
 class SpotBgmTriggerAction : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(SpotBgmTriggerAction, ksys::act::ai::Action)
 public:
@@ -24,6 +26,8 @@ protected:
     const bool* mIsStopWithoutReductionY_m{};
     // map_unit_param at offset 0x38
     sead::SafeString mSound_m{};
+    SpotBgmEntry* mSpotBgmEntry{};
 };
+KSYS_CHECK_SIZE_NX150(SpotBgmTriggerAction, 0x50);
 
 }  // namespace ksys::snd
