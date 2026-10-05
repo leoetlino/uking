@@ -88,7 +88,7 @@ public:
     bool init(agl::utl::ResParameterArchive archive, sead::Heap* heap);
 
     float getInterpolatedConnectionCurve(u32 index, float lookup);
-    float somethingGetLinearConnection(u32 a2, float a3);
+    float evalConnectionLinear(u32 index, float input);
 
 private:
     agl::utl::ParameterObj mSupportBoneHeader;
