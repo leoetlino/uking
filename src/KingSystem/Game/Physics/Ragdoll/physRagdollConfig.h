@@ -22,14 +22,14 @@ public:
             const auto& getDivideFlag() const { return *mDivideFlag; }
             const auto& getImpulseRate() const { return *mImpulseRate; }
             const auto& getDivideRate() const { return *mDivideRate; }
-            bool is100() const { return _100; }
+            bool shouldApplyAsLinearImpulse() const { return mApplyAsLinearImpulse; }
 
         private:
             agl::utl::Parameter<sead::FixedSafeString<64>> mTypeName;
             agl::utl::Parameter<bool> mDivideFlag;
             agl::utl::Parameter<float> mImpulseRate;
             agl::utl::Parameter<float> mDivideRate;
-            bool _100 = true;
+            bool mApplyAsLinearImpulse = true;
         };
 
         class ImpulseObj : public agl::utl::ParameterObj {
@@ -41,7 +41,7 @@ public:
             const auto& getAttackVector() const { return *mAttackVector; }
             const auto& getAttackPoint() const { return *mAttackPoint; }
             const auto& getImpulsePower() const { return *mImpulsePower; }
-            bool is130() const { return _130; }
+            bool isAttackPointRelativeToRootBone() const { return mAttackPointRelativeToRootBone; }
 
         private:
             agl::utl::Parameter<sead::FixedSafeString<64>> mTypeName;
@@ -49,7 +49,7 @@ public:
             agl::utl::Parameter<sead::Vector3f> mAttackVector;
             agl::utl::Parameter<sead::Vector3f> mAttackPoint;
             agl::utl::Parameter<float> mImpulsePower;
-            bool _130 = false;
+            bool mAttackPointRelativeToRootBone = false;
         };
 
         PartImpulseInfo();

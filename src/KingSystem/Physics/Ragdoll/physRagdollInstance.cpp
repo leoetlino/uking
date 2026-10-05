@@ -30,11 +30,12 @@
 
 namespace ksys::phys {
 
-static u8 sRagdollInstanceUnk1 = 15;
+static u8 sMaxPenetrationCheckInterval = 15;
 static RagdollInstance::Config sRagdollInstanceConfig;
 
 RagdollInstance::RagdollInstance(SystemGroupHandler* handler)
-    : mGroupHandler(handler), _e8(sRagdollInstanceUnk1), _e9(sRagdollInstanceUnk1) {}
+    : mGroupHandler(handler), mPenetrationCheckCountdown(sMaxPenetrationCheckInterval),
+      mPenetrationCheckInterval(sMaxPenetrationCheckInterval) {}
 
 RagdollInstance::~RagdollInstance() {
     finalize();
@@ -92,8 +93,8 @@ bool RagdollInstance::doInit(const RagdollParam* param, sead::DirectResource* re
 
     mBoneRigidBodies.allocBufferAssert(num_bones, heap);
     allocateBoneTransforms(num_bones, heap);
-    mBoneVectors.allocBufferAssert(num_bones, heap);
-    mBoneStuff.allocBufferAssert(num_bones, heap);
+    mGroundPenetrationHits.allocBufferAssert(num_bones, heap);
+    mBonePenetrationStates.allocBufferAssert(num_bones, heap);
 
     // Create a RagdollRigidBody for each bone.
     for (int i = 0; i < num_bones; ++i) {
@@ -128,7 +129,7 @@ bool RagdollInstance::doInit(const RagdollParam* param, sead::DirectResource* re
         mBoneRigidBodies[i]->init(heap);
     }
 
-    mTransform = new (heap, alignof(hkQsTransformf))
+    mWorldFromModelTransform = new (heap, alignof(hkQsTransformf))
         hkQsTransformf[1]{hkQsTransformf::IdentityInitializer{}};
     mRagdollParam = param;
 
@@ -139,11 +140,11 @@ bool RagdollInstance::doInit(const RagdollParam* param, sead::DirectResource* re
         mRagdollInstance->m_constraints[i]->setPriority(hkpConstraintInstance::PRIORITY_TOI);
     }
 
-    mBoneStuff2.allocBufferAssert(num_bones, heap);
+    mBoneAnimationWeights.allocBufferAssert(num_bones, heap);
     for (int i = 0; i < num_bones; ++i) {
         // XXX: this is probably an inlined function?
-        mBoneStuff2[i] = 0;
-        mFlags.set(Flag::_80);
+        mBoneAnimationWeights[i] = 0;
+        mFlags.set(Flag::AllBoneAnimationWeightsZero);
     }
 
     mModel = model;
@@ -203,12 +204,12 @@ void RagdollInstance::finalize() {
         mRagdollInstance = nullptr;
     }
 
-    if (mTransform)
-        util::safeDeleteArray(mTransform);
+    if (mWorldFromModelTransform)
+        util::safeDeleteArray(mWorldFromModelTransform);
 
-    mBoneVectors.freeBuffer();
-    mBoneStuff.freeBuffer();
-    mBoneStuff2.freeBuffer();
+    mGroundPenetrationHits.freeBuffer();
+    mBonePenetrationStates.freeBuffer();
+    mBoneAnimationWeights.freeBuffer();
 
     if (mBoneTransformsByteSize != 0) {
         std::destroy_n(mBoneTransforms.getBufferPtr(), mBoneTransforms.size());
@@ -448,26 +449,26 @@ void RagdollInstance::changeWorldState(RagdollInstance::WorldState state) {
             }
         }
 
-        for (auto& x : mBoneStuff)
+        for (auto& x : mBonePenetrationStates)
             x = 1;
 
-        mFlags.reset(Flag::_8);
-        _e8 = _e9;
+        mFlags.reset(Flag::NoGroundPenetration);
+        mPenetrationCheckCountdown = mPenetrationCheckInterval;
 
         for (auto* body : mBoneRigidBodies)
             body->setContactNone(true);
 
-        mFlags.set(Flag::_20);
+        mFlags.set(Flag::PendingControllerReset);
         mFlags.set(Flag::AddedToWorld);
-        mFlags.reset(Flag::_40);
-        mFlags.reset(Flag::_2);
-        mFlags.reset(Flag::_4);
+        mFlags.reset(Flag::BoneTransformsValid);
+        mFlags.reset(Flag::WasAtRest);
+        mFlags.reset(Flag::IsAtRest);
     } else {
         for (int i = 0, n = num_rigid_bodies; i < n; ++i)
             mBoneRigidBodies[i]->removeFromWorld();
 
         mFlags.reset(Flag::AddedToWorld);
-        mFlags.reset(Flag::_40);
+        mFlags.reset(Flag::BoneTransformsValid);
     }
 }
 
@@ -530,7 +531,7 @@ RagdollRigidBody* RagdollInstance::getChildBoneRigidBody(const RigidBody* body, 
 }
 
 sead::Matrix34f RagdollInstance::getTransform(int bone_index) const {
-    if (mFlags.isOff(Flag::_40)) {
+    if (mFlags.isOff(Flag::BoneTransformsValid)) {
         if (util::isMatrixInvalid(mModel->getMatrix()))
             return sead::Matrix34f::ident;
 
@@ -558,7 +559,7 @@ sead::Matrix34f RagdollInstance::getTransform(int bone_index) const {
 
 sead::Matrix34f RagdollInstance::getTransformWithCustomYAxis(int bone_index,
                                                              const sead::Vector3f& y_axis) const {
-    if (mFlags.isOff(Flag::_40)) {
+    if (mFlags.isOff(Flag::BoneTransformsValid)) {
         if (util::isMatrixInvalid(mModel->getMatrix()))
             return sead::Matrix34f::ident;
 
@@ -660,14 +661,14 @@ void RagdollInstance::setKeyframed(int bone_index, bool keyframed,
     mKeyframedBonesToSyncTo.changeBit(bone_index, keyframed && bool(sync_to_this_bone));
 }
 
-void RagdollInstance::setUnk1(u8 value) {
-    value = sead::Mathi::clamp(value, 0, sRagdollInstanceUnk1);
-    _e9 = value;
-    _e8 = value;
+void RagdollInstance::setPenetrationCheckInterval(u8 value) {
+    value = sead::Mathi::clamp(value, 0, sMaxPenetrationCheckInterval);
+    mPenetrationCheckInterval = value;
+    mPenetrationCheckCountdown = value;
 }
 
-void RagdollInstance::setMaximumUnk1(u8 value) {
-    sRagdollInstanceUnk1 = value;
+void RagdollInstance::setMaxPenetrationCheckInterval(u8 value) {
+    sMaxPenetrationCheckInterval = value;
 }
 
 void RagdollInstance::stopForcingKeyframing() {
@@ -720,7 +721,7 @@ RagdollInstance::Config& RagdollInstance::getConfig() {
 }
 
 void RagdollInstance::updateGravityFactorOverride() {
-    if (mFlags.isOff(Flag::_200))
+    if (mFlags.isOff(Flag::UseGravityFactorOverride))
         return;
 
     if (System::instance() == nullptr)
