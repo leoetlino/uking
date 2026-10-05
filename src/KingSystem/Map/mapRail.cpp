@@ -168,6 +168,10 @@ RailGuide::RailGuide() = default;
 
 RailGuide::~RailGuide() = default;
 
+RailPoint* RailGuide::allocPoint(sead::Heap* heap) {
+    return new (heap) RailGuidePoint;
+}
+
 bool RailRemainGuidePoint::parse(MubinIter* iter, sead::Heap* heap) {
     bool success = true;
     success &= RailGuidePoint::parse(iter, heap);
