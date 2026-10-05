@@ -74224,7 +74224,7 @@ Address,Quality,Size,Name
 0x0000007100d426ac,U,000096,ksys::map::PlacementMap::resetDynamic
 0x0000007100d4270c,O,000096,_ZN4ksys3map12PlacementMap6unloadEv
 0x0000007100d4276c,U,000048,ksys::map::PlacementMap::unloadStaticMubin
-0x0000007100d4279c,O,000176,_ZN4ksys3map12PlacementMap3x_6Ev
+0x0000007100d4279c,O,000176,_ZN4ksys3map12PlacementMap20prepareDynamicUnloadEv
 0x0000007100d4284c,U,000112,ksys::map::PlacementMap::clearDynamicObjsFlagBit0
 0x0000007100d428bc,U,002288,ksys::map::PlacementMap::traverseStaticObjsForFarActors
 0x0000007100d431ac,O,000212,_ZN4ksys3map12PlacementMap17getFieldBodyGroupEi
@@ -74242,7 +74242,7 @@ Address,Quality,Size,Name
 0x0000007100d44128,U,000560,ksys::map::PlacementMap::clearDynamicObjReferences
 0x0000007100d44358,U,003208,ksys::map::PlacementMapMgr::ctor
 0x0000007100d44fe0,U,000320,ksys::map::getMubinPath
-0x0000007100d45120,O,000472,_ZN4ksys3map12PlacementMap3x_7EiiaaRKN4sead14SafeStringBaseIcEES6_ib
+0x0000007100d45120,O,000472,_ZN4ksys3map12PlacementMap4initEiiaaRKN4sead14SafeStringBaseIcEES6_ib
 0x0000007100d452f8,U,000268,ksys::map::PlacementMapMgr::dtor
 0x0000007100d45404,U,000144,ksys::map::PlacementMapMgr::removeInnerData
 0x0000007100d45494,U,003388,ksys::map::PlacementMapMgr::initForestRendererFiles
@@ -92928,7 +92928,7 @@ Address,Quality,Size,Name
 0x00000071011e4e30,O,000120,_ZN4ksys3map12PlacementMgrD0Ev
 0x00000071011e4ea8,U,000584,ksys::map::PlacementMgr::finalize
 0x00000071011e50f0,O,000056,_ZN4ksys3map12PlacementMgr11releaseTreeEv
-0x00000071011e5128,M,000236,_ZN4ksys3map12PlacementMgr3x_3Ev
+0x00000071011e5128,M,000236,_ZN4ksys3map12PlacementMgr33deleteActorsOfUnloadingStaticObjsEv
 0x00000071011e5214,O,000008,_ZN4ksys3map12PlacementMgr8reset7F0Ev
 0x00000071011e521c,U,000716,ksys::map::PlacementMgr::calcRemoveInnerData
 0x00000071011e54e8,U,000084,ksys::map::PlacementMgr::initBeforeStageGenB
