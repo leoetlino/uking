@@ -22,16 +22,16 @@ public:
 
 protected:
     enum class Status {
-        _0 = 0,
-        _1 = 1,
-        _2 = 2,
-        _3 = 3,
+        OwnsNothing = 0,
+        OwnsContactPointInfo = 1,
+        OwnsRigidBody = 2,
+        OwnsContactPointInfoAndRigidBody = 3,
     };
 
     void doCast(const hkpLinearCastInput& input, hkpCdPointCollector& cast_collector,
                 hkpCdPointCollector* start_collector) override;
 
-    Status mStatus = Status::_0;
+    Status mStatus = Status::OwnsNothing;
 };
 
 class SphereCast : public ShapeCastWithInfo {

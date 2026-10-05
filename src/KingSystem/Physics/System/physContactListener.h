@@ -35,7 +35,7 @@ public:
     ContactLayerCollisionInfo* getContactLayerCollisionInfo(u32 rlayer_a, u32 rlayer_b);
 
     void addLayerPairForContactPointInfo(LayerContactPointInfo* info, ContactLayer layer1,
-                                         ContactLayer layer2, bool enabled);
+                                         ContactLayer layer2, bool do_not_delay_callback);
     void removeLayerPairsForContactPointInfo(LayerContactPointInfo* info);
     void removeLayerPairForContactPointInfo(LayerContactPointInfo* info, ContactLayer layer1,
                                             ContactLayer layer2);
@@ -78,9 +78,10 @@ protected:
                                           ContactLayer layer_a, ContactLayer layer_b,
                                           const hkpContactPointEvent& event);
 
-    virtual void m11(const hkpContactPointEvent& event, const RigidBodyCollisionMasks& masks_a,
-                     const RigidBodyCollisionMasks& masks_b, RigidBody* body_a, RigidBody* body_b) {
-    }
+    virtual void applyContactMaterialProperties(const hkpContactPointEvent& event,
+                                                const RigidBodyCollisionMasks& masks_a,
+                                                const RigidBodyCollisionMasks& masks_b,
+                                                RigidBody* body_a, RigidBody* body_b) {}
 
     virtual void handleCollisionAdded(const hkpCollisionEvent& event, RigidBody* body_a,
                                       RigidBody* body_b);
@@ -96,7 +97,7 @@ protected:
                                              RigidBody* body_b,
                                              sead::SafeArray<u32, 2>* out_material_masks);
 
-    virtual bool m15(RigidBody* body_a, RigidBody* body_b) { return false; }
+    virtual bool shouldRecordImpulseEntry(RigidBody* body_a, RigidBody* body_b) { return false; }
 
     /// Record a contact point in the ContactPointInfo instances of the bodies (if applicable).
     int notifyContactPointInfo(RigidBody* body_a, RigidBody* body_b, ContactLayer layer_a,
@@ -125,8 +126,8 @@ protected:
     u32 mTrackedLayersBufferSize{};
     u32 mLayerCount{};
     sead::CriticalSection mCS;
-    bool _90 = false;
-    bool _91 = false;
+    bool mMagneMassScalingActive = false;
+    bool mIgnoreObjectAndNpcContacts = false;
     bool mDisableContactPointInfoNotifications = false;
 };
 

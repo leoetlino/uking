@@ -13,9 +13,9 @@ class ClosestPointQueryWithInfo : public ClosestPointQuery {
     SEAD_RTTI_OVERRIDE(ClosestPointQueryWithInfo, ClosestPointQuery)
 public:
     enum class Status {
-        _1 = 1,
-        _2 = 2,
-        _3 = 3,
+        OwnsContactPointInfo = 1,
+        OwnsRigidBody = 2,
+        OwnsContactPointInfoAndRigidBody = 3,
     };
 
     ClosestPointQueryWithInfo(RigidBody* body, int num_points, const sead::SafeString& name, int a,
