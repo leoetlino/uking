@@ -183,7 +183,7 @@ hkBool SensorGroupFilter::isCollisionEnabled(const hkpShapeRayCastInput& aInput,
 hkBool SensorGroupFilter::isCollisionEnabled(const hkpWorldRayCastInput& inputA,
                                              const hkpCollidable& collidableB) const {
     auto* body = getRigidBody(collidableB);
-    if (body && body->hasFlag(RigidBody::Flag::_200))
+    if (body && body->hasFlag(RigidBody::Flag::DisableRayHit))
         return false;
 
     return testCollisionForRayCasting(inputA.m_filterInfo, collidableB.getCollisionFilterInfo());

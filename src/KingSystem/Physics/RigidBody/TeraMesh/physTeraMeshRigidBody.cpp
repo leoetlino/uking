@@ -19,13 +19,13 @@ TeraMeshRigidBody::~TeraMeshRigidBody() {
     }
 }
 
-u32 TeraMeshRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+u32 TeraMeshRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                                          const sead::Vector3f& contact_point) {
     const auto* collidable = getHkBody()->getCollidable();
     masks->ignored_layers = ~mContactMask;
-    if (unk != nullptr) {
+    if (shape_key != nullptr) {
         getCollisionFilterInfoFromCollidable(masks, &masks->collision_filter_info, *collidable,
-                                             unk);
+                                             shape_key);
         return 0;
     }
     masks->material_mask = collidable->getShape()->getUserData();

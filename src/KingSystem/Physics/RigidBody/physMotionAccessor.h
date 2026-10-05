@@ -59,15 +59,15 @@ public:
 
     RigidBody* getBody() const { return mBody; }
     hkpRigidBody* getHkBody() const { return mBody->getHkBody(); }
-    u32 get10() const { return _10; }
-    u32 get14() const { return _14; }
-    void increment10() { ++_10; }
-    void increment14() { ++_14; }
+    u32 getShapeUpdateCount() const { return mShapeUpdateCount; }
+    u32 getShapeReplaceCount() const { return mShapeReplaceCount; }
+    void incrementShapeUpdateCount() { ++mShapeUpdateCount; }
+    void incrementShapeReplaceCount() { ++mShapeReplaceCount; }
 
 protected:
     RigidBody* mBody = nullptr;
-    u32 _10 = 0;
-    u32 _14 = 0;
+    u32 mShapeUpdateCount = 0;
+    u32 mShapeReplaceCount = 0;
 };
 
 }  // namespace ksys::phys

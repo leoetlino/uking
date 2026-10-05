@@ -25,9 +25,11 @@ class hkpMotion;
 
 namespace ksys::phys {
 
+class AddEntityBatch;
 class CollisionInfo;
 class ContactPointInfo;
 class MotionAccessor;
+class RemoveEntityBatch;
 struct RigidBodyInstanceParam;
 class RigidBodyMotionEntity;
 class RigidBodyMotionSensor;
@@ -66,7 +68,7 @@ public:
     enum class Type {
         FromShape = 0,
         Ragdoll = 1,
-        _2 = 2,
+        FromResource = 2,
         TerrainHeightField = 3,
         StaticCompoundBody = 4,
         CharacterController = 5,
@@ -76,37 +78,37 @@ public:
     enum class Flag {
         IsSensor = 1 << 0,
         UpdateRequested = 1 << 1,
-        _4 = 1 << 2,
+        ResetLinksRequested = 1 << 2,
         IsAddedToWorld = 1 << 3,
-        _10 = 1 << 4,
-        _20 = 1 << 5,
-        _40 = 1 << 6,
+        OwnsShape = 1 << 4,
+        UpdateRequestsDisabled = 1 << 5,
+        IgnoreImpulses = 1 << 6,
         /// Indicates whether the Havok collidable has been configured to use a higher quality type.
         HighQualityCollidable = 1 << 7,
         UseSystemTimeFactor = 1 << 8,
-        _200 = 1 << 9,
-        _400 = 1 << 10,
-        _800 = 1 << 11,
-        _1000 = 1 << 12,
-        _2000 = 1 << 13,
-        _4000 = 1 << 14,
-        _8000 = 1 << 15,
-        _10000 = 1 << 16,
+        DisableRayHit = 1 << 9,
+        GravitySuspended = 1 << 10,
+        WaterRequestQueued = 1 << 11,
+        WaterfallRequestQueued = 1 << 12,
+        WaterContactTerrain = 1 << 13,
+        WaterContactBody = 1 << 14,
+        WaterContactWaterfall = 1 << 15,
+        WaterContactMaterial = 1 << 16,
         FixedWithImpulsePreserved = 1 << 17,
         Fixed = 1 << 18,
         Frozen = 1 << 19,
-        _100000 = 1 << 20,
-        _200000 = 1 << 21,
-        _400000 = 1 << 22,
-        _800000 = 1 << 23,
-        _1000000 = 1 << 24,
-        _2000000 = 1 << 25,
-        _4000000 = 1 << 26,
-        _8000000 = 1 << 27,
+        IgnoreWaterContact = 1 << 20,
+        IgnoreWaterFlow = 1 << 21,
+        NotStoppedByEvent = 1 << 22,
+        ConstraintReplacementTarget = 1 << 23,
+        NoContactReaction = 1 << 24,
+        DeactivationDisabled = 1 << 25,
+        DeactivationDisabledByCollision = 1 << 26,
+        DeactivationDisabledByCharController = 1 << 27,
         NoCharStandingOn = 1 << 28,
-        _20000000 = 1 << 29,
-        _40000000 = 1 << 30,
-        _80000000 = 1 << 31,
+        SavedMotionTypeKeyframed = 1 << 29,
+        SavedMotionTypeFixed = 1 << 30,
+        SavedMotionTypeDynamic = 1 << 31,
     };
 
     enum class MotionFlag {
@@ -127,11 +129,11 @@ public:
         DirtyInertiaLocal = 1 << 12,
         DirtyDampingOrGravityFactor = 1 << 13,
         DirtyShape = 1 << 14,
-        _8000 = 1 << 15,
-        _10000 = 1 << 16,
-        _20000 = 1 << 17,
-        _40000 = 1 << 18,
-        _80000 = 1 << 19,
+        DirtyCollisionFilterInfo = 1 << 15,
+        DirtyDeactivation = 1 << 16,
+        ActivationRequested = 1 << 17,
+        UnfixRequested = 1 << 18,
+        DirtyLinkedAccessors = 1 << 19,
     };
 
     enum class AlsoLockWorld : bool { Yes = true, No = false };
@@ -152,7 +154,7 @@ public:
     };
 
     RigidBody(Type type, ContactLayerType layer_type, hkpRigidBody* hk_body,
-              const sead::SafeString& name, sead::Heap* heap, bool set_flag_10);
+              const sead::SafeString& name, sead::Heap* heap, bool owns_shape);
     ~RigidBody() override;
 
     virtual float getVolume();
@@ -191,10 +193,10 @@ public:
     void resetLinkedRigidBody() const;
     /// Set the linked rigid body. This can only be done for sensor rigid bodies.
     bool setLinkedRigidBody(RigidBody* body);
-    bool isSensorMotionFlag40000Set() const;
+    bool isSensorIgnoringLinkedBodyMotion() const;
 
     // 0x0000007100f8d840
-    void removeFromWorldImmediately(void* arg = nullptr);
+    void removeFromWorldImmediately(RemoveEntityBatch* batch = nullptr);
 
     MotionType getMotionType() const;
 
@@ -202,7 +204,7 @@ public:
     // 0x0000007100f8e110
     void removeFromWorldImmediatelyAndResetLinks();
     // 0x0000007100f8e3fc
-    void x_11_addToWorld();
+    void addToWorldImmediately(AddEntityBatch* batch);
 
     CollisionInfo* getCollisionInfo() const { return mCollisionInfo; }
     void setCollisionInfo(CollisionInfo* info);
@@ -216,8 +218,8 @@ public:
     void setFixed(Fixed fixed, PreserveVelocities preserve_velocities);
     void resetFrozenState();
 
-    // 0x0000007100f8ee50 - FIXME: figure out what type is
-    void requestSuspendGravity(u8 type);
+    // 0x0000007100f8ee50
+    void requestSuspendGravity(u8 num_frames);
 
     void updateCollidableQualityType(bool high_quality);
 
@@ -318,11 +320,11 @@ public:
 
     void changeMotionType(MotionType motion_type);
     // 0x0000007100f9045c - calls a bunch of Havok world functions
-    void doChangeMotionType(MotionType x, MotionType y);
+    void doChangeMotionType(MotionType new_type, MotionType old_type);
     // 0x0000007100f908c8
     void processUpdateFlags();
-    void updateMotionTypeRelatedFlags();
-    void triggerScheduledMotionTypeChange();
+    void saveMotionType();
+    void restoreSavedMotionType();
 
     // region Velocity
 
@@ -472,20 +474,20 @@ public:
     void setColImpulseScale(float scale);
     float getColImpulseScale() const;
 
-    void clearEntityMotionFlag4(bool clear);
-    bool isEntityMotionFlag4Off() const;
+    void clearIgnoreMaxImpulse(bool clear);
+    bool isIgnoreMaxImpulseOff() const;
 
-    void setEntityMotionFlag8(bool set);
-    bool isEntityMotionFlag8On() const;
+    void setForceImpulseOnContact(bool set);
+    bool isForceImpulseOnContact() const;
 
-    void clearEntityMotionFlag10(bool clear);
-    bool isEntityMotionFlag10Off() const;
+    void clearExcludeOwnMotionFromImpulse(bool clear);
+    bool isExcludeOwnMotionFromImpulseOff() const;
 
-    void clearEntityMotionFlag20(bool clear);
-    bool isEntityMotionFlag20Off() const;
+    void clearIgnoreNormalForImpulse(bool clear);
+    bool isIgnoreNormalForImpulseOff() const;
 
-    void setEntityMotionFlag80(bool set);
-    bool isEntityMotionFlag80On() const;
+    void setMagneMassScalingSource(bool set);
+    bool isMagneMassScalingSource() const;
 
     bool isSensor() const { return mFlags.isOn(Flag::IsSensor); }
     bool isEntity() const { return !mFlags.isOn(Flag::IsSensor); }
@@ -497,8 +499,8 @@ public:
     const auto& getMotionFlags() const { return mMotionFlags; }
     void resetMotionFlagDirect(const MotionFlag flag) { mMotionFlags.reset(flag); }
     void setMotionFlag(MotionFlag flag);
-    void setFlag200() { mFlags.set(Flag::_200); }
-    void resetFlag200() { mFlags.reset(Flag::_200); }
+    void disableRayHit() { mFlags.set(Flag::DisableRayHit); }
+    void enableRayHit() { mFlags.reset(Flag::DisableRayHit); }
 
     hkpRigidBody* getHkBody() const { return mHkBody; }
 
@@ -516,17 +518,18 @@ public:
     // 0x0000007100f950ac
     bool x_105();
 
-    void setEntityMotionFlag40(bool set);
-    bool isEntityMotionFlag40On() const;
+    void setImpulseEntryRequested(bool set);
+    bool isImpulseEntryRequested() const;
 
-    // 0x0000007100f955c0 - FIXME: types
-    void processUpdateRequests(void* data = nullptr, void* data2 = nullptr);
+    // 0x0000007100f955c0
+    void processUpdateRequests(AddEntityBatch* add_batch = nullptr,
+                               RemoveEntityBatch* remove_batch = nullptr);
 
-    void clearFlag2000000(bool clear);
-    void clearFlag4000000(bool clear);
-    void clearFlag8000000(bool clear);
+    void setDeactivationEnabled(bool enabled);
+    void setDeactivationEnabledForCollision(bool enabled);
+    void setDeactivationEnabledForCharController(bool enabled);
     // 0x0000007100f95f8c
-    void setContactListenerEnabledMaybe(bool unk);
+    void setMagneMassScalingActive(bool active);
 
     void lock();
     void lock(AlsoLockWorld also_lock_world);
@@ -542,14 +545,14 @@ public:
     // 0x0000007100f96a4c
     void setRequestMgrContactCallbackEnabled(bool enabled);
 
-    void setEntityMotionFlag1(bool set);
-    bool isEntityMotionFlag1On() const;
+    void setAlwaysCharacterMassScaling(bool set);
+    bool isAlwaysCharacterMassScaling() const;
 
-    void setEntityMotionFlag100(bool set);
-    bool isEntityMotionFlag100On() const;
+    void setDisableCharacterMassScaling(bool set);
+    bool isCharacterMassScalingDisabled() const;
 
-    void setEntityMotionFlag200(bool set);
-    bool isEntityMotionFlag200On() const;
+    void setStopTimerSmallMass(bool set);
+    bool isStopTimerSmallMass() const;
 
     // FIXME: return type
     virtual u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
@@ -583,22 +586,22 @@ public:
     // Internal.
     void setUseSystemTimeFactor(bool use) { mFlags.change(Flag::UseSystemTimeFactor, use); }
     // Internal.
-    void clearFlag400000(bool clear) { mFlags.change(Flag::_400000, !clear); }
+    void setStoppedByEvent(bool stopped) { mFlags.change(Flag::NotStoppedByEvent, !stopped); }
     // Internal.
     void setUpdateRequestedFlag() { mFlags.set(Flag::UpdateRequested); }
     // Internal.
-    void setFlag20() { mFlags.set(Flag::_20); }
+    void disableUpdateRequests() { mFlags.set(Flag::UpdateRequestsDisabled); }
 
     // Internal.
     void onCollisionAdded() {
         if (mCollisionCount.increment() == 0)
-            clearFlag4000000(false);
+            setDeactivationEnabledForCollision(false);
     }
 
     // Internal.
     void onCollisionRemoved() {
         if (mCollisionCount.decrement() == 1)
-            clearFlag4000000(true);
+            setDeactivationEnabledForCollision(true);
     }
 
 protected:

@@ -13,7 +13,7 @@ public:
 
     CylinderWaterRigidBody(hkpRigidBody* hk_body, CylinderWaterShape* shape,
                            ContactLayerType layer_type, const sead::SafeString& name,
-                           bool set_flag_10, sead::Heap* heap);
+                           bool owns_shape, sead::Heap* heap);
     ~CylinderWaterRigidBody() override;
 
     void setRadius(float radius);
@@ -30,12 +30,12 @@ public:
 protected:
     Shape* getShape_() override;
     const Shape* getShape_() const override;
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 
 private:
     CylinderWaterShape* mShape{};
-    float _d8 = 1.0;
+    float mFlowSpeedFactor = 1.0;
 };
 
 }  // namespace ksys::phys
