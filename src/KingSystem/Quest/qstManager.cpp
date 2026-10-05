@@ -38,7 +38,7 @@ void Manager::cleanUp() {
 bool Manager::isQuestActor(act::Actor* actor) const {
     for (int i = 0; i < mQuests.size(); ++i) {
         const auto* quest = mQuests[i];
-        if (quest->x_6(actor))
+        if (quest->isCurrentStepAttentionOffActor(actor))
             return true;
     }
     return false;
@@ -52,14 +52,14 @@ void Manager::auto0(act::Actor* actor) {
     for (int i = 0; i < mQuests.size(); ++i) {
         Quest* quest = mQuests[i];
         if (quest->_c != 2 && quest->isActive())
-            quest->x_9(actor);
+            quest->acquireCurrentStepIndicatorActorLink(actor);
     }
 }
 
 bool Manager::auto4(act::Actor* actor) const {
     auto end = mQuests.end();
     for (auto it = mQuests.begin(); it != end; ++it) {
-        if (it->_c != 2 && it->isActive() && !it->x_8(actor))
+        if (it->_c != 2 && it->isActive() && !it->acquireCurrentStepActorLink(actor))
             return false;
     }
     return true;
@@ -119,7 +119,7 @@ bool Manager::setQuestStep(const sead::SafeString& quest_name, const sead::SafeS
         if (copy_name) {
             it->_e0 = true;
             if (step_name.isEmpty())
-                it->_e8.copy(it->x_11());
+                it->_e8.copy(it->getNextStepName());
         }
         if (force_run_telop)
             it->mForceRunTelop = true;

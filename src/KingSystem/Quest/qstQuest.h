@@ -18,19 +18,19 @@ public:
     bool isStepUnderSize() const { return (_140 >= 0 && _140 < mSteps.size()); }
     bool isNextStepUnderSize() const { return (_140 + 1 >= 0 && _140 + 1 < mSteps.size()); }
 
-    bool x_6(act::Actor* actor) const;
+    bool isCurrentStepAttentionOffActor(act::Actor* actor) const;
     void initFlags(gdt::Manager* gdm);
     bool isActive() const;
     void setField31();
     ActorData* sub_7100FDA5F8(int idx);
 
-    bool x_1() const;
-    void x_3();
-    bool x_7() const;
-    bool x_8(act::Actor* actor);
-    void x_9(act::Actor* actor);
+    bool isCancelled() const;
+    void markReady();
+    bool isCurrentStepAttentionOff() const;
+    bool acquireCurrentStepActorLink(act::Actor* actor);
+    void acquireCurrentStepIndicatorActorLink(act::Actor* actor);
     bool getDisplayName(sead::BufferedSafeString* out);
-    const char* x_11();
+    const char* getNextStepName();
 
     u32 _8 = 0;
     u32 _c = 0;
