@@ -43,8 +43,8 @@ public:
     Rail();
     virtual ~Rail();
     virtual void init(MubinIter* iter, sead::Heap* heap);
-    virtual s32 x_18() { return 0; }
-    virtual s32 x_20() { return 0; }
+    virtual bool isConnectable() { return false; }
+    virtual bool isRoute() { return false; }
     virtual RailPoint* allocPoint(sead::Heap* heap);
     virtual bool parse(MubinIter* iter);
     virtual void x_38() {}
@@ -117,6 +117,8 @@ class RailGuide : public Rail {
 public:
     RailGuide();
     ~RailGuide() override;
+
+    RailPoint* allocPoint(sead::Heap* heap) override;
 };
 
 class RailRemainGuide : public RailGuide {
@@ -150,9 +152,7 @@ public:
     RailConnectable();
     ~RailConnectable() override;
 
-    s32 x_18() override { return 1; }
-    s32 x_20() override { return 1; }
-    void x_38() override {}
+    bool isConnectable() override { return true; }
 };
 
 class RailRoutePoint : public RailConnectablePoint {
@@ -175,7 +175,9 @@ public:
     RailRoute();
     ~RailRoute() override;
 
+    bool isRoute() override { return true; }
     bool parse(MubinIter* iter) override;
+    void x_38() override {}
 
     bool isRenderEnabled() const;
     bool isAutoPlacementEnabled() const;
