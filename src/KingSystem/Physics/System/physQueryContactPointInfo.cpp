@@ -5,8 +5,9 @@
 namespace ksys::phys {
 
 QueryContactPointInfo* QueryContactPointInfo::make(sead::Heap* heap, int num_points,
-                                                   const sead::SafeString& name, int a, int b) {
-    auto* info = new (heap) QueryContactPointInfo(name, a, b, 0);
+                                                   const sead::SafeString& name, int overflow_mode,
+                                                   int ignore_separated_points) {
+    auto* info = new (heap) QueryContactPointInfo(name, overflow_mode, ignore_separated_points, 0);
     info->allocPoints(heap, num_points);
     return info;
 }

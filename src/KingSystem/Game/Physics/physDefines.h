@@ -239,13 +239,13 @@ union EntityCollisionMask {
         ContactLayer getLayer() const { return int(layer); }
 
         void addGroundHit(GroundHit hit) {
-            raw |= (1 << hit) << decltype(ground_hit_types)::StartBit();
+            raw |= (1 << hit) << decltype(ignored_ground_hit_types)::StartBit();
         }
 
         u32 raw;
-        util::BitField<0, 1, u32> unk;
-        util::BitField<8, 16, u32> ground_hit_types;
-        util::BitField<23, 1, u32> unk23;
+        util::BitField<0, 1, u32> ignored_by_npc_queries;
+        util::BitField<8, 16, u32> ignored_ground_hit_types;
+        util::BitField<23, 1, u32> ignores_hit_all;
         util::BitField<25, 5, u32> layer;
     };
 
@@ -305,7 +305,7 @@ union EntityQueryCollisionMask {
     constexpr bool operator!=(EntityQueryCollisionMask rhs) const { return raw != rhs.raw; }
 
     util::BitField<0, NumRegularEntityLayers, u32> layer_mask;
-    util::BitField<17, 1, u32> unk;
+    util::BitField<17, 1, u32> is_npc_query;
     util::BitField<18, 10, u32> group_handler_index;
     util::BitField<28, 4, GroundHit::ValueType, u32> ground_hit_type;
     u32 raw;

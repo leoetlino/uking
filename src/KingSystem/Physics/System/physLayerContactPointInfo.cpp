@@ -5,9 +5,11 @@
 namespace ksys::phys {
 
 LayerContactPointInfo* LayerContactPointInfo::make(sead::Heap* heap, int num, int num2,
-                                                   const sead::SafeString& name, int a, int b,
-                                                   int c) {
-    return System::instance()->allocLayerContactPointInfo(heap, num, num2, name, a, b, c);
+                                                   const sead::SafeString& name, int overflow_mode,
+                                                   int ignore_separated_points,
+                                                   int ignore_disabled_contacts) {
+    return System::instance()->allocLayerContactPointInfo(
+        heap, num, num2, name, overflow_mode, ignore_separated_points, ignore_disabled_contacts);
 }
 
 void LayerContactPointInfo::free(LayerContactPointInfo* instance) {
@@ -15,11 +17,11 @@ void LayerContactPointInfo::free(LayerContactPointInfo* instance) {
 }
 
 bool LayerContactPointInfo::registerLayerPair(ContactLayer layer1, ContactLayer layer2,
-                                              bool enabled) {
+                                              bool do_not_delay_callback) {
     if (mLayerType == ContactLayerType::Invalid)
         mLayerType = getContactLayerType(layer1);
 
-    if (!isPairUnknown(layer1, layer2))
+    if (!isLayerPairUnregistered(layer1, layer2))
         return false;
 
     // Add a new one.
@@ -29,12 +31,16 @@ bool LayerContactPointInfo::registerLayerPair(ContactLayer layer1, ContactLayer 
 
     entry->layer1 = layer1;
     entry->layer2 = layer2;
-    entry->enabled = enabled;
-    [&] { System::instance()->registerContactPointLayerPair(this, layer1, layer2, enabled); }();
+    entry->do_not_delay_callback = do_not_delay_callback;
+    [&] {
+        System::instance()->registerContactPointLayerPair(this, layer1, layer2,
+                                                          do_not_delay_callback);
+    }();
     return true;
 }
 
-bool LayerContactPointInfo::isPairUnknown(ContactLayer layer1, ContactLayer layer2) const {
+bool LayerContactPointInfo::isLayerPairUnregistered(ContactLayer layer1,
+                                                    ContactLayer layer2) const {
     for (int i = 0; i < mLayerEntries.size(); ++i) {
         const auto* entry = mLayerEntries[i];
         if (int(layer1) == entry->layer1 && int(layer2) == entry->layer2)
@@ -45,8 +51,11 @@ bool LayerContactPointInfo::isPairUnknown(ContactLayer layer1, ContactLayer laye
     return true;
 }
 
-LayerContactPointInfo::LayerContactPointInfo(const sead::SafeString& name, int a, int b, int c)
-    : ContactPointInfoBase(name, a, b, c) {}
+LayerContactPointInfo::LayerContactPointInfo(const sead::SafeString& name, int overflow_mode,
+                                             int ignore_separated_points,
+                                             int ignore_disabled_contacts)
+    : ContactPointInfoBase(name, overflow_mode, ignore_separated_points, ignore_disabled_contacts) {
+}
 
 LayerContactPointInfo::~LayerContactPointInfo() = default;
 

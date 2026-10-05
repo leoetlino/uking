@@ -19,7 +19,7 @@ public:
     struct LayerEntry {
         ContactLayer layer1;
         ContactLayer layer2;
-        bool enabled;
+        bool do_not_delay_callback;
     };
 
     class Iterator {
@@ -73,16 +73,19 @@ public:
     using ContactCallback = sead::IDelegate1R<const ContactEvent&, bool>;
 
     static LayerContactPointInfo* make(sead::Heap* heap, int num, int num2,
-                                       const sead::SafeString& name, int a, int b, int c);
+                                       const sead::SafeString& name, int overflow_mode,
+                                       int ignore_separated_points, int ignore_disabled_contacts);
     static void free(LayerContactPointInfo* instance);
 
-    LayerContactPointInfo(const sead::SafeString& name, int a, int b, int c);
+    LayerContactPointInfo(const sead::SafeString& name, int overflow_mode,
+                          int ignore_separated_points, int ignore_disabled_contacts);
     ~LayerContactPointInfo() override;
     void freePoints() override;
     virtual void allocPoints(sead::Heap* heap, int num, int num2);
 
-    bool registerLayerPair(ContactLayer layer1, ContactLayer layer2, bool enabled = true);
-    bool isPairUnknown(ContactLayer layer1, ContactLayer layer2) const;
+    bool registerLayerPair(ContactLayer layer1, ContactLayer layer2,
+                           bool do_not_delay_callback = true);
+    bool isLayerPairUnregistered(ContactLayer layer1, ContactLayer layer2) const;
 
     ContactLayerType getLayerType() const { return mLayerType; }
 

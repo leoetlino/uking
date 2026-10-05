@@ -5,16 +5,20 @@
 namespace ksys::phys {
 
 ContactPointInfo* ContactPointInfo::make(sead::Heap* heap, int num, const sead::SafeString& name,
-                                         int a, int b, int c) {
-    return System::instance()->allocContactPointInfo(heap, num, name, a, b, c);
+                                         int overflow_mode, int ignore_separated_points,
+                                         int ignore_disabled_contacts) {
+    return System::instance()->allocContactPointInfo(
+        heap, num, name, overflow_mode, ignore_separated_points, ignore_disabled_contacts);
 }
 
 void ContactPointInfo::free(ContactPointInfo* instance) {
     System::instance()->freeContactPointInfo(instance);
 }
 
-ContactPointInfo::ContactPointInfo(const sead::SafeString& name, int a, int b, int c)
-    : ContactPointInfoBase(name, a, b, c) {}
+ContactPointInfo::ContactPointInfo(const sead::SafeString& name, int overflow_mode,
+                                   int ignore_separated_points, int ignore_disabled_contacts)
+    : ContactPointInfoBase(name, overflow_mode, ignore_separated_points, ignore_disabled_contacts) {
+}
 
 ContactPointInfo::~ContactPointInfo() = default;
 

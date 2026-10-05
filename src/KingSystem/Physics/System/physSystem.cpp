@@ -63,9 +63,11 @@ void System::removeSystemGroupHandler(SystemGroupHandler* handler) {
 }
 
 ContactPointInfo* System::allocContactPointInfo(sead::Heap* heap, int num,
-                                                const sead::SafeString& name, int a, int b,
-                                                int c) const {
-    return mContactMgr->makeContactPointInfo(heap, num, name, a, b, c);
+                                                const sead::SafeString& name, int overflow_mode,
+                                                int ignore_separated_points,
+                                                int ignore_disabled_contacts) const {
+    return mContactMgr->makeContactPointInfo(heap, num, name, overflow_mode,
+                                             ignore_separated_points, ignore_disabled_contacts);
 }
 
 void System::freeContactPointInfo(ContactPointInfo* info) const {
@@ -104,9 +106,12 @@ SystemGroupHandler* System::addSystemGroupHandler(ContactLayerType layer_type, i
 }
 
 LayerContactPointInfo* System::allocLayerContactPointInfo(sead::Heap* heap, int num, int num2,
-                                                          const sead::SafeString& name, int a,
-                                                          int b, int c) const {
-    return mContactMgr->makeLayerContactPointInfo(heap, num, num2, name, a, b, c);
+                                                          const sead::SafeString& name,
+                                                          int overflow_mode,
+                                                          int ignore_separated_points,
+                                                          int ignore_disabled_contacts) const {
+    return mContactMgr->makeLayerContactPointInfo(
+        heap, num, num2, name, overflow_mode, ignore_separated_points, ignore_disabled_contacts);
 }
 
 void System::freeLayerContactPointInfo(LayerContactPointInfo* info) const {
@@ -120,9 +125,9 @@ void System::registerContactPointInfo(ContactPointInfo* info) const {
 }
 
 void System::registerContactPointLayerPair(LayerContactPointInfo* info, ContactLayer layer1,
-                                           ContactLayer layer2, bool enabled) {
+                                           ContactLayer layer2, bool do_not_delay_callback) {
     mContactListeners[static_cast<s32>(info->getLayerType())]->addLayerPairForContactPointInfo(
-        info, layer1, layer2, enabled);
+        info, layer1, layer2, do_not_delay_callback);
 }
 
 ContactLayerCollisionInfo* System::trackLayerPair(ContactLayer layer_a, ContactLayer layer_b) {

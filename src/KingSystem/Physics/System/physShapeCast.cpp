@@ -27,10 +27,10 @@ ShapeCast::ShapeCast(RigidBody* body, QueryContactPointInfo* contact_point_info,
 ShapeCast::~ShapeCast() = default;
 
 void ShapeCast::reset() {
-    _40 = {};
-    _41 = {};
-    _42 = {};
-    _44 = {};
+    mHasHit = {};
+    mHasHitAtStart = {};
+    mHasHitDuringCast = {};
+    mQueryState = {};
 
     if (mContactPointInfo)
         mContactPointInfo->getNumContactPoints() = 0;
@@ -94,7 +94,7 @@ bool ShapeCast::doExecuteQuery(hkpCdPointCollector& cast_collector,
 
         // Reset internal state.
         cast_collector.reset();
-        if (_44 == 1)
+        if (mQueryState == 1)
             reset();
 
         System::instance()->getHavokWorld(layer_type)->m_collisionInput->m_weldClosestPoints =
@@ -107,21 +107,21 @@ bool ShapeCast::doExecuteQuery(hkpCdPointCollector& cast_collector,
     auto* body = mBody;
     for (int i = 0, n = start_collector->getNumHits(); i < n; ++i) {
         if (registerContactPoint(start_collector->getHits()[i], body, ClampDistance::Yes)) {
-            _40 = true;
-            if (mMode == Mode::_0)
+            mHasHit = true;
+            if (mMode == Mode::Closest)
                 break;
         }
     }
 
-    _41 = _40;
+    mHasHitAtStart = mHasHit;
 
-    if (mMode == Mode::_2 || !_40) {
+    if (mMode == Mode::All || !mHasHit) {
         int num_hits = 0;
         FilteredClosestCdPointCollector* filtered_collector = nullptr;
         hkpAllCdPointCollector* all_point_collector = nullptr;
         bool ok = false;
 
-        if (mMode == Mode::_1 || mMode == Mode::_0) {
+        if (mMode == Mode::AllStartPointsAndClosest || mMode == Mode::Closest) {
             filtered_collector = static_cast<FilteredClosestCdPointCollector*>(&cast_collector);
             num_hits = 1;
             ok = filtered_collector->hasHit();
@@ -133,18 +133,18 @@ bool ShapeCast::doExecuteQuery(hkpCdPointCollector& cast_collector,
 
         if (ok) {
             for (int i = 0; i < num_hits; ++i) {
-                const auto& point = mMode == Mode::_2 ? all_point_collector->getHits()[i] :
-                                                        filtered_collector->getHit();
+                const auto& point = mMode == Mode::All ? all_point_collector->getHits()[i] :
+                                                         filtered_collector->getHit();
                 if (registerContactPoint(point, body, ClampDistance::No))
-                    _40 = true;
+                    mHasHit = true;
             }
         }
 
-        _42 = _40;
+        mHasHitDuringCast = mHasHit;
     }
 
-    _44 = 1;
-    return _40;
+    mQueryState = 1;
+    return mHasHit;
 }
 
 bool ShapeCast::registerContactPoint(const hkpRootCdPoint& point, RigidBody* body,
@@ -153,7 +153,7 @@ bool ShapeCast::registerContactPoint(const hkpRootCdPoint& point, RigidBody* bod
     if (!hit_entity)
         return false;
 
-    if (!mContactPointInfo->testContactPointDistance(point.getContact().getDistance()))
+    if (!mContactPointInfo->acceptsPointDistance(point.getContact().getDistance()))
         return false;
 
     auto* hit_body = getRigidBody(*hit_entity);
