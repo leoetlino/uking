@@ -27,7 +27,7 @@ public:
     // clang-format on
 
 private:
-    void doCreate_(u8*, u32, sead::Heap*) override {}
+    void doCreate_(u8* buffer, u32 buffer_size, sead::Heap* heap) override;
     bool parse_(u8* data, size_t size, sead::Heap* heap) override;
 
     agl::utl::ParameterList mParamList;
