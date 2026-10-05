@@ -314,9 +314,9 @@ void RayCast::shapeRayCastImpl(hkpWorldRayCastOutput* output, RigidBody* body) {
     input.m_from = toHkVec4(from);
     input.m_to = toHkVec4(to);
 
-    System::instance()->incrementWorldUnkCounter(ContactLayerType::Entity);
+    System::instance()->incrementWorldQueryRefCount(ContactLayerType::Entity);
     auto world_guard = sead::makeScopeGuard(
-        [&] { System::instance()->decrementWorldUnkCounter(ContactLayerType::Entity); });
+        [&] { System::instance()->decrementWorldQueryRefCount(ContactLayerType::Entity); });
 
     auto* collidable = body->getHkBody()->getCollidable();
 
@@ -500,7 +500,7 @@ void RayHitCollector::addRayHit(const hkpCdBody& cdBody,
     if (isIgnoredGroundHit(cdBody, hitInfo))
         return;
 
-    if (System::instance()->getEntityContactListenerField91() &&
+    if (System::instance()->isIgnoringObjectAndNpcContacts() &&
         mLayerType == ContactLayerType::Entity &&
         EntityContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
         // XXX: Similar checks show up in various other collectors. Can this be refactored?
@@ -530,7 +530,7 @@ void NormalCheckingRayHitCollector::addRayHit(const hkpCdBody& cdBody,
     if (!checkNormal(cdBody, hitInfo))
         return;
 
-    if (System::instance()->getEntityContactListenerField91() &&
+    if (System::instance()->isIgnoringObjectAndNpcContacts() &&
         mLayerType == ContactLayerType::Entity &&
         EntityContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
         return;

@@ -1269,7 +1269,7 @@ void RigidBody::computeVelocities(sead::Vector3f* linear_velocity, sead::Vector3
 
 float RigidBody::getInvDeltaTime() const {
     const float time_factor = getTimeFactor();
-    return time_factor == 0 ? 0 : (1.f / (time_factor * System::instance()->get64()));
+    return time_factor == 0 ? 0 : (1.f / (time_factor * System::instance()->getDeltaTime()));
 }
 
 void RigidBody::setCenterOfMassInLocal(const sead::Vector3f& center) {
@@ -1870,7 +1870,7 @@ void RigidBody::onInvalidParameter(int code) {
 
 void RigidBody::notifyUserTag(int code) {
     if (mUserTag)
-        mUserTag->m7(this, code);
+        mUserTag->onInvalidParameter(this, code);
 }
 
 void RigidBody::updateDeactivation() {

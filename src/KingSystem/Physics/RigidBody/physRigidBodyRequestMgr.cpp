@@ -15,18 +15,18 @@ RigidBodyRequestMgr::RigidBodyRequestMgr() = default;
 
 RigidBodyRequestMgr::~RigidBodyRequestMgr() {
     for (int i = 0; i < NumRigidBodyBuffers; ++i) {
-        mRigidBodies1[i].freeBuffer();
+        mPendingUpdateBodies[i].freeBuffer();
         mOobRigidBodies[i].freeBuffer();
     }
 
-    _38.freeBuffer();
-    _50.freeBuffer();
+    mConstraintRequests.freeBuffer();
+    mConstraintsToProcess.freeBuffer();
     mImpulseEntries.freeBuffer();
-    _b0.freeBuffer();
-    _c8.freeBuffer();
-    _e0.freeBuffer();
-    _120.freeBuffer();
-    _138.freeBuffer();
+    mWaterContactRequests.freeBuffer();
+    mGravitySuspensionRequests.freeBuffer();
+    mFreeGravitySuspensionRequests.freeBuffer();
+    mWaterContactRequestPool.freeBuffer();
+    mGravitySuspensionRequestPool.freeBuffer();
     mImpulseEntriesPool.freeBuffer();
     mMotionAccessors.freeBuffer();
 
@@ -37,30 +37,30 @@ RigidBodyRequestMgr::~RigidBodyRequestMgr() {
 }
 
 void RigidBodyRequestMgr::init(sead::Heap* heap) {
-    constexpr int Buffer138Size = 0x800;
+    constexpr int NumGravitySuspensionRequests = 0x800;
 
     mImpulseEntriesPool.allocBufferAssert(MaxNumImpulseEntries, heap);
     mNumActiveImpulseEntries = 0;
 
-    _120.allocBufferAssert(0x100, heap);
-    _130 = 0;
+    mWaterContactRequestPool.allocBufferAssert(0x100, heap);
+    mNumWaterContactRequests = 0;
 
     for (int i = 0; i < NumRigidBodyBuffers; ++i) {
-        mRigidBodies1[i].alloc(0x2000, heap);
+        mPendingUpdateBodies[i].alloc(0x2000, heap);
         mOobRigidBodies[i].alloc(0x100, heap);
     }
 
-    _38.alloc(0x800, heap);
-    _50.alloc(0x800, heap);
+    mConstraintRequests.alloc(0x800, heap);
+    mConstraintsToProcess.alloc(0x800, heap);
     mImpulseEntries.alloc(0x100, heap);
-    _b0.alloc(0x100, heap);
+    mWaterContactRequests.alloc(0x100, heap);
     mMotionAccessors.allocBuffer(0x400, heap);
-    _138.allocBufferAssert(Buffer138Size, heap);
-    _c8.alloc(0x800, heap);
-    _e0.alloc(Buffer138Size, heap);
+    mGravitySuspensionRequestPool.allocBufferAssert(NumGravitySuspensionRequests, heap);
+    mGravitySuspensionRequests.alloc(0x800, heap);
+    mFreeGravitySuspensionRequests.alloc(NumGravitySuspensionRequests, heap);
 
-    for (int i = 0; i < Buffer138Size; ++i) {
-        _e0.push(&_138[i]);
+    for (int i = 0; i < NumGravitySuspensionRequests; ++i) {
+        mFreeGravitySuspensionRequests.push(&mGravitySuspensionRequestPool[i]);
     }
 
     mNumEntitiesInWorld = 0;
@@ -117,12 +117,12 @@ void RigidBodyRequestMgr::processOobRigidBodyEntries(ContactLayerType layer_type
 }
 
 bool RigidBodyRequestMgr::pushRigidBody(ContactLayerType type, RigidBody* body) {
-    static_cast<void>(mRigidBodies1[int(type)].getSize());
-    return mRigidBodies1[int(type)].push(body);
+    static_cast<void>(mPendingUpdateBodies[int(type)].getSize());
+    return mPendingUpdateBodies[int(type)].push(body);
 }
 
 void RigidBodyRequestMgr::addEntityToWorld(ContactLayerType type, hkpEntity* entity) {
-    static_cast<void>(System::instance()->isActorSystemIdle());
+    static_cast<void>(System::instance()->canModifyWorldDirectly());
 
     auto* world = System::instance()->getHavokWorld(type);
     if (world->addEntity(entity))
@@ -130,7 +130,7 @@ void RigidBodyRequestMgr::addEntityToWorld(ContactLayerType type, hkpEntity* ent
 }
 
 void RigidBodyRequestMgr::removeEntityFromWorld(ContactLayerType type, hkpEntity* entity) {
-    static_cast<void>(System::instance()->isActorSystemIdle());
+    static_cast<void>(System::instance()->canModifyWorldDirectly());
 
     auto* world = System::instance()->getHavokWorld(type);
     if (world->removeEntity(entity))
