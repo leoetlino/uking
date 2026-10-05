@@ -44,8 +44,8 @@ public:
     enum class SyncToThisBone : bool;
 
     struct Config {
-        float _0;
-        float _4;
+        float penetration_impulse_target_speed;
+        float max_penetration_impulse;
         float _8;
         float _c;
         float _10;
@@ -82,7 +82,7 @@ public:
     void setUserTag(UserTag* tag);
     void setSystemGroupHandler(SystemGroupHandler* handler);
     // 0x0000007101221424
-    void setBoneWeightMaybe(int index, float value);
+    void setBoneAnimationWeight(int index, float value);
     void setContactPointInfo(ContactPointInfo* info);
     void enableContactLayer(ContactLayer layer);
     void disableContactLayer(ContactLayer layer);
@@ -122,8 +122,8 @@ public:
     /// Sets whether a bone is keyframed.
     /// @param sync_to_this_bone Only used if keyframed = true.
     void setKeyframed(int bone_index, bool keyframed, SyncToThisBone sync_to_this_bone);
-    void setUnk1(u8 value);
-    static void setMaximumUnk1(u8 value);
+    void setPenetrationCheckInterval(u8 value);
+    static void setMaxPenetrationCheckInterval(u8 value);
     void stopForcingKeyframing();
 
     void update();
@@ -144,23 +144,24 @@ private:
     };
 
     enum class Flag {
-        _2 = 0x2,
-        _4 = 0x4,
-        _8 = 0x8,
+        WasAtRest = 0x2,
+        IsAtRest = 0x4,
+        NoGroundPenetration = 0x8,
         AddedToWorld = 0x10,
-        _20 = 0x20,
-        _40 = 0x40,
-        _80 = 0x80,
+        PendingControllerReset = 0x20,
+        BoneTransformsValid = 0x40,
+        AllBoneAnimationWeightsZero = 0x80,
         /// Whether this instance has been registered with the RagdollInstanceMgr.
         IsRegistered = 0x100,
-        _200 = 0x200,
+        UseGravityFactorOverride = 0x200,
+        DrivenByFirstController = 0x400,
     };
 
-    struct BoneVectors {
-        sead::Vector3f _0 = sead::Vector3f::zero;
-        sead::Vector3f _c = sead::Vector3f::zero;
-        u16 _18 = -1;
-        u16 _1a = -1;
+    struct GroundPenetrationHit {
+        sead::Vector3f position = sead::Vector3f::zero;
+        sead::Vector3f normal = sead::Vector3f::zero;
+        u16 parent_bone_index = -1;
+        u16 bone_index = -1;
     };
 
     bool doInit(const RagdollParam* param, sead::DirectResource* res, gsys::Model* model,
@@ -183,17 +184,14 @@ private:
     SystemGroupHandler* mGroupHandler = nullptr;
     /// The rigid bodies of bones.
     sead::Buffer<RagdollRigidBody*> mBoneRigidBodies;
-    // TODO: rename
-    sead::Buffer<BoneVectors> mBoneVectors;
-    // TODO: rename
-    sead::Buffer<u32> mBoneStuff;
+    sead::Buffer<GroundPenetrationHit> mGroundPenetrationHits;
+    sead::Buffer<u32> mBonePenetrationStates;
     hkRootLevelContainer* mRootLevelContainer = nullptr;
     sead::SafeString mName;
     u8* mRagdollData = nullptr;
     u32 mRagdollDataSize = 0;
-    hkQsTransformf* mTransform = nullptr;
-    // TODO: rename
-    sead::Buffer<float> mBoneStuff2;
+    hkQsTransformf* mWorldFromModelTransform = nullptr;
+    sead::Buffer<float> mBoneAnimationWeights;
     float _98 = 0.1;
     float mGravityFactorOverride = 1.0;
     sead::Buffer<hkQsTransformf> mBoneTransforms;
@@ -205,10 +203,10 @@ private:
     sead::BitFlag32 mKeyframedBonesToSyncTo;
     gsys::Model* mModel = nullptr;
     RigidBody* mExtraRigidBody = nullptr;
-    void* _e0 = nullptr;
-    u8 _e8;
-    u8 _e9;
-    u8 _ea = 0;
+    RigidBody* mRootBonePenetrationCheckParent = nullptr;
+    u8 mPenetrationCheckCountdown;
+    u8 mPenetrationCheckInterval;
+    u8 mNumGroundPenetrationHits = 0;
     u8 mBoneIndexForExtraRigidBody = 0;
     ContactLayer mContactLayer = ContactLayer::EntityRagdoll;
 };
