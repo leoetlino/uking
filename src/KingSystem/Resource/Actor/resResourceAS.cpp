@@ -98,7 +98,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
             return false;
         }
 
-        _3ba |= (*it)->m7() & 1;
+        _3ba |= (*it)->needsExtraSkeletalAnims() & 1;
 
         switch ((*it)->getTypeIndex()) {
         case 62:
@@ -126,9 +126,9 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
     applyResParameterArchive(archive);
 
     if (auto* first = getFirstResource()) {
-        u32 x = first->m4();
+        u32 x = first->getMaxSkeletalAnimCount();
         x = x >= 0xff ? 0xff : x;
-        u32 y = first->m5();
+        u32 y = first->getMaxNonSkeletalAnimCount();
         y = y >= 0xff ? 0xff : y;
 
         _3b8 = x;

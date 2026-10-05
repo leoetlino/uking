@@ -25,10 +25,10 @@ public:
 
     bool parse(const ParseArgs& args);
 
-    virtual int m4() { return 0; }
-    virtual int m5() { return 0; }
-    virtual int m6() { return 1; }
-    virtual int m7() { return 0; }
+    virtual int getMaxSkeletalAnimCount() { return 0; }
+    virtual int getMaxNonSkeletalAnimCount() { return 0; }
+    virtual int getMaxElementWorkCount() { return 1; }
+    virtual int needsExtraSkeletalAnims() { return 0; }
 
     static const sead::SafeString& getDefaultStr();
     static ASResource* make(const ParseArgs& args);
@@ -57,9 +57,15 @@ public:
     ASResourceWithChildren(const ASResourceWithChildren&) = delete;
     auto operator=(const ASResourceWithChildren&) = delete;
 
-    int m4() override { return callOnChildren_(&ASResource::m4); }
-    int m5() override { return callOnChildren_(&ASResource::m5); }
-    int m6() override { return callOnChildren_(&ASResource::m6) + 1; }
+    int getMaxSkeletalAnimCount() override {
+        return callOnChildren_(&ASResource::getMaxSkeletalAnimCount);
+    }
+    int getMaxNonSkeletalAnimCount() override {
+        return callOnChildren_(&ASResource::getMaxNonSkeletalAnimCount);
+    }
+    int getMaxElementWorkCount() override {
+        return callOnChildren_(&ASResource::getMaxElementWorkCount) + 1;
+    }
 
 protected:
     using MemberFunction = int (ASResource::*)();
@@ -81,7 +87,7 @@ public:
 protected:
     bool doParse(const ParseArgs& args) override;
     int callOnChildren_(MemberFunction fn) override;
-    int m7() override;
+    int needsExtraSkeletalAnims() override;
 
     agl::utl::ParameterObj mObj;
     agl::utl::Parameter<bool> mSequenceLoop;
@@ -143,7 +149,7 @@ public:
     using ASAssetResource::ASAssetResource;
 
 protected:
-    int m5() override { return 1; }
+    int getMaxNonSkeletalAnimCount() override { return 1; }
 };
 
 class ASSkeltalAssetResource : public ASAssetResource {
@@ -156,6 +162,7 @@ public:
     const auto& getResetMorph() const { return *mResetMorph; }
 
 protected:
+    int getMaxSkeletalAnimCount() override { return 1; }
     bool doParse(const ParseArgs& args) override;
 
     agl::utl::Parameter<int> mInitAnmDriven;
