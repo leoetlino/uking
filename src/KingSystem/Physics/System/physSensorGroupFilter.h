@@ -10,8 +10,8 @@ public:
     explicit SensorSystemGroupHandler(int i) : SystemGroupHandler(i, ContactLayerType::Sensor) {}
 
     u32 makeCollisionFilterInfo(u32 info, ContactLayer layer, GroundHit ground_hit) override;
-    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) override;
-    bool m8() override;
+    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) override;
+    bool hasValidIndex() override;
 };
 
 class SensorGroupFilter : public GroupFilter {
@@ -38,15 +38,15 @@ public:
 
     u32 makeCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit) override;
     ContactLayer getCollisionFilterInfoLayer(u32 info) override;
-    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) override;
+    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) override;
     GroundHit getQueryCollisionMaskGroundHit(u32 info) override;
     void getCollisionFilterInfoLayerAndGroundHit(u32 info, ContactLayer* layer,
                                                  GroundHit* ground_hit) override;
     const char* getCollisionFilterInfoLayerText(u32 info) override;
     u32 getCollisionFilterInfoGroupHandlerIdx(u32 info) override;
 
-    virtual u32 makeCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit, u32 unk5,
-                                        u32 unk10);
+    virtual u32 makeRagdollCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit,
+                                               u32 bone_index, u32 parent_bone_index);
     virtual void setSensorLayerCollisionEnabledMask(ContactLayer layer, u32 mask);
 
 protected:
@@ -89,14 +89,14 @@ inline u32 SensorSystemGroupHandler::makeCollisionFilterInfo(u32 info, ContactLa
 }
 
 inline u32 SensorSystemGroupHandler::makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit,
-                                                            bool unk) {
+                                                            bool is_npc_query) {
     SensorQueryCollisionMask mask;
     mask.layer_mask = layer_mask;
     mask.group_handler_index.Init(getIndex());
     return mask.raw;
 }
 
-inline bool SensorSystemGroupHandler::m8() {
+inline bool SensorSystemGroupHandler::hasValidIndex() {
     return getIndex() > 0 && getIndex() < 0x400;
 }
 
@@ -109,7 +109,7 @@ inline ContactLayer SensorGroupFilter::getCollisionFilterInfoLayer(u32 info) {
 }
 
 inline u32 SensorGroupFilter::makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit,
-                                                     bool unk) {
+                                                     bool is_npc_query) {
     SensorQueryCollisionMask mask;
     mask.layer_mask = layer_mask;
     return mask.raw;
@@ -135,8 +135,9 @@ inline u32 SensorGroupFilter::getCollisionFilterInfoGroupHandlerIdx(u32 info) {
     return SensorCollisionMask(info).group_handler_index;
 }
 
-inline u32 SensorGroupFilter::makeCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit,
-                                                      u32 unk5, u32 unk10) {
+inline u32 SensorGroupFilter::makeRagdollCollisionFilterInfo(ContactLayer layer,
+                                                             GroundHit ground_hit, u32 bone_index,
+                                                             u32 parent_bone_index) {
     return 0;
 }
 

@@ -18,9 +18,9 @@ public:
 
     virtual ~SystemGroupHandler() = default;
     virtual u32 makeCollisionFilterInfo(u32 info, ContactLayer layer, GroundHit ground_hit) = 0;
-    virtual u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) = 0;
+    virtual u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) = 0;
     virtual u32 makeRagdollCollisionFilterInfo(GroundHit ground_hit);
-    virtual bool m8() = 0;
+    virtual bool hasValidIndex() = 0;
 
     int getIndex() const { return mIndex; }
     ContactLayerType getLayerType() const { return mLayerType; }
@@ -88,7 +88,7 @@ public:
     virtual ContactLayer getCollisionFilterInfoLayer(u32 info) = 0;
 
     /// Make a query collision mask with the specified layer mask, ground hit type and flag.
-    virtual u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) = 0;
+    virtual u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) = 0;
 
     /// Get the ground hit type from a query collision mask.
     virtual GroundHit getQueryCollisionMaskGroundHit(u32 info) = 0;
@@ -100,7 +100,7 @@ public:
     /// Get the layer from a collision filter mask.
     virtual const char* getCollisionFilterInfoLayerText(u32 info) = 0;
 
-    virtual void setLayerCustomMask(ContactLayer layer, u32 mask) {}
+    virtual void setLayerIgnorableMask(ContactLayer layer, u32 mask) {}
 
     /// Get the group handler index from a collision filter mask.
     virtual u32 getCollisionFilterInfoGroupHandlerIdx(u32 info) = 0;
