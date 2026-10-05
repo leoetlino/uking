@@ -12,7 +12,7 @@ public:
     class IHandler {
     public:
         virtual ~IHandler() = default;
-        virtual void handleAck(const MessageAck& ack) = 0;
+        virtual void handleAck(const MessageAck& ack) {}
     };
 
     explicit MessageTransceiverTxOnly(IHandler& handler);
