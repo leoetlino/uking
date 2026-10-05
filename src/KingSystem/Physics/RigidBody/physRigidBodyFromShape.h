@@ -50,7 +50,7 @@ public:
                                             SystemGroupHandler* group_handler);
 
     RigidBodyFromShape(hkpRigidBody* hkp_rigid_body, ContactLayerType layer_type,
-                       const sead::SafeString& name, bool set_flag_10, sead::Heap* heap);
+                       const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
     ~RigidBodyFromShape() override;
 
     ShapeType getShapeType() const;
@@ -72,7 +72,7 @@ private:
     /// Create a RigidBodyFromShape with the specified shape and rigid body parameters.
     /// @param shape Must not be null.
     template <typename RigidBodyT, typename ShapeT>
-    static RigidBodyT* make(ShapeT* shape, bool set_flag_10, const RigidBodyInstanceParam& param,
+    static RigidBodyT* make(ShapeT* shape, bool owns_shape, const RigidBodyInstanceParam& param,
                             sead::Heap* heap);
 
     /// Create a RigidBodyFromShape with the specified shape, rigid body parameters and handler.

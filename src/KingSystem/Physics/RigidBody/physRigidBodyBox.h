@@ -13,7 +13,7 @@ public:
     static BoxRigidBody* make(RigidBodyInstanceParam* param, sead::Heap* heap);
 
     BoxRigidBody(hkpRigidBody* hk_body, BoxShape* shape, ContactLayerType layer_type,
-                 const sead::SafeString& name, bool set_flag_10, sead::Heap* heap);
+                 const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
     ~BoxRigidBody() override;
 
     /// Set the box extents and trigger a shape update.
@@ -33,7 +33,7 @@ public:
 protected:
     Shape* getShape_() override;
     const Shape* getShape_() const override;
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 
     BoxShape* mShape;

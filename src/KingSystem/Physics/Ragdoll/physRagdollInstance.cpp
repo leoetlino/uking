@@ -348,14 +348,14 @@ void RagdollInstance::setUseSystemTimeFactor(bool use) {
         body->setUseSystemTimeFactor(use);
 }
 
-void RagdollInstance::clearFlag400000(bool clear) {
+void RagdollInstance::setStoppedByEvent(bool stopped) {
     for (auto* body : mBoneRigidBodies)
-        body->clearFlag400000(clear);
+        body->setStoppedByEvent(stopped);
 }
 
-void RagdollInstance::setEntityMotionFlag200(bool set) {
+void RagdollInstance::setStopTimerSmallMass(bool set) {
     for (auto* body : mBoneRigidBodies)
-        body->setEntityMotionFlag200(set);
+        body->setStopTimerSmallMass(set);
 }
 
 void RagdollInstance::setFixed(Fixed fixed, PreserveVelocities preserve_velocities) {

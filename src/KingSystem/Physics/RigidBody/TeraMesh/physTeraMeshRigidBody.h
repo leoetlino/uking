@@ -10,7 +10,7 @@ public:
 
     ~TeraMeshRigidBody() override;
 
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 };
 

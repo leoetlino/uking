@@ -11,11 +11,11 @@ class RigidBodyMotionSensor : public MotionAccessor {
     SEAD_RTTI_OVERRIDE(RigidBodyMotionSensor, MotionAccessor)
 public:
     enum class Flag {
-        _40000 = 1 << 18,
+        IgnoreLinkedBodyMotion = 1 << 18,
         HasExtraTranslateForLinkedRigidBody = 1 << 19,
         HasExtraRotateForLinkedRigidBody = 1 << 20,
-        HasLinkedRigidBodyWithoutFlag10 = 1 << 21,
-        _400000 = 1 << 22,
+        SharesShapeWithLinkedBody = 1 << 21,
+        AddToWorldBlocked = 1 << 22,
     };
 
     explicit RigidBodyMotionSensor(RigidBody* body);
@@ -46,7 +46,7 @@ public:
     void setLinkedRigidBody(RigidBody* body);
     void resetLinkedRigidBody();
     RigidBody* getLinkedRigidBody() const;
-    bool isFlag40000Set() const;
+    bool isIgnoringLinkedBodyMotion() const;
     void copyMotionFromLinkedRigidBody();
 
     ~RigidBodyMotionSensor() override;

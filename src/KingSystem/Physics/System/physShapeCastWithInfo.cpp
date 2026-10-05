@@ -74,7 +74,7 @@ SphereCast::SphereCast(ContactLayer layer, GroundHit ground_hit, SystemGroupHand
     sphere_param.groundhit = ground_hit;
     sphere_param.motion_type = MotionType::Fixed;
     sphere_param.system_group_handler = group_handler;
-    sphere_param._90 = true;
+    sphere_param.create_without_motion_accessor = true;
 
     mSphere = SphereRigidBody::make(&sphere_param, heap);
     mBody = mSphere;

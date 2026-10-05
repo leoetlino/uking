@@ -34,7 +34,7 @@ SphereBasedClosestPointQuery::SphereBasedClosestPointQuery(
     sphere_param.contact_layer = layer;
     sphere_param.groundhit = ground_hit;
     sphere_param.motion_type = MotionType::Fixed;
-    sphere_param._90 = true;
+    sphere_param.create_without_motion_accessor = true;
     sphere_param.system_group_handler = group_handler;
     makeAndSetSphere(&sphere_param, heap, position);
 }
@@ -51,7 +51,7 @@ SphereBasedClosestPointQuery::SphereBasedClosestPointQuery(
     sphere_param.radius = sphere_radius;
     sphere_param.contact_layer = layer;
     sphere_param.motion_type = MotionType::Fixed;
-    sphere_param._90 = true;
+    sphere_param.create_without_motion_accessor = true;
     makeAndSetSphere(&sphere_param, heap, position, &layer_mask_builder);
 }
 
@@ -70,7 +70,7 @@ SphereBasedClosestPointQuery::SphereBasedClosestPointQuery(
     sphere_param.receiver_mask = mask;
     sphere_param.motion_type = MotionType::Fixed;
     sphere_param.system_group_handler = group_handler;
-    sphere_param._90 = true;
+    sphere_param.create_without_motion_accessor = true;
     makeAndSetSphere(&sphere_param, heap, position);
 }
 
