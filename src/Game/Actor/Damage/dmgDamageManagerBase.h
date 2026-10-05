@@ -89,7 +89,7 @@ public:
 
     virtual s32 getAttackInfoFieldBC() { return 0; }
     virtual s32 getAttackInfoFlagFC() { return 0; }
-    virtual s32 m42() { return 0; }
+    virtual s32 isDamageItemFlagCheckDisabled() { return 0; }
     virtual void applyAttackInfoStateChangeDamage() {}
     virtual bool canTakeDamage();
     virtual void applyRequestedDamage() {}
@@ -97,8 +97,7 @@ public:
     virtual bool addDamage(s64 a2, s32 damage, s32 df48, s32 minDmg, s32 f50, s32 f54, s32 f40);
     virtual void onApplyDamage() {}
 
-    // Something depending on damage type?
-    virtual s32 m49(s32 damageTypeMaybe);
+    virtual s32 getDamageFromTypeIndex(s32 damageTypeMaybe);
 
     void clearCallbacks();
     void resetDamageInfo();
