@@ -25,11 +25,11 @@ class PolytopeShape : public Shape {
     SEAD_RTTI_OVERRIDE(PolytopeShape, Shape)
 public:
     enum class Flag {
-        _1 = 1 << 0,
+        DirtyVertices = 1 << 0,
         InvalidVolume = 1 << 1,
-        _4 = 1 << 2,
+        DirtyScaleTransform = 1 << 2,
         HasCustomScale = 1 << 3,
-        _10 = 1 << 4,
+        HavokShapeChanged = 1 << 4,
     };
 
     static PolytopeShape* make(const PolytopeShapeParam& param, sead::Heap* heap);

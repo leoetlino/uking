@@ -87,7 +87,7 @@ public:
     bool no_hit_ground = false;
     bool no_hit_water = false;
     bool no_char_standing_on = false;
-    bool _90 = false;
+    bool create_without_motion_accessor = false;
 
     bool isDynamicSensor() const {
         return getContactLayerType(contact_layer) == ContactLayerType::Sensor &&

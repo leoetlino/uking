@@ -40,13 +40,13 @@ bool PolytopeShape::setVertex(int vertex_idx, const sead::Vector3f& vertex) {
     if (mFlags.isOn(Flag::HasCustomScale)) {
         mScale = 1.0;
         mFlags.reset(Flag::HasCustomScale);
-        mFlags.set(Flag::_4);
-        mFlags.set(Flag::_10);
+        mFlags.set(Flag::DirtyScaleTransform);
+        mFlags.set(Flag::HavokShapeChanged);
     }
 
     if (vertex != mVertices[vertex_idx]) {
         mVertices[vertex_idx] = vertex;
-        mFlags.set(Flag::_1 | Flag::InvalidVolume);
+        mFlags.set(Flag::DirtyVertices | Flag::InvalidVolume);
         mVolume = -1.0;
         return true;
     }
@@ -60,7 +60,7 @@ void PolytopeShape::setNumVertices(u16 num) {
 
     mNumVertices = num;
     mVolume = -1.0;
-    mFlags.set(Flag::_1 | Flag::InvalidVolume);
+    mFlags.set(Flag::DirtyVertices | Flag::InvalidVolume);
 }
 
 PolytopeShape::PolytopeShape(const PolytopeShapeParam& param)
@@ -89,10 +89,11 @@ const hkpShape* PolytopeShape::getHavokShape() const {
     return mHavokShape;
 }
 
+// NON_MATCHING: incomplete (vertices shape rebuild and volume recalculation are missing)
 const hkpShape* PolytopeShape::updateHavokShape() {
     bool return_new_shape = false;
 
-    if (mFlags.isOn(Flag::_1)) {
+    if (mFlags.isOn(Flag::DirtyVertices)) {
         auto lock = sead::makeScopedLock(mCS);
 
         mHavokShape->setConnectivity(nullptr, false);
@@ -116,10 +117,10 @@ const hkpShape* PolytopeShape::updateHavokShape() {
             mFlags.reset(Flag::InvalidVolume);
         }
 
-        mFlags.reset(Flag::_1);
+        mFlags.reset(Flag::DirtyVertices);
     }
 
-    if (mFlags.isOn(Flag::_4)) {
+    if (mFlags.isOn(Flag::DirtyScaleTransform)) {
         auto lock = sead::makeScopedLock(mCS);
 
         hkQsTransform transform;
@@ -130,13 +131,13 @@ const hkpShape* PolytopeShape::updateHavokShape() {
             mHavokShape, transform, hkpShapeContainer::REFERENCE_POLICY_IGNORE);
         mTransformShape->setReferenceCount(ref_count);
 
-        mFlags.reset(Flag::_4);
+        mFlags.reset(Flag::DirtyScaleTransform);
     }
 
     setMaterialMask(mMaterialMask);
 
-    if (mFlags.isOn(Flag::_10)) {
-        mFlags.reset(Flag::_10);
+    if (mFlags.isOn(Flag::HavokShapeChanged)) {
+        mFlags.reset(Flag::HavokShapeChanged);
     } else if (!return_new_shape) {
         return nullptr;
     }
@@ -149,7 +150,7 @@ void PolytopeShape::setScale(float scale) {
     const float volume = mVolume;
 
     mScale *= scale;
-    mFlags.set(Flag::_4);
+    mFlags.set(Flag::DirtyScaleTransform);
     if (sead::Mathf::equalsEpsilon(mScale, 1.0)) {
         mScale = 1.0;
     }
@@ -162,7 +163,7 @@ void PolytopeShape::setScale(float scale) {
     const bool had_custom_scale = mFlags.isOn(Flag::HasCustomScale);
     const bool has_custom_scale = mScale != 1.0;
     mFlags.change(Flag::HasCustomScale, has_custom_scale);
-    mFlags.change(Flag::_10, had_custom_scale != has_custom_scale);
+    mFlags.change(Flag::HavokShapeChanged, had_custom_scale != has_custom_scale);
 
     if (!invalid_volume) {
         setVolume(scale * scale * scale * volume);

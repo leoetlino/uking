@@ -544,8 +544,8 @@ void ContactMgr::setImpulseEntryContactInfo(RigidBody* body_a, RigidBody* body_b
     const auto linvel_b =
         computeLinearVelocity(*entry->bodies[1], entry->linear_vels[1], contact_point_pos);
 
-    const bool is_flag_off =
-        entry->bodies[0]->isEntityMotionFlag20Off() && entry->bodies[1]->isEntityMotionFlag20Off();
+    const bool is_flag_off = entry->bodies[0]->isIgnoreNormalForImpulseOff() &&
+                             entry->bodies[1]->isIgnoreNormalForImpulseOff();
 
     /// The pre-collision relative velocity.
     const auto relative_vel = linvel_a - linvel_b;
@@ -583,11 +583,11 @@ inline void ContactMgr::processImpulseEntry(const ImpulseEntry& entry) {
     RigidBody* body_a = entry.bodies[0];
     RigidBody* body_b = entry.bodies[1];
 
-    if (body_a->isEntityMotionFlag40On())
-        body_a->setEntityMotionFlag40(false);
+    if (body_a->isImpulseEntryRequested())
+        body_a->setImpulseEntryRequested(false);
 
-    if (body_b->isEntityMotionFlag40On())
-        body_b->setEntityMotionFlag40(false);
+    if (body_b->isImpulseEntryRequested())
+        body_b->setImpulseEntryRequested(false);
 
     float impulse_a = 0.0f;
     float impulse_b = 0.0f;
@@ -613,10 +613,10 @@ inline void ContactMgr::processImpulseEntry(const ImpulseEntry& entry) {
 
     const auto add_impulse = [impulse_a, impulse_b](RigidBody* body1, RigidBody* body2,
                                                     float impulse) {
-        if (body1->isEntityMotionFlag10Off())
+        if (body1->isExcludeOwnMotionFromImpulseOff())
             impulse = impulse_a + impulse_b;
 
-        if (body2->isEntityMotionFlag8On() ||
+        if (body2->isForceImpulseOnContact() ||
             (body1->getMaxImpulse() >= 0 && impulse > body1->getMaxImpulse())) {
             System::instance()->getRigidBodyRequestMgr()->addImpulse(body1, body2, impulse);
         }

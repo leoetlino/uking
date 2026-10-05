@@ -31,11 +31,11 @@ public:
 protected:
     Shape* getShape_() override;
     const Shape* getShape_() const override;
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 
     BoxWaterShape* mShape;
-    u32 _d8{};
+    float mFlowSpeedFactor{};
 };
 
 }  // namespace ksys::phys

@@ -18,22 +18,22 @@ class RigidBodyMotionEntity : public MotionAccessor {
     SEAD_RTTI_OVERRIDE(RigidBodyMotionEntity, MotionAccessor)
 public:
     enum class Flag {
-        _1 = 1 << 0,
-        _2 = 1 << 1,
-        _4 = 1 << 2,
-        _8 = 1 << 3,
-        _10 = 1 << 4,
-        _20 = 1 << 5,
-        _40 = 1 << 6,
-        _80 = 1 << 7,
-        _100 = 1 << 8,
-        _200 = 1 << 9,
+        AlwaysCharacterMassScaling = 1 << 0,
+        RegisteredInRequestMgr = 1 << 1,
+        IgnoreMaxImpulse = 1 << 2,
+        ForceImpulseOnContact = 1 << 3,
+        ExcludeOwnMotionFromImpulse = 1 << 4,
+        IgnoreNormalForImpulse = 1 << 5,
+        ImpulseEntryRequested = 1 << 6,
+        MagneMassScalingSource = 1 << 7,
+        DisableCharacterMassScaling = 1 << 8,
+        StopTimerSmallMass = 1 << 9,
     };
 
     enum class ContactFlag {
-        _1 = 1 << 0,
-        _2 = 1 << 1,
-        _4 = 1 << 2,
+        InMagneMassScalingGroup = 1 << 0,
+        LeftMagneMassScalingGroup = 1 << 1,
+        JustJoinedMagneMassScalingGroup = 1 << 2,
     };
 
     explicit RigidBodyMotionEntity(RigidBody* body);

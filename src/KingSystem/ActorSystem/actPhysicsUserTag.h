@@ -23,9 +23,9 @@ public:
     void onMaxPositionExceeded(phys::RigidBody* body) override;
     void onImpulse(phys::RigidBody* body_a, phys::RigidBody* body_b, float impulse_a) override;
     void onBodyShapeChanged(phys::RigidBody* body) override;
-    void m5() override;
+    void onWaterContact(const phys::FluidContactRequest& request) override;
     const sead::SafeString& getName() const override;
-    void m7(phys::RigidBody* rigid_body, int a) override;
+    void onInvalidParameter(phys::RigidBody* body, int code) override;
     const sead::SafeString& getName(phys::RigidBody* rigid_body) const override;
 
 private:

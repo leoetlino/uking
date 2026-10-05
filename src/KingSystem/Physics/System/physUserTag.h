@@ -6,6 +6,7 @@
 
 namespace ksys::phys {
 
+struct FluidContactRequest;
 class RigidBody;
 
 class UserTag {
@@ -18,9 +19,9 @@ public:
     virtual void onMaxPositionExceeded(RigidBody* body);
     virtual void onImpulse(RigidBody* body_a, RigidBody* body_b, float impulse_a);
     virtual void onBodyShapeChanged(RigidBody* body);
-    virtual void m5();
+    virtual void onWaterContact(const FluidContactRequest& request);
     virtual const sead::SafeString& getName() const { return sead::SafeString::cEmptyString; }
-    virtual void m7(RigidBody* rigid_body, int a);
+    virtual void onInvalidParameter(RigidBody* body, int code);
     virtual const sead::SafeString& getName(RigidBody* rigid_body) const {
         return sead::SafeString::cEmptyString;
     }

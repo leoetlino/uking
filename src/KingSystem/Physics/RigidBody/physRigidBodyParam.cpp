@@ -168,7 +168,7 @@ RigidBodyParam::createRigidBody(SystemGroupHandler* group_handler, sead::Heap* h
         param.extents = *info.bounding_extents;
         param.system_group_handler = group_handler;
         auto* body = BoxRigidBody::make(&param, heap);
-        body->setFlag20();
+        body->disableUpdateRequests();
         return body;
     }
 

@@ -30,7 +30,7 @@ namespace ksys::phys {
 constexpr float MinInertia = 0.001;
 
 RigidBody::RigidBody(Type type, ContactLayerType layer_type, hkpRigidBody* hk_body,
-                     const sead::SafeString& name, sead::Heap* heap, bool set_flag_10)
+                     const sead::SafeString& name, sead::Heap* heap, bool owns_shape)
     : mCS(heap), mHkBody(hk_body), mRigidBodyAccessor(hk_body), mType(type) {
     if (!name.isEmpty()) {
         mHkBody->setName(name.cstr());
@@ -46,7 +46,7 @@ RigidBody::RigidBody(Type type, ContactLayerType layer_type, hkpRigidBody* hk_bo
 
     mFlags.change(Flag::HighQualityCollidable, isCharacterControllerType());
     mFlags.change(Flag::IsSensor, layer_type == ContactLayerType::Sensor);
-    mFlags.change(Flag::_10, set_flag_10);
+    mFlags.change(Flag::OwnsShape, owns_shape);
     mFlags.set(Flag::UseSystemTimeFactor);
 }
 
@@ -160,8 +160,9 @@ bool RigidBody::createMotion(hkpMaxSizeMotion* motion, MotionType motion_type,
         break;
     }
 
-    if (mFlags.isOff(Flag::_2000000) && mFlags.isOff(Flag::_4000000) &&
-        mFlags.isOff(Flag::_8000000)) {
+    if (mFlags.isOff(Flag::DeactivationDisabled) &&
+        mFlags.isOff(Flag::DeactivationDisabledByCollision) &&
+        mFlags.isOff(Flag::DeactivationDisabledByCharController)) {
         mHkBody->enableDeactivation(false);
         mHkBody->enableDeactivation(true);
     }
@@ -193,7 +194,7 @@ void RigidBody::addToWorld() {
 
         if (isSensor()) {
             auto* accessor = sead::DynamicCast<RigidBodyMotionSensor>(mMotionAccessor);
-            if (accessor->hasFlag(RigidBodyMotionSensor::Flag::_400000))
+            if (accessor->hasFlag(RigidBodyMotionSensor::Flag::AddToWorldBlocked))
                 return;
         }
     }
@@ -211,7 +212,7 @@ void RigidBody::setMotionFlag(MotionFlag flag) {
 
     mMotionFlags.set(flag);
 
-    if (mFlags.isOff(Flag::_20) && mFlags.isOff(Flag::UpdateRequested)) {
+    if (mFlags.isOff(Flag::UpdateRequestsDisabled) && mFlags.isOff(Flag::UpdateRequested)) {
         mFlags.set(Flag::UpdateRequested);
         System::instance()->getRigidBodyRequestMgr()->pushRigidBody(getLayerType(), this);
     }
@@ -256,7 +257,7 @@ bool RigidBody::removeFromWorldAndResetLinks() {
     bool result = true;
 
     if (isAddedToWorld()) {
-        mFlags.reset(Flag::_20);
+        mFlags.reset(Flag::UpdateRequestsDisabled);
 
         if (mMotionFlags.isOn(MotionFlag::BodyAddRequested)) {
             mMotionFlags.reset(MotionFlag::BodyAddRequested);
@@ -273,19 +274,19 @@ bool RigidBody::removeFromWorldAndResetLinks() {
     if (isSensor()) {
         auto* accessor = getSensorMotionAccessor();
         if (accessor && accessor->getLinkedRigidBody() != nullptr) {
-            mFlags.reset(Flag::_20);
+            mFlags.reset(Flag::UpdateRequestsDisabled);
             resetLinkedRigidBody();
             result = false;
         }
-    } else if (mMotionAccessor &&
-               getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_2)) {
-        mFlags.reset(Flag::_20);
+    } else if (mMotionAccessor && getEntityMotionAccessor()->hasFlag(
+                                      RigidBodyMotionEntity::Flag::RegisteredInRequestMgr)) {
+        mFlags.reset(Flag::UpdateRequestsDisabled);
         getEntityMotionAccessor()->deregisterAllAccessors();
         result = false;
     }
 
-    mFlags.set(Flag::_20);
-    mFlags.set(Flag::_4);
+    mFlags.set(Flag::UpdateRequestsDisabled);
+    mFlags.set(Flag::ResetLinksRequested);
     return result;
 }
 
@@ -323,7 +324,7 @@ bool RigidBody::setLinkedRigidBody(RigidBody* body) {
     if (!isSensor())
         return false;
 
-    if (body != nullptr && hasFlag(Flag::_20))
+    if (body != nullptr && hasFlag(Flag::UpdateRequestsDisabled))
         return false;
 
     if (!mMotionAccessor)
@@ -337,11 +338,11 @@ bool RigidBody::setLinkedRigidBody(RigidBody* body) {
     return true;
 }
 
-bool RigidBody::isSensorMotionFlag40000Set() const {
+bool RigidBody::isSensorIgnoringLinkedBodyMotion() const {
     auto* accessor = getSensorMotionAccessor();
     if (!accessor)
         return false;
-    return accessor->isFlag40000Set();
+    return accessor->isIgnoringLinkedBodyMotion();
 }
 
 MotionType RigidBody::getMotionType() const {
@@ -440,21 +441,21 @@ void RigidBody::removeFromWorldImmediatelyAndResetLinks() {
     auto lock = makeScopedLock();
 
     if (isEntity()) {
-        if (mMotionAccessor &&
-            getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_2)) {
-            mFlags.reset(Flag::_20);
+        if (mMotionAccessor && getEntityMotionAccessor()->hasFlag(
+                                   RigidBodyMotionEntity::Flag::RegisteredInRequestMgr)) {
+            mFlags.reset(Flag::UpdateRequestsDisabled);
             getEntityMotionAccessor()->deregisterAllAccessors();
         }
     } else {  // isSensor()
         auto* accessor = getSensorMotionAccessor();
         if (accessor && accessor->getLinkedRigidBody() != nullptr) {
-            mFlags.reset(Flag::_20);
+            mFlags.reset(Flag::UpdateRequestsDisabled);
             resetLinkedRigidBody();
         }
     }
 
-    mFlags.set(Flag::_20);
-    mFlags.set(Flag::_4);
+    mFlags.set(Flag::UpdateRequestsDisabled);
+    mFlags.set(Flag::ResetLinksRequested);
 
     removeFromWorldImmediately();
 }
@@ -518,7 +519,7 @@ void RigidBody::setFixed(Fixed fixed, PreserveVelocities preserve_velocities) {
         mFlags.change(Flag::Fixed, bool(fixed));
         if (!bool(fixed)) {
             setMotionFlag(MotionFlag::DirtyLinearVelocity);
-            setMotionFlag(MotionFlag::_40000);
+            setMotionFlag(MotionFlag::UnfixRequested);
         }
     }
 
@@ -707,7 +708,7 @@ void RigidBody::setCollisionFilterInfo(u32 info) {
             resetCollisionFilterInfoForListShapes(shape);
 
         if (isAddedToWorld())
-            setMotionFlag(MotionFlag::_8000);
+            setMotionFlag(MotionFlag::DirtyCollisionFilterInfo);
     }
 }
 
@@ -910,11 +911,11 @@ void RigidBody::updateShape() {
     if (shape) {
         mHkBody->setShape(shape);
         if (isEntity() && mMotionAccessor)
-            mMotionAccessor->increment14();
+            mMotionAccessor->incrementShapeReplaceCount();
     } else {
         mHkBody->updateShape();
         if (isEntity() && mMotionAccessor)
-            mMotionAccessor->increment10();
+            mMotionAccessor->incrementShapeUpdateCount();
     }
 
     if (mUserTag)
@@ -922,7 +923,7 @@ void RigidBody::updateShape() {
 }
 
 void RigidBody::setScale(float scale) {
-    if (!hasFlag(Flag::_10))
+    if (!hasFlag(Flag::OwnsShape))
         return;
 
     if (scale <= 0.0)
@@ -991,46 +992,47 @@ void RigidBody::changeMotionType(MotionType motion_type) {
     processUpdateFlags();
 }
 
-void RigidBody::updateMotionTypeRelatedFlags() {
-    if (hasFlag(Flag::_20000000) || hasFlag(Flag::_80000000) || hasFlag(Flag::_40000000))
+void RigidBody::saveMotionType() {
+    if (hasFlag(Flag::SavedMotionTypeKeyframed) || hasFlag(Flag::SavedMotionTypeDynamic) ||
+        hasFlag(Flag::SavedMotionTypeFixed))
         return;
 
     switch (getMotionType()) {
     case MotionType::Dynamic:
-        mFlags.set(Flag::_80000000);
-        mFlags.reset(Flag::_20000000);
-        mFlags.reset(Flag::_40000000);
+        mFlags.set(Flag::SavedMotionTypeDynamic);
+        mFlags.reset(Flag::SavedMotionTypeKeyframed);
+        mFlags.reset(Flag::SavedMotionTypeFixed);
         return;
     case MotionType::Fixed:
-        mFlags.set(Flag::_40000000);
-        mFlags.reset(Flag::_20000000);
-        mFlags.reset(Flag::_80000000);
+        mFlags.set(Flag::SavedMotionTypeFixed);
+        mFlags.reset(Flag::SavedMotionTypeKeyframed);
+        mFlags.reset(Flag::SavedMotionTypeDynamic);
         return;
     case MotionType::Keyframed:
-        mFlags.set(Flag::_20000000);
-        mFlags.reset(Flag::_40000000);
-        mFlags.reset(Flag::_80000000);
+        mFlags.set(Flag::SavedMotionTypeKeyframed);
+        mFlags.reset(Flag::SavedMotionTypeFixed);
+        mFlags.reset(Flag::SavedMotionTypeDynamic);
         return;
     case MotionType::Unknown:
     case MotionType::Invalid:
         break;
     }
 
-    mFlags.reset(Flag::_20000000);
-    mFlags.reset(Flag::_40000000);
-    mFlags.reset(Flag::_80000000);
+    mFlags.reset(Flag::SavedMotionTypeKeyframed);
+    mFlags.reset(Flag::SavedMotionTypeFixed);
+    mFlags.reset(Flag::SavedMotionTypeDynamic);
 }
 
-void RigidBody::triggerScheduledMotionTypeChange() {
-    if (hasFlag(Flag::_20000000)) {
+void RigidBody::restoreSavedMotionType() {
+    if (hasFlag(Flag::SavedMotionTypeKeyframed)) {
         changeMotionType(MotionType::Keyframed);
-        mFlags.reset(Flag::_20000000);
-    } else if (hasFlag(Flag::_40000000)) {
+        mFlags.reset(Flag::SavedMotionTypeKeyframed);
+    } else if (hasFlag(Flag::SavedMotionTypeFixed)) {
         changeMotionType(MotionType::Fixed);
-        mFlags.reset(Flag::_40000000);
-    } else if (hasFlag(Flag::_80000000)) {
+        mFlags.reset(Flag::SavedMotionTypeFixed);
+    } else if (hasFlag(Flag::SavedMotionTypeDynamic)) {
         changeMotionType(MotionType::Dynamic);
-        mFlags.reset(Flag::_80000000);
+        mFlags.reset(Flag::SavedMotionTypeDynamic);
     }
 }
 
@@ -1329,7 +1331,7 @@ void RigidBody::applyLinearImpulse(const sead::Vector3f& impulse) {
     if (System::instance()->isPaused())
         return;
 
-    if (hasFlag(Flag::_400) || hasFlag(Flag::_40))
+    if (hasFlag(Flag::GravitySuspended) || hasFlag(Flag::IgnoreImpulses))
         return;
 
     if (util::isVectorInvalid(impulse)) {
@@ -1345,7 +1347,7 @@ void RigidBody::applyAngularImpulse(const sead::Vector3f& impulse) {
     if (System::instance()->isPaused())
         return;
 
-    if (hasFlag(Flag::_400) || hasFlag(Flag::_40))
+    if (hasFlag(Flag::GravitySuspended) || hasFlag(Flag::IgnoreImpulses))
         return;
 
     if (util::isVectorInvalid(impulse)) {
@@ -1361,7 +1363,7 @@ void RigidBody::applyPointImpulse(const sead::Vector3f& impulse, const sead::Vec
     if (System::instance()->isPaused())
         return;
 
-    if (hasFlag(Flag::_400) || hasFlag(Flag::_40))
+    if (hasFlag(Flag::GravitySuspended) || hasFlag(Flag::IgnoreImpulses))
         return;
 
     if (util::isVectorInvalid(impulse)) {
@@ -1547,8 +1549,8 @@ float RigidBody::getRestitutionScale() const {
 }
 
 float RigidBody::getEffectiveRestitutionScale() const {
-    if (hasFlag(Flag::_2000) || hasFlag(Flag::_4000) || hasFlag(Flag::_8000) ||
-        hasFlag(Flag::_10000)) {
+    if (hasFlag(Flag::WaterContactTerrain) || hasFlag(Flag::WaterContactBody) ||
+        hasFlag(Flag::WaterContactWaterfall) || hasFlag(Flag::WaterContactMaterial)) {
         return getRestitutionScale() * 0.5f;
     }
 
@@ -1567,64 +1569,67 @@ float RigidBody::getMaxImpulse() const {
     return getEntityMotionAccessor()->getMaxImpulse();
 }
 
-void RigidBody::clearEntityMotionFlag4(bool clear) {
+void RigidBody::clearIgnoreMaxImpulse(bool clear) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_4, !clear);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::IgnoreMaxImpulse, !clear);
 }
 
-bool RigidBody::isEntityMotionFlag4Off() const {
+bool RigidBody::isIgnoreMaxImpulseOff() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return !getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_4);
+    return !getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::IgnoreMaxImpulse);
 }
 
-void RigidBody::setEntityMotionFlag8(bool set) {
+void RigidBody::setForceImpulseOnContact(bool set) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_8, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::ForceImpulseOnContact, set);
 }
 
-bool RigidBody::isEntityMotionFlag8On() const {
+bool RigidBody::isForceImpulseOnContact() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_8);
+    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::ForceImpulseOnContact);
 }
 
-void RigidBody::clearEntityMotionFlag10(bool clear) {
+void RigidBody::clearExcludeOwnMotionFromImpulse(bool clear) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_10, !clear);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::ExcludeOwnMotionFromImpulse,
+                                          !clear);
 }
 
-bool RigidBody::isEntityMotionFlag10Off() const {
+bool RigidBody::isExcludeOwnMotionFromImpulseOff() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return !getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_10);
+    return !getEntityMotionAccessor()->hasFlag(
+        RigidBodyMotionEntity::Flag::ExcludeOwnMotionFromImpulse);
 }
 
-void RigidBody::clearEntityMotionFlag20(bool clear) {
+void RigidBody::clearIgnoreNormalForImpulse(bool clear) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_20, !clear);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::IgnoreNormalForImpulse,
+                                          !clear);
 }
 
-bool RigidBody::isEntityMotionFlag20Off() const {
+bool RigidBody::isIgnoreNormalForImpulseOff() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return !getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_20);
+    return !getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::IgnoreNormalForImpulse);
 }
 
-void RigidBody::setEntityMotionFlag80(bool set) {
+void RigidBody::setMagneMassScalingSource(bool set) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_80, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::MagneMassScalingSource, set);
 }
 
-bool RigidBody::isEntityMotionFlag80On() const {
+bool RigidBody::isMagneMassScalingSource() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_80);
+    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::MagneMassScalingSource);
 }
 
 void RigidBody::setColImpulseScale(float scale) {
@@ -1654,16 +1659,16 @@ bool RigidBody::hasConstraintWithUserData() {
     return false;
 }
 
-void RigidBody::setEntityMotionFlag40(bool set) {
+void RigidBody::setImpulseEntryRequested(bool set) {
     if (!isEntity() || isCharacterControllerType())
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_40, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::ImpulseEntryRequested, set);
 }
 
-bool RigidBody::isEntityMotionFlag40On() const {
+bool RigidBody::isImpulseEntryRequested() const {
     if (!isEntity() || !mMotionAccessor || isCharacterControllerType())
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_40);
+    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::ImpulseEntryRequested);
 }
 
 void RigidBody::resetInertiaAndCenterOfMass() {
@@ -1697,38 +1702,38 @@ void RigidBody::computeShapeVolumeMassProperties(float* volume, sead::Vector3f* 
     }
 }
 
-void RigidBody::clearFlag2000000(bool clear) {
-    if (mFlags.isOff(Flag::_2000000) == clear)
+void RigidBody::setDeactivationEnabled(bool enabled) {
+    if (mFlags.isOff(Flag::DeactivationDisabled) == enabled)
         return;
 
-    mFlags.change(Flag::_2000000, !clear);
+    mFlags.change(Flag::DeactivationDisabled, !enabled);
 
     if (isAddedToWorld())
-        setMotionFlag(MotionFlag::_10000);
+        setMotionFlag(MotionFlag::DirtyDeactivation);
     else
         updateDeactivation();
 }
 
-void RigidBody::clearFlag4000000(bool clear) {
-    if (mFlags.isOff(Flag::_4000000) == clear)
+void RigidBody::setDeactivationEnabledForCollision(bool enabled) {
+    if (mFlags.isOff(Flag::DeactivationDisabledByCollision) == enabled)
         return;
 
-    mFlags.change(Flag::_4000000, !clear);
+    mFlags.change(Flag::DeactivationDisabledByCollision, !enabled);
 
     if (isAddedToWorld())
-        setMotionFlag(MotionFlag::_10000);
+        setMotionFlag(MotionFlag::DirtyDeactivation);
     else
         updateDeactivation();
 }
 
-void RigidBody::clearFlag8000000(bool clear) {
-    if (mFlags.isOff(Flag::_8000000) == clear)
+void RigidBody::setDeactivationEnabledForCharController(bool enabled) {
+    if (mFlags.isOff(Flag::DeactivationDisabledByCharController) == enabled)
         return;
 
-    mFlags.change(Flag::_8000000, !clear);
+    mFlags.change(Flag::DeactivationDisabledByCharController, !enabled);
 
     if (isAddedToWorld())
-        setMotionFlag(MotionFlag::_10000);
+        setMotionFlag(MotionFlag::DirtyDeactivation);
     else
         updateDeactivation();
 }
@@ -1808,40 +1813,44 @@ hkpMotion* RigidBody::getMotion() const {
     return getHkBody()->getMotion();
 }
 
-void RigidBody::setEntityMotionFlag1(bool set) {
+void RigidBody::setAlwaysCharacterMassScaling(bool set) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_1, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::AlwaysCharacterMassScaling,
+                                          set);
 }
 
-bool RigidBody::isEntityMotionFlag1On() const {
+bool RigidBody::isAlwaysCharacterMassScaling() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_1);
+    return getEntityMotionAccessor()->hasFlag(
+        RigidBodyMotionEntity::Flag::AlwaysCharacterMassScaling);
 }
 
-void RigidBody::setEntityMotionFlag100(bool set) {
+void RigidBody::setDisableCharacterMassScaling(bool set) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_100, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::DisableCharacterMassScaling,
+                                          set);
 }
 
-bool RigidBody::isEntityMotionFlag100On() const {
+bool RigidBody::isCharacterMassScalingDisabled() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_100);
+    return getEntityMotionAccessor()->hasFlag(
+        RigidBodyMotionEntity::Flag::DisableCharacterMassScaling);
 }
 
-void RigidBody::setEntityMotionFlag200(bool set) {
+void RigidBody::setStopTimerSmallMass(bool set) {
     if (!isEntity() || !mMotionAccessor)
         return;
-    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::_200, set);
+    getEntityMotionAccessor()->changeFlag(RigidBodyMotionEntity::Flag::StopTimerSmallMass, set);
 }
 
-bool RigidBody::isEntityMotionFlag200On() const {
+bool RigidBody::isStopTimerSmallMass() const {
     if (!isEntity() || !mMotionAccessor)
         return false;
-    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::_200);
+    return getEntityMotionAccessor()->hasFlag(RigidBodyMotionEntity::Flag::StopTimerSmallMass);
 }
 
 void RigidBody::assertLayerType(ContactLayer layer) const {
@@ -1861,11 +1870,13 @@ void RigidBody::onInvalidParameter(int code) {
 
 void RigidBody::notifyUserTag(int code) {
     if (mUserTag)
-        mUserTag->m7(this, code);
+        mUserTag->onInvalidParameter(this, code);
 }
 
 void RigidBody::updateDeactivation() {
-    if (mFlags.isOn(Flag::_2000000) || mFlags.isOn(Flag::_4000000) || mFlags.isOn(Flag::_8000000)) {
+    if (mFlags.isOn(Flag::DeactivationDisabled) ||
+        mFlags.isOn(Flag::DeactivationDisabledByCollision) ||
+        mFlags.isOn(Flag::DeactivationDisabledByCharController)) {
         if (getHkBody()->isDeactivationEnabled())
             mHkBody->enableDeactivation(false);
     } else if (!getHkBody()->isDeactivationEnabled()) {
