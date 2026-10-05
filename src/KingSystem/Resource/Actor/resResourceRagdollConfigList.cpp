@@ -70,7 +70,7 @@ bool RagdollConfigList::finishParsing_() {
     return true;
 }
 
-bool RagdollConfigList::m7_() {
+bool RagdollConfigList::prepareUnload_() {
     for (auto& param : mImpulseParams)
         param.config = nullptr;
 

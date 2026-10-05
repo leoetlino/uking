@@ -88,7 +88,7 @@ public:
 
 protected:
     bool finishParsing_() override;
-    bool m7_() override;
+    bool prepareUnload_() override;
 
 private:
     u8 _2b0 = 0;

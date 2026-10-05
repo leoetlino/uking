@@ -22,10 +22,10 @@ class StaticCompound;
 class StaticCompoundRigidBodyGroup {
 public:
     struct Config {
-        float unk1 = 1;
+        float fade_out_velocity_scale = 1;
         int move_duration_ticks = 30;
-        float unk2 = 1;
-        float unk3 = 1;
+        float linear_velocity_blend_factor = 1;
+        float angular_velocity_blend_factor = 1;
     };
 
     struct Epsilons {

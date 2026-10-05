@@ -33,7 +33,7 @@ public:
     bool parse(Context*, sead::Heap* heap);
     bool finalize();
     bool finishParsing(Context* context);
-    bool m7();
+    bool prepareUnload();
 
     static constexpr size_t cLoadDataAlignment = 4;
 
@@ -42,7 +42,7 @@ protected:
     virtual bool parse_(u8* data, size_t size, sead::Heap* heap);
     virtual void finalize_() {}
     virtual bool finishParsing_() { return true; }
-    virtual bool m7_() { return true; }
+    virtual bool prepareUnload_() { return true; }
     virtual void m8_() {}
 
     u32 mAllocSize = 0;

@@ -99,7 +99,7 @@ bool StaticCompound::finishParsing_() {
     return true;
 }
 
-bool StaticCompound::m7_() {
+bool StaticCompound::prepareUnload_() {
     if (isAnyRigidBodyAddedToWorld() || isAnyRigidBodyAddedOrBeingAddedToWorld()) {
         removeFromWorld();
         // We cannot unload this resource immediately.
