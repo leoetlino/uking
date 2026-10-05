@@ -82,7 +82,7 @@ private:
     void resetDynamic();
     void unload();
     void unloadStaticMubin();
-    bool x_6();
+    bool prepareDynamicUnload();
     void x_5();
     int traverseStaticObjsForFarActors(sead::Vector3f* vec, PlacementActors* pa, int id);
 
@@ -100,8 +100,8 @@ private:
     void setStaticCompoundInstanceEnabled(PreActor* obj, bool enabled);
     void x_9();
 
-    void x_7(int idx, int unknown, s8 column, s8 row, const sead::SafeString& mubin_path,
-             const sead::SafeString& folder_and_file, int map_id_maybe, bool skip_load_static_map);
+    void init(int idx, int unknown, s8 column, s8 row, const sead::SafeString& mubin_path,
+              const sead::SafeString& folder_and_file, int map_id_maybe, bool skip_load_static_map);
 
     int getStaticCompoundIdFromPosition(const sead::Vector3f& pos) const;
     int getStaticCompoundIdFromPosition(float x, float z) const;
@@ -128,7 +128,7 @@ private:
     u16 _352;
     sead::Matrix34f mMat;
     int mDistanceToCurrentMapUnit;
-    u32 _388;  // 388 check x_7() called ....
+    u32 _388;  // 388 check init() called ....
     u32 _38c;  // 38c ... from MapMgr::ctor (a8)
     PlacementActors* mPa;
     PlacementMapMgr* mMgr;
