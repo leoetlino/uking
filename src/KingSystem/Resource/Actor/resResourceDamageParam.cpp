@@ -2,6 +2,8 @@
 
 namespace ksys::res {
 
+void DamageParam::doCreate_(u8* buffer, u32 buffer_size, sead::Heap* heap) {}
+
 bool DamageParam::parse_(u8* data, size_t, sead::Heap* heap) {
     mDamageRateBuffer.allocBufferAssert(DamageSource::size(), heap);
     mDamageTypeBuffer.allocBufferAssert(DamageSource::size() * DamageSize::size(), heap);
