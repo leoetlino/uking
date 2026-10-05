@@ -20,9 +20,9 @@ void KorokFlowerVanish::enter_(ksys::act::ai::InlineParamPack* params) {
     auto* tgt_body = mActor->getTgtBody();
     if (main_body != nullptr && tgt_body != nullptr) {
         main_body->setContactAll();
-        main_body->setFlag200();
+        main_body->disableRayHit();
         tgt_body->setContactAll();
-        tgt_body->setFlag200();
+        tgt_body->disableRayHit();
     }
 }
 

@@ -54,7 +54,7 @@ static bool hasEntityWithMotionFlag80(const hkpCollisionEvent& event) {
         if (!entity)
             continue;
 
-        bool on = getRigidBody(*entity)->isEntityMotionFlag80On();
+        bool on = getRigidBody(*entity)->isMagneMassScalingSource();
         has_flag_80 |= on;
         if (on)
             break;
@@ -115,12 +115,12 @@ void EntityContactListener::collisionRemovedCallback(const hkpCollisionEvent& ev
 }
 
 bool EntityContactListener::m15(RigidBody* body_a, RigidBody* body_b) {
-    if (body_a->isEntityMotionFlag4Off() && body_b->isEntityMotionFlag4Off() &&
+    if (body_a->isIgnoreMaxImpulseOff() && body_b->isIgnoreMaxImpulseOff() &&
         (body_a->getMaxImpulse() >= 0 || body_b->getMaxImpulse() >= 0)) {
         return true;
     }
 
-    if (body_a->isEntityMotionFlag8On() || body_b->isEntityMotionFlag8On()) {
+    if (body_a->isForceImpulseOnContact() || body_b->isForceImpulseOnContact()) {
         return true;
     }
 
@@ -133,7 +133,7 @@ bool EntityContactListener::isObjectOrGroundOrNPCOrTree(const RigidBody& body) {
     case ContactLayer::EntityGroundObject:
     case ContactLayer::EntityNPC:
     case ContactLayer::EntityTree:
-        if (body.hasFlag(RigidBody::Flag::_400000))
+        if (body.hasFlag(RigidBody::Flag::NotStoppedByEvent))
             break;
         return true;
     default:
@@ -159,7 +159,7 @@ static bool unkLayerCheck(const RigidBody* body_a, const RigidBody* body_b, Cont
         case ContactLayer::EntityObject:
         case ContactLayer::EntityGroundObject:
         case ContactLayer::EntityTree:
-            if (!body_b->hasFlag(RigidBody::Flag::_400000))
+            if (!body_b->hasFlag(RigidBody::Flag::NotStoppedByEvent))
                 return true;
             break;
         case ContactLayer::EntityPlayer:
@@ -176,7 +176,7 @@ static bool unkLayerCheck(const RigidBody* body_a, const RigidBody* body_b, Cont
         case ContactLayer::EntityObject:
         case ContactLayer::EntityGroundObject:
         case ContactLayer::EntityTree:
-            if (!body_a->hasFlag(RigidBody::Flag::_400000))
+            if (!body_a->hasFlag(RigidBody::Flag::NotStoppedByEvent))
                 return true;
             break;
         default:
@@ -252,8 +252,10 @@ KSYS_ALWAYS_INLINE static bool needsMagneMassScaling(const hkpCollisionEvent& ev
         return false;
     }
 
-    if (body_a->getEntityMotionAccessor()->getContactFlags().isOff(ContactFlag::_1) &&
-        body_b->getEntityMotionAccessor()->getContactFlags().isOff(ContactFlag::_1)) {
+    if (body_a->getEntityMotionAccessor()->getContactFlags().isOff(
+            ContactFlag::InMagneMassScalingGroup) &&
+        body_b->getEntityMotionAccessor()->getContactFlags().isOff(
+            ContactFlag::InMagneMassScalingGroup)) {
         return false;
     }
 
@@ -265,11 +267,13 @@ KSYS_ALWAYS_INLINE static bool needsMagneMassScaling(const hkpCollisionEvent& ev
 
 static void updateMotionAccessorFlagsForMagneMassScaling(RigidBody* body_a, RigidBody* body_b) {
     // Set flag 1 and reset flag 2.
-    body_a->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_1);
-    body_b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_1);
+    body_a->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::InMagneMassScalingGroup);
+    body_b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::InMagneMassScalingGroup);
 
-    body_a->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_2);
-    body_b->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_2);
+    body_a->getEntityMotionAccessor()->getContactFlags().reset(
+        ContactFlag::LeftMagneMassScalingGroup);
+    body_b->getEntityMotionAccessor()->getContactFlags().reset(
+        ContactFlag::LeftMagneMassScalingGroup);
 }
 
 void EntityContactListener::setMagneMassScalingForContactIfNeeded(const hkpCollisionEvent& event,
@@ -302,7 +306,7 @@ void EntityContactListener::setImpulseScalingForTerrainContact(const hkpCollisio
     }
 
     auto* height_field_body = sead::DynamicCast<TerrainHeightFieldRigidBody>(body1);
-    if (!height_field_body || !height_field_body->getD8())
+    if (!height_field_body || !height_field_body->shouldScaleCharacterContactImpulse())
         return;
 
     [[maybe_unused]] auto* constraint = event.m_contactMgr->getConstraintInstance();
@@ -336,16 +340,20 @@ inline void EntityContactListener::removeViscousSurfaceModifierAndCollision(
         return;
 
     const auto update_contact_flags = [](RigidBody* body) {
-        if (!body->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_1)) {
+        if (!body->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::InMagneMassScalingGroup)) {
             return;
         }
 
-        if (body->isEntityMotionFlag80On())
+        if (body->isMagneMassScalingSource())
             return;
 
-        body->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_1);
-        body->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_2);
-        body->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_4);
+        body->getEntityMotionAccessor()->getContactFlags().reset(
+            ContactFlag::InMagneMassScalingGroup);
+        body->getEntityMotionAccessor()->getContactFlags().set(
+            ContactFlag::LeftMagneMassScalingGroup);
+        body->getEntityMotionAccessor()->getContactFlags().reset(
+            ContactFlag::JustJoinedMagneMassScalingGroup);
     };
 
     update_contact_flags(body_a);
@@ -412,50 +420,60 @@ inline void EntityContactListener::setMagneMassScalingForContact(const hkpCollis
 static void updateMotionFlagsAtEndOfStep(const hkpCollisionEvent& event, RigidBody* body_a,
                                          RigidBody* body_b) {
     const auto update_flags1 = [](RigidBody* a, RigidBody* b) {
-        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_2))
+        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::LeftMagneMassScalingGroup))
             return false;
-        if (!b->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_4))
+        if (!b->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::JustJoinedMagneMassScalingGroup))
             return false;
 
-        a->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_1);
-        a->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_2);
-        a->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_4);
+        a->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::InMagneMassScalingGroup);
+        a->getEntityMotionAccessor()->getContactFlags().reset(
+            ContactFlag::LeftMagneMassScalingGroup);
+        a->getEntityMotionAccessor()->getContactFlags().set(
+            ContactFlag::JustJoinedMagneMassScalingGroup);
         return true;
     };
 
     const auto update_flags2 = [](RigidBody* a, RigidBody* b) {
-        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_2))
+        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::LeftMagneMassScalingGroup))
             return false;
-        if (b->isEntityMotionFlag80On())
+        if (b->isMagneMassScalingSource())
             return false;
-        if (!b->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_1))
+        if (!b->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::InMagneMassScalingGroup))
             return false;
 
-        b->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_1);
-        b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_2);
+        b->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::InMagneMassScalingGroup);
+        b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::LeftMagneMassScalingGroup);
         return true;
     };
 
     const auto update_flags3 = [](RigidBody* a, RigidBody* b) {
-        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_1))
+        if (!a->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::InMagneMassScalingGroup))
             return false;
-        if (!b->getEntityMotionAccessor()->getContactFlags().isOff(ContactFlag::_1))
+        if (!b->getEntityMotionAccessor()->getContactFlags().isOff(
+                ContactFlag::InMagneMassScalingGroup))
             return false;
 
-        b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::_1);
-        b->getEntityMotionAccessor()->getContactFlags().reset(ContactFlag::_2);
+        b->getEntityMotionAccessor()->getContactFlags().set(ContactFlag::InMagneMassScalingGroup);
+        b->getEntityMotionAccessor()->getContactFlags().reset(
+            ContactFlag::LeftMagneMassScalingGroup);
         return true;
     };
 
     const auto update_flags4 = [](RigidBody* body) {
-        if (!body->getEntityMotionAccessor()->getContactFlags().isOn(ContactFlag::_4))
+        if (!body->getEntityMotionAccessor()->getContactFlags().isOn(
+                ContactFlag::JustJoinedMagneMassScalingGroup))
             return false;
-        if (body->isEntityMotionFlag80On())
+        if (body->isMagneMassScalingSource())
             return false;
         if (body->x_105())
             return false;
 
-        body->getEntityMotionAccessor()->getContactFlags() = ContactFlag::_1;
+        body->getEntityMotionAccessor()->getContactFlags() = ContactFlag::InMagneMassScalingGroup;
         return true;
     };
 
@@ -518,7 +536,7 @@ bool EntityContactListener::regularContactPointCallback(const hkpContactPointEve
         sead::Vector3f position, normal;
         storeToVec3(&position, event.m_contactPoint->getPosition());
         storeToVec3(&normal, event.m_contactPoint->getSeparatingNormal());
-        if (body_a->isEntityMotionFlag40On() || body_b->isEntityMotionFlag40On()) {
+        if (body_a->isImpulseEntryRequested() || body_b->isImpulseEntryRequested()) {
             mMgr->addImpulseEntry(body_a, body_b);
         }
 
