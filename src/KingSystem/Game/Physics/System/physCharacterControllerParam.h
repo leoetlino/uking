@@ -12,6 +12,7 @@ class CharacterFormSet;
 class CharacterController;
 class NavMeshCharacter;
 class Shape;
+class SystemGroupHandler;
 struct ShapeParamObj;
 
 SEAD_ENUM(NavMeshCharacterType, Player, Horse, Enemy, Guardian, NPC, NPCGoron, NPCSwimmer,
@@ -51,9 +52,9 @@ struct CharacterControllerParam : agl::utl::ParameterList, ICharacterControllerP
     Shape* createShape(int form_idx, sead::Heap* heap) override;
 
     CharacterFormSet* createFormSet(sead::Heap* heap);
-    // TODO: types
-    CharacterController* createController(const sead::SafeString& name, void* ctrl, void* x, bool y,
-                                          sead::Heap* heap);
+    CharacterController* createController(const sead::SafeString& name, CharacterFormSet* form_set,
+                                          SystemGroupHandler* group_handler,
+                                          bool create_fixed_bodies, sead::Heap* heap);
     NavMeshCharacter* createNavMeshCharacter(const sead::SafeString& name, sead::Heap* heap,
                                              const sead::Vector3f& scale);
 
