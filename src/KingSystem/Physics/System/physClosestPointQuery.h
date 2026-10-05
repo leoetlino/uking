@@ -23,7 +23,7 @@ public:
     void setLayerMasksAndBodyCollisionFilterInfo(const LayerMaskBuilder& builder);
 
     // 0x0000007100fb0850
-    bool execute(bool unk);
+    bool execute(bool weld_closest_points);
     bool isSuccess() const;
 
 protected:
@@ -31,7 +31,7 @@ protected:
 
     RigidBody* mBody{};
     QueryContactPointInfo* mContactPointInfo{};
-    u32 _18{};
+    u32 mQueryState{};
     bool mIsSuccess = false;
     sead::Matrix34f mMtx = sead::Matrix34f::ident;
 };

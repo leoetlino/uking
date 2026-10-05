@@ -71,12 +71,15 @@ public:
     void initSystemData(sead::Heap* heap);
 
     ContactPointInfo* allocContactPointInfo(sead::Heap* heap, int num, const sead::SafeString& name,
-                                            int a, int b, int c) const;
+                                            int overflow_mode, int ignore_separated_points,
+                                            int ignore_disabled_contacts) const;
     void freeContactPointInfo(ContactPointInfo* info) const;
 
     LayerContactPointInfo* allocLayerContactPointInfo(sead::Heap* heap, int num, int num2,
-                                                      const sead::SafeString& name, int a, int b,
-                                                      int c) const;
+                                                      const sead::SafeString& name,
+                                                      int overflow_mode,
+                                                      int ignore_separated_points,
+                                                      int ignore_disabled_contacts) const;
     void freeLayerContactPointInfo(LayerContactPointInfo* info) const;
 
     void registerContactPointInfo(ContactPointInfo* info) const;
@@ -84,7 +87,7 @@ public:
     void registerCollisionInfo(CollisionInfo* info) const;
     // 0x0000007101216974
     void registerContactPointLayerPair(LayerContactPointInfo* info, ContactLayer layer1,
-                                       ContactLayer layer2, bool enabled);
+                                       ContactLayer layer2, bool do_not_delay_callback);
 
     // 0x00000071012169a4
     CollisionInfo* allocCollisionInfo(sead::Heap* heap, const sead::SafeString& name) const;

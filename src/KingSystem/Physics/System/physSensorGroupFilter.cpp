@@ -19,8 +19,7 @@ namespace ksys::phys {
 constexpr int NumSensorHandlersInList0 = 0x10;
 constexpr int NumSensorHandlers = 0x400;
 
-// XXX: find a better name
-static bool testHandler(u32 idx) {
+static bool isIsolatedGroupHandlerIdx(u32 idx) {
     return idx != 0 && idx <= 15;
 }
 
@@ -58,7 +57,8 @@ hkBool SensorGroupFilter::testCollisionForSensors(u32 infoA, u32 infoB) const {
             if ((a_xor_b & GroupHandlerIdxMask) == 0) {
                 if (((infoA & GroupHandlerIdxMask) >> GroupHandlerIdxShift) > 15)
                     return false;
-            } else if (testHandler(a.group_handler_index) || testHandler(b.group_handler_index)) {
+            } else if (isIsolatedGroupHandlerIdx(a.group_handler_index) ||
+                       isIsolatedGroupHandlerIdx(b.group_handler_index)) {
                 return false;
             }
             return true;
@@ -69,7 +69,8 @@ hkBool SensorGroupFilter::testCollisionForSensors(u32 infoA, u32 infoB) const {
             if ((a_xor_b & GroupHandlerIdxMask) == 0) {
                 if (((infoA & GroupHandlerIdxMask) >> GroupHandlerIdxShift) > 15)
                     return false;
-            } else if (testHandler(a.group_handler_index) || testHandler(b.group_handler_index)) {
+            } else if (isIsolatedGroupHandlerIdx(a.group_handler_index) ||
+                       isIsolatedGroupHandlerIdx(b.group_handler_index)) {
                 return false;
             }
             return true;
@@ -79,7 +80,8 @@ hkBool SensorGroupFilter::testCollisionForSensors(u32 infoA, u32 infoB) const {
         if ((a_xor_b & GroupHandlerIdxMask) == 0) {
             if (((infoA & GroupHandlerIdxMask) >> GroupHandlerIdxShift) > 15)
                 return false;
-        } else if (testHandler(a.group_handler_index) || testHandler(b.group_handler_index)) {
+        } else if (isIsolatedGroupHandlerIdx(a.group_handler_index) ||
+                   isIsolatedGroupHandlerIdx(b.group_handler_index)) {
             return false;
         }
 
@@ -205,7 +207,8 @@ hkBool SensorGroupFilter::testCollisionForRayCasting(u32 infoRayCast, u32 info) 
     if (query_handler == mask_handler) {
         if (mask_handler > 15)
             return false;
-    } else if ((query_handler != 0 && query_handler >> 4 == 0) || testHandler(mask_handler)) {
+    } else if ((query_handler != 0 && query_handler >> 4 == 0) ||
+               isIsolatedGroupHandlerIdx(mask_handler)) {
         return false;
     }
     return query.layer_mask & (1 << mask.data.layer);

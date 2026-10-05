@@ -99,8 +99,7 @@ hkBool EntityGroupFilter::shouldHandleWaterCollision(u32 infoA, u32 infoB,
     return true;
 }
 
-// XXX: find a better name
-static bool testHandler(u32 idx) {
+static bool isIsolatedGroupHandlerIdx(u32 idx) {
     return idx != 0 && idx <= 15;
 }
 
@@ -118,8 +117,8 @@ hkBool EntityGroupFilter::testCollisionForEntities(u32 infoA, u32 infoB) const {
 
         if (a.is_ragdoll && b.is_ragdoll) {
             if (((infoA ^ infoB) & GroupHandlerIdxMask) != 0) {
-                if (testHandler(a.regular.group_handler_index) ||
-                    testHandler(b.regular.group_handler_index)) {
+                if (isIsolatedGroupHandlerIdx(a.regular.group_handler_index) ||
+                    isIsolatedGroupHandlerIdx(b.regular.group_handler_index)) {
                     return false;
                 }
             } else if ((infoA & GroupHandlerIdxMask) >> GroupHandlerIdxShift != 0) {
@@ -143,8 +142,8 @@ hkBool EntityGroupFilter::testCollisionForEntities(u32 infoA, u32 infoB) const {
             }
 
             if (((infoA ^ infoB) & GroupHandlerIdxMask) != 0) {
-                if (testHandler(a.regular.group_handler_index) ||
-                    testHandler(b.regular.group_handler_index)) {
+                if (isIsolatedGroupHandlerIdx(a.regular.group_handler_index) ||
+                    isIsolatedGroupHandlerIdx(b.regular.group_handler_index)) {
                     return false;
                 }
             } else if (((infoA & GroupHandlerIdxMask) >> GroupHandlerIdxShift) > 15) {
@@ -174,7 +173,7 @@ hkBool EntityGroupFilter::testCollisionForEntities(u32 infoA, u32 infoB) const {
             return false;
         if (!testLayerCollision(layerA, layerB))
             return false;
-        return !a.ground_hit.unk23 && !b.ground_hit.unk23;
+        return !a.ground_hit.ignores_hit_all && !b.ground_hit.ignores_hit_all;
     }
 
     EntityCollisionMask entity_mask, ground_hit_mask;
@@ -211,7 +210,8 @@ hkBool EntityGroupFilter::testCollisionForEntities(u32 infoA, u32 infoB) const {
         if (!testLayerCollision(layerB, layerA))
             return false;
     }
-    return !(ground_hit_mask.ground_hit.ground_hit_types & (1 << entity_mask.regular.ground_hit));
+    return !(ground_hit_mask.ground_hit.ignored_ground_hit_types &
+             (1 << entity_mask.regular.ground_hit));
 }
 
 hkBool EntityGroupFilter::testCollisionForPhantom(u32 infoPhantom, u32 infoB) const {
@@ -322,10 +322,10 @@ static hkBool checkCollisionWithGroundHitMask(EntityCollisionMask::GroundHitMask
     if (!(ray_cast.layer_mask & (1 << ground_hit_mask.getLayer())))
         return false;
 
-    if (ground_hit_mask.unk & ray_cast.unk)
+    if (ground_hit_mask.ignored_by_npc_queries & ray_cast.is_npc_query)
         return false;
 
-    if (ground_hit_mask.ground_hit_types & (1 << ray_cast.ground_hit_type))
+    if (ground_hit_mask.ignored_ground_hit_types & (1 << ray_cast.ground_hit_type))
         return false;
 
     return true;
@@ -350,7 +350,7 @@ hkBool EntityGroupFilter::testCollisionForRayCasting(u32 infoRayCast, u32 info) 
         return a.layer_mask & (1 << b.regular.layer);
     }
 
-    if (testHandler(aHandlerIdx) || testHandler(bHandlerIdx))
+    if (isIsolatedGroupHandlerIdx(aHandlerIdx) || isIsolatedGroupHandlerIdx(bHandlerIdx))
         return false;
 
     return a.layer_mask & (1 << b.regular.layer);
@@ -396,7 +396,7 @@ int EntityGroupFilter::getFreeListIndex(const SystemGroupHandler* handler) {
 
 u32 orEntityGroundHitMask(u32 mask, GroundHit type) {
     EntityCollisionMask info{mask};
-    info.ground_hit.ground_hit_types |= 1 << type;
+    info.ground_hit.ignored_ground_hit_types |= 1 << type;
     return info.raw;
 }
 
@@ -404,15 +404,15 @@ u32 orEntityGroundHitMask(u32 mask, const sead::SafeString& type) {
     return orEntityGroundHitMask(mask, groundHitFromText(type));
 }
 
-template <bool WithUnk>
+template <bool PreserveIgnoredByNpcQueries>
 static EntityCollisionMask makeEntityGroundHitMaskImpl(ContactLayer layer, u32 mask) {
     const EntityCollisionMask current{mask};
     EntityCollisionMask info{};
     info.ground_hit.layer.SetUnsafe(layer);
-    info.ground_hit.ground_hit_types = current.ground_hit.ground_hit_types;
+    info.ground_hit.ignored_ground_hit_types = current.ground_hit.ignored_ground_hit_types;
     info.is_ground_hit_mask = true;
-    if constexpr (WithUnk)
-        info.ground_hit.unk = current.ground_hit.unk & 1;
+    if constexpr (PreserveIgnoredByNpcQueries)
+        info.ground_hit.ignored_by_npc_queries = current.ground_hit.ignored_by_npc_queries & 1;
     return info;
 }
 

@@ -192,18 +192,18 @@ agl::utl::ResParameterArchive SystemData::loadCharacterCtrlTableRes() {
 
 void LayerTable::postRead_() {
     u32 collision_mask = 0;
-    u32 custom_mask = 0;
+    u32 ignorable_mask = 0;
 
     for (int i = 0; i < num_layers; ++i) {
         const int value = layer_values[i].ref();
         if (value & 1)
             collision_mask |= 1 << i;
         if (value & 2)
-            custom_mask |= 1 << i;
+            ignorable_mask |= 1 << i;
     }
 
     filter->setLayerCollisionEnabledMask(layer, collision_mask);
-    filter->setLayerCustomMask(layer, custom_mask);
+    filter->setLayerIgnorableMask(layer, ignorable_mask);
 }
 
 }  // namespace ksys::phys

@@ -33,9 +33,9 @@ protected:
 
 public:
     enum class Mode {
-        _0 = 0,
-        _1 = 1,
-        _2 = 2,
+        Closest = 0,
+        AllStartPointsAndClosest = 1,
+        All = 2,
     };
 
     ShapeCast(RigidBody* body, QueryContactPointInfo* contact_point_info, Mode mode);
@@ -77,10 +77,10 @@ protected:
     /// The end position of the ray in world space.
     sead::Vector3f mTo = sead::Vector3f::zero;
     sead::Quatf mRotation = sead::Quatf::unit;
-    bool _40{};
-    bool _41{};
-    bool _42{};
-    int _44{};
+    bool mHasHit{};
+    bool mHasHitAtStart{};
+    bool mHasHitDuringCast{};
+    int mQueryState{};
     Mode mMode{};
 };
 

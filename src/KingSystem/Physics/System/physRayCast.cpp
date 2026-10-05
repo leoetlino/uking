@@ -91,7 +91,7 @@ void RayCast::reset() {
 }
 
 void RayCast::resetCastResult() {
-    static_cast<void>(_98.load());
+    static_cast<void>(mIsCasting.load());
 
     mHasHit = false;
     mHitNormal = sead::Vector3f::zero;
@@ -101,7 +101,7 @@ void RayCast::resetCastResult() {
     mHasHitSpecifiedRigidBody = false;
     mHitBodyGroup = {};
     mHitMapObject = {};
-    _70 = {};
+    mQueryState = {};
 }
 
 static bool isLayerValid(ContactLayer layer, ContactLayerType type) {
@@ -158,8 +158,8 @@ void RayCast::setIgnoredGroundHit(GroundHit ground_hit) {
     mIgnoredGroundHit = ground_hit;
 }
 
-void RayCast::set9A(bool value) {
-    _9a = value;
+void RayCast::setIsNpcQuery(bool value) {
+    mIsNpcQuery = value;
 }
 
 void RayCast::setStart(const sead::Vector3f& start) {
@@ -197,7 +197,7 @@ bool RayCast::addIgnoredGroup(SystemGroupHandler* group_handler) {
 }
 
 void RayCast::setRigidBody(RigidBody* body) {
-    if (_70 != 1)
+    if (mQueryState != 1)
         mRigidBody = body;
 }
 
@@ -215,10 +215,10 @@ void RayCast::fillCastInput(hkpShapeRayCastInput& input, ContactLayerType layer_
 
 u32 RayCast::getFilterInfo(ContactLayerType layer_type, u32 layer_mask) const {
     if (mGroupHandler != nullptr) {
-        return mGroupHandler->makeQueryCollisionMask(layer_mask, mGroundHit, _9a);
+        return mGroupHandler->makeQueryCollisionMask(layer_mask, mGroundHit, mIsNpcQuery);
     } else {
         auto* filter = System::instance()->getGroupFilter(layer_type);
-        auto info = filter->makeQueryCollisionMask(layer_mask, mGroundHit, _9a);
+        auto info = filter->makeQueryCollisionMask(layer_mask, mGroundHit, mIsNpcQuery);
 #ifdef MATCHING_HACK_NX_CLANG
         asm("");
 #endif
@@ -227,9 +227,9 @@ u32 RayCast::getFilterInfo(ContactLayerType layer_type, u32 layer_mask) const {
 }
 
 void RayCast::preCast() {
-    if (_70 == 1)
+    if (mQueryState == 1)
         resetCastResult();
-    _98 = true;
+    mIsCasting = true;
 }
 
 bool RayCast::postCast(const hkpWorldRayCastOutput& output) {
@@ -238,8 +238,8 @@ bool RayCast::postCast(const hkpWorldRayCastOutput& output) {
         updateHitInformation(output);
         updateStaticCompoundObjectInfo(output);
     }
-    _98 = false;
-    _70 = 1;
+    mIsCasting = false;
+    mQueryState = 1;
     return mHasHit;
 }
 
@@ -391,7 +391,7 @@ void RayCast::updateStaticCompoundObjectInfo(const hkpWorldRayCastOutput& output
         if (raw_material == u32(-1))
             mMaterialMask.reset();
 
-        if (_99) {
+        if (mResolveHitMapObject) {
             getBodyGroupAndObjectFromSCShape(&mHitBodyGroup, &mHitMapObject, shape,
                                              output.m_shapeKeys);
         }
@@ -544,7 +544,7 @@ void NormalCheckingRayHitCollector::addRayHit(const hkpCdBody& cdBody,
 
 template <bool Invert>
 static bool checkDot(RayCast::NormalCheckingMode mode, float dot) {
-    if (mode == RayCast::NormalCheckingMode::_0) {
+    if (mode == RayCast::NormalCheckingMode::FrontFacesOnly) {
         if constexpr (Invert)
             return !(dot < 0);
         else

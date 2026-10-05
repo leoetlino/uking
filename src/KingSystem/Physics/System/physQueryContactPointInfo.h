@@ -20,7 +20,8 @@ public:
     };
 
     static QueryContactPointInfo* make(sead::Heap* heap, int num_points,
-                                       const sead::SafeString& name, int a, int b);
+                                       const sead::SafeString& name, int overflow_mode,
+                                       int ignore_separated_points);
     static void free(QueryContactPointInfo* info);
 
     using ContactPointInfo::ContactPointInfo;

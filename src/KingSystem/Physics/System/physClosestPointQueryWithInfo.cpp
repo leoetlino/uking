@@ -10,13 +10,14 @@ ClosestPointQueryWithInfo::ClosestPointQueryWithInfo(RigidBody* body, int num_po
                                                      const sead::SafeString& name, int a,
                                                      LowPriority low_priority)
     : ClosestPointQuery(body, nullptr) {
-    mStatus = Status::_1;
+    mStatus = Status::OwnsContactPointInfo;
     auto* heap = System::instance()->getPhysicsTempHeap(low_priority);
     mContactPointInfo = QueryContactPointInfo::make(heap, num_points, name, a, 0);
 }
 
 ClosestPointQueryWithInfo::~ClosestPointQueryWithInfo() {
-    if (mStatus == Status::_1 || mStatus == Status::_3) {
+    if (mStatus == Status::OwnsContactPointInfo ||
+        mStatus == Status::OwnsContactPointInfoAndRigidBody) {
         QueryContactPointInfo::free(mContactPointInfo);
     }
 }
@@ -86,7 +87,7 @@ SphereBasedClosestPointQuery::SphereBasedClosestPointQuery(RigidBody* sphere,
 }
 
 SphereBasedClosestPointQuery::~SphereBasedClosestPointQuery() {
-    if (mStatus == Status::_2 || mStatus == Status::_3) {
+    if (mStatus == Status::OwnsRigidBody || mStatus == Status::OwnsContactPointInfoAndRigidBody) {
         delete mSphere;
     }
 }
@@ -104,7 +105,7 @@ void SphereBasedClosestPointQuery::makeAndSetSphere(RigidBodyInstanceParam* sphe
 
     if (mBody) {
         mMtx.setTranslation(position);
-        mStatus = Status::_3;
+        mStatus = Status::OwnsContactPointInfoAndRigidBody;
     }
 }
 

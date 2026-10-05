@@ -24,36 +24,38 @@ class ContactPointInfoBase : public sead::INamable {
 public:
     using Points = sead::Buffer<ContactPoint*>;
 
-    // FIXME: parameter names
-    ContactPointInfoBase(const sead::SafeString& name, int a, int b, int c)
-        : sead::INamable(name), _2c(a), _30(b), _34(c) {}
+    ContactPointInfoBase(const sead::SafeString& name, int overflow_mode,
+                         int ignore_separated_points, int ignore_disabled_contacts)
+        : sead::INamable(name), mOverflowMode(overflow_mode),
+          mIgnoreSeparatedPoints(ignore_separated_points),
+          mIgnoreDisabledContacts(ignore_disabled_contacts) {}
     virtual ~ContactPointInfoBase() = default;
     virtual void freePoints() = 0;
 
-    u32 get30() const { return _30; }
-    void set30(u32 value) { _30 = value; }
+    u32 getIgnoreSeparatedPoints() const { return mIgnoreSeparatedPoints; }
+    void setIgnoreSeparatedPoints(u32 value) { mIgnoreSeparatedPoints = value; }
 
-    // TODO: rename
-    bool testContactPointDistance(float distance) const { return get30() == 0 || distance <= 0; }
+    bool acceptsPointDistance(float distance) const {
+        return getIgnoreSeparatedPoints() == 0 || distance <= 0;
+    }
 
-    u32 get34() const { return _34; }
-    void set34(u32 value) { _34 = value; }
+    u32 getIgnoreDisabledContacts() const { return mIgnoreDisabledContacts; }
+    void setIgnoreDisabledContacts(u32 value) { mIgnoreDisabledContacts = value; }
 
     bool isLayerSubscribed(ContactLayer layer) const {
         const auto type = getContactLayerType(layer);
         return mSubscribedLayers[int(type)].isOnBit(getContactLayerBaseRelativeValue(layer));
     }
 
-    // TODO: rename
-    bool isLayerInMask2(ContactLayer layer) const {
+    bool isNoCallbackDelayLayer(ContactLayer layer) const {
         const auto type = getContactLayerType(layer);
-        return mLayerMask2[int(type)].isOnBit(getContactLayerBaseRelativeValue(layer));
+        return mNoCallbackDelayLayers[int(type)].isOnBit(getContactLayerBaseRelativeValue(layer));
     }
 
     void setLayerMasks(const LayerMaskBuilder& builder) {
         for (int i = 0; i < NumContactLayerTypes; ++i) {
             mSubscribedLayers[i] = builder.getMasks()[i].layers;
-            mLayerMask2[i] = builder.getMasks()[i].layers2;
+            mNoCallbackDelayLayers[i] = builder.getMasks()[i].no_callback_delay_layers;
         }
     }
 
@@ -73,11 +75,10 @@ protected:
 
     sead::Atomic<int> mNumContactPoints;
     sead::SafeArray<sead::BitFlag32, 2> mSubscribedLayers;
-    // TODO: rename
-    sead::SafeArray<sead::BitFlag32, 2> mLayerMask2;
-    u32 _2c{};
-    u32 _30{};
-    u32 _34{};
+    sead::SafeArray<sead::BitFlag32, 2> mNoCallbackDelayLayers;
+    u32 mOverflowMode{};
+    u32 mIgnoreSeparatedPoints{};
+    u32 mIgnoreDisabledContacts{};
     sead::ListNode mListNode{};
 };
 
@@ -144,11 +145,13 @@ public:
     /// callback ignores the return value and only checks the ShouldDisableContact output.
     using ContactCallback = sead::IDelegate2R<ShouldDisableContact*, const Event&, bool>;
 
-    static ContactPointInfo* make(sead::Heap* heap, int num, const sead::SafeString& name, int a,
-                                  int b, int c);
+    static ContactPointInfo* make(sead::Heap* heap, int num, const sead::SafeString& name,
+                                  int overflow_mode, int ignore_separated_points,
+                                  int ignore_disabled_contacts);
     static void free(ContactPointInfo* instance);
 
-    ContactPointInfo(const sead::SafeString& name, int a, int b, int c);
+    ContactPointInfo(const sead::SafeString& name, int overflow_mode, int ignore_separated_points,
+                     int ignore_disabled_contacts);
     ~ContactPointInfo() override;
     void freePoints() override;
     virtual void allocPoints(sead::Heap* heap, int num);

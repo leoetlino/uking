@@ -115,17 +115,22 @@ void ContactMgr::doLoadContactInfoTable(agl::utl::ResParameterArchive archive,
 }
 
 ContactPointInfo* ContactMgr::makeContactPointInfo(sead::Heap* heap, int num,
-                                                   const sead::SafeString& name, int a, int b,
-                                                   int c) {
-    auto* info = new (heap) ContactPointInfo(name, a, b, c);
+                                                   const sead::SafeString& name, int overflow_mode,
+                                                   int ignore_separated_points,
+                                                   int ignore_disabled_contacts) {
+    auto* info = new (heap)
+        ContactPointInfo(name, overflow_mode, ignore_separated_points, ignore_disabled_contacts);
     info->allocPoints(heap, num);
     return info;
 }
 
 LayerContactPointInfo* ContactMgr::makeLayerContactPointInfo(sead::Heap* heap, int num, int num2,
-                                                             const sead::SafeString& name, int a,
-                                                             int b, int c) {
-    auto* info = new (heap) LayerContactPointInfo(name, a, b, c);
+                                                             const sead::SafeString& name,
+                                                             int overflow_mode,
+                                                             int ignore_separated_points,
+                                                             int ignore_disabled_contacts) {
+    auto* info = new (heap) LayerContactPointInfo(name, overflow_mode, ignore_separated_points,
+                                                  ignore_disabled_contacts);
     info->allocPoints(heap, num, num2);
     registerContactPointInfo(info);
     return info;
@@ -296,7 +301,7 @@ bool ContactMgr::registerContactPoint(ContactPointInfo* info, const ContactPoint
         auto& point_in_pool = mContactPointPool[pool_index];
         point_in_pool = point;
 
-        if (info->mNumContactPoints < info->mPoints.size() || info->_2c >= 2) {
+        if (info->mNumContactPoints < info->mPoints.size() || info->mOverflowMode >= 2) {
             int index = info->mNumContactPoints.increment();
             info->mPoints[index] = &point_in_pool;
             info->mPoints[index]->flags.makeAllZero();
@@ -316,7 +321,7 @@ bool ContactMgr::registerContactPoint(QueryContactPointInfo* info, const Contact
     auto& point_in_pool = mContactPointPool[pool_index];
     point_in_pool = point;
 
-    if (info->mNumContactPoints >= info->mPoints.size() && info->_2c < 2)
+    if (info->mNumContactPoints >= info->mPoints.size() && info->mOverflowMode < 2)
         return false;
 
     int index = info->mNumContactPoints.increment();
@@ -350,8 +355,8 @@ bool ContactMgr::initLayerMasks(ContactPointInfo* info,
         for (int i = 0; i < receivers.size(); ++i) {
             const auto& receiver = receivers[i];
             if (receiver_name == receiver.name) {
-                info->mSubscribedLayers[type] = receiver.layer_mask;
-                info->mLayerMask2[type] = receiver.layer_mask2;
+                info->mSubscribedLayers[type] = receiver.subscribed_layer_mask;
+                info->mNoCallbackDelayLayers[type] = receiver.no_callback_delay_layer_mask;
                 return true;
             }
         }
@@ -365,7 +370,7 @@ bool ContactMgr::initLayerMasks(CollisionInfo* info, const sead::SafeString& rec
         for (int i = 0; i < receivers.size(); ++i) {
             const auto& receiver = receivers[i];
             if (receiver_name == receiver.name) {
-                info->getLayerMask(ContactLayerType(type)) = receiver.layer_mask;
+                info->getLayerMask(ContactLayerType(type)) = receiver.subscribed_layer_mask;
                 return true;
             }
         }
@@ -379,7 +384,7 @@ bool ContactMgr::getSensorLayerMask(SensorCollisionMask* mask,
     for (int i = 0; i < receivers.size(); ++i) {
         const auto& receiver = receivers[i];
         if (receiver_name == receiver.name) {
-            receiverMaskSetSensorLayerMask(mask, receiver.layer_mask);
+            receiverMaskSetSensorLayerMask(mask, receiver.subscribed_layer_mask);
             return true;
         }
     }
@@ -645,15 +650,15 @@ void ContactMgr::clearImpulseEntries() {
 }
 
 void ContactInfoTable::Receiver::postRead_() {
-    layer_mask = 0;
-    layer_mask2 = 0;
+    subscribed_layer_mask = 0;
+    no_callback_delay_layer_mask = 0;
 
     for (int i = 0; i < num_layers; ++i) {
         const auto value = layer_values[i].ref();
         if (value & 1)
-            layer_mask |= 1 << i;
+            subscribed_layer_mask |= 1 << i;
         if (value & 2)
-            layer_mask2 |= 1 << i;
+            no_callback_delay_layer_mask |= 1 << i;
     }
 }
 
