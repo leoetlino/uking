@@ -1380,12 +1380,8 @@ Game/Actor/AI/aiLynelFindPlayer:
 Game/Actor/AI/aiLynelLineMoveAttack:
 - 0x7100491a80-0x71004921e4
 Game/Actor/AI/aiLynelNavMoveNoStop:
-- 0x71004921e4-0x7100492574
-- 0x710049268c-0x7100492d10
-- 0x7100492e34-0x7100493424
+- 0x71004921e4-0x7100493424
 Game/Actor/AI/aiLynelNavMoveTarget:
-- 0x7100492574-0x710049268c
-- 0x7100492d10-0x7100492e34
 - 0x7100493424-0x710049402c
 Game/Actor/AI/aiLynelNormal:
 - 0x710049402c-0x710049492c
@@ -1519,7 +1515,7 @@ Game/Actor/AI/aiNPCClerkRoot:
 Game/Actor/AI/aiNPCConfront:
 - 0x71004c4394-0x71004c6500
 Game/Actor/AI/aiNPCConfrontEnemy:
-- 0x71004c6500-0x71004c93ec
+- 0x71004c6500-0x71004c9274
 Game/Actor/AI/aiNPCGerudoQueenRoot:
 - 0x71004c95d8-0x71004c9e88
 Game/Actor/AI/aiNPCHeartsRoot:
@@ -2732,7 +2728,6 @@ Game/Actor/Action/actionAnimalASPlayWithLegTurn:
 - 0x710008dadc-0x710008e3bc
 Game/Actor/Action/actionAnimalEatAction:
 - 0x710008e650-0x710008eca0
-- 0x710008ee04-0x710008ee40
 Game/Actor/Action/actionAnimalElectricParalysis:
 - 0x710008ee40-0x710008f1fc
 Game/Actor/Action/actionAnimalFollow:
@@ -3084,7 +3079,6 @@ Game/Actor/Action/actionChangeEnvForEnduranceDungeon:
 - 0x71000d72f8-0x71000d791c
 Game/Actor/Action/actionChangeFreeMovingForDemo:
 - 0x710005349c-0x71000537a8
-- 0x710005390c-0x7100053948
 Game/Actor/Action/actionChangeMiniMapScale:
 - 0x71000d791c-0x71000d7bb0
 Game/Actor/Action/actionChangePosture:
@@ -6556,10 +6550,9 @@ Game/Actor/Camera/Action/actionCameraEventPolarCoord:
 - 0x7100767680-0x7100768038
 Game/Actor/Camera/Action/actionCameraEventPolarCoordPlayer:
 - 0x7100768038-0x7100768d08
-- 0x7100769828-0x710076988c
 Game/Actor/Camera/Action/actionCameraEventPolarCoordPlayerRel:
 - 0x7100768d08-0x7100769828
-- 0x710076988c-0x7100769990
+- 0x7100769828-0x7100769990
 Game/Actor/Camera/Action/actionCameraEventReserveConnectTime:
 - 0x7100769990-0x7100769ca8
 Game/Actor/Camera/Action/actionCameraEventSavePoint:
@@ -6733,7 +6726,7 @@ Game/Actor/Damage/dmgPopPoolDamageAttrDamageCallback:
 Game/Actor/Damage/dmgSiteBossDamageStatus:
 - 0x71006ee314-0x71006ee770
 Game/Actor/Damage/dmgSpeedTerrorEmitter:
-- 0x71006e1cdc-0x71006e24ec
+- 0x71006e1cc0-0x71006e24ec
 Game/Actor/Damage/dmgSwarmDamageStatus:
 - 0x71006ee770-0x71006efe9c
 Game/Actor/Damage/dmgThroughArrowDamageCallback:
@@ -7117,7 +7110,6 @@ Game/Actor/Player/Action/actionPlayerWaterDivingJump:
 - 0x7100824558-0x7100824bd8
 Game/Actor/Player/Action/actionPlayerWaterFall:
 - 0x7100824bd8-0x7100825278
-- 0x71008253dc-0x7100825418
 Game/Actor/Player/Action/actionPlayerWaterFallJump:
 - 0x7100825418-0x7100825720
 Game/Actor/Player/Action/actionPlayerWeaponThrow:
@@ -7559,8 +7551,7 @@ Game/Actor/actBeamBase:
 - 0x7100002da8-0x7100003864
 - 0x710000395c-0x7100003ef8
 Game/Actor/actBoneHandleEx:
-- 0x7100742ea0-0x71007432e4
-- 0x71007432e4-0x7100743798
+- 0x7100742ea0-0x7100743798
 Game/Actor/actBoneMtxVFRUtils:
 - 0x71007447cc-0x7100744bb8
 Game/Actor/actBowDamageMgr:
@@ -7588,10 +7579,10 @@ Game/Actor/actCombatActor:
 - 0x7100008504-0x710000a114
 Game/Actor/actCookResult:
 - 0x710000a114-0x710000a250
-- 0x710000a3d0-0x710000ae20
+- 0x710000a3d0-0x710000acac
 Game/Actor/actDragon:
 - 0x710000ae20-0x7100011e18
-- 0x7100011e70-0x710001229c
+- 0x7100011e70-0x7100012274
 - 0x7100012514-0x7100012c80
 Game/Actor/actDragonChallengeMgr:
 - 0x71006f94c4-0x71006fa1d0
@@ -7621,7 +7612,7 @@ Game/Actor/actFootAndSpineRotationRideInfo:
 - 0x710001b33c-0x710001b8b8
 - 0x710001ba54-0x710001bd60
 Game/Actor/actFootRotationRideInfo:
-- 0x71006e1614-0x71006e1cdc
+- 0x71006e1614-0x71006e1cc0
 Game/Actor/actGanonBeastUtils:
 - 0x710070284c-0x710070435c
 Game/Actor/actGelEnemy:
@@ -7644,10 +7635,12 @@ Game/Actor/actGiantEnemy:
 - 0x710002c304-0x710002c3dc
 - 0x710002c3dc-0x710002c468
 Game/Actor/actGiantEnemyBodyIk:
-- 0x710002c468-0x710002ecc4
+- 0x710002c468-0x710002e82c
+- 0x710002e82c-0x710002ecc4
 Game/Actor/actGiantEnemyFootIk:
 - 0x710002ecc4-0x710002ece0
-- 0x710002ecfc-0x710002fab4
+- 0x710002ecfc-0x710002f8a4
+- 0x710002f8ac-0x710002f9e4
 Game/Actor/actGiantGuardWeakPointPart:
 - 0x710001bf60-0x710001bfec
 - 0x710001c000-0x710001c2e8
@@ -7684,26 +7677,27 @@ Game/Actor/actHitInfoBaseMaybe:
 Game/Actor/actHorse:
 - 0x7100080604-0x71000818e4
 Game/Actor/actItem:
+- 0x710000acac-0x710000ae20
 - 0x71002c3a30-0x71002c40e0
 Game/Actor/actLastBoss:
 - 0x71002c40e0-0x71002c52dc
 - 0x71002c52dc-0x71002c6db0
 Game/Actor/actLegIkBase:
 - 0x710002ece0-0x710002ecfc
-- 0x710002fab4-0x710002fda8
+- 0x710002f8a4-0x710002f8ac
+- 0x710002f9e4-0x710002fda8
 Game/Actor/actLineBeam:
 - 0x71002c6db0-0x71002c802c
 Game/Actor/actLynelBodyControlUnit:
 - 0x710049a62c-0x710049a684
-- 0x710049b4a0-0x710049b56c
-- 0x710049b56c-0x710049b5c8
-- 0x710049b5c8-0x710049b628
-- 0x710070f32c-0x7100710078
+- 0x710049b4a0-0x710049b628
+- 0x710070f32c-0x710070ff50
+- 0x710070ff50-0x7100710078
 - 0x7100710078-0x71007107cc
 Game/Actor/actMapConstActive:
 - 0x71002dcfe0-0x71002dd640
 - 0x71002dd640-0x71002dd650
-- 0x71002dd650-0x71002dd8e4
+- 0x71002dd650-0x71002dd658
 Game/Actor/actMapConstPassive:
 - 0x71002dd8e4-0x71002ddcb4
 Game/Actor/actMapDynamicPassive:
@@ -7732,13 +7726,16 @@ Game/Actor/actMotorcycleUtils:
 Game/Actor/actMultiActorSpawner:
 - 0x71007107cc-0x7100710f04
 Game/Actor/actNPC:
-- 0x710001c748-0x71000236b8
+- 0x710001c748-0x710001c78c
+- 0x710001c790-0x71000236b8
 - 0x71000236c0-0x7100023710
 - 0x7100023fb0-0x710002403c
 - 0x710002403c-0x71000241dc
-- 0x7100714294-0x71007142c0
+- 0x71002c9ffc-0x71002ca1d8
+- 0x7100714294-0x71007142b8
+- 0x71007142bc-0x71007142c0
 Game/Actor/actNPCDamageMgr:
-- 0x71002c9024-0x71002ca1dc
+- 0x71002c9024-0x71002c9ffc
 Game/Actor/actNPCUtils:
 - 0x7100711fac-0x7100714294
 Game/Actor/actNavSearchControl:
@@ -7747,10 +7744,12 @@ Game/Actor/actNestSwarmCtrl:
 - 0x7100711020-0x710071124c
 - 0x710071124c-0x7100711fac
 Game/Actor/actNpcNavCostModifier:
+- 0x710001c78c-0x710001c790
 - 0x71002c8f48-0x71002c9024
 Game/Actor/actObjBoardWoodTriangleUserTag:
 - 0x710071f098-0x710071f374
 Game/Actor/actOctarockFormChangeUnit:
+- 0x71007142b8-0x71007142bc
 - 0x71007142c0-0x7100715960
 Game/Actor/actOffsetActorBind:
 - 0x71006e7ddc-0x71006e80f8
@@ -7770,7 +7769,8 @@ Game/Actor/actPriestBossAttackSelector:
 Game/Actor/actPriestBossCloneCtrl:
 - 0x710071bd3c-0x710071cae8
 Game/Actor/actPriestBossFanSearch:
-- 0x7100716a18-0x7100717258
+- 0x7100716a18-0x71007171b0
+- 0x71007171cc-0x7100717258
 Game/Actor/actPriestBossMetaAIUnit:
 - 0x7100717eec-0x710071a92c
 Game/Actor/actPriestBossNavCostModifier:
@@ -7778,6 +7778,7 @@ Game/Actor/actPriestBossNavCostModifier:
 Game/Actor/actPriestBossPhaseSecondSearch:
 - 0x7100717328-0x7100717eec
 Game/Actor/actPriestBossSearchBase:
+- 0x71007171b0-0x71007171cc
 - 0x710071a92c-0x710071bd3c
 Game/Actor/actPriestBossSectorPlacer:
 - 0x710071cae8-0x710071e0d8
@@ -7794,20 +7795,19 @@ Game/Actor/actRemains:
 Game/Actor/actRideableEnemy:
 - 0x71002cb158-0x71002cb900
 - 0x71002cb92c-0x71002cb930
-- 0x71002cb9b4-0x71002cba20
+- 0x71002cb9b4-0x71002cba18
 - 0x71002cba50-0x71002cbadc
 Game/Actor/actRope:
 - 0x71000241dc-0x7100024d38
 - 0x7100024d38-0x7100024e68
 - 0x7100024e68-0x7100025074
 Game/Actor/actSandworm:
-- 0x71002cbadc-0x71002cbc40
-- 0x71002cbc40-0x71002cca04
-- 0x71002ccaa0-0x71002ce330
-- 0x71002ce35c-0x71002ce854
+- 0x71002cbadc-0x71002cca04
+- 0x71002ccaa0-0x71002ce318
+- 0x71002ce380-0x71002ce854
 Game/Actor/actSandwormNavCostModifier:
 - 0x71002cca04-0x71002ccaa0
-- 0x71002ce330-0x71002ce35c
+- 0x71002ce318-0x71002ce380
 Game/Actor/actSandwormUtils:
 - 0x710071f4a8-0x7100720a18
 - 0x7100720a18-0x7100720a8c
@@ -8073,7 +8073,7 @@ Game/SaveTransferArchive:
 - 0x7100917740-0x71009181d4
 - 0x71009181d4-0x710091b7c8
 Game/Scene/DebugLayer:
-- 0x710090cfbc-0x710090d628
+- 0x710090cfbc-0x710090d404
 Game/Scene/GameSceneStatus:
 - 0x71008bf3b0-0x71008bf5dc
 Game/Scene/GameSceneTaskMgr:
@@ -8098,27 +8098,28 @@ Game/Scene/OpenWorldStage:
 - 0x71007c428c-0x71007c5fb0
 - 0x71007c5fb0-0x71007c6290
 - 0x71007c6290-0x71007c62e8
-- 0x71007c62e8-0x71007c6540
-- 0x71007c6540-0x71007c7190
+- 0x71007c62e8-0x71007c7190
 Game/Scene/StageBinder:
-- 0x71007cbbbc-0x71007cbe90
+- 0x71007cbbbc-0x71007cbdc0
 Game/Scene/StageFactory:
-- 0x71007cbe90-0x71007cc064
+- 0x71007cbdc0-0x71007cc064
 Game/Scene/StageSelect:
-- 0x71007ccec8-0x71007d06a0
-- 0x71007d06a0-0x71007d1030
+- 0x71007ccec8-0x71007d1030
 Game/Scene/StartupSaveCheckStage:
-- 0x71007d1834-0x71007d1d20
+- 0x71007d1834-0x71007d1ac8
+- 0x71007d1bf0-0x71007d1d20
 Game/Scene/StartupSaveCheckStageArg:
 - 0x71007d17b4-0x71007d1834
+- 0x71007d1ac8-0x71007d1bf0
 Game/Scene/TerrainScene:
-- 0x71007d3220-0x71007d3d4c
+- 0x71007d3220-0x71007d3d40
 Game/Scene/TitleStage:
-- 0x71007d3d4c-0x71007d4cac
+- 0x71007d3d40-0x71007d4cac
 Game/Scene/ViewerStage:
 - 0x71007d4cac-0x71007d5914
 Game/Scene/gameScene:
-- 0x71007a78d4-0x71007b6610
+- 0x71007a78d4-0x71007a7f5c
+- 0x71007a7f60-0x71007b6610
 - 0x71007b6610-0x71007b67cc
 - 0x71007b67d0-0x71007b6f30
 - 0x71007b6f3c-0x71007b7998
@@ -8180,7 +8181,7 @@ Game/UI/uiGuideStatePart:
 Game/UI/uiHeartGauge:
 - 0x7100934aec-0x7100935f60
 Game/UI/uiHeartGaugePart:
-- 0x7100935f60-0x7100936998
+- 0x7100935f60-0x7100936970
 Game/UI/uiHeartGaugeState:
 - 0x7100949aec-0x710094c2a4
 Game/UI/uiHeroPathTrackLoader:
@@ -8195,11 +8196,13 @@ Game/UI/uiItemIconTexture:
 - 0x71009ca980-0x71009cab7c
 - 0x71009cab84-0x71009cad00
 Game/UI/uiItemParamPart:
-- 0x7100989a80-0x7100989dc0
+- 0x7100989a5c-0x7100989dc0
 Game/UI/uiItemSlotPart:
-- 0x7100988ef0-0x7100989a80
+- 0x7100989010-0x7100989a5c
 Game/UI/uiItemSpIconListPart:
 - 0x71009b1a6c-0x71009b27a8
+Game/UI/uiItemSpIconPart:
+- 0x7100988ed0-0x7100989010
 Game/UI/uiLayer2D:
 - 0x71008befe4-0x71008bf3b0
 Game/UI/uiLowPrioThreadMgr:
@@ -8218,8 +8221,7 @@ Game/UI/uiMainScreenSinJuPart:
 Game/UI/uiMainScreenTempMeterPart:
 - 0x71009c81cc-0x71009c96a4
 Game/UI/uiMainScreenWeatherPart:
-- 0x71009c96a4-0x71009ca810
-- 0x71009ca810-0x71009ca980
+- 0x71009c96a4-0x71009ca980
 Game/UI/uiManager:
 - 0x7100a6da88-0x7100a7ffc8
 - 0x7100a80550-0x7100a80768
@@ -8293,7 +8295,7 @@ Game/UI/uiMapTileTextureResource:
 Game/UI/uiMessageGetGearPart:
 - 0x71009b0818-0x71009b14d8
 Game/UI/uiMotorcycleGaugePart:
-- 0x7100988168-0x7100988ef0
+- 0x7100988168-0x7100988ed0
 Game/UI/uiNumGhostPart:
 - 0x71009332f0-0x7100933580
 Game/UI/uiPaAppMapSensorPart:
@@ -8317,8 +8319,7 @@ Game/UI/uiPaMapPlayerPart:
 Game/UI/uiPaPauseInfoHaveNumPart:
 - 0x71009b17a4-0x71009b1a6c
 Game/UI/uiPaPauseSavePart:
-- 0x71009b9610-0x71009bc1cc
-- 0x71009bc1cc-0x71009bc268
+- 0x71009b9610-0x71009bc268
 Game/UI/uiPaPauseSpIconNewPart:
 - 0x71009bc268-0x71009bc9bc
 Game/UI/uiPaSensorPart:
@@ -8330,7 +8331,7 @@ Game/UI/uiPaShopMaterialPart:
 Game/UI/uiPage20_00PAScreen:
 - 0x71009af944-0x71009b0618
 Game/UI/uiPageScrollPart:
-- 0x7100936998-0x7100936af0
+- 0x7100936970-0x7100936af0
 Game/UI/uiPaneSlideGroupMaybe:
 - 0x7100937c74-0x7100937eec
 - 0x7100937eec-0x71009384b4
@@ -8359,15 +8360,15 @@ Game/UI/uiPictureTextureResourceMaybe:
 Game/UI/uiScreenAkashNum:
 - 0x71009ceab0-0x71009cf8a4
 - 0x71009cf988-0x71009cf9a0
-- 0x71009cfb14-0x71009cfea0
-- 0x71009d0310-0x71009d03ac
+- 0x71009cfb14-0x71009cfe90
+- 0x71009cff90-0x71009d03ac
 - 0x71009d03ac-0x71009d0608
+- 0x71009cfe90-0x71009cfea0
 Game/UI/uiScreenAmiiboWindow:
 - 0x71009d0608-0x71009d1218
 Game/UI/uiScreenAppAlbum:
 - 0x71009d1220-0x71009d6c24
-- 0x71009d6c24-0x71009d6cf0
-- 0x71009d6cf0-0x71009d6d8c
+- 0x71009d6c24-0x71009d6d8c
 - 0x71009d6d8c-0x71009d6f6c
 - 0x71009d7074-0x71009d7168
 Game/UI/uiScreenAppCamera:
@@ -8376,8 +8377,7 @@ Game/UI/uiScreenAppCamera:
 Game/UI/uiScreenAppHome:
 - 0x71009dbe48-0x71009de3c4
 Game/UI/uiScreenAppMap:
-- 0x71009e7f30-0x71009f28d0
-- 0x71009f28d0-0x71009f2aa8
+- 0x71009e7f30-0x71009f2aa8
 Game/UI/uiScreenAppMapDungeon:
 - 0x71009de3c4-0x71009e7f30
 Game/UI/uiScreenAppMenuBtn:
@@ -8386,16 +8386,14 @@ Game/UI/uiScreenAppPictureBook:
 - 0x71009f2eb0-0x71009f3458
 - 0x71009f3458-0x71009f345c
 - 0x71009f6af4-0x71009faed0
-- 0x71009fb120-0x71009fb48c
-- 0x71009fb48c-0x71009fb528
+- 0x71009fb120-0x71009fb528
 - 0x71009fb62c-0x71009fb6fc
 Game/UI/uiScreenAppSystemWindow:
 - 0x71009fbc8c-0x71009fcd64
 Game/UI/uiScreenAppSystemWindowNoBtn:
 - 0x71009fb828-0x71009fbc8c
 Game/UI/uiScreenAppTool:
-- 0x71009fcd64-0x7100a00070
-- 0x7100a00070-0x7100a00374
+- 0x71009fcd64-0x7100a00374
 Game/UI/uiScreenBootUp:
 - 0x7100a00374-0x7100a00584
 Game/UI/uiScreenChallengeWin:
@@ -8408,8 +8406,7 @@ Game/UI/uiScreenControllerWindow:
 - 0x7100a02e18-0x7100a02fb0
 - 0x7100a02fb0-0x7100a031e4
 Game/UI/uiScreenDLCSinJuAkashiNum:
-- 0x7100a043c0-0x7100a0501c
-- 0x7100a0501c-0x7100a05314
+- 0x7100a043c0-0x7100a05314
 Game/UI/uiScreenDLCWindow:
 - 0x7100a05314-0x7100a066d8
 - 0x7100a066d8-0x7100a067a8
@@ -8434,15 +8431,13 @@ Game/UI/uiScreenFactory:
 Game/UI/uiScreenFadeStatus:
 - 0x7100a09658-0x7100a0a420
 Game/UI/uiScreenGameOver:
-- 0x7100a0a420-0x7100a0ac50
-- 0x7100a0ac50-0x7100a0aec0
+- 0x7100a0a420-0x7100a0aec0
 Game/UI/uiScreenGamePadBG:
 - 0x7100a0aec0-0x7100a0b3ac
 Game/UI/uiScreenGameTitle:
 - 0x7100a0b3ac-0x7100a0b564
 Game/UI/uiScreenHardMode:
-- 0x7100a0b798-0x7100a0d6d4
-- 0x7100a0d6d4-0x7100a0dee4
+- 0x7100a0b798-0x7100a0dee4
 Game/UI/uiScreenHardModeTextDLC:
 - 0x7100a0b564-0x7100a0b798
 Game/UI/uiScreenHomeMenuCapture:
@@ -8452,8 +8447,7 @@ Game/UI/uiScreenKeyBoradTextArea:
 Game/UI/uiScreenKeyNum:
 - 0x7100a0e6f4-0x7100a0eb2c
 Game/UI/uiScreenKologNum:
-- 0x7100a0eb2c-0x7100a0f618
-- 0x7100a0f618-0x7100a0f910
+- 0x7100a0eb2c-0x7100a0f910
 Game/UI/uiScreenLastComplete:
 - 0x7100a0f910-0x7100a0fc84
 Game/UI/uiScreenLoadingWeapon:
@@ -8476,11 +8470,9 @@ Game/UI/uiScreenMainScreenHeartIchigekiDLC:
 Game/UI/uiScreenMainScreenMS:
 - 0x7100a16c0c-0x7100a17130
 Game/UI/uiScreenMainShortCut:
-- 0x7100a1ec24-0x7100a22344
-- 0x7100a22344-0x7100a223e0
+- 0x7100a1ec24-0x7100a223e0
 Game/UI/uiScreenMamoNum:
-- 0x7100a22584-0x7100a230c4
-- 0x7100a230c4-0x7100a233bc
+- 0x7100a22584-0x7100a233bc
 Game/UI/uiScreenMessageGet:
 - 0x7100a233bc-0x7100a25c4c
 Game/UI/uiScreenMessageTipsPauseMenu:
@@ -8494,8 +8486,7 @@ Game/UI/uiScreenOPtext:
 Game/UI/uiScreenOptionWindow:
 - 0x7100a28820-0x7100a2bd90
 Game/UI/uiScreenPauseMenu:
-- 0x7100a32f0c-0x7100a3ee90
-- 0x7100a3ee90-0x7100a3ef2c
+- 0x7100a32f0c-0x7100a3ef2c
 Game/UI/uiScreenPauseMenuBG:
 - 0x7100a2bd90-0x7100a2c0ac
 Game/UI/uiScreenPauseMenuEiketsu:
@@ -8511,11 +8502,9 @@ Game/UI/uiScreenPickUp:
 Game/UI/uiScreenReadyGo:
 - 0x7100a408fc-0x7100a40da0
 Game/UI/uiScreenRupee:
-- 0x7100a40da0-0x7100a41cac
-- 0x7100a41cac-0x7100a41fe4
+- 0x7100a40da0-0x7100a41fe4
 Game/UI/uiScreenSaveTransferWindow:
-- 0x7100a41fe4-0x7100a468bc
-- 0x7100a468bc-0x7100a47684
+- 0x7100a41fe4-0x7100a47684
 Game/UI/uiScreenSeekPadMenuBG:
 - 0x7100a4a7d0-0x7100a4ab20
 Game/UI/uiScreenShopBG:
@@ -8550,7 +8539,8 @@ Game/UI/uiScreenSystemWindowNoBtn:
 - 0x7100a603c0-0x7100a60808
 Game/UI/uiScreenThanks:
 - 0x7100a82860-0x7100a828f4
-- 0x7100a82910-0x7100a82aec
+- 0x7100a82910-0x7100a82940
+- 0x7100a82948-0x7100a82aec
 Game/UI/uiScreenTime:
 - 0x7100a68c84-0x7100a6917c
 Game/UI/uiScreenTitle:
@@ -8606,8 +8596,7 @@ Game/UI/uiStarNumWidget:
 Game/UI/uiSwkbdMgr:
 - 0x7100985720-0x7100985eb4
 Game/UI/uiSystemWindow_02PAScreen:
-- 0x71009c69a4-0x71009c7ed0
-- 0x71009c7ed0-0x71009c81cc
+- 0x71009c69a4-0x71009c81cc
 Game/UI/uiTarArchiveRes:
 - 0x7100a922b8-0x7100a93d34
 Game/UI/uiTextureSlotUtils:
@@ -8650,10 +8639,12 @@ KingSystem/AOC/aocManager:
 - 0x7100d68f10-0x7100d6cce4
 KingSystem/ActorSystem/AS/ASAnimBind:
 - 0x7101257844-0x7101257d90
+KingSystem/ActorSystem/AS/ASAnimBindingNode:
+- 0x710125abf8-0x710125b7ec
 KingSystem/ActorSystem/AS/ASBlendRatio:
 - 0x7101159880-0x71011599a0
 KingSystem/ActorSystem/AS/ASInstance:
-- 0x7101258608-0x710125b7ec
+- 0x7101258608-0x710125abf8
 KingSystem/ActorSystem/AS/ASList:
 - 0x71011599a0-0x71011616b4
 KingSystem/ActorSystem/AS/ASSlot:
@@ -8713,8 +8704,7 @@ KingSystem/ActorSystem/AS/GroundNormalSelector:
 KingSystem/ActorSystem/AS/GroundNormalSideSelector:
 - 0x710131b93c-0x710131ba40
 KingSystem/ActorSystem/AS/IntSelector:
-- 0x7101260f04-0x71012614c0
-- 0x71012614c0-0x71012616c4
+- 0x7101260f04-0x71012616c4
 KingSystem/ActorSystem/AS/NodePosSelector:
 - 0x710131c0e0-0x710131cd84
 KingSystem/ActorSystem/AS/PoseBuffer:
@@ -8860,7 +8850,6 @@ KingSystem/ActorSystem/actActorUtil:
 KingSystem/ActorSystem/actAiAction:
 - 0x710004c204-0x710004c20c
 - 0x710004fea8-0x710004feac
-- 0x7100050010-0x710005004c
 - 0x71011c2368-0x71011c23a4
 - 0x71011c23a4-0x71011c2e10
 KingSystem/ActorSystem/actAiActionBase:
@@ -8889,6 +8878,7 @@ KingSystem/ActorSystem/actAiActionBase:
 - 0x710031fc04-0x710031fd3c
 - 0x7100349fc4-0x710034a0fc
 - 0x710039d2d0-0x710039d408
+- 0x71004c9274-0x71004c93ac
 - 0x7100825278-0x71008253dc
 - 0x7100d16038-0x7100d175d4
 KingSystem/ActorSystem/actAiAi:
@@ -8907,7 +8897,10 @@ KingSystem/ActorSystem/actAiClassDef:
 - 0x71011df76c-0x71011e151c
 KingSystem/ActorSystem/actAiParam:
 - 0x710004d078-0x710004d0b4
+- 0x7100050010-0x710005004c
 - 0x7100050eac-0x7100050ee8
+- 0x710005390c-0x7100053948
+- 0x710008ee04-0x710008ee40
 - 0x71000b6b7c-0x71000b6bcc
 - 0x71000b9388-0x71000b93c4
 - 0x71000c5b48-0x71000c5b80
@@ -8918,6 +8911,8 @@ KingSystem/ActorSystem/actAiParam:
 - 0x71002a5b74-0x71002a5bb0
 - 0x71002a5d14-0x71002a5d50
 - 0x710034a0fc-0x710034a13c
+- 0x71004c93ac-0x71004c93ec
+- 0x71008253dc-0x7100825418
 - 0x7100d175d4-0x7100d18fd0
 KingSystem/ActorSystem/actAiQueries:
 - 0x7100d5a980-0x7100d5b118
@@ -8985,6 +8980,7 @@ KingSystem/ActorSystem/actBoneCopyActorBind:
 KingSystem/ActorSystem/actBoneHandle:
 - 0x7100d3b3f0-0x7100d3ba50
 KingSystem/ActorSystem/actBoneHandleBase:
+- 0x7100012274-0x710001229c
 - 0x7100d3ba50-0x7100d3bc4c
 KingSystem/ActorSystem/actClusteredRenderer:
 - 0x71012424e4-0x710124a494
@@ -9154,8 +9150,7 @@ KingSystem/Chemical/chmElementInstance:
 KingSystem/Chemical/chmEnvInfo:
 - 0x7101265a6c-0x7101265ab4
 KingSystem/Chemical/chmGrassFireGrid:
-- 0x71012dadf0-0x71012dc42c
-- 0x71012dc42c-0x71012de568
+- 0x71012de254-0x71012de568
 KingSystem/Chemical/chmObject:
 - 0x7100d8e3d4-0x7100d97ca4
 KingSystem/Chemical/chmRigid:
@@ -9239,7 +9234,7 @@ KingSystem/Event/evtActorManager:
 KingSystem/Event/evtBaseProcLinkForEvent:
 - 0x710059a430-0x710059a468
 - 0x710059a87c-0x710059a8c0
-- 0x7100dbda00-0x7100dbe010
+- 0x7100dbda00-0x7100dbe0ac
 KingSystem/Event/evtCameraSystem:
 - 0x7100da3b8c-0x7100da5360
 KingSystem/Event/evtContext:
@@ -9259,7 +9254,7 @@ KingSystem/Event/evtEventFlowMgr:
 KingSystem/Event/evtEventFlowSet:
 - 0x7100dc12a4-0x7100dc2360
 KingSystem/Event/evtEventFlowchart:
-- 0x7100dbaca8-0x7100dbb430
+- 0x7100dbaca8-0x7100dbb424
 KingSystem/Event/evtEventMgrDebug:
 - 0x71012770c4-0x71012793ec
 KingSystem/Event/evtEventMovie:
@@ -9293,7 +9288,6 @@ KingSystem/Event/evtQuery:
 - 0x7100daeb2c-0x7100daed7c
 KingSystem/Event/evtResidentEvent:
 - 0x7100701858-0x7100701be4
-- 0x7100dbe010-0x7100dbe0ac
 KingSystem/Event/evtResourceFlowchart:
 - 0x7100dc4fbc-0x7100dc5fe8
 - 0x7100dc5fec-0x7100dc6210
@@ -9310,6 +9304,7 @@ KingSystem/Framework/frmDebugMenuSkin:
 KingSystem/Framework/frmDebugNowLoading:
 - 0x71010bcc08-0x71010bcd5c
 KingSystem/Framework/frmDebugStatus:
+- 0x71007a7f5c-0x71007a7f60
 - 0x71010bcd5c-0x71010bd0c4
 KingSystem/Framework/frmDebugStatusMgr:
 - 0x71010bd0c4-0x71010bdd08
@@ -9646,6 +9641,7 @@ KingSystem/Game/Horse/HorseObject:
 KingSystem/Game/Horse/HorseReins:
 - 0x7100e7b470-0x7100e7be78
 KingSystem/Game/Horse/HorseRideInfo:
+- 0x71002ca1d8-0x71002ca1dc
 - 0x7100e7be78-0x7100e7c0ec
 - 0x7100e7c0ec-0x7100e7c318
 - 0x7100e7c318-0x7100e7c380
@@ -9658,6 +9654,7 @@ KingSystem/Game/Horse/RideUtils:
 KingSystem/Game/Horse/Rideable:
 - 0x71002cb900-0x71002cb92c
 - 0x71002cb930-0x71002cb9b4
+- 0x71002cba18-0x71002cba20
 - 0x71002cba2c-0x71002cba50
 - 0x7100e7db64-0x7100e7f25c
 KingSystem/Game/Horse/RideableHorse:
@@ -9673,6 +9670,7 @@ KingSystem/Game/Map/AutoPlacementInfo:
 KingSystem/Game/Map/MapConst:
 - 0x7100e8dde4-0x7100e8e260
 KingSystem/Game/Map/MapConstActiveBase:
+- 0x71002dd658-0x71002dd8e4
 - 0x7100e8e260-0x7100e8e4a4
 KingSystem/Game/Map/MapConstPassiveBase:
 - 0x7100e8e4a4-0x7100e8e67c
@@ -9748,8 +9746,10 @@ KingSystem/Game/Player/PlayerSurfaceProbe:
 - 0x7100ea7300-0x7100eab9a4
 KingSystem/Game/Player/ShieldSurfingPhysics:
 - 0x7100eb5e84-0x7100eba300
+- 0x7100ebb674-0x7100ebb740
 KingSystem/Game/Player/WakeBoardPhysics:
-- 0x7100eba300-0x7100ebb80c
+- 0x7100eba300-0x7100ebb674
+- 0x7100ebb740-0x7100ebb80c
 KingSystem/Game/Reaction/contactReactionUnit:
 - 0x7100ebb80c-0x7100ebf620
 KingSystem/Game/Reaction/reactionActor:
@@ -9943,9 +9943,10 @@ KingSystem/Graphics/gfxUIModelSceneDrawCb:
 KingSystem/Graphics/gfxUkingModelRenderOptionsMgr:
 - 0x7100f1b7c4-0x7100f1ba2c
 - 0x7100f1ba2c-0x7100f1c3f0
-- 0x7100f1c3f0-0x7100f1cc38
+- 0x7100f1c538-0x7100f1cc38
 - 0x7100f1cc38-0x7100f1e794
 - 0x7100f1e794-0x7100f1fe6c
+- 0x7100f1c3f0-0x7100f1c538
 KingSystem/Graphics/gfxVisitMarkRenderer:
 - 0x7100f36cbc-0x7100f383e0
 KingSystem/Map/mapActorPreLoadMgr:
@@ -10043,7 +10044,7 @@ KingSystem/Physics/CharacterController/physCharacterStateInAir:
 - 0x7100f67670-0x7100f67a1c
 KingSystem/Physics/CharacterController/physCharacterStateOnGround:
 - 0x7100f67b54-0x7100f69018
-KingSystem/Physics/Cloth/physClothEntryHkRefMaybe:
+KingSystem/Physics/Cloth/physClothInstantiationHelper:
 - 0x7101308f88-0x7101309098
 KingSystem/Physics/Cloth/physClothParam:
 - 0x710121c2b8-0x710121cc80
@@ -10143,7 +10144,7 @@ KingSystem/Physics/Ragdoll/physRagdollResource:
 - 0x71012170f0-0x7101217308
 - 0x71012acc3c-0x71012acc98
 KingSystem/Physics/Ragdoll/physRagdollRigidBody:
-- 0x71012acc98-0x71012ad5c0
+- 0x71012acc98-0x71012ad324
 KingSystem/Physics/Rig/physBoneAccessor:
 - 0x710122cd60-0x710122dca8
 KingSystem/Physics/Rig/physModelBoneAccessor:
@@ -10195,6 +10196,8 @@ KingSystem/Physics/RigidBody/TerrainHeightField/physTerrainHeightFieldRigidBody:
 KingSystem/Physics/RigidBody/TerrainHeightField/physTerrainHeightFieldShape:
 - 0x7101224848-0x7101226470
 - 0x7101226470-0x7101226aa8
+KingSystem/Physics/RigidBody/physBoneConstraint:
+- 0x71012ad324-0x71012ad5c0
 KingSystem/Physics/RigidBody/physEdgeRigidBodyParam:
 - 0x71012ad5c0-0x71012afb20
 KingSystem/Physics/RigidBody/physMotionAccessor:
@@ -10289,9 +10292,9 @@ KingSystem/Physics/System/physGroupFilter:
 - 0x7100fb605c-0x7100fb612c
 - 0x7100fc8654-0x7100fc865c
 - 0x7100fc86f4-0x7100fc86f8
-- 0x710121370c-0x7101213ff0
+- 0x710121370c-0x7101213f20
 KingSystem/Physics/System/physHavokMemoryAllocator:
-- 0x71012b1798-0x71012b1950
+- 0x71012b1798-0x71012b18f0
 KingSystem/Physics/System/physHavokWorkerThreadPool:
 - 0x710132084c-0x7101320ba0
 KingSystem/Physics/System/physInstanceSet:
@@ -10316,7 +10319,7 @@ KingSystem/Physics/System/physRayCastForRequest:
 KingSystem/Physics/System/physRayCastRequestMgr:
 - 0x7100fc5720-0x7100fc5dec
 KingSystem/Physics/System/physRigidBodyDividedMeshShapeMgr:
-- 0x7100fc5dec-0x7100fc74ac
+- 0x7100fc5dec-0x7100fc7188
 KingSystem/Physics/System/physSensorContactListener:
 - 0x71012b1950-0x71012b1f50
 KingSystem/Physics/System/physSensorGroupFilter:
@@ -10338,11 +10341,13 @@ KingSystem/Physics/System/physStaticCompoundMgr:
 KingSystem/Physics/System/physStaticCompoundRigidBodyGroup:
 - 0x7100fcbe40-0x7100fcd7a0
 KingSystem/Physics/System/physSystem:
-- 0x7101213ff0-0x7101216ed8
+- 0x7101213f20-0x7101216ed8
 - 0x7101217d9c-0x7101217dc8
 KingSystem/Physics/System/physSystemData:
 - 0x71012b1f50-0x71012b3238
 - 0x71012b3238-0x71012b370c
+KingSystem/Physics/System/physTeraWaterDisableBodiesMgr:
+- 0x7100fc7188-0x7100fc74ac
 KingSystem/Physics/System/physUserTag:
 - 0x710006217c-0x71000621dc
 - 0x7100e8f580-0x7100e8f584
@@ -10354,6 +10359,8 @@ KingSystem/Physics/System/physWorld:
 - 0x71012b370c-0x71012b4124
 KingSystem/Physics/System/physWorldBorder:
 - 0x7101320618-0x710132084c
+KingSystem/Physics/System/physhkFreeListAllocator:
+- 0x71012b18f0-0x71012b1950
 KingSystem/Quest/qstActLink:
 - 0x71012b4124-0x71012b4754
 KingSystem/Quest/qstActorData:
@@ -10452,7 +10459,7 @@ KingSystem/Resource/Actor/resResourceAttClient:
 - 0x710118127c-0x7101181470
 - 0x7101181470-0x710118168c
 KingSystem/Resource/Actor/resResourceAttPos:
-- 0x7101094f28-0x7101095970
+- 0x7101094f28-0x710109596c
 KingSystem/Resource/Actor/resResourceAwareness:
 - 0x7101182b64-0x7101183050
 - 0x7101183050-0x71011834cc
@@ -10467,7 +10474,7 @@ KingSystem/Resource/Actor/resResourceChemical:
 - 0x71012fa2d4-0x71012fa554
 - 0x71012fa554-0x71012fa9e4
 KingSystem/Resource/Actor/resResourceDamageParam:
-- 0x7101095970-0x7101097bf0
+- 0x710109596c-0x7101097bf0
 - 0x7101097bf0-0x7101098648
 - 0x71011819a8-0x71011820b8
 - 0x71011820b8-0x71011822d4
@@ -10525,13 +10532,16 @@ KingSystem/Resource/Actor/resResourceUMii:
 KingSystem/Resource/Event/resDemoASLoader:
 - 0x710127347c-0x7101273cf8
 KingSystem/Resource/Event/resEventFlowActionByNameBinder:
+- 0x7100dbb428-0x7100dbb42c
 - 0x7101272f88-0x7101272fbc
 KingSystem/Resource/Event/resEventFlowBinder:
+- 0x7100dbb424-0x7100dbb428
 - 0x7100dc5fe8-0x7100dc5fec
 - 0x7100dc6210-0x7100dc621c
 - 0x7101272f24-0x7101272f88
 - 0x7101272ff0-0x71012730a0
 KingSystem/Resource/Event/resEventFlowQueryByNameBinder:
+- 0x7100dbb42c-0x7100dbb430
 - 0x7101272fbc-0x7101272ff0
 KingSystem/Resource/Event/resResourceDemo:
 - 0x7101273cf8-0x7101276248
@@ -10988,7 +10998,7 @@ KingSystem/Sound/sndAudioResource:
 KingSystem/Sound/sndBaseNoise:
 - 0x71012be294-0x71012bf7b4
 KingSystem/Sound/sndBattleBgmGroup:
-- 0x7100ff8eb4-0x7100ff9a0c
+- 0x7100ff8eb4-0x7100ff9a04
 KingSystem/Sound/sndBgm:
 - 0x7100ff653c-0x7100ff65b4
 - 0x7100ff65b4-0x7100ff6648
@@ -10997,11 +11007,12 @@ KingSystem/Sound/sndBgmEntryList:
 - 0x71010073f4-0x7101007d14
 KingSystem/Sound/sndBgmFadeSLinkUser:
 - 0x7100ff67ec-0x7100ff6808
+- 0x7100ff6810-0x7100ff6814
 - 0x7100ffd508-0x7100ffd630
 - 0x710101d7f8-0x710101da4c
 - 0x710101da4c-0x710101e140
 KingSystem/Sound/sndBgmGroup:
-- 0x7100ff9a0c-0x7100ff9c58
+- 0x7100ff9a04-0x7100ff9c58
 KingSystem/Sound/sndBgmList:
 - 0x7100ff6a18-0x7100ff7d08
 KingSystem/Sound/sndBgmMgr:
@@ -11009,7 +11020,7 @@ KingSystem/Sound/sndBgmMgr:
 KingSystem/Sound/sndBgmPriorityList:
 - 0x710101ce5c-0x710101d7f8
 KingSystem/Sound/sndBgmSLinkUser:
-- 0x7100ff6808-0x7100ff6814
+- 0x7100ff6808-0x7100ff6810
 - 0x71010203ac-0x7101020e88
 KingSystem/Sound/sndBgmSpeakerBalanceSupplier:
 - 0x7100ff8c74-0x7100ff8eb4
@@ -11026,6 +11037,9 @@ KingSystem/Sound/sndCastleBgm:
 - 0x710101320c-0x7101013c50
 KingSystem/Sound/sndCurseGanonBgm:
 - 0x7101000254-0x71010010fc
+KingSystem/Sound/sndDemoBarsList:
+- 0x710105bc3c-0x710105cea0
+- 0x710105babc-0x710105bc3c
 KingSystem/Sound/sndDragonBgm:
 - 0x71010010fc-0x7101001b78
 - 0x7101001d24-0x7101001ed0
@@ -11054,18 +11068,24 @@ KingSystem/Sound/sndEnvSePointMgr:
 KingSystem/Sound/sndEnvSoundWater:
 - 0x710102ca7c-0x7101031010
 KingSystem/Sound/sndEquipNoise:
-- 0x71012c3074-0x71012c5810
+- 0x71012c3070-0x71012c5810
 KingSystem/Sound/sndEquipNoiseCtrl:
 - 0x710103ae4c-0x710103b704
 KingSystem/Sound/sndEquipNoiseMgr:
 - 0x710104b818-0x710104e4e4
 KingSystem/Sound/sndEventBgm:
+- 0x7101008120-0x710100812c
+- 0x71010082fc-0x7101008304
+- 0x7101008738-0x7101008740
 - 0x71010094f4-0x710100992c
 KingSystem/Sound/sndEventBgmRemainsElecBattle:
-- 0x7101007d14-0x7101008158
-- 0x7101008158-0x71010083d0
+- 0x7101007d14-0x7101008120
+- 0x710100812c-0x7101008158
+- 0x7101008158-0x71010082fc
+- 0x7101008304-0x71010083d0
 KingSystem/Sound/sndEventBgmRemainsFireBattle:
-- 0x71010083d0-0x7101008a4c
+- 0x71010083d0-0x7101008738
+- 0x7101008740-0x7101008a4c
 KingSystem/Sound/sndEventBgmRemainsWaterBattle:
 - 0x7101008a4c-0x7101008f50
 KingSystem/Sound/sndEventBgmRemainsWindBattle:
@@ -11082,6 +11102,8 @@ KingSystem/Sound/sndFinalTrialBossBattleBgm:
 - 0x710100dd4c-0x710100f2a8
 KingSystem/Sound/sndForestShakeSound:
 - 0x710102c1d8-0x710102ca7c
+KingSystem/Sound/sndFrameCounter:
+- 0x71012d1f28-0x71012d2008
 KingSystem/Sound/sndFxMgr:
 - 0x710104fe38-0x7101050a04
 - 0x7101050a04-0x710105153c
@@ -11096,7 +11118,8 @@ KingSystem/Sound/sndGanonGrudgeBgmGroup:
 KingSystem/Sound/sndGolemGiantBgm:
 - 0x710100ce68-0x710100d5bc
 KingSystem/Sound/sndGrassPlantSound:
-- 0x7101031010-0x7101034a10
+- 0x7101031010-0x7101031790
+- 0x7101031790-0x7101034a10
 KingSystem/Sound/sndGrudgeAmbientSound:
 - 0x7101034a10-0x7101036748
 KingSystem/Sound/sndGuardianBgm:
@@ -11111,8 +11134,6 @@ KingSystem/Sound/sndInsectSoundUserPool:
 - 0x71012c1308-0x71012c1fa0
 KingSystem/Sound/sndListenerPoser:
 - 0x71010549d8-0x7101055810
-KingSystem/Sound/sndMapBarsList:
-- 0x710105babc-0x710105cea0
 KingSystem/Sound/sndMaterialSoundBars:
 - 0x71012c8968-0x71012cbdb8
 KingSystem/Sound/sndMazeForestBgm:
@@ -11178,9 +11199,8 @@ KingSystem/Sound/sndResourceGroup:
 KingSystem/Sound/sndResourceManager:
 - 0x7101057c4c-0x7101059518
 - 0x71010597a0-0x7101059828
-KingSystem/Sound/sndReverbAreaMgr:
-- 0x7101059828-0x7101059888
-- 0x7101059888-0x7101059d08
+KingSystem/Sound/sndReverbArea:
+- 0x7101059828-0x7101059d08
 KingSystem/Sound/sndSLinkActorEventCallback:
 - 0x71012ceb94-0x71012ceddc
 KingSystem/Sound/sndSLinkEventCallback:
@@ -11205,7 +11225,7 @@ KingSystem/Sound/sndSilenceBgm:
 KingSystem/Sound/sndSound:
 - 0x71011fa294-0x71011fc5c0
 KingSystem/Sound/sndSoundAttenuationListener:
-- 0x71012c2b98-0x71012c3074
+- 0x71012c2b98-0x71012c3070
 KingSystem/Sound/sndSoundAttenuationMgr:
 - 0x71012c2870-0x71012c2b98
 KingSystem/Sound/sndSoundCalcThread2:
@@ -11230,7 +11250,7 @@ KingSystem/Sound/sndSoundXLinkUserEntry:
 KingSystem/Sound/sndSoundXLinkUserPool:
 - 0x710104990c-0x7101049ea0
 KingSystem/Sound/sndSpatialCalculator:
-- 0x71012d1c8c-0x71012d2008
+- 0x71012d1c8c-0x71012d1f28
 KingSystem/Sound/sndSpotBgmEntry:
 - 0x7101022f64-0x7101024a54
 KingSystem/Sound/sndSpotBgmMgr:
@@ -11258,10 +11278,11 @@ KingSystem/Sound/sndWaterFastSound:
 - 0x7101027438-0x71010283a0
 KingSystem/Sound/sndWaterObjSoundCtrl:
 - 0x710103733c-0x7101039dd8
+- 0x7101039dd8-0x7101039f00
 KingSystem/Sound/sndWeaponSwingCurve:
 - 0x7101060ed4-0x7101061024
 KingSystem/Sound/sndWindEnvSound:
-- 0x7101039dd8-0x710103aa3c
+- 0x7101039f00-0x710103aa3c
 KingSystem/StatisticsMgr:
 - 0x7100e31c5c-0x7100e35e60
 KingSystem/System/Account:
@@ -11364,6 +11385,7 @@ KingSystem/System/UI/ScreenBaseEx:
 - 0x7100a00584-0x7100a0058c
 - 0x7100a03e18-0x7100a03e1c
 - 0x7100a828f4-0x7100a82910
+- 0x7100a82940-0x7100a82948
 - 0x71010aa3b0-0x71010ad714
 KingSystem/System/UI/ScreenDefine:
 - 0x71010ad714-0x71010ad7c8
@@ -11424,6 +11446,9 @@ KingSystem/Terrain/teraGrassFadeUniformBlockArrays:
 - 0x710115699c-0x7101157c44
 KingSystem/Terrain/teraGrassFastMowList:
 - 0x71010612c4-0x71010615d4
+KingSystem/Terrain/teraGrassFireGrid:
+- 0x71012dadf0-0x71012dc42c
+- 0x71012dc42c-0x71012de254
 KingSystem/Terrain/teraGrassInteractMap:
 - 0x7101063728-0x710106ad3c
 KingSystem/Terrain/teraGrassMapRenderTexture:
@@ -11455,7 +11480,14 @@ KingSystem/Terrain/teraPrimitiveMesh:
 KingSystem/Terrain/teraQuadTreeNode:
 - 0x7101106f44-0x71011086dc
 KingSystem/Terrain/teraQuadrantCenteredGridMesh:
-- 0x7101148cd4-0x710114954c
+- 0x7101148cd4-0x7101149124
+- 0x7101149130-0x71011491bc
+- 0x71011491c8-0x7101149254
+- 0x7101149260-0x71011492ec
+- 0x71011492f8-0x7101149384
+- 0x7101149390-0x710114941c
+- 0x7101149428-0x71011494b4
+- 0x71011494c0-0x710114954c
 KingSystem/Terrain/teraQuadrantFloatGridMesh:
 - 0x71011487a8-0x7101148bb4
 KingSystem/Terrain/teraResourceHolder:
@@ -11472,13 +11504,22 @@ KingSystem/Terrain/teraSceneNodeHandle:
 KingSystem/Terrain/teraShapeCrossMesh:
 - 0x7101157c44-0x7101158f88
 KingSystem/Terrain/teraSystem:
-- 0x710114954c-0x710114e714
+- 0x710114954c-0x710114e474
+- 0x710114e540-0x710114e714
 KingSystem/Terrain/teraTera:
 - 0x71012eb874-0x71012ebf3c
 KingSystem/Terrain/teraTerrain:
 - 0x710113fdf4-0x71011487a8
+- 0x7101149124-0x7101149130
+- 0x71011491bc-0x71011491c8
+- 0x7101149254-0x7101149260
+- 0x71011492ec-0x71011492f8
+- 0x7101149384-0x7101149390
+- 0x710114941c-0x7101149428
+- 0x71011494b4-0x71011494c0
 KingSystem/Terrain/teraTerrainEditorBase:
 - 0x710107e724-0x710107eff0
+- 0x710114e474-0x710114e540
 KingSystem/Terrain/teraTerrainPatchRenderer:
 - 0x7101124304-0x710113091c
 KingSystem/Terrain/teraTerrainQuery:
@@ -11593,9 +11634,16 @@ KingSystem/Utils/Thread/TaskThread:
 KingSystem/Utils/unlabelled_0x71011ee4b8:
 - 0x71011ee4b8-0x71011ee4c0
 KingSystem/Volante/vltCameraMgrTask:
-- 0x71011f1304-0x71011f2140
+- 0x71011f1304-0x71011f1528
+- 0x71011f1628-0x71011f1924
+- 0x71011f1a2c-0x71011f1f0c
+- 0x71011f1528-0x71011f1628
+- 0x71011f1924-0x71011f1a2c
+- 0x71011f1f0c-0x71011f2140
 KingSystem/Volante/vltLayerMgrTask:
 - 0x71011f32f8-0x71011f3974
+KingSystem/Volante/vltMainLayer3D:
+- 0x710090d404-0x710090d628
 KingSystem/Volante/vltNodeMap_LayerHandle:
 - 0x7101306ebc-0x7101307b60
 KingSystem/World/worldActorWorldInfo:
@@ -11614,7 +11662,7 @@ KingSystem/World/worldDungeonSize:
 KingSystem/World/worldDungeonType:
 - 0x71010f888c-0x71010f8a38
 KingSystem/World/worldEnvMgr:
-- 0x71010d2248-0x71010dce44
+- 0x71010d2248-0x71010dce2c
 KingSystem/World/worldGrassFireElement:
 - 0x71012de568-0x71012df5b4
 KingSystem/World/worldJob:
@@ -11632,7 +11680,7 @@ KingSystem/World/worldManager:
 KingSystem/World/worldShootingStarMgr:
 - 0x71010d13a0-0x71010d14c8
 - 0x71010d14d8-0x71010d14e8
-- 0x71010dce44-0x71010dd91c
+- 0x71010dce2c-0x71010dd91c
 KingSystem/World/worldShootingStarMgrEx:
 - 0x71010cf370-0x71010d13a0
 KingSystem/World/worldSkyMgr:
@@ -16686,7 +16734,7 @@ lib/xlink2/xlink2GroupTable:
 lib/xlink2/xlink2HoldMgr:
 - 0x7100bc2b38-0x7100bc2f0c
 lib/xlink2/xlink2IUser:
-- 0x71009cfea0-0x71009d0310
+- 0x71009cfea0-0x71009cff90
 - 0x7100bc2f6c-0x7100bc2ffc
 lib/xlink2/xlink2Locator:
 - 0x7100bd631c-0x7100bd6334
