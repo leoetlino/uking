@@ -7,6 +7,7 @@ target_sources(uking PRIVATE
   sndMusicDefinition.h
   sndMusicInfo.cpp
   sndMusicInfo.h
+  sndReverbArea.h
   sndMgr.cpp
   sndMgr.h
   sndSound.cpp
