@@ -146,7 +146,7 @@ bool PlacementMap::isDynamicLoaded(const sead::Vector3f& pos) {
     return mRes[idx].mStatus == HkscRes::Status::_3;  // Likely InitStatus::DynamicLoaded
 }
 
-bool PlacementMap::x_6() {
+bool PlacementMap::prepareDynamicUnload() {
     if (mDynamicGroupIdx < 0) {
         return true;
     }
@@ -366,9 +366,9 @@ phys::StaticCompoundRigidBodyGroup* PlacementMap::getFieldBodyGroup(int field_gr
     return nullptr;
 }
 
-void PlacementMap::x_7(int idx, int unknown, s8 column, s8 row, const sead::SafeString& mubin_path,
-                       const sead::SafeString& folder_and_file, int map_id_maybe,
-                       bool skip_load_static_map) {
+void PlacementMap::init(int idx, int unknown, s8 column, s8 row, const sead::SafeString& mubin_path,
+                        const sead::SafeString& folder_and_file, int map_id_maybe,
+                        bool skip_load_static_map) {
     _388 = unknown;
     mIdx = idx;
     mCol = column;
