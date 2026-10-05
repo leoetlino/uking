@@ -265,7 +265,7 @@ int ASSequencePlayContainerResource::callOnChildren_(ASResourceWithChildren::Mem
     return ret;
 }
 
-int ASSequencePlayContainerResource::m7() {
+int ASSequencePlayContainerResource::needsExtraSkeletalAnims() {
     auto* parser = sead::DynamicCast<ASFloatArrayParser>(
         mExtensions.getParser(ASParamParser::Type::FloatArray));
     if (!parser)
