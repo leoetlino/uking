@@ -9929,8 +9929,7 @@ KingSystem/Graphics/gfxSearchLocationalLight:
 KingSystem/Graphics/gfxShadowCascadeCtrl:
 - 0x710128abe0-0x710128babc
 KingSystem/Graphics/gfxSky:
-- 0x7100f20d60-0x7100f21bb4
-- 0x7100f21bb4-0x7100f258c0
+- 0x7100f20d60-0x7100f258c0
 - 0x7100f258c0-0x7100f26b00
 KingSystem/Graphics/gfxSkyOcclusion:
 - 0x7100f26b00-0x7100f2a100
@@ -13879,7 +13878,9 @@ lib/NintendoSDK/atk/DeviceOutRecorder:
 - 0x710135d994-0x710135db0c
 lib/NintendoSDK/atk/EffectAux:
 - 0x710135b9d0-0x710135bde8
-- 0x710135bde8-0x710135bf14
+- 0x710135bde8-0x710135bf0c
+lib/NintendoSDK/atk/EffectBase:
+- 0x710135bf0c-0x710135bf14
 lib/NintendoSDK/atk/FsSoundArchive:
 - 0x7100b98c34-0x7100b98c3c
 - 0x71013395cc-0x7101339c38
@@ -13887,6 +13888,8 @@ lib/NintendoSDK/atk/MemorySoundArchive:
 - 0x7101339c38-0x7101339edc
 lib/NintendoSDK/atk/ProfileReader:
 - 0x710135db0c-0x710135db9c
+lib/NintendoSDK/atk/SequenceSoundHandle:
+- 0x7101364cbc-0x7101364ce4
 lib/NintendoSDK/atk/SoundArchive:
 - 0x7100b98c3c-0x7100b98c44
 - 0x7100b98d6c-0x7100b98ed4
@@ -13902,7 +13905,6 @@ lib/NintendoSDK/atk/SoundHeap:
 - 0x710133c428-0x710133c738
 lib/NintendoSDK/atk/SoundPlayer:
 - 0x710133c738-0x710133cfbc
-- 0x710133fc90-0x710133fed8
 lib/NintendoSDK/atk/SoundStartable:
 - 0x710133cfbc-0x710133d208
 lib/NintendoSDK/atk/SoundSystem:
@@ -13914,21 +13916,21 @@ lib/NintendoSDK/atk/TaskProfileLogger:
 - 0x710135db9c-0x710135dce4
 lib/NintendoSDK/atk/WaveSoundHandle:
 - 0x710133e3b0-0x710133e478
-- 0x710133e478-0x710133e4b0
+- 0x710133e478-0x710133e4a0
 lib/NintendoSDK/atk/detail/AddonSoundArchiveContainer:
-- 0x710133e4b0-0x710133e540
+- 0x710133e4a0-0x710133e540
 lib/NintendoSDK/atk/detail/AdvancedWaveSound:
 - 0x710135dce4-0x710135dfe0
 lib/NintendoSDK/atk/detail/AdvancedWaveSoundFile:
 - 0x71013657bc-0x710136582c
 lib/NintendoSDK/atk/detail/AdvancedWaveSoundFileReader:
-- 0x7101364ce4-0x7101364f28
+- 0x7101364ce4-0x7101364ed8
 lib/NintendoSDK/atk/detail/AdvancedWaveSoundPlayer:
 - 0x710135dfe0-0x710135ea80
 lib/NintendoSDK/atk/detail/AdvancedWaveSoundRuntime:
 - 0x710133e540-0x710133eb44
 lib/NintendoSDK/atk/detail/Bank:
-- 0x710135ff04-0x71013600bc
+- 0x710135fefc-0x71013600bc
 lib/NintendoSDK/atk/detail/BankFile:
 - 0x71013600bc-0x71013603b0
 - 0x71013603b0-0x7101360534
@@ -13960,7 +13962,9 @@ lib/NintendoSDK/atk/detail/DriverCommand:
 lib/NintendoSDK/atk/detail/DspAdpcmDecoder:
 - 0x710135fd88-0x710135fe84
 lib/NintendoSDK/atk/detail/DspadpcmReader:
-- 0x710135fe84-0x710135ff04
+- 0x710135fe84-0x710135fefc
+lib/NintendoSDK/atk/detail/ExternalSoundPlayer:
+- 0x710133fc90-0x710133fed8
 lib/NintendoSDK/atk/detail/FrameHeap:
 - 0x7101353e20-0x7101354368
 lib/NintendoSDK/atk/detail/GroupFile:
@@ -13982,7 +13986,7 @@ lib/NintendoSDK/atk/detail/MemoryFileStream:
 lib/NintendoSDK/atk/detail/MmlParser:
 - 0x7101360534-0x710136159c
 lib/NintendoSDK/atk/detail/MmlSequenceTrack:
-- 0x7101364fbc-0x7101365074
+- 0x7101364fbc-0x7101365024
 lib/NintendoSDK/atk/detail/MmlSequenceTrackAllocator:
 - 0x710136159c-0x7101361654
 - 0x7101361654-0x710136165c
@@ -14000,7 +14004,7 @@ lib/NintendoSDK/atk/detail/SequenceSound:
 - 0x710136165c-0x7101361ba8
 - 0x7101361ba8-0x7101361c68
 lib/NintendoSDK/atk/detail/SequenceSoundFile:
-- 0x7101365074-0x7101365174
+- 0x7101365024-0x7101365174
 lib/NintendoSDK/atk/detail/SequenceSoundFileReader:
 - 0x7101361c68-0x7101361d0c
 lib/NintendoSDK/atk/detail/SequenceSoundLoader:
@@ -14036,17 +14040,17 @@ lib/NintendoSDK/atk/detail/StreamChannel:
 lib/NintendoSDK/atk/detail/StreamSound:
 - 0x710134b9d4-0x710134c498
 lib/NintendoSDK/atk/detail/StreamSoundFile:
-- 0x7101361d0c-0x710136204c
+- 0x7101361d0c-0x7101361f98
 lib/NintendoSDK/atk/detail/StreamSoundFileLoader:
-- 0x7101365174-0x7101365590
+- 0x7101365174-0x71013654e8
 lib/NintendoSDK/atk/detail/StreamSoundFileReader:
-- 0x7101365590-0x71013657bc
+- 0x71013654e8-0x71013657bc
 lib/NintendoSDK/atk/detail/StreamSoundLoader:
-- 0x710136204c-0x71013642d4
+- 0x7101361f98-0x7101364284
 lib/NintendoSDK/atk/detail/StreamSoundPlayer:
 - 0x710134c498-0x710134fee0
 lib/NintendoSDK/atk/detail/StreamSoundPrefetchFile:
-- 0x71013642d4-0x7101364338
+- 0x7101364284-0x7101364338
 lib/NintendoSDK/atk/detail/StreamSoundPrefetchFileReader:
 - 0x710134fee0-0x710135002c
 - 0x710135002c-0x7101350074
@@ -14072,7 +14076,7 @@ lib/NintendoSDK/atk/detail/WaveArchiveFile:
 lib/NintendoSDK/atk/detail/WaveArchiveFileReader:
 - 0x71013439f0-0x7101343db4
 lib/NintendoSDK/atk/detail/WaveFile:
-- 0x7101364f28-0x7101364fbc
+- 0x7101364ed8-0x7101364fbc
 lib/NintendoSDK/atk/detail/WaveFileReader:
 - 0x710135f7f4-0x710135fa70
 lib/NintendoSDK/atk/detail/WaveSound:
@@ -14083,7 +14087,7 @@ lib/NintendoSDK/atk/detail/WaveSoundFile:
 lib/NintendoSDK/atk/detail/WaveSoundFileReader:
 - 0x7101359f64-0x710135a178
 lib/NintendoSDK/atk/detail/WaveSoundLoader:
-- 0x71013649a4-0x7101364ce4
+- 0x71013649a4-0x7101364cbc
 lib/NintendoSDK/atk/detail/WaveSoundPlayer:
 - 0x710135a178-0x710135ae78
 lib/NintendoSDK/atk/detail/WaveSoundRuntime:
@@ -14092,9 +14096,9 @@ lib/NintendoSDK/atk/detail/WaveSoundRuntime:
 - 0x710135b328-0x710135b9d0
 lib/NintendoSDK/atk/detail/fnd/FileStreamImpl:
 - 0x710135c2b8-0x710135c4c8
-- 0x710135c4c8-0x710135cb64
+- 0x710135c4c8-0x710135cb30
 lib/NintendoSDK/atk/detail/fnd/FileStreamProxy:
-- 0x710135cb64-0x710135cd34
+- 0x710135cb30-0x710135cd34
 lib/NintendoSDK/atk/detail/fnd/FrameHeapImpl:
 - 0x710135bf14-0x710135c100
 lib/NintendoSDK/atk/detail/fnd/HeapBase:
@@ -14112,7 +14116,7 @@ lib/NintendoSDK/font/CharStrmReader:
 lib/NintendoSDK/font/CharWriter:
 - 0x7101323bf0-0x7101323fec
 lib/NintendoSDK/font/DispStringBuffer:
-- 0x7101323fec-0x7101324c88
+- 0x7101323fec-0x7101324b64
 lib/NintendoSDK/font/Font:
 - 0x7100ab3568-0x7100ab3684
 lib/NintendoSDK/font/GlyphNode:
@@ -14120,11 +14124,11 @@ lib/NintendoSDK/font/GlyphNode:
 lib/NintendoSDK/font/GlyphTreeMap:
 - 0x7100ab3704-0x7100ab4144
 lib/NintendoSDK/font/GpuBuffer:
-- 0x7101324c88-0x7101325004
+- 0x7101324b64-0x7101324d50
 lib/NintendoSDK/font/PlacementTextureObject:
 - 0x7100ab3444-0x7100ab34a0
 lib/NintendoSDK/font/RectDrawer:
-- 0x7101325004-0x7101325fdc
+- 0x7101324d50-0x7101325fdc
 lib/NintendoSDK/font/ResFont:
 - 0x7101325fdc-0x71013263d0
 lib/NintendoSDK/font/ResFontBase:
@@ -14173,7 +14177,7 @@ lib/NintendoSDK/g3d/ResCameraAnim:
 - 0x7100ac6680-0x7100ac6714
 lib/NintendoSDK/g3d/ResFile:
 - 0x7100ac5780-0x7100ac6020
-- 0x710132fe40-0x710132ff50
+- 0x710132fe40-0x710132fe5c
 lib/NintendoSDK/g3d/ResMaterial:
 - 0x7100ac895c-0x7100ac9564
 - 0x7100c14d38-0x7100c14e7c
@@ -14186,19 +14190,21 @@ lib/NintendoSDK/g3d/ResModel:
 - 0x7100ac6308-0x7100ac6680
 - 0x7100c14bf4-0x7100c14d38
 lib/NintendoSDK/g3d/ResSceneAnim:
-- 0x7100ac6714-0x7100ac6a7c
+- 0x7100ac6714-0x7100ac68c8
+lib/NintendoSDK/g3d/ResShaderArchive:
+- 0x710132f938-0x710132fdb8
 lib/NintendoSDK/g3d/ResShaderFile:
 - 0x710132fdb8-0x710132fe40
 lib/NintendoSDK/g3d/ResShaderOption:
-- 0x710132f2ec-0x710132f434
+- 0x710132f2ec-0x710132f360
 lib/NintendoSDK/g3d/ResShaderParam:
 - 0x7100ac85ac-0x7100ac895c
 lib/NintendoSDK/g3d/ResShaderProgram:
 - 0x710132ee10-0x710132f2ec
 lib/NintendoSDK/g3d/ResShadingModel:
-- 0x710132f434-0x710132fdb8
+- 0x710132f360-0x710132f938
 lib/NintendoSDK/g3d/ResShape:
-- 0x7100ac6cb8-0x7100ac6d6c
+- 0x7100ac6b64-0x7100ac6d6c
 lib/NintendoSDK/g3d/ResShapeAnim:
 - 0x7100ac6e10-0x7100ac6f68
 lib/NintendoSDK/g3d/ResSkeletalAnim:
@@ -14206,14 +14212,14 @@ lib/NintendoSDK/g3d/ResSkeletalAnim:
 lib/NintendoSDK/g3d/ResSkeleton:
 - 0x7100ac72e4-0x7100ac7ef0
 lib/NintendoSDK/g3d/ResVertex:
-- 0x7100ac6a7c-0x7100ac6cb8
+- 0x7100ac68c8-0x7100ac6b64
 - 0x7100aee5d8-0x7100aee71c
 lib/NintendoSDK/g3d/ShaderSelector:
-- 0x71013309a0-0x7101330c54
+- 0x71013308f8-0x7101330c54
 lib/NintendoSDK/g3d/ShaderUtility:
 - 0x7101330c54-0x7101330e18
 lib/NintendoSDK/g3d/ShadingModelObj:
-- 0x710132ff50-0x71013309a0
+- 0x710132fe5c-0x71013308f8
 lib/NintendoSDK/g3d/ShapeObj:
 - 0x71013310cc-0x7101332344
 lib/NintendoSDK/g3d/SkeletalAnimBlender:
@@ -14272,6 +14278,8 @@ lib/NintendoSDK/gfx/gfx_StateInfo:
 - 0x7101320e28-0x7101320f34
 lib/NintendoSDK/gfx/gfx_TextureInfo:
 - 0x7101320f34-0x7101320fa4
+lib/NintendoSDK/gfx/util/gfx_ObjectDebugLabel-api.nvn.8:
+- 0x7100aeef18-0x7100aeef54
 lib/NintendoSDK/init/init_Malloc:
 - 0x7100aace68-0x7100aad060
 lib/NintendoSDK/init/nninitStartup:
@@ -15038,15 +15046,15 @@ lib/NintendoSDK/ui2d/AnimTransformBasic:
 - 0x7100ab4230-0x7100ab5ad0
 - 0x7100ab6080-0x7100ab6110
 lib/NintendoSDK/ui2d/ArcExtractor:
-- 0x710132aac8-0x710132b160
+- 0x710132aac8-0x710132b158
 lib/NintendoSDK/ui2d/Bounding:
 - 0x7100abfe78-0x7100abff98
 lib/NintendoSDK/ui2d/ControlSrc:
 - 0x7100ac04e8-0x7100ac06a4
 lib/NintendoSDK/ui2d/DrawInfo:
-- 0x7100ac06a4-0x7100ac0ecc
+- 0x7100ac06a4-0x7100ac07c0
 lib/NintendoSDK/ui2d/GraphicsResource:
-- 0x7100ac0ecc-0x7100ac31d0
+- 0x7100ac07c0-0x7100ac1b50
 lib/NintendoSDK/ui2d/Group:
 - 0x7100ab629c-0x7100ab64c8
 lib/NintendoSDK/ui2d/GroupContainer:
@@ -15055,7 +15063,7 @@ lib/NintendoSDK/ui2d/Layout:
 - 0x7100ab65cc-0x7100ab7f78
 lib/NintendoSDK/ui2d/Material:
 - 0x7100ab6110-0x7100ab629c
-- 0x7100ac31d0-0x7100ac50dc
+- 0x7100ac1b50-0x7100ac50dc
 lib/NintendoSDK/ui2d/Pane:
 - 0x7100ab7f78-0x7100ab98e8
 lib/NintendoSDK/ui2d/Parts:
@@ -15063,10 +15071,10 @@ lib/NintendoSDK/ui2d/Parts:
 lib/NintendoSDK/ui2d/Picture:
 - 0x7100ab9afc-0x7100aba544
 lib/NintendoSDK/ui2d/ResourceAccessor:
-- 0x7100be0e0c-0x7100be0e4c
-- 0x710132b160-0x710132b288
+- 0x7100be0e00-0x7100be0e4c
+- 0x710132b158-0x710132b288
 lib/NintendoSDK/ui2d/ResourceTextureInfo:
-- 0x7100be0ee0-0x7100be0fb4
+- 0x7100be0e4c-0x7100be0fb4
 lib/NintendoSDK/ui2d/ShaderContainer:
 - 0x710132b288-0x710132b518
 lib/NintendoSDK/ui2d/ShaderInfo:
@@ -15075,6 +15083,9 @@ lib/NintendoSDK/ui2d/TexMap:
 - 0x7100aba544-0x7100aba5b8
 lib/NintendoSDK/ui2d/TextBox:
 - 0x7100aba5b8-0x7100abc738
+lib/NintendoSDK/ui2d/TextSearcher:
+- 0x7100be73bc-0x7100be73c0
+- 0x7100be73c4-0x7100be73c8
 lib/NintendoSDK/ui2d/UserShaderInformation:
 - 0x7100abff98-0x7100abffac
 lib/NintendoSDK/ui2d/Util:
@@ -15100,10 +15111,10 @@ lib/NintendoSDK/vfx/G3dPrimitive:
 lib/NintendoSDK/vfx/ParticleCalculateArgImpl:
 - 0x7100ad4be4-0x7100ad4c40
 lib/NintendoSDK/vfx/Primitive:
-- 0x7100ae4da0-0x7100ae4de8
+- 0x7100ae4d80-0x7100ae4de8
 - 0x7100aedef8-0x7100aee3a8
 lib/NintendoSDK/vfx/Resource:
-- 0x7100ae2a5c-0x7100ae4da0
+- 0x7100ae2a5c-0x7100ae4d80
 lib/NintendoSDK/vfx/System:
 - 0x7100acb47c-0x7100acc1c0
 - 0x7100acc1c0-0x7100ad2f34
@@ -15112,17 +15123,17 @@ lib/NintendoSDK/vfx/TemporaryBuffer:
 lib/NintendoSDK/vfx/detail/AreaLoopSystem:
 - 0x7100ad39a4-0x7100ad4140
 lib/NintendoSDK/vfx/detail/Attribute:
-- 0x7100ad3954-0x7100ad39a4
+- 0x7100ad381c-0x7100ad39a4
 lib/NintendoSDK/vfx/detail/Buffer:
-- 0x7100ad367c-0x7100ad3954
+- 0x7100ad367c-0x7100ad381c
 lib/NintendoSDK/vfx/detail/BufferAllocator:
 - 0x7100ad4140-0x7100ad4688
 lib/NintendoSDK/vfx/detail/ComputeShader:
 - 0x7100aee71c-0x7100aee894
 lib/NintendoSDK/vfx/detail/ComputeShaderManager:
-- 0x7100ae526c-0x7100ae571c
+- 0x7100ae526c-0x7100ae54d0
 lib/NintendoSDK/vfx/detail/ConnectionStripeSystem:
-- 0x7100ae7260-0x7100ae9aa8
+- 0x7100ae7260-0x7100ae9854
 lib/NintendoSDK/vfx/detail/ConstantBufferSlot:
 - 0x7100ad3620-0x7100ad367c
 lib/NintendoSDK/vfx/detail/CurlNoiseTable:
@@ -15135,27 +15146,27 @@ lib/NintendoSDK/vfx/detail/EmitterCalculator:
 lib/NintendoSDK/vfx/detail/EmitterCalculatorEmit:
 - 0x7100add210-0x7100adf920
 lib/NintendoSDK/vfx/detail/EmitterCalculatorParticle:
-- 0x7100adf920-0x7100ae2a20
+- 0x7100adf920-0x7100ae2834
 lib/NintendoSDK/vfx/detail/GpuNoise:
 - 0x7100aece80-0x7100aedef8
 lib/NintendoSDK/vfx/detail/Random:
 - 0x7100acb168-0x7100acb47c
 lib/NintendoSDK/vfx/detail/Rendercontext:
-- 0x7100ae2a20-0x7100ae2a5c
+- 0x7100ae2834-0x7100ae2a5c
 lib/NintendoSDK/vfx/detail/Shader:
-- 0x7100aee894-0x7100aeef54
+- 0x7100aee894-0x7100aeef18
 lib/NintendoSDK/vfx/detail/ShaderManager:
 - 0x7100ae4e7c-0x7100ae526c
 lib/NintendoSDK/vfx/detail/StripeSystem:
-- 0x7100ae571c-0x7100ae717c
+- 0x7100ae54d0-0x7100ae7044
 lib/NintendoSDK/vfx/detail/StripeSystemUtility:
-- 0x7100ae717c-0x7100ae7260
+- 0x7100ae7044-0x7100ae7260
 lib/NintendoSDK/vfx/detail/SuperStripeSystem:
-- 0x7100ae9aa8-0x7100aece80
+- 0x7100ae9854-0x7100aece80
 lib/NintendoSDK/vfx/detail/TextureSampler:
-- 0x7100ad34dc-0x7100ad3620
+- 0x7100ad325c-0x7100ad3620
 lib/NintendoSDK/vfx/detail/TextureSamplerSlot:
-- 0x7100ad31fc-0x7100ad34dc
+- 0x7100ad31fc-0x7100ad325c
 lib/NintendoSDK/vfx/detail/unlabelled_0x7100acac80:
 - 0x7100acac80-0x7100acb168
 lib/aal/ATKAccessor:
@@ -15200,6 +15211,8 @@ lib/aal/AudioResource:
 - 0x7101406b0c-0x7101407998
 lib/aal/AuxBusCtrl:
 - 0x7100ba2590-0x7100ba2868
+lib/aal/AuxBusDataCtrl:
+- 0x710105466c-0x7101054670
 lib/aal/AuxBusDataSerialCtrl:
 - 0x7101405d20-0x71014064fc
 lib/aal/AuxBusMgr:
@@ -15254,9 +15267,11 @@ lib/aal/FinalOutputMeasure:
 - 0x7100ba9b38-0x7100bb2984
 lib/aal/FxDelay:
 - 0x71012cc088-0x71012ccc00
-- 0x71012ccd2c-0x71012cd0bc
+- 0x71012ccd2c-0x71012ccd90
+- 0x71012ccebc-0x71012cd0bc
 lib/aal/FxDelayInitializeArg:
 - 0x71012cbdb8-0x71012cbdd8
+- 0x71012ccd90-0x71012ccebc
 lib/aal/FxDelayParamSetter:
 - 0x71012cbdd8-0x71012cc088
 - 0x71012ccc00-0x71012ccd2c
@@ -15267,13 +15282,12 @@ lib/aal/FxParamSetter:
 - 0x71014064fc-0x7101406800
 lib/aal/FxReverbI3DL2:
 - 0x7101051b04-0x71010543c0
-- 0x71010544f0-0x7101054670
 - 0x7101054670-0x71010547a4
 lib/aal/FxReverbI3DL2ExpParamSetter:
 - 0x710105153c-0x7101051570
 - 0x7101051570-0x7101051b04
 - 0x71010543c0-0x71010544e8
-- 0x71010544ec-0x71010544f0
+- 0x71010544ec-0x710105466c
 lib/aal/Group:
 - 0x7100b7f748-0x7100b7ffa4
 - 0x7100b7ffa4-0x7100b800ac
@@ -15464,6 +15478,8 @@ lib/aal/WorkerThread:
 - 0x7100b7d074-0x7100b7d63c
 lib/aal/XmlUtil:
 - 0x7100bb6168-0x7100bb64a4
+lib/agl/common/aglComputeShader:
+- 0x7100b38fe8-0x7100b38ff0
 lib/agl/common/aglDepthShadow:
 - 0x71013d6204-0x71013d8048
 lib/agl/common/aglDepthShadowUnit:
@@ -15474,20 +15490,24 @@ lib/agl/common/aglDrawContext:
 - 0x7100b2f224-0x7100b2f6d0
 lib/agl/common/aglDrawMethod:
 - 0x7100b5fc98-0x7100b5fd40
+lib/agl/common/aglFragmentShader:
+- 0x7100b38fd0-0x7100b38fdc
 lib/agl/common/aglFrameRateControlBuffer:
-- 0x71013fee90-0x71013ff674
+- 0x71013fee90-0x71013ff5a4
 lib/agl/common/aglGPUCache:
-- 0x7101370c54-0x71013713dc
+- 0x7101370c54-0x7101370c6c
 lib/agl/common/aglGPUMemAddrBase:
 - 0x7100b2f6d0-0x7100b2f874
 lib/agl/common/aglGPUMemBlockBase:
 - 0x7100b2f874-0x7100b2fd1c
 lib/agl/common/aglGPUStressChecker:
-- 0x71013ff674-0x71013ffc04
+- 0x71013ff5a4-0x71013ffc04
 lib/agl/common/aglGPUTimeStamp:
 - 0x71014009e4-0x7101400a98
 lib/agl/common/aglGPUTimeStampArray:
 - 0x7101400a98-0x7101401120
+lib/agl/common/aglGeometryShader:
+- 0x7100b38fdc-0x7100b38fe8
 lib/agl/common/aglIndexStream:
 - 0x7100b6ce50-0x7100b6d0b8
 lib/agl/common/aglInitArg:
@@ -15497,7 +15517,7 @@ lib/agl/common/aglLUT:
 lib/agl/common/aglLayer:
 - 0x7100b5fd40-0x7100b621fc
 lib/agl/common/aglLayerJob:
-- 0x7100b6c118-0x7100b6cdf8
+- 0x7100b6c118-0x7100b6c408
 lib/agl/common/aglLightMap:
 - 0x7101401120-0x7101405d20
 lib/agl/common/aglLightMapMgr:
@@ -15509,7 +15529,7 @@ lib/agl/common/aglLightPrePass:
 - 0x71013c3044-0x71013c6500
 - 0x71013c6500-0x71013cd68c
 lib/agl/common/aglLocalLightMapObj:
-- 0x7101380f18-0x71013824bc
+- 0x7101380ef8-0x71013824bc
 lib/agl/common/aglLocalReflection:
 - 0x71013824bc-0x710138c8d4
 lib/agl/common/aglNoiseTexture3D:
@@ -15518,6 +15538,8 @@ lib/agl/common/aglOcclusionQuery:
 - 0x71013ead70-0x71013ebe58
 lib/agl/common/aglOcclusionQueryDrawer:
 - 0x71013ebe58-0x71013ec7e8
+lib/agl/common/aglPfxSky:
+- 0x7100b6c408-0x7100b6cdf8
 lib/agl/common/aglPlanarReflection:
 - 0x71013cd68c-0x71013ce998
 lib/agl/common/aglProjectionShadow:
@@ -15548,13 +15570,16 @@ lib/agl/common/aglSSII:
 lib/agl/common/aglSSSSS:
 - 0x71013d301c-0x71013d6204
 lib/agl/common/aglShader:
+- 0x7100b36944-0x7100b36948
+- 0x7100b38fbc-0x7100b38fd0
 - 0x7100b6d6d0-0x7100b6d6f4
 lib/agl/common/aglShaderCompileInfo:
 - 0x7100b6d6f4-0x7100b6d900
 lib/agl/common/aglShaderLocation:
 - 0x7100b35cb0-0x7100b365b0
 lib/agl/common/aglShaderProgram:
-- 0x7100b365b0-0x7100b38ff0
+- 0x7100b365b0-0x7100b36944
+- 0x7100b36948-0x7100b38fb4
 lib/agl/common/aglShaderProgramArchive:
 - 0x7100b6d900-0x7100b6f040
 lib/agl/common/aglShaderStorageBlock:
@@ -15599,8 +15624,11 @@ lib/agl/common/aglVertexAttribute:
 - 0x7100b3bdf4-0x7100b3c55c
 lib/agl/common/aglVertexBuffer:
 - 0x7100b6fffc-0x7100b7048c
+lib/agl/common/aglVertexFormatInfo:
+- 0x7101370c6c-0x71013713dc
+lib/agl/common/aglVertexShader:
+- 0x7100b38fb4-0x7100b38fbc
 lib/agl/common/aglViewFrustumCulling:
-- 0x7100c474ec-0x7100c4762c
 - 0x7100c4b934-0x7100c4baac
 - 0x7100c7dcd0-0x7100c7e0bc
 - 0x71013ec7e8-0x71013ed788
@@ -15609,11 +15637,11 @@ lib/agl/detail/aglCompSel:
 lib/agl/detail/aglDynamicUniformBlock:
 - 0x7100b6b81c-0x7100b6bb28
 lib/agl/detail/aglFileIOMgr:
-- 0x7100b64238-0x7100b6502c
+- 0x7100b64238-0x7100b64f5c
 lib/agl/detail/aglFileUtil:
 - 0x71013713dc-0x7101373514
 lib/agl/detail/aglGPUMemBlockMgr:
-- 0x7100b30820-0x7100b30fb4
+- 0x7100b30820-0x7100b30ee4
 lib/agl/detail/aglGPUMemBlockMgrHeapEx:
 - 0x7100b30294-0x7100b30820
 lib/agl/detail/aglMemoryPool:
@@ -15623,17 +15651,17 @@ lib/agl/detail/aglMemoryPoolHeap:
 lib/agl/detail/aglMemoryPoolType:
 - 0x7100b2fd1c-0x7100b2fdb4
 lib/agl/detail/aglPrivateResource:
-- 0x7100b6502c-0x7100b655ac
+- 0x7100b64f5c-0x7100b654dc
 lib/agl/detail/aglRootNode:
-- 0x7100b655ac-0x7100b65c30
+- 0x7100b654dc-0x7100b65c30
 lib/agl/detail/aglSMAAResTextureGenerator:
 - 0x71013fff6c-0x7101400380
 lib/agl/detail/aglSamplerObject:
 - 0x7100b6bef8-0x7100b6bf24
 lib/agl/detail/aglSeadUtil:
-- 0x7100b65c30-0x7100b66158
+- 0x7100b65c30-0x7100b66088
 lib/agl/detail/aglShaderHolder:
-- 0x7100b66158-0x7100b6aac0
+- 0x7100b66088-0x7100b6aac0
 lib/agl/detail/aglShaderTextUtil:
 - 0x7100b74b60-0x7100b75340
 lib/agl/detail/aglSurface:
@@ -15641,7 +15669,7 @@ lib/agl/detail/aglSurface:
 lib/agl/detail/aglTextureDataUtil:
 - 0x7100b6aac0-0x7100b6af48
 lib/agl/driver/aglGraphicsDriverMgr:
-- 0x7100b30fb4-0x7100b310e4
+- 0x7100b30ee4-0x7100b310e4
 lib/agl/driver/aglNVNMgr:
 - 0x7100b310e4-0x7100b32d24
 lib/agl/driver/aglNVNimage_:
@@ -15651,25 +15679,31 @@ lib/agl/driver/aglNVNsampler_:
 lib/agl/driver/aglNVNtexture_:
 - 0x7100b32d24-0x7100b331c8
 lib/agl/effect/aglCloud:
-- 0x7101374a6c-0x71013751bc
+- 0x7101373514-0x71013751bc
 - 0x71013751bc-0x71013790b8
-lib/agl/effect/aglCloudParam:
-- 0x7101373514-0x7101374a6c
 lib/agl/effect/aglDecalAo:
-- 0x7101400380-0x71014005d4
+- 0x7101400380-0x710140044c
 lib/agl/effect/aglDecalAoMgr:
-- 0x71013790b8-0x710137a8a0
+- 0x71013790b8-0x7101379ba8
+lib/agl/effect/aglDecalAoObject:
+- 0x7101379ba8-0x7101379f18
 lib/agl/effect/aglDecalDrawer:
 - 0x71013ed788-0x71013ee3dc
 lib/agl/effect/aglDecalSimple:
 - 0x71013ee3dc-0x71013ef544
+lib/agl/effect/aglDecalTextureDrawer:
+- 0x7101379f18-0x710137a7b0
+lib/agl/effect/aglDecalTrail:
+- 0x710140044c-0x71014005d4
 lib/agl/effect/aglDecalTrailMgr:
-- 0x710137a8a0-0x710137b2a4
+- 0x710137a7b0-0x710137b2a4
 lib/agl/effect/aglFxOfxLensFlare:
-- 0x71013ef544-0x71013f5dec
+- 0x71013ef544-0x71013f5474
+- 0x71013f5994-0x71013f5dec
 lib/agl/effect/aglNormalDrawer:
 - 0x710137b2a4-0x710137c368
 lib/agl/effect/aglOccludedEffectMgr:
+- 0x71013f5474-0x71013f5994
 - 0x71013f5dec-0x71013fa160
 lib/agl/effect/aglOcclusionRenderer:
 - 0x71013fa160-0x71013fcaa0
@@ -15682,12 +15716,17 @@ lib/agl/environment/aglCubeMap:
 lib/agl/environment/aglCubeMapMgr:
 - 0x71013907e8-0x71013932ac
 - 0x71013932ac-0x7101399208
+lib/agl/environment/aglDirectionalLight:
+- 0x710139aa40-0x710139b614
+- 0x710139c824-0x710139cd20
 lib/agl/environment/aglEnvObj:
 - 0x7100b7048c-0x7100b713fc
 lib/agl/environment/aglEnvObjBuffer:
+- 0x7100b3e374-0x7100b3e378
 - 0x7100b713fc-0x7100b71ba0
 lib/agl/environment/aglEnvObjMgr:
 - 0x7100b3c55c-0x7100b3e370
+- 0x7100b3e378-0x7100b3e380
 lib/agl/environment/aglEnvObjSet:
 - 0x7100b3e380-0x7100b3e654
 - 0x7100b3e690-0x7100b3f348
@@ -15697,10 +15736,17 @@ lib/agl/environment/aglEnvObjSetMgr:
 - 0x7101399208-0x7101399f2c
 lib/agl/environment/aglFog:
 - 0x7101399f2c-0x710139a4b4
+lib/agl/environment/aglHemisphereLight:
+- 0x710139a4bc-0x710139aa40
+- 0x710139c6e8-0x710139c824
 lib/agl/environment/aglLight:
-- 0x710139a4b4-0x710139cd20
+- 0x710139a4b4-0x710139a4bc
+- 0x710139b614-0x710139bbc4
+- 0x710139c4a0-0x710139c6e8
 lib/agl/environment/aglProjector:
 - 0x710139cd20-0x710139db04
+lib/agl/environment/aglSpotLight:
+- 0x710139bbc4-0x710139c4a0
 lib/agl/g3d/aglModelShaderAttribute:
 - 0x71013bf258-0x71013c0064
 lib/agl/g3d/aglModelShaderSampler:
@@ -15712,7 +15758,7 @@ lib/agl/g3d/aglNW4FToNN:
 lib/agl/g3d/aglResTextureDataEx:
 - 0x71013c06e4-0x71013c07cc
 lib/agl/g3d/aglShaderUtilG3D:
-- 0x71013808f4-0x7101380f18
+- 0x71013808f4-0x7101380ef8
 lib/agl/g3d/aglTextureDataInitializerG3D:
 - 0x7100b64020-0x7100b64238
 lib/agl/g3d/aglTextureUtilG3D:
@@ -15726,11 +15772,13 @@ lib/agl/postfx/aglBloomObj:
 lib/agl/postfx/aglColorCorrection:
 - 0x71013a4768-0x71013a6708
 lib/agl/postfx/aglDepthOfField:
-- 0x71013a6708-0x71013aac78
+- 0x71013a6708-0x71013aac60
 - 0x71013aac78-0x71013ab030
 - 0x71013ab030-0x71013ab684
 lib/agl/postfx/aglDepthOfFieldObj:
 - 0x71013ab684-0x71013abee8
+lib/agl/postfx/aglDepthOfFieldParameter:
+- 0x71013aac60-0x71013aac78
 lib/agl/postfx/aglFilterAA:
 - 0x71013abee8-0x71013b2098
 lib/agl/postfx/aglFlareFilter:
@@ -15738,11 +15786,15 @@ lib/agl/postfx/aglFlareFilter:
 lib/agl/postfx/aglFlareFilterParameter:
 - 0x71013b2098-0x71013b26b8
 lib/agl/postfx/aglGlareFilter:
-- 0x71013b4888-0x71013b7f1c
+- 0x71013b4ca8-0x71013b79c4
+- 0x71013b7bd8-0x71013b7e9c
+lib/agl/postfx/aglGlareFilterParameter:
+- 0x71013b4888-0x71013b4ca8
+- 0x71013b79c4-0x71013b7bd8
 lib/agl/postfx/aglHDRCompose:
-- 0x71013b7f1c-0x71013b86a0
+- 0x71013b7e9c-0x71013b86a0
 lib/agl/utility/aglAtomicPtrArray:
-- 0x7100b75340-0x7100b75864
+- 0x7100b75340-0x7100b75800
 lib/agl/utility/aglContextParameterBufferImpl:
 - 0x71013b86a0-0x71013b8a70
 lib/agl/utility/aglDebugPrimitiveMgr:
@@ -15750,13 +15802,15 @@ lib/agl/utility/aglDebugPrimitiveMgr:
 lib/agl/utility/aglDebugTexture:
 - 0x7100b71cfc-0x7100b71f74
 lib/agl/utility/aglDebugTextureDrawer:
-- 0x7100b75864-0x7100b75d44
+- 0x7100b75800-0x7100b75d44
 lib/agl/utility/aglDebugTexturePage:
+- 0x7100b5c00c-0x7100b5c048
+- 0x7100b5c674-0x7100b5c6b8
 - 0x7100b71ba0-0x7100b71cfc
 lib/agl/utility/aglDevTools:
-- 0x7100b3fd08-0x7100b45de0
+- 0x7100b3fd08-0x7100b45d10
 lib/agl/utility/aglDynamicTextureAllocator:
-- 0x7100b45de0-0x7100b47524
+- 0x7100b45d10-0x7100b47524
 - 0x7100b47524-0x7100b477e0
 - 0x7100b477e0-0x7100b479f8
 lib/agl/utility/aglDynamicTextureCache:
@@ -15774,12 +15828,12 @@ lib/agl/utility/aglImageFilter2D:
 lib/agl/utility/aglMultiFilter:
 - 0x71013b90a8-0x71013ba014
 lib/agl/utility/aglMultiFilterUnit:
-- 0x71013ba014-0x71013bcf58
+- 0x71013ba014-0x71013bce88
 lib/agl/utility/aglParameter:
 - 0x7100b3fb84-0x7100b3fb98
 - 0x7100b4bc24-0x7100b52770
 lib/agl/utility/aglParameterIO:
-- 0x7100b3e370-0x7100b3e380
+- 0x7100b3e370-0x7100b3e374
 - 0x7100b52770-0x7100b53384
 lib/agl/utility/aglParameterList:
 - 0x710089f874-0x710089f950
@@ -15790,27 +15844,28 @@ lib/agl/utility/aglParameterObj:
 - 0x710089f824-0x710089f874
 - 0x7100b3e654-0x7100b3e668
 - 0x7100b3f8c4-0x7100b3fb84
-- 0x7100b53cf4-0x7100b543cc
+- 0x7100b53cf4-0x7100b542fc
 lib/agl/utility/aglParameterStringMgr:
 - 0x7100b6cdf8-0x7100b6ce50
 lib/agl/utility/aglPickBuffer:
 - 0x71013bd354-0x71013bf258
 lib/agl/utility/aglPrimitiveShape:
-- 0x7100b543cc-0x7100b5be4c
+- 0x7100b542fc-0x7100b5bd7c
 lib/agl/utility/aglPrimitiveTexture:
-- 0x7100b5be4c-0x7100b5c6b8
+- 0x7100b5bd7c-0x7100b5c00c
+- 0x7100b5c048-0x7100b5c674
 lib/agl/utility/aglPrimitiveVertex:
-- 0x71013bcf58-0x71013bd354
+- 0x71013bce88-0x71013bd354
 lib/agl/utility/aglResParameter:
 - 0x7100b5c6b8-0x7100b5c7b4
 - 0x7100b5c7b4-0x7100b5c8bc
-- 0x7100b5c8bc-0x7100b5d2c0
+- 0x7100b5c8bc-0x7100b5d1f0
 lib/agl/utility/aglScreenShotMgr:
-- 0x7100b5d2c0-0x7100b5e810
+- 0x7100b5d1f0-0x7100b5e810
 lib/agl/utility/aglTextureMemoryAllocator:
-- 0x7100b5e810-0x7100b5f6a4
+- 0x7100b5e810-0x7100b5f640
 lib/agl/utility/aglVertexAttributeHolder:
-- 0x7100b5f6a4-0x7100b5fc98
+- 0x7100b5f640-0x7100b5fc98
 lib/agl/utility/common/aglResBinaryShaderArchive:
 - 0x7100b6af48-0x7100b6b81c
 lib/agl/utility/common/aglResCommon:
@@ -15874,7 +15929,7 @@ lib/eui/CheckButton:
 lib/eui/CheckKeepButton:
 - 0x7100bd8664-0x7100bd87d0
 lib/eui/ConstantBuffer:
-- 0x7100bf4168-0x7100bf4378
+- 0x7100bf40ec-0x7100bf4378
 lib/eui/ControlBase:
 - 0x7100bd87d0-0x7100bd8808
 lib/eui/ControlCreator:
@@ -15884,36 +15939,37 @@ lib/eui/DecisionButton:
 lib/eui/DragButton:
 - 0x7100bd8ea8-0x7100bd91bc
 lib/eui/DrawInfoEx:
+- 0x7100beb8fc-0x7100bebd60
 - 0x7100bf2ab0-0x7100bf2b74
 lib/eui/DynamicCapturePane:
-- 0x7100bf2b74-0x7100bf33b0
+- 0x7100bf2b74-0x7100bf3378
 lib/eui/DynamicCaptureUsePictureEx:
-- 0x7100bf33b0-0x7100bf3634
+- 0x7100bf3378-0x7100bf35fc
 lib/eui/DynamicCaptureUseWindowEx:
-- 0x7100bf3634-0x7100bf3880
+- 0x7100bf35fc-0x7100bf3880
 lib/eui/FontMgr:
-- 0x7100be332c-0x7100be39b8
+- 0x7100be325c-0x7100be39b8
 lib/eui/FrameBufferMultiFilter:
-- 0x7100bf3880-0x7100bf4168
+- 0x7100bf3880-0x7100bf40ec
 lib/eui/Grammar:
-- 0x7100be39b8-0x7100be4450
+- 0x7100be39b8-0x7100be4380
 lib/eui/HoverButton:
 - 0x7100befdb8-0x7100bf01d0
 lib/eui/LayoutEx:
 - 0x7100bdd16c-0x7100bdd41c
-- 0x7100bdd41c-0x7100bdfca4
+- 0x7100bdd41c-0x7100bdf594
 lib/eui/LetterAnimControl:
 - 0x7100bd92cc-0x7100bd9da8
 lib/eui/MassDrawPane:
-- 0x7100bdfca4-0x7100bdffc0
+- 0x7100bdf594-0x7100bdffc0
 lib/eui/MessageMgr:
-- 0x7100be4450-0x7100be4e70
+- 0x7100be4380-0x7100be4e70
 lib/eui/MessageSet:
 - 0x7100be4e70-0x7100be4fdc
 lib/eui/MessageString:
-- 0x7100be4fdc-0x7100be52e0
+- 0x7100be4fdc-0x7100be51c0
 lib/eui/MultiArcResourceAccessor:
-- 0x7100bdffc0-0x7100be0e0c
+- 0x7100bdffc0-0x7100be0e00
 lib/eui/MultiFilterPictureEx:
 - 0x7100be0fb4-0x7100be131c
 lib/eui/MultiFilterWindowEx:
@@ -15927,15 +15983,16 @@ lib/eui/PartsEx:
 lib/eui/PictureEx:
 - 0x7100be17dc-0x7100be196c
 lib/eui/RootPane:
-- 0x7100be196c-0x7100be1ae0
+- 0x7100be196c-0x7100be1a98
 lib/eui/ScalableFontMgr:
-- 0x7100be52e0-0x7100be5be4
+- 0x7100be51c0-0x7100be5be4
 lib/eui/ScalableFontTextBoxEx:
-- 0x7100be1ae0-0x7100be1ed4
+- 0x7100be1a98-0x7100be1ea4
 lib/eui/ScissorPane:
-- 0x7100be1ed4-0x7100be21b0
+- 0x7100be1ea4-0x7100be21b0
 lib/eui/Screen:
-- 0x7100be8f80-0x7100bebe04
+- 0x7100be8f80-0x7100beb8fc
+- 0x7100bebd60-0x7100bebe04
 - 0x7100bebe04-0x7100bebfd4
 lib/eui/ScreenMgr:
 - 0x7100bebfd4-0x7100beca2c
@@ -15945,14 +16002,14 @@ lib/eui/SelectButton:
 lib/eui/SharcArchive:
 - 0x7100beca2c-0x7100becd40
 lib/eui/TagProcessor:
-- 0x7100be0e4c-0x7100be0ee0
-- 0x7100be5be4-0x7100be72b4
+- 0x7100be5be4-0x7100be729c
 lib/eui/TapButton:
 - 0x7100bf01d0-0x7100bf0544
 lib/eui/TextBoxEx:
 - 0x7100be21b0-0x7100be30cc
 lib/eui/TextSearcher:
-- 0x7100be72b4-0x7100be73c8
+- 0x7100be729c-0x7100be73bc
+- 0x7100be73c0-0x7100be73c4
 lib/eui/TraceGaugeControl:
 - 0x7100bda164-0x7100bda958
 lib/eui/TwoTouchCheckKeepButton:
@@ -15964,9 +16021,9 @@ lib/eui/UniteButton:
 lib/eui/Util:
 - 0x7100bed030-0x7100befdb8
 lib/eui/WindowEx:
-- 0x7100be30cc-0x7100be332c
+- 0x7100be30cc-0x7100be325c
 lib/gsys/gsysApplicationPackage:
-- 0x7100c682a8-0x7100c683a8
+- 0x7100c681d8-0x7100c683a8
 - 0x7100c683a8-0x7100c683b0
 - 0x7100c683b0-0x7100c690f4
 lib/gsys/gsysApplicationPackageInfo:
@@ -15979,17 +16036,17 @@ lib/gsys/gsysCopyLayerTexture:
 - 0x7100bf5c6c-0x7100bf63ac
 lib/gsys/gsysDebugCtrl:
 - 0x7100c6a48c-0x7100c6a5f4
-lib/gsys/gsysEffectLightMgr:
-- 0x7100c4e968-0x7100c4efdc
 lib/gsys/gsysEffectModelDrawMgr:
 - 0x7100c559dc-0x7100c55c74
 - 0x7100c55c74-0x7100c5618c
 lib/gsys/gsysEffectModelDrawUnit:
 - 0x7100c55364-0x7100c559dc
+lib/gsys/gsysEffectRadialBlurMgr:
+- 0x7100c4f410-0x7100c4f758
 lib/gsys/gsysG3dResAnimationEx:
-- 0x7100c6c9c8-0x7100c6d0fc
+- 0x7100c6c9c0-0x7100c6d07c
 lib/gsys/gsysG3dResMaterialEx:
-- 0x7100c6d0fc-0x7100c6db2c
+- 0x7100c6d07c-0x7100c6db2c
 lib/gsys/gsysG3dResModelEx:
 - 0x7100c6db2c-0x7100c6e820
 lib/gsys/gsysG3dResShaderProgramEx:
@@ -15997,11 +16054,13 @@ lib/gsys/gsysG3dResShaderProgramEx:
 lib/gsys/gsysG3dResShapeEx:
 - 0x7100c6ee78-0x7100c70958
 lib/gsys/gsysGBuffer:
-- 0x7100c70958-0x7100c73d74
+- 0x7100c70958-0x7100c73d24
 lib/gsys/gsysGPUStressAnalyzer:
-- 0x7100c73d74-0x7100c74a9c
+- 0x7100c73d24-0x7100c74a9c
 lib/gsys/gsysIModelProcedural:
-- 0x7100c7fbec-0x7100c80100
+- 0x7100c1444c-0x7100c14574
+- 0x7100c7fbec-0x7100c80010
+- 0x7100c80088-0x7100c800d0
 lib/gsys/gsysLayer:
 - 0x7100bf4378-0x7100bf51a4
 lib/gsys/gsysLayer3D:
@@ -16011,13 +16070,15 @@ lib/gsys/gsysLayerTexture:
 lib/gsys/gsysLightProbeMgr:
 - 0x7100c74a9c-0x7100c78b50
 lib/gsys/gsysLogMgr:
-- 0x7100c6a5f4-0x7100c6a66c
+- 0x7100c6a5f4-0x7100c6a64c
 lib/gsys/gsysMaskedLight:
 - 0x7100c78b50-0x7100c79538
 lib/gsys/gsysMaskedProjLight:
-- 0x7100c79f0c-0x7100c7b6dc
+- 0x7100c79f0c-0x7100c7b220
+- 0x7100c7b3b0-0x7100c7b6dc
 lib/gsys/gsysMaskedSpotLight:
 - 0x7100c79538-0x7100c79f0c
+- 0x7100c7b220-0x7100c7b3b0
 lib/gsys/gsysMaskedSpotLightRig:
 - 0x7100c7b6dc-0x7100c7ceb0
 lib/gsys/gsysMemAllocator:
@@ -16040,27 +16101,27 @@ lib/gsys/gsysModelAutoAnimation:
 lib/gsys/gsysModelCubeMapDrawer:
 - 0x7100c7d178-0x7100c7dcd0
 lib/gsys/gsysModelDebugInfo:
-- 0x7100c009c0-0x7100c00b04
+- 0x7100c009c0-0x7100c00af4
 lib/gsys/gsysModelDrawObj:
-- 0x7100c00b04-0x7100c01494
+- 0x7100c00af4-0x7100c01494
 lib/gsys/gsysModelDrawObjStream:
 - 0x7100c7e0bc-0x7100c7e24c
 lib/gsys/gsysModelDynamicEnvInfo:
-- 0x7100c01494-0x7100c01ce8
+- 0x7100c01494-0x7100c01c18
 lib/gsys/gsysModelEnvInfo:
 - 0x7100c7e24c-0x7100c7e4ec
 lib/gsys/gsysModelJobQueue:
 - 0x7100c7e634-0x7100c7fbec
 lib/gsys/gsysModelMgr:
-- 0x7100c01ce8-0x7100c030bc
+- 0x7100c01c18-0x7100c030bc
 lib/gsys/gsysModelNW:
-- 0x7100c030bc-0x7100c07f18
+- 0x7100c030bc-0x7100c07f08
 lib/gsys/gsysModelProceduralShape:
-- 0x71014099f8-0x7101409c1c
+- 0x71014099f8-0x7101409bd4
 lib/gsys/gsysModelRenderCache:
 - 0x7100c80100-0x7100c81184
 lib/gsys/gsysModelRenderContext:
-- 0x7100c07f18-0x7100c09008
+- 0x7100c07f08-0x7100c09008
 lib/gsys/gsysModelRenderQueue:
 - 0x7100c09008-0x7100c09a94
 lib/gsys/gsysModelRenderState:
@@ -16069,27 +16130,32 @@ lib/gsys/gsysModelRenderUnit:
 - 0x7100c82ca0-0x7100c82f1c
 lib/gsys/gsysModelRenderUnitNW:
 - 0x7100c09ad0-0x7100c0a960
+lib/gsys/gsysModelRenderUnitNWArray:
+- 0x7100c4b824-0x7100c4b934
 lib/gsys/gsysModelRenderUnitNWOverride:
-- 0x7101409c1c-0x7101409ed8
+- 0x7101409bd4-0x7101409ed8
+lib/gsys/gsysModelRenderUnitProcedural:
+- 0x7100c80010-0x7100c80088
+- 0x7100c800d0-0x7100c80100
 lib/gsys/gsysModelResource:
 - 0x7100c0a960-0x7100c0c534
-- 0x7100c0c534-0x7100c0c748
+- 0x7100c0c534-0x7100c0c678
 lib/gsys/gsysModelResourceMgr:
-- 0x7100c0c748-0x7100c0d8f0
+- 0x7100c0c678-0x7100c0d8f0
 lib/gsys/gsysModelRig:
+- 0x7100c4d038-0x7100c4d20c
 - 0x7100c82f1c-0x7100c83ee0
 lib/gsys/gsysModelScene:
 - 0x7100c0d8f0-0x7100c10184
 - 0x7100c10184-0x7100c10a5c
-- 0x7100c10a5c-0x7100c14574
-- 0x7100c14898-0x7100c14934
+- 0x7100c10a5c-0x7100c1444c
 lib/gsys/gsysModelSceneAreaEnv:
 - 0x7100c14934-0x7100c14bf4
 - 0x7100c14e7c-0x7100c17534
 lib/gsys/gsysModelSceneBuffer:
-- 0x7100c17558-0x7100c19b4c
+- 0x7100c1754c-0x7100c19b4c
 lib/gsys/gsysModelSceneComponent:
-- 0x7100c17534-0x7100c17558
+- 0x7100c17534-0x7100c1754c
 - 0x7100c19b4c-0x7100c19c5c
 lib/gsys/gsysModelSceneConfig:
 - 0x7100c19c5c-0x7100c20ec4
@@ -16105,32 +16171,34 @@ lib/gsys/gsysModelSceneFx:
 - 0x7100c2d624-0x7100c309d0
 lib/gsys/gsysModelSceneGI:
 - 0x7100c309d0-0x7100c35368
-- 0x7100c35368-0x7100c354a0
+- 0x7100c35368-0x7100c35494
 lib/gsys/gsysModelScenePfx:
-- 0x7100c354a0-0x7100c36550
+- 0x7100c35494-0x7100c36550
 lib/gsys/gsysModelSceneShadow:
 - 0x7100c36550-0x7100c3b9ac
 lib/gsys/gsysModelSceneStatistics:
-- 0x7100c3b9ac-0x7100c3ba8c
+- 0x7100c3b9ac-0x7100c3b9f4
 lib/gsys/gsysModelShader:
-- 0x7100c3ba8c-0x7100c3cafc
+- 0x7100c3b9f4-0x7100c3cafc
 - 0x7100c3cafc-0x7100c3cc14
 lib/gsys/gsysModelShaderArchive:
 - 0x7100c3cc14-0x7100c3d3b4
-- 0x7100c3d3b4-0x7100c3d4b0
+- 0x7100c3d3b4-0x7100c3d480
 lib/gsys/gsysModelShaderHolder:
-- 0x7100c6a66c-0x7100c6a95c
+- 0x7100c6a64c-0x7100c6a88c
+lib/gsys/gsysModelShaderProgram:
+- 0x7100c3d480-0x7100c3d4b0
 lib/gsys/gsysModelShaderVariationKey:
 - 0x7100c83ee0-0x7100c84290
 lib/gsys/gsysModelSharedResource:
-- 0x7100c6a95c-0x7100c6ad7c
+- 0x7100c6a88c-0x7100c6ad7c
 - 0x7100c6ad7c-0x7100c6b140
 lib/gsys/gsysModelUnit:
-- 0x7100c14574-0x7100c14898
-- 0x7100c3d4b0-0x7100c474ec
+- 0x7100c14574-0x7100c14934
+- 0x7100c3d4b0-0x7100c4762c
 - 0x7100c4762c-0x7100c4903c
 lib/gsys/gsysModelUnitDrawArray:
-- 0x7100c4903c-0x7100c4b934
+- 0x7100c4903c-0x7100c4b824
 lib/gsys/gsysModelUnitGroup:
 - 0x7100c4baac-0x7100c4bd28
 lib/gsys/gsysModelViewInfo:
@@ -16139,17 +16207,23 @@ lib/gsys/gsysModelWorkBuffer:
 - 0x7100c6b140-0x7100c6b8d4
 - 0x7100c6b8d4-0x7100c6b8f4
 lib/gsys/gsysORUtil:
-- 0x7100c6b8f4-0x7100c6be38
+- 0x7100c6b8f4-0x7100c6bd68
+lib/gsys/gsysOfxLensFlareImpl:
+- 0x7100c4cde0-0x7100c4ce18
+- 0x7100c4d5e8-0x7100c4d6c0
 lib/gsys/gsysOfxLensFlareRig:
-- 0x7100c4be28-0x7100c4dfb0
+- 0x7100c4be28-0x7100c4cde0
+- 0x7100c4ce18-0x7100c4d038
+- 0x7100c4d20c-0x7100c4d5e8
+- 0x7100c4d6c0-0x7100c4dfb0
 lib/gsys/gsysOutline:
-- 0x7100c4dfb0-0x7100c4e968
+- 0x7100c4dfb0-0x7100c4e40c
 lib/gsys/gsysPartialSkeletalAnmBase:
 - 0x7100bff2e8-0x7100bff6d8
 lib/gsys/gsysPartialSkeletalAnmEx:
 - 0x7100bff6d8-0x7100bffa14
 lib/gsys/gsysParticleCB:
-- 0x7100c4efdc-0x7100c4f758
+- 0x7100c4e40c-0x7100c4f410
 lib/gsys/gsysParticleCS:
 - 0x7100c84290-0x7100c8458c
 lib/gsys/gsysParticleConfig:
@@ -16166,28 +16240,28 @@ lib/gsys/gsysProcessMeter:
 - 0x7100c588b4-0x7100c5902c
 lib/gsys/gsysRenderBufferContext:
 - 0x7100c5902c-0x7100c590d4
-- 0x7100c590d4-0x7100c5d1d8
+- 0x7100c590d4-0x7100c5d108
 lib/gsys/gsysResourceEditor:
-- 0x7100c5d1d8-0x7100c5d7b8
+- 0x7100c5d108-0x7100c5d7b8
 lib/gsys/gsysShaderContext:
-- 0x7100c5d7b8-0x7100c60310
+- 0x7100c5d7b8-0x7100c60258
 lib/gsys/gsysShaderHolder:
-- 0x7100c6be38-0x7100c6c9c8
+- 0x7100c6bd68-0x7100c6c9c0
 lib/gsys/gsysSnapshotTexture:
 - 0x7100c8458c-0x7100c84658
 lib/gsys/gsysSnapshotTextureMgr:
-- 0x7100c60310-0x7100c6152c
+- 0x7100c60258-0x7100c6152c
 lib/gsys/gsysSpotLight:
 - 0x7100c6152c-0x7100c6229c
 - 0x7100c6229c-0x7100c63578
 lib/gsys/gsysSystemTask:
 - 0x7100c63578-0x7100c63ad4
 - 0x7100c63ad4-0x7100c66d70
-- 0x7100c66d70-0x7100c67028
+- 0x7100c66d70-0x7100c66fb8
 lib/gsys/gsysVfxDrawProcedural:
-- 0x7100c67028-0x7100c67898
+- 0x7100c66fb8-0x7100c67898
 lib/gsys/gsysXluZPrePass:
-- 0x7100c67a58-0x7100c682a8
+- 0x7100c67a58-0x7100c681d8
 lib/gsys/unlabelled_0x7100c67898:
 - 0x7100c67898-0x7100c67a58
 lib/hkStubs/Havok/Common/Base/Object/hkReferencedObject:
@@ -16221,6 +16295,9 @@ lib/sead/codec/seadHashCRC16:
 - 0x710136e3b0-0x710136e5f4
 lib/sead/codec/seadHashCRC32:
 - 0x7100b215e0-0x7100b21834
+lib/sead/container/seadDebugMenuSkinDefault:
+- 0x7100af054c-0x7100af09b4
+- 0x7100af1eb8-0x7100af1fe0
 lib/sead/container/seadListImpl:
 - 0x7100aef604-0x7100aef85c
 lib/sead/container/seadPtrArray:
@@ -16249,6 +16326,8 @@ lib/sead/devenv/seadGameConfig:
 - 0x7100af2270-0x7100af2b50
 lib/sead/devenv/seadNinJoyNpadController:
 - 0x710136582c-0x7101367118
+lib/sead/devenv/seadNinSixAxisSensorAddon:
+- 0x7101367118-0x7101367998
 lib/sead/devenv/seadStackTrace:
 - 0x7101368184-0x7101368540
 lib/sead/filedevice/nin/seadNinAocFileDeviceNin:
@@ -16307,15 +16386,18 @@ lib/sead/framework/seadTaskBase:
 - 0x7100afc548-0x7100afcc00
 lib/sead/framework/seadTaskClassID:
 - 0x7100afcc00-0x7100afcc60
+lib/sead/framework/seadTaskEvent:
+- 0x7100afe454-0x7100afe658
 lib/sead/framework/seadTaskMgr:
-- 0x7100afcc60-0x7100afe658
+- 0x7100afcc60-0x7100afe454
 lib/sead/gfx/nin/seadGraphicsNvn:
 - 0x7100b00b50-0x7100b0118c
 lib/sead/gfx/nvn/seadDebugFontMgrNvn:
 - 0x7100afe658-0x7100affc20
 lib/sead/gfx/seadCamera:
-- 0x7100b1b9f0-0x7100b1c41c
-- 0x7100b1c41c-0x7100b1c6dc
+- 0x7100b1b9f0-0x7100b1c02c
+- 0x7100b1c224-0x7100b1c41c
+- 0x7100b1c41c-0x7100b1c560
 lib/sead/gfx/seadColor:
 - 0x7100b1c6dc-0x7100b1cca8
 lib/sead/gfx/seadDrawContext:
@@ -16329,9 +16411,12 @@ lib/sead/gfx/seadFrameBuffer:
 lib/sead/gfx/seadGraphics:
 - 0x7100b1ccbc-0x7100b1cdc4
 lib/sead/gfx/seadGraphicsContext:
-- 0x7100b1cdc4-0x7100b1d768
+- 0x7100b1cdc4-0x7100b1d698
+lib/sead/gfx/seadOrthoCamera:
+- 0x7100b1c02c-0x7100b1c224
+- 0x7100b1c560-0x7100b1c6dc
 lib/sead/gfx/seadPrimitiveRenderer:
-- 0x7100b1d768-0x7100b1d898
+- 0x7100b1d698-0x7100b1d898
 lib/sead/gfx/seadProjection:
 - 0x7100b1d898-0x7100b1f6b0
 lib/sead/gfx/seadTextWriter:
@@ -16376,16 +16461,18 @@ lib/sead/prim/seadEnum:
 - 0x7100b09d60-0x7100b09fec
 lib/sead/prim/seadMemUtil:
 - 0x7100b0c530-0x7100b0c56c
+lib/sead/prim/seadPrintFormatter:
+- 0x7100b0bd94-0x7100b0c320
 lib/sead/prim/seadRegionID:
 - 0x7100b0b730-0x7100b0bac4
 lib/sead/prim/seadSafeString:
 - 0x7100b0c56c-0x7100b0d358
 lib/sead/prim/seadStringBuilder:
 - 0x7100b0d358-0x7100b0da64
-lib/sead/prim/seadStringCutOffPrintOutput:
-- 0x7100b0bc2c-0x7100b0bd94
-lib/sead/prim/seadStringPrintOutput:
-- 0x7100b0bac4-0x7100b0bc2c
+lib/sead/prim/seadStringCutOffPrintFormatter:
+- 0x7100b0c35c-0x7100b0c524
+lib/sead/prim/seadStringPrintFormatter:
+- 0x7100b0c320-0x7100b0c35c
 lib/sead/prim/seadStringUtil:
 - 0x7100b0da64-0x7100b140c4
 lib/sead/random/seadGlobalRandom:
@@ -16442,13 +16529,14 @@ lib/sead/seadAudioTaskThreadCafe:
 lib/sead/seadDebugMenu:
 - 0x7100af00f8-0x7100af054c
 lib/sead/seadDebugMenuItem:
-- 0x7100af1e38-0x7100af2270
+- 0x7100af1e38-0x7100af1eb8
+- 0x7100af20c0-0x7100af2270
 lib/sead/seadDebugMenuItemBase:
-- 0x7100af1c74-0x7100af1e38
+- 0x7100af1c70-0x7100af1e38
+- 0x7100af20ac-0x7100af20c0
 lib/sead/seadDebugMenuPageBase:
-- 0x7100af09b4-0x7100af1c74
-lib/sead/seadDebugMenuSkinDefault:
-- 0x7100af054c-0x7100af09b4
+- 0x7100af09b4-0x7100af1c70
+- 0x7100af1fe0-0x7100af20ac
 lib/sead/seadExceptionHandler:
 - 0x7101367d00-0x7101368184
 lib/sead/seadGeometry:
@@ -16459,8 +16547,6 @@ lib/sead/seadMaskControllerWrapper:
 - 0x7100b1b32c-0x7100b1b7a0
 lib/sead/seadMessageSetBase:
 - 0x710136ffcc-0x71013700e0
-lib/sead/seadNinSixAxisSensorAddon:
-- 0x7101367118-0x7101367998
 lib/sead/seadNullFaderTask:
 - 0x7100b2d490-0x7100b2df98
 - 0x7100b2df98-0x7100b2e3ec
@@ -16471,13 +16557,11 @@ lib/sead/seadPerformanceMgrNx:
 lib/sead/seadPrimitiveDrawMgrNvn:
 - 0x7100b0118c-0x7100b02c5c
 lib/sead/seadPrimitiveDrawUtil:
-- 0x7100b03a0c-0x7100b04360
+- 0x7100b03930-0x7100b04360
 lib/sead/seadPrimitiveDrawer:
-- 0x7100b02dcc-0x7100b03a0c
+- 0x7100b02dcc-0x7100b03930
 lib/sead/seadPrintConfig:
 - 0x7100af2b50-0x7100af2d64
-lib/sead/seadPrintFormatter:
-- 0x7100b0bd94-0x7100b0c530
 lib/sead/seadRegionLanguageMgr:
 - 0x7100b09fec-0x7100b0aab8
 - 0x7100b0aab8-0x7100b0b208
@@ -16487,6 +16571,12 @@ lib/sead/seadSeadMenuMgr:
 - 0x7100af2d64-0x7100af30ac
 lib/sead/seadSeparateHeap:
 - 0x710136a4dc-0x710136b2dc
+lib/sead/seadStringCutOffPrintOutput:
+- 0x7100b0bc2c-0x7100b0bd94
+- 0x7100b0c52c-0x7100b0c530
+lib/sead/seadStringPrintOutput:
+- 0x7100b0bac4-0x7100b0bc2c
+- 0x7100b0c524-0x7100b0c52c
 lib/sead/seadTextStreamFormat:
 - 0x7100b16044-0x7100b16048
 - 0x7100b162c8-0x7100b18864
@@ -16544,9 +16634,9 @@ lib/sead/time/seadCalendarTime:
 lib/sead/time/seadDateSpan:
 - 0x7100b22ab0-0x7100b22af0
 lib/sead/time/seadDateTime:
-- 0x7100b22af0-0x7100b22f58
+- 0x7100b22af0-0x7100b22f50
 lib/sead/time/seadDateTimeUtc:
-- 0x7100b22f58-0x7100b22fc8
+- 0x7100b22f50-0x7100b22fc8
 lib/sead/time/seadDateUtil:
 - 0x7100b22fc8-0x7100b230d0
 lib/sead/time/seadTickSpan:
