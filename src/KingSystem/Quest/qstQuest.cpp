@@ -53,7 +53,7 @@ void Quest::setField31() {
     _31 = 1;
 }
 
-bool Quest::x_1() const {
+bool Quest::isCancelled() const {
     bool result = false;
 
     if (gdt::Manager::instance() == nullptr || mCancelled == gdt::InvalidHandle)
@@ -63,7 +63,7 @@ bool Quest::x_1() const {
     return result;
 }
 
-void Quest::x_3() {
+void Quest::markReady() {
     if (_c == 1 || _c == 2)
         return;
 
@@ -81,33 +81,33 @@ void Quest::x_3() {
     _10 = 0;
 }
 
-bool Quest::x_6(act::Actor* actor) const {
+bool Quest::isCurrentStepAttentionOffActor(act::Actor* actor) const {
     if (!isStepUnderSize() || !mSteps[_140]->attention_off)
         return false;
 
     return mSteps[_140]->sub_7100FDB89C(actor);
 }
 
-bool Quest::x_7() const {
+bool Quest::isCurrentStepAttentionOff() const {
     if (!isStepUnderSize())
         return false;
 
     return mSteps[_140]->attention_off;
 }
 
-bool Quest::x_8(act::Actor* actor) {
+bool Quest::acquireCurrentStepActorLink(act::Actor* actor) {
     if (isStepUnderCapacity())
         mSteps[_140]->sub_7100FDB538(actor, mName);
 
     return true;
 }
 
-void Quest::x_9(act::Actor* actor) {
+void Quest::acquireCurrentStepIndicatorActorLink(act::Actor* actor) {
     if (isStepUnderCapacity())
         mSteps[_140]->acquireIndicatorActorLink(actor);
 }
 
-const char* Quest::x_11() {
+const char* Quest::getNextStepName() {
     if (!isNextStepUnderSize())
         return &sead::SafeString::cNullChar;
 
