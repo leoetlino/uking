@@ -15,7 +15,7 @@ ClosestPointQuery::~ClosestPointQuery() = default;
 
 void ClosestPointQuery::reset() {
     mIsSuccess = false;
-    _18 = 0;
+    mQueryState = 0;
 }
 
 void ClosestPointQuery::setLayerMasks(const LayerMaskBuilder& builder) {

@@ -39,9 +39,8 @@ class LayerContactPointInfo;
 struct ContactInfoTable {
     struct Receiver : agl::utl::ParameterObj {
         const char* name = nullptr;
-        // TODO: figure out what these masks are
-        u32 layer_mask = 0;
-        u32 layer_mask2 = 0;
+        u32 subscribed_layer_mask = 0;
+        u32 no_callback_delay_layer_mask = 0;
         int num_layers = 0;
         sead::SafeArray<agl::utl::Parameter<int>, MaxNumLayersPerType> layer_values;
 
@@ -93,11 +92,13 @@ public:
     // region Factories for collision tracking structures
 
     ContactPointInfo* makeContactPointInfo(sead::Heap* heap, int num, const sead::SafeString& name,
-                                           int a, int b, int c);
+                                           int overflow_mode, int ignore_separated_points,
+                                           int ignore_disabled_contacts);
 
     LayerContactPointInfo* makeLayerContactPointInfo(sead::Heap* heap, int num, int num2,
-                                                     const sead::SafeString& name, int a, int b,
-                                                     int c);
+                                                     const sead::SafeString& name,
+                                                     int overflow_mode, int ignore_separated_points,
+                                                     int ignore_disabled_contacts);
 
     CollisionInfo* makeCollisionInfo(sead::Heap* heap, const sead::SafeString& name);
 

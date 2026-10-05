@@ -33,8 +33,8 @@ class RayCast {
     SEAD_RTTI_BASE(RayCast)
 public:
     enum class NormalCheckingMode {
-        _0 = 0,
-        _1 = 1,
+        FrontFacesOnly = 0,
+        BackFacesOnly = 1,
         DoNotCheck = 2,
     };
 
@@ -58,7 +58,7 @@ public:
 
     void setIgnoredGroundHit(GroundHit ground_hit);
     // TODO: rename
-    void set9A(bool value);
+    void setIsNpcQuery(bool value);
 
     void setStart(const sead::Vector3f& start);
     void setEnd(const sead::Vector3f& end);
@@ -83,9 +83,9 @@ public:
     bool getHitTriangleNormal(sead::Vector3f* normal, const hkpShape* hit_shape,
                               u32 shape_key) const;
     void getHitNormal(sead::Vector3f* normal) const;
-    // TODO: rename
-    // 0x0000007100fc4844
-    void getUnkVectors(sead::Vector3f* unk1, sead::Vector3f* unk2, sead::Vector3f* unk3) const;
+    // 0x0000007100fc488c
+    bool getHitTriangleWorldVertices(sead::Vector3f* vertex_a, sead::Vector3f* vertex_b,
+                                     sead::Vector3f* vertex_c) const;
     bool getHitTriangleNormal(sead::Vector3f* normal) const;
 
 protected:
@@ -120,13 +120,13 @@ protected:
     StaticCompoundRigidBodyGroup* mHitBodyGroup{};
     map::PreActor* mHitMapObject;
     sead::SafeArray<sead::BitFlag32, NumContactLayerTypes> mLayerMasks{};
-    sead::Atomic<u32> _70;
+    sead::Atomic<u32> mQueryState;
     NormalCheckingMode mNormalCheckingMode;
     MaterialMask mMaterialMask;
     RigidBody* mRigidBody{};
-    sead::Atomic<bool> _98;
-    bool _99{};
-    bool _9a{};
+    sead::Atomic<bool> mIsCasting;
+    bool mResolveHitMapObject{};
+    bool mIsNpcQuery{};
     sead::FixedPtrArray<SystemGroupHandler, 4> mIgnoredGroups;
     RigidBodyHitCallback* mRigidBodyHitCallback{};
     GroundHit mIgnoredGroundHit = GroundHit::Ignore;
