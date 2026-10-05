@@ -161,9 +161,9 @@ RigidBody* RigidBodyFromShape::createEntityShapeBody(const sead::SafeString& nam
 }
 
 RigidBodyFromShape::RigidBodyFromShape(hkpRigidBody* hkp_rigid_body, ContactLayerType layer_type,
-                                       const sead::SafeString& name, bool set_flag_10,
+                                       const sead::SafeString& name, bool owns_shape,
                                        sead::Heap* heap)
-    : RigidBody(RigidBody::Type::FromShape, layer_type, hkp_rigid_body, name, heap, set_flag_10) {}
+    : RigidBody(RigidBody::Type::FromShape, layer_type, hkp_rigid_body, name, heap, owns_shape) {}
 
 RigidBodyFromShape::~RigidBodyFromShape() {
     mHkBody->setName(nullptr);
@@ -242,7 +242,7 @@ RigidBodyT* RigidBodyFromShape::make(RigidBodyInstanceParam* param, sead::Heap* 
 }
 
 template <typename RigidBodyT, typename ShapeT>
-RigidBodyT* RigidBodyFromShape::make(ShapeT* shape, bool set_flag_10,
+RigidBodyT* RigidBodyFromShape::make(ShapeT* shape, bool owns_shape,
                                      const RigidBodyInstanceParam& param, sead::Heap* heap) {
     const auto layer_type = getContactLayerType(param.contact_layer);
 
@@ -289,7 +289,7 @@ RigidBodyT* RigidBodyFromShape::make(ShapeT* shape, bool set_flag_10,
     auto* hk_body = new (hk_body_storage) hkpRigidBody(cinfo);
 
     RigidBodyFromShape* body =
-        new (heap) RigidBodyT(hk_body, shape, layer_type, param.name, set_flag_10, heap);
+        new (heap) RigidBodyT(hk_body, shape, layer_type, param.name, owns_shape, heap);
 
     body->mFlags.set(Flag::UpdateRequested);
 
@@ -299,8 +299,8 @@ RigidBodyT* RigidBodyFromShape::make(ShapeT* shape, bool set_flag_10,
         hk_body->setMaxAngularVelocity(cinfo.m_maxAngularVelocity);
     }
 
-    if (param._90) {
-        body->setFlag20();
+    if (param.create_without_motion_accessor) {
+        body->disableUpdateRequests();
     } else if (!body->initMotionAccessor(param, heap, false)) {
         delete body;
         return nullptr;
@@ -317,12 +317,12 @@ RigidBodyT* RigidBodyFromShape::make(ShapeT* shape, bool set_flag_10,
 
     body->updateCollidableQualityType(param.toi);
     body->updateShape();
-    body->clearEntityMotionFlag20(!param.ignore_normal_for_impulse);
+    body->clearIgnoreNormalForImpulse(!param.ignore_normal_for_impulse);
     body->enableGroundCollision(!param.no_hit_ground);
     body->enableWaterCollision(!param.no_hit_water);
     body->mFlags.change(Flag::NoCharStandingOn, param.no_char_standing_on);
     body->setContactMask(param.contact_mask);
-    body->setEntityMotionFlag1(param.always_character_mass_scaling);
+    body->setAlwaysCharacterMassScaling(param.always_character_mass_scaling);
     body->processUpdateRequests(nullptr, nullptr);
 
     return static_cast<RigidBodyT*>(body);
@@ -378,7 +378,7 @@ RigidBodyT* RigidBodyFromShape::cloneImpl(sead::Heap* heap,
     param.max_linear_velocity = getMaxLinearVelocity();
     param.max_angular_velocity_rad = getMaxAngularVelocity();
     param.magne_mass_scaling_factor = getMagneMassScalingFactor();
-    param.enable_deactivation = !hasFlag(RigidBody::Flag::_2000000);
+    param.enable_deactivation = !hasFlag(RigidBody::Flag::DeactivationDisabled);
     param.toi = hasFlag(RigidBody::Flag::HighQualityCollidable);
     param.system_group_handler = group_handler;
     param.contact_layer = getContactLayer();

@@ -10,11 +10,11 @@ ListShapeRigidBody* ListShapeRigidBody::make(RigidBodyInstanceParam* param, sead
 
 ListShapeRigidBody::ListShapeRigidBody(hkpRigidBody* hk_body, ListShape* shape,
                                        ContactLayerType layer_type, const sead::SafeString& name,
-                                       bool set_flag_10, sead::Heap* heap)
-    : RigidBodyFromShape(hk_body, layer_type, name, set_flag_10, heap), mShape(shape) {}
+                                       bool owns_shape, sead::Heap* heap)
+    : RigidBodyFromShape(hk_body, layer_type, name, owns_shape, heap), mShape(shape) {}
 
 ListShapeRigidBody::~ListShapeRigidBody() {
-    if (hasFlag(RigidBody::Flag::_10) && mShape) {
+    if (hasFlag(RigidBody::Flag::OwnsShape) && mShape) {
         util::safeDelete(mShape);
     }
 }
@@ -70,11 +70,11 @@ const Shape* ListShapeRigidBody::getShape_() const {
     return mShape;
 }
 
-u32 ListShapeRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+u32 ListShapeRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                                           const sead::Vector3f& contact_point) {
     masks->ignored_layers = ~mContactMask;
     masks->collision_filter_info = getCollisionFilterInfo();
-    masks->material_mask = getMaterialMask(unk != nullptr ? int(*unk) : 0).getRawData();
+    masks->material_mask = getMaterialMask(shape_key != nullptr ? int(*shape_key) : 0).getRawData();
     return 0;
 }
 

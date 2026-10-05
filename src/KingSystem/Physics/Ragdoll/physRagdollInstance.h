@@ -70,8 +70,8 @@ public:
     void setFixedAndPreserveImpulse(Fixed fixed, MarkLinearVelAsDirty mark_linear_vel_as_dirty);
     void resetFrozenState();
     void setUseSystemTimeFactor(bool use);
-    void clearFlag400000(bool clear);
-    void setEntityMotionFlag200(bool set);
+    void setStoppedByEvent(bool stopped);
+    void setStopTimerSmallMass(bool set);
     void setFixed(Fixed fixed, PreserveVelocities preserve_velocities);
 
     ModelBoneAccessor* getModelBoneAccessor() const;

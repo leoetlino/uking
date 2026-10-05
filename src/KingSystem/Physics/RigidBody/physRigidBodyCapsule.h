@@ -13,7 +13,7 @@ public:
     static CapsuleRigidBody* make(RigidBodyInstanceParam* param, sead::Heap* heap);
 
     CapsuleRigidBody(hkpRigidBody* hk_body, CapsuleShape* shape, ContactLayerType layer_type,
-                     const sead::SafeString& name, bool set_flag_10, sead::Heap* heap);
+                     const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
     ~CapsuleRigidBody() override;
 
     void setRadius(float radius);
@@ -31,7 +31,7 @@ public:
 protected:
     Shape* getShape_() override;
     const Shape* getShape_() const override;
-    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+    u32 getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                           const sead::Vector3f& contact_point) override;
 
     CapsuleShape* mShape{};
