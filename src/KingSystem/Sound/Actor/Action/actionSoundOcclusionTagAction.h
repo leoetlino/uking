@@ -19,8 +19,11 @@ public:
 protected:
     void calc_() override;
 
+    sead::Buffer<ksys::game::AreaContactLayerEntry> mContactLayers;
     // static_param at offset 0x48
     const float* mOcclusionLevel_s{};
+    int mObserveMode{};
 };
+KSYS_CHECK_SIZE_NX150(SoundOcclusionTagAction, 0x58);
 
 }  // namespace ksys::snd
