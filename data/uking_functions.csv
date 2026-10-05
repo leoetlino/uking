@@ -88480,8 +88480,8 @@ Address,Quality,Size,Name
 0x00000071010952a0,U,000536,ksys::res::AttPos::calcWorldMtxByBoneIdx
 0x00000071010954b8,U,000624,ksys::res::AttPos::calcActorMtx
 0x0000007101095728,U,000580,ksys::res::AttPos::calcWorldMtx
-0x000000710109596c,U,000004,nullsub_4467
-0x0000007101095970,O,000004,_ZN4ksys3res11DamageParam9doCreate_EPhjPN4sead4HeapE
+0x000000710109596c,O,000004,_ZN4ksys3res11DamageParam9doCreate_EPhjPN4sead4HeapE
+0x0000007101095970,O,000004,_ZThn632_N4ksys3res11DamageParam9doCreate_EPhjPN4sead4HeapE
 0x0000007101095974,O,007556,_ZN4ksys3res11DamageParam6parse_EPhmPN4sead4HeapE
 0x00000071010976f8,O,000028,_ZThn632_N4ksys3res11DamageParam6parse_EPhmPN4sead4HeapE
 0x0000007101097714,O,000288,_ZN4ksys3res11DamageParam13getDamageRateERKN4sead14SafeStringBaseIcEE
