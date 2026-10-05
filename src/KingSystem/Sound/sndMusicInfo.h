@@ -63,7 +63,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterList mHeader;
+    agl::utl::IParameterList mMusicParam;
     agl::utl::IParameterObj mData;
 
 public:
@@ -102,7 +102,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mTimeDay;
@@ -135,7 +135,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterList mData;
+    agl::utl::IParameterList mMusicParam;
 
 public:
     sead::Buffer<ParamPerType> mParamPerTypes;
@@ -148,7 +148,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mTimeDay;
@@ -174,7 +174,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -192,7 +192,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mFadeOutWaitSec;
@@ -212,7 +212,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -227,7 +227,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -242,7 +242,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<unsigned int> mBpm;
@@ -279,7 +279,7 @@ public:
     void init(sead::Heap* heap) override;
 
 protected:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -319,7 +319,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mFadeOutSec;
@@ -335,7 +335,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -358,7 +358,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -386,7 +386,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterList mData;
+    agl::utl::IParameterList mMusicParam;
 
 public:
     sead::Buffer<ParamPerType> mParamPerTypes;
@@ -399,7 +399,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mFadeInSec;
@@ -414,7 +414,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mMinVolumeOutStorm;
@@ -432,7 +432,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mFoundFadeOutSec;
@@ -457,7 +457,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterList mHeader;
+    agl::utl::IParameterList mMusicParam;
 
 public:
     sead::Buffer<PartChangeOdds> mPartChangeOdds;
@@ -480,7 +480,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mOddsPlayableString;
@@ -494,7 +494,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mPlayWaitSec;
@@ -509,7 +509,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mFadeOutSecA;
@@ -525,7 +525,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mTransitionDelaySec;
@@ -539,7 +539,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mStartDelaySec;
@@ -556,7 +556,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterObj mData;
+    agl::utl::IParameterObj mMusicParam;
 
 public:
     agl::utl::Parameter<float> mTransformDemoWaitSec;
@@ -586,7 +586,7 @@ public:
     void init(sead::Heap* heap) override;
 
 private:
-    agl::utl::IParameterList mData;
+    agl::utl::IParameterList mMusicParam;
 
 public:
     sead::Buffer<ParamPerType> mParamPerTypes;
