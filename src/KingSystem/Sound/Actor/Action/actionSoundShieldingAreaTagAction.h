@@ -5,6 +5,8 @@
 
 namespace ksys::snd {
 
+class SoundShieldingArea;
+
 class SoundShieldingAreaTagAction : public ksys::game::AreaActionBase {
     SEAD_RTTI_OVERRIDE(SoundShieldingAreaTagAction, ksys::game::AreaActionBase)
 public:
@@ -23,6 +25,12 @@ protected:
     const float* mMerginDistance_m{};
     // map_unit_param at offset 0x40
     const bool* mIsShieldChemicalWind_m{};
+    sead::Buffer<ksys::game::AreaContactLayerEntry> mContactLayers;
+    float mAreaContactDepths[16]{};
+    float mShieldingRate{};
+    int mShieldingRateAliveFrames{};
+    SoundShieldingArea* mShieldingArea{};
 };
+KSYS_CHECK_SIZE_NX150(SoundShieldingAreaTagAction, 0xa8);
 
 }  // namespace ksys::snd
