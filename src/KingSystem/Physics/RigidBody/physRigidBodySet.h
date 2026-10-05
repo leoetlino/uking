@@ -31,12 +31,12 @@ public:
     void setFixedAndPreserveImpulse(Fixed fixed, MarkLinearVelAsDirty mark_linear_vel_as_dirty);
     void resetFrozenState();
     void setUseSystemTimeFactor(bool use);
-    void clearFlag400000(bool clear);
-    void setEntityMotionFlag200(bool set);
+    void setStoppedByEvent(bool stopped);
+    void setStopTimerSmallMass(bool set);
     void setFixed(Fixed fixed, PreserveVelocities preserve_velocities);
 
-    void updateMotionTypeRelatedFlags();
-    void triggerScheduledMotionTypeChange();
+    void saveMotionType();
+    void restoreSavedMotionType();
 
     bool hasActiveEntityBody() const;
 
@@ -65,8 +65,8 @@ public:
     void addToWorld();
     void removeFromWorld();
     bool removeFromWorldAndResetLinks();
-    bool hasNoRigidBodyWithFlag8(bool require_motion_flag_1_to_be_unset);
-    void requestSuspendGravity(u8 type);
+    bool isNoBodyInWorld(bool also_check_pending_add);
+    void requestSuspendGravity(u8 num_frames);
 
 private:
     sead::SafeString mName;

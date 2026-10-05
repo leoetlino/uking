@@ -11,11 +11,11 @@ CapsuleRigidBody* CapsuleRigidBody::make(RigidBodyInstanceParam* param, sead::He
 
 CapsuleRigidBody::CapsuleRigidBody(hkpRigidBody* hk_body, CapsuleShape* shape,
                                    ContactLayerType layer_type, const sead::SafeString& name,
-                                   bool set_flag_10, sead::Heap* heap)
-    : RigidBodyFromShape(hk_body, layer_type, name, set_flag_10, heap), mShape(shape) {}
+                                   bool owns_shape, sead::Heap* heap)
+    : RigidBodyFromShape(hk_body, layer_type, name, owns_shape, heap), mShape(shape) {}
 
 CapsuleRigidBody::~CapsuleRigidBody() {
-    if (hasFlag(RigidBody::Flag::_10) && mShape) {
+    if (hasFlag(RigidBody::Flag::OwnsShape) && mShape) {
         util::safeDelete(mShape);
     }
 }
@@ -65,7 +65,7 @@ const Shape* CapsuleRigidBody::getShape_() const {
     return mShape;
 }
 
-u32 CapsuleRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+u32 CapsuleRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                                         const sead::Vector3f& contact_point) {
     masks->ignored_layers = ~mContactMask.getDirect();
     masks->collision_filter_info = getCollisionFilterInfo();
