@@ -82,13 +82,13 @@ bool RigidBodyFromResource::isMaterial(Material material) const {
     return found_child_shape_with_material;
 }
 
-u32 RigidBodyFromResource::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+u32 RigidBodyFromResource::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                                              const sead::Vector3f& contact_point) {
     masks->ignored_layers = ~mContactMask;
     auto* collidable = getHkBody()->getCollidable();
-    if (unk != nullptr) {
+    if (shape_key != nullptr) {
         return getCollisionFilterInfoFromCollidable(masks, &masks->collision_filter_info,
-                                                    *collidable, unk);
+                                                    *collidable, shape_key);
     }
     masks->material_mask = collidable->getShape()->getUserData();
     masks->collision_filter_info = collidable->getCollisionFilterInfo();

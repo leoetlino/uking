@@ -253,19 +253,19 @@ void RigidBodyMotionSensor::setLinkedRigidBody(RigidBody* body) {
     }
 
     if (body) {
-        if (body->isEntity() && mFlags.isOff(Flag::HasLinkedRigidBodyWithoutFlag10)) {
+        if (body->isEntity() && mFlags.isOff(Flag::SharesShapeWithLinkedBody)) {
             RigidBodyMotionEntity* accessor = body->getEntityMotionAccessorForSensor();
             if (accessor && accessor->registerAccessor(this)) {
                 mLinkedRigidBody = body;
-                if (mBody->hasFlag(RigidBody::Flag::_10))
-                    mFlags.reset(Flag::HasLinkedRigidBodyWithoutFlag10);
+                if (mBody->hasFlag(RigidBody::Flag::OwnsShape))
+                    mFlags.reset(Flag::SharesShapeWithLinkedBody);
                 else
-                    mFlags.set(Flag::HasLinkedRigidBodyWithoutFlag10);
+                    mFlags.set(Flag::SharesShapeWithLinkedBody);
             }
         }
     } else {
         mLinkedRigidBody = nullptr;
-        mFlags.reset(Flag::HasLinkedRigidBodyWithoutFlag10);
+        mFlags.reset(Flag::SharesShapeWithLinkedBody);
     }
 }
 
@@ -277,7 +277,7 @@ void RigidBodyMotionSensor::resetLinkedRigidBody() {
     if (mLinkedRigidBody) {
         mLinkedRigidBody->getEntityMotionAccessorForSensor()->deregisterAccessor(this);
         mLinkedRigidBody = nullptr;
-        mFlags.reset(Flag::HasLinkedRigidBodyWithoutFlag10);
+        mFlags.reset(Flag::SharesShapeWithLinkedBody);
     }
 }
 
@@ -285,8 +285,8 @@ RigidBody* RigidBodyMotionSensor::getLinkedRigidBody() const {
     return mLinkedRigidBody;
 }
 
-bool RigidBodyMotionSensor::isFlag40000Set() const {
-    return mFlags.isOn(Flag::_40000);
+bool RigidBodyMotionSensor::isIgnoringLinkedBodyMotion() const {
+    return mFlags.isOn(Flag::IgnoreLinkedBodyMotion);
 }
 
 void RigidBodyMotionSensor::copyMotionFromLinkedRigidBody() {
@@ -297,21 +297,21 @@ void RigidBodyMotionSensor::copyMotionFromLinkedRigidBody() {
     auto* this_hk_body = mBody->getHkBody();
 
     bool reset_needed = false;
-    if (mFlags.isOn(Flag::HasLinkedRigidBodyWithoutFlag10)) {
-        if (_14 != accessor->get14()) {
-            _14 = accessor->get14();
+    if (mFlags.isOn(Flag::SharesShapeWithLinkedBody)) {
+        if (mShapeReplaceCount != accessor->getShapeReplaceCount()) {
+            mShapeReplaceCount = accessor->getShapeReplaceCount();
             this_hk_body->setShape(linked_hk_body->getCollidable()->getShape());
             reset_needed = true;
         }
 
-        if (_10 != accessor->get10()) {
-            _10 = accessor->get10();
+        if (mShapeUpdateCount != accessor->getShapeUpdateCount()) {
+            mShapeUpdateCount = accessor->getShapeUpdateCount();
             this_hk_body->updateShape();
             reset_needed = true;
         }
     }
 
-    if (mFlags.isOff(Flag::_40000)) {
+    if (mFlags.isOff(Flag::IgnoreLinkedBodyMotion)) {
         hkVector4f position;
         if (mFlags.isOn(Flag::HasExtraTranslateForLinkedRigidBody)) {
             position.setTransformedPos(linked_hk_body->getTransform(),

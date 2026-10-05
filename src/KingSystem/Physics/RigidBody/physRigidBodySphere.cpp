@@ -10,11 +10,11 @@ SphereRigidBody* SphereRigidBody::make(RigidBodyInstanceParam* param, sead::Heap
 
 SphereRigidBody::SphereRigidBody(hkpRigidBody* hk_body, SphereShape* shape,
                                  ContactLayerType layer_type, const sead::SafeString& name,
-                                 bool set_flag_10, sead::Heap* heap)
-    : RigidBodyFromShape(hk_body, layer_type, name, set_flag_10, heap), mShape(shape) {}
+                                 bool owns_shape, sead::Heap* heap)
+    : RigidBodyFromShape(hk_body, layer_type, name, owns_shape, heap), mShape(shape) {}
 
 SphereRigidBody::~SphereRigidBody() {
-    if (hasFlag(RigidBody::Flag::_10) && mShape) {
+    if (hasFlag(RigidBody::Flag::OwnsShape) && mShape) {
         delete mShape;
         mShape = nullptr;
     }
@@ -65,7 +65,7 @@ const Shape* SphereRigidBody::getShape_() const {
     return mShape;
 }
 
-u32 SphereRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* unk,
+u32 SphereRigidBody::getCollisionMasks(RigidBody::CollisionMasks* masks, const u32* shape_key,
                                        const sead::Vector3f& contact_point) {
     masks->ignored_layers = ~mContactMask.getDirect();
     masks->collision_filter_info = getCollisionFilterInfo();

@@ -39,7 +39,7 @@ bool RigidBodySetFromResource::init(const RigidBodySetParamAccessor& accessor, s
 
         const auto layer_type = getContactLayerType(param.contact_layer);
         auto* body = new (heap) RigidBodyFromResource(hk_bodies[i], accessor.getVolume(i),
-                                                      layer_type, heap, RigidBody::Type::_2);
+                                                      layer_type, heap, RigidBody::Type::FromResource);
         mRigidBodies.pushBack(body);
         body->setUpdateRequestedFlag();
 
@@ -59,7 +59,7 @@ bool RigidBodySetFromResource::init(const RigidBodySetParamAccessor& accessor, s
                                                         param.system_group_handler);
         }
 
-        body->clearEntityMotionFlag20(!param.ignore_normal_for_impulse);
+        body->clearIgnoreNormalForImpulse(!param.ignore_normal_for_impulse);
         body->enableGroundCollision(!param.no_hit_ground);
         body->enableWaterCollision(!param.no_hit_water);
         body->setNoCharStandingOn(param.no_char_standing_on);

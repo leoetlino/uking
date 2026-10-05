@@ -2,16 +2,20 @@
 
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 
+namespace ksys::tera {
+class Scene;
+}
+
 namespace ksys::phys {
 
 class TerrainHeightFieldRigidBody : public RigidBody {
     SEAD_RTTI_OVERRIDE(TerrainHeightFieldRigidBody, RigidBody)
 public:
-    bool getD8() const { return _d8; }
+    bool shouldScaleCharacterContactImpulse() const { return mScaleCharacterContactImpulse; }
 
 private:
-    void* _d0{};
-    bool _d8 = false;
+    tera::Scene* mTeraScene{};
+    bool mScaleCharacterContactImpulse = false;
 };
 
 }  // namespace ksys::phys
