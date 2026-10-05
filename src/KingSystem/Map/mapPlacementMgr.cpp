@@ -30,7 +30,7 @@ void PlacementMgr::releaseTree() {
 }
 
 // NON_MATCHING
-void PlacementMgr::x_3() {
+void PlacementMgr::deleteActorsOfUnloadingStaticObjs() {
     auto ac = act::ActorCreator::instance();
     const auto loc = sead::makeScopedLock(ac->getCS());
     if (mNumStaticObjs < mPlacementActors->getNumStaticObjs()) {

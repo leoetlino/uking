@@ -40,7 +40,7 @@ class PlacementMgr {
 
 public:
     void releaseTree();
-    void x_3();
+    void deleteActorsOfUnloadingStaticObjs();
     void reset7F0();
     void initClusteredRenderer();
     void auto0();
