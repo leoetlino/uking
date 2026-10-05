@@ -13,9 +13,9 @@ public:
     explicit EntitySystemGroupHandler(int i) : SystemGroupHandler(i, ContactLayerType::Entity) {}
 
     u32 makeCollisionFilterInfo(u32 info, ContactLayer layer, GroundHit ground_hit) override;
-    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) override;
+    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) override;
     u32 makeRagdollCollisionFilterInfo(GroundHit ground_hit) override;
-    bool m8() override;
+    bool hasValidIndex() override;
 };
 
 class EntityGroupFilter : public GroupFilter {
@@ -44,12 +44,12 @@ public:
     bool shouldContactNeverBeIgnored(ContactLayer layerA, ContactLayer layerB) override;
     u32 makeCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit) override;
     ContactLayer getCollisionFilterInfoLayer(u32 info) override;
-    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool unk) override;
+    u32 makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit, bool is_npc_query) override;
     GroundHit getQueryCollisionMaskGroundHit(u32 info) override;
     void getCollisionFilterInfoLayerAndGroundHit(u32 info, ContactLayer* layer,
                                                  GroundHit* ground_hit) override;
     const char* getCollisionFilterInfoLayerText(u32 info) override;
-    void setLayerCustomMask(ContactLayer layer, u32 mask) override;
+    void setLayerIgnorableMask(ContactLayer layer, u32 mask) override;
     u32 getCollisionFilterInfoGroupHandlerIdx(u32 info) override;
 
     virtual u32 makeRagdollCollisionFilterInfo(ContactLayer layer, GroundHit ground_hit,
@@ -126,12 +126,12 @@ inline u32 EntitySystemGroupHandler::makeCollisionFilterInfo(u32 info, ContactLa
 }
 
 inline u32 EntitySystemGroupHandler::makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit,
-                                                            bool unk) {
+                                                            bool is_npc_query) {
     EntityQueryCollisionMask mask;
     mask.layer_mask = layer_mask;
     mask.group_handler_index.Init(getIndex());
     mask.ground_hit_type.Init(static_cast<GroundHit::ValueType>(int(ground_hit)));
-    mask.unk.SetBit(unk);
+    mask.is_npc_query.SetBit(is_npc_query);
     return mask.raw;
 }
 
@@ -143,7 +143,7 @@ inline u32 EntitySystemGroupHandler::makeRagdollCollisionFilterInfo(GroundHit gr
     return info.raw;
 }
 
-inline bool EntitySystemGroupHandler::m8() {
+inline bool EntitySystemGroupHandler::hasValidIndex() {
     return getIndex() > 0 && getIndex() < 0x400;
 }
 
@@ -161,11 +161,11 @@ inline ContactLayer EntityGroupFilter::getCollisionFilterInfoLayer(u32 info) {
 }
 
 inline u32 EntityGroupFilter::makeQueryCollisionMask(u32 layer_mask, GroundHit ground_hit,
-                                                     bool unk) {
+                                                     bool is_npc_query) {
     EntityQueryCollisionMask mask;
     mask.layer_mask = layer_mask;
     mask.ground_hit_type = ground_hit.value();
-    mask.unk.SetBit(unk);
+    mask.is_npc_query.SetBit(is_npc_query);
     return mask.raw;
 }
 
@@ -189,7 +189,7 @@ inline const char* EntityGroupFilter::getCollisionFilterInfoLayerText(u32 info) 
     return contactLayerToText(getCollisionFilterInfoLayer(info));
 }
 
-inline void EntityGroupFilter::setLayerCustomMask(ContactLayer layer, u32 mask) {
+inline void EntityGroupFilter::setLayerIgnorableMask(ContactLayer layer, u32 mask) {
     mLayersThatCanBeIgnored[layer] = mask;
 }
 

@@ -21,6 +21,11 @@ namespace ksys::phys {
 
 using ContactFlag = RigidBodyMotionEntity::ContactFlag;
 
+enum ContactConstraintUserDataFlag {
+    MagneMassScalingApplied = 1,
+    KeepContactDisabled = 0x10000,
+};
+
 static bool shouldProcessEntityContact(sead::BitFlag32 ignored_layers_a,
                                        sead::BitFlag32 ignored_layers_b, ContactLayer layer_a,
                                        ContactLayer layer_b) {
@@ -100,7 +105,7 @@ void EntityContactListener::collisionAddedCallback(const hkpCollisionEvent& even
         body_b->onCollisionAdded();
     }
 
-    if (!should_process && m15(body_a, body_b)) {
+    if (!should_process && shouldRecordImpulseEntry(body_a, body_b)) {
         mMgr->addImpulseEntry(body_a, body_b);
     }
 }
@@ -114,7 +119,7 @@ void EntityContactListener::collisionRemovedCallback(const hkpCollisionEvent& ev
     removeMassChangerModifier(event, body_a, body_b);
 }
 
-bool EntityContactListener::m15(RigidBody* body_a, RigidBody* body_b) {
+bool EntityContactListener::shouldRecordImpulseEntry(RigidBody* body_a, RigidBody* body_b) {
     if (body_a->isIgnoreMaxImpulseOff() && body_b->isIgnoreMaxImpulseOff() &&
         (body_a->getMaxImpulse() >= 0 || body_b->getMaxImpulse() >= 0)) {
         return true;
@@ -150,9 +155,8 @@ bool EntityContactListener::isObjectOrGroundOrNPCOrTree(const hkpCdBody& cd_body
     return isObjectOrGroundOrNPCOrTree(*body);
 }
 
-// TODO: rename
-static bool unkLayerCheck(const RigidBody* body_a, const RigidBody* body_b, ContactLayer layer_a,
-                          ContactLayer layer_b) {
+static bool isPlayerOrNpcVsObjectOrCharacter(const RigidBody* body_a, const RigidBody* body_b,
+                                             ContactLayer layer_a, ContactLayer layer_b) {
     if (layer_a.value() == ContactLayer::EntityPlayer ||
         layer_a.value() == ContactLayer::EntityNPC) {
         switch (layer_b.value()) {
@@ -192,7 +196,8 @@ bool EntityContactListener::contactPointCallbackImpl(u32 ignored_layers_a, u32 i
                                                      ContactLayer layer_a, ContactLayer layer_b,
                                                      const hkpContactPointEvent& event) {
     if (shouldProcessEntityContact(ignored_layers_a, ignored_layers_b, layer_a, layer_b) ||
-        (_91 && unkLayerCheck(body_a, body_b, layer_a, layer_b))) {
+        (mIgnoreObjectAndNpcContacts &&
+         isPlayerOrNpcVsObjectOrCharacter(body_a, body_b, layer_a, layer_b))) {
         disableContact(event);
 
         if (event.m_type == hkpContactPointEvent::TYPE_MANIFOLD &&
@@ -207,7 +212,7 @@ bool EntityContactListener::contactPointCallbackImpl(u32 ignored_layers_a, u32 i
         auto* constraint = event.m_contactMgr->getConstraintInstance();
         if (constraint == nullptr ||
             constraint->getData()->getType() != hkpConstraintData::CONSTRAINT_TYPE_CONTACT ||
-            !(constraint->getUserData() & 0x10000)) {
+            !(constraint->getUserData() & KeepContactDisabled)) {
             // Clear the contact disabled flag.
             enableContact(event);
         }
@@ -215,10 +220,10 @@ bool EntityContactListener::contactPointCallbackImpl(u32 ignored_layers_a, u32 i
     return true;
 }
 
-void EntityContactListener::m11(const hkpContactPointEvent& event,
-                                const RigidBodyCollisionMasks& masks_a,
-                                const RigidBodyCollisionMasks& masks_b, RigidBody* body_a,
-                                RigidBody* body_b) {
+void EntityContactListener::applyContactMaterialProperties(const hkpContactPointEvent& event,
+                                                           const RigidBodyCollisionMasks& masks_a,
+                                                           const RigidBodyCollisionMasks& masks_b,
+                                                           RigidBody* body_a, RigidBody* body_b) {
     auto* hk_point_properties = event.m_contactPointProperties;
 
     const MaterialMask mat_mask_a{masks_a.material_mask};
@@ -327,8 +332,7 @@ static bool removeViscousSurfaceModifier(const hkpCollisionEvent& event) {
 
     if (constraint &&
         constraint->getData()->getType() == hkpConstraintData::CONSTRAINT_TYPE_CONTACT) {
-        // TODO: add named constants for this flag?
-        constraint->m_userData &= ~1;
+        constraint->m_userData &= ~MagneMassScalingApplied;
     }
 
     return true;
@@ -413,7 +417,7 @@ inline void EntityContactListener::setMagneMassScalingForContact(const hkpCollis
 
     if (auto* constraint = event.m_contactMgr->getConstraintInstance()) {
         if (constraint->getData()->getType() == hkpConstraintData::CONSTRAINT_TYPE_CONTACT)
-            constraint->m_userData |= 1;
+            constraint->m_userData |= MagneMassScalingApplied;
     }
 }
 
@@ -532,7 +536,7 @@ bool EntityContactListener::regularContactPointCallback(const hkpContactPointEve
         ContactListener::regularContactPointCallback(event, body_a, body_b, &material_masks);
 
     if (event.m_contactPointProperties->m_flags & hkpContactPointProperties::CONTACT_IS_NEW &&
-        m15(body_a, body_b)) {
+        shouldRecordImpulseEntry(body_a, body_b)) {
         sead::Vector3f position, normal;
         storeToVec3(&position, event.m_contactPoint->getPosition());
         storeToVec3(&normal, event.m_contactPoint->getSeparatingNormal());

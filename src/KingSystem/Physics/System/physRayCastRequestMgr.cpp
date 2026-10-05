@@ -73,7 +73,7 @@ RayCastForRequest* RayCastRequestMgr::allocRequest(SystemGroupHandler* group_han
 
     request->mList = nullptr;
 
-    if (request->mData->_98) {
+    if (request->mData->mIsCasting) {
         mFreeList.pushBack(request);
         return nullptr;
     }
@@ -81,7 +81,7 @@ RayCastForRequest* RayCastRequestMgr::allocRequest(SystemGroupHandler* group_han
     request->mData->reset();
     request->mData->mGroupHandler = group_handler;
     request->mData->setGroundHit(ground_hit);
-    request->mData->mNormalCheckingMode = RayCast::NormalCheckingMode::_0;
+    request->mData->mNormalCheckingMode = RayCast::NormalCheckingMode::FrontFacesOnly;
     return request->mData;
 }
 
