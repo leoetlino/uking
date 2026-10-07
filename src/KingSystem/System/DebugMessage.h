@@ -34,7 +34,9 @@ struct DebugMessage {
     f32 _84 = 0.8;
     bool _88 = true;
     bool _89 = true;
+    void* _90 = nullptr;
+    void* _98 = nullptr;
 };
-KSYS_CHECK_SIZE_NX150(DebugMessage, 0x90);
+KSYS_CHECK_SIZE_NX150(DebugMessage, 0xA0);
 
 }  // namespace ksys
