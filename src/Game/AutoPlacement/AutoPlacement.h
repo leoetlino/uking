@@ -22,21 +22,21 @@ struct AutoPlacementFlowRes;
 class PlacementThing;
 
 struct PlacementGroup {
-    sead::SafeString a;
-    u32 _10;
-    u32 _14;
-    u8 _18;
-    u8 _19;
-    u8 _1a;
-    u8 _1b;
-    u8 _1c;
-    u8 _1d;
-    u8 _1e;
-    u8 _1f{};
-    s16 _20;
-    u16 _22{};
-    u8 _24;
-    u8 _25{};
+    sead::SafeString actor_name;
+    u32 group_radius;
+    u32 offset_pos_y;
+    u8 grid_x;
+    u8 grid_z;
+    u8 num;
+    u8 equip_weapon_actor_count;
+    u8 flow_idx;
+    u8 locator_type;
+    u8 is_active;
+    u8 flags{};
+    s16 object_ref_idx;
+    u16 weather_mask{};
+    u8 num_killed;
+    u8 time_division_mask{};
     void* _28;
     void* _30;
     void* _38;
@@ -47,7 +47,7 @@ struct PlacementGroup {
     void* _60;
     void* _68;
     sead::SafeString b;
-    u32 _80{};
+    u32 num_alive{};
 };
 KSYS_CHECK_SIZE_NX150(PlacementGroup, 0x88);
 
@@ -62,12 +62,13 @@ public:
         PlacementDone,
     };
 
-    explicit PlacementThing(bool set)
-        : mDelegate{this, &PlacementThing::sub_7100650C28}, _8944(set) {}
+    explicit PlacementThing(bool is_obstacle_sweep)
+        : mDelegate{this, &PlacementThing::onRayHitRigidBody}, mIsObstacleSweep(is_obstacle_sweep) {
+    }
 
     bool invoke();
     void stepRaycast();
-    void sub_7100650C28(ksys::phys::RigidBody*);
+    void onRayHitRigidBody(ksys::phys::RigidBody*);
     const char* getCurrentGroundMat() const;
     const char* getCurrentWaterSubMat() const;
 
@@ -75,20 +76,20 @@ private:
     friend class AutoPlacement;
 
     ksys::phys::RayCastForRequest* mRaycast{};
-    u8 _8880{};
+    u8 mHit{};
     u8 mUnderwater{};
-    sead::Vector3f mVec1{};
+    sead::Vector3f mStartPos{};
     sead::Vector3f mQueryVec{};
     u32 _889c{};
     f32 _88a0 = 1.0f;
-    ksys::phys::MaterialMask mMask1;
-    ksys::phys::MaterialMask mMask2;
+    ksys::phys::MaterialMask mGroundMaterial;
+    ksys::phys::MaterialMask mWaterMaterial;
     f32 mWaterQuery = -1.0f;
     sead::Delegate1<PlacementThing, ksys::phys::RigidBody*> mDelegate;
     sead::CriticalSection mCS{};
     State mState;
-    u8 _8944{};
-    u8 _8945{};
+    u8 mIsObstacleSweep{};
+    u8 mSweepRayCount{};
 };
 
 struct ActorSpawnInfo {
@@ -97,9 +98,9 @@ struct ActorSpawnInfo {
 
         // exclusive
         TrunkOrGlowStoneLocator = 2,
-        _4 = 4,
+        TrunkLocator = 4,
         TrunkLocatorRandom = 8,
-        _10 = 0x10,
+        BranchLocator = 0x10,
         BranchLocatorRandom = 0x20,
         OnTreeLocator = 0x40,
         OnTreeLocatorRandom = 0x80,
@@ -111,11 +112,11 @@ struct ActorSpawnInfo {
 
     sead::SafeString name{};
     AutoPlacementFlowRes* flow;
-    u8 _18;
-    u8 _19;
+    u8 max_groups;
+    u8 num_groups_placed;
     sead::TypedBitFlag<SpawnLocation> spawn_location{};
-    u16 _1c;
-    u16 _1e;
+    u16 max_attempts;
+    u16 num_attempts;
 };
 
 class AutoPlacement {
@@ -123,56 +124,62 @@ public:
     AutoPlacement();
     ~AutoPlacement();
 
-    bool sub_710064CBFC(sead::Heap* heap, u8 flag, s32 num_spawn, s32 num_obj);
-    u32 sub_710064CD80(u32, u32);
+    enum class State : u8 {
+        Ready,
+        NeedsLocators,
+        Inactive,
+    };
+
+    bool init(sead::Heap* heap, u8 flag, s32 num_spawn, s32 num_obj);
+    u32 isWithinOneCellOf(u32, u32);
     void reset(bool force);
 
     bool hasNearbyPlacedActorWithNameInGroup(const sead::SafeString& name,
                                              const sead::Vector3f& distance);
 
     void setSpawnInfo(const sead::SafeString& name, s32 count);
-    void sub_710064DA54();
+    void deactivate();
 
-    bool sub_710064E178(const sead::SafeString& name, u32 placement_type,
-                        const sead::Vector3f& pos);
-    bool sub_710064EF24(ActorSpawnInfo* info, const sead::Vector3f& pos);
-    void sub_710064F744(u8 a1, u8 a2);
+    bool isActorInEcosystemAreaAtPos(const sead::SafeString& name, u32 placement_type,
+                                     const sead::Vector3f& pos);
+    bool canSpawnEntryAtPos(ActorSpawnInfo* info, const sead::Vector3f& pos);
+    void updateCurrentGroupNum(u8 num, u8 equip_weapon_actor_count);
     void incrementGroup();
-    bool sub_7100650144(PlacementGroup* grp, bool check_exposure);
+    bool isGroupLocatorUnavailable(PlacementGroup* grp, bool check_exposure);
     s32 placeGroup(AutoPlacementFlowRes* res);
-    s32 sub_7100650908();
+    s32 getCurrentGroupFlowIdx();
     void stepAllRaycasts();
-    void sub_7100650C28(ksys::phys::RigidBody* rb);
+    void onRayHitRigidBody(ksys::phys::RigidBody* rb);
 
 private:
     struct ObjectRef {
         ksys::map::PreActor* obj;
-        void* _8;
+        void* locator_cache_idx;
     };
 
-    s16 _0 = 0;
+    s16 mNumGroups = 0;
     s16 mGroupIdx = -1;
-    u8 _4 = 0xFF;
-    u8 _5 = 0xFF;
-    s16 _6 = 0;
-    u8 _8 = 0;
-    u8 _9 = 2;
+    u8 mGridX = 0xFF;
+    u8 mGridZ = 0xFF;
+    s16 mNearCreateWaitFrame = 0;
+    State mState = State::Ready;
+    u8 mCurrentGroupMatched = 2;
     sead::BitFlag<u8> mNearFlag{};
-    sead::BitFlag<u8> _b{};
-    u8 _c = 0;
-    u8 _d = 0;
-    u8 _e = 0;
+    sead::BitFlag<u8> mEquipCategory{};
+    u8 mCurSpawnInfoIdx = 0;
+    u8 mNumSpawnInfos = 0;
+    u8 mAppearWeatherMask = 0;
     u8 _f = 0;
-    u8 _10 = 0;
-    s32 _14 = 0;
+    u8 mTimeDivisionMask = 0;
+    s32 mResetCount = 0;
     sead::Buffer<ActorSpawnInfo> mSpawnInfo;
     sead::CriticalSection mCS{};
     sead::SafeArray<PlacementGroup, 0x100> mGroups{};
-    sead::SafeString _8868{};
-    PlacementThing mThing1{false};
-    PlacementThing mThing2{false};
-    PlacementThing mThing3{true};
-    void* mX;
+    sead::SafeString mRailName{};
+    PlacementThing mCandidateRay{false};
+    PlacementThing mSpawnRay{false};
+    PlacementThing mObstacleRay{true};
+    void* mCurRay;
     sead::Buffer<ObjectRef> mObjectRefs;
 };
 
