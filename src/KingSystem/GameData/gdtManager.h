@@ -565,7 +565,7 @@ private:
 
         void addRecord(s32 value, const sead::SafeString& name, s32 sub_idx, bool debug);
 
-        u64 _0 = 0;
+        u64 counts = 0;
         sead::SafeArray<sead::FixedRingBuffer<Record, 64>, NumCores> ring_buffers[2];
         sead::SafeArray<Record, 0xc0> arrays[2]{};
     };
