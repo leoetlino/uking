@@ -41,7 +41,7 @@ public:
     virtual u32 getDamage() = 0;
     virtual s32 getField48() = 0;
     virtual s32 getMinDmg() = 0;
-    virtual s32 getField50() = 0;
+    virtual s32 getDamageKind() = 0;
     virtual s32 getField54() = 0;
     virtual bool checkDamageFlags() = 0;
     virtual s32 getFlags2() = 0;
@@ -57,8 +57,8 @@ public:
     sead::Buffer<DamageCallback*> mCallbacks{};
 
     // Callback status flags?
-    s32 mField_30 = 0;
-    s8 mField_34 = 0;
+    s32 mStruct20Lock = 0;
+    s8 mIsDamageDisabled = 0;
 };
 
 }  // namespace ksys::act
