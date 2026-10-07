@@ -46,8 +46,8 @@ private:
         void finalize();
         void calc();
 
-        void* _8{};
-        void* _10{};
+        void* mHead{};
+        void* mTail{};
     };
 
     struct TerrorFilter {
