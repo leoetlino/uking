@@ -48,7 +48,7 @@ public:
         OutOfPlacementArea = 0xa,
         OutOfDeleteDistance = 0xb,
         OutOfLoadDistance = 0xc,
-        _d = 0xd,
+        GenGroupActiveBeforeWake = 0xd,
         FadeoutDeleteBeforeWake = 0xe,
         ActorLimiter = 0xf,
         PreActorHandedOver = 0x10,
