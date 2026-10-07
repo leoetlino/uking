@@ -481,7 +481,7 @@ protected:
     /* 0x4f0 */ float mModelOpacity = 1.0;
     /* 0x4f4 */ float mWarpEffectValue = 0.0;
     /* 0x4f8 */ float mFadeInDelay = 0.0;
-    /* 0x4fc */ float _4fc = 0.0;
+    /* 0x4fc */ float mVillagerOffscreenTimer = 0.0;
     /* 0x500 */ sead::BoundBox3f mAabb{sead::Vector3f::zero, sead::Vector3f::zero};
 
     /* 0x518 */ sead::TypedBitFlag<ActorFlag2, s32> mActorFlags2{};
