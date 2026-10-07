@@ -12,6 +12,13 @@ class Actor;
 
 namespace ksys::act::ai {
 
+enum class BehaviorPendingState : u8 {
+    None = 0,
+    Enter = 1,
+    Leave = 2,
+    Cancelled = 3,
+};
+
 class Behavior {
     SEAD_RTTI_BASE(Behavior)
 
@@ -42,10 +49,10 @@ public:
 protected:
     Actor* mActor{};
     u16 mDefIdx{};
-    u8 _12{};
-    u8 _13{};
-    void* _18{};
-    void* _20{};
+    u8 mSetCount{};
+    BehaviorPendingState mPendingState{};
+    void* mNext{};
+    void* mNextPending{};
 };
 KSYS_CHECK_SIZE_NX150(Behavior, 0x28);
 

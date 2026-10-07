@@ -15,8 +15,8 @@ RootAi::~RootAi() {
     mBehaviors.finalize();
     mAis.finalize();
     mActions.finalize();
-    if (_140)
-        delete _140;
+    if (mEventActionContexts)
+        delete mEventActionContexts;
 }
 
 bool RootAi::loadMapUnitParams(const AIDef& def, sead::Heap* heap) {
