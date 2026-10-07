@@ -191,7 +191,6 @@ private:
     sead::Heap* mPhysicsTempDefaultHeap{};
     sead::Heap* mPhysicsTempLowHeap{};
     DebugMessage mDebugMessage;
-    u8 _258[0x268 - 0x258];
     IsIndoorStage mIsIndoorStage;
     sead::Mutex mCharacterControllerMutex;
     sead::PtrArray<CharacterController> mCharacterControllers;
