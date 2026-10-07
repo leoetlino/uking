@@ -25,7 +25,7 @@ bool ResourceInfoContainer::loadResourceSizeTable() {
         req.mFileDevice = nullptr;
         req.mLoadCompressed = true;
         req._24 = false;
-        req._8 = true;
+        req.mInitLoadSignalsEvent = true;
         req.mLoadDataAlignment = 8;
         req.mBufferSize = 0;
         req.mEntryFactory = nullptr;

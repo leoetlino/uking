@@ -22,7 +22,7 @@ Handle::Status Cache::loadResource(const ControlTaskData& data) {
     auto* handle = data.mResHandle;
     if (handle->isLinked()) {
         stubbedLogFunction();
-        return Handle::Status::_8;
+        return Handle::Status::AlreadyRequested;
     }
 
     {
@@ -66,13 +66,14 @@ Handle::Status Cache::loadResource(const ControlTaskData& data) {
             } else if (removed) {
                 unit->updateStatus();
                 unit->attachHandle(handle);
-                return unit->getRefCount() == 1 ? Handle::Status::_6 : Handle::Status::_5;
+                return unit->getRefCount() == 1 ? Handle::Status::FromCacheUnreferenced :
+                                                  Handle::Status::FromCache;
             }
         }
     }
 
     if (data.mHasResLoadReq)
-        return Handle::Status::_8;
+        return Handle::Status::AlreadyRequested;
 
     ResourceUnit* result;
 
@@ -109,7 +110,7 @@ Handle::Status Cache::loadResource(const ControlTaskData& data) {
     }
 
     if (!result)
-        return Handle::Status::_3;
+        return Handle::Status::NoMemory;
 
     {
         auto lock = sead::makeScopedLock(gCacheCriticalSection);
@@ -132,9 +133,9 @@ Handle::Status Cache::loadResource(const ControlTaskData& data) {
 
     ResourceUnit::RequestInitLoadArg load_arg;
     load_arg.lane_id = lane_id;
-    load_arg.has_handle = data.mResLoadReq._8;
+    load_arg.has_handle = data.mResLoadReq.mInitLoadSignalsEvent;
     result->requestInitLoad(load_arg);
-    return Handle::Status::_7;
+    return Handle::Status::RequestOk;
 }
 
 void Cache::eraseUnit(ResourceUnit* unit) {

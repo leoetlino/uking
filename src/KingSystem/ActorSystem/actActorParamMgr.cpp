@@ -247,7 +247,7 @@ bool ActorParamMgr::requestLoadActorPack(res::Handle* handle, const sead::SafeSt
     path.format("Actor/Pack/%s.bactorpack", actor_name.cstr());
     req.mRequester = actor_name;
     req.mLaneId = lane_id;
-    req._8 = true;
+    req.mInitLoadSignalsEvent = true;
     req._28 = false;
     return handle->requestLoad(path, &req);
 }
@@ -764,7 +764,7 @@ bool ActorParamMgr::prepareLoadFromActorPack(sead::BufferedSafeString* path, res
 
     req->mLaneId = lane_id;
     req->mRequester = requester;
-    req->_8 = true;
+    req->mInitLoadSignalsEvent = true;
     return ret;
 }
 
@@ -781,7 +781,7 @@ res::Archive* ActorParamMgr::loadActorPack(res::Handle* handle, const sead::Safe
     path.format("Actor/Pack/%s.bactorpack", actor_name.cstr());
     arg.load_req.mRequester = actor_name;
     arg.load_req.mLaneId = lane_id;
-    arg.load_req._8 = true;
+    arg.load_req.mInitLoadSignalsEvent = true;
     arg.load_req._28 = false;
     arg.load_req.mPath = path;
 
@@ -815,7 +815,7 @@ T* ActorParamMgr::loadFile(ActorParam* param, ActorParam::ResourceType type, con
         path.format("%s/%s.b%s", dir_name_c, name_c, extension_c);
         {
             res::SimpleLoadRequest req;
-            req._8 = true;
+            req.mInitLoadSignalsEvent = true;
             actor_name = &param->getActorName();
             req.mRequester = *actor_name;
             req.mPath = path;
