@@ -41,7 +41,7 @@ class PlacementMgr {
 public:
     void releaseTree();
     void deleteActorsOfUnloadingStaticObjs();
-    void reset7F0();
+    void startRemoveInnerData();
     void initClusteredRenderer();
     void auto0();
     bool auto1();
@@ -81,7 +81,7 @@ public:
     static sead::TypedBitFlag<MgrStaticFlags, u16> sFlags;
 
     u32 _28;
-    u32 _2c = 0;
+    u32 mStatus = 0;
     u32 _30 = 0;
 
     u8 TEMP[0x108];
@@ -152,7 +152,7 @@ public:
     sead::DelegateFunc mInvoker{};
     u8 TEMP4[0x10];
 
-    s32 _7f0 = -1;
+    s32 mRemoveInnerDataStep = -1;
 
     sead::DelegateFunc mInvoker2{};
     u8 TEMP5[0x10];
