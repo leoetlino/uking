@@ -55,7 +55,7 @@ void StarterPackMgr::loadBootupGraphicsPack() {
 
         res::LoadRequest load_req;
         load_req.mRequester = "StarterPackMgr";
-        load_req._8 = true;
+        load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
         load_req.mArena = mOverlayArena;
 
@@ -70,7 +70,7 @@ void StarterPackMgr::loadBootupPacks() {
 
         res::LoadRequest load_req;
         load_req.mRequester = "StarterPackMgr";
-        load_req._8 = true;
+        load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
         load_req.mArena = mOverlayArena;
 
@@ -89,7 +89,7 @@ void StarterPackMgr::loadTitlePack() {
 
         res::LoadRequest load_req;
         load_req.mRequester = "StarterPackMgr";
-        load_req._8 = true;
+        load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
         load_req.mArena = mOverlayArena;
 
@@ -104,7 +104,7 @@ void StarterPackMgr::loadTitleBGPacks() {
 
         res::LoadRequest load_req;
         load_req.mRequester = "StarterPackMgr";
-        load_req._8 = true;
+        load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
         load_req.mArena = mOverlayArena;
 

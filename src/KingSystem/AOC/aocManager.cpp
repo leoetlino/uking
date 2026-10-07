@@ -126,7 +126,7 @@ void Manager::loadAocMainFieldPack(OverlayArena* arena) {
 
     res::LoadRequest req;
     req.mRequester = "aocManager";
-    req._8 = true;
+    req.mInitLoadSignalsEvent = true;
     req._26 = false;
     req.mAocFileDevice = device;
     req.mArena = arena;

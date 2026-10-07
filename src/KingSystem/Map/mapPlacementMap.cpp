@@ -272,7 +272,7 @@ bool PlacementMap::loadStaticCompound(int hksc_idx, bool auto_gen_mu, bool req_a
     res::LoadRequest arg;
 
     arg.mRequester = "PlacementMgr";
-    arg._8 = req_arg_8;
+    arg.mInitLoadSignalsEvent = req_arg_8;
     arg._22 = 1;
 
     const auto lock = sead::makeScopedLock(mCs);

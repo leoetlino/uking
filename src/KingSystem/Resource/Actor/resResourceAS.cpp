@@ -131,11 +131,11 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
         u32 y = first->getMaxNonSkeletalAnimCount();
         y = y >= 0xff ? 0xff : y;
 
-        _3b8 = x;
-        _3b9 = y;
+        mMaxSkeletalAnimCount = x;
+        mMaxNonSkeletalAnimCount = y;
     } else {
-        _3b8 = 0;
-        _3b9 = 0;
+        mMaxSkeletalAnimCount = 0;
+        mMaxNonSkeletalAnimCount = 0;
     }
 
     mHeap->adjust();
