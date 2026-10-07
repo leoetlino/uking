@@ -39,8 +39,8 @@ public:
     u32 getDamage() override;
     s32 getField48() override { return mField_48; }
     s32 getMinDmg() override { return mMinDmg; }
-    s32 getField50() override { return mField_50; }
-    s32 getField54() override { return mField_54; }
+    s32 getDamageKind() override { return mDamageKind; }
+    s32 getField54() override { return mDamageReaction; }
     bool checkDamageFlags() override { return false; }
     s32 getFlags2() override { return mFlags2; }
     virtual f32 getStasisBlowPowerRatio() { return 0.0f; }
@@ -64,10 +64,10 @@ public:
     virtual bool getDamageDir(sead::Vector3f* dir) { return false; }
 
     //(FIXME: incomplete)
-    virtual s64 m29(s64 a2);
+    virtual s64 getDamageDirNormalized(s64 a2);
 
     // qword pointer? (FIXME: incomplete)
-    virtual s64 m30(u64 a2);
+    virtual s64 getDamageDirection(u64 a2);
 
     virtual bool getHitDirection(sead::Vector3f* dir) { return false; }
     virtual s32 getDamageImpulse() { return 0; }
@@ -79,7 +79,7 @@ public:
     virtual ksys::act::BaseProcLink* getAttacker();
 
     // FIXME: incomplete. Same as getAttacker, but return different Actor ProcLink I assume.
-    virtual s64 m37();
+    virtual s64 getDamageSourceProcLink();
 
     virtual s32 isDamageSourceObjectMaybe() { return 0; }
 
@@ -107,16 +107,16 @@ public:
     inline void tryApplyDamageRecovery(s32& damage);
 
 private:
-    s32 mField_40 = 0;
+    s32 mImpactSize = 0;
     s32 mDamage = 0;
     s32 mField_48 = 0;
     s32 mMinDmg = 0;
-    s32 mField_50 = -1;
-    s32 mField_54 = -1;
+    s32 mDamageKind = -1;
+    s32 mDamageReaction = -1;
     s32 mFlags2 = 0;
     s32 mDamageType = 0;
-    s32 mDamageReactionTableStuff = -1;
-    u8 mField_64 = 0;
+    s32 mDamageReactionTableIndex = -1;
+    u8 mReactionOverrideFlags = 0;
     bool mIsOwnedByPlayer;
 };
 KSYS_CHECK_SIZE_NX150(DamageManagerBase, 0x68);
