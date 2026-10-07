@@ -465,7 +465,7 @@ private:
         _2 = 2,
         _4 = 4,
         _7 = _1 | _2 | _4,
-        _8 = 8,
+        BoolFlagChangeRecorded = 8,
         EventAssociatedFlagModified = 0x10,
     };
 

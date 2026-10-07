@@ -16,10 +16,10 @@ public:
     ArcResourceMgr() = default;
     virtual ~ArcResourceMgr();
 
-    virtual void sub_10();
+    virtual void loadArchivesInDirectory();
     virtual void loadArchive(sead::Heap* heap, const sead::SafeString& path);
-    virtual void sub_20();
-    virtual void sub_28();
+    virtual void findArchiveData();
+    virtual void unloadAllArchives();
     virtual void addArchive(ArcResource* archive);
 
 private:

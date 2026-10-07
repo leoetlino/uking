@@ -34,7 +34,7 @@ void Metadata::doAssign_(const Metadata& other) {
     mIsAsync = other.mIsAsync;
     mSkipIsStartableAirCheck = other.mSkipIsStartableAirCheck;
     mForceNoChild = other.mForceNoChild;
-    _13 = other._13;
+    mUseNoPauseActors = other.mUseNoPauseActors;
     mEventStartWaitFrame = other.mEventStartWaitFrame;
     if (mOrderParam && other.mOrderParam)
         *mOrderParam = *other.mOrderParam;
@@ -63,7 +63,7 @@ void Metadata::reset() {
     mSetNoDeleteCurrentActor = false;
     mSkipIsStartableAirCheck = false;
     mForceNoChild = false;
-    _13 = false;
+    mUseNoPauseActors = false;
     mCurrentActor = nullptr;
     _20 = 0;
     mEventStartWaitFrame = -1;
