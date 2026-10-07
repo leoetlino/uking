@@ -16,7 +16,7 @@ namespace uking {
 AutoPlacement::AutoPlacement() = default;
 AutoPlacement::~AutoPlacement() = default;
 
-bool AutoPlacement::sub_710064CBFC(sead::Heap* heap, u8 flag, s32 num_spawn, s32 num_obj) {
+bool AutoPlacement::init(sead::Heap* heap, u8 flag, s32 num_spawn, s32 num_obj) {
     mNearFlag = flag;
 
     if (!mSpawnInfo.tryAllocBuffer(num_spawn, heap))
@@ -27,9 +27,9 @@ bool AutoPlacement::sub_710064CBFC(sead::Heap* heap, u8 flag, s32 num_spawn, s32
     return true;
 }
 
-u32 AutoPlacement::sub_710064CD80(u32 a, u32 b) {
+u32 AutoPlacement::isWithinOneCellOf(u32 a, u32 b) {
     auto calc = [](u32 x, u32 y, u32 a, u32 b) { return (1 - a + x < 3) & (1 - b + y < 3); };
-    return calc(_4, _5, a, b);
+    return calc(mGridX, mGridZ, a, b);
 }
 
 void ActorSpawnInfo::calcSpawnLocations() {
@@ -50,11 +50,11 @@ void ActorSpawnInfo::calcSpawnLocations() {
     if (mgr->hasTag(iter, CreateFromTrunkOrGlowStoneLocator))
         spawn_location.set(SpawnLocation::TrunkOrGlowStoneLocator);
     else if (mgr->hasTag(iter, 0x923A4962))
-        spawn_location.set(SpawnLocation::_4);
+        spawn_location.set(SpawnLocation::TrunkLocator);
     else if (mgr->hasTag(iter, CreateFromTrunkLocatorRandom))
         spawn_location.set(SpawnLocation::TrunkLocatorRandom);
     else if (mgr->hasTag(iter, 0x7881F260))
-        spawn_location.set(SpawnLocation::_10);
+        spawn_location.set(SpawnLocation::BranchLocator);
     else if (mgr->hasTag(iter, CreateFromBranchLocatorRandom))
         spawn_location.set(SpawnLocation::BranchLocatorRandom);
     else if (mgr->hasTag(iter, CreateFromOnTreeLocator))
@@ -70,22 +70,22 @@ void AutoPlacement::setSpawnInfo(const sead::SafeString& name, s32 count) {
     if (flow != nullptr) {
         info->name = name;
         info->flow = flow;
-        info->_19 = 0;
+        info->num_groups_placed = 0;
         s32 value = std::min(count, 255);
-        info->_18 = value;
-        info->_1c = value * 30;
-        info->_1e = 0;
+        info->max_groups = value;
+        info->max_attempts = value * 30;
+        info->num_attempts = 0;
         info->calcSpawnLocations();
-        _d = true;
-        _8 = 0;
+        mNumSpawnInfos = 1;
+        mState = State::Ready;
     } else {
-        _d = false;
+        mNumSpawnInfos = 0;
     }
 }
 
-void AutoPlacement::sub_710064DA54() {
+void AutoPlacement::deactivate() {
     reset(false);
-    _8 = 2;
+    mState = State::Inactive;
 }
 
 ksys::game::AreaItemType sPlacementItemTypesData[] = {
@@ -96,8 +96,8 @@ ksys::game::AreaItemType sPlacementItemTypesData[] = {
 sead::Buffer<ksys::game::AreaItemType> sPlacementItemTypes{sPlacementItemTypesData};
 
 // NON_MATCHING: stack
-bool AutoPlacement::sub_710064E178(const sead::SafeString& name, u32 placement_type,
-                                   const sead::Vector3f& pos) {
+bool AutoPlacement::isActorInEcosystemAreaAtPos(const sead::SafeString& name, u32 placement_type,
+                                                const sead::Vector3f& pos) {
     if (mNearFlag == 0xFE)
         return true;
 
@@ -137,13 +137,13 @@ bool PlacementThing::invoke() {
     mRaycast->enableLayer(ksys::phys::ContactLayer::EntityGroundObject);
     mRaycast->enableLayer(ksys::phys::ContactLayer::EntityTree);
 
-    if (_8944) {
-        sead::Vector3f v1 = mVec1 + sead::Vector3f{0, 4, 30};
-        sead::Vector3f v2 = mVec1 - sead::Vector3f{0, 4, 30};
+    if (mIsObstacleSweep) {
+        sead::Vector3f v1 = mStartPos + sead::Vector3f{0, 4, 30};
+        sead::Vector3f v2 = mStartPos - sead::Vector3f{0, 4, 30};
         mRaycast->setStartAndEnd(v1, v2);
     } else {
-        sead::Vector3f v1{mVec1.x, 2000.0f, mVec1.z};
-        sead::Vector3f v2{mVec1.x, -100.0f, mVec1.z};
+        sead::Vector3f v1{mStartPos.x, 2000.0f, mStartPos.z};
+        sead::Vector3f v2{mStartPos.x, -100.0f, mStartPos.z};
         mRaycast->setStartAndEnd(v1, v2);
         mRaycast->setCallback(&mDelegate);
     }
@@ -152,13 +152,13 @@ bool PlacementThing::invoke() {
     return true;
 }
 
-bool AutoPlacement::sub_7100650144(PlacementGroup* grp, bool check_exposure) {
-    if (grp->_1d == 0xFF)
+bool AutoPlacement::isGroupLocatorUnavailable(PlacementGroup* grp, bool check_exposure) {
+    if (grp->locator_type == 0xFF)
         return false;
-    if (grp->_20 == -1)
+    if (grp->object_ref_idx == -1)
         return false;
 
-    auto* object = mObjectRefs[grp->_20].obj;
+    auto* object = mObjectRefs[grp->object_ref_idx].obj;
     if (object == nullptr)
         return false;
 
@@ -169,7 +169,7 @@ bool AutoPlacement::sub_7100650144(PlacementGroup* grp, bool check_exposure) {
     if (object->getProc() == nullptr && object->getFlags0().isOn(ksys::map::PreActor::Flag0::_80))
         return true;
 
-    if (grp->_1d != 2)
+    if (grp->locator_type != 2)
         return false;
 
     if (check_exposure && !ksys::world::WeatherMgr::isExposureZero())
@@ -177,7 +177,7 @@ bool AutoPlacement::sub_7100650144(PlacementGroup* grp, bool check_exposure) {
     return false;
 }
 
-bool AutoPlacement::sub_710064EF24(ActorSpawnInfo* info, const sead::Vector3f& pos) {
+bool AutoPlacement::canSpawnEntryAtPos(ActorSpawnInfo* info, const sead::Vector3f& pos) {
     auto* mgr = AutoPlacementMgr::instance();
     u32 placement_type = info->flow->placement_type;
     if (mgr->auto0(pos, placement_type)) {
@@ -190,7 +190,7 @@ bool AutoPlacement::sub_710064EF24(ActorSpawnInfo* info, const sead::Vector3f& p
     }
 
     if ((mNearFlag != 0xFF && mgr->auto11(pos)) ||
-        (!sub_710064E178(info->name, placement_type, pos))) {
+        (!isActorInEcosystemAreaAtPos(info->name, placement_type, pos))) {
         return false;
     }
 
@@ -201,16 +201,16 @@ bool AutoPlacement::sub_710064EF24(ActorSpawnInfo* info, const sead::Vector3f& p
     return true;
 }
 
-void AutoPlacement::sub_710064F744(u8 a1, u8 a2) {
+void AutoPlacement::updateCurrentGroupNum(u8 num, u8 equip_weapon_actor_count) {
     if (mNearFlag != 0xFF)
         return;
     if (mGroupIdx < 0)
         return;
 
     auto& grp = mGroups[mGroupIdx];
-    if (!grp._80) {
-        grp._1a = a1;
-        grp._1b = a2;
+    if (!grp.num_alive) {
+        grp.num = num;
+        grp.equip_weapon_actor_count = equip_weapon_actor_count;
     }
 }
 
@@ -225,36 +225,36 @@ s32 AutoPlacement::placeGroup(AutoPlacementFlowRes* res) {
         return -1;
     }
 
-    mThing2.mRaycast = mThing1.mRaycast;
-    _6 = 0;
-    _b = 0xFF;
+    mSpawnRay.mRaycast = mCandidateRay.mRaycast;
+    mNearCreateWaitFrame = 0;
+    mEquipCategory = 0xFF;
 
     auto& grp = mGroups[mGroupIdx];
     if (grp.b.isEmpty()) {
         return -1;
     }
 
-    _8868 = sead::SafeString::cEmptyString;
+    mRailName = sead::SafeString::cEmptyString;
     int tmp = 0;
-    res->start(this, grp.a, &tmp);
-    if (!_9)
+    res->start(this, grp.actor_name, &tmp);
+    if (!mCurrentGroupMatched)
         return -1;
-    _9 = 0;
+    mCurrentGroupMatched = 0;
 
     return mGroupIdx;
 }
 
-s32 AutoPlacement::sub_7100650908() {
+s32 AutoPlacement::getCurrentGroupFlowIdx() {
     if (mGroupIdx < 0) {
         return -1;
     }
-    return mGroups[mGroupIdx]._1c;
+    return mGroups[mGroupIdx].flow_idx;
 }
 
 void AutoPlacement::stepAllRaycasts() {
-    mThing1.stepRaycast();
-    mThing2.stepRaycast();
-    mThing3.stepRaycast();
+    mCandidateRay.stepRaycast();
+    mSpawnRay.stepRaycast();
+    mObstacleRay.stepRaycast();
 }
 
 void PlacementThing::stepRaycast() {
@@ -266,7 +266,7 @@ void PlacementThing::stepRaycast() {
             mRaycast = nullptr;
         }
         mState = State::Invalid;
-        _8880 = _8944;
+        mHit = mIsObstacleSweep;
         return;
     }
 
@@ -297,7 +297,7 @@ void PlacementThing::stepRaycast() {
     mState = next;
 }
 
-void AutoPlacement::sub_7100650C28(ksys::phys::RigidBody* rb) {
+void AutoPlacement::onRayHitRigidBody(ksys::phys::RigidBody* rb) {
     if (rb == nullptr)
         return;
 
@@ -315,22 +315,22 @@ void AutoPlacement::sub_7100650C28(ksys::phys::RigidBody* rb) {
     mNearFlag.set(ksys::act::hasTag(actor, ksys::act::tags::Tree) ||
                   ksys::act::hasTag(actor, ksys::act::tags::AutoPlacementForbidCreate));
 
-    _b.set(actor->getName() == "AirWallHorse");
+    mEquipCategory.set(actor->getName() == "AirWallHorse");
 }
 
 const char* PlacementThing::getCurrentGroundMat() const {
     if (mWaterQuery > 0.0f) {
-        return mMask2.getMaterialName();
+        return mWaterMaterial.getMaterialName();
     } else {
-        return mMask1.getMaterialName();
+        return mGroundMaterial.getMaterialName();
     }
 }
 
 const char* PlacementThing::getCurrentWaterSubMat() const {
     if (mWaterQuery > 0.0f) {
-        return mMask2.getSubMaterialName();
+        return mWaterMaterial.getSubMaterialName();
     } else {
-        return mMask1.getSubMaterialName();
+        return mGroundMaterial.getSubMaterialName();
     }
 }
 
