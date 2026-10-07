@@ -251,7 +251,7 @@ void Awareness::Instances::calc() {
 
 void Awareness::Instances::calcForEvent(bool check_334) {
     for (int i = 0; i < count; ++i) {
-        if (!check_334 || get(i)->_334 < 0)
+        if (!check_334 || get(i)->mFlags < 0)
             get(i)->calcForEvent();
     }
 }

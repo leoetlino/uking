@@ -30,7 +30,7 @@ public:
 
 private:
     Actor* mActor = nullptr;
-    int _10 = -1;
+    int mThrownValue = -1;
     u16 _14 = 0;
 };
 KSYS_CHECK_SIZE_NX150(PhysicsUserTag, 0x18);
