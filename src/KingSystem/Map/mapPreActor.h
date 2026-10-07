@@ -217,7 +217,7 @@ private:
     u8 mIdx = 0;
     u8 mNumLinksPointingToMe = 0;
     sead::TypedBitFlag<ActorFlag8, u8> mActorFlags8;
-    u8 _b = 0xff;
+    u8 mMassDrawFadeCounter = 0xff;
     u16 mId = 0;
     s16 mStaticCompoundActorId = -1;
     void* _10 = nullptr;
