@@ -18,7 +18,16 @@ public:
 };
 
 enum class RootAiFlag {
-    _8 = 8,
+    ReturnFromDamage = 0,
+    ReturnFromGuard = 1,
+    _2 = 2,
+    _3 = 3,
+    ReturnFromRebound = 4,
+    WaitingForEventStart = 5,
+    RequestDemoRootChild = 6,
+    RequestNormalRootChild = 7,
+    ChildChanged = 8,
+    ExternalImpulsePending = 9,
 };
 
 // TODO: rename
@@ -74,38 +83,38 @@ public:
 private:
     friend class ActionBase;
 
-    // TODO: rename and put this in a different translation unit
-    struct SomeStruct {
-        SomeStruct();
-        virtual ~SomeStruct();
+    // TODO: put this in a different translation unit
+    struct EventActionContextList {
+        EventActionContextList();
+        virtual ~EventActionContextList();
 
-        void* _8{};
+        void* mEventActionContexts{};
     };
-    KSYS_CHECK_SIZE_NX150(SomeStruct, 0x10);
+    KSYS_CHECK_SIZE_NX150(EventActionContextList, 0x10);
 
     void calc_() override;
 
-    f32 _40 = 1.0;
-    u32 _44{};
+    f32 mChemicalScale = 1.0;
+    u32 mLastModelIceRatio{};
     Actions mActions;
     Ais mAis;
     Behaviors mBehaviors;
     Queries mQueries;
     sead::SafeArray<Behavior*, 3> mBehaviorsByStopAndCalcTiming[2]{};
-    void* _138{};
-    SomeStruct* _140{};
+    void* mPendingBehaviors{};
+    EventActionContextList* mEventActionContexts{};
     u32 mI{};
     u16 mAt{};
-    u8 _14e{};
+    u8 mPreDeleteDone{};
     void* _150{};
     void* _158{};
     void* _160{};
     // TODO: is this really an atomic?
-    sead::Atomic<f32> _168 = 1.0;
+    sead::Atomic<f32> mExternalImpulseScale = 1.0;
     // RootAiFlag
-    sead::BitFlag16 _16c;
+    sead::BitFlag16 mFlags;
     // RootAiFlag2
-    sead::BitFlag16 _16e;
+    sead::BitFlag16 mPrevFlags;
     ParamPack mMapUnitParams;
     ParamPack mAiTreeParams;
 };
