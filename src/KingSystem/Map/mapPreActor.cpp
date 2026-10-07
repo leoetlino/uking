@@ -15,7 +15,7 @@ namespace ksys::map {
 // NON_MATCHING
 PreActor::PreActor() {
     mHardModeFlags.makeAllZero();
-    _b = 0xFF;
+    mMassDrawFadeCounter = 0xFF;
     _18 = nullptr;
     _20 = nullptr;
     mProc = nullptr;
@@ -69,7 +69,7 @@ void PreActor::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* 
     mTraverseDistInt = 0;
     mHashId = 0;
     mHardModeFlags.makeAllZero();
-    _b = 0xFF;
+    mMassDrawFadeCounter = 0xFF;
     mProc = nullptr;
     mLinkData = nullptr;
     iter->tryGetFloatArrayByKey(&mTranslate.x, "Translate");

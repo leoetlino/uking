@@ -43,8 +43,8 @@ void PlacementMgr::deleteActorsOfUnloadingStaticObjs() {
     }
 }
 
-void PlacementMgr::reset7F0() {
-    _7f0 = 0;
+void PlacementMgr::startRemoveInnerData() {
+    mRemoveInnerDataStep = 0;
 }
 
 // NON_MATCHING
