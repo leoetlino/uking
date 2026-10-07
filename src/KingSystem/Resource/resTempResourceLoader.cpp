@@ -82,7 +82,7 @@ sead::DirectResource* TempResourceLoader::getResourceForLoadRequest(Context* con
     mHandle.parseResource(context);
 
     if (!mHandle.isSuccess()) {
-        if (mHandle.getStatus() != Handle::Status::_3) {
+        if (mHandle.getStatus() != Handle::Status::NoMemory) {
             mFlags.reset(Flag::Loading);
             sead::FormatFixedSafeString<256> message(
                 "(TempResourceLoader) メモリ不足以外のエラーでした。: %s(%d)\n",
@@ -138,7 +138,7 @@ sead::DirectResource* TempResourceLoader::load(TempResourceLoader::LoadArg& arg)
             if (mHandle.isSuccess())
                 break;
 
-            if (mHandle.getStatus() != Handle::Status::_3) {
+            if (mHandle.getStatus() != Handle::Status::NoMemory) {
                 mFlags.reset(Flag::Loading);
                 sead::FormatFixedSafeString<256> message(
                     "(TempResourceLoader) メモリ不足以外のエラーでした。: %s(%d)\n",

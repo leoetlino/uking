@@ -99,8 +99,8 @@ public:
     void drawDebug() override;
     bool parse(const CreateArg& arg) override;
 
-    virtual bool m9() { return true; }
-    virtual float m10() { return 0; }
+    virtual bool isPosInArea() { return true; }
+    virtual float getAreaExtent() { return 0; }
     virtual void drawDebugShape() {}
 
 protected:
@@ -114,8 +114,8 @@ public:
     using AttCheckArea::AttCheckArea;
 
     bool parse(const CreateArg& arg) override;
-    bool m9() override;
-    float m10() override;
+    bool isPosInArea() override;
+    float getAreaExtent() override;
     void drawDebugShape() override;
 
 private:
@@ -132,8 +132,8 @@ public:
     using AttCheckArea::AttCheckArea;
 
     bool parse(const CreateArg& arg) override;
-    bool m9() override;
-    float m10() override;
+    bool isPosInArea() override;
+    float getAreaExtent() override;
     void drawDebugShape() override;
 
 private:
@@ -158,8 +158,8 @@ public:
     using AttCheckArea::AttCheckArea;
 
     bool parse(const CreateArg& arg) override;
-    bool m9() override;
-    float m10() override;
+    bool isPosInArea() override;
+    float getAreaExtent() override;
 
 private:
     agl::utl::Parameter<bool> mAngleCheckIgnoreLockOn;
@@ -185,8 +185,8 @@ public:
     explicit AttCheckAreaBox(AttCheckType type) : AttCheckArea(type) {}
 
     bool parse(const CreateArg& arg) override;
-    bool m9() override;
-    float m10() override;
+    bool isPosInArea() override;
+    float getAreaExtent() override;
     void drawDebugShape() override;
 
 private:
