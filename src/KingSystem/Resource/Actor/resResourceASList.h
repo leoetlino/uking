@@ -91,8 +91,8 @@ protected:
     bool prepareUnload_() override;
 
 private:
-    u8 _2b0 = 0;
-    u8 _2b1 = 0;
+    u8 mMaxSkeletalAnimCount = 0;
+    u8 mMaxNonSkeletalAnimCount = 0;
     u8 _2b2 = 0;
     u8 _2b3 = 0;
     sead::Buffer<ASDefine> mASDefines;
