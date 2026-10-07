@@ -6,15 +6,15 @@
 namespace ksys::world {
 
 SkyMgr::SkyMgr() {
-    _20._18 = {0, 0, 0};
-    _20._24 = {0, 0, 0};
-    _3f08.x = 0.572061;
-    _3f08.y = -0.707107;
-    _3f08.z = -0.415627;
-    _20._0 = {0, 0, 0};
-    _20._c = {0, 0, 0};
-    _3f20.x = sead::GlobalRandom::instance()->getF32();
-    _3f20.y = sead::GlobalRandom::instance()->getF32();
+    mLightDirs._18 = {0, 0, 0};
+    mLightDirs._24 = {0, 0, 0};
+    mLightDir.x = 0.572061;
+    mLightDir.y = -0.707107;
+    mLightDir.z = -0.415627;
+    mLightDirs.mEnvDifLightDir = {0, 0, 0};
+    mLightDirs.mLightDirRaw = {0, 0, 0};
+    mCloudShadowOffset.x = sead::GlobalRandom::instance()->getF32();
+    mCloudShadowOffset.y = sead::GlobalRandom::instance()->getF32();
 
     mPrCloud[0].mScrollSpd.init(-0.35, "ScrollSpd", "", &mPrCloud[0].mObj);
     mPrCloud[0].mNoiseAdd1.init(-0.75, "NoiseAdd1", "", &mPrCloud[0].mObj);
@@ -66,12 +66,12 @@ SkyMgr::SkyMgr() {
 
     *mPrCloud[0].mNoiseTextureNo_Blend = 3;
     *mPrCloud[2].mNoiseTextureNo_Blend = 3;
-    mPrCloud[0]._128 = 1.0;
-    mPrCloud[1]._128 = 1.0;
-    mPrCloud[2]._128 = 1.0;
-    mPrCloud[0]._104 = 0;
-    mPrCloud[1]._104 = 0;
-    mPrCloud[2]._104 = 0;
+    mPrCloud[0].mWindVecAddRandom = 1.0;
+    mPrCloud[1].mWindVecAddRandom = 1.0;
+    mPrCloud[2].mWindVecAddRandom = 1.0;
+    mPrCloud[0].mPosDensityChgState = 0;
+    mPrCloud[1].mPosDensityChgState = 0;
+    mPrCloud[2].mPosDensityChgState = 0;
     mPrCloud[0]._100 = 0;
     mPrCloud[1]._100 = 0;
     mPrCloud[2]._100 = 0;
@@ -310,15 +310,15 @@ SkyMgr::SkyMgr() {
     mMoonScale.init(2400.0, "MoonScale", "", &mSunParamObj);
     mSunDirYStop.init(-55000.0, "SunDirYStop", "", &mSunParamObj);
 
-    _3f3c = 0.0;
-    _3f40 = 0.0;
-    _3f14.x = -0.0;
-    _3f14.y = -std::sinf(0.82903141);
-    _3f14.z = -std::cosf(0.82903141);
-    _3f14.normalize();
-    _3f44 = 0.0;
-    _3f48 = 0.0;
-    _3f4c = 0.2;
+    mCloudyRate = 0.0;
+    mPeriodicRandom = 0.0;
+    mSunPathAxis.x = -0.0;
+    mSunPathAxis.y = -std::sinf(0.82903141);
+    mSunPathAxis.z = -std::cosf(0.82903141);
+    mSunPathAxis.normalize();
+    mSunMoonPathRate = 0.0;
+    mWindAngle = 0.0;
+    mWindSpeed = 0.2;
 
     const auto a = sead::GlobalRandom::instance()->getF32() * float(2 * sead::numbers::pi);
     const auto b = sead::GlobalRandom::instance()->getF32() * float(2 * sead::numbers::pi);
@@ -333,18 +333,18 @@ SkyMgr::SkyMgr() {
         int idx0 = i <= 4 ? idx0_array[i] : 2;
         int idx1 = i <= 4 ? idx1_array[i] : 1;
         auto& pr = mPrCloudV[idx0][idx1];
-        pr._1e4 = false;
-        pr._24c = false;
-        pr._2b4 = false;
-        pr._31c = false;
-        pr._384 = false;
-        pr._3ec = false;
-        pr._1e0 = a;
-        pr._248 = b;
-        pr._2b0 = c;
-        pr._318 = d;
-        pr._380 = e;
-        pr._3e8 = f;
+        pr.mDensitySinOff = false;
+        pr.mAlphaMulSinOff = false;
+        pr.mDistotionSinOff = false;
+        pr.mAlphaThresholdSinOff = false;
+        pr.mSkyHeightSinOff = false;
+        pr.mBaseTexScaleSinOff = false;
+        pr.mDensitySinPhase = a;
+        pr.mAlphaMulSinPhase = b;
+        pr.mDistotionSinPhase = c;
+        pr.mAlphaThresholdSinPhase = d;
+        pr.mSkyHeightSinPhase = e;
+        pr.mBaseTexScaleSinPhase = f;
     }
 
     for (int i = 0; i != NumSkyPalettes; ++i) {
