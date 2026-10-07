@@ -102,8 +102,6 @@ private:
     sead::TypedBitFlag<Flag> mFlags;
     ActorParam* mParams = nullptr;
     DebugMessage mDebugMessage{"アクタパラメータ"};
-    void* _e0 = nullptr;
-    void* _e8 = nullptr;
     sead::Heap* mDebugHeap = nullptr;
     sead::Heap* mTempHeap = nullptr;
     sead::SafeArray<res::Handle, ActorParam::NumResourceTypes> mDummyResources;
