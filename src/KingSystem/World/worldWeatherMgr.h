@@ -8,11 +8,6 @@ namespace ksys::world {
 
 constexpr u32 NumWeatherCycles = 3;
 
-// This may be incorrect
-struct ClimateWeathers {
-    s32 weather[NumWeatherCycles];
-};
-
 // TODO
 class WeatherMgr : public Job {
 public:
@@ -33,20 +28,20 @@ public:
     WeatherType getWeather2() const { return mWeather2; }
 
     u8 _20[0x24 - 0x20];
-    float _24;
+    float mWeatherTransition;
 
 private:
     WeatherType mWeather;   // 0x28
     WeatherType mWeather2;  // 0x32
 
 public:
-    WeatherType _2a[NumClimates * NumWeatherCycles * 6];
+    WeatherType mClimateWeatherSchedule[NumClimates * NumWeatherCycles * 6];
     u8 _193;
-    ClimateWeathers mClimateWeathers[NumClimates];  // 0x194
+    s32 mClimateWeatherFlags[NumWeatherCycles][NumClimates];  // 0x194
     u8 _284[0x318 - 0x284];
-    float mTimeBlock;  // 0x318
-    u32 mWeekDay;      // 0x31c
-    u8 _31c[0x398 - 0x320];
+    s32 mTimeBlock;  // 0x318
+    u32 mWeekDay;    // 0x31c
+    u8 _320[0x398 - 0x320];
 };
 KSYS_CHECK_SIZE_NX150(WeatherMgr, 0x398);
 

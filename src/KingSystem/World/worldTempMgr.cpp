@@ -104,7 +104,7 @@ float TempMgr::calcTemperature() {
         WeatherType weather = Manager::instance()->getWeatherMgr()->getWeather();
         WeatherType weather2 = Manager::instance()->getWeatherMgr()->getWeather2();
 
-        float current_weather_rate = Manager::instance()->getWeatherMgr()->_24;
+        float current_weather_rate = Manager::instance()->getWeatherMgr()->mWeatherTransition;
         float start_temp = getWeatherTemperatureOffset(weather);
         float end_temp = getWeatherTemperatureOffset(weather2);
 
