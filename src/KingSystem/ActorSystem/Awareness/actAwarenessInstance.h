@@ -16,7 +16,7 @@ public:
     void calc2();
 
     u8 _8[0x334 - 0x8];
-    s8 _334;
+    s8 mFlags;
     u32 _338;
 };
 KSYS_CHECK_SIZE_NX150(AwarenessInstance, 0x340);
