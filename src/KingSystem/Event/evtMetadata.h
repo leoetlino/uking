@@ -43,7 +43,7 @@ public:
     bool isSetNoDeleteCurrentActor() const { return mSetNoDeleteCurrentActor; }
     bool isSkipIsStartableAirCheck() const { return mSkipIsStartableAirCheck; }
     bool isForceNoChild() const { return mForceNoChild; }
-    bool is13() const { return _13; }
+    bool shouldUseNoPauseActors() const { return mUseNoPauseActors; }
     void* get18() const { return _18; }
     u32 get20() const { return _20; }
     int getEventStartWaitFrame() const { return mEventStartWaitFrame; }
@@ -63,7 +63,7 @@ private:
     bool mSetNoDeleteCurrentActor;
     bool mSkipIsStartableAirCheck;
     bool mForceNoChild;
-    bool _13;
+    bool mUseNoPauseActors;
     void* _18;
     u32 _20;
     int mEventStartWaitFrame;
