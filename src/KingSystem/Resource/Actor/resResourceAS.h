@@ -45,8 +45,8 @@ private:
     agl::utl::Parameter<f32> mRandomRateMax;
     agl::utl::Parameter<bool> mForbidPartialDemoAS;
     agl::utl::Parameter<bool> mUseIK;
-    u8 _3b8{};
-    u8 _3b9{};
+    u8 mMaxSkeletalAnimCount{};
+    u8 mMaxNonSkeletalAnimCount{};
     u8 _3ba{};
     u8 _3bb{};
     sead::Heap* mHeap{};

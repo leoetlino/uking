@@ -46,7 +46,7 @@ bool ResourceUnit::init(const ResourceUnit::InitArg& arg) {
 
     if (arg.load_req->mPackHandle) {
         SimplePackedLoadRequest request;
-        request._8 = true;
+        request.mInitLoadSignalsEvent = true;
         request.mRequester = "ResourceUnit";
         request.mLaneId = 2;
         request.mPack = arg.load_req->mPackHandle;

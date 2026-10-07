@@ -145,7 +145,7 @@ sead::DirectResource* Handle::load(const sead::SafeString& path, const ILoadRequ
             *out_status = mStatus;
     } else {
         if (out_status)
-            *out_status = Status::_8;
+            *out_status = Status::AlreadyRequested;
     }
 
     return getResource();
@@ -173,11 +173,11 @@ bool Handle::requestLoad(const sead::SafeString& path, const ILoadRequest* reque
         if (out_status)
             *out_status = ret;
 
-        return ret == Status::_7;
+        return ret == Status::RequestOk;
     }
 
     if (out_status)
-        *out_status = Status::_8;
+        *out_status = Status::AlreadyRequested;
 
     return false;
 }
@@ -219,8 +219,8 @@ bool Handle::parseResource(Context* context) {
         return true;
     }
 
-    if (mStatus == Status::_1 || mStatus == Status::SizeZero || mStatus == Status::_3 ||
-        mStatus == Status::_8 || mStatus == Status::ParseFailed ||
+    if (mStatus == Status::_1 || mStatus == Status::SizeZero || mStatus == Status::NoMemory ||
+        mStatus == Status::AlreadyRequested || mStatus == Status::ParseFailed ||
         mStatus == Status::BadAllocSize || mStatus == Status::Edited ||
         mStatus == Status::BadHeapSize || mStatus == Status::FileDeviceError ||
         mStatus == Status::Cancelled) {
@@ -259,7 +259,7 @@ bool Handle::parseResource(Context* context) {
         mFlags.set(Flag::Parsed);
         return true;
     case ResourceUnit::Status::_14:
-        if (mStatus == Status::_7)
+        if (mStatus == Status::RequestOk)
             mStatus = Status::_4;
         updateResourceMgrFlag_();
         break;
@@ -283,7 +283,7 @@ void Handle::updateResourceMgrFlag_() {
 
     bool warn = true;
     switch (mStatus) {
-    case Status::_3:
+    case Status::NoMemory:
         if (!mUnit || !mUnit->mArena1->isFlag1Set())
             break;
         if (!returnFalse())
@@ -294,9 +294,9 @@ void Handle::updateResourceMgrFlag_() {
         if (!returnFalse())
             warn = false;
         break;
-    case Status::_5:
-    case Status::_6:
-    case Status::_8:
+    case Status::FromCache:
+    case Status::FromCacheUnreferenced:
+    case Status::AlreadyRequested:
         if (!returnFalse())
             warn = false;
         break;
@@ -307,7 +307,7 @@ void Handle::updateResourceMgrFlag_() {
     if (warn)
         stubbedLogFunction();
 
-    if (mStatus != Status::_3 || !mUnit || !mUnit->mArena1)
+    if (mStatus != Status::NoMemory || !mUnit || !mUnit->mArena1)
         return;
 
     auto* heap = mUnit->mArena1->getHeap();
@@ -345,7 +345,7 @@ void Handle::updateStatusAndUnload_() {
 #ifdef MATCHING_HACK_NX_CLANG
             asm("");
 #endif
-            return Status::_3;
+            return Status::NoMemory;
         }();
     }
     updateResourceMgrFlag_();
@@ -452,8 +452,8 @@ bool Handle::checkLoadStatus() const {
     if (mFlags.isOn(Flag::LoadRequested) && mUnit)
         ok = mUnit->isStatus9_12_15();
 
-    ok |= mStatus == Status::_1 || mStatus == Status::SizeZero || mStatus == Status::_3 ||
-          mStatus == Status::_8 || mStatus == Status::ParseFailed ||
+    ok |= mStatus == Status::_1 || mStatus == Status::SizeZero || mStatus == Status::NoMemory ||
+          mStatus == Status::AlreadyRequested || mStatus == Status::ParseFailed ||
           mStatus == Status::BadAllocSize || mStatus == Status::Edited ||
           mStatus == Status::BadHeapSize || mStatus == Status::FileDeviceError ||
           mStatus == Status::Cancelled;
@@ -472,7 +472,7 @@ void Handle::waitForResourceAndParse_(Context* context) {
     }
 
     if (mUnit->waitForResourceAndParse(context)) {
-        if (mStatus == Status::_7)
+        if (mStatus == Status::RequestOk)
             mStatus = Status::_4;
         updateResourceMgrFlag_();
         return;
