@@ -298,16 +298,16 @@ void PauseMenuDataMgr::initForNewSave() {
     ksys::gdt::setFlag_KorokNutsNum(0);
     ksys::gdt::setFlag_DungeonClearSealNum(0);
     ksys::gdt::setFlag_FairyCountCheck(false);
-    _444fc = {};
+    mPauseMenuOpenMode = {};
     resetItemAndPointers();
     mIsPouchForQuest = false;
     for (auto& x : mGrabbedItems)
         x = {};
-    _44504 = {};
-    _44508 = {};
-    _4450c = {};
-    _44510 = {};
-    _44514 = {};
+    mNumSmallSwords = {};
+    mNumLargeSwords = {};
+    mNumSpears = {};
+    mNumShields = {};
+    mNumBows = {};
     mRitoSoulItem = {};
     mGoronSoulItem = {};
     mZoraSoulItem = {};
@@ -332,7 +332,7 @@ void PauseMenuDataMgr::loadFromGameData() {
     for (auto& x : mGrabbedItems)
         x = {};
     resetItemAndPointers();
-    _444fc = 0;
+    mPauseMenuOpenMode = 0;
     mIsPouchForQuest = false;
     resetEquippedItemArray();
 
@@ -973,7 +973,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
 
                 mLastAddedItem = &item;
                 resetItem();
-                _444fc = 0;
+                mPauseMenuOpenMode = 0;
                 return;
             }
         }
@@ -1048,7 +1048,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
 
         mLastAddedItem = added_item;
         resetItem();
-        _444fc = 0;
+        mPauseMenuOpenMode = 0;
         return;
     }
 
@@ -1115,7 +1115,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
     added_item->mValue = value;
     mLastAddedItem = added_item;
     resetItem();
-    _444fc = 0;
+    mPauseMenuOpenMode = 0;
 }
 
 void PauseMenuDataMgr::saveToGameData(const sead::OffsetList<PouchItem>& list) const {
@@ -1595,7 +1595,7 @@ void PauseMenuDataMgr::removeGrabbedItems() {
     for (s32 i = 0, n = mGrabbedItems.size(); i < n; ++i) {
         auto& entry = mGrabbedItems[i];
         auto* item = entry.item;
-        if (item && item->getValue() == 0 && !entry._9)
+        if (item && item->getValue() == 0 && !entry.grabbed_again)
             destroyAndRecycleItem(mItemLists, item);
         entry = {};
     }
@@ -1620,15 +1620,15 @@ bool PauseMenuDataMgr::removeGrabbedItem(ksys::act::BaseProcLink* link) {
             auto& entry = mGrabbedItems[i];
             if (found) {
                 mGrabbedItems[i - 1].item = entry.item;
-                mGrabbedItems[i - 1]._8 = entry._8;
-                mGrabbedItems[i - 1]._9 = entry._9;
+                mGrabbedItems[i - 1].spawned_actor = entry.spawned_actor;
+                mGrabbedItems[i - 1].grabbed_again = entry.grabbed_again;
                 continue;
             }
 
             if (!entry.item || name != entry.item->getName())
                 continue;
 
-            if (entry.item->getValue() == 0 && !entry._9) {
+            if (entry.item->getValue() == 0 && !entry.grabbed_again) {
                 const auto lock = sead::makeScopedLock(cs);
                 auto* item = entry.item;
                 destroyAndRecycleItem(mItemLists, item);
@@ -3068,12 +3068,12 @@ void PauseMenuDataMgr::grabbedItemStuff(PouchItem* item) {
             for (auto& info : mGrabbedItems) {
                 if (info.item) {
                     if (info.item == item) {
-                        info._9 = true;
+                        info.grabbed_again = true;
                     }
                 } else {
                     info.item = item;
-                    info._8 = true;
-                    info._9 = false;
+                    info.spawned_actor = true;
+                    info.grabbed_again = false;
                     uking::act::spawnDroppedInventoryItem(
                         item->getName().cstr(), ActorHeapUtil::instance()->getBaseProcHeap(), -1,
                         SleepAfterInit::No, nullptr, SpawnViaCarryBox::Yes, 0.8, -0.8);
