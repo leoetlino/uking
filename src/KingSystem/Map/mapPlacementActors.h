@@ -121,7 +121,7 @@ public:
     PlacementAreaMgr* mStruct1;
     u8 _e8[0x538 - 0xe8];
     sead::SafeArray<ActorData, 6000> mActorData;
-    u8 _261b38[0x2a8058 - 0x261b38];
+    u8 mActorDataMap[0x2a8058 - 0x261b38];
     u32 mActorDataMapSize;
     u8 _2a805c[0x2a80d0 - 0x2a805c];
 };
