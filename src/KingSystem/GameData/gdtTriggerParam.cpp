@@ -1414,7 +1414,7 @@ void TriggerParam::recordFlagChange(const FlagBase* flag, s32 idx, s32 sub_idx) 
     ++mFlagChangeRecordIndices[platform_core_id];
 
     if (flag->getType() == FlagType::Bool)
-        mBitFlags.set(BitFlag::_8);
+        mBitFlags.set(BitFlag::BoolFlagChangeRecorded);
 }
 
 SET_FLAG_VALUE_IMPL_(TriggerParam::setS32, s32, mS32Flags, s32, value)
@@ -2108,7 +2108,7 @@ void TriggerParam::copyChangedFlags(TriggerParam& other, bool set_all_flags, boo
             }
 
             mFlagChangeRecordIndices[i] = 0;
-            other.mBitFlags.reset(BitFlag::_8);
+            other.mBitFlags.reset(BitFlag::BoolFlagChangeRecorded);
         }
         return;
     }
