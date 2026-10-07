@@ -26,12 +26,12 @@ public:
         _1 = 1,
         /// "Size Zero" (8)
         SizeZero = 2,
-        _3 = 3,
+        NoMemory = 3,
         _4 = 4,
-        _5 = 5,
-        _6 = 6,
-        _7 = 7,
-        _8 = 8,
+        FromCache = 5,
+        FromCacheUnreferenced = 6,
+        RequestOk = 7,
+        AlreadyRequested = 8,
         /// "Compose NG" (9)
         ParseFailed = 9,
         /// "AllocSizeNG" (10)

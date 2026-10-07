@@ -147,8 +147,8 @@ bool ASList::prepareUnload_() {
     for (auto& as : mASDefines)
         as.as = nullptr;
 
-    _2b0 = 0;
-    _2b1 = 0;
+    mMaxSkeletalAnimCount = 0;
+    mMaxNonSkeletalAnimCount = 0;
     _2b2 = 0;
     _2b3 = 0;
     return true;
@@ -157,17 +157,19 @@ bool ASList::prepareUnload_() {
 void ASList::addAS_(s32 index, AS* as) {
     mASDefines[index].as = as;
 
-    _2b0 = _2b0 > as->_3b8 ? _2b0 : as->_3b8;
+    mMaxSkeletalAnimCount = mMaxSkeletalAnimCount > as->mMaxSkeletalAnimCount ?
+                                mMaxSkeletalAnimCount :
+                                as->mMaxSkeletalAnimCount;
 
-    const auto as_counter = as->_3b9;
-    if (_2b1 == 0) {
-        _2b1 = as_counter;
+    const auto as_counter = as->mMaxNonSkeletalAnimCount;
+    if (mMaxNonSkeletalAnimCount == 0) {
+        mMaxNonSkeletalAnimCount = as_counter;
         _2b3 = as->_3bb;
     } else {
         u8* flags1;
         u8* flags2;
-        if (as_counter > _2b1) {
-            _2b1 = as_counter;
+        if (as_counter > mMaxNonSkeletalAnimCount) {
+            mMaxNonSkeletalAnimCount = as_counter;
             flags1 = &as->_3bb;
             flags2 = &_2b3;
         } else {
@@ -179,7 +181,7 @@ void ASList::addAS_(s32 index, AS* as) {
             const auto mask = 1u << i;
             if ((*flags1 & mask) == 0 && (*flags2 & mask) != 0) {
                 _2b3 |= mask;
-                _2b1++;
+                mMaxNonSkeletalAnimCount++;
             }
         }
     }

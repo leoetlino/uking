@@ -28,7 +28,7 @@ public:
     ILoadRequest& operator=(const ILoadRequest&) = default;
     virtual ~ILoadRequest();
 
-    bool _8 = false;
+    bool mInitLoadSignalsEvent = false;
     u32 mLaneId = 1;
     sead::SafeString mRequester;
 };
@@ -60,7 +60,7 @@ public:
     sead::FileDevice* mAocFileDevice = nullptr;
     OverlayArena* mArena = nullptr;
     Handle* mPackHandle = nullptr;
-    void* _60 = nullptr;
+    void* mFilePathContainer = nullptr;
     void* _68 = nullptr;
     sead::SafeString mPath;
 };
