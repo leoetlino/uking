@@ -396,11 +396,10 @@ public:
     void grabbedItemStuff(PouchItem* item);
 
 private:
-    // TODO: rename
     struct GrabbedItemInfo {
         PouchItem* item{};
-        bool _8{};
-        bool _9{};
+        bool spawned_actor{};
+        bool grabbed_again{};
     };
     KSYS_CHECK_SIZE_NX150(GrabbedItemInfo, 0x10);
 
@@ -462,8 +461,8 @@ private:
     }
 
     void destroyAndRecycleItem(Lists& lists, PouchItem* item) {
-        if (mItem_444f0 == item)
-            mItem_444f0 = nullptr;
+        if (mFocusItem == item)
+            mFocusItem = nullptr;
         if (mLastAddedItem == item)
             mLastAddedItem = nullptr;
 
@@ -474,8 +473,8 @@ private:
 
     void resetItemAndPointers() {
         mLastAddedItem = nullptr;
-        mItem_444f0 = nullptr;
-        _444f8 = -1;
+        mFocusItem = nullptr;
+        mFocusItemCategory = -1;
         resetItem();
     }
 
@@ -518,15 +517,15 @@ private:
     s32 mLastAddedItemSlot = -1;
     s32 mNumTabs = 0;
     sead::SafeArray<GrabbedItemInfo, NumGrabbableItems> mGrabbedItems;
-    PouchItem* mItem_444f0{};
-    s32 _444f8 = -1;
-    s32 _444fc{};
-    s32 _44500 = -1;
-    u32 _44504{};
-    u32 _44508{};
-    u32 _4450c{};
-    u32 _44510{};
-    u32 _44514{};
+    PouchItem* mFocusItem{};
+    s32 mFocusItemCategory = -1;
+    s32 mPauseMenuOpenMode{};
+    s32 mRequestedOpenCategory = -1;
+    u32 mNumSmallSwords{};
+    u32 mNumLargeSwords{};
+    u32 mNumSpears{};
+    u32 mNumShields{};
+    u32 mNumBows{};
     PouchItem* mRitoSoulItem{};
     PouchItem* mGoronSoulItem{};
     PouchItem* mZoraSoulItem{};
