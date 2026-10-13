@@ -77,7 +77,6 @@ target_sources(uking PRIVATE
     actBaseProcInitializer.h
     actBaseProcJob.cpp
     actBaseProcJob.h
-    actBaseProcJobHandler.cpp
     actBaseProcJobHandler.h
     actBaseProcJobQue.cpp
     actBaseProcJobQue.h
