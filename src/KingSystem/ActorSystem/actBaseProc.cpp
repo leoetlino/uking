@@ -13,6 +13,8 @@ namespace ksys::act {
 
 static util::InitTimeInfo sInfo;
 
+BaseProcJobHandler::BaseProcJobHandler(BaseProc* proc) : mLink(proc, proc->getPriority()) {}
+
 BaseProc::BaseProc(const CreateArg& arg)
     : mName(arg.actor_name), mPriority(arg.class_info->priority) {
     BaseProcMgr* mgr = BaseProcMgr::instance();
