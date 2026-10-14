@@ -45195,7 +45195,7 @@ Address,Quality,Size,Name
 0x00000071006d8be4,U,000516,uking::act::DamageMgr::applyRequestedImpulseDamage
 0x00000071006d8de8,U,000148,uking::act::getAttackerWeaponImpactScale
 0x00000071006d8e7c,U,000068,_ZN5uking3act10Struct20_2C1Ev
-0x00000071006d8ec0,O,000244,_ZN5uking3act10Struct20_212combineMaybeEPN4ksys3act12Struct20BaseE
+0x00000071006d8ec0,O,000244,_ZN5uking3act10Struct20_27combineEPN4ksys3act12Struct20BaseE
 0x00000071006d8fb4,U,000288,uking::act::DamageMgr::checkDerivedRuntimeTypeInfo
 0x00000071006d90d4,U,000092,uking::act::DamageMgr::getRuntimeTypeInfo
 0x00000071006d9130,U,000212,uking::act::DamageMgr::dtor
@@ -45222,7 +45222,7 @@ Address,Quality,Size,Name
 0x00000071006d9870,U,000020,_ZN4ksys3act12Struct20BaseD2Ev
 0x00000071006d9884,U,000004,ksys::act::Struct20Base::dtorDelete
 0x00000071006d9888,U,000004,ksys::act::Struct20Base::reset
-0x00000071006d988c,U,000004,ksys::act::Struct20Base::combineMaybe
+0x00000071006d988c,U,000004,ksys::act::Struct20Base::combine
 0x00000071006d9890,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN5uking3act8Struct20EE9isDerivedEPKNS0_9InterfaceE
 0x00000071006d991c,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN4ksys3act12Struct20BaseEE9isDerivedEPKNS0_9InterfaceE
 0x00000071006d99a8,U,000076,uking::act::initStasisDamageRecord
@@ -45386,7 +45386,7 @@ Address,Quality,Size,Name
 0x00000071006e1274,O,000004,_ZN5uking3act17DamageManagerBase20applyRequestedDamageEv
 0x00000071006e1278,O,000016,_ZN5uking3act17DamageManagerBase22getDamageFromTypeIndexEi
 0x00000071006e1288,U,000028,uking::act::DamageMgr::getActorDamageParam
-0x00000071006e12a4,O,000208,_ZN5uking3act8Struct2012combineMaybeEPN4ksys3act12Struct20BaseE
+0x00000071006e12a4,O,000208,_ZN5uking3act8Struct207combineEPN4ksys3act12Struct20BaseE
 0x00000071006e1374,U,000020,uking::act::DamageManagerBase::getAttacker
 0x00000071006e1388,U,000020,uking::act::DamageManagerBase::getDamageSourceProcLink
 0x00000071006e139c,U,000204,uking::act::DamageManagerBase::checkDerivedRuntimeTypeInfo
