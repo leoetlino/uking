@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionDemoGetItem.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionDemoGetItem.h"
 
 namespace uking::action {
 
-class DemoGetItemAnimStop : public DemoGetItem {
-    SEAD_RTTI_OVERRIDE(DemoGetItemAnimStop, DemoGetItem)
+class DemoGetItemAnimStop : public ksys::act::ai::DemoGetItem {
+    SEAD_RTTI_OVERRIDE(DemoGetItemAnimStop, ksys::act::ai::DemoGetItem)
 public:
     explicit DemoGetItemAnimStop(const InitArg& arg);
     ~DemoGetItemAnimStop() override;
