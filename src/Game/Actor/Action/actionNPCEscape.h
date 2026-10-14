@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRandomMoveAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionRandomMoveAction.h"
 
 namespace uking::action {
 
-class NPCEscape : public RandomMoveAction {
-    SEAD_RTTI_OVERRIDE(NPCEscape, RandomMoveAction)
+class NPCEscape : public ksys::act::ai::RandomMoveAction {
+    SEAD_RTTI_OVERRIDE(NPCEscape, ksys::act::ai::RandomMoveAction)
 public:
     explicit NPCEscape(const InitArg& arg);
     ~NPCEscape() override;
