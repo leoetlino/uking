@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionDemoGetItem.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionDemoGetItem.h"
 
 namespace uking::action {
 
-class DemoGetWeapon : public DemoGetItem {
-    SEAD_RTTI_OVERRIDE(DemoGetWeapon, DemoGetItem)
+class DemoGetWeapon : public ksys::act::ai::DemoGetItem {
+    SEAD_RTTI_OVERRIDE(DemoGetWeapon, ksys::act::ai::DemoGetItem)
 public:
     explicit DemoGetWeapon(const InitArg& arg);
     ~DemoGetWeapon() override;
