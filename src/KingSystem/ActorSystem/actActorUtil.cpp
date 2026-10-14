@@ -116,7 +116,7 @@ bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::Safe
 }
 
 // NON_MATCHING: this version doesn't have unnecessary register moves.
-bool shouldSkipSpawnWhenRaining(map::PreActor* obj) {
+bool shouldSkipSpawnIfNotRaining(map::PreActor* obj) {
     if (obj->getFlags().isOff(map::PreActor::Flag::CreateNotRain))
         return false;
 
