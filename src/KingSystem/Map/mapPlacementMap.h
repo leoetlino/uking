@@ -29,12 +29,12 @@ class PlacementMap {
     struct HkscRes {
     public:
         enum class Status : int {
-            _0 = 0,
-            _1 = 1,
-            _2 = 2,  // Call cleanupHkscMaybe(), if ok, set to 3
-            _3 = 3,
-            _4 = 4,  // Call removeStaticCompoundFromWorld, if ok, set to 5
-            _5 = 5,
+            None = 0,
+            Loading = 1,
+            Loaded = 2,
+            AddedToWorld = 3,
+            RemovingFromWorld = 4,
+            Unloading = 5,
         };
 
         HkscRes() = default;
@@ -57,10 +57,9 @@ class PlacementMap {
     };
     KSYS_CHECK_SIZE_NX150(InitStatus, 4);
 
-    // Rename when better information is available
     enum class MapObjStatus : int {
-        Loading = 0,
-        Ready = 1,
+        Parsed = 0,
+        LoadFailed = 1,
         NotReady = 2,
     };
 
@@ -87,15 +86,15 @@ private:
     int traverseStaticObjsForFarActors(sead::Vector3f* vec, PlacementActors* pa, int id);
 
     phys::StaticCompoundRigidBodyGroup* getFieldBodyGroup(int field_group_idx);
-    void cleanupPhysics();
+    void removeAndUnloadStaticCompounds();
     bool loadStaticCompound(int hksc_idx, bool is_auto_gen_mu, bool req_arg_8);
-    MapObjStatus x_2(int hksc_idx);
-    void updateObjectCollisionAndId(int id, PreActor* obj);
+    MapObjStatus parseStaticCompoundAndBindObjects(int hksc_idx);
+    void bindObjectToStaticCompound(int id, PreActor* obj);
     void unloadHksc(int hksc_idx);
-    bool clearStaticCompoundActorId(int id);
+    bool tryUnloadStaticCompound(int id);
     int isPosNearQuadrantCenter(int id);
     bool removeStaticCompoundFromWorld(int sc_id, bool cleanup);
-    int doSomethingStaticCompound(int hksc_idx);
+    int addStaticCompoundToWorld(int hksc_idx);
     bool isDynamicLoaded(const sead::Vector3f& pos);
     void setStaticCompoundInstanceEnabled(PreActor* obj, bool enabled);
     void x_9();
