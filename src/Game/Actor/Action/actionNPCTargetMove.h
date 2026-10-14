@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRandomMoveAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionRandomMoveAction.h"
 
 namespace uking::action {
 
-class NPCTargetMove : public RandomMoveAction {
-    SEAD_RTTI_OVERRIDE(NPCTargetMove, RandomMoveAction)
+class NPCTargetMove : public ksys::act::ai::RandomMoveAction {
+    SEAD_RTTI_OVERRIDE(NPCTargetMove, ksys::act::ai::RandomMoveAction)
 public:
     explicit NPCTargetMove(const InitArg& arg);
     ~NPCTargetMove() override;
