@@ -89,6 +89,7 @@ const hkpShape* PolytopeShape::getHavokShape() const {
     return mHavokShape;
 }
 
+// NON_MATCHING: incomplete (vertices shape rebuild and volume recalculation are missing)
 const hkpShape* PolytopeShape::updateHavokShape() {
     bool return_new_shape = false;
 
