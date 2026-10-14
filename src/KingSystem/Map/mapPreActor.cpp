@@ -405,7 +405,7 @@ void PreActor::setRevivalFlagValue(bool value) {
 }
 
 // NON_MATCHING
-bool PreActor::x_18() const {
+bool PreActor::areLifeConditionsSatisfied() const {
     act::InfoData::InvalidLifeConditions info;
     const char* s;
     auto* id = act::InfoData::instance();
@@ -456,7 +456,7 @@ bool PreActor::checkTraverseFlags() const {
 }
 
 // NON_MATCHING
-bool PreActor::x_20() const {
+bool PreActor::shouldSpawnOnTraverse() const {
     if (getActorData().mFlags.isOffBit(ActorData::Flag::RevivalEnable))
         return false;
 
