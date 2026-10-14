@@ -65,7 +65,7 @@ bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags);
 bool hasOneTagAtLeast(BaseProcLink* link, const sead::SafeString& tags);
 bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tags);
 
-bool shouldSkipSpawnWhenRaining(map::PreActor* obj);
+bool shouldSkipSpawnIfNotRaining(map::PreActor* obj);
 bool shouldSkipSpawnIfGodForestOff(map::PreActor* obj);
 bool shouldSkipSpawnGodForestActor(map::PreActor* obj);
 bool shouldSkipSpawnFairy(map::PreActor* obj);
