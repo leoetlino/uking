@@ -9,15 +9,15 @@ void Struct20_2::reset() {
     Struct20::reset();
 }
 
-void Struct20_2::combineMaybe(ksys::act::Struct20Base* other) {
+void Struct20_2::combine(ksys::act::Struct20Base* other) {
     Struct20_2* otherStruct = sead::DynamicCast<Struct20_2>(other);
     if (!otherStruct) {
-        Struct20::combineMaybe(other);
+        Struct20::combine(other);
         return;
     }
 
     mField_1C |= otherStruct->mField_1C;
-    Struct20::combineMaybe(other);
+    Struct20::combine(other);
     if (mField_18 == otherStruct->mField_18 && otherStruct->mField_30) {
         mField_30 = true;
         mField_20 = otherStruct->mField_20;

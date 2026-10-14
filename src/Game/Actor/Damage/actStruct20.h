@@ -23,7 +23,7 @@ public:
 
     void reset() override;
 
-    __attribute__((noinline)) void combineMaybe(ksys::act::Struct20Base* other) override;
+    __attribute__((noinline)) void combine(ksys::act::Struct20Base* other) override;
 
     // Unknown which fields belong in Struct20 vs Struct20Base
     u32 mField_8 = 0;
@@ -50,7 +50,7 @@ public:
     ~Struct20_2() override { ; }
 
     void reset() override;
-    void combineMaybe(ksys::act::Struct20Base* other) override;
+    void combine(ksys::act::Struct20Base* other) override;
 
     f32 mField_20;
     f32 mField_24;
