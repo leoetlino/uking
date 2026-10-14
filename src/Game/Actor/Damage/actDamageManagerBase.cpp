@@ -196,7 +196,7 @@ s32 DamageManagerBase::getDamageFromTypeIndex(s32 damageTypeMaybe) {
     return 0;
 }
 
-void Struct20::combineMaybe(ksys::act::Struct20Base* other) {
+void Struct20::combine(ksys::act::Struct20Base* other) {
     Struct20* otherStruct = sead::DynamicCast<Struct20>(other);
     if (!otherStruct) {
         return;
