@@ -74079,13 +74079,13 @@ Address,Quality,Size,Name
 0x0000007100d379b0,U,000072,ksys::map::LinkTag::dtorDelete
 0x0000007100d379f8,U,001656,ksys::map::LinkTag::init_
 0x0000007100d38070,U,000256,ksys::map::isLinkTagNAndOrNOr
-0x0000007100d38170,U,000308,ksys::map::isFlagSet
+0x0000007100d38170,U,000308,ksys::map::readLinkTagSaveFlag
 0x0000007100d382a4,U,000056,ksys::map::LinkTag::finalizeInit_
 0x0000007100d382dc,U,000188,ksys::map::LinkTag::prepareForPreDelete_
 0x0000007100d38398,U,000092,ksys::map::LinkTag::finishPreparingForPreDelete_
 0x0000007100d383f4,U,000320,ksys::map::LinkTag::calcCount
 0x0000007100d38534,U,000748,ksys::map::LinkTag::calcPulse
-0x0000007100d38820,U,001372,ksys::map::LinkTag::calcOther
+0x0000007100d38820,U,001372,ksys::map::LinkTag::calcLogic
 0x0000007100d38d7c,U,000372,ksys::map::LinkTag::onEnterCalc_
 0x0000007100d38ef0,U,000076,ksys::map::LinkTag::hasJobType_
 0x0000007100d38f3c,U,000132,ksys::map::LinkTag::carryOverJobRequest_
@@ -74094,7 +74094,7 @@ Address,Quality,Size,Name
 0x0000007100d3905c,U,000064,ksys::map::LinkTag::shouldSkipJobPush_
 0x0000007100d3909c,U,000132,ksys::map::LinkTag::onJobPush2_
 0x0000007100d39120,U,000172,ksys::map::LinkTag::forceJobPushes
-0x0000007100d391cc,U,000596,ksys::map::LinkTag::updateIsFlagSetFlag
+0x0000007100d391cc,U,000596,ksys::map::LinkTag::setState
 0x0000007100d39420,U,000052,ksys::map::LinkTag::getActivatedBit
 0x0000007100d39454,U,000588,ksys::map::isAreaOrTagProfile
 0x0000007100d396a0,U,000584,ksys::map::LinkTag::isTriggered
@@ -92987,7 +92987,7 @@ Address,Quality,Size,Name
 0x00000071011eb448,U,000008,ksys::map::PlacementMgr::getEntryUnitConfigName
 0x00000071011eb450,U,000016,
 0x00000071011eb460,U,000012,ksys::map::PlacementMgr::getMassRendererBufferIndexMaybe
-0x00000071011eb46c,U,000008,ksys::map::PlacementMgr::__auto19
+0x00000071011eb46c,U,000008,ksys::map::PlacementMgr::queueHandedBackPreActor
 0x00000071011eb474,U,000044,ksys::map::PlacementMgr::getDeleteDistance
 0x00000071011eb4a0,U,000040,ksys::map::PlacementMgr::getLoadDistancePlus10
 0x00000071011eb4c8,U,000020,ksys::map::PlacementMgr::getDispDistanceComplex
