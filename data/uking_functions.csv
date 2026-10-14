@@ -49654,8 +49654,8 @@ Address,Quality,Size,Name
 0x00000071007d022c,U,000004,uking::StageSelect::moveLeave
 0x00000071007d0230,U,000112,uking::StageSelect::checkDerivedRuntimeTypeInfo
 0x00000071007d02a0,U,000092,uking::StageSelect::getRuntimeTypeInfo
-0x00000071007d02fc,U,000008,uking::StageSelect::activeReenter
-0x00000071007d0304,U,000008,uking::StageSelect::moveReenter
+0x00000071007d02fc,U,000008,uking::StageSelect::activeReceiveMessage
+0x00000071007d0304,U,000008,uking::StageSelect::moveReceiveMessage
 0x00000071007d030c,O,000428,_ZN4sead16RegionLanguageID5text_Ei
 0x00000071007d04b8,U,000004,j__ZdlPv_354
 0x00000071007d04bc,O,000240,_ZN4sead15FixedSafeStringILi95EEaSERKNS_14SafeStringBaseIcEE
