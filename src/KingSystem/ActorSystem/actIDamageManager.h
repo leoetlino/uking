@@ -27,7 +27,7 @@ public:
     virtual ~Struct20Base() = default;
 
     virtual void reset();
-    virtual void combineMaybe(Struct20Base* other);
+    virtual void combine(Struct20Base* other);
 };
 
 class IDamageManager {
