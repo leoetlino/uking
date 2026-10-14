@@ -225,18 +225,14 @@
 #include "Game/Actor/Action/actionDemoEnemyReset.h"
 #include "Game/Actor/Action/actionDemoFindPlayer.h"
 #include "Game/Actor/Action/actionDemoForceSetPlayerSavePosAngle.h"
-#include "Game/Actor/Action/actionDemoGetItem.h"
 #include "Game/Actor/Action/actionDemoGetItemAnimStop.h"
 #include "Game/Actor/Action/actionDemoGetWeapon.h"
 #include "Game/Actor/Action/actionDemoKokkoAngry.h"
 #include "Game/Actor/Action/actionDemoMotorcyclePutMaterials.h"
 #include "Game/Actor/Action/actionDemoNoAnimDrivenTurn.h"
-#include "Game/Actor/Action/actionDemoResetActor.h"
-#include "Game/Actor/Action/actionDemoResetBoneCtrl.h"
 #include "Game/Actor/Action/actionDemoSweep.h"
 #include "Game/Actor/Action/actionDemoTriggerToggleVisible.h"
 #include "Game/Actor/Action/actionDemoTurnToActor.h"
-#include "Game/Actor/Action/actionDemoVisibleOff.h"
 #include "Game/Actor/Action/actionDemoVisibleOn.h"
 #include "Game/Actor/Action/actionDemoVoiceTrigger.h"
 #include "Game/Actor/Action/actionDgnObjDLCSpurGearB01.h"
@@ -279,8 +275,6 @@
 #include "Game/Actor/Action/actionDropCreateForReplace.h"
 #include "Game/Actor/Action/actionDropWeapon.h"
 #include "Game/Actor/Action/actionDrowningDeath.h"
-#include "Game/Actor/Action/actionDummyDropTable.h"
-#include "Game/Actor/Action/actionDummyTriggerAction.h"
 #include "Game/Actor/Action/actionDunegonRotateWait.h"
 #include "Game/Actor/Action/actionDungeonEntranceASPlay.h"
 #include "Game/Actor/Action/actionDungeonMove.h"
@@ -457,7 +451,6 @@
 #include "Game/Actor/Action/actionFollowIgniteToSelfPos.h"
 #include "Game/Actor/Action/actionForbidComeback.h"
 #include "Game/Actor/Action/actionForbidSettingInstEventFlag.h"
-#include "Game/Actor/Action/actionForceChangeAction.h"
 #include "Game/Actor/Action/actionForceEndPlayerSlow.h"
 #include "Game/Actor/Action/actionForceGetUpFreeze.h"
 #include "Game/Actor/Action/actionForceGetUpWaterFloatFreeze.h"
@@ -792,7 +785,6 @@
 #include "Game/Actor/Action/actionIchigekiHeartDecrease.h"
 #include "Game/Actor/Action/actionIchigekiHeartUiClose.h"
 #include "Game/Actor/Action/actionIchigekiHeartUiOpen.h"
-#include "Game/Actor/Action/actionIdleAction.h"
 #include "Game/Actor/Action/actionIgniteGrabAndShoot.h"
 #include "Game/Actor/Action/actionIgniteThreeActorAttack.h"
 #include "Game/Actor/Action/actionIgniteToTarget.h"
@@ -1146,7 +1138,6 @@
 #include "Game/Actor/Action/actionSendMessage4YunBoCannon.h"
 #include "Game/Actor/Action/actionSendMessageBroadCast.h"
 #include "Game/Actor/Action/actionSendPlayerNoticeMessage.h"
-#include "Game/Actor/Action/actionSendSignalAction.h"
 #include "Game/Actor/Action/actionSendSignalForSignalFlowAct.h"
 #include "Game/Actor/Action/actionSendTargetActorRequestShareAwn.h"
 #include "Game/Actor/Action/actionSeqPunchByASEvent.h"
@@ -1208,7 +1199,6 @@
 #include "Game/Actor/Action/actionSilentKilled.h"
 #include "Game/Actor/Action/actionSimpleGrabWithAS.h"
 #include "Game/Actor/Action/actionSimpleLineBeam.h"
-#include "Game/Actor/Action/actionSimpleOpenMessageDialogAction.h"
 #include "Game/Actor/Action/actionSimpleUniqueTalk.h"
 #include "Game/Actor/Action/actionSiteBossAvoid.h"
 #include "Game/Actor/Action/actionSiteBossBowBlowOff.h"
@@ -1338,7 +1328,6 @@
 #include "Game/Actor/Action/actionTeleportTargetFrontInAir.h"
 #include "Game/Actor/Action/actionTerrainCalcCenter.h"
 #include "Game/Actor/Action/actionTerrainHideCenter.h"
-#include "Game/Actor/Action/actionTestAction.h"
 #include "Game/Actor/Action/actionThrow.h"
 #include "Game/Actor/Action/actionThrowLeft.h"
 #include "Game/Actor/Action/actionThrowRight.h"
@@ -1371,7 +1360,6 @@
 #include "Game/Actor/Action/actionUKingEmitEffectLoopAction.h"
 #include "Game/Actor/Action/actionUnarmedAttack.h"
 #include "Game/Actor/Action/actionUnarmedLargeAttack.h"
-#include "Game/Actor/Action/actionUpdateDataByGetDemoAction.h"
 #include "Game/Actor/Action/actionUseNavMeshConnectAction.h"
 #include "Game/Actor/Action/actionVacuumedItemShootToTarget.h"
 #include "Game/Actor/Action/actionVanish.h"
@@ -1443,10 +1431,7 @@
 #include "Game/Actor/Action/actionWolfLinkAmiiboRegister.h"
 #include "Game/Actor/Action/actionWolfLinkAmiiboWarp.h"
 #include "Game/Actor/Action/actionWolfLinkEvent.h"
-#include "Game/Actor/Action/actionXLinkEventCreateAction.h"
 #include "Game/Actor/Action/actionXLinkEventEnable.h"
-#include "Game/Actor/Action/actionXLinkEventFadeAction.h"
-#include "Game/Actor/Action/actionXLinkEventKillAction.h"
 #include "Game/Actor/Action/actionZoraHeroRescuePlayer.h"
 #include "Game/Actor/Action/actionZoraHeroWaterFallJump.h"
 #include "Game/Actor/Action/actionZoraSurfing.h"
@@ -1724,7 +1709,22 @@
 #include "Game/Actor/System/Action/actionSystemApplyEnvSetAction.h"
 #include "Game/Actor/System/Action/actionSystemSetWindAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
+#include "KingSystem/ActorSystem/actionDemoGetItem.h"
+#include "KingSystem/ActorSystem/actionDemoResetActor.h"
+#include "KingSystem/ActorSystem/actionDemoResetBoneCtrl.h"
+#include "KingSystem/ActorSystem/actionDemoVisibleOff.h"
 #include "KingSystem/ActorSystem/actionDummyAction.h"
+#include "KingSystem/ActorSystem/actionDummyDropTable.h"
+#include "KingSystem/ActorSystem/actionDummyTriggerAction.h"
+#include "KingSystem/ActorSystem/actionForceChangeAction.h"
+#include "KingSystem/ActorSystem/actionIdleAction.h"
+#include "KingSystem/ActorSystem/actionSendSignalAction.h"
+#include "KingSystem/ActorSystem/actionSimpleOpenMessageDialogAction.h"
+#include "KingSystem/ActorSystem/actionTestAction.h"
+#include "KingSystem/ActorSystem/actionUpdateDataByGetDemoAction.h"
+#include "KingSystem/ActorSystem/actionXLinkEventCreateAction.h"
+#include "KingSystem/ActorSystem/actionXLinkEventFadeAction.h"
+#include "KingSystem/ActorSystem/actionXLinkEventKillAction.h"
 #include "KingSystem/Effect/Actor/Action/actionEmitEffectLoopAction.h"
 #include "KingSystem/Effect/Actor/Action/actionFootStepCalcOn.h"
 #include "KingSystem/Effect/Actor/Action/actionOneTimeEffectLocaterAction.h"
@@ -1796,7 +1796,7 @@ static Factory sActionFactories[] = {
     {0x03c34f8e, Factory::make<action::NPCMakeArtifact>},
     {0x03f24195, Factory::make<action::DownloadAlbum>},
     {0x03f688c2, Factory::make<action::ForkClothOnOffASPlay>},
-    {0x044ce1a7, Factory::make<action::SimpleOpenMessageDialogAction>},
+    {0x044ce1a7, Factory::make<ksys::act::ai::SimpleOpenMessageDialogAction>},
     {0x0487a192, Factory::make<action::SystemSleep>},
     {0x0496ceb8, Factory::make<action::OffMiss>},
     {0x04aa5460, Factory::make<action::Catch>},
@@ -1882,7 +1882,7 @@ static Factory sActionFactories[] = {
     {0x121f02f5, Factory::make<action::ChemicalPhysHitBreakBall>},
     {0x123333a2, Factory::make<action::Rebound>},
     {0x12344bba, Factory::make<action::RemainsWaterBulletShooter>},
-    {0x129871c9, Factory::make<action::DemoResetBoneCtrl>},
+    {0x129871c9, Factory::make<ksys::act::ai::DemoResetBoneCtrl>},
     {0x12b3ae04, Factory::make<action::FlyingCharacterFreeFallEx>},
     {0x12eb118b, Factory::make<action::IgniteToTarget>},
     {0x12fdb21b, Factory::make<action::NavMeshSwim>},
@@ -2073,7 +2073,7 @@ static Factory sActionFactories[] = {
     {0x2f5426f8, Factory::make<action::WarpToScheduleAnchor>},
     {0x2f95648b, Factory::make<action::EventDisableContactLayerTrigger>},
     {0x2fb49db4, Factory::make<action::OpenMessageDialogTrig>},
-    {0x2fc26a05, Factory::make<action::IdleAction>},
+    {0x2fc26a05, Factory::make<ksys::act::ai::IdleAction>},
     {0x2fd1cded, Factory::make<action::AnmToRagdollDie>},
     {0x30164201, Factory::make<action::NavMeshLiftWalk>},
     {0x301bc34f, Factory::make<action::PlayerMove>},
@@ -2164,7 +2164,7 @@ static Factory sActionFactories[] = {
     {0x3c63b17f, Factory::make<action::EventEquipLastSetItem>},
     {0x3ccd8713, Factory::make<action::HorseSaddleDefaultAction>},
     {0x3ccf7d45, Factory::make<action::ShutterOpen>},
-    {0x3ce0a49c, Factory::make<action::ForceChangeAction>},
+    {0x3ce0a49c, Factory::make<ksys::act::ai::ForceChangeAction>},
     {0x3d5b0e1a, Factory::make<action::NPCRegisterAndReceiveHorse>},
     {0x3d687443, Factory::make<action::HorseRandomMoveAction>},
     {0x3d6a59d9, Factory::make<action::GameDataAddFloat>},
@@ -2482,14 +2482,14 @@ static Factory sActionFactories[] = {
     {0x6c1d5de2, Factory::make<action::AnimalNoCheckMove>},
     {0x6c7561f9, Factory::make<action::EatAndHeal>},
     {0x6c76465e, Factory::make<action::GanonBeastDamageASPlay>},
-    {0x6cc2c1e0, Factory::make<action::DemoResetActor>},
+    {0x6cc2c1e0, Factory::make<ksys::act::ai::DemoResetActor>},
     {0x6cee009d, Factory::make<action::SetChemicalWeaponPower>},
     {0x6d40816a, Factory::make<action::ShootArrow>},
     {0x6d4f3f32, Factory::make<action::ActorInfoToGameDataFloat>},
     {0x6d6129d3, Factory::make<action::WaterFloatBase>},
     {0x6d96bbf6, Factory::make<action::ForkOnEnterWeaponUse>},
     {0x6dac04dc, Factory::make<action::PlayerHangWallCatch>},
-    {0x6e2ec850, Factory::make<action::DemoVisibleOff>},
+    {0x6e2ec850, Factory::make<ksys::act::ai::DemoVisibleOff>},
     {0x6e3793f8, Factory::make<action::ForkNeckRotateDynPosBasic>},
     {0x6e53f7f1, Factory::make<action::ForkSetComebackPosition>},
     {0x6e7f3f16, Factory::make<action::EventSetYfogRatio>},
@@ -2564,10 +2564,10 @@ static Factory sActionFactories[] = {
     {0x771914b1, Factory::make<action::NPCInfoOnNamedHorse>},
     {0x772521ef, Factory::make<action::PlayerLand>},
     {0x776f59aa, Factory::make<action::GelEnemyFreeze>},
-    {0x7792f0bf, Factory::make<action::XLinkEventCreateAction>},
+    {0x7792f0bf, Factory::make<ksys::act::ai::XLinkEventCreateAction>},
     {0x77ace40f, Factory::make<action::NPCReceiveHorse>},
     {0x77ba9c9d, Factory::make<action::SwitchWindmill>},
-    {0x77c6ae77, Factory::make<action::XLinkEventFadeAction>},
+    {0x77c6ae77, Factory::make<ksys::act::ai::XLinkEventFadeAction>},
     {0x77dc3c61, Factory::make<action::SetupGetDemoModeNumUi>},
     {0x77f2619b, Factory::make<action::ForkFlyToTargetDirect>},
     {0x78057ff5, Factory::make<action::PlayerSideStep>},
@@ -2621,7 +2621,7 @@ static Factory sActionFactories[] = {
     {0x7f421259, Factory::make<action::DgnObj_DLC_CWRotDirSwitchOff>},
     {0x7f4daa94, Factory::make<action::HoverTurn>},
     {0x7f93f356, Factory::make<action::HoldArrowTurn>},
-    {0x7f9dd9b9, Factory::make<action::XLinkEventKillAction>},
+    {0x7f9dd9b9, Factory::make<ksys::act::ai::XLinkEventKillAction>},
     {0x7fa9fbac, Factory::make<action::CameraEventTalkManualCtrl>},
     {0x7fafff4a, Factory::make<action::PlayerSlideLand>},
     {0x7fea5577, Factory::make<action::DungeonRotateShuttle>},
@@ -2749,7 +2749,7 @@ static Factory sActionFactories[] = {
     {0x8ebeace6, Factory::make<action::SiteBossShieldBashAttack>},
     {0x8ebf06bb, Factory::make<action::SetTargetFrameMtx>},
     {0x8ed07212, Factory::make<action::SwarmFlyMove>},
-    {0x8edbc0e3, Factory::make<action::TestAction>},
+    {0x8edbc0e3, Factory::make<ksys::act::ai::TestAction>},
     {0x8edcce42, Factory::make<action::GuardianMiniGuardBreak>},
     {0x8efb7bd1, Factory::make<action::TimeredNeckSpin>},
     {0x8f12d233, Factory::make<action::SiteBossCreateIceSplinter>},
@@ -2782,7 +2782,7 @@ static Factory sActionFactories[] = {
     {0x933bc222, Factory::make<action::EventPickOutFromPorch>},
     {0x935dcd31, Factory::make<action::EventAutoSaveAtGameClear>},
     {0x93775dfc, Factory::make<action::PlayASForTimeline>},
-    {0x938c6d07, Factory::make<action::SendSignalAction>},
+    {0x938c6d07, Factory::make<ksys::act::ai::SendSignalAction>},
     {0x93ffcb9d, Factory::make<action::ForkMultiSleep>},
     {0x9462484b, Factory::make<action::ResetPlayerPullSwordStartLife>},
     {0x948cb143, Factory::make<action::RemoveSensor>},
@@ -3103,7 +3103,7 @@ static Factory sActionFactories[] = {
     {0xbee7703b, Factory::make<action::Kick>},
     {0xbf0bbaec, Factory::make<action::Msg2CameraKeepState>},
     {0xbf729064, Factory::make<action::RequestOpenPopUpHelp>},
-    {0xbf9aa06f, Factory::make<action::DummyTriggerAction>},
+    {0xbf9aa06f, Factory::make<ksys::act::ai::DummyTriggerAction>},
     {0xbfa2f834, Factory::make<action::PlayerSelfCamera>},
     {0xc0463781, Factory::make<action::HuntingDead>},
     {0xc04cb3fe, Factory::make<action::PriestBossAimBeamWithAS>},
@@ -3260,7 +3260,7 @@ static Factory sActionFactories[] = {
     {0xd560b356, Factory::make<ksys::snd::SceneSoundNotifyTalkAction>},
     {0xd584dab3, Factory::make<action::GuardianMiniGuardWait>},
     {0xd589a506, Factory::make<action::WolfLinkEvent>},
-    {0xd595067c, Factory::make<action::DemoGetItem>},
+    {0xd595067c, Factory::make<ksys::act::ai::DemoGetItem>},
     {0xd5a30142, Factory::make<action::StopChargeChemicalWeaponPower>},
     {0xd5a89f09, Factory::make<action::EnemyChangeWeapon>},
     {0xd5f14354, Factory::make<action::EventSetDynamic>},
@@ -3358,7 +3358,7 @@ static Factory sActionFactories[] = {
     {0xe346024a, Factory::make<action::BattleCloseGuardRun>},
     {0xe35e39f1, Factory::make<action::CurseRRematchCount>},
     {0xe3688091, Factory::make<action::WaitForKeyInput>},
-    {0xe3897445, Factory::make<action::DummyDropTable>},
+    {0xe3897445, Factory::make<ksys::act::ai::DummyDropTable>},
     {0xe392fcb5, Factory::make<action::AnimalNavMeshMove>},
     {0xe3dcea22, Factory::make<action::EquipedQuiver>},
     {0xe42497af, Factory::make<action::CameraEventAnimFlowForMapTower>},
@@ -3424,7 +3424,7 @@ static Factory sActionFactories[] = {
     {0xed12aa5f, Factory::make<action::ForceEndPlayerSlow>},
     {0xed4eec19, Factory::make<action::LyzalfosFlame>},
     {0xed574a23, Factory::make<action::ForkWaitCloseGanonShoutMsgClose>},
-    {0xed59af6e, Factory::make<action::UpdateDataByGetDemoAction>},
+    {0xed59af6e, Factory::make<ksys::act::ai::UpdateDataByGetDemoAction>},
     {0xed5ebacd, Factory::make<action::MotorcycleAppear>},
     {0xee0f068f, Factory::make<action::HorseRideLoopAttack>},
     {0xee264ba9, Factory::make<action::SimpleUniqueTalk>},
