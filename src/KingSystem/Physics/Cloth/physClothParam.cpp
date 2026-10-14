@@ -46,7 +46,7 @@ const ClothParam* ClothSetParam::getCloth(const sead::SafeString& name) const {
 
 ClothParam::ClothParam()
     : wind_drag(5.0, "wind_drag", this), wind_frequency(5.0, "wind_frequency", this),
-      wind_min_speed(-4.0, "wind_mind_speed", this), wind_max_speed(10.0, "wind_max_speed", this),
+      wind_min_speed(-4.0, "wind_min_speed", this), wind_max_speed(10.0, "wind_max_speed", this),
       sub_wind_factor_main(1.0, "sub_wind_factor_main", this),
       sub_wind_factor_add(0.0, "sub_wind_factor_add", this), wind_enable(true, "wind_enable", this),
       writeback_to_local(false, "writeback_to_local", this),
