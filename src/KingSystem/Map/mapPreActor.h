@@ -155,8 +155,8 @@ public:
     const char* getHashIdStringDebug() const;
     const char* getHashIdStringDebug_0() const;
 
-    bool x_18() const;
-    bool x_20() const;
+    bool areLifeConditionsSatisfied() const;
+    bool shouldSpawnOnTraverse() const;
     s32 x_22() const;
 
     bool hasGenGroup() const;
