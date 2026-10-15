@@ -6,7 +6,7 @@
 #include <prim/seadSafeString.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::gdt {
 
 // FIXME
 class SaveMgr {
@@ -38,4 +38,4 @@ public:
     void loadGameSaveData();
 };
 
-}  // namespace ksys
+}  // namespace ksys::gdt
