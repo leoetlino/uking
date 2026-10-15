@@ -33,8 +33,8 @@ bool Resource::finishParsing(Context*) {
     return ret;
 }
 
-bool Resource::m7() {
-    return m7_();
+bool Resource::prepareUnload() {
+    return prepareUnload_();
 }
 
 }  // namespace ksys::res
