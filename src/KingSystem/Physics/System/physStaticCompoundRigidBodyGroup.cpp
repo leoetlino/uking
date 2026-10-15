@@ -283,8 +283,10 @@ void StaticCompoundRigidBodyGroup::processUpdates() {
                     angvel *= getVelocityMultiplier();
                 }
 
-                util::lerp(&linvel, mLinearVelocity, linvel, getConfig().unk2);
-                util::lerp(&angvel, mAngularVelocity, angvel, getConfig().unk3);
+                util::lerp(&linvel, mLinearVelocity, linvel,
+                           getConfig().linear_velocity_blend_factor);
+                util::lerp(&angvel, mAngularVelocity, angvel,
+                           getConfig().angular_velocity_blend_factor);
             }
 
             body->setLinearVelocity(linvel, getEpsilons().linvel);
@@ -318,7 +320,8 @@ void StaticCompoundRigidBodyGroup::processUpdates() {
 }
 
 float StaticCompoundRigidBodyGroup::getVelocityMultiplier() const {
-    return getConfig().unk1 * float(mUpdateTimer) / float(getConfig().move_duration_ticks);
+    return getConfig().fade_out_velocity_scale * float(mUpdateTimer) /
+           float(getConfig().move_duration_ticks);
 }
 
 const sead::Matrix34f& StaticCompoundRigidBodyGroup::getTransform() const {
