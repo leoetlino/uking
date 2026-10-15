@@ -5,15 +5,15 @@
 namespace ksys {
 
 // FIXME: incomplete
-// Unknown struct seen in OverlayArenaSystem.
-class OverlayArenaSystemS1 final {
+class CoordinatorForOverlayArena final {
 public:
-    OverlayArenaSystemS1();
-    virtual ~OverlayArenaSystemS1();
+    CoordinatorForOverlayArena();
+    virtual ~CoordinatorForOverlayArena();
 
     // TODO: figure out if this is the same interface as SystemPauseMgr.
     // Both have the exact same number of virtual functions and some of the functions
-    // look somewhat similar (suspending threads, looping while waiting for their status to change).
+    // look somewhat similar (suspending threads, looping while waiting for their status to
+    // change).
 
     virtual void init();
     // Resume resource compaction
@@ -34,6 +34,6 @@ public:
     // Does nothing
     virtual void m14();
 };
-KSYS_CHECK_SIZE_NX150(OverlayArenaSystemS1, 0x8);
+KSYS_CHECK_SIZE_NX150(CoordinatorForOverlayArena, 0x8);
 
 }  // namespace ksys

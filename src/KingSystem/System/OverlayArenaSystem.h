@@ -5,8 +5,8 @@
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/System/OverlayArenaSystemS1.h"
-#include "KingSystem/System/OverlayArenaSystemS2.h"
+#include "KingSystem/System/CoordinatorDeferredRequest.h"
+#include "KingSystem/System/CoordinatorForOverlayArena.h"
 #include "KingSystem/Utils/Thread/Event.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -111,12 +111,12 @@ private:
     OverlayArena* mUnknownArena = nullptr;
     sead::Heap* mJpegHeap = nullptr;
     ISystemPauseMgr* mSystemPauseMgr = nullptr;
-    OverlayArenaSystemS1 mS1;
+    CoordinatorForOverlayArena mSystemCoordinator;
     u32 _b8 = 0;
     TaskThread* mPrepareThread = nullptr;
     Task* mTask = nullptr;
     sead::DelegateR<OverlayArenaSystem, bool> mDelegate;
-    OverlayArenaSystemS2 mS2;
+    CoordinatorDeferredRequest mDeferredRequest;
     sead::Atomic<u32> _130 = 0;
     sead::Atomic<u32> _134 = 0;
     res::Handle mResHandle;

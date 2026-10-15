@@ -90,10 +90,10 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
     }
 
     {
-        OverlayArenaSystemS2::InitArg arg_;
-        arg_.s1 = &mS1;
+        CoordinatorDeferredRequest::InitArg arg_;
+        arg_.system_coordinator = &mSystemCoordinator;
         arg_.system_pause_mgr = mSystemPauseMgr;
-        mS2.init(arg_);
+        mDeferredRequest.init(arg_);
     }
 
     mSzsDecompressorInstHeap = sead::ExpHeap::create(
@@ -113,7 +113,7 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
     }
 
     res::stubbedLogFunction();
-    mS1.init();
+    mSystemCoordinator.init();
     res::stubbedLogFunction();
 
     if (mSystemPauseMgr) {

@@ -12,6 +12,8 @@ target_sources(uking PRIVATE
     BasicProfiler.h
     CameraEditor.cpp
     CameraEditor.h
+    CoordinatorDeferredRequest.h
+    CoordinatorForOverlayArena.h
     CoreInfo.h
     CurrentResNameMgr.cpp
     CurrentResNameMgr.h
@@ -33,8 +35,6 @@ target_sources(uking PRIVATE
     OverlayArena.h
     OverlayArenaSystem.cpp
     OverlayArenaSystem.h
-    OverlayArenaSystemS1.h
-    OverlayArenaSystemS2.h
     Patrol.cpp
     Patrol.h
     PlayReport.cpp
