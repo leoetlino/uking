@@ -143,7 +143,7 @@ bool ASList::finishParsing_() {
     return true;
 }
 
-bool ASList::m7_() {
+bool ASList::prepareUnload_() {
     for (auto& as : mASDefines)
         as.as = nullptr;
 

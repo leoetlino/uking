@@ -53,7 +53,7 @@ public:
     void doCreate_(u8* buffer, u32 buffer_size, sead::Heap* parent_heap) override;
     bool needsParse() const override { return true; }
     bool finishParsing_() override;
-    bool m7_() override;
+    bool prepareUnload_() override;
 
 private:
     enum class Flag {
