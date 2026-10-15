@@ -10,6 +10,8 @@ target_sources(uking PRIVATE
   gameItemUtils.h
   gamePlayReport.cpp
   gamePlayReport.h
+  ActorHeapUtil.cpp
+  ActorHeapUtil.h
   E3Mgr.cpp
   E3Mgr.h
   NXArgs.cpp
