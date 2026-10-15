@@ -24,8 +24,6 @@ target_sources(uking PRIVATE
     actActorCreator.h
     actActorEditorNode.cpp
     actActorEditorNode.h
-    actActorLimiter.cpp
-    actActorLimiter.h
     actActorLinkConstDataAccess.cpp
     actActorLinkConstDataAccess.h
     actActorParam.cpp

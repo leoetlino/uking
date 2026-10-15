@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/actActorLimiter.h"
+#include "KingSystem/Game/actActorLimiter.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actTag.h"
 
