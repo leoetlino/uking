@@ -14,7 +14,7 @@ bool EventHoverNullASPlay::init_(sead::Heap* heap) {
 void EventHoverNullASPlay::enter_(ksys::act::ai::InlineParamPack* params) {
     EventNullASPlayBase::enter_(params);
 
-    mCCAccessor.changeMotionType(mActor->getCharacterController(), ksys::act::MotionType::Hover);
+    mMotionTypeChanger.changeMotionType(mActor->getCharacterController(), act::MotionType::Hover);
 }
 
 void EventHoverNullASPlay::leave_() {
