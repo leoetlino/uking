@@ -2,7 +2,7 @@
 
 #include <heap/seadDisposer.h>
 
-namespace ksys::act {
+namespace uking {
 
 class ActorHeapUtil {
     SEAD_SINGLETON_DISPOSER(ActorHeapUtil)
@@ -22,4 +22,4 @@ private:
     sead::Heap* mMemoryResidentActorHeap{};
 };
 
-}  // namespace ksys::act
+}  // namespace uking
