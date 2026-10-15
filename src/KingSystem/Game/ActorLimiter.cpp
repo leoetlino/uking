@@ -1,8 +1,8 @@
-#include "KingSystem/Game/actActorLimiter.h"
+#include "KingSystem/Game/ActorLimiter.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actTag.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 bool ActorLimiter::List::init(sead::Heap* heap, int capacity) {
     mNodes.allocBufferAssert(capacity, heap);
@@ -15,7 +15,7 @@ bool ActorLimiter::List::init(sead::Heap* heap, int capacity) {
     return true;
 }
 
-bool ActorLimiter::List::addActor(BaseProc* proc, bool allow_evicting_old_actors) {
+bool ActorLimiter::List::addActor(act::BaseProc* proc, bool allow_evicting_old_actors) {
     const auto lock = sead::makeScopedLock(mCritSection);
 
     // Find a free node.
@@ -35,18 +35,18 @@ bool ActorLimiter::List::addActor(BaseProc* proc, bool allow_evicting_old_actors
 
         target_node = mActorList.popFront();
         if (target_node) {
-            ActorLinkConstDataAccess acc;
+            act::ActorLinkConstDataAccess acc;
             acquireActor(&target_node->proc_link, &acc);
 
             // Priority material actors will not be evicted if possible.
-            if (acc.hasTag(tags::PriorityMaterial)) {
+            if (acc.hasTag(act::tags::PriorityMaterial)) {
                 mActorList.pushBack(target_node);
                 target_node = mActorList.popFront();
                 if (target_node)
                     acquireActor(&target_node->proc_link, &acc);
             }
 
-            acc.fadeoutDelete(BaseProc::DeleteReason::_f);
+            acc.fadeoutDelete(act::BaseProc::DeleteReason::_f);
         }
 
         if (target_node == nullptr)
@@ -68,4 +68,4 @@ bool ActorLimiter::init(sead::Heap* heap, const sead::SafeArray<int, NumCategori
     return true;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::game
