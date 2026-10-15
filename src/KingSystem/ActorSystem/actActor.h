@@ -61,7 +61,7 @@ class ModelTextureBinding;
 }  // namespace res
 
 namespace xlink {
-class XLink;
+class ActorEffects;
 }  // namespace xlink
 
 namespace act {
@@ -495,7 +495,7 @@ protected:
     /* 0x550 */ AwarenessInstance* mAwarenessInstance = nullptr;
     /* 0x558 */ ai::RootAi* mRootAi = nullptr;
     /* 0x560 */ as::ASList* mASList = nullptr;
-    /* 0x568 */ xlink::XLink* mXLink = nullptr;
+    /* 0x568 */ xlink::ActorEffects* mActorEffects = nullptr;
     /* 0x570 */ ActorParam* mActorParam = nullptr;
     /* 0x578 */ phys::InstanceSet* mPhysics = nullptr;
     /* 0x580 */ PhysicsConstraints mConstraints;
