@@ -11,7 +11,7 @@ bool StopAllDemoSoundAction::init_(sead::Heap* heap) {
 }
 
 void StopAllDemoSoundAction::enter_(ksys::act::ai::InlineParamPack* params) {
-    ksys::act::ai::Action::enter_(params);
+    mDelayTimer = 1.0f;
 }
 
 void StopAllDemoSoundAction::leave_() {
