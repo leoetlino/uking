@@ -10,7 +10,7 @@
 #include "KingSystem/GameData/gdtFlag.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::gdt {
 class SaveMgr;
 }
 
@@ -73,9 +73,10 @@ public:
     KSYS_CHECK_SIZE_NX150(Flag, 0x10);
 
     struct File {
-        void forEachFlag(const sead::Delegate1<SaveMgr, const Flag&>& delegate);
-        void forEachFlag(const sead::Delegate1<SaveMgr, const Flag&>& delegate, s32 start, s32 end);
-        void forEachFlag(const sead::Delegate1<SaveMgr, Flag&>& delegate);
+        void forEachFlag(const sead::Delegate1<gdt::SaveMgr, const Flag&>& delegate);
+        void forEachFlag(const sead::Delegate1<gdt::SaveMgr, const Flag&>& delegate, s32 start,
+                         s32 end);
+        void forEachFlag(const sead::Delegate1<gdt::SaveMgr, Flag&>& delegate);
         s32 findFlagIndex(u32 flag_name_hash) const;
 
         u32 name_hash = std::numeric_limits<int>::min();
