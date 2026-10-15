@@ -7,12 +7,12 @@
 
 namespace ksys::res {
 
-void GameSaveData::File::forEachFlag(const sead::Delegate1<SaveMgr, const Flag&>& delegate) {
+void GameSaveData::File::forEachFlag(const sead::Delegate1<gdt::SaveMgr, const Flag&>& delegate) {
     for (const auto& flag : flags)
         delegate(flag);
 }
 
-void GameSaveData::File::forEachFlag(const sead::Delegate1<SaveMgr, const Flag&>& delegate,
+void GameSaveData::File::forEachFlag(const sead::Delegate1<gdt::SaveMgr, const Flag&>& delegate,
                                      s32 start, s32 end) {
     if (start == end)
         return;
@@ -21,7 +21,7 @@ void GameSaveData::File::forEachFlag(const sead::Delegate1<SaveMgr, const Flag&>
         delegate(*it);
 }
 
-void GameSaveData::File::forEachFlag(const sead::Delegate1<SaveMgr, Flag&>& delegate) {
+void GameSaveData::File::forEachFlag(const sead::Delegate1<gdt::SaveMgr, Flag&>& delegate) {
     for (auto& flag : flags)
         delegate(flag);
 }
