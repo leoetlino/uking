@@ -5,8 +5,6 @@
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/System/OverlayArenaSystemS1.h"
-#include "KingSystem/System/OverlayArenaSystemS2.h"
 #include "KingSystem/Utils/Thread/Event.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -48,6 +46,57 @@ class OverlayArenaSystem {
     virtual ~OverlayArenaSystem();
 
 public:
+    // FIXME: incomplete
+    class PauseSequence final {
+    public:
+        PauseSequence();
+        virtual ~PauseSequence();
+
+        // TODO: figure out if this is the same interface as SystemPauseMgr.
+        // Both have the exact same number of virtual functions and some of the functions
+        // look somewhat similar (suspending threads, looping while waiting for their status to
+        // change).
+
+        virtual void init();
+        // Resume resource compaction
+        virtual void m3();
+        virtual void m4();
+        // Resume resource compaction + EventMgr
+        virtual void m5();
+        // Stop threads, clear cache, etc.
+        virtual void m6();
+        virtual bool m7();
+        virtual void m8();
+        virtual void m9();
+        // Does nothing
+        virtual void m10();
+        virtual bool m11();
+        virtual void m12();
+        virtual void m13();
+        // Does nothing
+        virtual void m14();
+    };
+
+    // FIXME: incomplete
+    class DeferredRequest {
+    public:
+        struct InitArg {
+            PauseSequence* pause_sequence;
+            ISystemPauseMgr* system_pause_mgr;
+        };
+
+        DeferredRequest();
+
+        void init(const InitArg& arg);
+
+    private:
+        u32 _0 = 0;
+        sead::Delegate1R<DeferredRequest, void*, bool> mDelegate;
+        u32 _28 = 1;
+        void* _30 = nullptr;
+        void* _38 = nullptr;
+    };
+
     struct InitArg {
         ISystemPauseMgr* system_pause_mgr;
     };
@@ -111,17 +160,19 @@ private:
     OverlayArena* mUnknownArena = nullptr;
     sead::Heap* mJpegHeap = nullptr;
     ISystemPauseMgr* mSystemPauseMgr = nullptr;
-    OverlayArenaSystemS1 mS1;
+    PauseSequence mPauseSequence;
     u32 _b8 = 0;
     TaskThread* mPrepareThread = nullptr;
     Task* mTask = nullptr;
     sead::DelegateR<OverlayArenaSystem, bool> mDelegate;
-    OverlayArenaSystemS2 mS2;
+    DeferredRequest mDeferredRequest;
     sead::Atomic<u32> _130 = 0;
     sead::Atomic<u32> _134 = 0;
     res::Handle mResHandle;
     Event mEvent;
 };
+KSYS_CHECK_SIZE_NX150(OverlayArenaSystem::PauseSequence, 0x8);
+KSYS_CHECK_SIZE_NX150(OverlayArenaSystem::DeferredRequest, 0x40);
 KSYS_CHECK_SIZE_NX150(OverlayArenaSystem, 0x1c8);
 
 }  // namespace ksys
