@@ -24,8 +24,8 @@ target_sources(uking PRIVATE
   actPlayerCreateMgr.h
   actPlayerCreateTrace.cpp
   actPlayerCreateTrace.h
-  actPlayerCreateUtils.cpp
-  actPlayerCreateUtils.h
+  actUtils.cpp
+  actUtils.h
   actWeapon.cpp
   actWeapon.h
 )
