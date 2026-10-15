@@ -20,6 +20,8 @@ protected:
 
     // dynamic_param at offset 0x20
     sead::SafeString mBgmName_d{};
+    bool mEventBgmAssetsSeenAlive{};
 };
+KSYS_CHECK_SIZE_NX150(EventBgmStartAndKeepAction, 0x38);
 
 }  // namespace ksys::snd

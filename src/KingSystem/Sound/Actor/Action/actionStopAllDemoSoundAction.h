@@ -17,6 +17,9 @@ public:
 
 protected:
     void calc_() override;
+
+    float mDelayTimer{};
 };
+KSYS_CHECK_SIZE_NX150(StopAllDemoSoundAction, 0x20);
 
 }  // namespace ksys::snd
