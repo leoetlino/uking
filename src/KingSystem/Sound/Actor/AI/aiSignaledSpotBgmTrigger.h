@@ -20,6 +20,8 @@ protected:
     const bool* mIsStopWithoutReductionY_m{};
     // map_unit_param at offset 0x40
     sead::SafeString mSound_m{};
+    bool mLastBasicSig{};
 };
+KSYS_CHECK_SIZE_NX150(SignaledSpotBgmTrigger, 0x58);
 
 }  // namespace ksys::snd
