@@ -45,7 +45,7 @@ bool AttClientList::finishParsing_() {
     return true;
 }
 
-bool AttClientList::m7_() {
+bool AttClientList::prepareUnload_() {
     for (auto& client : mClients)
         client.client = nullptr;
     return true;

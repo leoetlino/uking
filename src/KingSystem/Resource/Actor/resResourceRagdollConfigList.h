@@ -40,7 +40,7 @@ public:
     bool needsParse() const override { return true; }
     bool parse_(u8* data, size_t size, sead::Heap* heap) override;
     bool finishParsing_() override;
-    bool m7_() override;
+    bool prepareUnload_() override;
 
     const sead::Buffer<ImpulseParam>& getImpulseParams() const { return mImpulseParams; }
     f32 getUpperLimitHeight() const { return mUpperLimitHeight.ref(); }
