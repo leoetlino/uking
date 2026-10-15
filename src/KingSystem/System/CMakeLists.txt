@@ -33,8 +33,6 @@ target_sources(uking PRIVATE
     OverlayArena.h
     OverlayArenaSystem.cpp
     OverlayArenaSystem.h
-    OverlayArenaSystemS1.h
-    OverlayArenaSystemS2.h
     Patrol.cpp
     Patrol.h
     PlayReport.cpp
