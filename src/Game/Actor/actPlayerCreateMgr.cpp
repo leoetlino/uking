@@ -3,7 +3,7 @@
 #include <prim/seadStringBuilder.h>
 #include "Game/Actor/Player/actPlayerBase.h"
 #include "Game/Actor/Player/actPlayerInfo.h"
-#include "Game/Actor/actPlayerCreateUtils.h"
+#include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/ActorSystem/Profiles/actWeaponBase.h"
