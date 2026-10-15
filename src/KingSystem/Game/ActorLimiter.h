@@ -8,7 +8,7 @@
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 class ActorLimiter {
     SEAD_SINGLETON_DISPOSER(ActorLimiter)
@@ -34,12 +34,12 @@ public:
         ~List() { mNodes.freeBuffer(); }
 
         bool init(sead::Heap* heap, int capacity);
-        bool addActor(BaseProc* proc, bool allow_evicting_old_actors);
+        bool addActor(act::BaseProc* proc, bool allow_evicting_old_actors);
 
     private:
         struct Node {
             sead::ListNode node;
-            BaseProcLink proc_link;
+            act::BaseProcLink proc_link;
         };
 
         sead::Buffer<Node> mNodes;
@@ -58,4 +58,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(ActorLimiter, 0x360);
 
-}  // namespace ksys::act
+}  // namespace ksys::game
