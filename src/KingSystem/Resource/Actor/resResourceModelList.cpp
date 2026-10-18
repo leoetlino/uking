@@ -159,9 +159,9 @@ bool ModelList::parseAnmTarget(const agl::utl::ResParameterList& res, sead::Heap
         list_name.appendWithFormat("%d", it.getIndex());
 
         it->num_as_slot.init(0, "NumASSlot", "", &it->base_obj);
-        // "is particle enabled" (particle is misspelled as "partical" [sic])
+        // "Partical" [sic] means "partial" (it gates partial skeleton resets), not "particle"
         it->is_partical_enable.init(false, "IsParticalEnable", "", &it->base_obj);
-        it->target_type.init(0, "TargetType", "", &it->base_obj);
+        it->target_type.init(int(as::AnmTargetType::Primary), "TargetType", "", &it->base_obj);
         it->list.addObj(&it->base_obj, "Base");
 
         const auto partials =

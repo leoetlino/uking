@@ -118,6 +118,14 @@ enum class ASElementType : u16 {
     ZEx00ExposureSelector = 106,
 };
 
+enum class InitAnmDriven {
+    FromAnmLoop = 0,
+    None = 1,
+    TranslationOnly = 2,
+    RotationOnly = 3,
+    TranslationAndRotation = 4,
+};
+
 }  // namespace ksys::as
 
 namespace ksys::res {
