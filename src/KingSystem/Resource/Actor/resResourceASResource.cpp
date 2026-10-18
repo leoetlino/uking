@@ -1,6 +1,7 @@
 #include "KingSystem/Resource/Actor/resResourceASResource.h"
 #include <limits>
 #include <prim/seadSafeString.h>
+#include "KingSystem/ActorSystem/AS/ASList.h"
 #include "KingSystem/Resource/Actor/resResourceAS.h"
 
 namespace ksys::as {
@@ -11,13 +12,14 @@ namespace ksys::res {
 
 namespace {
 
+using as::ASKey;
+
 struct ASElementFactory {
     const char* name;
     ASResource* (*make_res)(int type_index, const ASResource::ParseArgs& args);
     // FIXME: signature
     as::Element* (*make)();
-    /// Arbitrary value that is passed to the Element class
-    int value;
+    ASKey key;
 };
 
 sead::SafeString sStr_default = "default";
@@ -29,124 +31,173 @@ ASResource* resFactoryImpl_(int type_index, const ASResource::ParseArgs& arg) {
 
 // FIXME: make functions
 sead::SafeArray<ASElementFactory, 107> sFactories{{
-    /* 000 */ {"AbsTemperatureBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 24},
-    /* 001 */ {"AbsTemperatureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 24},
-    /* 002 */ {"ArmorSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 57},
-    /* 003 */ {"ArrowSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 60},
-    /* 004 */ {"AttentionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 48},
-    /* 005 */ {"BoneBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 28},
-    /* 006 */ {"BoneVisibilityAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
-    /* 007 */ {"BoolSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 66},
-    /* 008 */ {"ButtonSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 46},
-    /* 009 */ {"ChargeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 42},
+    /* 000 */ {"AbsTemperatureBlender", resFactoryImpl_<ASBlenderResource>, nullptr,
+               ASKey::AbsTemperature},
+    /* 001 */
+    {"AbsTemperatureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::AbsTemperature},
+    /* 002 */ {"ArmorSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Armor},
+    /* 003 */ {"ArrowSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Arrow},
+    /* 004 */ {"AttentionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Attention},
+    /* 005 */ {"BoneBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Bone},
+    /* 006 */ {"BoneVisibilityAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
+    /* 007 */ {"BoolSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Bool},
+    /* 008 */ {"ButtonSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Button},
+    /* 009 */ {"ChargeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Charge},
 
-    /* 010 */ {"ClearMatAnmAsset", resFactoryImpl_<ASResource>, nullptr, -1},
-    /* 011 */ {"ComboSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 43},
-    /* 012 */ {"DiffAngleYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 26},
-    /* 013 */ {"DiffAngleYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 26},
-    /* 014 */ {"DirectionAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 9},
-    /* 015 */ {"DirectionAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 9},
-    /* 016 */ {"DistanceBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 16},
-    /* 017 */ {"DistanceSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 16},
-    /* 018 */ {"DungeonClearSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 64},
-    /* 019 */ {"DungeonNumberSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 41},
+    /* 010 */ {"ClearMatAnmAsset", resFactoryImpl_<ASResource>, nullptr, ASKey::None},
+    /* 011 */ {"ComboSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Combo},
+    /* 012 */ {"DiffAngleYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::DiffAngleY},
+    /* 013 */
+    {"DiffAngleYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::DiffAngleY},
+    /* 014 */
+    {"DirectionAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::DirectionAngle},
+    /* 015 */
+    {"DirectionAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::DirectionAngle},
+    /* 016 */ {"DistanceBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Distance},
+    /* 017 */ {"DistanceSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Distance},
+    /* 018 */
+    {"DungeonClearSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::DungeonClear},
+    /* 019 */
+    {"DungeonNumberSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::DungeonNumber},
 
-    /* 020 */ {"EmotionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 55},
-    /* 021 */ {"EventFlagSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 65},
-    /* 022 */ {"EyeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 37},
-    /* 023 */ {"EyebrowSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 38},
-    /* 024 */ {"FaceEmotionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 56},
-    /* 025 */ {"FootBLLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 34},
-    /* 026 */ {"FootBRLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 33},
-    /* 027 */ {"FootFLLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 32},
-    /* 028 */ {"FootFRLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 31},
-    /* 029 */ {"ForwardBentBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 18},
+    /* 020 */ {"EmotionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Emotion},
+    /* 021 */ {"EventFlagSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::EventFlag},
+    /* 022 */ {"EyeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Eye},
+    /* 023 */ {"EyebrowSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Eyebrow},
+    /* 024 */
+    {"FaceEmotionSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::FaceEmotion},
+    /* 025 */
+    {"FootBLLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::FootBLLife},
+    /* 026 */
+    {"FootBRLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::FootBRLife},
+    /* 027 */
+    {"FootFLLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::FootFLLife},
+    /* 028 */
+    {"FootFRLifeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::FootFRLife},
+    /* 029 */
+    {"ForwardBentBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::ForwardBent},
 
-    /* 030 */ {"ForwardBentSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 18},
-    /* 031 */ {"GearSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 64},
-    /* 032 */ {"GenerationSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 35},
-    /* 033 */ {"GrabTypeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 49},
-    /* 034 */ {"GroundNormalBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 21},
-    /* 035 */ {"GroundNormalSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 21},
-    /* 036 */ {"GroundNormalSideBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 22},
-    /* 037 */ {"GroundNormalSideSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 22},
-    /* 038 */ {"MaskSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 58},
-    /* 039 */ {"MatVisibilityAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
+    /* 030 */
+    {"ForwardBentSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::ForwardBent},
+    /* 031 */ {"GearSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Gear},
+    /* 032 */
+    {"GenerationSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Generation},
+    /* 033 */ {"GrabTypeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::GrabType},
+    /* 034 */
+    {"GroundNormalBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::GroundNormal},
+    /* 035 */
+    {"GroundNormalSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::GroundNormal},
+    /* 036 */
+    {"GroundNormalSideBlender", resFactoryImpl_<ASBlenderResource>, nullptr,
+     ASKey::GroundNormalSide},
+    /* 037 */
+    {"GroundNormalSideSelector", resFactoryImpl_<ASSelectorResource>, nullptr,
+     ASKey::GroundNormalSide},
+    /* 038 */ {"MaskSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Mask},
+    /* 039 */ {"MatVisibilityAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
 
-    /* 040 */ {"MouthSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 36},
-    /* 041 */ {"NoAnmAsset", resFactoryImpl_<ASResource>, nullptr, -1},
-    /* 042 */ {"NoLoopStickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 7},
-    /* 043 */ {"NoLoopStickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 7},
-    /* 044 */ {"NodePosSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 63},
-    /* 045 */ {"PersonalitySelector", resFactoryImpl_<ASSelectorResource>, nullptr, 50},
-    /* 046 */ {"PostureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 59},
-    /* 047 */ {"PreASSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 51},
-    /* 048 */ {"PreExclusionRandomSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 30},
-    /* 049 */ {"RandomSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 30},
+    /* 040 */ {"MouthSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Mouth},
+    /* 041 */ {"NoAnmAsset", resFactoryImpl_<ASResource>, nullptr, ASKey::None},
+    /* 042 */
+    {"NoLoopStickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr,
+     ASKey::NoLoopStickAngle},
+    /* 043 */
+    {"NoLoopStickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr,
+     ASKey::NoLoopStickAngle},
+    /* 044 */ {"NodePosSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::NodePos},
+    /* 045 */
+    {"PersonalitySelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Personality},
+    /* 046 */ {"PostureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Posture},
+    /* 047 */ {"PreASSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::PreAS},
+    /* 048 */
+    {"PreExclusionRandomSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Random},
+    /* 049 */ {"RandomSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Random},
 
-    /* 050 */ {"RideSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 61},
-    /* 051 */ {"RightStickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 8},
-    /* 052 */ {"RightStickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 8},
-    /* 053 */ {"RightStickValueBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 3},
-    /* 054 */ {"RightStickValueSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 3},
-    /* 055 */ {"RightStickXBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 4},
-    /* 056 */ {"RightStickXSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 4},
-    /* 057 */ {"RightStickYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 5},
-    /* 058 */ {"RightStickYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 5},
-    /* 059 */ {"SelfHeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 39},
+    /* 050 */ {"RideSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Ride},
+    /* 051 */
+    {"RightStickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::RightStickAngle},
+    /* 052 */
+    {"RightStickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr,
+     ASKey::RightStickAngle},
+    /* 053 */
+    {"RightStickValueBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::RightStickValue},
+    /* 054 */
+    {"RightStickValueSelector", resFactoryImpl_<ASSelectorResource>, nullptr,
+     ASKey::RightStickValue},
+    /* 055 */
+    {"RightStickXBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::RightStickX},
+    /* 056 */
+    {"RightStickXSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::RightStickX},
+    /* 057 */
+    {"RightStickYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::RightStickY},
+    /* 058 */
+    {"RightStickYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::RightStickY},
+    /* 059 */
+    {"SelfHeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::SelfHeight},
 
-    /* 060 */ {"SelfWeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 40},
+    /* 060 */
+    {"SelfWeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::SelfWeight},
     /* 061 */
-    {"SequencePlayContainer", resFactoryImpl_<ASSequencePlayContainerResource>, nullptr, -1},
-    /* 062 */ {"ShaderParamAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
-    /* 063 */ {"ShaderParamColorAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
-    /* 064 */ {"ShaderParamTexSRTAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
-    /* 065 */ {"SizeBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 17},
-    /* 066 */ {"SizeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 17},
-    /* 067 */ {"SkeltalAsset", resFactoryImpl_<ASSkeltalAssetResource>, nullptr, -1},
-    /* 068 */ {"SpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 19},
-    /* 069 */ {"SpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 19},
+    {"SequencePlayContainer", resFactoryImpl_<ASSequencePlayContainerResource>, nullptr,
+     ASKey::None},
+    /* 062 */ {"ShaderParamAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
+    /* 063 */ {"ShaderParamColorAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
+    /* 064 */ {"ShaderParamTexSRTAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
+    /* 065 */ {"SizeBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Size},
+    /* 066 */ {"SizeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Size},
+    /* 067 */ {"SkeltalAsset", resFactoryImpl_<ASSkeltalAssetResource>, nullptr, ASKey::None},
+    /* 068 */ {"SpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Speed},
+    /* 069 */ {"SpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Speed},
 
-    /* 070 */ {"StickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 6},
-    /* 071 */ {"StickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 6},
-    /* 072 */ {"StickValueBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 0},
-    /* 073 */ {"StickValueSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 0},
-    /* 074 */ {"StickXBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 1},
-    /* 075 */ {"StickXSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 1},
-    /* 076 */ {"StickYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 2},
-    /* 077 */ {"StickYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 2},
-    /* 078 */ {"StressBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 14},
-    /* 079 */ {"StressSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 14},
+    /* 070 */ {"StickAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::StickAngle},
+    /* 071 */
+    {"StickAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::StickAngle},
+    /* 072 */ {"StickValueBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::StickValue},
+    /* 073 */
+    {"StickValueSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::StickValue},
+    /* 074 */ {"StickXBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::StickX},
+    /* 075 */ {"StickXSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::StickX},
+    /* 076 */ {"StickYBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::StickY},
+    /* 077 */ {"StickYSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::StickY},
+    /* 078 */ {"StressBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Stress},
+    /* 079 */ {"StressSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Stress},
 
-    /* 080 */ {"SyncPlayContainer", resFactoryImpl_<ASResourceWithChildren>, nullptr, -1},
-    /* 081 */ {"TemperatureBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 23},
-    /* 082 */ {"TemperatureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 23},
-    /* 083 */ {"TexturePatternAsset", resFactoryImpl_<ASAssetExResource>, nullptr, -1},
-    /* 084 */ {"TimeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 52},
-    /* 085 */ {"TiredBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 13},
-    /* 086 */ {"TiredSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 13},
-    /* 087 */ {"UseItemSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 62},
-    /* 088 */ {"UserAngle2Blender", resFactoryImpl_<ASBlenderResource>, nullptr, 12},
-    /* 089 */ {"UserAngle2Selector", resFactoryImpl_<ASSelectorResource>, nullptr, 12},
+    /* 080 */ {"SyncPlayContainer", resFactoryImpl_<ASResourceWithChildren>, nullptr, ASKey::None},
+    /* 081 */
+    {"TemperatureBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Temperature},
+    /* 082 */
+    {"TemperatureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Temperature},
+    /* 083 */ {"TexturePatternAsset", resFactoryImpl_<ASAssetExResource>, nullptr, ASKey::None},
+    /* 084 */ {"TimeSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Time},
+    /* 085 */ {"TiredBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Tired},
+    /* 086 */ {"TiredSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Tired},
+    /* 087 */ {"UseItemSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::UseItem},
+    /* 088 */ {"UserAngle2Blender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::UserAngle2},
+    /* 089 */
+    {"UserAngle2Selector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::UserAngle2},
 
-    /* 090 */ {"UserAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 11},
-    /* 091 */ {"UserAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 11},
-    /* 092 */ {"UserSpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 10},
-    /* 093 */ {"UserSpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 10},
-    /* 094 */ {"VariationSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 47},
-    /* 095 */ {"WallAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 15},
-    /* 096 */ {"WallAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 15},
-    /* 097 */ {"WeaponDetailSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 45},
-    /* 098 */ {"WeaponSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 44},
-    /* 099 */ {"WeatherSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 53},
+    /* 090 */ {"UserAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::UserAngle},
+    /* 091 */ {"UserAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::UserAngle},
+    /* 092 */ {"UserSpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::UserSpeed},
+    /* 093 */ {"UserSpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::UserSpeed},
+    /* 094 */ {"VariationSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Variation},
+    /* 095 */ {"WallAngleBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::WallAngle},
+    /* 096 */ {"WallAngleSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::WallAngle},
+    /* 097 */
+    {"WeaponDetailSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::WeaponDetail},
+    /* 098 */ {"WeaponSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Weapon},
+    /* 099 */ {"WeatherSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Weather},
 
-    /* 100 */ {"WeightBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 25},
-    /* 101 */ {"WeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 25},
-    /* 102 */ {"WindVelocityBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 27},
-    /* 103 */ {"YSpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 20},
-    /* 104 */ {"YSpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 20},
-    /* 105 */ {"ZEx00ExposureBlender", resFactoryImpl_<ASBlenderResource>, nullptr, 29},
-    /* 106 */ {"ZEx00ExposureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, 29},
+    /* 100 */ {"WeightBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::Weight},
+    /* 101 */ {"WeightSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::Weight},
+    /* 102 */
+    {"WindVelocityBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::WindVelocity},
+    /* 103 */ {"YSpeedBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::YSpeed},
+    /* 104 */ {"YSpeedSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::YSpeed},
+    /* 105 */
+    {"ZEx00ExposureBlender", resFactoryImpl_<ASBlenderResource>, nullptr, ASKey::ZEx00Exposure},
+    /* 106 */
+    {"ZEx00ExposureSelector", resFactoryImpl_<ASSelectorResource>, nullptr, ASKey::ZEx00Exposure},
 }};
 
 }  // namespace

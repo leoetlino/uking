@@ -12,6 +12,15 @@ namespace ksys::res {
 
 class ASResource;
 
+enum class ASAssetExKindFlags : u8 {
+    ShaderParam = 1 << 0,
+    ShaderParamColor = 1 << 1,
+    ShaderParamTexSRT = 1 << 2,
+    TexturePattern = 1 << 3,
+    BoneVisibility = 1 << 4,
+    MatVisibility = 1 << 5,
+};
+
 class AS : public ParamIO, public Resource {
     SEAD_RTTI_OVERRIDE(AS, Resource)
 public:
@@ -47,8 +56,8 @@ private:
     agl::utl::Parameter<bool> mUseIK;
     u8 mMaxSkeletalAnimCount{};
     u8 mMaxNonSkeletalAnimCount{};
-    u8 _3ba{};
-    u8 _3bb{};
+    u8 mNeedsExtraSkeletalAnims{};
+    u8 mAssetExKinds{};
     sead::Heap* mHeap{};
 };
 KSYS_CHECK_SIZE_NX150(AS, 0x3c8);
