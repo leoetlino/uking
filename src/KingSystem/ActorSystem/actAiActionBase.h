@@ -80,8 +80,8 @@ public:
     const char* getClassName() const;
     const char* getName() const;
 
-    void playAS(const char* name, bool repeat, u32 slot, u32 seq_bank, f32 t);
-    bool isFinishedAS(u32 slot, u32 seq_bank);
+    void playAS(const char* name, bool repeat, u32 anm_target_idx, u32 slot_idx, f32 t);
+    bool isFinishedAS(u32 anm_target_idx, u32 slot_idx);
 
     virtual bool isFailed() const { return mFlags.isOn(Flag::Failed); }
     virtual bool isFinished() const { return mFlags.isOn(Flag::Finished); }
