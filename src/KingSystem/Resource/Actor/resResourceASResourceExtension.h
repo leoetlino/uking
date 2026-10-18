@@ -80,6 +80,27 @@ private:
 class ASFrameCtrlParser : public ASParamParser {
     SEAD_RTTI_OVERRIDE(ASFrameCtrlParser, ASParamParser)
 public:
+    enum class Connect {
+        None = 0,
+        InPhaseWithPrevAS = 1,
+        AntiPhaseWithPrevAS = 2,
+        RandomFrame = 3,
+    };
+
+    enum class FootType {
+        None = 0,
+        LeftFootForward = 1,
+        LeftFootUp = 2,
+        RightFootForward = 3,
+        RightFootUp = 4,
+    };
+
+    enum class AnmLoop {
+        FromAnm = 0,
+        NoLoop = 1,
+        Loop = 2,
+    };
+
     ASFrameCtrlParser() : ASParamParser(Type::FrameCtrl) {}
 
     const auto& getRate() const { return *mRate; }

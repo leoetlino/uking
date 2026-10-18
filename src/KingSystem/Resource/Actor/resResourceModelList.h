@@ -8,6 +8,17 @@
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
+namespace ksys::as {
+
+enum class AnmTargetType : u8 {
+    Primary = 0,
+    Secondary = 1,
+    NonSkeletal = 2,
+    Independent = 3,
+};
+
+}  // namespace ksys::as
+
 namespace ksys::res {
 
 class ModelList : public ParamIO, public Resource {
