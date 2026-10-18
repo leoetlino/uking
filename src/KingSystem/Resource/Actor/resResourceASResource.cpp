@@ -403,7 +403,8 @@ bool ASSkeltalAssetResource::doParse(const ASResource::ParseArgs& args) {
 
     mMorph.init(5.0, "Morph", "補間", "Min=0.f,Max=20.f", &mObj);
     mResetMorph.init(5.0, "ResetMorph", "リセット時補間", "Min=0.f,Max=20.f", &mObj);
-    mInitAnmDriven.init(false, "InitAnmDriven", "初期アニメドリブン", "", &mObj);
+    mInitAnmDriven.init(int(as::InitAnmDriven::FromAnmLoop), "InitAnmDriven", "初期アニメドリブン",
+                        "", &mObj);
 
     return true;
 }
