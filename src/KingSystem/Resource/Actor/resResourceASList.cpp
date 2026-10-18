@@ -149,8 +149,8 @@ bool ASList::prepareUnload_() {
 
     mMaxSkeletalAnimCount = 0;
     mMaxNonSkeletalAnimCount = 0;
-    _2b2 = 0;
-    _2b3 = 0;
+    mNeedsExtraSkeletalAnims = 0;
+    mAssetExKinds = 0;
     return true;
 }
 
@@ -164,29 +164,29 @@ void ASList::addAS_(s32 index, AS* as) {
     const auto as_counter = as->mMaxNonSkeletalAnimCount;
     if (mMaxNonSkeletalAnimCount == 0) {
         mMaxNonSkeletalAnimCount = as_counter;
-        _2b3 = as->_3bb;
+        mAssetExKinds = as->mAssetExKinds;
     } else {
         u8* flags1;
         u8* flags2;
         if (as_counter > mMaxNonSkeletalAnimCount) {
             mMaxNonSkeletalAnimCount = as_counter;
-            flags1 = &as->_3bb;
-            flags2 = &_2b3;
+            flags1 = &as->mAssetExKinds;
+            flags2 = &mAssetExKinds;
         } else {
-            flags1 = &_2b3;
-            flags2 = &as->_3bb;
+            flags1 = &mAssetExKinds;
+            flags2 = &as->mAssetExKinds;
         }
 
         for (int i = 0; i < 6; ++i) {
             const auto mask = 1u << i;
             if ((*flags1 & mask) == 0 && (*flags2 & mask) != 0) {
-                _2b3 |= mask;
+                mAssetExKinds |= mask;
                 mMaxNonSkeletalAnimCount++;
             }
         }
     }
 
-    _2b2 |= as->_3ba;
+    mNeedsExtraSkeletalAnims |= as->mNeedsExtraSkeletalAnims;
 }
 
 const char* ASList::getASFileName(const sead::SafeString& name) const {
