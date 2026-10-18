@@ -6,6 +6,120 @@
 #include <utility/aglResParameter.h>
 #include "KingSystem/Resource/Actor/resResourceASResourceExtension.h"
 
+namespace ksys::as {
+
+enum class ASElementType : u16 {
+    AbsTemperatureBlender = 0,
+    AbsTemperatureSelector = 1,
+    ArmorSelector = 2,
+    ArrowSelector = 3,
+    AttentionSelector = 4,
+    BoneBlender = 5,
+    BoneVisibilityAsset = 6,
+    BoolSelector = 7,
+    ButtonSelector = 8,
+    ChargeSelector = 9,
+    ClearMatAnmAsset = 10,
+    ComboSelector = 11,
+    DiffAngleYBlender = 12,
+    DiffAngleYSelector = 13,
+    DirectionAngleBlender = 14,
+    DirectionAngleSelector = 15,
+    DistanceBlender = 16,
+    DistanceSelector = 17,
+    DungeonClearSelector = 18,
+    DungeonNumberSelector = 19,
+    EmotionSelector = 20,
+    EventFlagSelector = 21,
+    EyeSelector = 22,
+    EyebrowSelector = 23,
+    FaceEmotionSelector = 24,
+    FootBLLifeSelector = 25,
+    FootBRLifeSelector = 26,
+    FootFLLifeSelector = 27,
+    FootFRLifeSelector = 28,
+    ForwardBentBlender = 29,
+    ForwardBentSelector = 30,
+    GearSelector = 31,
+    GenerationSelector = 32,
+    GrabTypeSelector = 33,
+    GroundNormalBlender = 34,
+    GroundNormalSelector = 35,
+    GroundNormalSideBlender = 36,
+    GroundNormalSideSelector = 37,
+    MaskSelector = 38,
+    MatVisibilityAsset = 39,
+    MouthSelector = 40,
+    NoAnmAsset = 41,
+    NoLoopStickAngleBlender = 42,
+    NoLoopStickAngleSelector = 43,
+    NodePosSelector = 44,
+    PersonalitySelector = 45,
+    PostureSelector = 46,
+    PreASSelector = 47,
+    PreExclusionRandomSelector = 48,
+    RandomSelector = 49,
+    RideSelector = 50,
+    RightStickAngleBlender = 51,
+    RightStickAngleSelector = 52,
+    RightStickValueBlender = 53,
+    RightStickValueSelector = 54,
+    RightStickXBlender = 55,
+    RightStickXSelector = 56,
+    RightStickYBlender = 57,
+    RightStickYSelector = 58,
+    SelfHeightSelector = 59,
+    SelfWeightSelector = 60,
+    SequencePlayContainer = 61,
+    ShaderParamAsset = 62,
+    ShaderParamColorAsset = 63,
+    ShaderParamTexSRTAsset = 64,
+    SizeBlender = 65,
+    SizeSelector = 66,
+    SkeltalAsset = 67,
+    SpeedBlender = 68,
+    SpeedSelector = 69,
+    StickAngleBlender = 70,
+    StickAngleSelector = 71,
+    StickValueBlender = 72,
+    StickValueSelector = 73,
+    StickXBlender = 74,
+    StickXSelector = 75,
+    StickYBlender = 76,
+    StickYSelector = 77,
+    StressBlender = 78,
+    StressSelector = 79,
+    SyncPlayContainer = 80,
+    TemperatureBlender = 81,
+    TemperatureSelector = 82,
+    TexturePatternAsset = 83,
+    TimeSelector = 84,
+    TiredBlender = 85,
+    TiredSelector = 86,
+    UseItemSelector = 87,
+    UserAngle2Blender = 88,
+    UserAngle2Selector = 89,
+    UserAngleBlender = 90,
+    UserAngleSelector = 91,
+    UserSpeedBlender = 92,
+    UserSpeedSelector = 93,
+    VariationSelector = 94,
+    WallAngleBlender = 95,
+    WallAngleSelector = 96,
+    WeaponDetailSelector = 97,
+    WeaponSelector = 98,
+    WeatherSelector = 99,
+    WeightBlender = 100,
+    WeightSelector = 101,
+    WindVelocityBlender = 102,
+    YSpeedBlender = 103,
+    YSpeedSelector = 104,
+    ZEx00ExposureBlender = 105,
+    ZEx00ExposureSelector = 106,
+};
+
+}  // namespace ksys::as
+
 namespace ksys::res {
 
 class AS;
@@ -20,7 +134,8 @@ public:
         int index;
     };
 
-    ASResource(int type_index, int index) : mTypeIndex(type_index), mIndex(index) {}
+    ASResource(int type_index, int index)
+        : mTypeIndex(static_cast<as::ASElementType>(type_index)), mIndex(index) {}
     virtual ~ASResource() = default;
 
     bool parse(const ParseArgs& args);
@@ -33,7 +148,7 @@ public:
     static const sead::SafeString& getDefaultStr();
     static ASResource* make(const ParseArgs& args);
 
-    u16 getTypeIndex() const { return mTypeIndex; }
+    as::ASElementType getTypeIndex() const { return mTypeIndex; }
     u16 getIndex() const { return mIndex; }
     int findStringIndex(const sead::SafeString& value) const;
     int findIntIndex(int value) const;
@@ -43,7 +158,7 @@ public:
 protected:
     virtual bool doParse(const ParseArgs& args) { return true; }
 
-    u16 mTypeIndex{};
+    as::ASElementType mTypeIndex{};
     u16 mIndex{};
     agl::utl::ParameterList mList;
     ASExtensions mExtensions;

@@ -86,7 +86,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
 
     addObj(&mCommonParams, str_CommonParams);
 
-    _3bb = 0;
+    mAssetExKinds = 0;
 
     res_it = Elements.listBegin();
     args.index = 0;
@@ -98,26 +98,28 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
             return false;
         }
 
-        _3ba |= (*it)->needsExtraSkeletalAnims() & 1;
+        mNeedsExtraSkeletalAnims |= (*it)->needsExtraSkeletalAnims() & 1;
 
         switch ((*it)->getTypeIndex()) {
-        case 62:
-            _3bb |= 1 << 0;
+        case as::ASElementType::ShaderParamAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::ShaderParam);
             break;
-        case 63:
-            _3bb |= 1 << 1;
+        case as::ASElementType::ShaderParamColorAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::ShaderParamColor);
             break;
-        case 64:
-            _3bb |= 1 << 2;
+        case as::ASElementType::ShaderParamTexSRTAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::ShaderParamTexSRT);
             break;
-        case 83:
-            _3bb |= 1 << 3;
+        case as::ASElementType::TexturePatternAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::TexturePattern);
             break;
-        case 6:
-            _3bb |= 1 << 4;
+        case as::ASElementType::BoneVisibilityAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::BoneVisibility);
             break;
-        case 39:
-            _3bb |= 1 << 5;
+        case as::ASElementType::MatVisibilityAsset:
+            mAssetExKinds |= u8(ASAssetExKindFlags::MatVisibility);
+            break;
+        default:
             break;
         }
         ++args.index;
