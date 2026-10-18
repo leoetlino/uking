@@ -658,7 +658,7 @@ Address,Quality,Size,Name
 0x000000710001bfec,U,000020,uking::act::MessageSender::dtor
 0x000000710001c000,U,000216,uking::act::GiantGuardWeakPointPart::init
 0x000000710001c0d8,U,000100,uking::act::GiantGuardWeakPointPart::startASSequence
-0x000000710001c13c,U,000088,uking::act::GiantGuardWeakPointPart::finishASSequenceMaybe
+0x000000710001c13c,U,000088,uking::act::GiantGuardWeakPointPart::startEndAS
 0x000000710001c194,U,000072,uking::act::GiantGuardWeakPointPart::leave
 0x000000710001c1dc,U,000268,uking::act::GiantGuardWeakPointPart::updateASSequence
 0x000000710001c2e8,U,000004,uking::act::MessageSender::dtorDelete
@@ -26998,7 +26998,7 @@ Address,Quality,Size,Name
 0x000000710042bb44,O,000092,_ZNK5uking2ai12GuardianRoot18getRuntimeTypeInfoEv
 0x000000710042bba0,U,000068,uking::ai::GuardianRoot::MessageReceiver::dtorDelete
 0x000000710042bbe4,U,000008,uking::ai::GuardianRoot::MessageReceiver::receive
-0x000000710042bbec,U,000016,
+0x000000710042bbec,U,000016,ksys::as::ASSlot::setFlag100
 0x000000710042bbfc,O,000372,_ZN5uking2ai12GuardianRoot33checkDerivedRuntimeTypeInfoStaticEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x000000710042bd70,U,000116,uking::ai::GuardianTargetLost::ctor
 0x000000710042bde4,O,000004,_ZN5uking2ai18GuardianTargetLost5init_EPN4sead4HeapE
@@ -31177,7 +31177,7 @@ Address,Quality,Size,Name
 0x0000007100507a20,U,000008,uking::ai::PriestBossActorEnemyRoot::shouldUpdateSupportBonesEnabled
 0x0000007100507a28,U,000052,uking::ai::MessageSenderPriestBossPhaseEndState::dtorDelete
 0x0000007100507a5c,U,000008,uking::ai::MessageSenderPriestBossPhaseEndState::getUserData
-0x0000007100507a64,U,000012,
+0x0000007100507a64,U,000012,ksys::as::ASSlot::setGraphicsAnimEnabled
 0x0000007100507a70,O,000372,_ZN5uking2ai24PriestBossActorEnemyRoot33checkDerivedRuntimeTypeInfoStaticEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x0000007100507be4,U,000124,uking::ai::PriestBossActorGiantFouthRoot::ctor
 0x0000007100507c60,W,000088,_ZN5uking2ai29PriestBossActorGiantFouthRootD1Ev
@@ -79359,7 +79359,7 @@ Address,Quality,Size,Name
 0x0000007100e76b40,U,000124,ksys::game::AnimalUnit::ASController::requestJump
 0x0000007100e76bbc,U,000028,ksys::game::AnimalUnit::ASController::clearJump
 0x0000007100e76bd8,U,000276,ksys::game::AnimalUnit::ASController::isInJumpFrameRange
-0x0000007100e76cec,U,000128,ksys::game::AnimalUnit::ASController::getPlayingGearSlotMaybe
+0x0000007100e76cec,U,000128,ksys::game::AnimalUnit::ASController::getPlayingGearSlot
 0x0000007100e76d6c,U,000088,ksys::game::AnimalUnit::ASController::getGearSlotFrame
 0x0000007100e76dc4,U,000088,ksys::game::AnimalUnit::ASController::getGearSlotEndFrame
 0x0000007100e76e1c,U,000088,ksys::game::AnimalUnit::ASController::getGearSlotFrameRate
@@ -94829,8 +94829,8 @@ Address,Quality,Size,Name
 0x000000710125e42c,U,000376,ksys::as::BoneBlender::applyAnim
 0x000000710125e5a4,U,000036,ksys::as::BoneBlender::calcBlendIndices
 0x000000710125e5c8,U,000124,ksys::as::BoneBlender::isEndlessLoop
-0x000000710125e644,U,000012,
-0x000000710125e650,U,000012,
+0x000000710125e644,U,000012,ksys::as::BoneBlender::getFirstChildWeightScale
+0x000000710125e650,U,000012,ksys::as::BoneBlender::getSecondChildWeightScale
 0x000000710125e65c,U,000008,ksys::as::BoneBlender::checkDerivedRuntimeTypeInfo
 0x000000710125e664,U,000092,ksys::as::BoneBlender::getRuntimeTypeInfo
 0x000000710125e6c0,U,000036,ksys::as::BoneBlender::dtorDelete
@@ -97527,7 +97527,7 @@ Address,Quality,Size,Name
 0x0000007101302930,U,000008,ksys::as::FrameCtrl::checkStart_
 0x0000007101302938,U,000008,ksys::as::FrameCtrl::checkEnd_
 0x0000007101302940,U,000008,ksys::as::FrameCtrl::checkOld_
-0x0000007101302948,U,000008,
+0x0000007101302948,U,000008,ksys::as::FrameCtrl::checkRate_
 0x0000007101302950,U,000028,ksys::as::FrameCtrl::setStopFrameFromRate
 0x000000710130296c,U,000032,ksys::as::FrameCtrl::getRange
 0x000000710130298c,U,000088,ksys::as::FrameCtrl::getFrameRangeRate

@@ -77,12 +77,58 @@ enum class ASKey : u32 {
     None = 0xffffffff,
 };
 
+enum class ASBoolKeyBit : u32 {
+    BasicSig = 0,
+    Player_BattlePosture = 1,
+    Dragon_HasGrudge = 1,
+    Burning = 2,
+    Horse_GrassOrWaterAhead = 3,
+    RiddenHorsePanic = 4,
+    TemperatureComfortable = 5,
+    LodStateFlag2Clear = 6,
+    EmotionChanged = 9,
+    Sunazarashi_OnGround = 10,
+    FaceEmotionChanged = 11,
+    Horse_LoveWaitAllowed = 12,
+    Npc_BasicSig = 13,
+    Greeting = 14,
+    Guarding = 15,
+    HasReins = 16,
+    Airborne = 17,
+    InWater = 18,
+    HighJumpOrLanding = 19,
+    Player_EnemyWait = 20,
+    Talking = 21,
+    Horse_IsActiveHorse = 22,
+    BowHeldByPlayer = 23,
+    IsWet = 24,
+    RemainsSignal = 25,
+    IsRidden = 26,
+    Player_RidingLargeMount = 27,
+    BallRolling = 28,
+    RandomWaitAllowed = 29,
+    HasShield = 30,
+    SleepOnBed = 31,
+    Dozing = 32,
+    NotStaminaExhausted = 33,
+    Player_SilentKillable = 34,
+    PlayStartAnim = 35,
+    TorchChargeIgnite = 36,
+    WeaponNotBlunt = 37,
+    WeaponBurning = 38,
+    AirOcta_FlyingHigh = 40,
+    Motorcycle_EnergyEmpty = 41,
+    Motorcycle_Wheelie = 42,
+    Motorcycle_Drift = 43,
+    Motorcycle_Braking = 44,
+};
+
 class ASList {
 public:
-    void startAnimationMaybe(f32 a2, f32 a3, const sead::SafeString& animation, int a5, int a6,
-                             bool a7);
-    bool setKeyString(u32 a1, const sead::SafeString& a2, u32 a3);
-    s64 setBoolKeyBit(u32 a1, int a2, bool m, u32 a4);
+    void setASByName(f32 a2, f32 a3, const sead::SafeString& name, int anm_target_idx, int slot_idx,
+                     bool a7);
+    bool setKeyString(ASKey key, const sead::SafeString& a2, u32 a3);
+    s64 setBoolKeyBit(ASKey key, ASBoolKeyBit bit, bool value, u32 unused);
     const sead::Vector3f* getAnimDrivenAngularVelocity();
 };
 
