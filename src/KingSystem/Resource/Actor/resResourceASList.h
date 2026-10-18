@@ -93,8 +93,8 @@ protected:
 private:
     u8 mMaxSkeletalAnimCount = 0;
     u8 mMaxNonSkeletalAnimCount = 0;
-    u8 _2b2 = 0;
-    u8 _2b3 = 0;
+    u8 mNeedsExtraSkeletalAnims = 0;
+    u8 mAssetExKinds = 0;
     sead::Buffer<ASDefine> mASDefines;
     sead::Buffer<CFDefine> mCFDefines;
     sead::Buffer<AddRes> mAddReses;
