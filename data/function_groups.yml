@@ -7636,8 +7636,7 @@ Game/Actor/actGiantEnemy:
 - 0x710002c304-0x710002c3dc
 - 0x710002c3dc-0x710002c468
 Game/Actor/actGiantEnemyBodyIk:
-- 0x710002c468-0x710002e82c
-- 0x710002e82c-0x710002ecc4
+- 0x710002c468-0x710002ecc4
 Game/Actor/actGiantEnemyFootIk:
 - 0x710002ecc4-0x710002ece0
 - 0x710002ecfc-0x710002f8a4
