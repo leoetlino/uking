@@ -202,7 +202,52 @@ def by_address(lines: list[str]) -> dict[int, str]:
     return {int(line.partition(" ")[0], 16): line for line in lines}
 
 
-def print_comparison(baseline: Report, report: Report) -> bool:
+def is_placed_among_neighbours(previous: int, run: list[int], following: int, link_positions: dict[int, int]) -> bool:
+    if run != sorted(run):
+        return False
+
+    if previous < following:
+        return previous < run[0] and run[-1] < following
+
+    # Nothing can link between reversed neighbours, so the run has to sit directly against one.
+    if link_positions[run[-1]] - link_positions[run[0]] != len(run) - 1:
+        return False
+
+    return (link_positions[run[0]] == link_positions[previous] + 1
+            or link_positions[run[-1]] + 1 == link_positions[following])
+
+
+def find_tolerated_objects(baseline: Report, report: Report, objects: list[tuple[int, int]]) -> set[int]:
+    # An object placed correctly among neighbours that are themselves misordered can't count as
+    # in order until those neighbours are fixed, so adding it doesn't make the order any worse.
+    old, new = by_address(baseline.misordered_objects), by_address(report.misordered_objects)
+    is_already_misordered = lambda address: address in old and address in new
+    decomp_addresses = sorted(decomp_address for _, decomp_address in objects)
+    link_positions = {decomp_address: i for i, decomp_address in enumerate(decomp_addresses)}
+
+    tolerated: set[int] = set()
+    i = 0
+    while i < len(objects):
+        run_end = i
+        while run_end < len(objects) and objects[run_end][0] in new and objects[run_end][0] not in old:
+            run_end += 1
+        if run_end == i:
+            i += 1
+            continue
+
+        if 0 < i and run_end < len(objects):
+            previous, following = objects[i - 1], objects[run_end]
+            run = [decomp_address for _, decomp_address in objects[i:run_end]]
+            if (is_already_misordered(previous[0]) and is_already_misordered(following[0])
+                    and is_placed_among_neighbours(previous[1], run, following[1], link_positions)):
+                tolerated.update(address for address, _ in objects[i:run_end])
+        i = run_end
+
+    return tolerated
+
+
+def print_comparison(baseline: Report, report: Report, objects: list[tuple[int, int]]) -> bool:
+    tolerated = find_tolerated_objects(baseline, report, objects)
     deltas: list[int] = []
     for (title, old_lines), new_lines in zip(baseline.sections().items(), report.sections().values()):
         old, new = by_address(old_lines), by_address(new_lines)
@@ -218,11 +263,16 @@ def print_comparison(baseline: Report, report: Report) -> bool:
             print(f"{sign}{Fore.RESET} {colorize(line)}")
         if renamed:
             print(f"{Style.DIM}  {renamed} unchanged except for their object or function name{Style.RESET_ALL}")
+        if tolerated and new_lines is report.misordered_objects:
+            print(f"{Style.DIM}  {len(tolerated)} new, in order relative to their already misordered neighbours"
+                  f"{Style.RESET_ALL}")
         print()
 
-    changes = ", ".join(f"{name} {delta:+d}" for name, delta in zip(Report.SUMMARY_NAMES, deltas))
-    print(f"order change: {changes}")
-    return any(delta > 0 for delta in deltas)
+    summaries = [f"{name} {delta:+d}" for name, delta in zip(Report.SUMMARY_NAMES, deltas)]
+    if tolerated:
+        summaries[0] += f" ({len(tolerated)} tolerated)"
+    print(f"order change: {', '.join(summaries)}")
+    return deltas[0] - len(tolerated) > 0 or any(delta > 0 for delta in deltas[1:])
 
 
 def main() -> None:
@@ -260,8 +310,8 @@ def main() -> None:
         block.sort()
 
     objects_in_original_order = sorted(main_runs, key=lambda obj: main_runs[obj][0].orig_addr)
-    misordered_objects = out_of_order(objects_in_original_order,
-                                      lambda obj: min(function.decomp_addr for function in main_runs[obj]))
+    decomp_addresses = {obj: min(function.decomp_addr for function in main_runs[obj]) for obj in main_runs}
+    misordered_objects = out_of_order(objects_in_original_order, lambda obj: decomp_addresses[obj])
 
     misordered_functions: list[Function] = []
     for obj in objects_in_original_order:
@@ -296,7 +346,9 @@ def main() -> None:
 
     if args.baseline:
         print()
-        if print_comparison(Report.load(args.baseline), report):
+        objects = [(main_runs[obj][0].orig_addr + ORIGINAL_BASE, decomp_addresses[obj])
+                   for obj in objects_in_original_order]
+        if print_comparison(Report.load(args.baseline), report, objects):
             sys.stdout.flush()
             utils.fail("this change makes the object or function order worse")
 
