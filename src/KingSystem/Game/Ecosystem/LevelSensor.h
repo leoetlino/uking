@@ -30,6 +30,8 @@ enum class WeaponModifier {
     NoneForced = 4,
 };
 
+WeaponModifier getRandomWeaponModifier(s32 judge_type, const sead::SafeString& unit_config_name);
+
 class LevelSensor {
 public:
     LevelSensor();
@@ -47,6 +49,9 @@ public:
     void calculatePoints();
 
 private:
+    bool isScalingAllowed(const sead::Vector3f& position) const;
+    bool isScalingAllowed(const act::Actor& actor) const;
+
     f32 mPoints{};
     f32 mWeaponPoints{};
     f32 mEnemyPoints{};
