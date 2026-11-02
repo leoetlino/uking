@@ -82,8 +82,8 @@ public:
     bool GET_NAME(TYPE* value, s32 array_index, s32 index) const {                                 \
         return getBuffer()->GET_NAME(value, array_index, index, mRef.mCheckPermissions);           \
     }                                                                                              \
-    bool GET_NAME(TYPE* value, const sead::SafeString& name) const {                               \
-        return getBuffer()->GET_NAME(value, name, mRef.mCheckPermissions);                         \
+    bool GET_NAME(TYPE* value, const sead::SafeString& name, bool x = true) const {                \
+        return getBuffer()->GET_NAME(value, name, mRef.mCheckPermissions, x);                      \
     }                                                                                              \
     bool GET_NAME(TYPE* value, const sead::SafeString& array_name, s32 index) const {              \
         return getBuffer()->GET_NAME(value, array_name, index, mRef.mCheckPermissions);            \
@@ -111,14 +111,14 @@ public:
         return true;                                                                               \
     }                                                                                              \
     bool SET_NAME(TYPE const& value, const sead::SafeString& name,                                 \
-                  bool bypass_one_trigger_check = false) {                                         \
+                  bool bypass_one_trigger_check = false, bool x = true) {                          \
         if (mRef.mChangeOnlyOnce)                                                                  \
             return false;                                                                          \
-        if (!getBuffer1()->SET_NAME(value, name, mRef.mCheckPermissions, true,                     \
+        if (!getBuffer1()->SET_NAME(value, name, mRef.mCheckPermissions, x,                        \
                                     bypass_one_trigger_check))                                     \
             return false;                                                                          \
         if (mRef.mPropagateParam1Changes)                                                          \
-            getBuffer0()->SET_NAME(value, name, mRef.mCheckPermissions, true,                      \
+            getBuffer0()->SET_NAME(value, name, mRef.mCheckPermissions, x,                         \
                                    bypass_one_trigger_check);                                      \
         return true;                                                                               \
     }                                                                                              \
@@ -146,6 +146,10 @@ public:
         PROXY_GET_SET_IMPL_(getVec4f, setVec4f, sead::Vector4f)
 
 #undef PROXY_GET_SET_IMPL_
+
+        bool getBool2(bool* value, const sead::SafeString& name) const {
+            return getBuffer()->getBool2(value, name, mRef.mCheckPermissions);
+        }
 
 #define PROXY_RESET_IMPL_(NAME)                                                                    \
     bool NAME(s32 idx) { return getBuffer1()->NAME(idx, mRef.mCheckPermissions); }                 \
@@ -348,11 +352,11 @@ public:
     }                                                                                              \
     /* Setters (by name) */                                                                        \
     KSYS_ALWAYS_INLINE bool NAME(TRAITS::ArgType value, const sead::SafeString& name, bool debug,  \
-                                 bool force) {                                                     \
+                                 bool force, bool x = true) {                                      \
         if (mBitFlags.isOn(BitFlag::_40000))                                                       \
             return false;                                                                          \
         auto& ref = debug ? getParamBypassPerm() : getParam();                                     \
-        return ref.get().NAME(value, name, force);                                                 \
+        return ref.get().NAME(value, name, force, x);                                              \
     }                                                                                              \
     bool NAME(TRAITS::ArgType value, const sead::SafeString& name);                                \
     bool NAME##_(TRAITS::ArgType value, const sead::SafeString& name);                             \
