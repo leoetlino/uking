@@ -2,20 +2,6 @@ target_sources(uking PRIVATE
     AS/ASList.h
     AS/ASList.cpp
     
-    Attention/actAttention.cpp
-    Attention/actAttention.h
-
-    Awareness/actAwareness.cpp
-    Awareness/actAwareness.h
-    Awareness/actAwarenessDefs.cpp
-    Awareness/actAwarenessDefs.h
-    Awareness/actAwarenessInstance.cpp
-    Awareness/actAwarenessInstance.h
-    Awareness/actAwarenessMiscUtils.cpp
-    Awareness/actAwarenessMiscUtils.h
-
-
-
     actActor.cpp
     actActor.h
     actActorCreator.cpp

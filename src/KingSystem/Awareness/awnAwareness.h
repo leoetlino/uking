@@ -11,7 +11,7 @@
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::awn {
 
 class AwarenessInstance;
 
@@ -102,7 +102,7 @@ private:
 
     // FIXME: rename
     struct Link {
-        BaseProcLink link;
+        act::BaseProcLink link;
         // TODO: physics body?
         void* _10{};
     };
@@ -110,7 +110,7 @@ private:
     // FIXME: rename
     struct Link2 {
         Link2() { _10 = 0; }
-        BaseProcLink link;
+        act::BaseProcLink link;
         u8 _10{};
         u32 _14{};
         void* _18{};
@@ -151,4 +151,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(Awareness, 0x138);
 
-}  // namespace ksys::act
+}  // namespace ksys::awn

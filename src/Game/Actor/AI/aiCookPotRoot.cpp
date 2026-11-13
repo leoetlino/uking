@@ -1,8 +1,8 @@
 #include "Game/Actor/AI/aiCookPotRoot.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/AOC/HardModeManager.h"
-#include "KingSystem/ActorSystem/Attention/actAttention.h"
 #include "KingSystem/ActorSystem/actActor.h"
+#include "KingSystem/Attention/attAttention.h"
 #include "KingSystem/Utils/Thread/Message.h"
 #include "KingSystem/World/worldEnvMgr.h"
 #include "KingSystem/World/worldManager.h"
@@ -44,7 +44,7 @@ void CookPotRoot::loadParams_() {
 
 // NON_MATCHING
 bool CookPotRoot::handleMessage_(const ksys::Message& message) {
-    if (message.getType().value == (u32)ksys::act::AttActionCode::Cook) {
+    if (message.getType().value == (u32)ksys::att::AttActionCode::Cook) {
         // 着火: "ignition" or "on fire"
         // This is checking if the pot is lit.
         if (isCurrentChild("着火")) {
@@ -100,7 +100,7 @@ bool CookPotRoot::handleMessage_(const ksys::Message& message) {
         }
     }
 
-    if (message.getType().value != (u32)ksys::act::AttActionCode::KillTime) {
+    if (message.getType().value != (u32)ksys::att::AttActionCode::KillTime) {
         return false;
     }
 

@@ -69,7 +69,7 @@ void AttClient::doCreate_(u8*, u32, sead::Heap*) {}
 
 namespace {
 
-// Keep this in sync with ksys::act::AttType!
+// Keep this in sync with ksys::att::AttType!
 sead::SafeArray<const char*, 8> sAttTypes = {{
     "Action",
     "Lock",
@@ -81,38 +81,38 @@ sead::SafeArray<const char*, 8> sAttTypes = {{
     "LookOnly",
 }};
 
-void parseAttType(const agl::utl::ResParameterObj& AttClientParams, act::AttType* type) {
+void parseAttType(const agl::utl::ResParameterObj& AttClientParams, att::AttType* type) {
     const sead::SafeString AttType =
         agl::utl::getResParameter(AttClientParams, "AttType").getData<char>();
 
-    *type = act::AttType::Invalid;
+    *type = att::AttType::Invalid;
 
     for (int i = 0; i < sAttTypes.size(); ++i) {
         if (AttType == sAttTypes[i]) {
-            *type = static_cast<act::AttType>(i);
+            *type = static_cast<att::AttType>(i);
             break;
         }
     }
 
-    if (*type == act::AttType::Invalid)
-        *type = act::AttType::Action;
+    if (*type == att::AttType::Invalid)
+        *type = att::AttType::Action;
 }
 
-void parseActionType(const agl::utl::ResParameterObj& AttClientParams, act::AttActionCode* code) {
+void parseActionType(const agl::utl::ResParameterObj& AttClientParams, att::AttActionCode* code) {
     const sead::SafeString ActionType =
         agl::utl::getResParameter(AttClientParams, "ActionType").getData<char>();
 
-    *code = act::AttActionCode::Dummy;
+    *code = att::AttActionCode::Dummy;
 
-    for (int i = int(act::AttActionCode::None); i < int(act::AttActionCode::Dummy); ++i) {
-        if (ActionType == act::AttActionType::text(i - int(act::AttActionCode::None))) {
-            *code = static_cast<act::AttActionCode>(i);
+    for (int i = int(att::AttActionCode::None); i < int(att::AttActionCode::Dummy); ++i) {
+        if (ActionType == att::AttActionType::text(i - int(att::AttActionCode::None))) {
+            *code = static_cast<att::AttActionCode>(i);
             break;
         }
     }
 
-    if (*code == act::AttActionCode::Dummy)
-        *code = act::AttActionCode::None;
+    if (*code == att::AttActionCode::Dummy)
+        *code = att::AttActionCode::None;
 }
 
 }  // namespace
@@ -130,9 +130,9 @@ bool AttClient::parse_(u8* data, size_t size, sead::Heap* heap) {
     addObj(&mAttClientParamsObj, "AttClientParams");
 
     mAttTypeParam.init({sAttTypes[0]}, "AttType", "", &mAttClientParamsObj);
-    mActionTypeParam.init({act::AttActionType(act::AttActionType::None).text()}, "ActionType", "",
+    mActionTypeParam.init({att::AttActionType(att::AttActionType::None).text()}, "ActionType", "",
                           &mAttClientParamsObj);
-    mPriorityTypeParam.init({act::AttPriorityType(act::AttPriorityType::Obj).text()},
+    mPriorityTypeParam.init({att::AttPriorityType(att::AttPriorityType::Obj).text()},
                             "PriorityType", "", &mAttClientParamsObj);
 
     const int num_checks = root.getResParameterListNum();
@@ -162,14 +162,14 @@ bool AttClient::parse_(u8* data, size_t size, sead::Heap* heap) {
     applyResParameterArchive(archive);
 
     const sead::SafeString PriorityType = mPriorityTypeParam.ref();
-    for (auto priority : act::AttPriorityType{}) {
+    for (auto priority : att::AttPriorityType{}) {
         if (PriorityType == priority.text()) {
             mPriorityType = priority;
             mPriorityTypeStr = PriorityType;
             return true;
         }
     }
-    mPriorityType = act::AttPriorityType::Obj;
+    mPriorityType = att::AttPriorityType::Obj;
     mPriorityTypeStr = mPriorityType.text();
     return true;
 }

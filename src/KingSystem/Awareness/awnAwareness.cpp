@@ -1,15 +1,15 @@
-#include "KingSystem/ActorSystem/Awareness/actAwareness.h"
+#include "KingSystem/Awareness/awnAwareness.h"
 #include <container/seadSafeArray.h>
 #include <cstring>
 #include <prim/seadScopedLock.h>
 #include <utility/aglParameter.h>
 #include <utility/aglResParameter.h>
-#include "KingSystem/ActorSystem/Awareness/actAwarenessDefs.h"
-#include "KingSystem/ActorSystem/Awareness/actAwarenessInstance.h"
+#include "KingSystem/Awareness/awnAwarenessDefs.h"
+#include "KingSystem/Awareness/awnAwarenessInstance.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 
-namespace ksys::act {
+namespace ksys::awn {
 
 SEAD_SINGLETON_DISPOSER_IMPL(Awareness)
 
@@ -256,4 +256,4 @@ void Awareness::Instances::calcForEvent(bool check_334) {
     }
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::awn

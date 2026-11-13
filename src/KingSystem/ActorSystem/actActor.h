@@ -29,6 +29,15 @@ namespace as {
 class ASList;
 }  // namespace as
 
+namespace att {
+class AttClientList;
+class Attention;
+}  // namespace att
+
+namespace awn {
+class AwarenessInstance;
+}  // namespace awn
+
 namespace chm {
 class ActorChemicals;
 }  // namespace chm
@@ -73,9 +82,6 @@ class LifeRecoverInfo;
 class Actor;
 class ActorCreator;
 class ActorParam;
-class AttClientList;
-class Attention;
-class AwarenessInstance;
 class BaseProcLink;
 class BoneControl;
 class Chemical;
@@ -492,7 +498,7 @@ protected:
     /* 0x540 */ sead::Atomic<bool> mUnloadedOutOfPlacementArea = false;
 
     /* 0x548 */ void* mAwarenessSourceHolder = nullptr;
-    /* 0x550 */ AwarenessInstance* mAwarenessInstance = nullptr;
+    /* 0x550 */ awn::AwarenessInstance* mAwarenessInstance = nullptr;
     /* 0x558 */ ai::RootAi* mRootAi = nullptr;
     /* 0x560 */ as::ASList* mASList = nullptr;
     /* 0x568 */ xlink::ActorEffects* mActorEffects = nullptr;
@@ -507,7 +513,7 @@ protected:
     /* 0x5c0 */ sead::Heap* mActorFrameHeap = nullptr;
     /* 0x5c8 */ sead::Heap* mParentHeap = nullptr;
     /* 0x5d0 */ ActorUniqueName* mUniqueName = nullptr;
-    /* 0x5d8 */ AttClientList* mAttention = nullptr;
+    /* 0x5d8 */ att::AttClientList* mAttention = nullptr;
     /* 0x5e0 */ ActorMessageTransceiver mMsgTransceiver{*this, this};
     /* 0x638 */ Schedule* mSchedule = nullptr;
 

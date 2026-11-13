@@ -3,7 +3,7 @@
 #include <basis/seadTypes.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::awn {
 
 // FIXME
 class AwarenessInstance {
@@ -21,4 +21,4 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(AwarenessInstance, 0x340);
 
-}  // namespace ksys::act
+}  // namespace ksys::awn

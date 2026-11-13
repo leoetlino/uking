@@ -1,9 +1,9 @@
-#include "KingSystem/ActorSystem/Awareness/actAwarenessDefs.h"
+#include "KingSystem/Awareness/awnAwarenessDefs.h"
 #include <container/seadSafeArray.h>
 #include <utility/aglParameter.h>
-#include "KingSystem/ActorSystem/Awareness/actAwarenessMiscUtils.h"
+#include "KingSystem/Awareness/awnAwarenessMiscUtils.h"
 
-namespace ksys::act {
+namespace ksys::awn {
 
 sead::SafeArray<const char*, 13> sAwarenessTerrorTypes = sead::toArray({
     "TerrorPlayer",
@@ -45,4 +45,4 @@ u32 getAwarenessSensorFlags(u32 hash) {
     return 0xffffffff;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::awn

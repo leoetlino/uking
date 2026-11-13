@@ -2,7 +2,7 @@
 
 #include <prim/seadEnum.h>
 
-namespace ksys::act {
+namespace ksys::att {
 
 enum class AttType {
     Action = 0,
@@ -67,4 +67,4 @@ SEAD_ENUM(AttActionType, None,Talk,Listen,Awake,Grab,Open,Pick,Catch,CheckCatch,
 SEAD_ENUM(AttPriorityType, Default,Enemy,Npc,Obj,ObjLow,ObjMiddle,ObjHigh,Bullet)
 // clang-format on
 
-}  // namespace ksys::act
+}  // namespace ksys::att

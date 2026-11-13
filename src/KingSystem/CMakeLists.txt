@@ -4,6 +4,8 @@ add_subdirectory(Resource)
 
 add_subdirectory(ActorSystem)
 add_subdirectory(AOC)
+add_subdirectory(Attention)
+add_subdirectory(Awareness)
 add_subdirectory(Camera)
 add_subdirectory(Chemical)
 add_subdirectory(Controller)
