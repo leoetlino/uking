@@ -1,11 +1,11 @@
 #pragma once
 
-#include "KingSystem/System/OverlayArenaSystem.h"
+#include "KingSystem/Resource/resOverlayArenaSystem.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace uking {
 
-class SystemPauseMgr : public ksys::ISystemPauseMgr {
+class SystemPauseMgr : public ksys::res::ISystemPauseMgr {
 public:
     SystemPauseMgr();
     ~SystemPauseMgr() override;

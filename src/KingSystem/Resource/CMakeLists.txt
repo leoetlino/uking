@@ -92,6 +92,8 @@ target_sources(uking PRIVATE
   resCompactedHeap.h
   resControlTask.cpp
   resControlTask.h
+  resCoordinatorDeferredRequest.h
+  resCoordinatorForOverlayArena.h
   resCounter.cpp
   resCounter.h
   resEntryFactory.cpp
@@ -107,6 +109,8 @@ target_sources(uking PRIVATE
   resModelResourceDivide.h
   resOffsetReadFileDevice.cpp
   resOffsetReadFileDevice.h
+  resOverlayArenaSystem.cpp
+  resOverlayArenaSystem.h
   resPlacement.cpp
   resPlacement.h
   resResourceMgrTask.cpp

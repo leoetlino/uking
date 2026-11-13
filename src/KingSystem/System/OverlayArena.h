@@ -14,8 +14,9 @@
 namespace ksys {
 
 namespace res {
+class OverlayArenaSystem;
 class ResourceUnit;
-}
+}  // namespace res
 namespace util {
 class DualHeap;
 }
@@ -73,7 +74,7 @@ public:
     static constexpr size_t getListNodeOffset() { return offsetof(OverlayArena, mListNode); }
 
 private:
-    friend class OverlayArenaSystem;
+    friend class res::OverlayArenaSystem;
 
     enum class Flag : u8 {
         _1 = 0x1,

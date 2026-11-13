@@ -3,7 +3,7 @@
 #include <prim/seadDelegate.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::res {
 
 class CoordinatorForOverlayArena;
 class ISystemPauseMgr;
@@ -29,4 +29,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(CoordinatorDeferredRequest, 0x40);
 
-}  // namespace ksys
+}  // namespace ksys::res

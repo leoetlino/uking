@@ -16,9 +16,9 @@
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resOverlayArenaSystem.h"
 #include "KingSystem/Resource/resResourceGameData.h"
 #include "KingSystem/Resource/resSystem.h"
-#include "KingSystem/System/OverlayArenaSystem.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
@@ -621,7 +621,7 @@ FlagHandle Manager::getRevivalFlagHandle(const sead::SafeString& object_name,
 }
 
 void Manager::allocParam1() {
-    auto* parent_heap = OverlayArenaSystem::instance()->getGameDataWorkHeap();
+    auto* parent_heap = res::OverlayArenaSystem::instance()->getGameDataWorkHeap();
     auto* heap = util::createDualHeap(0, "param1", parent_heap, nullptr,
                                       sead::Heap::cHeapDirection_Forward, false);
     mFlagBuffer1 = new (heap) TriggerParam;

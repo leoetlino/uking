@@ -4,9 +4,9 @@
 #include <prim/seadDelegate.h>
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
+#include "KingSystem/Resource/resCoordinatorDeferredRequest.h"
+#include "KingSystem/Resource/resCoordinatorForOverlayArena.h"
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/System/CoordinatorDeferredRequest.h"
-#include "KingSystem/System/CoordinatorForOverlayArena.h"
 #include "KingSystem/Utils/Thread/Event.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -20,6 +20,8 @@ namespace ksys {
 class Task;
 class TaskThread;
 class OverlayArena;
+
+namespace res {
 
 class ISystemPauseMgr {
 public:
@@ -123,5 +125,7 @@ private:
     Event mEvent;
 };
 KSYS_CHECK_SIZE_NX150(OverlayArenaSystem, 0x1c8);
+
+}  // namespace res
 
 }  // namespace ksys

@@ -2,7 +2,7 @@
 
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys {
+namespace ksys::res {
 
 // FIXME: incomplete
 class CoordinatorForOverlayArena final {
@@ -36,4 +36,4 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(CoordinatorForOverlayArena, 0x8);
 
-}  // namespace ksys
+}  // namespace ksys::res

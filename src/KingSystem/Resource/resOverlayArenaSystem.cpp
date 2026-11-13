@@ -1,4 +1,4 @@
-#include "KingSystem/System/OverlayArenaSystem.h"
+#include "KingSystem/Resource/resOverlayArenaSystem.h"
 #include <KingSystem/Resource/resResourceMgrTask.h>
 #include <heap/seadExpHeap.h>
 #include <heap/seadHeap.h>
@@ -10,7 +10,7 @@
 #include "KingSystem/Utils/Thread/Task.h"
 #include "KingSystem/Utils/Thread/TaskThread.h"
 
-namespace ksys {
+namespace ksys::res {
 
 SEAD_SINGLETON_DISPOSER_IMPL(OverlayArenaSystem)
 
@@ -324,4 +324,4 @@ void OverlayArenaSystem::createMovieHeap() {
     res::stubbedLogFunction();
 }
 
-}  // namespace ksys
+}  // namespace ksys::res
