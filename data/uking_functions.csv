@@ -86636,7 +86636,7 @@ Address,Quality,Size,Name
 0x0000007101013b5c,U,000092,ksys::snd::HyruleCastleBgm::getRuntimeTypeInfo_thunk10
 0x0000007101013bb8,U,000004,ksys::snd::HyruleCastleBgm::dtor_thunk10
 0x0000007101013bbc,U,000036,ksys::snd::HyruleCastleBgm::dtorDelete_thunk10
-0x0000007101013be0,U,000112,sinitCastleBgmStrings
+0x0000007101013be0,U,000112,sinitHyruleCastleBgmStrings
 0x0000007101013c50,U,000208,ksys::snd::MazeForestBgm::ctor
 0x0000007101013d20,U,000512,ksys::snd::MazeForestBgm::update
 0x0000007101013f20,U,000080,ksys::snd::MazeForestBgm::stop
@@ -86819,7 +86819,7 @@ Address,Quality,Size,Name
 0x000000710101d5ec,U,000300,ksys::snd::MusicPriorityList::add
 0x000000710101d718,U,000096,ksys::snd::MusicPriorityList::remove
 0x000000710101d778,U,000004,nullsub_4380
-0x000000710101d77c,U,000124,sinit_sndBgmPriorityList
+0x000000710101d77c,U,000124,sinitMusicPriorityListGlobals
 0x000000710101d7f8,U,000188,ksys::snd::BgmFadeSLinkUser::ctor
 0x000000710101d8b4,U,000020,ksys::snd::BgmFadeSLinkUser::dtor
 0x000000710101d8c8,U,000052,ksys::snd::BgmFadeSLinkUser::dtorDelete
@@ -96302,8 +96302,8 @@ Address,Quality,Size,Name
 0x00000071012c0898,U,000892,ksys::snd::GrassPlantSoundPointGrid::registerPlantShakeSoundPointCb
 0x00000071012c0c14,U,000340,ksys::snd::GrassPlantSoundPointGrid::reset
 0x00000071012c0d68,U,001296,ksys::snd::GrassPlantSoundPointGrid::initNearestPointTable
-0x00000071012c1278,U,000052,sead::Delegate1R_PlantSoundPointGrid::invoke
-0x00000071012c12ac,U,000092,sead::Delegate1R_PlantSoundPointGrid::clone
+0x00000071012c1278,U,000052,sead::Delegate1R_GrassPlantSoundPointGrid::invoke
+0x00000071012c12ac,U,000092,sead::Delegate1R_GrassPlantSoundPointGrid::clone
 0x00000071012c1308,U,000332,ksys::snd::InsectSoundUserPool::ctor
 0x00000071012c1454,U,000112,ksys::snd::InsectSoundUserPool::dtor
 0x00000071012c14c4,U,000120,ksys::snd::InsectSoundUserPool::dtorDelete
