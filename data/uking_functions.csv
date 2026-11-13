@@ -52918,7 +52918,7 @@ Address,Quality,Size,Name
 0x000000710088f9b4,U,001420,uking::act::Player::updateHpStaminaStatusEffectToGameData
 0x000000710088ff40,U,000008,uking::act::Player::getExtraLife
 0x000000710088ff48,U,000012,uking::act::Player::getExtraEnergy
-0x000000710088ff54,U,000324,sinit_actPlayerGameplay
+0x000000710088ff54,U,000324,sinit_actPlayerEquip
 0x0000007100890098,U,000300,uking::act::Player::spawnMagnetgloveActorAttached
 0x00000071008901c4,U,000012,uking::act::Player::m255
 0x00000071008901d0,U,000216,uking::act::Player::getAttentionMoveSpeed
