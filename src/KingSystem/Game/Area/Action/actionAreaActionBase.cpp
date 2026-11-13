@@ -3,18 +3,18 @@
 namespace ksys::game {
 
 AreaActionBase::AreaActionBase(const InitArg& arg)
-    : ksys::act::ai::Action(arg), ActorObserver(this) {}
+    : ksys::act::ai::Action(arg), AreaObserver(this) {}
 
 void AreaActionBase::enter_(ksys::act::ai::InlineParamPack* params) {
     enterAndResetContactLayersSent();
 }
 
 void AreaActionBase::calc_() {
-    ActorObserverBase::calc();
+    AreaObserverBase::calc();
 }
 
 bool AreaActionBase::handleMessage_(const Message& message) {
-    return ActorObserverBase::handleMessage(&message);
+    return AreaObserverBase::handleMessage(&message);
 }
 
 }  // namespace ksys::game

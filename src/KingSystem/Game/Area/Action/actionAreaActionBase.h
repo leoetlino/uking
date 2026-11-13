@@ -1,11 +1,11 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAction.h"
-#include "KingSystem/Game/Area/ActorObserverBase.h"
+#include "KingSystem/Game/Area/AreaObserver.h"
 
 namespace ksys::game {
 
-class AreaActionBase : public ksys::act::ai::Action, public ActorObserver {
+class AreaActionBase : public ksys::act::ai::Action, public AreaObserver {
     SEAD_RTTI_OVERRIDE(AreaActionBase, ksys::act::ai::Action)
 public:
     explicit AreaActionBase(const InitArg& arg);

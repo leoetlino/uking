@@ -1,5 +1,6 @@
 target_sources(uking PRIVATE
-  ActorObserverBase.h
+  AreaObserver.h
+  AreaObserverBase.h
 )
 
 add_subdirectory(Action)
