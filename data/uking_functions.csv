@@ -53011,8 +53011,8 @@ Address,Quality,Size,Name
 0x00000071008979cc,U,000024,uking::ButtonComboChecker::resetPadCombo
 0x00000071008979e4,U,000124,uking::ButtonComboChecker::updatePadComboCounter
 0x0000007100897a60,U,000036,uking::ButtonComboChecker::isPadComboComplete
-0x0000007100897a84,U,000016,uking::frm::System::MotionSensor::getInstance
-0x0000007100897a94,U,000016,uking::frm::System::MotionSensor::setInstance
+0x0000007100897a84,U,000016,uking::GyroSensor::getInstance
+0x0000007100897a94,U,000016,uking::GyroSensor::setInstance
 0x0000007100897aa4,U,000100,uking::Rumble::SingletonDisposer_::dtor
 0x0000007100897b08,U,000108,uking::Rumble::SingletonDisposer_::dtorDelete
 0x0000007100897b74,U,000180,uking::Rumble::createInstance
@@ -53246,7 +53246,7 @@ Address,Quality,Size,Name
 0x00000071008a45f0,U,000084,uking::initGyroAimOrientation
 0x00000071008a4644,U,000080,uking::resetGyroAimOrientation
 0x00000071008a4694,U,000392,uking::updateGyroAimOrientation
-0x00000071008a481c,U,000216,uking::readMotionSensorOrientationMtx
+0x00000071008a481c,U,000216,uking::readGyroSensorOrientationMtx
 0x00000071008a48f4,U,000480,uking::slerpOrientationTowardsTargetByAngle
 0x00000071008a4ad4,U,000672,uking::isValidRotationMtx33
 0x00000071008a4d74,U,000656,uking::applyRelativeRotationMtx33
@@ -54411,10 +54411,10 @@ Address,Quality,Size,Name
 0x0000007100900c84,U,000092,uking::isGdtF32FlagCopied
 0x0000007100900ce0,U,000060,uking::getGdtF32IfCopied
 0x0000007100900d1c,U,000032,uking::wasGdtFlagCopied
-0x0000007100900d3c,U,000212,uking::frm::System::MotionSensor::ctor
-0x0000007100900e10,U,002376,uking::frm::System::MotionSensor::calcController
-0x0000007100901758,U,000420,uking::frm::System::MotionSensor::validateMotionMtxMaybe
-0x00000071009018fc,U,000060,uking::frm::System::MotionSensor::getGyroAngularSpeedMaybe
+0x0000007100900d3c,U,000212,uking::GyroSensor::ctor
+0x0000007100900e10,U,002376,uking::GyroSensor::calcController
+0x0000007100901758,U,000420,uking::GyroSensor::validateMotionMtxMaybe
+0x00000071009018fc,U,000060,uking::GyroSensor::getGyroAngularSpeedMaybe
 0x0000007100901938,U,000004,j__ZdlPv_409
 0x000000710090193c,U,000096,uking::HomeButtonMgr::SingletonDisposer_::dtor
 0x000000710090199c,U,000104,uking::HomeButtonMgr::SingletonDisposer_::dtorDelete
