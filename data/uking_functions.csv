@@ -87972,7 +87972,7 @@ Address,Quality,Size,Name
 0x00000071010768ac,U,000060,ksys::tera::GrassCellBoundsScratchBuffer::dtorDelete
 0x00000071010768e8,U,000060,ksys::tera::GrassNearCellGridProbeScratchBuffer::dtorDelete
 0x0000007101076924,U,000060,ksys::tera::GrassNearCellGridUpdateStateScratchBuffer::dtorDelete
-0x0000007101076960,U,000196,sinit_teraGrassCellGrid
+0x0000007101076960,U,000196,sinitGrassNearCellGrid
 0x0000007101076a24,U,000116,ksys::tera::buildAreaBoundsTable
 0x0000007101076a98,U,000012,ksys::tera::getGrassDrawSuppressedFlag
 0x0000007101076aa4,U,000068,ksys::tera::GrassSummaryLayers::ctor
