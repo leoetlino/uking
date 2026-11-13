@@ -344,7 +344,7 @@ static Job* makeJob(JobType type, sead::Heap* heap) {
     case JobType::Sky:
         return new (heap) SkyMgr;
     case JobType::ShootingStar:
-        return new (heap) ShootingStarMgrEx;
+        return new (heap) CollaboShootingStarMgr;
     case JobType::Weather:
         return new (heap) WeatherMgr;
     case JobType::Temp:

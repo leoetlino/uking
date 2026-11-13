@@ -6,12 +6,12 @@
 namespace ksys::world {
 
 // TODO
-class ShootingStarMgrEx : public ShootingStarMgr {
+class CollaboShootingStarMgr : public ShootingStarMgr {
 public:
-    ShootingStarMgrEx();
+    CollaboShootingStarMgr();
 
     u8 _30[0x88 - 0x30];
 };
-KSYS_CHECK_SIZE_NX150(ShootingStarMgrEx, 0x88);
+KSYS_CHECK_SIZE_NX150(CollaboShootingStarMgr, 0x88);
 
 }  // namespace ksys::world
