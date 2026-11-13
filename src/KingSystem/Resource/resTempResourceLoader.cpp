@@ -1,9 +1,9 @@
 #include "KingSystem/Resource/resTempResourceLoader.h"
 #include <resource/seadResource.h>
 #include <thread/seadThread.h>
-#include "KingSystem/Resource/resArchiveWork.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resSystem.h"
+#include "KingSystem/Resource/resTextureArchiveWork.h"
 #include "KingSystem/Resource/resUnit.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/Thread/TaskThread.h"

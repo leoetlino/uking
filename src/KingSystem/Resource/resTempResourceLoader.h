@@ -14,12 +14,12 @@ class DirectResource;
 
 namespace ksys::res {
 
-class ArchiveWork;
+class TextureArchiveWork;
 
 class TempResourceLoader {
 public:
     struct InitArg {
-        ArchiveWork* work;
+        TextureArchiveWork* work;
     };
 
     struct LoadArg {
@@ -77,7 +77,7 @@ private:
 
     sead::TypedBitFlag<Flag> mFlags;
     sead::DirectResource* mResource{};
-    ArchiveWork* mWork{};
+    TextureArchiveWork* mWork{};
     Handle mHandle;
     LoadArg mLoadArg;
     sead::FixedSafeString<128> mPath;

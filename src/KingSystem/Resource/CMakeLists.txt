@@ -81,8 +81,6 @@ target_sources(uking PRIVATE
   GeneralParamList/resGParamListObjectZora.h
   GeneralParamList/resGParamListTraits.h
 
-  resArchiveWork.cpp
-  resArchiveWork.h
   resCache.cpp
   resCache.h
   resCompactedHeap.cpp
@@ -114,6 +112,8 @@ target_sources(uking PRIVATE
   resSystem.h
   resTempResourceLoader.cpp
   resTempResourceLoader.h
+  resTextureArchiveWork.cpp
+  resTextureArchiveWork.h
   resTextureHandleList.cpp
   resTextureHandleList.h
   resTextureHandleMgr.cpp

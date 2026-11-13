@@ -16,7 +16,7 @@ class Event;
 
 namespace res {
 
-class ArchiveWork {
+class TextureArchiveWork {
 public:
     struct InitArg {
         bool arena_set_flag_8;
@@ -28,8 +28,8 @@ public:
     };
     KSYS_CHECK_SIZE_NX150(InitArg, 0x30);
 
-    ArchiveWork();
-    ~ArchiveWork();
+    TextureArchiveWork();
+    ~TextureArchiveWork();
 
     bool init(const InitArg& arg);
     u32 getHeapSize() const;
@@ -42,7 +42,7 @@ private:
     Event* mEvent = nullptr;
     OverlayArena* mArena = nullptr;
 };
-KSYS_CHECK_SIZE_NX150(ArchiveWork, 0x10);
+KSYS_CHECK_SIZE_NX150(TextureArchiveWork, 0x10);
 
 }  // namespace res
 

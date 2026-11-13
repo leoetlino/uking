@@ -1,13 +1,13 @@
-#include "KingSystem/Resource/resArchiveWork.h"
+#include "KingSystem/Resource/resTextureArchiveWork.h"
 #include "KingSystem/System/OverlayArena.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Thread/Event.h"
 
 namespace ksys::res {
 
-ArchiveWork::ArchiveWork() = default;
+TextureArchiveWork::TextureArchiveWork() = default;
 
-ArchiveWork::~ArchiveWork() {
+TextureArchiveWork::~TextureArchiveWork() {
     if (mArena) {
         mArena->clearUnits();
         util::safeDelete(mArena);
@@ -15,7 +15,7 @@ ArchiveWork::~ArchiveWork() {
     util::safeDelete(mEvent);
 }
 
-bool ArchiveWork::init(const ArchiveWork::InitArg& arg) {
+bool TextureArchiveWork::init(const TextureArchiveWork::InitArg& arg) {
     mEvent = new (arg.heap) Event(
         nullptr, sead::IDisposer::HeapNullOption::DoNotAppendDisposerIfNoHeapSpecified, false);
     mEvent->resetSignal();
@@ -34,15 +34,15 @@ bool ArchiveWork::init(const ArchiveWork::InitArg& arg) {
     return mArena->init(arena_arg);
 }
 
-u32 ArchiveWork::getHeapSize() const {
+u32 TextureArchiveWork::getHeapSize() const {
     return mArena->getHeap()->getSize();
 }
 
-OverlayArena* ArchiveWork::getArena() const {
+OverlayArena* TextureArchiveWork::getArena() const {
     return mArena;
 }
 
-bool ArchiveWork::waitForEvent(u32 milliseconds) {
+bool TextureArchiveWork::waitForEvent(u32 milliseconds) {
     if (milliseconds != 0) {
         const auto duration = sead::TickSpan::makeFromMilliSeconds(milliseconds);
         if (!mEvent->wait(duration))
@@ -53,7 +53,7 @@ bool ArchiveWork::waitForEvent(u32 milliseconds) {
     return true;
 }
 
-void ArchiveWork::setEvent() {
+void TextureArchiveWork::setEvent() {
     mEvent->setSignal();
 }
 

@@ -2,7 +2,7 @@
 
 namespace ksys::res {
 
-class ArchiveWork;
+class TextureArchiveWork;
 
 // TODO: very incomplete
 class TextureHandleMgr {
@@ -12,7 +12,7 @@ public:
     void preCalc();
     void calc();
 
-    ArchiveWork* getArchiveWork() const;
+    TextureArchiveWork* getArchiveWork() const;
     void clearAllCache();
 };
 
