@@ -4,8 +4,8 @@
 #include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
+#include "KingSystem/PlayReport/ProductReporter.h"
 #include "KingSystem/Quest/qstQuest.h"
-#include "KingSystem/System/ProductReporter.h"
 
 namespace uking {
 
@@ -17,7 +17,7 @@ void reportKorok(const sead::Vector3f& position) {
     ksys::ProductReporter::getSomeBool();
     s32 id = getFlag_HiddenKorok_Number();
 
-    PlayReport report("korok"_str, 7, ksys::PlayReportMgr::instance()->getReporter()->getHeap());
+    PlayReport report("korok"_str, 7, ksys::ProductReportMgr::instance()->getReporter()->getHeap());
 
     report.addMapType();
     report.add("Id"_str, u32(id));
@@ -25,8 +25,8 @@ void reportKorok(const sead::Vector3f& position) {
     report.addPlayTimes();
     report.addPosition({position.x, position.z});
 
-    if (ksys::PlayReportMgr::instance()) {
-        auto* reporter = ksys::PlayReportMgr::instance()->getReporter();
+    if (ksys::ProductReportMgr::instance()) {
+        auto* reporter = ksys::ProductReportMgr::instance()->getReporter();
         if (reporter && reporter->isEnabled())
             reporter->saveReport(&report);
     }
@@ -37,7 +37,8 @@ void reportDungeon(const sead::SafeString& name, const sead::SafeString& event) 
     if (!name.include("Remains") && !name.include("Dungeon") && !name.include("FinalTrial"))
         return;
 
-    PlayReport report("dungeon"_str, 6, ksys::PlayReportMgr::instance()->getReporter()->getHeap());
+    PlayReport report("dungeon"_str, 6,
+                      ksys::ProductReportMgr::instance()->getReporter()->getHeap());
 
     report.addMapType();
 
@@ -46,8 +47,8 @@ void reportDungeon(const sead::SafeString& name, const sead::SafeString& event) 
 
     report.addPlayTimes();
 
-    if (ksys::PlayReportMgr::instance()) {
-        auto* reporter = ksys::PlayReportMgr::instance()->getReporter();
+    if (ksys::ProductReportMgr::instance()) {
+        auto* reporter = ksys::ProductReportMgr::instance()->getReporter();
         if (reporter && reporter->isEnabled())
             reporter->saveReport(&report);
     }
@@ -239,7 +240,8 @@ unsigned int getQuestId(const sead::SafeString& quest_name) {
 
 void reportGetItem(const sead::Vector3f& pos, const sead::SafeString& item_name) {
     ksys::ProductReporter::getSomeBool();
-    PlayReport report("getitem"_str, 7, ksys::PlayReportMgr::instance()->getReporter()->getHeap());
+    PlayReport report("getitem"_str, 7,
+                      ksys::ProductReportMgr::instance()->getReporter()->getHeap());
     report.addMapType();
 
     auto name = static_cast<int>(sead::HashCRC32::calcStringHash(item_name));
@@ -253,8 +255,8 @@ void reportGetItem(const sead::Vector3f& pos, const sead::SafeString& item_name)
     report.add("Position"_str, position);
     report.addPlayTimes();
 
-    if (ksys::PlayReportMgr::instance()) {
-        auto* reporter = ksys::PlayReportMgr::instance()->getReporter();
+    if (ksys::ProductReportMgr::instance()) {
+        auto* reporter = ksys::ProductReportMgr::instance()->getReporter();
         if (reporter && reporter->isEnabled())
             reporter->saveReport(&report);
     }
@@ -270,7 +272,7 @@ void reportQuestStep(const ksys::qst::Quest* quest, int step_index) {
         const unsigned int quest_id = getQuestId(name);
 
         PlayReport report("challenge"_str, 7,
-                          ksys::PlayReportMgr::instance()->getReporter()->getHeap());
+                          ksys::ProductReportMgr::instance()->getReporter()->getHeap());
 
         report.addMapType();
         report.add("Id"_str, quest_id);
@@ -279,8 +281,8 @@ void reportQuestStep(const ksys::qst::Quest* quest, int step_index) {
         report.add("StepName"_str, step_name);
         report.addPlayTimes();
 
-        if (ksys::PlayReportMgr::instance()) {
-            auto* reporter = ksys::PlayReportMgr::instance()->getReporter();
+        if (ksys::ProductReportMgr::instance()) {
+            auto* reporter = ksys::ProductReportMgr::instance()->getReporter();
             if (reporter && reporter->isEnabled())
                 reporter->saveReport(&report);
         }

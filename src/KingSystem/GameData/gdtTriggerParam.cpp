@@ -12,8 +12,8 @@
 #include "KingSystem/Game/UI/UIGlue.h"
 #include "KingSystem/GameData/gdtFlagProxy.h"
 #include "KingSystem/GameData/gdtManager.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/Resource/resResourceGameData.h"
-#include "KingSystem/System/PlayReportMgr.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 #include "KingSystem/Utils/SafeDelete.h"
@@ -200,7 +200,7 @@ bool doSetFlagValue(bool* success, const T& value, const sead::PtrArray<FlagBase
 }
 
 void sendFlagChangePlayReport(const sead::SafeString& name, const FlagBase* flag) {
-    if (!PlayReportMgr::instance())
+    if (!ProductReportMgr::instance())
         return;
 
     for (s32 i = 0; i < sConfig.num_current_rupee_flag_name_changes; ++i) {
@@ -257,7 +257,7 @@ void sendFlagChangePlayReport(const sead::SafeString& name, const FlagBase* flag
             default:
                 break;
             }
-            PlayReportMgr::instance()->reportDebug(name, value_str);
+            ProductReportMgr::instance()->reportDebug(name, value_str);
             break;
         }
     }
@@ -272,11 +272,11 @@ void reportFlagChange(const FlagBase* flag, s32 sub_idx = -1) {
 
     if constexpr (std::is_same<T, bool>()) {
         if ((s32(type) == FlagType::Bool || s32(type) == FlagType::BoolArray) &&
-            PlayReportMgr::instance()) {
+            ProductReportMgr::instance()) {
             if (flag_->getValue())
-                PlayReportMgr::instance()->reportDebug("FlagOn", name);
+                ProductReportMgr::instance()->reportDebug("FlagOn", name);
             else
-                PlayReportMgr::instance()->reportDebug("FlagOff", name);
+                ProductReportMgr::instance()->reportDebug("FlagOff", name);
         }
     } else {
         sendFlagChangePlayReport(name, flag);

@@ -6,7 +6,7 @@
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/Event/evtMetadata.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/System/PlayReportMgr.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/System/VFR.h"
 #include "KingSystem/World/worldManager.h"
 
@@ -212,8 +212,8 @@ void TimeMgr::handleNewDay(HandleNewDayMode mode) {
         } else {
             callBloodMoonDemo();
             mBloodMoonTimer = 0.0;
-            if (PlayReportMgr::instance())
-                PlayReportMgr::instance()->reportDebug("BloodyMoon", "Schedule");
+            if (ProductReportMgr::instance())
+                ProductReportMgr::instance()->reportDebug("BloodyMoon", "Schedule");
         }
         mBloodMoonForceMode = {};
     }

@@ -1,4 +1,4 @@
-#include "KingSystem/System/ProductReporter.h"
+#include "KingSystem/PlayReport/ProductReporter.h"
 
 #include <gfx/seadCamera.h>
 #include <heap/seadExpHeap.h>
@@ -9,8 +9,8 @@
 #include "KingSystem/Camera/CameraMgr.h"
 #include "KingSystem/Framework/frmFramework.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/Sound/sndSound.h"
-#include "KingSystem/System/PlayReportMgr.h"
 #include "KingSystem/System/VFR.h"
 
 namespace ksys {
@@ -224,17 +224,17 @@ void PlayReport::addPlayTimes() {
     if (!gdt::Manager::instance())
         return;
 
-    if (!PlayReportMgr::instance())
+    if (!ProductReportMgr::instance())
         return;
 
-    if (!PlayReportMgr::instance()->getReporter())
+    if (!ProductReportMgr::instance()->getReporter())
         return;
 
     s32 playTime =
-        PlayReportMgr::instance()->getReporter()->getS32(PlayReportKey::PlayReport_PlayTime);
+        ProductReportMgr::instance()->getReporter()->getS32(PlayReportKey::PlayReport_PlayTime);
 
     s32 allPlayTime =
-        PlayReportMgr::instance()->getReporter()->getS32(PlayReportKey::PlayReport_AllPlayTime);
+        ProductReportMgr::instance()->getReporter()->getS32(PlayReportKey::PlayReport_AllPlayTime);
 
     add(sead::SafeString("PlayTime"), u32(playTime));
     add(sead::SafeString("AllPlayTime"), u32(allPlayTime));

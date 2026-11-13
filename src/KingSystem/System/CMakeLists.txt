@@ -33,11 +33,6 @@ target_sources(uking PRIVATE
     OverlayArenaSystem.h
     Patrol.cpp
     Patrol.h
-    PlayReport.cpp
-    PlayReportMgr.cpp
-    PlayReportMgr.h
-    ProductReporter.cpp
-    ProductReporter.h
     Revision.cpp
     Revision.h
     StringBoard.h

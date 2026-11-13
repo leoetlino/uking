@@ -1,8 +1,8 @@
 #include <nn/account.h>
 #include <nn/prepo.h>
 #include "KingSystem/Account.h"
-#include "KingSystem/System/PlayReportMgr.h"
-#include "KingSystem/System/ProductReporter.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
+#include "KingSystem/PlayReport/ProductReporter.h"
 
 namespace ksys {
 

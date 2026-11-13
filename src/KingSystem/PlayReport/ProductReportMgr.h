@@ -3,7 +3,7 @@
 #include <container/seadBuffer.h>
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/System/ProductReporter.h"
+#include "KingSystem/PlayReport/ProductReporter.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace nn::prepo {
@@ -18,10 +18,10 @@ class PlayerLink;
 
 class ProductReporter;
 
-class PlayReportMgr {
-    SEAD_SINGLETON_DISPOSER(PlayReportMgr)
-    PlayReportMgr() = default;
-    virtual ~PlayReportMgr();
+class ProductReportMgr {
+    SEAD_SINGLETON_DISPOSER(ProductReportMgr)
+    ProductReportMgr() = default;
+    virtual ~ProductReportMgr();
 
 public:
     void init(sead::Heap* heap);
@@ -47,7 +47,7 @@ private:
     bool _30 = false;
     act::PlayerLink* mPlayerLink = nullptr;
 };
-KSYS_CHECK_SIZE_NX150(PlayReportMgr, 0x40);
+KSYS_CHECK_SIZE_NX150(ProductReportMgr, 0x40);
 
 class PlayReport {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <math/seadVectorFwd.h>
-#include "KingSystem/System/PlayReportMgr.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 
 namespace ksys::qst {
 struct Quest;

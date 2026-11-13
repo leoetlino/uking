@@ -24,7 +24,7 @@
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
-#include "KingSystem/System/PlayReportMgr.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
@@ -809,7 +809,7 @@ void PauseMenuDataMgr::itemGet(const sead::SafeString& name, int value,
 
     const auto lock = sead::makeScopedLock(mCritSection);
     auto& lists = mItemLists;
-    ksys::PlayReportMgr::instance()->reportDebug("PouchGet", name);
+    ksys::ProductReportMgr::instance()->reportDebug("PouchGet", name);
     addToPouch(name, type, lists, value, false, modifier);
     saveToGameData(lists.list1);
 }
@@ -1217,7 +1217,7 @@ void PauseMenuDataMgr::cookItemGet(const uking::CookItem& cook_item) {
     const auto lock = sead::makeScopedLock(mCritSection);
     auto& lists = mItemLists;
 
-    ksys::PlayReportMgr::instance()->reportDebug("PouchGet", cook_item.actor_name);
+    ksys::ProductReportMgr::instance()->reportDebug("PouchGet", cook_item.actor_name);
     const auto type = getType(cook_item.actor_name);
     addToPouch(cook_item.actor_name, type, lists, 1, false);
     setCookDataOnLastAddedItem(cook_item);
@@ -1314,7 +1314,7 @@ KSYS_ALWAYS_INLINE inline void
 PauseMenuDataMgr::deleteItem_(const sead::OffsetList<PouchItem>& list, PouchItem* item,
                               const sead::SafeString& name) {
     destroyAndRecycleItem(mItemLists, item);
-    ksys::PlayReportMgr::instance()->reportDebug("PouchDelete", name);
+    ksys::ProductReportMgr::instance()->reportDebug("PouchDelete", name);
     saveToGameData(list);
     updateInventoryInfo(list);
     updateListHeads();
@@ -1339,7 +1339,7 @@ void PauseMenuDataMgr::removeItem(const sead::SafeString& name) {
     auto* info = ksys::act::InfoData::instance();
     if (info->hasTag(item->getName().cstr(), ksys::act::tags::CanStack) && item->getValue() > 1) {
         item->mValue -= 1;
-        ksys::PlayReportMgr::instance()->reportDebug("PouchDelete", name);
+        ksys::ProductReportMgr::instance()->reportDebug("PouchDelete", name);
         updateInventoryInfo(items);
         updateListHeads();
         saveToGameData(items);
@@ -1964,7 +1964,7 @@ void PauseMenuDataMgr::removeCookResult(const sead::SafeString& name, s32 effect
         return;
 
     destroyAndRecycleItem(mItemLists, to_remove);
-    ksys::PlayReportMgr::instance()->reportDebug("PouchDeleteFromFlow", name);
+    ksys::ProductReportMgr::instance()->reportDebug("PouchDeleteFromFlow", name);
     saveToGameData(items);
     updateInventoryInfo(items);
     updateListHeads();
@@ -2538,7 +2538,7 @@ bool PauseMenuDataMgr::getFromShop(const sead::SafeString& name, int value,
         addToPouch(name, type, lists, life, false, modifier);
     }
 
-    ksys::PlayReportMgr::instance()->reportDebug("PouchGetFromShop", name);
+    ksys::ProductReportMgr::instance()->reportDebug("PouchGetFromShop", name);
     saveToGameData(lists.list1);
     return true;
 }
