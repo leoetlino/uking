@@ -6,7 +6,7 @@
 
 namespace ksys::map {
 
-class Placement18;
+class PlacementRailMgr;
 
 class RailPoint {
     friend class Rail;
@@ -140,7 +140,7 @@ public:
 
     Rail* getJunctionRail() const;
     RailPoint* getJunctionPoint() const;
-    void parseJunctions(Placement18 p18, s32 idx, u32 hash, sead::Heap* heap);
+    void parseJunctions(PlacementRailMgr p18, s32 idx, u32 hash, sead::Heap* heap);
 
 protected:
     Rail* mJunctionRail;

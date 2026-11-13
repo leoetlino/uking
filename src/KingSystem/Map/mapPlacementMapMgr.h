@@ -15,8 +15,8 @@ class FarActorMerge;
 namespace ksys::map {
 
 class MapProperties;
-class Placement18;
 class PlacementActors;
+class PlacementRailMgr;
 
 class PlacementMap;
 
@@ -33,7 +33,7 @@ class PlacementMapMgr {
         PlacementActors* mPa;
         s64 _28;
         res::Handle mRes;
-        Placement18* mP18;
+        PlacementRailMgr* mP18;
         s32 _88;
         s32 _8c;
         void* _90;
