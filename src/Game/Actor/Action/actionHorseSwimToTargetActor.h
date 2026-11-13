@@ -1,12 +1,12 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAction.h"
-#include "KingSystem/Game/Horse/Action/actionHorseSwim.h"
+#include "KingSystem/Game/Horse/Action/actionHorseSwimBase.h"
 
 namespace uking::action {
 
-class HorseSwimToTargetActor : public ksys::game::HorseSwim {
-    SEAD_RTTI_OVERRIDE(HorseSwimToTargetActor, ksys::game::HorseSwim)
+class HorseSwimToTargetActor : public ksys::game::HorseSwimBase {
+    SEAD_RTTI_OVERRIDE(HorseSwimToTargetActor, ksys::game::HorseSwimBase)
 public:
     explicit HorseSwimToTargetActor(const InitArg& arg);
     ~HorseSwimToTargetActor() override;

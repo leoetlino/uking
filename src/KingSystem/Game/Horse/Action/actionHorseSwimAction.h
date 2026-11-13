@@ -1,12 +1,12 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAction.h"
-#include "KingSystem/Game/Horse/Action/actionHorseSwim.h"
+#include "KingSystem/Game/Horse/Action/actionHorseSwimBase.h"
 
 namespace ksys::game {
 
-class HorseSwimAction : public HorseSwim {
-    SEAD_RTTI_OVERRIDE(HorseSwimAction, HorseSwim)
+class HorseSwimAction : public HorseSwimBase {
+    SEAD_RTTI_OVERRIDE(HorseSwimAction, HorseSwimBase)
 public:
     explicit HorseSwimAction(const InitArg& arg);
     ~HorseSwimAction() override;

@@ -2,24 +2,24 @@
 
 namespace ksys::game {
 
-HorseSwimAction::HorseSwimAction(const InitArg& arg) : HorseSwim(arg) {}
+HorseSwimAction::HorseSwimAction(const InitArg& arg) : HorseSwimBase(arg) {}
 
 HorseSwimAction::~HorseSwimAction() = default;
 
 bool HorseSwimAction::init_(sead::Heap* heap) {
-    return HorseSwim::init_(heap);
+    return HorseSwimBase::init_(heap);
 }
 
 void HorseSwimAction::enter_(ksys::act::ai::InlineParamPack* params) {
-    HorseSwim::enter_(params);
+    HorseSwimBase::enter_(params);
 }
 
 void HorseSwimAction::leave_() {
-    HorseSwim::leave_();
+    HorseSwimBase::leave_();
 }
 
 void HorseSwimAction::loadParams_() {
-    HorseSwim::loadParams_();
+    HorseSwimBase::loadParams_();
     getStaticParam(&mLandSearchRadius_s, "LandSearchRadius");
     getStaticParam(&mLandSearchNormalCos_s, "LandSearchNormalCos");
     getStaticParam(&mLandSearchMinArea_s, "LandSearchMinArea");
@@ -29,7 +29,7 @@ void HorseSwimAction::loadParams_() {
 }
 
 void HorseSwimAction::calc_() {
-    HorseSwim::calc_();
+    HorseSwimBase::calc_();
 }
 
 }  // namespace ksys::game

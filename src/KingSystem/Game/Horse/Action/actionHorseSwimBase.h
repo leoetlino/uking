@@ -4,11 +4,11 @@
 
 namespace ksys::game {
 
-class HorseSwim : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(HorseSwim, ksys::act::ai::Action)
+class HorseSwimBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(HorseSwimBase, ksys::act::ai::Action)
 public:
-    explicit HorseSwim(const InitArg& arg);
-    ~HorseSwim() override;
+    explicit HorseSwimBase(const InitArg& arg);
+    ~HorseSwimBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

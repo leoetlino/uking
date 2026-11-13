@@ -25,10 +25,10 @@ target_sources(uking PRIVATE
   actionHorseSaddleBindAction.h
   actionHorseSaddleDefaultAction.cpp
   actionHorseSaddleDefaultAction.h
-  actionHorseSwim.cpp
-  actionHorseSwim.h
   actionHorseSwimAction.cpp
   actionHorseSwimAction.h
+  actionHorseSwimBase.cpp
+  actionHorseSwimBase.h
   actionHorseTurnAction.cpp
   actionHorseTurnAction.h
   actionHorseWaitAction.cpp

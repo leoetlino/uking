@@ -2,29 +2,29 @@
 
 namespace uking::action {
 
-HorseSwimToTargetActor::HorseSwimToTargetActor(const InitArg& arg) : HorseSwim(arg) {}
+HorseSwimToTargetActor::HorseSwimToTargetActor(const InitArg& arg) : HorseSwimBase(arg) {}
 
 HorseSwimToTargetActor::~HorseSwimToTargetActor() = default;
 
 bool HorseSwimToTargetActor::init_(sead::Heap* heap) {
-    return HorseSwim::init_(heap);
+    return HorseSwimBase::init_(heap);
 }
 
 void HorseSwimToTargetActor::enter_(ksys::act::ai::InlineParamPack* params) {
-    HorseSwim::enter_(params);
+    HorseSwimBase::enter_(params);
 }
 
 void HorseSwimToTargetActor::leave_() {
-    HorseSwim::leave_();
+    HorseSwimBase::leave_();
 }
 
 void HorseSwimToTargetActor::loadParams_() {
-    HorseSwim::loadParams_();
+    HorseSwimBase::loadParams_();
     getDynamicParam(&mTargetActor_d, "TargetActor");
 }
 
 void HorseSwimToTargetActor::calc_() {
-    HorseSwim::calc_();
+    HorseSwimBase::calc_();
 }
 
 }  // namespace uking::action
