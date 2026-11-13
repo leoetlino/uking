@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSwimDash::PlayerSwimDash(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSwimDash::PlayerSwimDash(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSwimDash::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSwimDash::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSwimDash::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerSwimDash::loadParams_() {
 }
 
 void PlayerSwimDash::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

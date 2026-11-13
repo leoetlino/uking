@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerCutNormal : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerCutNormal, PlayerAction)
+class PlayerCutNormal : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerCutNormal, PlayerBase)
 public:
     explicit PlayerCutNormal(const InitArg& arg);
 

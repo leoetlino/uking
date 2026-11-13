@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerCutTurn::PlayerCutTurn(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutTurn::PlayerCutTurn(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerCutTurn::~PlayerCutTurn() = default;
 
 void PlayerCutTurn::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutTurn::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutTurn::loadParams_() {
@@ -27,7 +27,7 @@ void PlayerCutTurn::loadParams_() {
 }
 
 void PlayerCutTurn::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

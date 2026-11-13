@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerBeetleSubject::PlayerBeetleSubject(const InitArg& arg) : PlayerAction(arg) {}
+PlayerBeetleSubject::PlayerBeetleSubject(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerBeetleSubject::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerBeetleSubject::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerBeetleSubject::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerBeetleSubject::loadParams_() {
 }
 
 void PlayerBeetleSubject::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

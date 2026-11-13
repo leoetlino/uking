@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerDoorPullOpen::PlayerDoorPullOpen(const InitArg& arg) : PlayerAction(arg) {}
+PlayerDoorPullOpen::PlayerDoorPullOpen(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerDoorPullOpen::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerDoorPullOpen::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerDoorPullOpen::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

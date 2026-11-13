@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerHangWallCatch::PlayerHangWallCatch(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHangWallCatch::PlayerHangWallCatch(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerHangWallCatch::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHangWallCatch::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHangWallCatch::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

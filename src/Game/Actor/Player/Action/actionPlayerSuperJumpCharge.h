@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerSuperJumpCharge : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerSuperJumpCharge, PlayerAction)
+class PlayerSuperJumpCharge : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerSuperJumpCharge, PlayerBase)
 public:
     explicit PlayerSuperJumpCharge(const InitArg& arg);
 

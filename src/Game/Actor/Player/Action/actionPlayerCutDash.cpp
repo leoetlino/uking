@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerCutDash::PlayerCutDash(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutDash::PlayerCutDash(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutDash::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutDash::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutDash::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerCutDash::loadParams_() {
 }
 
 void PlayerCutDash::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

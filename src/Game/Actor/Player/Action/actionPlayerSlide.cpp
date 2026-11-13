@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerSlide::PlayerSlide(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSlide::PlayerSlide(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerSlide::~PlayerSlide() = default;
 
 void PlayerSlide::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSlide::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSlide::loadParams_() {
@@ -26,7 +26,7 @@ void PlayerSlide::loadParams_() {
 }
 
 void PlayerSlide::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

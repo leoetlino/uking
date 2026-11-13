@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSwimSpinAttack::PlayerSwimSpinAttack(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSwimSpinAttack::PlayerSwimSpinAttack(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSwimSpinAttack::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSwimSpinAttack::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSwimSpinAttack::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerSwimSpinAttack::loadParams_() {
 }
 
 void PlayerSwimSpinAttack::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

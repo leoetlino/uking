@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerGuardSlip : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerGuardSlip, PlayerAction)
+class PlayerGuardSlip : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerGuardSlip, PlayerBase)
 public:
     explicit PlayerGuardSlip(const InitArg& arg);
 

@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSquatWait::PlayerSquatWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSquatWait::PlayerSquatWait(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSquatWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSquatWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSquatWait::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerSquatWait::loadParams_() {
 }
 
 void PlayerSquatWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

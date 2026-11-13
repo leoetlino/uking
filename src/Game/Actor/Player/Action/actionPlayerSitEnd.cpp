@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerSitEnd::PlayerSitEnd(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSitEnd::PlayerSitEnd(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSitEnd::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSitEnd::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSitEnd::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

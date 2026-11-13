@@ -2,27 +2,26 @@
 
 namespace uking::action {
 
-PlayerDestinationTurnStarter::PlayerDestinationTurnStarter(const InitArg& arg)
-    : PlayerAction(arg) {}
+PlayerDestinationTurnStarter::PlayerDestinationTurnStarter(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerDestinationTurnStarter::~PlayerDestinationTurnStarter() = default;
 
 bool PlayerDestinationTurnStarter::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerDestinationTurnStarter::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerDestinationTurnStarter::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerDestinationTurnStarter::loadParams_() {}
 
 void PlayerDestinationTurnStarter::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

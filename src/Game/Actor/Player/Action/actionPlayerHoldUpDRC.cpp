@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerHoldUpDRC::PlayerHoldUpDRC(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHoldUpDRC::PlayerHoldUpDRC(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerHoldUpDRC::~PlayerHoldUpDRC() = default;
 
 void PlayerHoldUpDRC::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHoldUpDRC::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHoldUpDRC::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerHoldUpDRC::loadParams_() {
 }
 
 void PlayerHoldUpDRC::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

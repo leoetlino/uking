@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerCutAfterJump::PlayerCutAfterJump(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutAfterJump::PlayerCutAfterJump(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutAfterJump::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutAfterJump::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutAfterJump::loadParams_() {}
 
 void PlayerCutAfterJump::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

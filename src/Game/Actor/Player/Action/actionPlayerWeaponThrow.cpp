@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerWeaponThrow::PlayerWeaponThrow(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWeaponThrow::PlayerWeaponThrow(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerWeaponThrow::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWeaponThrow::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWeaponThrow::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerWeaponThrow::loadParams_() {
 }
 
 void PlayerWeaponThrow::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

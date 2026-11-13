@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerHellNoFade::PlayerHellNoFade(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHellNoFade::PlayerHellNoFade(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerHellNoFade::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHellNoFade::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHellNoFade::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerHellNoFade::loadParams_() {
 }
 
 void PlayerHellNoFade::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

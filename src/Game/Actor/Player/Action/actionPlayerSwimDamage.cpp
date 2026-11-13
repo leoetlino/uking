@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerSwimDamage::PlayerSwimDamage(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSwimDamage::PlayerSwimDamage(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSwimDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSwimDamage::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSwimDamage::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

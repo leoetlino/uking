@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerWaterFallJump::PlayerWaterFallJump(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWaterFallJump::PlayerWaterFallJump(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerWaterFallJump::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWaterFallJump::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWaterFallJump::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerWaterFallJump::loadParams_() {
 }
 
 void PlayerWaterFallJump::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

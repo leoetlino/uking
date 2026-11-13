@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerPullSwordFirstFail::PlayerPullSwordFirstFail(const InitArg& arg) : PlayerAction(arg) {}
+PlayerPullSwordFirstFail::PlayerPullSwordFirstFail(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerPullSwordFirstFail::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerPullSwordFirstFail::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerPullSwordFirstFail::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerPullSwordFirstFail::loadParams_() {
 }
 
 void PlayerPullSwordFirstFail::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

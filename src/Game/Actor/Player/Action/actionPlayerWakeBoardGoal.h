@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerWakeBoardGoal : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerWakeBoardGoal, PlayerAction)
+class PlayerWakeBoardGoal : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerWakeBoardGoal, PlayerBase)
 public:
     explicit PlayerWakeBoardGoal(const InitArg& arg);
     ~PlayerWakeBoardGoal() override;

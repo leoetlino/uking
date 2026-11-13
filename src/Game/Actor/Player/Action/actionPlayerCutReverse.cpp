@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerCutReverse::PlayerCutReverse(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutReverse::PlayerCutReverse(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutReverse::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutReverse::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutReverse::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

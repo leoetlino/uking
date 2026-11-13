@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerHell::PlayerHell(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHell::PlayerHell(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerHell::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHell::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHell::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerHell::loadParams_() {
 }
 
 void PlayerHell::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

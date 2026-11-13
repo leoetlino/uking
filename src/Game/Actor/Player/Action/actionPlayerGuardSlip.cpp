@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerGuardSlip::PlayerGuardSlip(const InitArg& arg) : PlayerAction(arg) {}
+PlayerGuardSlip::PlayerGuardSlip(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerGuardSlip::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerGuardSlip::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerGuardSlip::loadParams_() {
@@ -32,7 +32,7 @@ void PlayerGuardSlip::loadParams_() {
 }
 
 void PlayerGuardSlip::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

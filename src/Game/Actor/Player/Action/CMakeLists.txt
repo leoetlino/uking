@@ -3,8 +3,6 @@ target_sources(uking PRIVATE
   actionDemoPlayerZoraRide.h
   actionForkOnEnterDropWeaponWithSpeed.cpp
   actionForkOnEnterDropWeaponWithSpeed.h
-  actionPlayerAction.cpp
-  actionPlayerAction.h
   actionPlayerAnchorMove.cpp
   actionPlayerAnchorMove.h
   actionPlayerAtnMove.cpp
@@ -15,6 +13,8 @@ target_sources(uking PRIVATE
   actionPlayerBackJump.h
   actionPlayerBackJumpLand.cpp
   actionPlayerBackJumpLand.h
+  actionPlayerBase.cpp
+  actionPlayerBase.h
   actionPlayerBeetleSubject.cpp
   actionPlayerBeetleSubject.h
   actionPlayerBindSheikPad.cpp
@@ -69,6 +69,8 @@ target_sources(uking PRIVATE
   actionPlayerDemoWait.h
   actionPlayerDestinationMove.cpp
   actionPlayerDestinationMove.h
+  actionPlayerDestinationMoveBase.cpp
+  actionPlayerDestinationMoveBase.h
   actionPlayerDestinationTurn.cpp
   actionPlayerDestinationTurn.h
   actionPlayerDestinationTurnRefActor.cpp
@@ -123,8 +125,6 @@ target_sources(uking PRIVATE
   actionPlayerGuardJustFall.h
   actionPlayerGuardSlip.cpp
   actionPlayerGuardSlip.h
-  actionPlayerGuidedMove.cpp
-  actionPlayerGuidedMove.h
   actionPlayerHangWallCatch.cpp
   actionPlayerHangWallCatch.h
   actionPlayerHell.cpp

@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerRideJump::PlayerRideJump(const InitArg& arg) : PlayerAction(arg) {}
+PlayerRideJump::PlayerRideJump(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerRideJump::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerRideJump::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerRideJump::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerRideJump::loadParams_() {
 }
 
 void PlayerRideJump::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

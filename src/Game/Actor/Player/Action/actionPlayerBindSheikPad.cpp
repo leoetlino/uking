@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-PlayerBindSheikPad::PlayerBindSheikPad(const InitArg& arg) : PlayerAction(arg) {}
+PlayerBindSheikPad::PlayerBindSheikPad(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerBindSheikPad::~PlayerBindSheikPad() = default;
 
 bool PlayerBindSheikPad::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerBindSheikPad::loadParams_() {}

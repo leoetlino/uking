@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerEquipHaveMasterSword : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerEquipHaveMasterSword, PlayerAction)
+class PlayerEquipHaveMasterSword : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerEquipHaveMasterSword, PlayerBase)
 public:
     explicit PlayerEquipHaveMasterSword(const InitArg& arg);
     ~PlayerEquipHaveMasterSword() override;

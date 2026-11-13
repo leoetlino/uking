@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerStepMove::PlayerStepMove(const InitArg& arg) : PlayerAction(arg) {}
+PlayerStepMove::PlayerStepMove(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerStepMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerStepMove::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerStepMove::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

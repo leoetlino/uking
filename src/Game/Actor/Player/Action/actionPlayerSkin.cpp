@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSkin::PlayerSkin(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSkin::PlayerSkin(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSkin::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSkin::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSkin::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerSkin::loadParams_() {
 }
 
 void PlayerSkin::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

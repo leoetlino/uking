@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerLadderUpStart::PlayerLadderUpStart(const InitArg& arg) : PlayerAction(arg) {}
+PlayerLadderUpStart::PlayerLadderUpStart(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerLadderUpStart::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerLadderUpStart::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerLadderUpStart::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerLadderUpStart::loadParams_() {
 }
 
 void PlayerLadderUpStart::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

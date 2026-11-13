@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerShieldRideMove::PlayerShieldRideMove(const InitArg& arg) : PlayerAction(arg) {}
+PlayerShieldRideMove::PlayerShieldRideMove(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerShieldRideMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerShieldRideMove::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerShieldRideMove::loadParams_() {
@@ -25,7 +25,7 @@ void PlayerShieldRideMove::loadParams_() {
 }
 
 void PlayerShieldRideMove::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

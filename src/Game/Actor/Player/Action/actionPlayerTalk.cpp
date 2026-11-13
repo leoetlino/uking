@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerTalk::PlayerTalk(const InitArg& arg) : PlayerAction(arg) {}
+PlayerTalk::PlayerTalk(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerTalk::~PlayerTalk() = default;
 
 bool PlayerTalk::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerTalk::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerTalk::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerTalk::loadParams_() {
@@ -23,7 +23,7 @@ void PlayerTalk::loadParams_() {
 }
 
 void PlayerTalk::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

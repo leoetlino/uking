@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerStepAttack::PlayerStepAttack(const InitArg& arg) : PlayerAction(arg) {}
+PlayerStepAttack::PlayerStepAttack(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerStepAttack::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerStepAttack::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerStepAttack::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerStepAttack::loadParams_() {
 }
 
 void PlayerStepAttack::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerZoraRide::PlayerZoraRide(const InitArg& arg) : PlayerAction(arg) {}
+PlayerZoraRide::PlayerZoraRide(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerZoraRide::~PlayerZoraRide() = default;
 
 void PlayerZoraRide::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerZoraRide::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerZoraRide::loadParams_() {
@@ -22,7 +22,7 @@ void PlayerZoraRide::loadParams_() {
 }
 
 void PlayerZoraRide::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

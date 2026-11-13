@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerCutTurnLSword::PlayerCutTurnLSword(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutTurnLSword::PlayerCutTurnLSword(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutTurnLSword::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutTurnLSword::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutTurnLSword::loadParams_() {
@@ -30,7 +30,7 @@ void PlayerCutTurnLSword::loadParams_() {
 }
 
 void PlayerCutTurnLSword::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

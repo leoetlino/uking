@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerCutHorseJump::PlayerCutHorseJump(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutHorseJump::PlayerCutHorseJump(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutHorseJump::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutHorseJump::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutHorseJump::loadParams_() {
@@ -28,7 +28,7 @@ void PlayerCutHorseJump::loadParams_() {
 }
 
 void PlayerCutHorseJump::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

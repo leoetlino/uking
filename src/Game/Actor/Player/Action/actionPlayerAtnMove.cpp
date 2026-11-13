@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerAtnMove::PlayerAtnMove(const InitArg& arg) : PlayerAction(arg) {}
+PlayerAtnMove::PlayerAtnMove(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerAtnMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerAtnMove::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerAtnMove::loadParams_() {}
 
 void PlayerAtnMove::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerHorseGetOff::PlayerHorseGetOff(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHorseGetOff::PlayerHorseGetOff(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerHorseGetOff::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHorseGetOff::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHorseGetOff::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerHorseGetOff::loadParams_() {
 }
 
 void PlayerHorseGetOff::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

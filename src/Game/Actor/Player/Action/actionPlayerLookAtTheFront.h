@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerLookAtTheFront : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerLookAtTheFront, PlayerAction)
+class PlayerLookAtTheFront : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerLookAtTheFront, PlayerBase)
 public:
     explicit PlayerLookAtTheFront(const InitArg& arg);
     ~PlayerLookAtTheFront() override;

@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-PlayerSetVisibleWeapon::PlayerSetVisibleWeapon(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSetVisibleWeapon::PlayerSetVisibleWeapon(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerSetVisibleWeapon::~PlayerSetVisibleWeapon() = default;
 
 bool PlayerSetVisibleWeapon::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerSetVisibleWeapon::loadParams_() {

@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerPullSword::PlayerPullSword(const InitArg& arg) : PlayerAction(arg) {}
+PlayerPullSword::PlayerPullSword(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerPullSword::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerPullSword::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerPullSword::loadParams_() {
@@ -23,7 +23,7 @@ void PlayerPullSword::loadParams_() {
 }
 
 void PlayerPullSword::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

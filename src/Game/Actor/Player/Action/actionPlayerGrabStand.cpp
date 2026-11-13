@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerGrabStand::PlayerGrabStand(const InitArg& arg) : PlayerAction(arg) {}
+PlayerGrabStand::PlayerGrabStand(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerGrabStand::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerGrabStand::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerGrabStand::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

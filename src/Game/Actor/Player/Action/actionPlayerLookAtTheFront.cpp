@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-PlayerLookAtTheFront::PlayerLookAtTheFront(const InitArg& arg) : PlayerAction(arg) {}
+PlayerLookAtTheFront::PlayerLookAtTheFront(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerLookAtTheFront::~PlayerLookAtTheFront() = default;
 
 bool PlayerLookAtTheFront::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerLookAtTheFront::loadParams_() {

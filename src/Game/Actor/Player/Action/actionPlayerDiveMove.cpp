@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerDiveMove::PlayerDiveMove(const InitArg& arg) : PlayerAction(arg) {}
+PlayerDiveMove::PlayerDiveMove(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerDiveMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerDiveMove::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerDiveMove::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerDiveMove::loadParams_() {
 }
 
 void PlayerDiveMove::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

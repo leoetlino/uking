@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSwimWait::PlayerSwimWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSwimWait::PlayerSwimWait(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSwimWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSwimWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSwimWait::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerSwimWait::loadParams_() {
 }
 
 void PlayerSwimWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

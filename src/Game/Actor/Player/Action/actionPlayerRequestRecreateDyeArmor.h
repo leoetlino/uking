@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerRequestRecreateDyeArmor : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerRequestRecreateDyeArmor, PlayerAction)
+class PlayerRequestRecreateDyeArmor : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerRequestRecreateDyeArmor, PlayerBase)
 public:
     explicit PlayerRequestRecreateDyeArmor(const InitArg& arg);
     ~PlayerRequestRecreateDyeArmor() override;

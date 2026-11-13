@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerLadderToClimb::PlayerLadderToClimb(const InitArg& arg) : PlayerAction(arg) {}
+PlayerLadderToClimb::PlayerLadderToClimb(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerLadderToClimb::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerLadderToClimb::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerLadderToClimb::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

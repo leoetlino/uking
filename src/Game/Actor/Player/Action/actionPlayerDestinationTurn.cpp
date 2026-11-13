@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerDestinationTurn::PlayerDestinationTurn(const InitArg& arg) : PlayerAction(arg) {}
+PlayerDestinationTurn::PlayerDestinationTurn(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerDestinationTurn::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerDestinationTurn::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerDestinationTurn::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerDestinationTurn::loadParams_() {
 }
 
 void PlayerDestinationTurn::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

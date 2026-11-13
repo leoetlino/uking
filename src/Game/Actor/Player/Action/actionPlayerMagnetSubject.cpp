@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerMagnetSubject::PlayerMagnetSubject(const InitArg& arg) : PlayerAction(arg) {}
+PlayerMagnetSubject::PlayerMagnetSubject(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerMagnetSubject::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerMagnetSubject::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerMagnetSubject::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerMagnetSubject::loadParams_() {
 }
 
 void PlayerMagnetSubject::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

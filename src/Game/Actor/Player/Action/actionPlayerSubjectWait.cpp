@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerSubjectWait::PlayerSubjectWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSubjectWait::PlayerSubjectWait(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSubjectWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSubjectWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSubjectWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

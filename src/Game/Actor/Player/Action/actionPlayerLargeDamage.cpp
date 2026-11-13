@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerLargeDamage::PlayerLargeDamage(const InitArg& arg) : PlayerAction(arg) {}
+PlayerLargeDamage::PlayerLargeDamage(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerLargeDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerLargeDamage::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerLargeDamage::loadParams_() {
@@ -88,7 +88,7 @@ void PlayerLargeDamage::loadParams_() {
 }
 
 void PlayerLargeDamage::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerRemainsBlow::PlayerRemainsBlow(const InitArg& arg) : PlayerAction(arg) {}
+PlayerRemainsBlow::PlayerRemainsBlow(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerRemainsBlow::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerRemainsBlow::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerRemainsBlow::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerRemainsBlow::loadParams_() {
 }
 
 void PlayerRemainsBlow::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

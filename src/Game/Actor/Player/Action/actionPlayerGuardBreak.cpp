@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerGuardBreak::PlayerGuardBreak(const InitArg& arg) : PlayerAction(arg) {}
+PlayerGuardBreak::PlayerGuardBreak(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerGuardBreak::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerGuardBreak::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerGuardBreak::loadParams_() {}
 
 void PlayerGuardBreak::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

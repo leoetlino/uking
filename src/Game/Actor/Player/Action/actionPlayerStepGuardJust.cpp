@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerStepGuardJust::PlayerStepGuardJust(const InitArg& arg) : PlayerAction(arg) {}
+PlayerStepGuardJust::PlayerStepGuardJust(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerStepGuardJust::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerStepGuardJust::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerStepGuardJust::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerStepGuardJust::loadParams_() {
 }
 
 void PlayerStepGuardJust::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

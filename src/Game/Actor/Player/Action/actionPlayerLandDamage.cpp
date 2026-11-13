@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerLandDamage::PlayerLandDamage(const InitArg& arg) : PlayerAction(arg) {}
+PlayerLandDamage::PlayerLandDamage(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerLandDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerLandDamage::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerLandDamage::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerLandDamage::loadParams_() {
 }
 
 void PlayerLandDamage::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

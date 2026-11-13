@@ -3,12 +3,12 @@
 namespace uking::action {
 
 PlayerRequestRecreateDyeArmor::PlayerRequestRecreateDyeArmor(const InitArg& arg)
-    : PlayerAction(arg) {}
+    : PlayerBase(arg) {}
 
 PlayerRequestRecreateDyeArmor::~PlayerRequestRecreateDyeArmor() = default;
 
 bool PlayerRequestRecreateDyeArmor::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerRequestRecreateDyeArmor::loadParams_() {}

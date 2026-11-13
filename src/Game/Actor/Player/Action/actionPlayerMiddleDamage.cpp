@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerMiddleDamage::PlayerMiddleDamage(const InitArg& arg) : PlayerAction(arg) {}
+PlayerMiddleDamage::PlayerMiddleDamage(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerMiddleDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerMiddleDamage::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerMiddleDamage::loadParams_() {
@@ -32,7 +32,7 @@ void PlayerMiddleDamage::loadParams_() {
 }
 
 void PlayerMiddleDamage::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

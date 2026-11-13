@@ -5,10 +5,10 @@
 
 namespace uking::action {
 
-class PlayerAction : public ActionEx {
-    SEAD_RTTI_OVERRIDE(PlayerAction, ActionEx)
+class PlayerBase : public ActionEx {
+    SEAD_RTTI_OVERRIDE(PlayerBase, ActionEx)
 public:
-    explicit PlayerAction(const InitArg& arg);
+    explicit PlayerBase(const InitArg& arg);
 
     void enter_(ksys::act::ai::InlineParamPack* params) override;
     void leave_() override;

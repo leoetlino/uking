@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerGuidedMove : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerGuidedMove, PlayerAction)
+class PlayerDestinationMoveBase : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerDestinationMoveBase, PlayerBase)
 public:
-    explicit PlayerGuidedMove(const InitArg& arg);
+    explicit PlayerDestinationMoveBase(const InitArg& arg);
 
     void enter_(ksys::act::ai::InlineParamPack* params) override;
     void leave_() override;

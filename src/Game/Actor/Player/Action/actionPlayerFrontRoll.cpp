@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerFrontRoll::PlayerFrontRoll(const InitArg& arg) : PlayerAction(arg) {}
+PlayerFrontRoll::PlayerFrontRoll(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerFrontRoll::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerFrontRoll::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerFrontRoll::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerFrontRoll::loadParams_() {
 }
 
 void PlayerFrontRoll::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

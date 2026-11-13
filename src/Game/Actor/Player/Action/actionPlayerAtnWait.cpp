@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerAtnWait::PlayerAtnWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerAtnWait::PlayerAtnWait(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerAtnWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerAtnWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerAtnWait::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerAtnWait::loadParams_() {
 }
 
 void PlayerAtnWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

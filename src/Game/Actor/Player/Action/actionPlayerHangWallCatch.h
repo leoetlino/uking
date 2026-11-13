@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerHangWallCatch : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerHangWallCatch, PlayerAction)
+class PlayerHangWallCatch : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerHangWallCatch, PlayerBase)
 public:
     explicit PlayerHangWallCatch(const InitArg& arg);
 

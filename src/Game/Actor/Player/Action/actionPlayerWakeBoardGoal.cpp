@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerWakeBoardGoal::PlayerWakeBoardGoal(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWakeBoardGoal::PlayerWakeBoardGoal(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerWakeBoardGoal::~PlayerWakeBoardGoal() = default;
 
 void PlayerWakeBoardGoal::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWakeBoardGoal::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWakeBoardGoal::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerWakeBoardGoal::loadParams_() {
 }
 
 void PlayerWakeBoardGoal::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

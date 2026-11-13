@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerClimbRest::PlayerClimbRest(const InitArg& arg) : PlayerAction(arg) {}
+PlayerClimbRest::PlayerClimbRest(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerClimbRest::~PlayerClimbRest() = default;
 
 void PlayerClimbRest::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerClimbRest::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerClimbRest::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerClimbRest::loadParams_() {
 }
 
 void PlayerClimbRest::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

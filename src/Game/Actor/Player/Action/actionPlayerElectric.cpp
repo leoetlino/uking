@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerElectric::PlayerElectric(const InitArg& arg) : PlayerAction(arg) {}
+PlayerElectric::PlayerElectric(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerElectric::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerElectric::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerElectric::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerElectric::loadParams_() {
 }
 
 void PlayerElectric::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

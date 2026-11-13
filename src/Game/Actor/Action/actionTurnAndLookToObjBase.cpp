@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-TurnAndLookToObjBase::TurnAndLookToObjBase(const InitArg& arg) : PlayerAction(arg) {}
+TurnAndLookToObjBase::TurnAndLookToObjBase(const InitArg& arg) : PlayerBase(arg) {}
 
 TurnAndLookToObjBase::~TurnAndLookToObjBase() = default;
 
 bool TurnAndLookToObjBase::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void TurnAndLookToObjBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void TurnAndLookToObjBase::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void TurnAndLookToObjBase::loadParams_() {
@@ -30,7 +30,7 @@ void TurnAndLookToObjBase::loadParams_() {
 }
 
 void TurnAndLookToObjBase::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

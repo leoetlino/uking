@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSuperBlow::PlayerSuperBlow(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSuperBlow::PlayerSuperBlow(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSuperBlow::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSuperBlow::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSuperBlow::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerSuperBlow::loadParams_() {
 }
 
 void PlayerSuperBlow::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

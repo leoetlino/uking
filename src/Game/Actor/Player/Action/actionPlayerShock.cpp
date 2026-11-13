@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerShock::PlayerShock(const InitArg& arg) : PlayerAction(arg) {}
+PlayerShock::PlayerShock(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerShock::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerShock::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerShock::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

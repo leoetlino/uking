@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerTreeClimb::PlayerTreeClimb(const InitArg& arg) : PlayerAction(arg) {}
+PlayerTreeClimb::PlayerTreeClimb(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerTreeClimb::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerTreeClimb::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerTreeClimb::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

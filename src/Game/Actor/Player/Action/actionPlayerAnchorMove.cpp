@@ -2,30 +2,30 @@
 
 namespace uking::action {
 
-PlayerAnchorMove::PlayerAnchorMove(const InitArg& arg) : PlayerGuidedMove(arg) {}
+PlayerAnchorMove::PlayerAnchorMove(const InitArg& arg) : PlayerDestinationMoveBase(arg) {}
 
 PlayerAnchorMove::~PlayerAnchorMove() = default;
 
 bool PlayerAnchorMove::init_(sead::Heap* heap) {
-    return PlayerGuidedMove::init_(heap);
+    return PlayerDestinationMoveBase::init_(heap);
 }
 
 void PlayerAnchorMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerGuidedMove::enter_(params);
+    PlayerDestinationMoveBase::enter_(params);
 }
 
 void PlayerAnchorMove::leave_() {
-    PlayerGuidedMove::leave_();
+    PlayerDestinationMoveBase::leave_();
 }
 
 void PlayerAnchorMove::loadParams_() {
-    PlayerGuidedMove::loadParams_();
+    PlayerDestinationMoveBase::loadParams_();
     getDynamicParam(&mUniqueName_d, "UniqueName");
     getDynamicParam(&mAnchorName_d, "AnchorName");
 }
 
 void PlayerAnchorMove::calc_() {
-    PlayerGuidedMove::calc_();
+    PlayerDestinationMoveBase::calc_();
 }
 
 }  // namespace uking::action

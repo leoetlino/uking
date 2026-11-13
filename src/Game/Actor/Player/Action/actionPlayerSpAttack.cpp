@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerSpAttack::PlayerSpAttack(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSpAttack::PlayerSpAttack(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSpAttack::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSpAttack::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSpAttack::loadParams_() {
@@ -18,7 +18,7 @@ void PlayerSpAttack::loadParams_() {
 }
 
 void PlayerSpAttack::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

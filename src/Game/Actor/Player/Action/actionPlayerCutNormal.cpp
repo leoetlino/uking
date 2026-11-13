@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerCutNormal::PlayerCutNormal(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCutNormal::PlayerCutNormal(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerCutNormal::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCutNormal::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCutNormal::loadParams_() {
@@ -29,7 +29,7 @@ void PlayerCutNormal::loadParams_() {
 }
 
 void PlayerCutNormal::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

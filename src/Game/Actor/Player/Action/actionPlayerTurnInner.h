@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Player/Action/actionPlayerAction.h"
+#include "Game/Actor/Player/Action/actionPlayerBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PlayerTurnInner : public PlayerAction {
-    SEAD_RTTI_OVERRIDE(PlayerTurnInner, PlayerAction)
+class PlayerTurnInner : public PlayerBase {
+    SEAD_RTTI_OVERRIDE(PlayerTurnInner, PlayerBase)
 public:
     explicit PlayerTurnInner(const InitArg& arg);
     ~PlayerTurnInner() override;

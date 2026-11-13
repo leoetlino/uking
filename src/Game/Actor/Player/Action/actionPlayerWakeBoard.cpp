@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerWakeBoard::PlayerWakeBoard(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWakeBoard::PlayerWakeBoard(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerWakeBoard::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWakeBoard::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWakeBoard::loadParams_() {}
 
 void PlayerWakeBoard::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

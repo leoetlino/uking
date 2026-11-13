@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-PlayerHide::PlayerHide(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHide::PlayerHide(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerHide::~PlayerHide() = default;
 
 bool PlayerHide::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerHide::loadParams_() {

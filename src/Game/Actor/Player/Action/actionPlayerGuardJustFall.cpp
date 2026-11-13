@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerGuardJustFall::PlayerGuardJustFall(const InitArg& arg) : PlayerAction(arg) {}
+PlayerGuardJustFall::PlayerGuardJustFall(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerGuardJustFall::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerGuardJustFall::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerGuardJustFall::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

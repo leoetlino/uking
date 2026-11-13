@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerCleaningAround::PlayerCleaningAround(const InitArg& arg) : PlayerAction(arg) {}
+PlayerCleaningAround::PlayerCleaningAround(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerCleaningAround::~PlayerCleaningAround() = default;
 
 bool PlayerCleaningAround::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerCleaningAround::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerCleaningAround::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerCleaningAround::loadParams_() {
@@ -23,7 +23,7 @@ void PlayerCleaningAround::loadParams_() {
 }
 
 void PlayerCleaningAround::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

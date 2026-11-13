@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-PlayerUpdateEquip::PlayerUpdateEquip(const InitArg& arg) : PlayerAction(arg) {}
+PlayerUpdateEquip::PlayerUpdateEquip(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerUpdateEquip::~PlayerUpdateEquip() = default;
 
 bool PlayerUpdateEquip::init_(sead::Heap* heap) {
-    return PlayerAction::init_(heap);
+    return PlayerBase::init_(heap);
 }
 
 void PlayerUpdateEquip::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerUpdateEquip::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerUpdateEquip::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

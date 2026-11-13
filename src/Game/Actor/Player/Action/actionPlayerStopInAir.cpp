@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerStopInAir::PlayerStopInAir(const InitArg& arg) : PlayerAction(arg) {}
+PlayerStopInAir::PlayerStopInAir(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerStopInAir::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerStopInAir::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerStopInAir::loadParams_() {
@@ -17,7 +17,7 @@ void PlayerStopInAir::loadParams_() {
 }
 
 void PlayerStopInAir::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

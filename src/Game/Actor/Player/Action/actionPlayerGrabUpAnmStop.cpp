@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerGrabUpAnmStop::PlayerGrabUpAnmStop(const InitArg& arg) : PlayerAction(arg) {}
+PlayerGrabUpAnmStop::PlayerGrabUpAnmStop(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerGrabUpAnmStop::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerGrabUpAnmStop::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerGrabUpAnmStop::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

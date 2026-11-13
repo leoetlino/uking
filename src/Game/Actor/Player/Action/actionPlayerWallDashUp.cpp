@@ -2,14 +2,14 @@
 
 namespace uking::action {
 
-PlayerWallDashUp::PlayerWallDashUp(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWallDashUp::PlayerWallDashUp(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerWallDashUp::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWallDashUp::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWallDashUp::loadParams_() {
@@ -19,7 +19,7 @@ void PlayerWallDashUp::loadParams_() {
 }
 
 void PlayerWallDashUp::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

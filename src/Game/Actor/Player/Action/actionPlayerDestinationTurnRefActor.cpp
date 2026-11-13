@@ -3,16 +3,16 @@
 namespace uking::action {
 
 PlayerDestinationTurnRefActor::PlayerDestinationTurnRefActor(const InitArg& arg)
-    : PlayerAction(arg) {}
+    : PlayerBase(arg) {}
 
 PlayerDestinationTurnRefActor::~PlayerDestinationTurnRefActor() = default;
 
 void PlayerDestinationTurnRefActor::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerDestinationTurnRefActor::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerDestinationTurnRefActor::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerDestinationTurnRefActor::loadParams_() {
 }
 
 void PlayerDestinationTurnRefActor::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

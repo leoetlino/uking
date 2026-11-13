@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-PlayerWakeBoardReady::PlayerWakeBoardReady(const InitArg& arg) : PlayerAction(arg) {}
+PlayerWakeBoardReady::PlayerWakeBoardReady(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerWakeBoardReady::~PlayerWakeBoardReady() = default;
 
 void PlayerWakeBoardReady::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerWakeBoardReady::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerWakeBoardReady::loadParams_() {
@@ -20,7 +20,7 @@ void PlayerWakeBoardReady::loadParams_() {
 }
 
 void PlayerWakeBoardReady::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

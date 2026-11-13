@@ -2,22 +2,22 @@
 
 namespace uking::action {
 
-PlayerNavMeshMove::PlayerNavMeshMove(const InitArg& arg) : PlayerGuidedMove(arg) {}
+PlayerNavMeshMove::PlayerNavMeshMove(const InitArg& arg) : PlayerDestinationMoveBase(arg) {}
 
 void PlayerNavMeshMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerGuidedMove::enter_(params);
+    PlayerDestinationMoveBase::enter_(params);
 }
 
 void PlayerNavMeshMove::leave_() {
-    PlayerGuidedMove::leave_();
+    PlayerDestinationMoveBase::leave_();
 }
 
 void PlayerNavMeshMove::loadParams_() {
-    PlayerGuidedMove::loadParams_();
+    PlayerDestinationMoveBase::loadParams_();
 }
 
 void PlayerNavMeshMove::calc_() {
-    PlayerGuidedMove::calc_();
+    PlayerDestinationMoveBase::calc_();
 }
 
 }  // namespace uking::action

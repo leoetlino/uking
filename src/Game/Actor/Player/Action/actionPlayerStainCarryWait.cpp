@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerStainCarryWait::PlayerStainCarryWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerStainCarryWait::PlayerStainCarryWait(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerStainCarryWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerStainCarryWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerStainCarryWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

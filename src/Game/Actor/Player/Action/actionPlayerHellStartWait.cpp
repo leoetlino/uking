@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PlayerHellStartWait::PlayerHellStartWait(const InitArg& arg) : PlayerAction(arg) {}
+PlayerHellStartWait::PlayerHellStartWait(const InitArg& arg) : PlayerBase(arg) {}
 
 PlayerHellStartWait::~PlayerHellStartWait() = default;
 
 void PlayerHellStartWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerHellStartWait::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerHellStartWait::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

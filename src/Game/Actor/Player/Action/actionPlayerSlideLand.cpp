@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerSlideLand::PlayerSlideLand(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSlideLand::PlayerSlideLand(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSlideLand::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSlideLand::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSlideLand::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action

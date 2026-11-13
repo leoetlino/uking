@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-PlayerSleep::PlayerSleep(const InitArg& arg) : PlayerAction(arg) {}
+PlayerSleep::PlayerSleep(const InitArg& arg) : PlayerBase(arg) {}
 
 void PlayerSleep::enter_(ksys::act::ai::InlineParamPack* params) {
-    PlayerAction::enter_(params);
+    PlayerBase::enter_(params);
 }
 
 void PlayerSleep::leave_() {
-    PlayerAction::leave_();
+    PlayerBase::leave_();
 }
 
 void PlayerSleep::calc_() {
-    PlayerAction::calc_();
+    PlayerBase::calc_();
 }
 
 }  // namespace uking::action
