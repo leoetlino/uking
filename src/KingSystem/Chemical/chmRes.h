@@ -11,10 +11,10 @@
 
 namespace ksys::chm {
 
-class SystemConfig : public agl::utl::IParameterIO, public sead::hostio::Node {
-    SEAD_SINGLETON_DISPOSER(SystemConfig)
-    SystemConfig() : agl::utl::IParameterIO("chmres", 0) {}
-    ~SystemConfig() override;
+class Res : public agl::utl::IParameterIO, public sead::hostio::Node {
+    SEAD_SINGLETON_DISPOSER(Res)
+    Res() : agl::utl::IParameterIO("chmres", 0) {}
+    ~Res() override;
 
 public:
     struct Element : agl::utl::IParameterObj, sead::hostio::Node {

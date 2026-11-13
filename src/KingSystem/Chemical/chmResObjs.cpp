@@ -1,8 +1,8 @@
-#include "KingSystem/Chemical/chmSystemConfig.h"
+#include "KingSystem/Chemical/chmRes.h"
 
 namespace ksys::chm {
 
-SystemConfig::Element::Element()
+Res::Element::Element()
     : name({"----"}, "name", "ID", this), label({"名称未設定"}, "label", "名前", this),
       effect_type(0, "effect_type", "エフェクトタイプ", this),
       attribute(0, "attribute", "ビットフラグ", this),
@@ -14,9 +14,9 @@ SystemConfig::Element::Element()
       shock_wave_speed(0.0, "shock_wave_speed", "衝撃波の速度", this),
       fire_level(2, "fire_level", "炎レベル", this), moisture(0.0, "moisture", "湿度", this) {}
 
-SystemConfig::Element::~Element() = default;
+Res::Element::~Element() = default;
 
-SystemConfig::Material::Material()
+Res::Material::Material()
     : id({"untitled"}, "id", "ID", this), label({"名称未設定材質"}, "label", "名前", this),
       attribute(0, "attribute", "属性フラグ", this),
       heat_capacity(1.0, "heat_capacity", "比熱容量[J/gK]", "Min=0, Max=10", this),
@@ -40,9 +40,9 @@ SystemConfig::Material::Material()
       ice_magic_res_element_name({"----"}, "ice_magic_res_element_name", "氷魔法", this),
       water_res_element_name({"----"}, "water_res_element_name", "水", this) {}
 
-SystemConfig::Material::~Material() = default;
+Res::Material::~Material() = default;
 
-SystemConfig::World::World()
+Res::World::World()
     : id({"untitled"}, "id", "ID", this), label({"名称未設定"}, "label", "ラベル", this),
       evaporation_speed_rate(24.0, "evaporation_speed_rate", "温度に対する蒸発係数",
                              "Min=0 ,Max=100", this),
@@ -70,6 +70,6 @@ SystemConfig::World::World()
       object_ignition_count(90.0, "object_ignition_count", "キャラクタ着火時間(フレーム)", this),
       offensive_rigid_radius(1.0, "offensive_rigid_radius", "攻撃状態のケミカルサイズ", this) {}
 
-SystemConfig::World::~World() = default;
+Res::World::~World() = default;
 
 }  // namespace ksys::chm

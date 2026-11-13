@@ -1,15 +1,15 @@
-#include "KingSystem/Chemical/chmSystemConfig.h"
+#include "KingSystem/Chemical/chmRes.h"
 
 namespace ksys::chm {
 
-SEAD_SINGLETON_DISPOSER_IMPL(SystemConfig)
+SEAD_SINGLETON_DISPOSER_IMPL(Res)
 
-SystemConfig::~SystemConfig() {
+Res::~Res() {
     mMaterials.freeBuffer();
     mWorlds.freeBuffer();
 }
 
-void SystemConfig::init(sead::Heap* heap) {
+void Res::init(sead::Heap* heap) {
     mMaterials.allocBufferAssert(128, heap);
     mElements.allocBufferAssert(128, heap);
     mWorlds.allocBufferAssert(8, heap);
@@ -26,7 +26,7 @@ void SystemConfig::init(sead::Heap* heap) {
         mElementList.addObj(&*it, sead::FormatFixedSafeString<1024>("%d", it.getIndex()));
 }
 
-const SystemConfig::World& SystemConfig::getWorld(const sead::SafeString& name) const {
+const Res::World& Res::getWorld(const sead::SafeString& name) const {
     for (auto it = mWorlds.begin(), end = mWorlds.end(); it != end; ++it) {
         if (name == it->id.ref())
             return *it;
@@ -34,7 +34,7 @@ const SystemConfig::World& SystemConfig::getWorld(const sead::SafeString& name) 
     return mDummyWorld;
 }
 
-const SystemConfig::Material& SystemConfig::getMaterial(const sead::SafeString& name) const {
+const Res::Material& Res::getMaterial(const sead::SafeString& name) const {
     for (auto it = mMaterials.begin(), end = mMaterials.end(); it != end; ++it) {
         if (name == it->id.ref())
             return *it;
@@ -42,7 +42,7 @@ const SystemConfig::Material& SystemConfig::getMaterial(const sead::SafeString& 
     return mDummyMaterial;
 }
 
-const SystemConfig::Element& SystemConfig::getElement(const sead::SafeString& name) const {
+const Res::Element& Res::getElement(const sead::SafeString& name) const {
     for (auto it = mElements.begin(), end = mElements.end(); it != end; ++it) {
         if (name == it->name.ref())
             return *it;
