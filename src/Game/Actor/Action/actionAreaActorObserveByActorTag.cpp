@@ -3,12 +3,12 @@
 namespace uking::action {
 
 AreaActorObserveByActorTag::AreaActorObserveByActorTag(const InitArg& arg)
-    : AreaActorObserve(arg) {}
+    : AreaObserveActorBase(arg) {}
 
 AreaActorObserveByActorTag::~AreaActorObserveByActorTag() = default;
 
 bool AreaActorObserveByActorTag::init_(sead::Heap* heap) {
-    return AreaActorObserve::init_(heap);
+    return AreaObserveActorBase::init_(heap);
 }
 
 }  // namespace uking::action

@@ -2,7 +2,7 @@
 
 namespace ksys::game {
 
-AreaObserveActorAction::AreaObserveActorAction(const InitArg& arg) : AreaActorObserve(arg) {}
+AreaObserveActorAction::AreaObserveActorAction(const InitArg& arg) : AreaObserveActorBase(arg) {}
 
 AreaObserveActorAction::~AreaObserveActorAction() = default;
 

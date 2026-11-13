@@ -5,11 +5,11 @@
 
 namespace ksys::game {
 
-class AreaActorObserve : public AreaActionBase {
-    SEAD_RTTI_OVERRIDE(AreaActorObserve, AreaActionBase)
+class AreaObserveActorBase : public AreaActionBase {
+    SEAD_RTTI_OVERRIDE(AreaObserveActorBase, AreaActionBase)
 public:
-    explicit AreaActorObserve(const InitArg& arg);
-    ~AreaActorObserve() override;
+    explicit AreaObserveActorBase(const InitArg& arg);
+    ~AreaObserveActorBase() override;
 
     bool init_(sead::Heap* heap) override;
     void loadParams_() override;
