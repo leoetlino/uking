@@ -14,11 +14,9 @@
 #include "KingSystem/System/CoreInfo.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::res {
-class GameData;
-}
-
 namespace ksys::gdt {
+
+class TriggerResource;
 
 class TriggerParam {
 public:
@@ -63,7 +61,7 @@ public:
 
     TriggerParam();
 
-    void copyFromGameDataRes(res::GameData* gdata, sead::Heap* heap);
+    void copyFromTriggerResource(TriggerResource* gdata, sead::Heap* heap);
     void init(sead::Heap* heap);
     void destroyHeap();
     void allocBools(s32 size, sead::Heap* heap);

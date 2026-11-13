@@ -13,11 +13,11 @@
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/GameData/gdtSaveMgr.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
+#include "KingSystem/GameData/gdtTriggerResource.h"
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resOverlayArenaSystem.h"
-#include "KingSystem/Resource/resResourceGameData.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/HeapUtil.h"
@@ -107,7 +107,7 @@ void Manager::init(sead::Heap* heap, sead::Framework* framework) {
 
     SaveMgr::instance()->init(arg);
 
-    static res::EntryFactory<res::GameData> bgdata_factory{5.0, 0xc0000};
+    static res::EntryFactory<TriggerResource> bgdata_factory{5.0, 0xc0000};
     res::registerEntryFactory(&bgdata_factory, "bgdata");
 
     mSaveAreaHeap =

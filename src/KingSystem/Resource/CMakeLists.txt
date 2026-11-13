@@ -127,8 +127,6 @@ target_sources(uking PRIVATE
   resResource.h
   resResourceArchive.cpp
   resResourceArchive.h
-  resResourceGameData.cpp
-  resResourceGameData.h
   resResourceGameSaveData.cpp
   resResourceGameSaveData.h
 

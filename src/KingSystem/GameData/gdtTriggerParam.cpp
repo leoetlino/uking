@@ -12,8 +12,8 @@
 #include "KingSystem/Game/UI/UIGlue.h"
 #include "KingSystem/GameData/gdtFlagProxy.h"
 #include "KingSystem/GameData/gdtManager.h"
+#include "KingSystem/GameData/gdtTriggerResource.h"
 #include "KingSystem/PlayReport/ProductReportMgr.h"
-#include "KingSystem/Resource/resResourceGameData.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 #include "KingSystem/Utils/SafeDelete.h"
@@ -405,8 +405,8 @@ bool resetFlag(bool* was_reset, const sead::PtrArray<FlagBase>& flags, s32 idx,
 }
 
 template <typename T>
-inline void copyGameDataResBuffer(sead::Buffer<T>& source, sead::PtrArray<FlagBase>& dest,
-                                  sead::Heap* heap) {
+inline void copyTriggerResourceBuffer(sead::Buffer<T>& source, sead::PtrArray<FlagBase>& dest,
+                                      sead::Heap* heap) {
     if (source.size() == 0)
         return;
 
@@ -418,9 +418,9 @@ inline void copyGameDataResBuffer(sead::Buffer<T>& source, sead::PtrArray<FlagBa
 }
 
 template <typename T>
-inline void copyGameDataResBuffer(sead::PtrArray<sead::Buffer<T>>& source,
-                                  sead::PtrArray<sead::PtrArray<FlagBase>>& dest,
-                                  sead::Heap* heap) {
+inline void copyTriggerResourceBuffer(sead::PtrArray<sead::Buffer<T>>& source,
+                                      sead::PtrArray<sead::PtrArray<FlagBase>>& dest,
+                                      sead::Heap* heap) {
     const auto n = source.capacity();
     if (n < 1)
         return;
@@ -637,29 +637,29 @@ void copyFlagArrays(sead::PtrArray<sead::PtrArray<FlagBase>>& dest,
     }
 }
 
-void TriggerParam::copyFromGameDataRes(res::GameData* gdata, sead::Heap* heap) {
+void TriggerParam::copyFromTriggerResource(TriggerResource* gdata, sead::Heap* heap) {
     if (!gdata)
         return;
 
-    copyGameDataResBuffer(gdata->getBoolFlags(), mBoolFlags, heap);
-    copyGameDataResBuffer(gdata->getS32Flags(), mS32Flags, heap);
-    copyGameDataResBuffer(gdata->getF32Flags(), mF32Flags, heap);
-    copyGameDataResBuffer(gdata->getStringFlags(), mStringFlags, heap);
-    copyGameDataResBuffer(gdata->getString64Flags(), mString64Flags, heap);
-    copyGameDataResBuffer(gdata->getString256Flags(), mString256Flags, heap);
-    copyGameDataResBuffer(gdata->getVector2fFlags(), mVector2fFlags, heap);
-    copyGameDataResBuffer(gdata->getVector3fFlags(), mVector3fFlags, heap);
-    copyGameDataResBuffer(gdata->getVector4fFlags(), mVector4fFlags, heap);
+    copyTriggerResourceBuffer(gdata->getBoolFlags(), mBoolFlags, heap);
+    copyTriggerResourceBuffer(gdata->getS32Flags(), mS32Flags, heap);
+    copyTriggerResourceBuffer(gdata->getF32Flags(), mF32Flags, heap);
+    copyTriggerResourceBuffer(gdata->getStringFlags(), mStringFlags, heap);
+    copyTriggerResourceBuffer(gdata->getString64Flags(), mString64Flags, heap);
+    copyTriggerResourceBuffer(gdata->getString256Flags(), mString256Flags, heap);
+    copyTriggerResourceBuffer(gdata->getVector2fFlags(), mVector2fFlags, heap);
+    copyTriggerResourceBuffer(gdata->getVector3fFlags(), mVector3fFlags, heap);
+    copyTriggerResourceBuffer(gdata->getVector4fFlags(), mVector4fFlags, heap);
 
-    copyGameDataResBuffer(gdata->getBoolArrayFlags(), mBoolArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getS32ArrayFlags(), mS32ArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getF32ArrayFlags(), mF32ArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getStringArrayFlags(), mStringArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getString64ArrayFlags(), mString64ArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getString256ArrayFlags(), mString256ArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getVector2fArrayFlags(), mVector2fArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getVector3fArrayFlags(), mVector3fArrayFlags, heap);
-    copyGameDataResBuffer(gdata->getVector4fArrayFlags(), mVector4fArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getBoolArrayFlags(), mBoolArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getS32ArrayFlags(), mS32ArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getF32ArrayFlags(), mF32ArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getStringArrayFlags(), mStringArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getString64ArrayFlags(), mString64ArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getString256ArrayFlags(), mString256ArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getVector2fArrayFlags(), mVector2fArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getVector3fArrayFlags(), mVector3fArrayFlags, heap);
+    copyTriggerResourceBuffer(gdata->getVector4fArrayFlags(), mVector4fArrayFlags, heap);
 
     mResourceFlags = gdata->getField14();
 }

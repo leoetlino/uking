@@ -10,4 +10,6 @@ target_sources(uking PRIVATE
   gdtSaveMgr.h
   gdtTriggerParam.cpp
   gdtTriggerParam.h
+  gdtTriggerResource.cpp
+  gdtTriggerResource.h
 )

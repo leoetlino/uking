@@ -1,14 +1,14 @@
-#include "KingSystem/Resource/resResourceGameData.h"
+#include "KingSystem/GameData/gdtTriggerResource.h"
 #include <Byaml/Byaml.h>
 #include <type_traits>
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
-namespace ksys::res {
+namespace ksys::gdt {
 
-GameData::GameData() = default;
+TriggerResource::TriggerResource() = default;
 
-GameData::~GameData() {
+TriggerResource::~TriggerResource() {
     ;
 }
 
@@ -18,7 +18,7 @@ KSYS_ALWAYS_INLINE inline void
 loadFlags(const sead::SafeString& data_type, const al::ByamlIter& root_iter, sead::Heap* heap,
           sead::Buffer<FlagType>& flags, const sead::SafeString& wanted_data_type,
           gdt::FlagType flag_type, const GetConfigFn& get_config_fn) {
-    constexpr bool IsBoolFlag = std::is_same<FlagType, gdt::FlagBool>();
+    constexpr bool IsBoolFlag = std::is_same<FlagType, FlagBool>();
 
     if (data_type != wanted_data_type)
         return;
@@ -31,7 +31,7 @@ loadFlags(const sead::SafeString& data_type, const al::ByamlIter& root_iter, sea
     if (num_flags > 0)
         flags.allocBufferAssert(num_flags, heap);
 
-    gdt::FlagProperties properties{};
+    FlagProperties properties{};
     typename FlagType::ConfigType config{};
 
     for (s32 i = 0; i < num_flags; ++i) {
@@ -39,17 +39,17 @@ loadFlags(const sead::SafeString& data_type, const al::ByamlIter& root_iter, sea
         if (!array_iter.tryGetIterByIndex(&iter, i))
             continue;
 
-        gdt::FlagDebugData* debug_data = nullptr;
+        FlagDebugData* debug_data = nullptr;
         if (util::getDebugHeap())
-            debug_data = new (util::getDebugHeap()) gdt::FlagDebugData();
+            debug_data = new (util::getDebugHeap()) FlagDebugData();
 
-        GameData::loadDebugData(debug_data, iter);
+        TriggerResource::loadDebugData(debug_data, iter);
 
         s32 hash = 0;
         iter.tryGetIntByKey(&hash, "HashValue");
         const u32 hash_u = hash;
 
-        GameData::loadFlagProperties(&properties, iter);
+        TriggerResource::loadFlagProperties(&properties, iter);
         get_config_fn(&config, iter);
 
         flags[i].setDebugData(debug_data);
@@ -84,7 +84,7 @@ loadArrayFlags(const sead::SafeString& data_type, const al::ByamlIter& root_iter
     const auto num_flags = array_iter.getSize();
     flags.allocBuffer(num_flags, heap);
 
-    gdt::FlagProperties properties{};
+    FlagProperties properties{};
     typename FlagType::ConfigType config{};
 
     for (s32 i = 0; i < num_flags; ++i) {
@@ -92,17 +92,17 @@ loadArrayFlags(const sead::SafeString& data_type, const al::ByamlIter& root_iter
         if (!array_iter.tryGetIterByIndex(&iter, i))
             continue;
 
-        gdt::FlagDebugData* debug_data = nullptr;
+        FlagDebugData* debug_data = nullptr;
         if (util::getDebugHeap())
-            debug_data = new (util::getDebugHeap()) gdt::FlagDebugData();
+            debug_data = new (util::getDebugHeap()) FlagDebugData();
 
-        GameData::loadDebugData(debug_data, iter);
+        TriggerResource::loadDebugData(debug_data, iter);
 
         s32 hash = 0;
         iter.tryGetIntByKey(&hash, "HashValue");
         const u32 hash_u = hash;
 
-        GameData::loadFlagProperties(&properties, iter);
+        TriggerResource::loadFlagProperties(&properties, iter);
         get_config_fn(&config, iter);
 
         al::ByamlIter values_iter;
@@ -168,8 +168,8 @@ KSYS_ALWAYS_INLINE inline bool tryGetVector(const al::ByamlIter& value_iter, T* 
 // * In init_string_array_flag_config, some calls to memcpy (for string copies) are replaced
 //   with memset and calcLength() is optimized out.
 // * sead::Vector4<float>::operator= (the original code does 64-bit loads and stores)
-void GameData::doCreate_(u8* data, u32, sead::Heap*) {
-    auto* heap = gdt::Manager::instance()->getSaveAreaHeap();
+void TriggerResource::doCreate_(u8* data, u32, sead::Heap*) {
+    auto* heap = Manager::instance()->getSaveAreaHeap();
 
     const al::ByamlIter root_iter{data};
 
@@ -177,8 +177,8 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
     root_iter.getKeyName(&key, 0);
     const sead::SafeString data_type = key;
 
-    loadFlags(data_type, root_iter, heap, mBoolFlags, "bool_data", gdt::FlagType::Bool,
-              [](gdt::FlagBool::ConfigType* config, const al::ByamlIter& iter) {
+    loadFlags(data_type, root_iter, heap, mBoolFlags, "bool_data", FlagType::Bool,
+              [](FlagBool::ConfigType* config, const al::ByamlIter& iter) {
                   bool min_value{};
                   bool max_value{};
                   s32 init_value{};
@@ -188,8 +188,8 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
                   iter.tryGetBoolByKey(&max_value, "MaxValue");
               });
 
-    loadFlags(data_type, root_iter, heap, mS32Flags, "s32_data", gdt::FlagType::S32,
-              [](gdt::FlagS32::ConfigType* config, const al::ByamlIter& iter) {
+    loadFlags(data_type, root_iter, heap, mS32Flags, "s32_data", FlagType::S32,
+              [](FlagS32::ConfigType* config, const al::ByamlIter& iter) {
                   s32 init_value{};
                   s32 min_value{};
                   s32 max_value{};
@@ -201,8 +201,8 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
                   config->max_value = max_value;
               });
 
-    loadFlags(data_type, root_iter, heap, mF32Flags, "f32_data", gdt::FlagType::F32,
-              [](gdt::FlagF32::ConfigType* config, const al::ByamlIter& iter) {
+    loadFlags(data_type, root_iter, heap, mF32Flags, "f32_data", FlagType::F32,
+              [](FlagF32::ConfigType* config, const al::ByamlIter& iter) {
                   f32 init_value{};
                   f32 min_value{};
                   f32 max_value{};
@@ -231,14 +231,14 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         config->max_value = StringType("");
     };
 
-    loadFlags(data_type, root_iter, heap, mStringFlags, "string_data", gdt::FlagType::String,
+    loadFlags(data_type, root_iter, heap, mStringFlags, "string_data", FlagType::String,
               init_string_flag_config);
 
-    loadFlags(data_type, root_iter, heap, mString64Flags, "string64_data", gdt::FlagType::String64,
+    loadFlags(data_type, root_iter, heap, mString64Flags, "string64_data", FlagType::String64,
               init_string_flag_config);
 
-    loadFlags(data_type, root_iter, heap, mString256Flags, "string256_data",
-              gdt::FlagType::String256, init_string_flag_config);
+    loadFlags(data_type, root_iter, heap, mString256Flags, "string256_data", FlagType::String256,
+              init_string_flag_config);
 
     const auto init_vector_flag_config = [](auto* config, const al::ByamlIter& iter) {
         using VectorType = decltype(config->initial_value);
@@ -263,24 +263,24 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         config->max_value = max_value;
     };
 
-    loadFlags(data_type, root_iter, heap, mVector2fFlags, "vector2f_data", gdt::FlagType::Vector2f,
+    loadFlags(data_type, root_iter, heap, mVector2fFlags, "vector2f_data", FlagType::Vector2f,
               init_vector_flag_config);
 
-    loadFlags(data_type, root_iter, heap, mVector3fFlags, "vector3f_data", gdt::FlagType::Vector3f,
+    loadFlags(data_type, root_iter, heap, mVector3fFlags, "vector3f_data", FlagType::Vector3f,
               init_vector_flag_config);
 
-    loadFlags(data_type, root_iter, heap, mVector4fFlags, "vector4f_data", gdt::FlagType::Vector4f,
+    loadFlags(data_type, root_iter, heap, mVector4fFlags, "vector4f_data", FlagType::Vector4f,
               init_vector_flag_config);
 
     loadArrayFlags(
-        data_type, root_iter, heap, mBoolArrayFlags, "bool_array_data", gdt::FlagType::BoolArray,
-        [](gdt::FlagBool::ConfigType*, const al::ByamlIter& iter) {
+        data_type, root_iter, heap, mBoolArrayFlags, "bool_array_data", FlagType::BoolArray,
+        [](FlagBool::ConfigType*, const al::ByamlIter& iter) {
             bool min_value;
             bool max_value;
             iter.tryGetBoolByKey(&min_value, "MinValue");
             iter.tryGetBoolByKey(&max_value, "MaxValue");
         },
-        [](gdt::FlagBool::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
+        [](FlagBool::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
             bool value;
             s32 int_value{};
             if (values_iter.tryGetIntByIndex(&int_value, value_idx))
@@ -292,8 +292,8 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         });
 
     loadArrayFlags(
-        data_type, root_iter, heap, mS32ArrayFlags, "s32_array_data", gdt::FlagType::S32Array,
-        [](gdt::FlagS32::ConfigType* config, const al::ByamlIter& iter) {
+        data_type, root_iter, heap, mS32ArrayFlags, "s32_array_data", FlagType::S32Array,
+        [](FlagS32::ConfigType* config, const al::ByamlIter& iter) {
             s32 min_value;
             s32 max_value;
             iter.tryGetIntByKey(&min_value, "MinValue");
@@ -301,7 +301,7 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
             config->min_value = min_value;
             config->max_value = max_value;
         },
-        [](gdt::FlagS32::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
+        [](FlagS32::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
             s32 value;
             values_iter.tryGetIntByIndex(&value, value_idx);
             config->initial_value = value;
@@ -309,8 +309,8 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         });
 
     loadArrayFlags(
-        data_type, root_iter, heap, mF32ArrayFlags, "f32_array_data", gdt::FlagType::F32Array,
-        [](gdt::FlagF32::ConfigType* config, const al::ByamlIter& iter) {
+        data_type, root_iter, heap, mF32ArrayFlags, "f32_array_data", FlagType::F32Array,
+        [](FlagF32::ConfigType* config, const al::ByamlIter& iter) {
             f32 min_value;
             f32 max_value;
             iter.tryGetFloatByKey(&min_value, "MinValue");
@@ -318,7 +318,7 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
             config->min_value = min_value;
             config->max_value = max_value;
         },
-        [](gdt::FlagF32::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
+        [](FlagF32::ConfigType* config, const al::ByamlIter& values_iter, s32 value_idx) {
             f32 value;
             tryGetFloatOrIntByIndex(values_iter, value_idx, &value);
             config->initial_value = value;
@@ -348,15 +348,15 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         };
 
     loadArrayFlags(data_type, root_iter, heap, mStringArrayFlags, "string32_array_data",
-                   gdt::FlagType::StringArray, init_string_array_flag_config,
+                   FlagType::StringArray, init_string_array_flag_config,
                    init_string_array_child_flag_config);
 
     loadArrayFlags(data_type, root_iter, heap, mString64ArrayFlags, "string64_array_data",
-                   gdt::FlagType::String64Array, init_string_array_flag_config,
+                   FlagType::String64Array, init_string_array_flag_config,
                    init_string_array_child_flag_config);
 
     loadArrayFlags(data_type, root_iter, heap, mString256ArrayFlags, "string256_array_data",
-                   gdt::FlagType::String256Array, init_string_array_flag_config,
+                   FlagType::String256Array, init_string_array_flag_config,
                    init_string_array_child_flag_config);
 
     const auto init_vector_array_flag_config = [](auto* config, const al::ByamlIter& iter) {
@@ -393,19 +393,19 @@ void GameData::doCreate_(u8* data, u32, sead::Heap*) {
         };
 
     loadArrayFlags(data_type, root_iter, heap, mVector2fArrayFlags, "vector2f_array_data",
-                   gdt::FlagType::Vector2fArray, init_vector_array_flag_config,
+                   FlagType::Vector2fArray, init_vector_array_flag_config,
                    init_vector_array_child_flag_config);
 
     loadArrayFlags(data_type, root_iter, heap, mVector3fArrayFlags, "vector3f_array_data",
-                   gdt::FlagType::Vector3fArray, init_vector_array_flag_config,
+                   FlagType::Vector3fArray, init_vector_array_flag_config,
                    init_vector_array_child_flag_config);
 
     loadArrayFlags(data_type, root_iter, heap, mVector4fArrayFlags, "vector4f_array_data",
-                   gdt::FlagType::Vector4fArray, init_vector_array_flag_config,
+                   FlagType::Vector4fArray, init_vector_array_flag_config,
                    init_vector_array_child_flag_config);
 }
 
-void GameData::loadDebugData(gdt::FlagDebugData* data, const al::ByamlIter& iter) {
+void TriggerResource::loadDebugData(FlagDebugData* data, const al::ByamlIter& iter) {
     if (!data)
         return;
 
@@ -427,7 +427,7 @@ void GameData::loadDebugData(gdt::FlagDebugData* data, const al::ByamlIter& iter
     data->delete_rev = delete_rev;
 }
 
-void GameData::loadFlagProperties(gdt::FlagProperties* properties, const al::ByamlIter& iter) {
+void TriggerResource::loadFlagProperties(FlagProperties* properties, const al::ByamlIter& iter) {
     bool is_one_trigger = false;
     bool is_program_readable = false;
     bool is_program_writable = false;
@@ -447,7 +447,7 @@ void GameData::loadFlagProperties(gdt::FlagProperties* properties, const al::Bya
     properties->setIsProgramWritable(is_program_writable);
     properties->setIsSave(is_save);
     properties->setIsEventAssociated(is_event_associated);
-    properties->setResetType(gdt::ResetType(reset_type));
+    properties->setResetType(ResetType(reset_type));
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::gdt
