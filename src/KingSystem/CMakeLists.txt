@@ -24,6 +24,8 @@ add_subdirectory(World)
 add_subdirectory(XLink)
 
 target_sources(uking PRIVATE
+  Account.cpp
+  Account.h
   ksys.cpp
   ksys.h
   ksysDebugInput.cpp

@@ -4,8 +4,6 @@ target_sources(uking PRIVATE
     UI/LayoutResourceMgr.cpp
     UI/LayoutResourceMgr.h
 
-    Account.cpp
-    Account.h
     AutoDim.cpp
     AutoDim.h
     BasicProfiler.cpp
