@@ -20,6 +20,12 @@ target_sources(uking PRIVATE
   DamageInfoMgr.h
   E3Mgr.cpp
   E3Mgr.h
+  gdtCommonFlags.cpp
+  gdtCommonFlags.h
+  gdtCommonFlagsAccessorDecls.inc
+  gdtCommonFlagsAccessorDefs.inc
+  gdtCommonFlagsHandleDecls.inc
+  gdtCommonFlagsHandleDefs.inc
   NXArgs.cpp
   NXArgs.h
   SystemPauseMgr.cpp

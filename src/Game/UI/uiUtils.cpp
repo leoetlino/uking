@@ -6,9 +6,9 @@
 #include "Game/CreatePlayerEquipActorMgr.h"
 #include "Game/DamageInfoMgr.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 
 namespace uking::ui {
 
@@ -64,7 +64,7 @@ void getWeaponStats(const PouchItem& item, WeaponStats* stats) {
                 power = ksys::act::getMasterSwordTrueFormAttackPower(info_, name);
             } else {
                 const auto attack = ksys::act::getAttackPower(info_, name);
-                power = ksys::gdt::getFlag_MasterSword_Add_Power() + attack;
+                power = getFlag_MasterSword_Add_Power() + attack;
             }
         }
         stats->power = power;

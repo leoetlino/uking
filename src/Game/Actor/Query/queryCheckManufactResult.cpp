@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryCheckManufactResult.h"
 #include <evfl/Query.h>
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
+#include "Game/gdtCommonFlags.h"
 
 namespace uking::query {
 
@@ -11,8 +11,8 @@ CheckManufactResult::~CheckManufactResult() = default;
 static constexpr s32 sManufactResults[8] = {0, 6, 4, 6, 1, 2, 3, 5};
 
 int CheckManufactResult::doQuery() {
-    if (ksys::gdt::getFlag_Shop_IsDecide()) {
-        s32 state = ksys::gdt::getFlag_Shop_CurrentItemState();
+    if (getFlag_Shop_IsDecide()) {
+        s32 state = getFlag_Shop_CurrentItemState();
         if (state < 8 && state >= 0)
             return sManufactResults[state];
     }

@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryBranchByDyeColor.h"
 #include <evfl/Query.h>
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
+#include "Game/gdtCommonFlags.h"
 
 namespace uking::query {
 
@@ -9,7 +9,7 @@ BranchByDyeColor::BranchByDyeColor(const InitArg& arg) : ksys::act::ai::Query(ar
 BranchByDyeColor::~BranchByDyeColor() = default;
 
 int BranchByDyeColor::doQuery() {
-    auto index = ksys::gdt::getFlag_ColorChange_MaterialIndex();
+    auto index = getFlag_ColorChange_MaterialIndex();
     if (index >= 1 && index <= 15) {
         return index;
     }

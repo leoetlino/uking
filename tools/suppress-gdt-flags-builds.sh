@@ -1,9 +1,9 @@
 #!/bin/bash
 
 array=(
-    src/KingSystem/GameData/gdtCommonFlags.cpp
-    src/KingSystem/GameData/gdtCommonFlagsUtils.cpp
-    src/KingSystem/GameData/gdtSpecialFlags.cpp
+    src/Game/gdtCommonFlags.cpp
+    src/Game/gdtCommonFlagsAccessorDefs.inc
+    src/Game/gdtCommonFlagsHandleDefs.inc
 )
 
 for file in "${array[@]}"

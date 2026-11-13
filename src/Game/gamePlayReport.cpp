@@ -1,7 +1,7 @@
 #include "Game/gamePlayReport.h"
 #include <math/seadVector.h>
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/Game/StageInfo.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/Quest/qstQuest.h"
@@ -15,7 +15,7 @@ int convertPositionToInt(const sead::Vector2i& pos);
 
 void reportKorok(const sead::Vector3f& position) {
     ksys::ProductReporter::getSomeBool();
-    s32 id = ksys::gdt::getFlag_HiddenKorok_Number();
+    s32 id = getFlag_HiddenKorok_Number();
 
     PlayReport report("korok"_str, 7, ksys::PlayReportMgr::instance()->getReporter()->getHeap());
 
@@ -294,7 +294,7 @@ void PlayReport::addMapType() {
     if (!ksys::gdt::Manager::instance())
         return;
 
-    add("IsHardMode"_str, ksys::gdt::getFlag_AoC_HardMode_Enabled());
+    add("IsHardMode"_str, getFlag_AoC_HardMode_Enabled());
 
     const sead::SafeString& current_map = ksys::game::StageInfo::getCurrentMapType();
     u32 type = 0;

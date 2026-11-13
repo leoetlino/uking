@@ -7,13 +7,13 @@
 #include "Game/Actor/actWeapon.h"
 #include "Game/ActorHeapUtil.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 #include "KingSystem/Game/Weapon/WeaponBase.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 
 namespace uking {
 
@@ -206,7 +206,7 @@ void CreatePlayerEquipActorMgr::requestCreateArmor(s32 slot_idx, const sead::Saf
     bool is_dye = ksys::act::InfoData::instance()->hasTag(name.cstr(), ksys::act::tags::ArmorDye);
     if (is_dye) {
         params->add(dye_color, ArmorDyeColor);
-        if (ksys::gdt::getFlag_ColorChange_EnablePreview()) {
+        if (getFlag_ColorChange_EnablePreview()) {
             params->add(true, EnableDynamicColorChange);
         }
     }

@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryCheckIsOpenItemCategory.h"
 #include <evfl/Query.h>
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
+#include "Game/gdtCommonFlags.h"
 
 namespace uking::query {
 
@@ -9,7 +9,7 @@ CheckIsOpenItemCategory::CheckIsOpenItemCategory(const InitArg& arg) : ksys::act
 CheckIsOpenItemCategory::~CheckIsOpenItemCategory() = default;
 
 int CheckIsOpenItemCategory::doQuery() {
-    return !ksys::gdt::getFlag_IsOpenItemCategory(*mCategory);
+    return !getFlag_IsOpenItemCategory(*mCategory);
 }
 
 void CheckIsOpenItemCategory::loadParams(const evfl::QueryArg& arg) {

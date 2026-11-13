@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryCheckShopSelectedItemName.h"
 #include <evfl/Query.h>
-#include "KingSystem/GameData/gdtSpecialFlags.h"
+#include "Game/gdtCommonFlags.h"
 
 namespace uking::query {
 
@@ -11,7 +11,7 @@ CheckShopSelectedItemName::~CheckShopSelectedItemName() = default;
 
 int CheckShopSelectedItemName::doQuery() {
     const char* result = &sead::SafeString::cNullChar;
-    ksys::gdt::getStr64ByKey(&result, "Shop_SelectItemName");
+    getStr64ByKey(&result, "Shop_SelectItemName");
     return mPorchItemName == result;
 }
 

@@ -1,9 +1,9 @@
 #include "Game/Actor/Player/actPlayerInfo.h"
 #include "Game/Actor/Player/actPlayerBase.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/ksys.h"
 
 namespace uking::act {
@@ -53,7 +53,7 @@ s32 PlayerInfo::getMaxLifeFromPlayerActor() const {
 }
 
 void PlayerInfo::setMaxHeartValue(s32 quarter_hearts) {
-    ksys::gdt::setFlag_MaxHartValue(quarter_hearts);
+    setFlag_MaxHartValue(quarter_hearts);
     mMaxHeartValue = static_cast<f32>(quarter_hearts);
 }
 
@@ -63,7 +63,7 @@ u32 PlayerInfo::getMaxHeartValue() const {
 }
 
 void PlayerInfo::updateMaxHeartValueFromGameData() {
-    mMaxHeartValue = static_cast<f32>(ksys::gdt::getFlag_MaxHartValue());
+    mMaxHeartValue = static_cast<f32>(getFlag_MaxHartValue());
 }
 
 void PlayerInfo::setLifeForPlayerActor(s32 life) {
@@ -85,7 +85,7 @@ void PlayerInfo::recoverLife() {
 }
 
 void PlayerInfo::setStaminaCurrentMax(f32 max_stamina) {
-    ksys::gdt::setFlag_StaminaCurrentMax(max_stamina);
+    setFlag_StaminaCurrentMax(max_stamina);
     mStaminaCurrentMax = max_stamina;
 }
 
@@ -94,11 +94,11 @@ f32 PlayerInfo::getStaminaCurrentMax() const {
 }
 
 void PlayerInfo::updateStaminaCurrentMaxFromGameData() {
-    mStaminaCurrentMax = ksys::gdt::getFlag_StaminaCurrentMax();
+    mStaminaCurrentMax = getFlag_StaminaCurrentMax();
 }
 
 void PlayerInfo::setStaminaMax(f32 max_stamina) {
-    ksys::gdt::setFlag_StaminaMax(max_stamina);
+    setFlag_StaminaMax(max_stamina);
     mStaminaMax = max_stamina;
 }
 
@@ -107,7 +107,7 @@ f32 PlayerInfo::getStaminaMax() const {
 }
 
 void PlayerInfo::updateStaminaMaxFromGameData() {
-    mStaminaMax = ksys::gdt::getFlag_StaminaMax();
+    mStaminaMax = getFlag_StaminaMax();
 }
 
 PlayerBase* PlayerInfo::getPlayerUnchecked() {

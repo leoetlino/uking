@@ -15,16 +15,14 @@
 #include "Game/Framework/gameScene.h"
 #include "Game/UI/uiUtils.h"
 #include "Game/gameItemUtils.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/GameData/gdtSpecialFlagNames.h"
-#include "KingSystem/GameData/gdtSpecialFlags.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/System/PlayReportMgr.h"
 #include "KingSystem/Utils/HeapUtil.h"
@@ -295,9 +293,9 @@ void PauseMenuDataMgr::initForNewSave() {
     }
 
     mNumTabs = 0;
-    ksys::gdt::setFlag_KorokNutsNum(0);
-    ksys::gdt::setFlag_DungeonClearSealNum(0);
-    ksys::gdt::setFlag_FairyCountCheck(false);
+    setFlag_KorokNutsNum(0);
+    setFlag_DungeonClearSealNum(0);
+    setFlag_FairyCountCheck(false);
     mPauseMenuOpenMode = {};
     resetItemAndPointers();
     mIsPouchForQuest = false;
@@ -341,7 +339,6 @@ void PauseMenuDataMgr::loadFromGameData() {
 }
 
 void PauseMenuDataMgr::doLoadFromGameData() {
-    namespace gdt = ksys::gdt;
     const auto lock = sead::makeScopedLock(mCritSection);
     auto& lists = mItemLists;
 
@@ -367,7 +364,7 @@ void PauseMenuDataMgr::doLoadFromGameData() {
 
     for (u32 idx = 0; idx < u32(NumPouchItemsMax); ++idx) {
         const char* item_name;
-        gdt::getFlag_PorchItem(&item_name, s32(idx));
+        getFlag_PorchItem(&item_name, s32(idx));
 
         if (found_travel_medallion || sValues.Obj_WarpDLC == item_name)
             found_travel_medallion = true;
@@ -375,8 +372,8 @@ void PauseMenuDataMgr::doLoadFromGameData() {
         if (sead::SafeString(item_name).isEmpty())
             break;
 
-        const bool equipped = gdt::getFlag_PorchItem_EquipFlag(s32(idx));
-        const s32 value = gdt::getFlag_PorchItem_Value1(s32(idx));
+        const bool equipped = getFlag_PorchItem_EquipFlag(s32(idx));
+        const s32 value = getFlag_PorchItem_Value1(s32(idx));
         const auto type = getType(item_name);
 
         switch (type) {
@@ -412,46 +409,46 @@ void PauseMenuDataMgr::doLoadFromGameData() {
         if (type == PouchItemType::Food) {
             sead::Vector2f v{0, 0};
 
-            gdt::getFlag_StaminaRecover(&v, num_food);
+            getFlag_StaminaRecover(&v, num_food);
             mLastAddedItem->getCookData().setHealthRecover(s32(v.x));
             mLastAddedItem->getCookData().setEffectDuration(s32(v.y));
 
-            gdt::getFlag_CookEffect0(&v, num_food);
+            getFlag_CookEffect0(&v, num_food);
             mLastAddedItem->getCookData().setEffect(v);
 
-            gdt::getFlag_CookEffect1(&v, num_food);
+            getFlag_CookEffect1(&v, num_food);
             mLastAddedItem->getCookData().setSellPrice(s32(v.x));
 
-            gdt::getFlag_CookMaterialName0(&item_name, num_food);
+            getFlag_CookMaterialName0(&item_name, num_food);
             mLastAddedItem->setIngredient(0, item_name);
 
-            gdt::getFlag_CookMaterialName1(&item_name, num_food);
+            getFlag_CookMaterialName1(&item_name, num_food);
             mLastAddedItem->setIngredient(1, item_name);
 
-            gdt::getFlag_CookMaterialName2(&item_name, num_food);
+            getFlag_CookMaterialName2(&item_name, num_food);
             mLastAddedItem->setIngredient(2, item_name);
 
-            gdt::getFlag_CookMaterialName3(&item_name, num_food);
+            getFlag_CookMaterialName3(&item_name, num_food);
             mLastAddedItem->setIngredient(3, item_name);
 
-            gdt::getFlag_CookMaterialName4(&item_name, num_food);
+            getFlag_CookMaterialName4(&item_name, num_food);
             mLastAddedItem->setIngredient(4, item_name);
 
             ++num_food;
 
         } else if (type == PouchItemType::Sword &&
                    isMasterSwordActorName(mLastAddedItem->getName()) &&
-                   gdt::getFlag_MasterSwordRecoverTime() <= sead::Mathf::epsilon() &&
+                   getFlag_MasterSwordRecoverTime() <= sead::Mathf::epsilon() &&
                    mLastAddedItem->getValue() <= 0) {
             const s32 new_value = getWeaponInventoryLife(mLastAddedItem->getName());
             mLastAddedItem->mValue = new_value;
-            gdt::setFlag_PorchItem_Value1(new_value, s32(idx));
+            setFlag_PorchItem_Value1(new_value, s32(idx));
         }
     }
 
     // Add the Travel Medallion (Obj_WarpDLC) to the inventory if it is missing for some reason
     if (ksys::aoc::Manager::instance()->hasAoc2() &&
-        !(found_travel_medallion | !gdt::getFlag_IsGet_Obj_WarpDLC())) {
+        !(found_travel_medallion | !getFlag_IsGet_Obj_WarpDLC())) {
         addToPouch(sValues.Obj_WarpDLC.cstr(), PouchItemType::KeyItem, lists, 1, false, nullptr,
                    true);
     }
@@ -461,43 +458,43 @@ void PauseMenuDataMgr::doLoadFromGameData() {
     bool was_missing_hero_soul = false;
     s32 num_cleared_beasts = 0;
 
-    if (gdt::getFlag_Clear_RemainsWind()) {
+    if (getFlag_Clear_RemainsWind()) {
         ++num_cleared_beasts;
         if (!mRitoSoulItem) {
             was_missing_hero_soul = true;
             addToPouch(sValues.Obj_HeroSoul_Rito.cstr(), PouchItemType::KeyItem, lists, 1, true,
                        nullptr, true);
-            gdt::setFlag_IsPlayed_Demo119_0(true);
+            setFlag_IsPlayed_Demo119_0(true);
         }
     }
 
-    if (gdt::getFlag_Clear_RemainsFire()) {
+    if (getFlag_Clear_RemainsFire()) {
         ++num_cleared_beasts;
         if (!mGoronSoulItem) {
             was_missing_hero_soul = true;
             addToPouch(sValues.Obj_HeroSoul_Goron.cstr(), PouchItemType::KeyItem, lists, 1, true,
                        nullptr, true);
-            gdt::setFlag_IsPlayed_Demo116_0(true);
+            setFlag_IsPlayed_Demo116_0(true);
         }
     }
 
-    if (gdt::getFlag_Clear_RemainsWater()) {
+    if (getFlag_Clear_RemainsWater()) {
         ++num_cleared_beasts;
         if (!mZoraSoulItem) {
             was_missing_hero_soul = true;
             addToPouch(sValues.Obj_HeroSoul_Zora.cstr(), PouchItemType::KeyItem, lists, 1, true,
                        nullptr, true);
-            gdt::setFlag_IsPlayed_Demo122_0(true);
+            setFlag_IsPlayed_Demo122_0(true);
         }
     }
 
-    if (gdt::getFlag_Clear_RemainsElectric()) {
+    if (getFlag_Clear_RemainsElectric()) {
         ++num_cleared_beasts;
         if (!mGerudoSoulItem) {
             was_missing_hero_soul = true;
             addToPouch(sValues.Obj_HeroSoul_Gerudo.cstr(), PouchItemType::KeyItem, lists, 1, true,
                        nullptr, true);
-            gdt::setFlag_IsPlayed_Demo125_0(true);
+            setFlag_IsPlayed_Demo125_0(true);
         }
     }
 
@@ -530,19 +527,19 @@ bool PauseMenuDataMgr::cannotGetItem(const sead::SafeString& name, int n) const 
     if (type <= PouchItemType::Shield) {
         switch (type) {
         case PouchItemType::Sword: {
-            const auto limit = ksys::gdt::getFlag_WeaponPorchStockNum();
+            const auto limit = getFlag_WeaponPorchStockNum();
             return isList2Empty() || limit < countItems(PouchItemType::Sword) + n;
         }
         case PouchItemType::Shield: {
-            const auto limit = ksys::gdt::getFlag_ShieldPorchStockNum();
+            const auto limit = getFlag_ShieldPorchStockNum();
             return isList2Empty() || limit < countItems(PouchItemType::Shield) + n;
         }
         case PouchItemType::Bow: {
-            const auto limit = ksys::gdt::getFlag_BowPorchStockNum();
+            const auto limit = getFlag_BowPorchStockNum();
             return isList2Empty() || limit < countItems(PouchItemType::Bow) + n;
         }
         default: {
-            const auto limit = ksys::gdt::getFlag_WeaponPorchStockNum();
+            const auto limit = getFlag_WeaponPorchStockNum();
             return isList2Empty() || limit < countItems(PouchItemType::Sword, true) + n;
         }
         }
@@ -775,17 +772,15 @@ bool PauseMenuDataMgr::isWeaponSectionFull(const sead::SafeString& weapon_type) 
 
     if (weapon_type == sValues.WeaponSmallSword || weapon_type == sValues.WeaponLargeSword ||
         weapon_type == sValues.WeaponSpear) {
-        return check(ksys::gdt::getFlag_WeaponPorchStockNum, PouchCategory::Sword,
-                     PouchItemType::Sword);
+        return check(getFlag_WeaponPorchStockNum, PouchCategory::Sword, PouchItemType::Sword);
     }
 
     if (weapon_type == sValues.WeaponBow) {
-        return check(ksys::gdt::getFlag_BowPorchStockNum, PouchCategory::Bow, PouchItemType::Bow);
+        return check(getFlag_BowPorchStockNum, PouchCategory::Bow, PouchItemType::Bow);
     }
 
     if (weapon_type == sValues.WeaponShield) {
-        return check(ksys::gdt::getFlag_ShieldPorchStockNum, PouchCategory::Shield,
-                     PouchItemType::Shield);
+        return check(getFlag_ShieldPorchStockNum, PouchCategory::Shield, PouchItemType::Shield);
     }
 
     return false;
@@ -904,7 +899,7 @@ void PauseMenuDataMgr::addToPouch(const sead::SafeString& name, PouchItemType ty
             if (!item->isInInventory() || item->getName() != name)
                 continue;
 
-            if (ksys::gdt::getFlag_MasterSwordRecoverTime() <= sead::Mathf::epsilon()) {
+            if (getFlag_MasterSwordRecoverTime() <= sead::Mathf::epsilon()) {
                 if (item->getValue() <= 0)
                     item->mValue = value;
             } else {
@@ -926,15 +921,15 @@ void PauseMenuDataMgr::addToPouch(const sead::SafeString& name, PouchItemType ty
         updateListHeads();
 
         if (name == sValues.Obj_KorokNuts)
-            ksys::gdt::setFlag_KorokNutsNum(getItemCount(name));
+            setFlag_KorokNutsNum(getItemCount(name));
         else if (name == sValues.Obj_DungeonClearSeal)
-            ksys::gdt::setFlag_DungeonClearSealNum(getItemCount(name));
+            setFlag_DungeonClearSealNum(getItemCount(name));
     }
 
     sead::SafeString same_group_actor_name;
     ksys::act::getSameGroupActorName(&same_group_actor_name, name);
-    ksys::gdt::setIsGetItem(same_group_actor_name, true);
-    ksys::gdt::setIsGetItem2(same_group_actor_name, true);
+    setIsGetItem(same_group_actor_name, true);
+    setIsGetItem2(same_group_actor_name, true);
 }
 
 void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& name, Lists& lists,
@@ -962,7 +957,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
                     int max = 0;
                     auto* gdt_manager = ksys::gdt::Manager::instance();
                     if (gdt_manager) {
-                        sead::SafeString flag_name = ksys::gdt::flagname::DungeonClearSealNum();
+                        sead::SafeString flag_name = flagname::DungeonClearSealNum();
                         gdt_manager->getParam().get1().getBuffer1()->getMaxValueForS32(&max,
                                                                                        flag_name);
                     }
@@ -1003,19 +998,19 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
         }
     } else {
         if (item_name_to_add == sValues.Obj_HeroSoul_Zora &&
-            ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Zora()) {
+            getFlag_IsGet_Obj_DLC_HeroSoul_Zora()) {
             item_name_to_add = sValues.Obj_DLC_HeroSoul_Zora;
 
         } else if (item_name_to_add == sValues.Obj_HeroSoul_Rito &&
-                   ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Rito()) {
+                   getFlag_IsGet_Obj_DLC_HeroSoul_Rito()) {
             item_name_to_add = sValues.Obj_DLC_HeroSoul_Rito;
 
         } else if (item_name_to_add == sValues.Obj_HeroSoul_Goron &&
-                   ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Goron()) {
+                   getFlag_IsGet_Obj_DLC_HeroSoul_Goron()) {
             item_name_to_add = sValues.Obj_DLC_HeroSoul_Goron;
 
         } else if (item_name_to_add == sValues.Obj_HeroSoul_Gerudo &&
-                   ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Gerudo()) {
+                   getFlag_IsGet_Obj_DLC_HeroSoul_Gerudo()) {
             item_name_to_add = sValues.Obj_DLC_HeroSoul_Gerudo;
         }
     }
@@ -1030,7 +1025,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
     added_item->mItemUse = getItemUse(item_name_to_add);
 
     if (added_item->mType == PouchItemType::Arrow) {
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
     }
 
     if (isPouchItemArmor(type)) {
@@ -1044,7 +1039,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
         } else {
             added_item->mValue = -1;
         }
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Armor));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Armor));
 
         mLastAddedItem = added_item;
         resetItem();
@@ -1057,26 +1052,26 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
         if (value <= 0 && !isMasterSwordActorName(item_name_to_add)) {
             value = 1;
         }
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Sword));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Sword));
         setItemModifier(*added_item, modifier);
         break;
     case PouchItemType::Bow:
         value = std::max(value, 1);
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
         setItemModifier(*added_item, modifier);
         break;
     case PouchItemType::Shield:
         value = std::max(value, 1);
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Shield));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Shield));
         setItemModifier(*added_item, modifier);
         break;
     case PouchItemType::Material:
         value = std::clamp(value, 0, ItemStackSizeMax);
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Material));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Material));
         break;
     case PouchItemType::Food:
         value = std::clamp(value, 0, ItemStackSizeMax);
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Food));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::Food));
         break;
     case PouchItemType::KeyItem:
         if (ksys::act::InfoData::instance()->hasTag(item_name_to_add.cstr(),
@@ -1106,7 +1101,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
             // NOLINTEND(bugprone-branch-clone)
         }
         value = std::clamp(value, 0, ItemStackSizeMax);
-        ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::KeyItem));
+        setFlag_IsOpenItemCategory(true, u32(PouchCategory::KeyItem));
         break;
     default:
         break;
@@ -1131,9 +1126,9 @@ void PauseMenuDataMgr::saveToGameData(const sead::OffsetList<PouchItem>& list) c
 
     for (idx = 0; idx < NumPouchItemsMax; ++idx) {
         if (!item) {
-            ksys::gdt::setFlag_PorchItem({}, idx);
-            ksys::gdt::setFlag_PorchItem_EquipFlag(false, idx);
-            ksys::gdt::setFlag_PorchItem_Value1(0, idx);
+            setFlag_PorchItem({}, idx);
+            setFlag_PorchItem_EquipFlag(false, idx);
+            setFlag_PorchItem_Value1(0, idx);
             continue;
         }
 
@@ -1145,9 +1140,9 @@ void PauseMenuDataMgr::saveToGameData(const sead::OffsetList<PouchItem>& list) c
         }
 
         if (!item) {
-            ksys::gdt::setFlag_PorchItem({}, idx);
-            ksys::gdt::setFlag_PorchItem_EquipFlag(false, idx);
-            ksys::gdt::setFlag_PorchItem_Value1(0, idx);
+            setFlag_PorchItem({}, idx);
+            setFlag_PorchItem_EquipFlag(false, idx);
+            setFlag_PorchItem_Value1(0, idx);
             return;
         }
 
@@ -1160,9 +1155,9 @@ void PauseMenuDataMgr::saveToGameData(const sead::OffsetList<PouchItem>& list) c
             }
         }
         const auto type = item->getType();
-        ksys::gdt::setFlag_PorchItem(name, idx);
-        ksys::gdt::setFlag_PorchItem_EquipFlag(item->isEquipped(), idx);
-        ksys::gdt::setFlag_PorchItem_Value1(value, idx);
+        setFlag_PorchItem(name, idx);
+        setFlag_PorchItem_EquipFlag(item->isEquipped(), idx);
+        setFlag_PorchItem_Value1(value, idx);
         switch (type) {
         case PouchItemType::Sword:
             if (num_swords < NumSwordsMax) {
@@ -1193,17 +1188,17 @@ void PauseMenuDataMgr::saveToGameData(const sead::OffsetList<PouchItem>& list) c
             if (num_food >= NumFoodMax)
                 break;
 
-            ksys::gdt::setFlag_StaminaRecover(
+            setFlag_StaminaRecover(
                 {static_cast<f32>(item->getCookData().mHealthRecover),
                  static_cast<f32>(item->getCookData().mEffectDuration) * 30.0f / 30.0f},
                 num_food);
-            ksys::gdt::setFlag_CookEffect0(item->getCookData().mEffect, num_food);
-            ksys::gdt::setFlag_CookEffect1({f32(item->getCookData().mSellPrice), 0.0}, num_food);
-            ksys::gdt::setFlag_CookMaterialName0(item->getIngredient(0), num_food);
-            ksys::gdt::setFlag_CookMaterialName1(item->getIngredient(1), num_food);
-            ksys::gdt::setFlag_CookMaterialName2(item->getIngredient(2), num_food);
-            ksys::gdt::setFlag_CookMaterialName3(item->getIngredient(3), num_food);
-            ksys::gdt::setFlag_CookMaterialName4(item->getIngredient(4), num_food);
+            setFlag_CookEffect0(item->getCookData().mEffect, num_food);
+            setFlag_CookEffect1({f32(item->getCookData().mSellPrice), 0.0}, num_food);
+            setFlag_CookMaterialName0(item->getIngredient(0), num_food);
+            setFlag_CookMaterialName1(item->getIngredient(1), num_food);
+            setFlag_CookMaterialName2(item->getIngredient(2), num_food);
+            setFlag_CookMaterialName3(item->getIngredient(3), num_food);
+            setFlag_CookMaterialName4(item->getIngredient(4), num_food);
             ++num_food;
             break;
         default:
@@ -1395,7 +1390,7 @@ void PauseMenuDataMgr::removeArrow(const sead::SafeString& arrow_name, int count
 
     const auto num = getItemCount(arrow_name);
     if (!mIsPouchForQuest && idx >= 0)
-        ksys::gdt::setFlag_PorchItem_Value1(num, idx);
+        setFlag_PorchItem_Value1(num, idx);
 }
 
 // NON_MATCHING: branch merging -- but this is pretty clearly equivalent
@@ -1545,7 +1540,7 @@ void PauseMenuDataMgr::setEquippedWeaponItemValue(s32 value, PouchItemType type)
 
         item.mValue = value;
         if (idx >= 0 && !mIsPouchForQuest)
-            ksys::gdt::setFlag_PorchItem_Value1(value, idx);
+            setFlag_PorchItem_Value1(value, idx);
 
         return;
     }
@@ -1680,12 +1675,12 @@ int PauseMenuDataMgr::getRealArrowCount(const sead::SafeString& name) const {
 
     for (u32 i = 0; i < u32(NumPouchItemsMax); ++i) {
         const char* item_name;
-        ksys::gdt::getFlag_PorchItem(&item_name, s32(i));
+        getFlag_PorchItem(&item_name, s32(i));
         const sead::SafeString item_name_str{item_name};
         if (item_name_str.isEmpty())
             break;
         if (item_name_str == name)
-            return ksys::gdt::getFlag_PorchItem_Value1(s32(i));
+            return getFlag_PorchItem_Value1(s32(i));
     }
     return 0;
 }
@@ -1698,8 +1693,8 @@ void PauseMenuDataMgr::breakMasterSword() {
             item.mValue = 0;
             item.mEquipped = false;
             if (!mIsPouchForQuest && idx >= 0) {
-                ksys::gdt::setFlag_PorchItem_Value1(0, idx);
-                ksys::gdt::setFlag_PorchItem_EquipFlag(false, idx);
+                setFlag_PorchItem_Value1(0, idx);
+                setFlag_PorchItem_EquipFlag(false, idx);
             }
             break;
         }
@@ -1717,7 +1712,7 @@ void PauseMenuDataMgr::restoreMasterSword(bool only_if_broken) {
 
             item.mValue = getWeaponInventoryLife(item.getName());
             if (!mIsPouchForQuest && idx >= 0)
-                ksys::gdt::setFlag_PorchItem_Value1(item.mValue, idx);
+                setFlag_PorchItem_Value1(item.mValue, idx);
 
             break;
         }
@@ -2056,7 +2051,7 @@ void PauseMenuDataMgr::initPouchForQuest() {
         updateListHeads();
     }
 
-    ksys::gdt::setFlag_FairyCountCheck(false);
+    setFlag_FairyCountCheck(false);
     createPlayerEquipment();
 }
 
@@ -2128,16 +2123,16 @@ void PauseMenuDataMgr::sortItems(PouchCategory category, bool do_not_save) {
 
     switch (category) {
     case PouchCategory::Sword:
-        ksys::gdt::setFlag_SortTypeWeaponPouch(!ksys::gdt::getFlag_SortTypeWeaponPouch());
+        setFlag_SortTypeWeaponPouch(!getFlag_SortTypeWeaponPouch());
         break;
     case PouchCategory::Bow:
-        ksys::gdt::setFlag_SortTypeBowPouch(!ksys::gdt::getFlag_SortTypeBowPouch());
+        setFlag_SortTypeBowPouch(!getFlag_SortTypeBowPouch());
         break;
     case PouchCategory::Shield:
-        ksys::gdt::setFlag_SortTypeShieldPouch(!ksys::gdt::getFlag_SortTypeShieldPouch());
+        setFlag_SortTypeShieldPouch(!getFlag_SortTypeShieldPouch());
         break;
     case PouchCategory::Armor:
-        ksys::gdt::setFlag_SortTypeArmorPouch(!ksys::gdt::getFlag_SortTypeArmorPouch());
+        setFlag_SortTypeArmorPouch(!getFlag_SortTypeArmorPouch());
         break;
     default:
         break;
@@ -2325,7 +2320,7 @@ int pouchItemSortPredicateForArrow(const PouchItem* lhs, const PouchItem* rhs) {
 }
 
 int compareWeapon(const PouchItem* lhs, const PouchItem* rhs, ksys::act::InfoData* data) {
-    if (ksys::gdt::getFlag_SortTypeWeaponPouch())
+    if (getFlag_SortTypeWeaponPouch())
         return compareWeaponType1(lhs, rhs, data);
     return compareWeaponType0(lhs, rhs, data);
 }
@@ -2334,13 +2329,13 @@ int compareBow(const PouchItem* lhs, const PouchItem* rhs, ksys::act::InfoData* 
     if (lhs->getType() == PouchItemType::Arrow)
         return compareSortKeys(lhs, rhs, data);
 
-    if (ksys::gdt::getFlag_SortTypeBowPouch())
+    if (getFlag_SortTypeBowPouch())
         return compareWeaponType1(lhs, rhs, data);
     return compareWeaponType0(lhs, rhs, data);
 }
 
 int compareShield(const PouchItem* lhs, const PouchItem* rhs, ksys::act::InfoData* data) {
-    if (ksys::gdt::getFlag_SortTypeShieldPouch()) {
+    if (getFlag_SortTypeShieldPouch()) {
         if (auto cmp = compareSortKeys(lhs, rhs, data))
             return cmp;
 
@@ -2354,7 +2349,7 @@ int compareShield(const PouchItem* lhs, const PouchItem* rhs, ksys::act::InfoDat
 }
 
 int compareArmor(const PouchItem* lhs, const PouchItem* rhs, ksys::act::InfoData* data) {
-    if (ksys::gdt::getFlag_SortTypeArmorPouch()) {
+    if (getFlag_SortTypeArmorPouch()) {
         if (auto cmp = compareSortKeys(lhs, rhs, data))
             return cmp;
 
@@ -2616,26 +2611,22 @@ bool PauseMenuDataMgr::isHeroSoulEnabled(const sead::SafeString& name) const {
 
 // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 bool PauseMenuDataMgr::hasRitoSoulPlus() const {
-    return ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Rito() &&
-           ksys::aoc::Manager::instance()->hasAoc3();
+    return getFlag_IsGet_Obj_DLC_HeroSoul_Rito() && ksys::aoc::Manager::instance()->hasAoc3();
 }
 
 // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 bool PauseMenuDataMgr::hasGoronSoulPlus() const {
-    return ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Goron() &&
-           ksys::aoc::Manager::instance()->hasAoc3();
+    return getFlag_IsGet_Obj_DLC_HeroSoul_Goron() && ksys::aoc::Manager::instance()->hasAoc3();
 }
 
 // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 bool PauseMenuDataMgr::hasGerudoSoulPlus() const {
-    return ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Gerudo() &&
-           ksys::aoc::Manager::instance()->hasAoc3();
+    return getFlag_IsGet_Obj_DLC_HeroSoul_Gerudo() && ksys::aoc::Manager::instance()->hasAoc3();
 }
 
 // NOLINTNEXTLINE(readability-convert-member-functions-to-static)
 bool PauseMenuDataMgr::hasZoraSoulPlus() const {
-    return ksys::gdt::getFlag_IsGet_Obj_DLC_HeroSoul_Zora() &&
-           ksys::aoc::Manager::instance()->hasAoc3();
+    return getFlag_IsGet_Obj_DLC_HeroSoul_Zora() && ksys::aoc::Manager::instance()->hasAoc3();
 }
 
 int PauseMenuDataMgr::countItemsWithCategoryByType(PouchCategory category) const {
@@ -2723,7 +2714,7 @@ const PouchItem* PauseMenuDataMgr::getItemByIndex(PouchCategory category, int in
     case PouchCategory::Sword:
         return getItemByIndex(PouchItemType::Sword, index);
     case PouchCategory::Bow: {
-        const auto num_bows = ksys::gdt::getFlag_BowPorchStockNum();
+        const auto num_bows = getFlag_BowPorchStockNum();
         if (index < num_bows)
             return getItemByIndex(PouchItemType::Bow, index);
         return getItemByIndex(PouchItemType::Arrow, index - num_bows);
@@ -2799,13 +2790,13 @@ bool PauseMenuDataMgr::isOverCategoryLimit(PouchItemType type) const {
     const auto count = countItems(type);
     switch (type) {
     case PouchItemType::Sword:
-        return ksys::gdt::getFlag_WeaponPorchStockNum() <= count || count >= NumSwordsMax;
+        return getFlag_WeaponPorchStockNum() <= count || count >= NumSwordsMax;
     case PouchItemType::Bow:
-        return ksys::gdt::getFlag_BowPorchStockNum() <= count || count >= NumBowsMax;
+        return getFlag_BowPorchStockNum() <= count || count >= NumBowsMax;
     case PouchItemType::Arrow:
         return count >= NumArrowItemsMax;
     case PouchItemType::Shield:
-        return ksys::gdt::getFlag_ShieldPorchStockNum() <= count || count >= NumShieldsMax;
+        return getFlag_ShieldPorchStockNum() <= count || count >= NumShieldsMax;
     case PouchItemType::ArmorHead:
     case PouchItemType::ArmorUpper:
     case PouchItemType::ArmorLower:
@@ -2867,26 +2858,26 @@ void PauseMenuDataMgr::openItemCategoryIfNeeded() const {
     for (s32 i = 0; i < NumTabMax; ++i) {
         const auto type = mTabsType[i];
         if (isPouchItemArmor(type)) {
-            ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Armor));
+            setFlag_IsOpenItemCategory(true, u32(PouchCategory::Armor));
         } else {
             switch (type) {
             case PouchItemType::Sword:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Sword));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::Sword));
                 break;
             case PouchItemType::Bow:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::Bow));
                 break;
             case PouchItemType::Shield:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Shield));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::Shield));
                 break;
             case PouchItemType::Material:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Material));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::Material));
                 break;
             case PouchItemType::Food:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::Food));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::Food));
                 break;
             case PouchItemType::KeyItem:
-                ksys::gdt::setFlag_IsOpenItemCategory(true, u32(PouchCategory::KeyItem));
+                setFlag_IsOpenItemCategory(true, u32(PouchCategory::KeyItem));
                 break;
             default:
                 break;
@@ -2990,25 +2981,25 @@ void PauseMenuDataMgr::initInventoryForOpenWorldDemo() {
 void PauseMenuDataMgr::updateDivineBeastClearFlags(int num_cleared_beasts) {
     switch (num_cleared_beasts) {
     case 1:
-        ksys::gdt::setFlag_Find_4Relic_1stClear(true);
+        setFlag_Find_4Relic_1stClear(true);
         break;
     case 2:
-        ksys::gdt::setFlag_Find_4Relic_2ndClear(true);
-        ksys::gdt::setFlag_BattleArena_Level1(false, true);
-        ksys::gdt::setFlag_BattleArena_Level2(true, true);
+        setFlag_Find_4Relic_2ndClear(true);
+        setFlag_BattleArena_Level1(false, true);
+        setFlag_BattleArena_Level2(true, true);
         break;
     case 3:
-        ksys::gdt::setFlag_Find_4Relic_3rdClear(true);
-        ksys::gdt::setFlag_BattleArena_Level1(false, true);
-        ksys::gdt::setFlag_BattleArena_Level2(false, true);
-        ksys::gdt::setFlag_BattleArena_Level3(true, true);
+        setFlag_Find_4Relic_3rdClear(true);
+        setFlag_BattleArena_Level1(false, true);
+        setFlag_BattleArena_Level2(false, true);
+        setFlag_BattleArena_Level3(true, true);
         break;
     case 4:
-        ksys::gdt::setFlag_Find_4Relic_4thClear(true);
-        ksys::gdt::setFlag_BattleArena_Level1(false, true);
-        ksys::gdt::setFlag_BattleArena_Level2(false, true);
-        ksys::gdt::setFlag_BattleArena_Level3(false, true);
-        ksys::gdt::setFlag_BattleArena_Level4(true, true);
+        setFlag_Find_4Relic_4thClear(true);
+        setFlag_BattleArena_Level1(false, true);
+        setFlag_BattleArena_Level2(false, true);
+        setFlag_BattleArena_Level3(false, true);
+        setFlag_BattleArena_Level4(true, true);
         break;
     default:
         break;

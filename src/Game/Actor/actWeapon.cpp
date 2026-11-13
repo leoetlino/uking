@@ -2,12 +2,12 @@
 #include <Byaml/Byaml.h>
 #include <random/seadGlobalRandom.h>
 #include "Game/UI/uiPauseMenuDataMgr.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 #include "KingSystem/Game/GlobalParameter.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponCommon.h"
@@ -38,60 +38,57 @@ int WeaponModifierInfo::getLifeMultiplier() {
 }
 
 void WeaponModifierInfo::loadPorchSwordFlag(int idx) {
-    set(ksys::gdt::getFlag_PorchSword_FlagSp(idx), ksys::gdt::getFlag_PorchSword_ValueSp(idx));
+    set(getFlag_PorchSword_FlagSp(idx), getFlag_PorchSword_ValueSp(idx));
 }
 
 void WeaponModifierInfo::loadPorchShieldFlag(int idx) {
-    set(ksys::gdt::getFlag_PorchShield_FlagSp(idx), ksys::gdt::getFlag_PorchShield_ValueSp(idx));
+    set(getFlag_PorchShield_FlagSp(idx), getFlag_PorchShield_ValueSp(idx));
 }
 
 void WeaponModifierInfo::loadPorchBowFlag(int idx) {
-    set(ksys::gdt::getFlag_PorchBow_FlagSp(idx), ksys::gdt::getFlag_PorchBow_ValueSp(idx));
+    set(getFlag_PorchBow_FlagSp(idx), getFlag_PorchBow_ValueSp(idx));
 }
 
 void WeaponModifierInfo::savePorchSwordFlag(int idx) const {
-    ksys::gdt::setFlag_PorchSword_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_PorchSword_ValueSp(value, idx);
+    setFlag_PorchSword_FlagSp(flags.getDirect(), idx);
+    setFlag_PorchSword_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::savePorchShieldFlag(int idx) const {
-    ksys::gdt::setFlag_PorchShield_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_PorchShield_ValueSp(value, idx);
+    setFlag_PorchShield_FlagSp(flags.getDirect(), idx);
+    setFlag_PorchShield_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::savePorchBowFlag(int idx) const {
-    ksys::gdt::setFlag_PorchBow_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_PorchBow_ValueSp(value, idx);
+    setFlag_PorchBow_FlagSp(flags.getDirect(), idx);
+    setFlag_PorchBow_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::loadEquipStandSwordFlag(int idx) {
-    set(ksys::gdt::getFlag_EquipStandSword_FlagSp(idx),
-        ksys::gdt::getFlag_EquipStandSword_ValueSp(idx));
+    set(getFlag_EquipStandSword_FlagSp(idx), getFlag_EquipStandSword_ValueSp(idx));
 }
 
 void WeaponModifierInfo::loadEquipStandShieldFlag(int idx) {
-    set(ksys::gdt::getFlag_EquipStandShield_FlagSp(idx),
-        ksys::gdt::getFlag_EquipStandShield_ValueSp(idx));
+    set(getFlag_EquipStandShield_FlagSp(idx), getFlag_EquipStandShield_ValueSp(idx));
 }
 
 void WeaponModifierInfo::loadEquipStandBowFlag(int idx) {
-    set(ksys::gdt::getFlag_EquipStandBow_FlagSp(idx),
-        ksys::gdt::getFlag_EquipStandBow_ValueSp(idx));
+    set(getFlag_EquipStandBow_FlagSp(idx), getFlag_EquipStandBow_ValueSp(idx));
 }
 
 void WeaponModifierInfo::saveEquipStandSwordFlag(int idx) const {
-    ksys::gdt::setFlag_EquipStandSword_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_EquipStandSword_ValueSp(value, idx);
+    setFlag_EquipStandSword_FlagSp(flags.getDirect(), idx);
+    setFlag_EquipStandSword_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::saveEquipStandShieldFlag(int idx) const {
-    ksys::gdt::setFlag_EquipStandShield_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_EquipStandShield_ValueSp(value, idx);
+    setFlag_EquipStandShield_FlagSp(flags.getDirect(), idx);
+    setFlag_EquipStandShield_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::saveEquipStandBowFlag(int idx) const {
-    ksys::gdt::setFlag_EquipStandBow_FlagSp(flags.getDirect(), idx);
-    ksys::gdt::setFlag_EquipStandBow_ValueSp(value, idx);
+    setFlag_EquipStandBow_FlagSp(flags.getDirect(), idx);
+    setFlag_EquipStandBow_ValueSp(value, idx);
 }
 
 void WeaponModifierInfo::addModifierParams(ksys::act::InstParamPack& params) const {

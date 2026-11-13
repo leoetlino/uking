@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryHasItemDyeSpecifiedColor.h"
 #include <evfl/Query.h>
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
+#include "Game/gdtCommonFlags.h"
 
 namespace uking::query {
 
@@ -10,7 +10,7 @@ HasItemDyeSpecifiedColor::HasItemDyeSpecifiedColor(const InitArg& arg)
 HasItemDyeSpecifiedColor::~HasItemDyeSpecifiedColor() = default;
 
 int HasItemDyeSpecifiedColor::doQuery() {
-    s32 state = ksys::gdt::getFlag_Shop_ItemState();
+    s32 state = getFlag_Shop_ItemState();
     switch (state) {
     case 0:
     case 9:

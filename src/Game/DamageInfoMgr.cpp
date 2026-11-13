@@ -1,7 +1,7 @@
 #include "Game/DamageInfoMgr.h"
 #include "Game/Framework/gameStageInfo.h"
+#include "Game/gdtCommonFlags.h"
 #include "KingSystem/Game/GlobalParameter.h"
-#include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 
 namespace uking {
@@ -40,27 +40,27 @@ bool DamageInfoMgr::isTrueFormMasterSword() const {
     if (mMasterSwordDisableTrueForm)
         return false;
 
-    if (ksys::gdt::getFlag_Open_MasterSword_FullPower())
+    if (getFlag_Open_MasterSword_FullPower())
         return true;
 
-    if (ksys::gdt::getFlag_IsInHyruleCastleArea())
+    if (getFlag_IsInHyruleCastleArea())
         return true;
 
-    if (ksys::gdt::getFlag_LastBossGanonBeastGenerateFlag())
+    if (getFlag_LastBossGanonBeastGenerateFlag())
         return true;
 
     const sead::SafeString& map = StageInfo::getCurrentMapName();
 
-    if (!ksys::gdt::getFlag_Die_PGanonElectric() && map == "RemainsElectric")
+    if (!getFlag_Die_PGanonElectric() && map == "RemainsElectric")
         return true;
 
-    if (!ksys::gdt::getFlag_Die_PGanonFire() && map == "RemainsFire")
+    if (!getFlag_Die_PGanonFire() && map == "RemainsFire")
         return true;
 
-    if (!ksys::gdt::getFlag_Die_PGanonWater() && map == "RemainsWater")
+    if (!getFlag_Die_PGanonWater() && map == "RemainsWater")
         return true;
 
-    if (!ksys::gdt::getFlag_Die_PGanonWind() && map == "RemainsWind")
+    if (!getFlag_Die_PGanonWind() && map == "RemainsWind")
         return true;
 
     return mMasterSwordDetectedEvil;
