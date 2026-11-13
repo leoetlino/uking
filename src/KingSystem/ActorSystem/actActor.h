@@ -73,6 +73,7 @@ class LifeRecoverInfo;
 class Actor;
 class ActorCreator;
 class ActorParam;
+class AttClientList;
 class Attention;
 class AwarenessInstance;
 class BaseProcLink;
@@ -506,7 +507,7 @@ protected:
     /* 0x5c0 */ sead::Heap* mActorFrameHeap = nullptr;
     /* 0x5c8 */ sead::Heap* mParentHeap = nullptr;
     /* 0x5d0 */ ActorUniqueName* mUniqueName = nullptr;
-    /* 0x5d8 */ Attention* mAttention = nullptr;
+    /* 0x5d8 */ AttClientList* mAttention = nullptr;
     /* 0x5e0 */ ActorMessageTransceiver mMsgTransceiver{*this, this};
     /* 0x638 */ Schedule* mSchedule = nullptr;
 
