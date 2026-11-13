@@ -3101,8 +3101,8 @@ target_sources(uking PRIVATE
   actionWolfLinkAmiiboRegister.h
   actionWolfLinkAmiiboWarp.cpp
   actionWolfLinkAmiiboWarp.h
-  actionWolfLinkEvent.cpp
-  actionWolfLinkEvent.h
+  WolfLinkEvent.cpp
+  WolfLinkEvent.h
   actionXLinkEventEnable.cpp
   actionXLinkEventEnable.h
   actionZoraHeroRescuePlayer.cpp

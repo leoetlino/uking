@@ -1,4 +1,4 @@
-#include "Game/Actor/Action/actionWolfLinkEvent.h"
+#include "Game/Actor/Action/WolfLinkEvent.h"
 
 namespace uking::action {
 

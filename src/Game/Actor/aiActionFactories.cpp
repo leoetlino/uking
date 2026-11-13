@@ -1,5 +1,6 @@
 #include "Game/Actor/aiActionFactories.h"
 #include <array>
+#include "Game/Actor/Action/WolfLinkEvent.h"
 #include "Game/Actor/Action/actionASPlaySimpleAnmDriven.h"
 #include "Game/Actor/Action/actionActivateAttackSensor.h"
 #include "Game/Actor/Action/actionActorInfoToGameDataFloat.h"
@@ -1405,7 +1406,6 @@
 #include "Game/Actor/Action/actionWizzrobeVisibleWalk.h"
 #include "Game/Actor/Action/actionWolfLinkAmiiboRegister.h"
 #include "Game/Actor/Action/actionWolfLinkAmiiboWarp.h"
-#include "Game/Actor/Action/actionWolfLinkEvent.h"
 #include "Game/Actor/Action/actionXLinkEventEnable.h"
 #include "Game/Actor/Action/actionZoraHeroRescuePlayer.h"
 #include "Game/Actor/Action/actionZoraHeroWaterFallJump.h"
