@@ -7,7 +7,7 @@ namespace sead {
 class Heap;
 }
 
-namespace ksys {
+namespace ksys::gfx {
 
 // FIXME: requires agl::cull::OcclusionQueryCylinder
 class OcclusionQueryCylinder {
@@ -22,4 +22,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(OcclusionQueryCylinder, 0xa0);
 
-}  // namespace ksys
+}  // namespace ksys::gfx

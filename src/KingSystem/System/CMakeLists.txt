@@ -29,8 +29,6 @@ target_sources(uking PRIVATE
     MemoryProfiler.h
     MessageCapture.cpp
     MessageCapture.h
-    OcclusionQueryCylinder.cpp
-    OcclusionQueryCylinder.h
     OverlayArena.cpp
     OverlayArena.h
     OverlayArenaSystem.cpp

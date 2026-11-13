@@ -8,7 +8,7 @@ namespace sead {
 class Heap;
 }
 
-namespace ksys {
+namespace ksys::gfx {
 class OcclusionQueryCylinder;
 }
 
@@ -36,7 +36,7 @@ private:
     sead::BitFlag16 mFlags26;
     float _28 = 1.0;
     Actor* mActor = nullptr;
-    OcclusionQueryCylinder* mOcclusionQueryCylinder = nullptr;
+    gfx::OcclusionQueryCylinder* mOcclusionQueryCylinder = nullptr;
     float _40 = 0.0;
     float _44 = 0.0;
     float _48 = 0.0;

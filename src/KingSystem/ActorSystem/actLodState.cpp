@@ -2,11 +2,11 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/Graphics/gfxOcclusionQueryCylinder.h"
 #include "KingSystem/Map/mapPlacementAreaMgr.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/Actor/resResourceLod.h"
-#include "KingSystem/System/OcclusionQueryCylinder.h"
 
 namespace ksys::act {
 
@@ -36,11 +36,11 @@ LodState::LodState(sead::Heap* heap, sead::BitFlag32 flags, Actor* actor,
     if (!mActor->checkFlag(Actor::ActorFlag::CharacterLike) ||
         mActor->getProfile().startsWith("Guardian")) {
         if (is_air_octa_platform) {
-            mOcclusionQueryCylinder = new (heap) OcclusionQueryCylinder;
+            mOcclusionQueryCylinder = new (heap) gfx::OcclusionQueryCylinder;
             mOcclusionQueryCylinder->init(heap);
         }
     } else {
-        mOcclusionQueryCylinder = new (heap) OcclusionQueryCylinder;
+        mOcclusionQueryCylinder = new (heap) gfx::OcclusionQueryCylinder;
         mOcclusionQueryCylinder->init(heap);
     }
 
