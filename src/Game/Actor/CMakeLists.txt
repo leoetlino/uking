@@ -17,8 +17,6 @@ target_sources(uking PRIVATE
   actDamageMgr.cpp
   actDragon.cpp
   actDragon.h
-  actPlayerCreateTrace.cpp
-  actPlayerCreateTrace.h
   actQueryFactories.cpp
   actQueryFactories.h
   actStruct20.h

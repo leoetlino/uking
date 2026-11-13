@@ -7,10 +7,10 @@
 #include <prim/seadBitFlag.h>
 #include <prim/seadSafeString.h>
 #include <prim/seadStringBuilder.h>
-#include "Game/Actor/actPlayerCreateTrace.h"
 #include "KingSystem/ActorSystem/actBaseProcHandle.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/System/StringBoard.h"
+#include "KingSystem/Utils/Thread/Trace.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
@@ -134,7 +134,7 @@ private:
 
     Slots<ksys::act::BaseProcHandle> mProcHandles{};
     sead::BitFlag8 mIsLoading;
-    act::PlayerCreateTracer mTracer;
+    ksys::Tracer mTracer;
     Slots<Entry> mEntries{};
 
     // stubbed in release builds

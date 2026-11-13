@@ -51,6 +51,8 @@ target_sources(uking PRIVATE
   Thread/TaskQueueLock.h
   Thread/TaskThread.cpp
   Thread/TaskThread.h
+  Thread/Trace.cpp
+  Thread/Trace.h
 
   Container/LockFreeQueue.h
   Container/StrTreeMap.h
