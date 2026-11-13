@@ -12,7 +12,7 @@
 #include "Game/ActorHeapUtil.h"
 #include "Game/Cooking/cookManager.h"
 #include "Game/CreatePlayerEquipActorMgr.h"
-#include "Game/Scene/gameScene.h"
+#include "Game/Framework/gameScene.h"
 #include "Game/UI/uiUtils.h"
 #include "Game/gameItemUtils.h"
 #include "KingSystem/AOC/aocManager.h"

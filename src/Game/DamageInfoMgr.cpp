@@ -1,5 +1,5 @@
 #include "Game/DamageInfoMgr.h"
-#include "Game/Scene/gameStageInfo.h"
+#include "Game/Framework/gameStageInfo.h"
 #include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
