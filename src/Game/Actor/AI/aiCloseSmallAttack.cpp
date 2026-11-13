@@ -2,7 +2,7 @@
 
 namespace uking::ai {
 
-CloseSmallAttack::CloseSmallAttack(const InitArg& arg) : CloseSmallAttackBase(arg) {}
+CloseSmallAttack::CloseSmallAttack(const InitArg& arg) : CloseAttack(arg) {}
 
 CloseSmallAttack::~CloseSmallAttack() = default;
 

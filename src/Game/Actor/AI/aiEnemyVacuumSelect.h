@@ -4,11 +4,11 @@
 
 namespace uking::ai {
 
-class EnemyVacuumBombSelectBase : public ksys::act::ai::Ai {
-    SEAD_RTTI_OVERRIDE(EnemyVacuumBombSelectBase, ksys::act::ai::Ai)
+class EnemyVacuumSelect : public ksys::act::ai::Ai {
+    SEAD_RTTI_OVERRIDE(EnemyVacuumSelect, ksys::act::ai::Ai)
 public:
-    explicit EnemyVacuumBombSelectBase(const InitArg& arg);
-    ~EnemyVacuumBombSelectBase() override;
+    explicit EnemyVacuumSelect(const InitArg& arg);
+    ~EnemyVacuumSelect() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

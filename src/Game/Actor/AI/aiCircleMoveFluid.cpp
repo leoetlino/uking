@@ -1,24 +1,24 @@
-#include "Game/Actor/AI/aiCircleMoveInFluid.h"
+#include "Game/Actor/AI/aiCircleMoveFluid.h"
 
 namespace uking::ai {
 
-CircleMoveInFluid::CircleMoveInFluid(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
+CircleMoveFluid::CircleMoveFluid(const InitArg& arg) : ksys::act::ai::Ai(arg) {}
 
-CircleMoveInFluid::~CircleMoveInFluid() = default;
+CircleMoveFluid::~CircleMoveFluid() = default;
 
-bool CircleMoveInFluid::init_(sead::Heap* heap) {
+bool CircleMoveFluid::init_(sead::Heap* heap) {
     return ksys::act::ai::Ai::init_(heap);
 }
 
-void CircleMoveInFluid::enter_(ksys::act::ai::InlineParamPack* params) {
+void CircleMoveFluid::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Ai::enter_(params);
 }
 
-void CircleMoveInFluid::leave_() {
+void CircleMoveFluid::leave_() {
     ksys::act::ai::Ai::leave_();
 }
 
-void CircleMoveInFluid::loadParams_() {
+void CircleMoveFluid::loadParams_() {
     getStaticParam(&mSpeed_s, "Speed");
     getStaticParam(&mRadiusX_s, "RadiusX");
     getStaticParam(&mRadiusZ_s, "RadiusZ");

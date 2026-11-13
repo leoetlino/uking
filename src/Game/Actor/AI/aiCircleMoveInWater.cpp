@@ -2,24 +2,24 @@
 
 namespace uking::ai {
 
-CircleMoveInWater::CircleMoveInWater(const InitArg& arg) : CircleMoveInFluid(arg) {}
+CircleMoveInWater::CircleMoveInWater(const InitArg& arg) : CircleMoveFluid(arg) {}
 
 CircleMoveInWater::~CircleMoveInWater() = default;
 
 bool CircleMoveInWater::init_(sead::Heap* heap) {
-    return CircleMoveInFluid::init_(heap);
+    return CircleMoveFluid::init_(heap);
 }
 
 void CircleMoveInWater::enter_(ksys::act::ai::InlineParamPack* params) {
-    CircleMoveInFluid::enter_(params);
+    CircleMoveFluid::enter_(params);
 }
 
 void CircleMoveInWater::leave_() {
-    CircleMoveInFluid::leave_();
+    CircleMoveFluid::leave_();
 }
 
 void CircleMoveInWater::loadParams_() {
-    CircleMoveInFluid::loadParams_();
+    CircleMoveFluid::loadParams_();
     getStaticParam(&mAllowMoveWaterDepth_s, "AllowMoveWaterDepth");
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }

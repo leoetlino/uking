@@ -285,10 +285,10 @@ target_sources(uking PRIVATE
   aiChuchuTypeSelect.h
   aiCircleMove.cpp
   aiCircleMove.h
+  aiCircleMoveFluid.cpp
+  aiCircleMoveFluid.h
   aiCircleMoveFlying.cpp
   aiCircleMoveFlying.h
-  aiCircleMoveInFluid.cpp
-  aiCircleMoveInFluid.h
   aiCircleMoveInWater.cpp
   aiCircleMoveInWater.h
   aiCircleMovePos.cpp
@@ -305,10 +305,10 @@ target_sources(uking PRIVATE
   aiCliffDistanceSelectThreeAction.h
   aiCliffStopEnemyNormal.cpp
   aiCliffStopEnemyNormal.h
+  aiCloseAttack.cpp
+  aiCloseAttack.h
   aiCloseSmallAttack.cpp
   aiCloseSmallAttack.h
-  aiCloseSmallAttackBase.cpp
-  aiCloseSmallAttackBase.h
   aiClusterRenderCheckTag.cpp
   aiClusterRenderCheckTag.h
   aiColGroundHitSelect.cpp
@@ -621,10 +621,10 @@ target_sources(uking PRIVATE
   aiEnemyTreeWeaponSearchOrBattle.h
   aiEnemyVacuumBombSelect.cpp
   aiEnemyVacuumBombSelect.h
-  aiEnemyVacuumBombSelectBase.cpp
-  aiEnemyVacuumBombSelectBase.h
   aiEnemyVacuumChangeItemSelect.cpp
   aiEnemyVacuumChangeItemSelect.h
+  aiEnemyVacuumSelect.cpp
+  aiEnemyVacuumSelect.h
   aiEnemyVacuumWeaponTypeSelect.cpp
   aiEnemyVacuumWeaponTypeSelect.h
   aiEnemyWaitViewItem.cpp

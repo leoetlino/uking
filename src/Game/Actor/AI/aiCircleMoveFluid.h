@@ -4,11 +4,11 @@
 
 namespace uking::ai {
 
-class CircleMoveInFluid : public ksys::act::ai::Ai {
-    SEAD_RTTI_OVERRIDE(CircleMoveInFluid, ksys::act::ai::Ai)
+class CircleMoveFluid : public ksys::act::ai::Ai {
+    SEAD_RTTI_OVERRIDE(CircleMoveFluid, ksys::act::ai::Ai)
 public:
-    explicit CircleMoveInFluid(const InitArg& arg);
-    ~CircleMoveInFluid() override;
+    explicit CircleMoveFluid(const InitArg& arg);
+    ~CircleMoveFluid() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

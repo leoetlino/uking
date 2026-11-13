@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/AI/aiCircleMoveInFluid.h"
+#include "Game/Actor/AI/aiCircleMoveFluid.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
 
 namespace uking::ai {
 
-class CircleMoveFlying : public CircleMoveInFluid {
-    SEAD_RTTI_OVERRIDE(CircleMoveFlying, CircleMoveInFluid)
+class CircleMoveFlying : public CircleMoveFluid {
+    SEAD_RTTI_OVERRIDE(CircleMoveFlying, CircleMoveFluid)
 public:
     explicit CircleMoveFlying(const InitArg& arg);
     ~CircleMoveFlying() override;

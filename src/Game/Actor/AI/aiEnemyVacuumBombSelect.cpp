@@ -2,24 +2,24 @@
 
 namespace uking::ai {
 
-EnemyVacuumBombSelect::EnemyVacuumBombSelect(const InitArg& arg) : EnemyVacuumBombSelectBase(arg) {}
+EnemyVacuumBombSelect::EnemyVacuumBombSelect(const InitArg& arg) : EnemyVacuumSelect(arg) {}
 
 EnemyVacuumBombSelect::~EnemyVacuumBombSelect() = default;
 
 bool EnemyVacuumBombSelect::init_(sead::Heap* heap) {
-    return EnemyVacuumBombSelectBase::init_(heap);
+    return EnemyVacuumSelect::init_(heap);
 }
 
 void EnemyVacuumBombSelect::enter_(ksys::act::ai::InlineParamPack* params) {
-    EnemyVacuumBombSelectBase::enter_(params);
+    EnemyVacuumSelect::enter_(params);
 }
 
 void EnemyVacuumBombSelect::leave_() {
-    EnemyVacuumBombSelectBase::leave_();
+    EnemyVacuumSelect::leave_();
 }
 
 void EnemyVacuumBombSelect::loadParams_() {
-    EnemyVacuumBombSelectBase::loadParams_();
+    EnemyVacuumSelect::loadParams_();
 }
 
 }  // namespace uking::ai

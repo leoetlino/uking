@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/AI/aiEnemyVacuumBombSelectBase.h"
+#include "Game/Actor/AI/aiEnemyVacuumSelect.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
 
 namespace uking::ai {
 
-class EnemyVacuumBombSelect : public EnemyVacuumBombSelectBase {
-    SEAD_RTTI_OVERRIDE(EnemyVacuumBombSelect, EnemyVacuumBombSelectBase)
+class EnemyVacuumBombSelect : public EnemyVacuumSelect {
+    SEAD_RTTI_OVERRIDE(EnemyVacuumBombSelect, EnemyVacuumSelect)
 public:
     explicit EnemyVacuumBombSelect(const InitArg& arg);
     ~EnemyVacuumBombSelect() override;
