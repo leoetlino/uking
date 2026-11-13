@@ -13,6 +13,7 @@
 #include "KingSystem/ActorSystem/actActorEditorNode.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/ActorSystem/actModelCallback.h"
 #include "KingSystem/ActorSystem/actPhysicsConstraints.h"
 #include "KingSystem/ActorSystem/actPhysicsUserTag.h"
 #include "KingSystem/Map/mapMubinIter.h"
@@ -93,21 +94,6 @@ class IDamageManager;
 class LodState;
 class ModelBindInfo;
 class Schedule;
-
-// FIXME: move this to a separate file and rename
-class UMiiModelLink {
-public:
-    explicit UMiiModelLink(Actor* actor) : mActor(actor) {}
-
-    virtual void m0() {}
-    virtual void m1() {}
-    virtual void m2() {}
-    virtual void m3() {}
-
-private:
-    Actor* mActor = nullptr;
-};
-KSYS_CHECK_SIZE_NX150(UMiiModelLink, 0x10);
 
 struct ActorUniqueName {
     sead::BufferedSafeString* unique_name;
@@ -550,7 +536,7 @@ protected:
     /* 0x6a8 */ chm::ActorChemicals* mChemicals = nullptr;
     /* 0x6b0 */ reaction::ReactionSet* mReaction = nullptr;
     /* 0x6b8 */ void* mContactReactionUnit = nullptr;
-    /* 0x6c0 */ UMiiModelLink mUMiiModelLink{this};
+    /* 0x6c0 */ ModelCallback mModelCallback{this};
     /* 0x6d0 */ float mDeleteEffectWaitTimer = 0.0;
     /* 0x6d8 */ void* mEffectModelEntry = nullptr;
     /* 0x6e0 */ float mWaterHitEffectTimer = 0.0;

@@ -77,6 +77,8 @@ target_sources(uking PRIVATE
     actLifeRecoveryInfo.h
     actLodState.cpp
     actLodState.h
+    actModelCallback.cpp
+    actModelCallback.h
     actPhysicsConstraints.cpp
     actPhysicsConstraints.h
     actPhysicsUserTag.cpp
