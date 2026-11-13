@@ -7,11 +7,11 @@
 #include <prim/seadScopedLock.h>
 #include "Game/Actor/Player/actPlayerBase.h"
 #include "Game/Actor/Player/actPlayerInfo.h"
-#include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
 #include "Game/ActorHeapUtil.h"
 #include "Game/Cooking/cookManager.h"
+#include "Game/CreatePlayerEquipActorMgr.h"
 #include "Game/Scene/gameScene.h"
 #include "Game/UI/uiUtils.h"
 #include "Game/gameItemUtils.h"
@@ -1470,12 +1470,12 @@ void PauseMenuDataMgr::createPlayerEquipment() {
     constexpr const char* Caller = "PauseMenuDataMgr_FromSaveData";
     const auto lock = sead::makeScopedLock(mCritSection);
 
-    auto* create_mgr = act::CreatePlayerEquipActorMgr::instance();
+    auto* create_mgr = CreatePlayerEquipActorMgr::instance();
     if (!create_mgr) {
         return;
     }
 
-    std::array<PouchItem*, (u64)act::CreateEquipmentSlot::Length> equipment_items{};
+    std::array<PouchItem*, (u64)CreateEquipmentSlot::Length> equipment_items{};
 
     const auto& items = getItems();
     PouchItem* item = items.isEmpty() ? nullptr : items.nth(0);
@@ -1494,11 +1494,10 @@ void PauseMenuDataMgr::createPlayerEquipment() {
                 }
             }
         }
-        const auto* head = equipment_items[(u64)act::CreateEquipmentSlot::ArmorHead];
-        if (head && equipment_items[(u64)act::CreateEquipmentSlot::ArmorUpper]) {
-            need_head_b = act::needsArmorHeadB(
-                head->getName(),
-                equipment_items[(u64)act::CreateEquipmentSlot::ArmorUpper]->getName());
+        const auto* head = equipment_items[(u64)CreateEquipmentSlot::ArmorHead];
+        if (head && equipment_items[(u64)CreateEquipmentSlot::ArmorUpper]) {
+            need_head_b = needsArmorHeadB(
+                head->getName(), equipment_items[(u64)CreateEquipmentSlot::ArmorUpper]->getName());
         }
     }
 
@@ -1507,7 +1506,7 @@ void PauseMenuDataMgr::createPlayerEquipment() {
     s32 slot = 0;  // <- this is required to match
     for (u64 i = 0; i != equipment_items.size(); slot = s32(++i)) {
         if (equipment_items[i]) {
-            if (!need_head_b || i != (u64)act::CreateEquipmentSlot::ArmorHead) {
+            if (!need_head_b || i != (u64)CreateEquipmentSlot::ArmorHead) {
                 createEquipmentFromItem(equipment_items[i], Caller);
             } else {
                 create_mgr->requestCreateArmorHeadB(equipment_items[i]->getName(),
@@ -1515,13 +1514,13 @@ void PauseMenuDataMgr::createPlayerEquipment() {
             }
             continue;
         }
-        if (i > (u64)act::CreateEquipmentSlot::WeaponBow) {
+        if (i > (u64)CreateEquipmentSlot::WeaponBow) {
             create_mgr->requestCreateDefaultArmor(slot, Caller);
             continue;
         }
 
         if (player) {
-            auto equipment_slot = getEquipmentSlot((act::CreateEquipmentSlot)i);
+            auto equipment_slot = getEquipmentSlot((CreateEquipmentSlot)i);
             player->switchEquipment(getDefaultEquipment(equipment_slot), 30);
         }
 

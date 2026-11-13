@@ -3,7 +3,7 @@
 #include <prim/seadSafeString.h>
 #include "Game/Actor/actWeapon.h"
 
-namespace uking::act {
+namespace uking {
 enum class CreateEquipmentSlot : u8;
 }
 
@@ -40,8 +40,8 @@ void setShowRaceResult(s32 result_type);
 int countCookResultsCheck(const sead::SafeString& name, s32 effect_type);
 int countCookResultsAllOk(const sead::SafeString& name);
 
-act::CreateEquipmentSlot getCreateEquipmentSlot(ui::PouchItemType type);
-ui::EquipmentSlot getEquipmentSlot(act::CreateEquipmentSlot slot);
+CreateEquipmentSlot getCreateEquipmentSlot(ui::PouchItemType type);
+ui::EquipmentSlot getEquipmentSlot(CreateEquipmentSlot slot);
 bool createEquipmentFromItem(const ui::PouchItem* item, const sead::SafeString& caller);
 
 }  // namespace uking::ui

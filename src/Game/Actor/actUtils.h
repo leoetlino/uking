@@ -13,13 +13,16 @@ class BaseProcHandle;
 class InstParamPack;
 }  // namespace ksys::act
 
+namespace uking {
+enum class CreateEquipmentSlot : u8;
+}  // namespace uking
+
 namespace uking::ui {
 class PouchItem;
 }  // namespace uking::ui
 
 namespace uking::act {
 
-enum class CreateEquipmentSlot : u8;
 struct WeaponModifierInfo;
 void requestCreateWeaponByRawLife(const char* actor_class, const sead::Matrix34f& matrix, f32 scale,
                                   sead::Heap* heap, ksys::act::BaseProcHandle* handle, s32 life,

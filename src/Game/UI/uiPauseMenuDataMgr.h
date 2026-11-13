@@ -29,12 +29,11 @@ struct WeaponModifierInfo;
 }  // namespace uking::act
 
 namespace uking {
+enum class CreateEquipmentSlot : u8;
 struct CookItem;
 }  // namespace uking
 
 namespace uking::ui {
-
-enum class CreateEquipmentSlot : u8;
 
 constexpr int NumSwordsMax = 20;
 constexpr int NumBowsMax = 14;

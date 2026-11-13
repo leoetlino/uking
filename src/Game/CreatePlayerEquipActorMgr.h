@@ -25,6 +25,9 @@ enum class EquipmentSlot;
 
 namespace uking::act {
 struct WeaponModifierInfo;
+}  // namespace uking::act
+
+namespace uking {
 
 enum class CreateEquipmentSlot : u8 {
     WeaponSword = 0,
@@ -81,9 +84,11 @@ public:
     ksys::act::Actor* tryGetEquipmentActor(s32 slot_idx);
 
     void requestCreateWeapon(s32 slot_idx, const sead::SafeString& name, int value,
-                             const WeaponModifierInfo* modifier, const sead::SafeString& caller);
+                             const act::WeaponModifierInfo* modifier,
+                             const sead::SafeString& caller);
     void requestCreateWeapon(const sead::SafeString& name, int value,
-                             const WeaponModifierInfo* modifier, const sead::SafeString& caller);
+                             const act::WeaponModifierInfo* modifier,
+                             const sead::SafeString& caller);
 
     void requestCreateArmor(s32 slot_idx, const sead::SafeString& name, int dye_color,
                             const sead::SafeString& caller);
@@ -129,7 +134,7 @@ private:
 
     Slots<ksys::act::BaseProcHandle> mProcHandles{};
     sead::BitFlag8 mIsLoading;
-    PlayerCreateTracer mTracer;
+    act::PlayerCreateTracer mTracer;
     Slots<Entry> mEntries{};
 
     // stubbed in release builds
@@ -148,4 +153,4 @@ bool needsArmorHeadB(const sead::SafeString& armor_head_name,
 bool isArmorHeadMantleType2(const sead::SafeString& armor_head_name);
 bool isArmorUpperNotUseMantleType0(const sead::SafeString& armor_upper_name);
 
-}  // namespace uking::act
+}  // namespace uking

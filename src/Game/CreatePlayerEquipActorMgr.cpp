@@ -1,4 +1,4 @@
-#include "Game/Actor/actPlayerCreateMgr.h"
+#include "Game/CreatePlayerEquipActorMgr.h"
 #include <prim/seadRuntimeTypeInfo.h>
 #include <prim/seadStringBuilder.h>
 #include "Game/Actor/Player/actPlayerBase.h"
@@ -15,7 +15,7 @@
 #include "KingSystem/Game/Weapon/WeaponBase.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 
-namespace uking::act {
+namespace uking {
 
 void PlayerCreateDebugStub::init() {
     struct MsgStub {
@@ -148,25 +148,26 @@ ksys::act::Actor* CreatePlayerEquipActorMgr::tryGetEquipmentActor(s32 slot_idx) 
 }
 
 void CreatePlayerEquipActorMgr::requestCreateWeapon(s32 slot_idx, const sead::SafeString& name,
-                                                    int value, const WeaponModifierInfo* modifier,
+                                                    int value,
+                                                    const act::WeaponModifierInfo* modifier,
                                                     const sead::SafeString& caller) {
     auto scope = mTracer.trace()->makeScope("requestCreateWeapon", caller, 1);
 
     deleteLoadingProc(slot_idx);
-    auto* player = PlayerInfo::instance()->getPlayer();
+    auto* player = act::PlayerInfo::instance()->getPlayer();
 
     sead::Matrix34f pos;
     pos.makeT(player->getMtx().getTranslation());
 
-    requestCreateWeaponByRawLife(name.cstr(), pos, 1.0,
-                                 ActorHeapUtil::instance()->getBaseProcHeap(),
-                                 &mProcHandles[slot_idx], value, false, modifier, 2, 2);
+    act::requestCreateWeaponByRawLife(name.cstr(), pos, 1.0,
+                                      ActorHeapUtil::instance()->getBaseProcHeap(),
+                                      &mProcHandles[slot_idx], value, false, modifier, 2, 2);
 
     onSlotLoadingRequested(slot_idx, name);
 }
 
 void CreatePlayerEquipActorMgr::requestCreateWeapon(const sead::SafeString& name, int value,
-                                                    const WeaponModifierInfo* modifier,
+                                                    const act::WeaponModifierInfo* modifier,
                                                     const sead::SafeString& caller) {
     auto scope = mTracer.trace()->makeScope("requestCreateWeapon", caller, 1);
     auto* info_data = ksys::act::InfoData::instance();
@@ -212,7 +213,7 @@ void CreatePlayerEquipActorMgr::requestCreateArmor(s32 slot_idx, const sead::Saf
 
     {
         ksys::act::ActorLinkConstDataAccess access;
-        ksys::act::acquireActor(&PlayerInfo::instance()->getPlayerLink(), &access);
+        ksys::act::acquireActor(&act::PlayerInfo::instance()->getPlayerLink(), &access);
         sead::Vector3f pos;
         access.getActorMtx().getTranslation(pos);
         params->addPosition(pos);
@@ -317,4 +318,4 @@ bool isArmorUpperNotUseMantleType0(const sead::SafeString& armor_upper_name) {
                                                  armor_upper_name.cstr()) != 0;
 }
 
-}  // namespace uking::act
+}  // namespace uking

@@ -12,6 +12,8 @@ target_sources(uking PRIVATE
   gamePlayReport.h
   ActorHeapUtil.cpp
   ActorHeapUtil.h
+  CreatePlayerEquipActorMgr.cpp
+  CreatePlayerEquipActorMgr.h
   DamageInfoMgr.cpp
   DamageInfoMgr.h
   E3Mgr.cpp

@@ -1,6 +1,6 @@
 #include "Game/Actor/actUtils.h"
-#include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actWeapon.h"
+#include "Game/CreatePlayerEquipActorMgr.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/Game/Weapon/WeaponBase.h"
 
