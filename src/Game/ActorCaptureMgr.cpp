@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/actActorCaptureMgr.h"
+#include "Game/ActorCaptureMgr.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
@@ -6,7 +6,7 @@
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Utils/SafeDelete.h"
 
-namespace ksys::act {
+namespace uking {
 
 ActorCaptureMgr::ActorCaptureMgr() {
     mRes.reset();
@@ -16,21 +16,21 @@ ActorCaptureMgr::ActorCaptureMgr() {
 ActorCaptureMgr::~ActorCaptureMgr() {
     mActor = nullptr;
     mCamera = nullptr;
-    res::unregisterEntryFactory(mFactory);
-    util::safeDelete(mFactory);
+    ksys::res::unregisterEntryFactory(mFactory);
+    ksys::util::safeDelete(mFactory);
 }
 
 void ActorCaptureMgr::init(const InitArg& arg) {
-    mFactory = new (arg.heap) res::EntryFactory<res::ActorCapture>(1.0, 0x1000);
-    res::registerEntryFactory(mFactory, "bactcapt");
+    mFactory = new (arg.heap) ksys::res::EntryFactory<ksys::res::ActorCapture>(1.0, 0x1000);
+    ksys::res::registerEntryFactory(mFactory, "bactcapt");
 
-    res::LoadRequest req;
+    ksys::res::LoadRequest req;
     req.mRequester = "ActorCaptureMgr";
     req._26 = false;
     mDummyFile.load("Actor/ActorCapture/Dummy.bactcapt", &req);
 }
 
-void ActorCaptureMgr::setCamera(Actor* camera) {
+void ActorCaptureMgr::setCamera(ksys::act::Actor* camera) {
     if (camera)
         mCamera = camera;
 }
@@ -43,19 +43,19 @@ void ActorCaptureMgr::loadCaptureParam() {
     if (!name)
         return;
 
-    res::ActorCapture* param = nullptr;
+    ksys::res::ActorCapture* param = nullptr;
 
     {
-        res::LoadRequest req;
+        ksys::res::LoadRequest req;
         req.mRequester = "ActorCaptureMgr";
         sead::FormatFixedSafeString<128> path("Actor/ActorCapture/%s.bactcapt", name);
-        res::ResourceMgrTask::instance()->controlField9c0d88(false);
-        auto* file = sead::DynamicCast<res::ActorCapture>(mCaptureParamFile.load(path, &req));
-        res::ResourceMgrTask::instance()->controlField9c0d88(true);
+        ksys::res::ResourceMgrTask::instance()->controlField9c0d88(false);
+        auto* file = sead::DynamicCast<ksys::res::ActorCapture>(mCaptureParamFile.load(path, &req));
+        ksys::res::ResourceMgrTask::instance()->controlField9c0d88(true);
         if (file)
             param = file;
         if (!param)
-            param = sead::DynamicCast<res::ActorCapture>(mDummyFile.getResource());
+            param = sead::DynamicCast<ksys::res::ActorCapture>(mDummyFile.getResource());
     }
 
     mRes.mCameraInfoObj.copy(param->mCameraInfoObj);
@@ -63,4 +63,4 @@ void ActorCaptureMgr::loadCaptureParam() {
     mRes.mLightInfoObj.copy(param->mLightInfoObj);
 }
 
-}  // namespace ksys::act
+}  // namespace uking

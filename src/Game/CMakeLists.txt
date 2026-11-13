@@ -10,6 +10,8 @@ target_sources(uking PRIVATE
   gameItemUtils.h
   gamePlayReport.cpp
   gamePlayReport.h
+  ActorCaptureMgr.cpp
+  ActorCaptureMgr.h
   ActorHeapUtil.cpp
   ActorHeapUtil.h
   CreatePlayerEquipActorMgr.cpp

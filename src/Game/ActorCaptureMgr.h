@@ -7,13 +7,15 @@
 #include "KingSystem/System/Timer.h"
 #include "KingSystem/Utils/Types.h"
 
+namespace ksys::act {
+class Actor;
+}
+
 namespace ksys::res {
 class EntryFactoryBase;
 }
 
-namespace ksys::act {
-
-class Actor;
+namespace uking {
 
 // TODO: incomplete
 class ActorCaptureMgr {
@@ -26,20 +28,20 @@ public:
     virtual ~ActorCaptureMgr();
 
     void init(const InitArg& arg);
-    void setCamera(Actor* camera);
+    void setCamera(ksys::act::Actor* camera);
 
     void loadCaptureParam();
     const char* getCapturedActorName() const;
 
 private:
-    Actor* mActor{};
-    Actor* mCamera{};
-    res::EntryFactoryBase* mFactory{};
-    res::Handle mDummyFile;
-    res::Handle mCaptureParamFile;
+    ksys::act::Actor* mActor{};
+    ksys::act::Actor* mCamera{};
+    ksys::res::EntryFactoryBase* mFactory{};
+    ksys::res::Handle mDummyFile;
+    ksys::res::Handle mCaptureParamFile;
     sead::FixedSafeString<64> mStr;
     sead::FixedSafeString<256> mStr2;
-    res::ActorCapture mRes;
+    ksys::res::ActorCapture mRes;
     struct Field768 {
         Field768() {
             _76c = 0;
@@ -51,8 +53,8 @@ private:
     s32 _770 = -1;
     u32 _774{};
     u32 _778{};
-    Timer mTimer;
+    ksys::Timer mTimer;
 };
 KSYS_CHECK_SIZE_NX150(ActorCaptureMgr, 0x788);
 
-}  // namespace ksys::act
+}  // namespace uking

@@ -18,8 +18,6 @@ target_sources(uking PRIVATE
 
     actActor.cpp
     actActor.h
-    actActorCaptureMgr.cpp
-    actActorCaptureMgr.h
     actActorCreator.cpp
     actActorCreator.h
     actActorEditorNode.cpp
