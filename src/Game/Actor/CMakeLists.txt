@@ -1,7 +1,6 @@
 add_subdirectory(Action)
 add_subdirectory(AI)
 add_subdirectory(Camera)
-add_subdirectory(Damage)
 add_subdirectory(Player)
 add_subdirectory(Query)
 target_sources(uking PRIVATE

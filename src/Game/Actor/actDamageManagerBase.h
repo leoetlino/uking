@@ -6,8 +6,8 @@
 #include <math/seadMatrix.h>
 #include <prim/seadRuntimeTypeInfo.h>
 
-#include "Game/Actor/Damage/actDamageInfoMgr.h"
 #include "Game/Actor/actStruct20.h"
+#include "Game/DamageInfoMgr.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actIDamageManager.h"
 

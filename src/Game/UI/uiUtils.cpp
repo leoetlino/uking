@@ -1,10 +1,10 @@
 #include "Game/UI/uiUtils.h"
 #include <Byaml/Byaml.h>
 #include "Game/AOC/aocHardModeManager.h"
-#include "Game/Actor/Damage/actDamageInfoMgr.h"
 #include "Game/Actor/actPlayerCreateMgr.h"
 #include "Game/Actor/actUtils.h"
 #include "Game/Actor/actWeapon.h"
+#include "Game/DamageInfoMgr.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
@@ -57,7 +57,7 @@ void getWeaponStats(const PouchItem& item, WeaponStats* stats) {
     } else if (isMasterSwordItem(item)) {
         int power = 0;
         if (item.getValue() > 0) {
-            const bool is_true_form = act::DamageInfoMgr::instance()->isTrueFormMasterSword();
+            const bool is_true_form = DamageInfoMgr::instance()->isTrueFormMasterSword();
             auto* info_ = ksys::act::InfoData::instance();
             const char* name = item.getName().cstr();
             if (is_true_form) {
@@ -70,7 +70,7 @@ void getWeaponStats(const PouchItem& item, WeaponStats* stats) {
         stats->power = power;
 
     } else if (act::isOneHitObliteratorActorName(item.getName())) {
-        stats->power = act::DamageInfoMgr::instance()->isOneHitObliteratorActive() ? 99999 : 1;
+        stats->power = DamageInfoMgr::instance()->isOneHitObliteratorActive() ? 99999 : 1;
     } else {
         stats->power =
             ksys::act::getAttackPower(ksys::act::InfoData::instance(), item.getName().cstr());

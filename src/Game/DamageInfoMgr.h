@@ -8,7 +8,7 @@
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/Resource/resHandle.h"
 
-namespace uking::act {
+namespace uking {
 
 // FIXME: incomplete
 class DamageInfoMgr {
@@ -59,4 +59,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(DamageInfoMgr, 0x12F0);
 
-}  // namespace uking::act
+}  // namespace uking

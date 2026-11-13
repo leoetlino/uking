@@ -1,10 +1,10 @@
-#include "Game/Actor/Damage/actDamageInfoMgr.h"
+#include "Game/DamageInfoMgr.h"
 #include "Game/Scene/gameStageInfo.h"
 #include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 
-namespace uking::act {
+namespace uking {
 
 SEAD_SINGLETON_DISPOSER_IMPL(DamageInfoMgr)
 
@@ -66,4 +66,4 @@ bool DamageInfoMgr::isTrueFormMasterSword() const {
     return mMasterSwordDetectedEvil;
 }
 
-}  // namespace uking::act
+}  // namespace uking
