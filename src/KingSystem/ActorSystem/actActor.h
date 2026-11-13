@@ -38,6 +38,10 @@ namespace awn {
 class AwarenessInstance;
 }  // namespace awn
 
+namespace bonectrl {
+class ActorBoneControl;
+}  // namespace bonectrl
+
 namespace chm {
 class ActorChemicals;
 }  // namespace chm
@@ -83,7 +87,6 @@ class Actor;
 class ActorCreator;
 class ActorParam;
 class BaseProcLink;
-class BoneControl;
 class Chemical;
 class ImpulseBaseProcLink;
 class IDamageManager;
@@ -506,7 +509,7 @@ protected:
     /* 0x578 */ phys::InstanceSet* mPhysics = nullptr;
     /* 0x580 */ PhysicsConstraints mConstraints;
     /* 0x598 */ LodState* mLodState = nullptr;
-    /* 0x5a0 */ BoneControl* mBoneControl = nullptr;
+    /* 0x5a0 */ bonectrl::ActorBoneControl* mBoneControl = nullptr;
     /* 0x5a8 */ phys::StaticCompoundRigidBodyGroup* mFieldBodyGroup = nullptr;
     /* 0x5b0 */ void* mExtraAnimResList = nullptr;
     /* 0x5b8 */ sead::Heap* mActorHeap = nullptr;
