@@ -47200,10 +47200,10 @@ Address,Quality,Size,Name
 0x0000007100747c88,U,000204,uking::act::AcceptOnlyBombDamageCallback::checkDerivedRuntimeTypeInfo
 0x0000007100747d54,U,000092,uking::act::AcceptOnlyBombDamageCallback::getRuntimeTypeInfo
 0x0000007100747db0,U,000072,uking::act::AcceptOnlyBombDamageCallback::dtorDelete
-0x0000007100747df8,U,000028,uking::act::ThroughArrowDamageCallback::call
-0x0000007100747e14,U,000204,uking::act::ThroughArrowDamageCallback::checkDerivedRuntimeTypeInfo
-0x0000007100747ee0,U,000092,uking::act::ThroughArrowDamageCallback::getRuntimeTypeInfo
-0x0000007100747f3c,U,000072,uking::act::ThroughArrowDamageCallback::dtorDelete
+0x0000007100747df8,U,000028,uking::act::ArrowThroughDamageCallback::call
+0x0000007100747e14,U,000204,uking::act::ArrowThroughDamageCallback::checkDerivedRuntimeTypeInfo
+0x0000007100747ee0,U,000092,uking::act::ArrowThroughDamageCallback::getRuntimeTypeInfo
+0x0000007100747f3c,U,000072,uking::act::ArrowThroughDamageCallback::dtorDelete
 0x0000007100747f84,U,000160,uking::act::BlowOffDamageCallback::call
 0x0000007100748024,U,000204,uking::act::BlowOffDamageCallback::checkDerivedRuntimeTypeInfo
 0x00000071007480f0,U,000092,uking::act::BlowOffDamageCallback::getRuntimeTypeInfo
