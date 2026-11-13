@@ -10,8 +10,11 @@ class Heap;
 
 namespace ksys::act {
 class BaseProcHandle;
-class InstParamPack;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class ActorInstParamPack;
+}  // namespace ksys::frm
 
 namespace uking {
 enum class CreateEquipmentSlot : u8;

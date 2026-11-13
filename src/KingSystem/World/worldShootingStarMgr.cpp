@@ -3,7 +3,7 @@
 #include <random/seadGlobalRandom.h>
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actBaseProcHeapMgr.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/World/worldManager.h"
 
@@ -117,7 +117,7 @@ void ShootingStarMgr::spawnStar() {
     if (!isStarPositionValid())
         return;
 
-    act::InstParamPack pack;
+    frm::ActorInstParamPack pack;
     sead::Vector3f pos;
     tryGetStarPosition(&pos);
 

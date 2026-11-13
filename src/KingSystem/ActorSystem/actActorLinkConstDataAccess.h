@@ -5,8 +5,8 @@
 #include <prim/seadRuntimeTypeInfo.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcAccessor.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcAccessor.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys {
@@ -28,14 +28,14 @@ namespace ksys::act {
 class Actor;
 
 /// Provides read-only access to actor data for safe, multi-threaded access.
-class ActorLinkConstDataAccess : public BaseProcAccessor {
+class ActorLinkConstDataAccess : public frm::BaseProcAccessor {
 public:
     ActorLinkConstDataAccess() = default;
-    explicit ActorLinkConstDataAccess(BaseProc* proc) : BaseProcAccessor(proc) {}
+    explicit ActorLinkConstDataAccess(BaseProc* proc) : frm::BaseProcAccessor(proc) {}
 
-    bool acquireActor(const BaseProcAccessor& other);
+    bool acquireActor(const frm::BaseProcAccessor& other);
 
-    bool hasProc() const { return BaseProcAccessor::hasProc(); }
+    bool hasProc() const { return frm::BaseProcAccessor::hasProc(); }
 
     /// Checks whether the acquired BaseProc is `proc`.
     bool hasProc(BaseProc* proc) const;
@@ -73,8 +73,8 @@ public:
     bool hasTag(u32 tag) const;
     const char* getUniqueName() const;
     u32 getId() const;
-    bool acquireConnectedCalcParent(BaseProcAccessor* accessor) const;
-    bool acquireConnectedCalcChild(BaseProcAccessor* accessor) const;
+    bool acquireConnectedCalcParent(frm::BaseProcAccessor* accessor) const;
+    bool acquireConnectedCalcChild(frm::BaseProcAccessor* accessor) const;
     bool hasConnectedCalcParent() const;
     bool isInvisible() const;
 

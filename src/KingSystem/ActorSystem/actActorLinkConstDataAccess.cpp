@@ -25,7 +25,7 @@ inline Actor* ActorLinkConstDataAccess::getActor() const {
     return static_cast<Actor*>(getProcIfActor(mProc));
 }
 
-bool ActorLinkConstDataAccess::acquireActor(const BaseProcAccessor& other) {
+bool ActorLinkConstDataAccess::acquireActor(const frm::BaseProcAccessor& other) {
     return acquire(getProcIfActor(other.mProc));
 }
 
@@ -136,7 +136,7 @@ u32 ActorLinkConstDataAccess::getId() const {
     return proc->getId();
 }
 
-bool ActorLinkConstDataAccess::acquireConnectedCalcParent(BaseProcAccessor* accessor) const {
+bool ActorLinkConstDataAccess::acquireConnectedCalcParent(frm::BaseProcAccessor* accessor) const {
     auto* proc = getActor();
     if (!proc)
         return false;
@@ -145,7 +145,7 @@ bool ActorLinkConstDataAccess::acquireConnectedCalcParent(BaseProcAccessor* acce
     return accessor->mProc != nullptr;
 }
 
-bool ActorLinkConstDataAccess::acquireConnectedCalcChild(BaseProcAccessor* accessor) const {
+bool ActorLinkConstDataAccess::acquireConnectedCalcChild(frm::BaseProcAccessor* accessor) const {
     auto* proc = getActor();
     if (!proc)
         return false;

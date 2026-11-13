@@ -4,7 +4,7 @@
 #include <prim/seadDelegate.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Utils/Thread/ManagedTask.h"
 #include "KingSystem/Utils/Thread/Task.h"
@@ -28,7 +28,7 @@ struct BaseProcCreateArg {
     sead::SafeString proc_name;
     map::MubinIter* mubin_iter;
     map::PreActor* map_object;
-    InstParamPack::Buffer* params;
+    frm::ActorInstParamPack::Buffer* params;
     BaseProcLink proc_link;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcCreateArg, 0x58);
@@ -47,7 +47,7 @@ public:
     BaseProcHandle* mProcHandle{};
     map::MubinIter* mMubinIter{};
     map::PreActor* mMapObject{};
-    InstParamPack::Buffer* mParams{};
+    frm::ActorInstParamPack::Buffer* mParams{};
     BaseProc* mOtherProc{};
     bool mSleepAfterInit{};
 };
@@ -96,7 +96,7 @@ private:
                                                     &BaseProcCreateTask::onTaskDelegateInvoked};
     BaseProcLink mLink;
     f32 mDistanceToLoadSphere = -1.0;
-    InstParamPack::Buffer mParams;
+    frm::ActorInstParamPack::Buffer mParams;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcCreateTask, 0x298);
 

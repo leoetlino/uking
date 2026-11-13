@@ -1,9 +1,9 @@
-#include "KingSystem/ActorSystem/actBaseProcAccessor.h"
+#include "KingSystem/Framework/frmBaseProcAccessor.h"
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/Utils/Debug.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcAccessor::~BaseProcAccessor() {
     if (mAcquired && mProc)
@@ -13,7 +13,7 @@ BaseProcAccessor::~BaseProcAccessor() {
     mProc = nullptr;
 }
 
-bool BaseProcAccessor::acquire(BaseProc* proc) {
+bool BaseProcAccessor::acquire(act::BaseProc* proc) {
     if (mProc) {
         if (mAcquired)
             mProc->release();
@@ -25,7 +25,8 @@ bool BaseProcAccessor::acquire(BaseProc* proc) {
     return proc && proc->acquire(*this);
 }
 
-bool acquireProc(BaseProcAccessor* accessor, BaseProc* proc, const sead::SafeString& from, s32) {
+bool acquireProc(BaseProcAccessor* accessor, act::BaseProc* proc, const sead::SafeString& from,
+                 s32) {
     bool acquired = false;
 
     if (accessor) {
@@ -34,7 +35,7 @@ bool acquireProc(BaseProcAccessor* accessor, BaseProc* proc, const sead::SafeStr
             return false;
     }
 
-    if (acquired || BaseProcMgr::instance()->isHighPriorityThread())
+    if (acquired || act::BaseProcMgr::instance()->isHighPriorityThread())
         return true;
 
     sead::FixedSafeString<256> message;
@@ -45,4 +46,4 @@ bool acquireProc(BaseProcAccessor* accessor, BaseProc* proc, const sead::SafeStr
     return false;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

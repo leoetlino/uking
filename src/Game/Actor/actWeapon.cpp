@@ -6,7 +6,7 @@
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
@@ -91,7 +91,7 @@ void WeaponModifierInfo::saveEquipStandBowFlag(int idx) const {
     setFlag_EquipStandBow_ValueSp(value, idx);
 }
 
-void WeaponModifierInfo::addModifierParams(ksys::act::InstParamPack& params) const {
+void WeaponModifierInfo::addModifierParams(ksys::frm::ActorInstParamPack& params) const {
     params->add(value, "AddParam");
     params->add(int(flags.getDirect()), "AddSpecialFlag");
 }

@@ -1,14 +1,15 @@
 #include "KingSystem/Game/Weapon/WeaponBase.h"
 #include "KingSystem/ActorSystem/actActorCreator.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 
 namespace ksys::game {
 
 void WeaponBase::requestCreateWeaponActor(const char* actor, const sead::Matrix34f& matrix,
                                           f32 scale, sead::Heap* heap,
                                           ksys::act::BaseProcHandle* handle, s32 life,
-                                          ksys::act::InstParamPack* params_in, s32 task_lane_id) {
-    ksys::act::InstParamPack params;
+                                          ksys::frm::ActorInstParamPack* params_in,
+                                          s32 task_lane_id) {
+    ksys::frm::ActorInstParamPack params;
     if (params_in) {
         params = *params_in;
     }

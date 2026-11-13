@@ -7,8 +7,11 @@
 
 namespace ksys::act {
 class Actor;
-class BaseProcAccessor;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class BaseProcAccessor;
+}  // namespace ksys::frm
 
 namespace ksys::map {
 
@@ -65,7 +68,7 @@ enum class MapLinkDefType {
 struct ObjectLink {
     ~ObjectLink() {}
     act::Actor* getObjectActor() const;
-    bool getObjectProcWithAccessor(act::BaseProcAccessor& accessor) const;
+    bool getObjectProcWithAccessor(frm::BaseProcAccessor& accessor) const;
     const char* getDescription() const;
     static const char* getDescriptionForType(MapLinkDefType t);
     static MapLinkDefType getTypeForName(const sead::SafeString& name);

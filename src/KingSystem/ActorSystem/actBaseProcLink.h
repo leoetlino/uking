@@ -9,9 +9,12 @@
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/Utils/Types.h"
 
+namespace ksys::frm {
+class BaseProcAccessor;
+}  // namespace ksys::frm
+
 namespace ksys::act {
 
-class BaseProcAccessor;
 class BaseProc;
 class BaseProcLinkData;
 
@@ -29,8 +32,8 @@ public:
     bool hasProcInCalcState() const;
     bool hasProcById(BaseProc* proc) const;
 
-    BaseProc* getProc(BaseProcAccessor* accessor, BaseProc* other_proc) const;
-    BaseProc* getProc(BaseProcAccessor* accessor) const;
+    BaseProc* getProc(frm::BaseProcAccessor* accessor, BaseProc* other_proc) const;
+    BaseProc* getProc(frm::BaseProcAccessor* accessor) const;
 
     /// Acquire the specified BaseProc.
     /// If a BaseProc has already been specified, it is released.

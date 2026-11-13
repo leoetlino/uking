@@ -5,14 +5,19 @@
 #include <utility>
 
 namespace ksys::act {
-
+class ActorLinkConstDataAccess;
 class BaseProc;
+class BaseProcHandle;
+class BaseProcUnit;
+}  // namespace ksys::act
+
+namespace ksys::frm {
 
 /// Holds a reference to a BaseProc for safe, multi-threaded access.
 class BaseProcAccessor {
 public:
     BaseProcAccessor() = default;
-    explicit BaseProcAccessor(BaseProc* proc) { acquire(proc); }
+    explicit BaseProcAccessor(act::BaseProc* proc) { acquire(proc); }
     /// Destructor that automatically releases any acquired BaseProc.
     ~BaseProcAccessor();
 
@@ -27,24 +32,25 @@ public:
 
     /// Acquire a BaseProc. This increments its reference count.
     /// If an actor was already acquired, it is released.
-    bool acquire(BaseProc* proc);
+    bool acquire(act::BaseProc* proc);
 
     void release() { acquire(nullptr); }
 
     bool hasProc() const { return mProc != nullptr; }
 
 protected:
-    friend class ActorLinkConstDataAccess;
-    friend class BaseProc;
-    friend class BaseProcHandle;
-    friend class BaseProcUnit;
+    friend class act::ActorLinkConstDataAccess;
+    friend class act::BaseProc;
+    friend class act::BaseProcHandle;
+    friend class act::BaseProcUnit;
 
     bool mAcquired = false;
-    BaseProc* mProc = nullptr;
+    act::BaseProc* mProc = nullptr;
 };
 
 /// Acquire the specified BaseProc using `accessor`. Using ActorLinkConstDataAccess is mandatory
 /// when acquiring from a low priority thread (see BaseProcMgr for a definition).
-bool acquireProc(BaseProcAccessor* accessor, BaseProc* proc, const sead::SafeString& from, s32 = 2);
+bool acquireProc(BaseProcAccessor* accessor, act::BaseProc* proc, const sead::SafeString& from,
+                 s32 = 2);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

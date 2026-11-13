@@ -129,7 +129,7 @@ act::Actor* ObjectLink::getObjectActor() const {
     return other_obj->tryGetActor(false);
 }
 
-bool ObjectLink::getObjectProcWithAccessor(act::BaseProcAccessor& accessor) const {
+bool ObjectLink::getObjectProcWithAccessor(frm::BaseProcAccessor& accessor) const {
     if (other_obj == nullptr)
         return accessor.acquire(nullptr);
     else

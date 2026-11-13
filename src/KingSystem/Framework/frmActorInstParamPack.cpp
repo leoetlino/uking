@@ -1,19 +1,19 @@
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include <prim/seadMemUtil.h>
 
-namespace ksys::act {
+namespace ksys::frm {
 
-void InstParamPack::Buffer::clear() {
+void ActorInstParamPack::Buffer::clear() {
     mNumItems = 0;
     mPosition = 0;
     mData.fill(0);
 }
 
 // NON_MATCHING: write()
-void InstParamPack::Buffer::add(const void* data, const sead::SafeString& name, s32 byte_size,
-                                InstParamPack::EntryType type) {
+void ActorInstParamPack::Buffer::add(const void* data, const sead::SafeString& name, s32 byte_size,
+                                     ActorInstParamPack::EntryType type) {
     if (byte_size + mPosition + u32(sizeof(const char*)) + 1 > mData.getByteSize()) {
-        SEAD_ASSERT_MSG(false, "InstParamPack::Buffer::add: Buffer overflow");
+        SEAD_ASSERT_MSG(false, "ActorInstParamPack::Buffer::add: Buffer overflow");
         return;
     }
 
@@ -24,12 +24,12 @@ void InstParamPack::Buffer::add(const void* data, const sead::SafeString& name, 
 }
 
 // NON_MATCHING: write()
-void InstParamPack::Buffer::add(ActorCallback* callback, const sead::SafeString& name) {
+void ActorInstParamPack::Buffer::add(ActorCallback* callback, const sead::SafeString& name) {
     add(callback, name, sizeof(callback), EntryType::UInt64);
 }
 
 // NON_MATCHING
-bool InstParamPack::Buffer::pop(s32* position, InstParamPack::Entry* out_entry) {
+bool ActorInstParamPack::Buffer::pop(s32* position, ActorInstParamPack::Entry* out_entry) {
     if (!read(out_entry->key, position))
         return false;
 
@@ -68,7 +68,8 @@ bool InstParamPack::Buffer::pop(s32* position, InstParamPack::Entry* out_entry) 
     }
 }
 
-InstParamPack::Buffer& InstParamPack::Buffer::operator=(const InstParamPack::Buffer& other) {
+ActorInstParamPack::Buffer&
+ActorInstParamPack::Buffer::operator=(const ActorInstParamPack::Buffer& other) {
     size_t pos = other.mPosition;
     mPosition = pos;
     mNumItems = other.mNumItems;
@@ -76,4 +77,4 @@ InstParamPack::Buffer& InstParamPack::Buffer::operator=(const InstParamPack::Buf
     return *this;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

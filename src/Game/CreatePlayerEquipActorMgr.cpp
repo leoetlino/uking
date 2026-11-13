@@ -12,7 +12,7 @@
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Game/Weapon/WeaponBase.h"
 
 namespace uking {
@@ -202,7 +202,7 @@ void CreatePlayerEquipActorMgr::requestCreateArmor(s32 slot_idx, const sead::Saf
 
     deleteLoadingProc(slot_idx);
 
-    ksys::act::InstParamPack params;
+    ksys::frm::ActorInstParamPack params;
     bool is_dye = ksys::act::InfoData::instance()->hasTag(name.cstr(), ksys::act::tags::ArmorDye);
     if (is_dye) {
         params->add(dye_color, ArmorDyeColor);

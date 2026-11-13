@@ -10,7 +10,7 @@ void requestCreateWeaponByRawLife(const char* actor_class, const sead::Matrix34f
                                   sead::Heap* heap, ksys::act::BaseProcHandle* handle, s32 life,
                                   bool is_player_put, const WeaponModifierInfo* modifier,
                                   s32 task_lane_id, s32 res_lane_id) {
-    ksys::act::InstParamPack params;
+    ksys::frm::ActorInstParamPack params;
     params->add(is_player_put, "IsPlayerPut");
     if (modifier) {
         modifier->addModifierParams(params);

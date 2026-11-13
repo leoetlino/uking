@@ -1,10 +1,10 @@
 #include "KingSystem/ActorSystem/actBaseProc.h"
 #include <thread/seadThread.h>
 #include <time/seadTickSpan.h>
-#include "KingSystem/ActorSystem/actBaseProcAccessor.h"
 #include "KingSystem/ActorSystem/actBaseProcHandle.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcAccessor.h"
 #include "KingSystem/Terrain/teraSystem.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
@@ -596,7 +596,7 @@ bool BaseProc::setStateFlag(u32 flag_bit) {
     return BaseProcMgr::instance()->setProcFlag(*this, flag_bit);
 }
 
-bool BaseProc::acquire(BaseProcAccessor& accessor) {
+bool BaseProc::acquire(frm::BaseProcAccessor& accessor) {
     if (mState == State::Delete)
         return false;
 

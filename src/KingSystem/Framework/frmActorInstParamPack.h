@@ -11,10 +11,12 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
-
 class BaseProc;
+}  // namespace ksys::act
 
-class InstParamPack {
+namespace ksys::frm {
+
+class ActorInstParamPack {
 public:
     enum class EntryType {
         /// Signed 32-bit integer.
@@ -35,7 +37,7 @@ public:
         Matrix34 = 7,
     };
 
-    using ActorCallback = sead::IDelegate1<BaseProc*>;
+    using ActorCallback = sead::IDelegate1<act::BaseProc*>;
 
     struct Entry {
         union Data {
@@ -145,23 +147,23 @@ public:
     };
     KSYS_CHECK_SIZE_NX150(Buffer, 0xc4);
 
-    InstParamPack() = default;
-    virtual ~InstParamPack() = default;
-    InstParamPack& operator=(const InstParamPack& other) = default;
+    ActorInstParamPack() = default;
+    virtual ~ActorInstParamPack() = default;
+    ActorInstParamPack& operator=(const ActorInstParamPack& other) = default;
 
     Buffer& getBuffer() { return mBuffer; }
     const Buffer& getBuffer() const { return mBuffer; }
 
-    BaseProc* getProc() const { return mProc; }
-    void setProc(BaseProc* proc) { mProc = proc; }
+    act::BaseProc* getProc() const { return mProc; }
+    void setProc(act::BaseProc* proc) { mProc = proc; }
 
     Buffer* operator->() { return &mBuffer; }
     const Buffer* operator->() const { return &mBuffer; }
 
 private:
-    BaseProc* mProc = nullptr;
+    act::BaseProc* mProc = nullptr;
     Buffer mBuffer;
 };
-KSYS_CHECK_SIZE_NX150(InstParamPack, 0xd8);
+KSYS_CHECK_SIZE_NX150(ActorInstParamPack, 0xd8);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

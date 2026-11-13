@@ -11,8 +11,11 @@ class ByamlIter;
 
 namespace ksys::act {
 class Actor;
-class InstParamPack;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class ActorInstParamPack;
+}  // namespace ksys::frm
 
 namespace ksys::map {
 class PreActor;
@@ -45,7 +48,7 @@ public:
                      const act::Actor* actor) const;
 
     bool scaleActor(const sead::SafeString& name, map::PreActor* obj, const char** scaled_weapon,
-                    act::InstParamPack* pack, const sead::Vector3f& position) const;
+                    frm::ActorInstParamPack* pack, const sead::Vector3f& position) const;
 
     void calculatePoints();
 

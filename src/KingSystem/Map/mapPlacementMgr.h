@@ -12,8 +12,11 @@
 namespace ksys::act {
 class Actor;
 class ClusteredRenderer;
-class InstParamPack;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class ActorInstParamPack;
+}  // namespace ksys::frm
 
 namespace ksys::map {
 
@@ -45,7 +48,7 @@ public:
     void initClusteredRenderer();
     void auto0();
     bool auto1();
-    void x_0(sead::Vector3f* pos, act::InstParamPack* pack);
+    void x_0(sead::Vector3f* pos, frm::ActorInstParamPack* pack);
     void printDebugInfo();
     void loadModel(PreActor* obj);
     void incrementCounter();

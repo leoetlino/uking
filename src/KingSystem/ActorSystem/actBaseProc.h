@@ -15,9 +15,12 @@
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Types.h"
 
+namespace ksys::frm {
+class BaseProcAccessor;
+}  // namespace ksys::frm
+
 namespace ksys::act {
 
-class BaseProcAccessor;
 class BaseProc;
 class BaseProcLinkData;
 class BaseProcJobHandler;
@@ -121,7 +124,7 @@ public:
     bool isDeleteOrInvalid() const { return mState >= act::BaseProc::State::Delete; }
 
     /// For BaseProcLink or BaseProcAccessor.
-    bool acquire(BaseProcAccessor& accessor);
+    bool acquire(frm::BaseProcAccessor& accessor);
     BaseProcLinkData* getBaseProcLinkData() const { return mBaseProcLinkData; }
     /// For BaseProcLink or BaseProcAccessor.
     void release();

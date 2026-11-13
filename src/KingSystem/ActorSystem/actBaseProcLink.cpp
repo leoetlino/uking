@@ -2,8 +2,8 @@
 #include <prim/seadScopedLock.h>
 #include <thread/seadThread.h>
 #include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcAccessor.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcAccessor.h"
 
 namespace ksys::act {
 
@@ -39,9 +39,9 @@ bool BaseProcLink::hasProcById(BaseProc* proc) const {
     return proc != nullptr & mId != cInvalidId && mId == proc->getId();
 }
 
-BaseProc* BaseProcLink::getProc(BaseProcAccessor* accessor, BaseProc* other_proc) const {
+BaseProc* BaseProcLink::getProc(frm::BaseProcAccessor* accessor, BaseProc* other_proc) const {
     return getProcInContext([&](BaseProc* proc, bool) -> BaseProc* {
-        if (proc && acquireProc(accessor, proc, "frm::BaseProcLink") &&
+        if (proc && frm::acquireProc(accessor, proc, "frm::BaseProcLink") &&
             BaseProcMgr::instance()->isAccessingProcSafe(proc, other_proc)) {
             return proc;
         }
@@ -49,9 +49,9 @@ BaseProc* BaseProcLink::getProc(BaseProcAccessor* accessor, BaseProc* other_proc
     });
 }
 
-BaseProc* BaseProcLink::getProc(BaseProcAccessor* accessor) const {
+BaseProc* BaseProcLink::getProc(frm::BaseProcAccessor* accessor) const {
     return getProcInContext([&](BaseProc* proc, bool) -> BaseProc* {
-        if (proc && acquireProc(accessor, proc, "frm::BaseProcLink"))
+        if (proc && frm::acquireProc(accessor, proc, "frm::BaseProcLink"))
             return proc;
         return nullptr;
     });

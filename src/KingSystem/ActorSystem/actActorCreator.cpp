@@ -39,7 +39,7 @@ ActorCreator::~ActorCreator() = default;
 bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
                                          map::MubinIter* mubin_iter, map::PreActor* map_object,
                                          BaseProcHandle* handle, int task_lane_id,
-                                         InstParamPack* params) {
+                                         frm::ActorInstParamPack* params) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
         return false;
@@ -52,7 +52,7 @@ bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
 }
 
 BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                     InstParamPack* params, bool sleep_after_init, bool) {
+                                     frm::ActorInstParamPack* params, bool sleep_after_init, bool) {
     auto* debug_heap = util::getDebugHeap();
     bool has_debug_heap = false;
     if (debug_heap && (debug_heap == heap || debug_heap->isInclude(heap))) {
@@ -84,8 +84,9 @@ BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, 
     return actor;
 }
 
-Actor* ActorCreator::createActor(const char* name, sead::Heap* heap, InstParamPack* params,
-                                 bool sleep_after_init, bool block_other_synchronous_spawns) {
+Actor* ActorCreator::createActor(const char* name, sead::Heap* heap,
+                                 frm::ActorInstParamPack* params, bool sleep_after_init,
+                                 bool block_other_synchronous_spawns) {
     BaseProc* proc = nullptr;
     if (block_other_synchronous_spawns)
         mBlockSpawns = true;
@@ -109,7 +110,7 @@ Actor* ActorCreator::createActor(const char* name, sead::Heap* heap, InstParamPa
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                                        map::MubinIter* mubin_iter, map::PreActor* map_object,
                                        BaseProcHandle* handle, int task_lane_id,
-                                       InstParamPack* params) {
+                                       frm::ActorInstParamPack* params) {
     BaseProcCreateTaskData data;
     data.mHeap = heap;
     data.mProcClass = actor_class;
@@ -132,7 +133,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                                        map::PreActor* map_object, BaseProcHandle* handle,
-                                       int task_lane_id, InstParamPack* params) {
+                                       int task_lane_id, frm::ActorInstParamPack* params) {
     BaseProcCreateTaskData data;
     data.mHeap = heap;
     data.mProcClass = actor_class;
@@ -153,7 +154,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 }
 
 bool ActorCreator::requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
-                                      InstParamPack* params, map::PreActor* map_object,
+                                      frm::ActorInstParamPack* params, map::PreActor* map_object,
                                       int task_lane_id) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
@@ -185,46 +186,49 @@ void ActorCreator::eraseActor(Actor* actor) {
     actor->mCreator = nullptr;
 }
 
-void ActorCreator::addScale(InstParamPack& pack, float scale) {
+void ActorCreator::addScale(frm::ActorInstParamPack& pack, float scale) {
     addScale(pack, {scale, scale, scale});
 }
 
-void ActorCreator::addScale(InstParamPack& pack, const sead::Vector3f& scale) {
+void ActorCreator::addScale(frm::ActorInstParamPack& pack, const sead::Vector3f& scale) {
     sead::SafeString key = "@S";
     pack.getBuffer().add(scale, key);
 }
 
-bool ActorCreator::isAITreeParam(const InstParamPack::Entry& entry) {
+bool ActorCreator::isAITreeParam(const frm::ActorInstParamPack::Entry& entry) {
     return sead::SafeString("=AT") == entry.key;
 }
 
-void ActorCreator::addAITreeParam(InstParamPack& pack, const sead::SafeString& value,
+void ActorCreator::addAITreeParam(frm::ActorInstParamPack& pack, const sead::SafeString& value,
                                   const sead::SafeString& name) {
     pack.getBuffer().add(true, "=AT");
     pack.getBuffer().add(value, name);
 }
 
-void ActorCreator::addAITreeParam(InstParamPack& pack, int value, const sead::SafeString& name) {
+void ActorCreator::addAITreeParam(frm::ActorInstParamPack& pack, int value,
+                                  const sead::SafeString& name) {
     pack.getBuffer().add(true, "=AT");
     pack.getBuffer().add(value, name);
 }
 
-void ActorCreator::addAITreeParam(InstParamPack& pack, u32 value, const sead::SafeString& name) {
+void ActorCreator::addAITreeParam(frm::ActorInstParamPack& pack, u32 value,
+                                  const sead::SafeString& name) {
     pack.getBuffer().add(true, "=AT");
     pack.getBuffer().add(value, name);
 }
 
-void ActorCreator::addAITreeParam(InstParamPack& pack, bool value, const sead::SafeString& name) {
+void ActorCreator::addAITreeParam(frm::ActorInstParamPack& pack, bool value,
+                                  const sead::SafeString& name) {
     pack.getBuffer().add(true, "=AT");
     pack.getBuffer().add(value, name);
 }
 
-void ActorCreator::setCreatePriorityState1(InstParamPack& pack, BaseProc* proc) {
+void ActorCreator::setCreatePriorityState1(frm::ActorInstParamPack& pack, BaseProc* proc) {
     pack.setProc(proc);
     proc->setCreatePriorityState1();
 }
 
-void ActorCreator::setCreatePriorityState2(InstParamPack& pack, BaseProc* proc) {
+void ActorCreator::setCreatePriorityState2(frm::ActorInstParamPack& pack, BaseProc* proc) {
     pack.setProc(proc);
     proc->setCreatePriorityState2();
     pack->addWait();

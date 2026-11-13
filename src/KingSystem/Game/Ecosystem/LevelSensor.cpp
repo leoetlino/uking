@@ -2,7 +2,7 @@
 
 #include <Byaml/Byaml.h>
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Resource/resLoadRequest.h"
@@ -162,7 +162,7 @@ bool LevelSensor::scaleWeapon(const sead::SafeString& weapon, WeaponModifier min
 }
 
 bool LevelSensor::scaleActor(const sead::SafeString& name, map::PreActor* obj,
-                             const char** scaled_weapon, act::InstParamPack* pack,
+                             const char** scaled_weapon, frm::ActorInstParamPack* pack,
                              const sead::Vector3f& position) const {
     if (!isScalingAllowed(position))
         return false;

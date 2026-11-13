@@ -6,11 +6,14 @@
 
 namespace ksys::act {
 class ActorLinkConstDataAccess;
-class InstParamPack;
 namespace ai {
 struct InlineParamPack;
 }
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class ActorInstParamPack;
+}  // namespace ksys::frm
 
 namespace ksys::evt {
 class OrderParam;
@@ -80,7 +83,7 @@ struct WeaponModifierInfo {
     void saveEquipStandShieldFlag(int idx) const;
     void saveEquipStandBowFlag(int idx) const;
 
-    void addModifierParams(ksys::act::InstParamPack& params) const;
+    void addModifierParams(ksys::frm::ActorInstParamPack& params) const;
     void set(u32 type_, u32 value_);
     static void addModifierParams(WeaponModifierInfo* self, ksys::evt::OrderParam& params);
     static void addModifierParams(WeaponModifierInfo* self, ksys::act::ai::InlineParamPack& params);

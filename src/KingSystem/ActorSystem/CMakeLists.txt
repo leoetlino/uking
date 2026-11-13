@@ -39,8 +39,6 @@ target_sources(uking PRIVATE
     actAiQuerys.h
     actBaseProc.cpp
     actBaseProc.h
-    actBaseProcAccessor.cpp
-    actBaseProcAccessor.h
     actBaseProcCreateTask.cpp
     actBaseProcCreateTask.h
     actBaseProcDeleter.cpp
@@ -72,8 +70,6 @@ target_sources(uking PRIVATE
     actInfoCommon.h
     actInfoData.cpp
     actInfoData.h
-    actInstParamPack.cpp
-    actInstParamPack.h
     actLifeRecoveryInfo.h
     actLodState.cpp
     actLodState.h

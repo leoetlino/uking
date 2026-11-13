@@ -125,7 +125,7 @@ act::Actor* PreActor::tryGetActor(bool force) {
     return sead::DynamicCast<act::Actor>(proc);
 }
 
-bool PreActor::getActorWithAccessor(act::BaseProcAccessor& accessor) {
+bool PreActor::getActorWithAccessor(frm::BaseProcAccessor& accessor) {
     act::BaseProcMgr* instance = act::BaseProcMgr::instance();
 
     if (instance == nullptr || !instance->isHighPriorityThread() || mProc == nullptr)

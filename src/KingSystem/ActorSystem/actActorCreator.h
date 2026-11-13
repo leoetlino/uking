@@ -5,7 +5,7 @@
 #include <math/seadVector.h>
 #include <prim/seadDelegate.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/ActorSystem/actInstParamPack.h"
+#include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Utils/Thread/Task.h"
 #include "KingSystem/Utils/Thread/TaskQueueBase.h"
 #include "KingSystem/Utils/Types.h"
@@ -38,11 +38,12 @@ class ActorCreator {
 public:
     bool requestCreateMapActor(const char* name, sead::Heap* heap, map::MubinIter* mubin_iter,
                                map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
-                               InstParamPack* params);
-    Actor* createActor(const char* name, sead::Heap* heap, InstParamPack* params,
+                               frm::ActorInstParamPack* params);
+    Actor* createActor(const char* name, sead::Heap* heap, frm::ActorInstParamPack* params,
                        bool sleep_after_init, bool block_other_synchronous_spawns);
     bool requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
-                            InstParamPack* params, map::PreActor* map_object, int task_lane_id);
+                            frm::ActorInstParamPack* params, map::PreActor* map_object,
+                            int task_lane_id);
 
     void enableDistanceUnloadChecks();
     void eraseActor(Actor* actor);
@@ -53,26 +54,30 @@ public:
     sead::OffsetList<Actor>& getActorList() { return mActorList; }
     sead::CriticalSection& getCS() { return mActorListCS; }
 
-    static void addScale(InstParamPack& pack, float scale);
-    static void addScale(InstParamPack& pack, const sead::Vector3f& scale);
-    static bool isAITreeParam(const InstParamPack::Entry& entry);
-    static void addAITreeParam(InstParamPack& pack, const sead::SafeString& value,
+    static void addScale(frm::ActorInstParamPack& pack, float scale);
+    static void addScale(frm::ActorInstParamPack& pack, const sead::Vector3f& scale);
+    static bool isAITreeParam(const frm::ActorInstParamPack::Entry& entry);
+    static void addAITreeParam(frm::ActorInstParamPack& pack, const sead::SafeString& value,
                                const sead::SafeString& name);
-    static void addAITreeParam(InstParamPack& pack, int value, const sead::SafeString& name);
-    static void addAITreeParam(InstParamPack& pack, u32 value, const sead::SafeString& name);
-    static void addAITreeParam(InstParamPack& pack, bool value, const sead::SafeString& name);
-    static void setCreatePriorityState1(InstParamPack& pack, BaseProc* proc);
-    static void setCreatePriorityState2(InstParamPack& pack, BaseProc* proc);
+    static void addAITreeParam(frm::ActorInstParamPack& pack, int value,
+                               const sead::SafeString& name);
+    static void addAITreeParam(frm::ActorInstParamPack& pack, u32 value,
+                               const sead::SafeString& name);
+    static void addAITreeParam(frm::ActorInstParamPack& pack, bool value,
+                               const sead::SafeString& name);
+    static void setCreatePriorityState1(frm::ActorInstParamPack& pack, BaseProc* proc);
+    static void setCreatePriorityState2(frm::ActorInstParamPack& pack, BaseProc* proc);
 
 private:
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                              map::MubinIter* mubin_iter, map::PreActor* map_object,
-                             BaseProcHandle* handle, int task_lane_id, InstParamPack* params);
+                             BaseProcHandle* handle, int task_lane_id,
+                             frm::ActorInstParamPack* params);
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                              map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
-                             InstParamPack* params);
+                             frm::ActorInstParamPack* params);
     BaseProc* createActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                           InstParamPack* params, bool sleep_after_init, bool = false);
+                           frm::ActorInstParamPack* params, bool sleep_after_init, bool = false);
 
     BaseProc* doCreateProc(BaseProcCreateArg& arg);
     void onTaskRemoved(const TaskRemoveCallbackContext& context);

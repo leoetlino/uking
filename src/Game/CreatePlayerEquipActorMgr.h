@@ -14,9 +14,12 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
-class InstParamPack;
 class Actor;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class ActorInstParamPack;
+}  // namespace ksys::frm
 
 namespace uking::ui {
 enum class PouchItemType;

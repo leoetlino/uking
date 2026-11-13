@@ -3,9 +3,9 @@
 #include "KingSystem/Game/Area/AreaObserverBase.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 class BaseProcAccessor;
-}  // namespace ksys::act
+}  // namespace ksys::frm
 
 namespace ksys::phys {
 class RigidBody;
@@ -35,7 +35,7 @@ public:
                                              const CollidingBodiesIterator& begin,
                                              const CollidingBodiesIterator& end) override;
 
-    virtual bool observeActor(const act::BaseProcAccessor& actor);
+    virtual bool observeActor(const frm::BaseProcAccessor& actor);
     virtual bool shouldIgnoreBody(phys::RigidBody* body);
 };
 KSYS_CHECK_SIZE_NX150(AreaObserver, 0x18);

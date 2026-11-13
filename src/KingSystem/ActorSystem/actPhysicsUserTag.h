@@ -3,10 +3,13 @@
 #include "KingSystem/Physics/System/physUserTag.h"
 #include "KingSystem/Utils/Types.h"
 
+namespace ksys::frm {
+class BaseProcAccessor;
+}  // namespace ksys::frm
+
 namespace ksys::act {
 
 class Actor;
-class BaseProcAccessor;
 
 class PhysicsUserTag : public phys::UserTag {
     SEAD_RTTI_OVERRIDE(PhysicsUserTag, phys::UserTag)
@@ -15,8 +18,8 @@ public:
     explicit PhysicsUserTag(Actor* actor);
     ~PhysicsUserTag() override;
 
-    Actor* getActor(BaseProcAccessor* accessor, Actor* other_actor) const;
-    bool acquireActor(BaseProcAccessor* accessor) const;
+    Actor* getActor(frm::BaseProcAccessor* accessor, Actor* other_actor) const;
+    bool acquireActor(frm::BaseProcAccessor* accessor) const;
 
     Actor* getActor() const { return mActor; }
 
