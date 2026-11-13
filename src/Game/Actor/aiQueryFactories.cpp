@@ -161,8 +161,8 @@
 #include "Game/Actor/Query/queryWhatDayOfTheWeek.h"
 #include "Game/Actor/Query/queryWhatDungeonType.h"
 #include "Game/Actor/Query/queryWhatMoonName.h"
-#include "KingSystem/ActorSystem/actAiQueries.h"
 #include "KingSystem/ActorSystem/actAiQuery.h"
+#include "KingSystem/ActorSystem/actAiQuerys.h"
 #include "KingSystem/ActorSystem/queryCheckEventCancel.h"
 #include "KingSystem/ActorSystem/queryCheckJustBeforeEventCancel.h"
 #include "KingSystem/ActorSystem/queryDummyQuery.h"
@@ -341,7 +341,7 @@ static ksys::act::ai::QueryFactory sQueryFactories[] = {
 };
 
 void initQueryFactories() {
-    ksys::act::ai::Queries::setFactories(std::size(sQueryFactories), sQueryFactories);
+    ksys::act::ai::Querys::setFactories(std::size(sQueryFactories), sQueryFactories);
 }
 
 }  // namespace uking

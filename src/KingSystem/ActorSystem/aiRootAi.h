@@ -6,8 +6,8 @@
 #include "KingSystem/ActorSystem/actAiAi.h"
 #include "KingSystem/ActorSystem/actAiBehavior.h"
 #include "KingSystem/ActorSystem/actAiParam.h"
-#include "KingSystem/ActorSystem/actAiQueries.h"
 #include "KingSystem/ActorSystem/actAiQuery.h"
+#include "KingSystem/ActorSystem/actAiQuerys.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act::ai {
@@ -54,7 +54,7 @@ public:
     const Actions& getActions() const { return mActions; }
     const Ais& getAis() const { return mAis; }
     const Behaviors& getBehaviors() const { return mBehaviors; }
-    const Queries& getQueries() const { return mQueries; }
+    const Querys& getQueries() const { return mQueries; }
 
     bool loadMapUnitParams(const AIDef& def, sead::Heap* heap);
     bool loadAITreeParams(const AIDef& def, sead::Heap* heap);
@@ -99,7 +99,7 @@ private:
     Actions mActions;
     Ais mAis;
     Behaviors mBehaviors;
-    Queries mQueries;
+    Querys mQueries;
     sead::SafeArray<Behavior*, 3> mBehaviorsByStopAndCalcTiming[2]{};
     void* mPendingBehaviors{};
     EventActionContextList* mEventActionContexts{};

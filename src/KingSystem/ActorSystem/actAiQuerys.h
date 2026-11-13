@@ -12,10 +12,10 @@ namespace ksys::act::ai {
 class Query;
 struct QueryFactory;
 
-class Queries {
+class Querys {
 public:
-    Queries();
-    ~Queries();
+    Querys();
+    ~Querys();
 
     void finalize();
 

@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/actAiQueries.h"
+#include "KingSystem/ActorSystem/actAiQuerys.h"
 #include <codec/seadHashCRC32.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
@@ -8,13 +8,13 @@
 
 namespace ksys::act::ai {
 
-Queries::Queries() = default;
+Querys::Querys() = default;
 
-Queries::~Queries() {
+Querys::~Querys() {
     finalize();
 }
 
-void Queries::finalize() {
+void Querys::finalize() {
     for (s32 i = 0; i < mClasses.size(); ++i) {
         if (mClasses[i]) {
             delete mClasses[i];
@@ -27,7 +27,7 @@ void Queries::finalize() {
     mClasses.freeBuffer();
 }
 
-bool Queries::init(Actor* actor, sead::Heap* heap) {
+bool Querys::init(Actor* actor, sead::Heap* heap) {
     const auto* aiprog = actor->getParam()->getRes().mAIProgram;
 
     const auto num_Queries = aiprog->getQueries().size();
@@ -97,7 +97,7 @@ bool Queries::init(Actor* actor, sead::Heap* heap) {
     return true;
 }
 
-bool Queries::updateForPreDelete() const {
+bool Querys::updateForPreDelete() const {
     bool ok = true;
     for (auto* cb : mUpdateForPreDeleteCbs) {
         if (cb)
@@ -106,14 +106,14 @@ bool Queries::updateForPreDelete() const {
     return ok;
 }
 
-void Queries::onPreDelete() const {
+void Querys::onPreDelete() const {
     for (auto* cb : mOnPreDeleteCbs) {
         if (cb)
             cb->onPreDelete();
     }
 }
 
-Query* Queries::getQuery(const sead::SafeString& name) const {
+Query* Querys::getQuery(const sead::SafeString& name) const {
     for (auto* query : mClasses) {
         if (name == query->getName())
             return query;
@@ -121,7 +121,7 @@ Query* Queries::getQuery(const sead::SafeString& name) const {
     return nullptr;
 }
 
-QueryFactory* Queries::getFactory(const sead::SafeString& name) {
+QueryFactory* Querys::getFactory(const sead::SafeString& name) {
     const u32 name_hash = sead::HashCRC32::calcStringHash(name);
     const s32 idx = sFactories.binarySearch(
         name_hash, +[](const QueryFactory& factory, const u32& hash) {
@@ -136,10 +136,10 @@ QueryFactory* Queries::getFactory(const sead::SafeString& name) {
     return sFactories.get(idx);
 }
 
-void Queries::setFactories(int count, QueryFactory* factories) {
+void Querys::setFactories(int count, QueryFactory* factories) {
     sFactories.setBuffer(count, factories);
 }
 
-sead::Buffer<QueryFactory> Queries::sFactories;
+sead::Buffer<QueryFactory> Querys::sFactories;
 
 }  // namespace ksys::act::ai

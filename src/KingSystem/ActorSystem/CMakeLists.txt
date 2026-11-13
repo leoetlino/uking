@@ -51,8 +51,8 @@ target_sources(uking PRIVATE
     actAiParam.h
     actAiQuery.cpp
     actAiQuery.h
-    actAiQueries.cpp
-    actAiQueries.h
+    actAiQuerys.cpp
+    actAiQuerys.h
     actBaseProc.cpp
     actBaseProc.h
     actBaseProcAccessor.cpp
