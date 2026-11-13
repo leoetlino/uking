@@ -6,6 +6,7 @@ add_subdirectory(ActorSystem)
 add_subdirectory(AOC)
 add_subdirectory(Camera)
 add_subdirectory(Chemical)
+add_subdirectory(Controller)
 add_subdirectory(Effect)
 add_subdirectory(Event)
 add_subdirectory(Framework)
@@ -29,6 +30,4 @@ target_sources(uking PRIVATE
   Account.h
   ksys.cpp
   ksys.h
-  ksysDebugInput.cpp
-  ksysDebugInput.h
 )

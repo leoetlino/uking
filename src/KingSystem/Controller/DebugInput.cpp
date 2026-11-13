@@ -1,4 +1,4 @@
-#include "KingSystem/ksysDebugInput.h"
+#include "KingSystem/Controller/DebugInput.h"
 #include "KingSystem/System/VFR.h"
 
 namespace ksys {
