@@ -40,6 +40,22 @@ struct BaseProcCreateRequest {
     TaskRemoveCallback* task_remove_callback;
 };
 
+class BaseProcMap : public util::StrTreeMap<BaseProcMapNode> {
+public:
+    void insert(BaseProcMapNode* node);
+
+    void erase(BaseProcMapNode* node) {
+        auto prev = node->prev();
+        auto next = node->next();
+        if (prev)
+            node->erase_();
+        else if (next)
+            StrTreeMap::insert(next);
+        else
+            StrTreeMap::erase(node->key());
+    }
+};
+
 class BaseProcMgr {
     SEAD_SINGLETON_DISPOSER(BaseProcMgr)
     BaseProcMgr();

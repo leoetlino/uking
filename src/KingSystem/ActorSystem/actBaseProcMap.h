@@ -24,7 +24,14 @@ public:
     BaseProcMapNode* prev() const { return mPrev; }
     BaseProcMapNode* next() const { return mNext; }
 
-    void add(BaseProcMapNode* node);
+    void add(BaseProcMapNode* node) {
+        auto next = mNext;
+        node->mPrev = this;
+        node->mNext = next;
+        mNext = node;
+        if (next)
+            next->mPrev = node;
+    }
 
     bool isInserted() const { return mInserted; }
     void setInserted() { mInserted = true; }
@@ -42,22 +49,6 @@ private:
     BaseProcMapNode* mPrev = nullptr;
     BaseProcMapNode* mNext = nullptr;
     bool mInserted = false;
-};
-
-class BaseProcMap : public util::StrTreeMap<BaseProcMapNode> {
-public:
-    void insert(BaseProcMapNode* node);
-
-    void erase(BaseProcMapNode* node) {
-        auto prev = node->prev();
-        auto next = node->next();
-        if (prev)
-            node->erase_();
-        else if (next)
-            StrTreeMap::insert(next);
-        else
-            StrTreeMap::erase(node->key());
-    }
 };
 
 }  // namespace ksys::act

@@ -77,6 +77,14 @@ void BaseProcMgr::registerProc(BaseProc& proc) {
     mProcMap.insert(&proc.mMapNode);
 }
 
+void BaseProcMap::insert(BaseProcMapNode* node) {
+    if (auto existing_node = find(node->key()))
+        existing_node->add(node);
+    else
+        StrTreeMap::insert(node);
+    node->setInserted();
+}
+
 void BaseProcMgr::unregisterProc(BaseProc& proc) {
     if (!proc.mMapNode.isInserted())
         return;
