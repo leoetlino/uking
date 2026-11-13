@@ -1,14 +1,16 @@
 #include "KingSystem/Resource/resCache.h"
 #include <prim/seadScopedLock.h>
-#include "KingSystem/Resource/resCacheCriticalSection.h"
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Utils/Debug.h"
+#include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::res {
 
 Cache::Cache() = default;
+
+Cache::~Cache() = default;
 
 void Cache::init() {}
 
@@ -187,6 +189,17 @@ void Cache::eraseUnits() {
     sead::Delegate1<ForEachContext, util::StrTreeMapNode*> delegate{&context,
                                                                     &ForEachContext::deleteUnit};
     mMap.forEach(delegate);
+}
+
+[[maybe_unused]] static util::InitTimeInfo sInitTimeInfo;
+sead::CriticalSection gCacheCriticalSection;
+
+void lockCacheCriticalSection() {
+    gCacheCriticalSection.lock();
+}
+
+void unlockCacheCriticalSection() {
+    gCacheCriticalSection.unlock();
 }
 
 }  // namespace ksys::res

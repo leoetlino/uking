@@ -85,8 +85,6 @@ target_sources(uking PRIVATE
   resArchiveWork.h
   resCache.cpp
   resCache.h
-  resCacheCriticalSection.cpp
-  resCacheCriticalSection.h
   resCompactedHeap.cpp
   resCompactedHeap.h
   resControlTask.cpp

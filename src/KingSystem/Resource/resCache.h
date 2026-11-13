@@ -1,6 +1,7 @@
 #pragma once
 
 #include <hostio/seadHostIONode.h>
+#include <thread/seadCriticalSection.h>
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resUnit.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
@@ -13,7 +14,7 @@ class ControlTaskData;
 class Cache : public sead::hostio::Node {
 public:
     Cache();
-    virtual ~Cache() = default;
+    virtual ~Cache();
 
     void init();
     ResourceUnit* findUnit(const ResourceUnitMapNode::KeyType& key) const;
@@ -30,5 +31,10 @@ private:
     util::StrTreeMap<ResourceUnitMapNode> mMap;
 };
 KSYS_CHECK_SIZE_NX150(Cache, 0x18);
+
+extern sead::CriticalSection gCacheCriticalSection;
+
+void lockCacheCriticalSection();
+void unlockCacheCriticalSection();
 
 }  // namespace ksys::res
