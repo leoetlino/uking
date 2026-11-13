@@ -1,7 +1,7 @@
 #include "KingSystem/ksys.h"
 #include <heap/seadHeapMgr.h>
 #include <thread/seadThread.h>
-#include "KingSystem/ActorSystem/actBaseProcCreateTaskSelector.h"
+#include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actBaseProcInitializer.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/System/HavokWorkerMgr.h"

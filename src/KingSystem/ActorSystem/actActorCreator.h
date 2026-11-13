@@ -7,6 +7,7 @@
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 #include "KingSystem/Utils/Thread/Task.h"
+#include "KingSystem/Utils/Thread/TaskQueueBase.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::map {
@@ -91,5 +92,20 @@ private:
     IBaseProcFactory* mBaseProcFactory;
 };
 KSYS_CHECK_SIZE_NX150(ActorCreator, 0xf0);
+
+class BaseProcCreateTaskSelector {
+    SEAD_SINGLETON_DISPOSER(BaseProcCreateTaskSelector)
+    BaseProcCreateTaskSelector() = default;
+
+public:
+    auto& getDelegate() { return mDelegate; }
+
+private:
+    Task* selectTask(const TaskSelectionContext& context);
+
+    TaskSelectionDelegateT<BaseProcCreateTaskSelector> mDelegate{
+        this, &BaseProcCreateTaskSelector::selectTask};
+};
+KSYS_CHECK_SIZE_NX150(BaseProcCreateTaskSelector, 0x40);
 
 }  // namespace ksys::act

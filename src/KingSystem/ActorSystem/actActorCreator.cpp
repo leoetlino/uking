@@ -1,4 +1,5 @@
 #include "KingSystem/ActorSystem/actActorCreator.h"
+#include <limits>
 #include <prim/seadScopedLock.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorTemplate.h"
@@ -6,6 +7,7 @@
 #include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
@@ -226,6 +228,43 @@ void ActorCreator::setCreatePriorityState2(InstParamPack& pack, BaseProc* proc) 
     pack.setProc(proc);
     proc->setCreatePriorityState2();
     pack->addWait();
+}
+
+SEAD_SINGLETON_DISPOSER_IMPL(BaseProcCreateTaskSelector)
+
+Task* BaseProcCreateTaskSelector::selectTask(const TaskSelectionContext& context) {
+    Task* min_task = nullptr;
+    Task* lane1_task = nullptr;
+    auto min = std::numeric_limits<float>::max();
+
+    for (auto& it : context) {
+        auto* task = sead::DynamicCast<BaseProcCreateTask>(&it);
+        if (!task)
+            return &it;
+
+        if (task->getLaneId() == u8(BaseProcCreateTask::LaneId::_2))
+            return &it;
+
+        if (task->mMapObject && task->mMapObject->getFlags0().isOff(map::PreActor::Flag0::_4))
+            return &it;
+
+        if (task->mDistanceToLoadSphere >= 0.0 && min > task->mDistanceToLoadSphere)
+            min_task = &it;
+
+        if (task->mDistanceToLoadSphere >= 0.0 && min > task->mDistanceToLoadSphere)
+            min = task->mDistanceToLoadSphere;
+
+        if (task->getLaneId() == u8(BaseProcCreateTask::LaneId::_1))
+            lane1_task = &it;
+    }
+
+    if (min_task)
+        return min_task;
+
+    if (lane1_task)
+        return lane1_task;
+
+    return std::addressof(*context.begin());
 }
 
 }  // namespace ksys::act

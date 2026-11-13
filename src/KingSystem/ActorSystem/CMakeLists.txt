@@ -43,8 +43,6 @@ target_sources(uking PRIVATE
     actBaseProcAccessor.h
     actBaseProcCreateTask.cpp
     actBaseProcCreateTask.h
-    actBaseProcCreateTaskSelector.cpp
-    actBaseProcCreateTaskSelector.h
     actBaseProcDeleter.cpp
     actBaseProcDeleter.h
     actBaseProcHandle.cpp
