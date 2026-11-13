@@ -100,8 +100,6 @@ target_sources(uking PRIVATE
   resInfoContainer.cpp
   resInfoContainer.h
   resLoadRequest.h
-  resMemoryTask.cpp
-  resMemoryTask.h
   resModelResourceDivide.cpp
   resModelResourceDivide.h
   resOffsetReadFileDevice.cpp
