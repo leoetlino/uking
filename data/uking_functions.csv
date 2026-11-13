@@ -48779,10 +48779,10 @@ Address,Quality,Size,Name
 0x00000071007a03e4,U,000052,uking::act::CharacterControllerOnGroundContactList::dtorDelete
 0x00000071007a0418,U,000020,uking::act::PlayerOnGroundContactList::dtor
 0x00000071007a042c,U,000052,uking::act::PlayerOnGroundContactList::dtorDelete
-0x00000071007a0460,U,000056,uking::act::HitInfoBaseMaybe::ctor
-0x00000071007a0498,U,000008,uking::act::HitInfoBaseMaybe::resetFlags
-0x00000071007a04a0,U,001644,uking::act::HitInfoBaseMaybe::initHitWithGuard
-0x00000071007a0b0c,U,000084,_ZN5uking3act16HitInfoBaseMaybeaSERS1_
+0x00000071007a0460,U,000056,uking::act::HitInfoBase::ctor
+0x00000071007a0498,U,000008,uking::act::HitInfoBase::resetFlags
+0x00000071007a04a0,U,001644,uking::act::HitInfoBase::initHitWithGuard
+0x00000071007a0b0c,U,000084,_ZN5uking3act11HitInfoBaseaSERS1_
 0x00000071007a0b60,U,000344,uking::act::addHitHistoryEntry
 0x00000071007a0cb8,U,000352,uking::act::refreshHitHistoryEntry
 0x00000071007a0e18,U,000156,uking::act::hitHistoryContainsActor
