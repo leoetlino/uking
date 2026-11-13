@@ -7,7 +7,7 @@
 #include <prim/seadRuntimeTypeInfo.h>
 
 #include "Game/Actor/Damage/actDamageInfoMgr.h"
-#include "Game/Actor/Damage/actStruct20.h"
+#include "Game/Actor/actStruct20.h"
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actIDamageManager.h"
 

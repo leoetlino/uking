@@ -1,4 +1,4 @@
-#include "Game/Actor/Damage/actDamageManagerBase.h"
+#include "Game/Actor/actDamageManagerBase.h"
 #include "Game/AOC/aocHardModeManager.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"

@@ -1,4 +1,4 @@
-#include "Game/Actor/Damage/actStruct20.h"
+#include "Game/Actor/actStruct20.h"
 
 namespace uking::act {
 

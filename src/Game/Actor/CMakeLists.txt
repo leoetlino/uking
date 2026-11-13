@@ -13,6 +13,9 @@ target_sources(uking PRIVATE
   actActorFactory.h
   actAiFactories.cpp
   actAiFactories.h
+  actDamageManagerBase.cpp
+  actDamageManagerBase.h
+  actDamageMgr.cpp
   actDragon.cpp
   actDragon.h
   actPlayerCreateMgr.cpp
@@ -21,6 +24,7 @@ target_sources(uking PRIVATE
   actPlayerCreateTrace.h
   actQueryFactories.cpp
   actQueryFactories.h
+  actStruct20.h
   actTemporaryMotionTypeChanger.h
   actUtils.cpp
   actUtils.h
