@@ -1,15 +1,13 @@
 #pragma once
 
-#include "Game/Actor/Action/actionKnockBackHitImpactForce.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class SmallDamageBackwardBase : public KnockBackHitImpactForce {
-    SEAD_RTTI_OVERRIDE(SmallDamageBackwardBase, KnockBackHitImpactForce)
+class GetItemBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(GetItemBase, ksys::act::ai::Action)
 public:
-    explicit SmallDamageBackwardBase(const InitArg& arg);
-    ~SmallDamageBackwardBase() override;
+    explicit GetItemBase(const InitArg& arg);
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

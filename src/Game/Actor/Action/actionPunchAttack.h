@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PunchAttack : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(PunchAttack, ActionWithAS)
+class PunchAttack : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(PunchAttack, OnetimeStopBase)
 public:
     explicit PunchAttack(const InitArg& arg);
     ~PunchAttack() override;

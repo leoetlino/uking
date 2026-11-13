@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class BackStepToTarget : public ActionEx {
-    SEAD_RTTI_OVERRIDE(BackStepToTarget, ActionEx)
+class JumpToTargetBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(JumpToTargetBase, ksys::act::ai::Action)
 public:
-    explicit BackStepToTarget(const InitArg& arg);
-    ~BackStepToTarget() override;
+    explicit JumpToTargetBase(const InitArg& arg);
+    ~JumpToTargetBase() override;
 
+    bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;
     void leave_() override;
     void loadParams_() override;
@@ -19,17 +19,17 @@ protected:
     void calc_() override;
 
     // static_param at offset 0x20
-    const float* mStopSpeedRatio_s{};
+    const float* mMaxSpeed_s{};
     // static_param at offset 0x28
-    const float* mStopRotSpeedRatio_s{};
+    const float* mJumpHeight_s{};
     // static_param at offset 0x30
     const float* mJumpGravity_s{};
     // static_param at offset 0x38
-    const float* mJumpHeight_s{};
+    const float* mPosReduceRatioOnGround_s{};
     // static_param at offset 0x40
-    const float* mRotRatio_s{};
+    const float* mRotReduceRatioOnGround_s{};
     // static_param at offset 0x48
-    const bool* mCheckRotEvent_s{};
+    const float* mInWaterDepth_s{};
     // dynamic_param at offset 0x50
     sead::Vector3f* mTargetPos_d{};
 };

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ThrowWeapon : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(ThrowWeapon, ActionWithAS)
+class ThrowWeapon : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(ThrowWeapon, OnetimeStopBase)
 public:
     explicit ThrowWeapon(const InitArg& arg);
     ~ThrowWeapon() override;

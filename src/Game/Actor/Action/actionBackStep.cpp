@@ -2,6 +2,6 @@
 
 namespace uking::action {
 
-BackStep::BackStep(const InitArg& arg) : BackStepBase(arg) {}
+BackStep::BackStep(const InitArg& arg) : BackStepFromTarget(arg) {}
 
 }  // namespace uking::action

@@ -1,17 +1,16 @@
 #pragma once
 
-#include "Game/Actor/Action/actionBackStepToTarget.h"
+#include "Game/Actor/Action/actionActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class BackStepBase : public BackStepToTarget {
-    SEAD_RTTI_OVERRIDE(BackStepBase, BackStepToTarget)
+class BackStepBase : public ActionEx {
+    SEAD_RTTI_OVERRIDE(BackStepBase, ActionEx)
 public:
     explicit BackStepBase(const InitArg& arg);
     ~BackStepBase() override;
 
-    bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;
     void leave_() override;
     void loadParams_() override;
@@ -19,8 +18,20 @@ public:
 protected:
     void calc_() override;
 
-    // static_param at offset 0xc0
-    const float* mJumpDist_s{};
+    // static_param at offset 0x20
+    const float* mStopSpeedRatio_s{};
+    // static_param at offset 0x28
+    const float* mStopRotSpeedRatio_s{};
+    // static_param at offset 0x30
+    const float* mJumpGravity_s{};
+    // static_param at offset 0x38
+    const float* mJumpHeight_s{};
+    // static_param at offset 0x40
+    const float* mRotRatio_s{};
+    // static_param at offset 0x48
+    const bool* mCheckRotEvent_s{};
+    // dynamic_param at offset 0x50
+    sead::Vector3f* mTargetPos_d{};
 };
 
 }  // namespace uking::action

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionGiantBattleCloseAction.h"
+#include "Game/Actor/Action/actionGiantBattleCloseMoveAction.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class GiantBattleCloseMove : public GiantBattleCloseAction {
-    SEAD_RTTI_OVERRIDE(GiantBattleCloseMove, GiantBattleCloseAction)
+class GiantBattleCloseMove : public GiantBattleCloseMoveAction {
+    SEAD_RTTI_OVERRIDE(GiantBattleCloseMove, GiantBattleCloseMoveAction)
 public:
     explicit GiantBattleCloseMove(const InitArg& arg);
     ~GiantBattleCloseMove() override;

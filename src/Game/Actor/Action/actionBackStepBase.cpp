@@ -2,29 +2,30 @@
 
 namespace uking::action {
 
-BackStepBase::BackStepBase(const InitArg& arg) : BackStepToTarget(arg) {}
+BackStepBase::BackStepBase(const InitArg& arg) : ActionEx(arg) {}
 
 BackStepBase::~BackStepBase() = default;
 
-bool BackStepBase::init_(sead::Heap* heap) {
-    return BackStepToTarget::init_(heap);
-}
-
 void BackStepBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    BackStepToTarget::enter_(params);
+    ActionEx::enter_(params);
 }
 
 void BackStepBase::leave_() {
-    BackStepToTarget::leave_();
+    ActionEx::leave_();
 }
 
 void BackStepBase::loadParams_() {
-    BackStepToTarget::loadParams_();
-    getStaticParam(&mJumpDist_s, "JumpDist");
+    getDynamicParam(&mTargetPos_d, "TargetPos");
+    getStaticParam(&mStopSpeedRatio_s, "StopSpeedRatio");
+    getStaticParam(&mStopRotSpeedRatio_s, "StopRotSpeedRatio");
+    getStaticParam(&mJumpGravity_s, "JumpGravity");
+    getStaticParam(&mJumpHeight_s, "JumpHeight");
+    getStaticParam(&mRotRatio_s, "RotRatio");
+    getStaticParam(&mCheckRotEvent_s, "CheckRotEvent");
 }
 
 void BackStepBase::calc_() {
-    BackStepToTarget::calc_();
+    ActionEx::calc_();
 }
 
 }  // namespace uking::action

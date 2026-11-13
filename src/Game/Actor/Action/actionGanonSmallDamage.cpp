@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-GanonSmallDamage::GanonSmallDamage(const InitArg& arg) : SmallDamageBase(arg) {}
+GanonSmallDamage::GanonSmallDamage(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 GanonSmallDamage::~GanonSmallDamage() = default;
 
 bool GanonSmallDamage::init_(sead::Heap* heap) {
-    return SmallDamageBase::init_(heap);
+    return KnockBackNoRotBase::init_(heap);
 }
 
 void GanonSmallDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 void GanonSmallDamage::leave_() {
-    SmallDamageBase::leave_();
+    KnockBackNoRotBase::leave_();
 }
 
 void GanonSmallDamage::loadParams_() {
@@ -25,7 +25,7 @@ void GanonSmallDamage::loadParams_() {
 }
 
 void GanonSmallDamage::calc_() {
-    SmallDamageBase::calc_();
+    KnockBackNoRotBase::calc_();
 }
 
 }  // namespace uking::action

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class Angry : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(Angry, ActionWithAS)
+class Angry : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(Angry, OnetimeStopBase)
 public:
     explicit Angry(const InitArg& arg);
 

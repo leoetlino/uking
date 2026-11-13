@@ -2,28 +2,28 @@
 
 namespace uking::action {
 
-GiantBattleCloseWalk::GiantBattleCloseWalk(const InitArg& arg) : GiantBattleCloseAction(arg) {}
+GiantBattleCloseWalk::GiantBattleCloseWalk(const InitArg& arg) : GiantBattleCloseMoveAction(arg) {}
 
 GiantBattleCloseWalk::~GiantBattleCloseWalk() = default;
 
 bool GiantBattleCloseWalk::init_(sead::Heap* heap) {
-    return GiantBattleCloseAction::init_(heap);
+    return GiantBattleCloseMoveAction::init_(heap);
 }
 
 void GiantBattleCloseWalk::enter_(ksys::act::ai::InlineParamPack* params) {
-    GiantBattleCloseAction::enter_(params);
+    GiantBattleCloseMoveAction::enter_(params);
 }
 
 void GiantBattleCloseWalk::leave_() {
-    GiantBattleCloseAction::leave_();
+    GiantBattleCloseMoveAction::leave_();
 }
 
 void GiantBattleCloseWalk::loadParams_() {
-    GiantBattleCloseAction::loadParams_();
+    GiantBattleCloseMoveAction::loadParams_();
 }
 
 void GiantBattleCloseWalk::calc_() {
-    GiantBattleCloseAction::calc_();
+    GiantBattleCloseMoveAction::calc_();
 }
 
 }  // namespace uking::action

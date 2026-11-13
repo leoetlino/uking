@@ -2,31 +2,31 @@
 
 namespace uking::action {
 
-SubAnmKnockBackShock::SubAnmKnockBackShock(const InitArg& arg) : AnmKnockBackShock(arg) {}
+SubAnmKnockBackShock::SubAnmKnockBackShock(const InitArg& arg) : KnockBackShockWithAS(arg) {}
 
 SubAnmKnockBackShock::~SubAnmKnockBackShock() = default;
 
 bool SubAnmKnockBackShock::init_(sead::Heap* heap) {
-    return AnmKnockBackShock::init_(heap);
+    return KnockBackShockWithAS::init_(heap);
 }
 
 void SubAnmKnockBackShock::enter_(ksys::act::ai::InlineParamPack* params) {
-    AnmKnockBackShock::enter_(params);
+    KnockBackShockWithAS::enter_(params);
 }
 
 void SubAnmKnockBackShock::leave_() {
-    AnmKnockBackShock::leave_();
+    KnockBackShockWithAS::leave_();
 }
 
 void SubAnmKnockBackShock::loadParams_() {
-    AnmKnockBackShock::loadParams_();
+    KnockBackShockWithAS::loadParams_();
     getStaticParam(&mSubASSlot_s, "SubASSlot");
     getStaticParam(&mSubAS_s, "SubAS");
     getStaticParam(&mLeaveSubAS_s, "LeaveSubAS");
 }
 
 void SubAnmKnockBackShock::calc_() {
-    AnmKnockBackShock::calc_();
+    KnockBackShockWithAS::calc_();
 }
 
 }  // namespace uking::action

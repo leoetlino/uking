@@ -2,28 +2,28 @@
 
 namespace uking::action {
 
-LandRagdoll::LandRagdoll(const InitArg& arg) : Ragdoll(arg) {}
+LandRagdoll::LandRagdoll(const InitArg& arg) : RagdollGetUpBase(arg) {}
 
 LandRagdoll::~LandRagdoll() = default;
 
 bool LandRagdoll::init_(sead::Heap* heap) {
-    return Ragdoll::init_(heap);
+    return RagdollGetUpBase::init_(heap);
 }
 
 void LandRagdoll::enter_(ksys::act::ai::InlineParamPack* params) {
-    Ragdoll::enter_(params);
+    RagdollGetUpBase::enter_(params);
 }
 
 void LandRagdoll::leave_() {
-    Ragdoll::leave_();
+    RagdollGetUpBase::leave_();
 }
 
 void LandRagdoll::loadParams_() {
-    Ragdoll::loadParams_();
+    RagdollGetUpBase::loadParams_();
 }
 
 void LandRagdoll::calc_() {
-    Ragdoll::calc_();
+    RagdollGetUpBase::calc_();
 }
 
 }  // namespace uking::action

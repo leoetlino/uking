@@ -3,24 +3,24 @@
 namespace uking::action {
 
 RemainsWaterExplodeBulletMove::RemainsWaterExplodeBulletMove(const InitArg& arg)
-    : RemainsWaterBulletAction(arg) {}
+    : RemainsWaterBulletMoveBase(arg) {}
 
 RemainsWaterExplodeBulletMove::~RemainsWaterExplodeBulletMove() = default;
 
 bool RemainsWaterExplodeBulletMove::init_(sead::Heap* heap) {
-    return RemainsWaterBulletAction::init_(heap);
+    return RemainsWaterBulletMoveBase::init_(heap);
 }
 
 void RemainsWaterExplodeBulletMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    RemainsWaterBulletAction::enter_(params);
+    RemainsWaterBulletMoveBase::enter_(params);
 }
 
 void RemainsWaterExplodeBulletMove::leave_() {
-    RemainsWaterBulletAction::leave_();
+    RemainsWaterBulletMoveBase::leave_();
 }
 
 void RemainsWaterExplodeBulletMove::loadParams_() {
-    RemainsWaterBulletAction::loadParams_();
+    RemainsWaterBulletMoveBase::loadParams_();
     getStaticParam(&mMaxSpeed_s, "MaxSpeed");
     getStaticParam(&mCloseRadius_s, "CloseRadius");
     getStaticParam(&mChaseAngleMulRate_s, "ChaseAngleMulRate");
@@ -32,7 +32,7 @@ void RemainsWaterExplodeBulletMove::loadParams_() {
 }
 
 void RemainsWaterExplodeBulletMove::calc_() {
-    RemainsWaterBulletAction::calc_();
+    RemainsWaterBulletMoveBase::calc_();
 }
 
 }  // namespace uking::action

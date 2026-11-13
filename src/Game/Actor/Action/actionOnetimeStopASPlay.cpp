@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-OnetimeStopASPlay::OnetimeStopASPlay(const InitArg& arg) : ActionWithAS(arg) {}
+OnetimeStopASPlay::OnetimeStopASPlay(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 OnetimeStopASPlay::~OnetimeStopASPlay() = default;
 
 void OnetimeStopASPlay::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void OnetimeStopASPlay::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void OnetimeStopASPlay::loadParams_() {
@@ -21,7 +21,7 @@ void OnetimeStopASPlay::loadParams_() {
 }
 
 void OnetimeStopASPlay::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

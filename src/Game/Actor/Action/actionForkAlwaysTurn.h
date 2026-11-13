@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionForkTurn.h"
+#include "Game/Actor/Action/actionForkTurnBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkAlwaysTurn : public ForkTurn {
-    SEAD_RTTI_OVERRIDE(ForkAlwaysTurn, ForkTurn)
+class ForkAlwaysTurn : public ForkTurnBase {
+    SEAD_RTTI_OVERRIDE(ForkAlwaysTurn, ForkTurnBase)
 public:
     explicit ForkAlwaysTurn(const InitArg& arg);
     ~ForkAlwaysTurn() override;

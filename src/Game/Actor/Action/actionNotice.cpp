@@ -2,10 +2,10 @@
 
 namespace uking::action {
 
-Notice::Notice(const InitArg& arg) : ActionWithAS(arg) {}
+Notice::Notice(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 void Notice::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 }  // namespace uking::action

@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class ForkTurn : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(ForkTurn, ksys::act::ai::Action)
+class ForkTurnBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(ForkTurnBase, ksys::act::ai::Action)
 public:
-    explicit ForkTurn(const InitArg& arg);
-    ~ForkTurn() override;
+    explicit ForkTurnBase(const InitArg& arg);
+    ~ForkTurnBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

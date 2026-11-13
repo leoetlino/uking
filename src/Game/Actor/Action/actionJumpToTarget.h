@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionJumpTo.h"
+#include "Game/Actor/Action/actionJumpToTargetBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class JumpToTarget : public JumpTo {
-    SEAD_RTTI_OVERRIDE(JumpToTarget, JumpTo)
+class JumpToTarget : public JumpToTargetBase {
+    SEAD_RTTI_OVERRIDE(JumpToTarget, JumpToTargetBase)
 public:
     explicit JumpToTarget(const InitArg& arg);
     ~JumpToTarget() override;

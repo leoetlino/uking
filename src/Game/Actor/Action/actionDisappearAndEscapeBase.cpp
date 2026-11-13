@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-DisappearAndEscapeBase::DisappearAndEscapeBase(const InitArg& arg) : ActionWithAS(arg) {}
+DisappearAndEscapeBase::DisappearAndEscapeBase(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 DisappearAndEscapeBase::~DisappearAndEscapeBase() = default;
 
 bool DisappearAndEscapeBase::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void DisappearAndEscapeBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void DisappearAndEscapeBase::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void DisappearAndEscapeBase::loadParams_() {
@@ -23,7 +23,7 @@ void DisappearAndEscapeBase::loadParams_() {
 }
 
 void DisappearAndEscapeBase::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

@@ -2,18 +2,18 @@
 
 namespace uking::action {
 
-Angry::Angry(const InitArg& arg) : ActionWithAS(arg) {}
+Angry::Angry(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 bool Angry::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void Angry::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void Angry::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void Angry::loadParams_() {
@@ -21,7 +21,7 @@ void Angry::loadParams_() {
 }
 
 void Angry::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

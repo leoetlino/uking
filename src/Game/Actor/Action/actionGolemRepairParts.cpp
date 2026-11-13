@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-GolemRepairParts::GolemRepairParts(const InitArg& arg) : ActionWithAS(arg) {}
+GolemRepairParts::GolemRepairParts(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 GolemRepairParts::~GolemRepairParts() = default;
 
 bool GolemRepairParts::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void GolemRepairParts::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void GolemRepairParts::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void GolemRepairParts::loadParams_() {
@@ -29,7 +29,7 @@ void GolemRepairParts::loadParams_() {
 }
 
 void GolemRepairParts::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

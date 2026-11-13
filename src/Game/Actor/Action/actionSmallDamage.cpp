@@ -2,10 +2,10 @@
 
 namespace uking::action {
 
-SmallDamage::SmallDamage(const InitArg& arg) : SmallDamageBase(arg) {}
+SmallDamage::SmallDamage(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 void SmallDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 }  // namespace uking::action

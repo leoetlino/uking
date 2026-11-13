@@ -2,26 +2,26 @@
 
 namespace uking::action {
 
-GetRupee::GetRupee(const InitArg& arg) : GetItem(arg) {}
+GetRupee::GetRupee(const InitArg& arg) : GetItemBase(arg) {}
 
 bool GetRupee::init_(sead::Heap* heap) {
-    return GetItem::init_(heap);
+    return GetItemBase::init_(heap);
 }
 
 void GetRupee::enter_(ksys::act::ai::InlineParamPack* params) {
-    GetItem::enter_(params);
+    GetItemBase::enter_(params);
 }
 
 void GetRupee::leave_() {
-    GetItem::leave_();
+    GetItemBase::leave_();
 }
 
 void GetRupee::loadParams_() {
-    GetItem::loadParams_();
+    GetItemBase::loadParams_();
 }
 
 void GetRupee::calc_() {
-    GetItem::calc_();
+    GetItemBase::calc_();
 }
 
 }  // namespace uking::action

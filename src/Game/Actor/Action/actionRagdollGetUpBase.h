@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class Ragdoll : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(Ragdoll, ksys::act::ai::Action)
+class RagdollGetUpBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(RagdollGetUpBase, ksys::act::ai::Action)
 public:
-    explicit Ragdoll(const InitArg& arg);
-    ~Ragdoll() override;
+    explicit RagdollGetUpBase(const InitArg& arg);
+    ~RagdollGetUpBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

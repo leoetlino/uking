@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class DisappearAndEscapeBase : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(DisappearAndEscapeBase, ActionWithAS)
+class DisappearAndEscapeBase : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(DisappearAndEscapeBase, OnetimeStopBase)
 public:
     explicit DisappearAndEscapeBase(const InitArg& arg);
     ~DisappearAndEscapeBase() override;

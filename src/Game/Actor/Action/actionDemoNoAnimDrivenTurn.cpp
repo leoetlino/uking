@@ -2,31 +2,31 @@
 
 namespace uking::action {
 
-DemoNoAnimDrivenTurn::DemoNoAnimDrivenTurn(const InitArg& arg) : ForkTurn(arg) {}
+DemoNoAnimDrivenTurn::DemoNoAnimDrivenTurn(const InitArg& arg) : ForkTurnBase(arg) {}
 
 DemoNoAnimDrivenTurn::~DemoNoAnimDrivenTurn() = default;
 
 bool DemoNoAnimDrivenTurn::init_(sead::Heap* heap) {
-    return ForkTurn::init_(heap);
+    return ForkTurnBase::init_(heap);
 }
 
 void DemoNoAnimDrivenTurn::enter_(ksys::act::ai::InlineParamPack* params) {
-    ForkTurn::enter_(params);
+    ForkTurnBase::enter_(params);
 }
 
 void DemoNoAnimDrivenTurn::leave_() {
-    ForkTurn::leave_();
+    ForkTurnBase::leave_();
 }
 
 void DemoNoAnimDrivenTurn::loadParams_() {
-    ForkTurn::loadParams_();
+    ForkTurnBase::loadParams_();
     getDynamicParam(&mObjectId_d, "ObjectId");
     getDynamicParam(&mActorName_d, "ActorName");
     getDynamicParam(&mUniqueName_d, "UniqueName");
 }
 
 void DemoNoAnimDrivenTurn::calc_() {
-    ForkTurn::calc_();
+    ForkTurnBase::calc_();
 }
 
 }  // namespace uking::action

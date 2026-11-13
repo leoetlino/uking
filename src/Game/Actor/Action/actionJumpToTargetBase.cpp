@@ -1,24 +1,24 @@
-#include "Game/Actor/Action/actionJumpTo.h"
+#include "Game/Actor/Action/actionJumpToTargetBase.h"
 
 namespace uking::action {
 
-JumpTo::JumpTo(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+JumpToTargetBase::JumpToTargetBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
-JumpTo::~JumpTo() = default;
+JumpToTargetBase::~JumpToTargetBase() = default;
 
-bool JumpTo::init_(sead::Heap* heap) {
+bool JumpToTargetBase::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void JumpTo::enter_(ksys::act::ai::InlineParamPack* params) {
+void JumpToTargetBase::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void JumpTo::leave_() {
+void JumpToTargetBase::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void JumpTo::loadParams_() {
+void JumpToTargetBase::loadParams_() {
     getStaticParam(&mMaxSpeed_s, "MaxSpeed");
     getStaticParam(&mJumpHeight_s, "JumpHeight");
     getStaticParam(&mJumpGravity_s, "JumpGravity");
@@ -28,7 +28,7 @@ void JumpTo::loadParams_() {
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }
 
-void JumpTo::calc_() {
+void JumpToTargetBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

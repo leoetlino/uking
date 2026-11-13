@@ -3,28 +3,28 @@
 namespace uking::action {
 
 ForkOnEnterDropWeaponWithSpeed::ForkOnEnterDropWeaponWithSpeed(const InitArg& arg)
-    : ForkDropWeapon(arg) {}
+    : ForkDropWeaponWithSpeedBase(arg) {}
 
 ForkOnEnterDropWeaponWithSpeed::~ForkOnEnterDropWeaponWithSpeed() = default;
 
 bool ForkOnEnterDropWeaponWithSpeed::init_(sead::Heap* heap) {
-    return ForkDropWeapon::init_(heap);
+    return ForkDropWeaponWithSpeedBase::init_(heap);
 }
 
 void ForkOnEnterDropWeaponWithSpeed::enter_(ksys::act::ai::InlineParamPack* params) {
-    ForkDropWeapon::enter_(params);
+    ForkDropWeaponWithSpeedBase::enter_(params);
 }
 
 void ForkOnEnterDropWeaponWithSpeed::leave_() {
-    ForkDropWeapon::leave_();
+    ForkDropWeaponWithSpeedBase::leave_();
 }
 
 void ForkOnEnterDropWeaponWithSpeed::loadParams_() {
-    ForkDropWeapon::loadParams_();
+    ForkDropWeaponWithSpeedBase::loadParams_();
 }
 
 void ForkOnEnterDropWeaponWithSpeed::calc_() {
-    ForkDropWeapon::calc_();
+    ForkDropWeaponWithSpeedBase::calc_();
 }
 
 }  // namespace uking::action

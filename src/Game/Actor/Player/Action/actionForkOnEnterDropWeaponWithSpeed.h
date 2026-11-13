@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionForkDropWeapon.h"
+#include "Game/Actor/Action/actionForkDropWeaponWithSpeedBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkOnEnterDropWeaponWithSpeed : public ForkDropWeapon {
-    SEAD_RTTI_OVERRIDE(ForkOnEnterDropWeaponWithSpeed, ForkDropWeapon)
+class ForkOnEnterDropWeaponWithSpeed : public ForkDropWeaponWithSpeedBase {
+    SEAD_RTTI_OVERRIDE(ForkOnEnterDropWeaponWithSpeed, ForkDropWeaponWithSpeedBase)
 public:
     explicit ForkOnEnterDropWeaponWithSpeed(const InitArg& arg);
     ~ForkOnEnterDropWeaponWithSpeed() override;

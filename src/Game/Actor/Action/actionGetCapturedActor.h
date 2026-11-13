@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionGetItem.h"
+#include "Game/Actor/Action/actionGetItemBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class GetCapturedActor : public GetItem {
-    SEAD_RTTI_OVERRIDE(GetCapturedActor, GetItem)
+class GetCapturedActor : public GetItemBase {
+    SEAD_RTTI_OVERRIDE(GetCapturedActor, GetItemBase)
 public:
     explicit GetCapturedActor(const InitArg& arg);
     ~GetCapturedActor() override;

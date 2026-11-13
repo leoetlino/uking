@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionGetItem.h"
+#include "Game/Actor/Action/actionGetItemBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class GetItemIntoBag : public GetItem {
-    SEAD_RTTI_OVERRIDE(GetItemIntoBag, GetItem)
+class GetItemIntoBag : public GetItemBase {
+    SEAD_RTTI_OVERRIDE(GetItemIntoBag, GetItemBase)
 public:
     explicit GetItemIntoBag(const InitArg& arg);
 

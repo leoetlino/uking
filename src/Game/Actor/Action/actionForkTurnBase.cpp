@@ -1,24 +1,24 @@
-#include "Game/Actor/Action/actionForkTurn.h"
+#include "Game/Actor/Action/actionForkTurnBase.h"
 
 namespace uking::action {
 
-ForkTurn::ForkTurn(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+ForkTurnBase::ForkTurnBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
-ForkTurn::~ForkTurn() = default;
+ForkTurnBase::~ForkTurnBase() = default;
 
-bool ForkTurn::init_(sead::Heap* heap) {
+bool ForkTurnBase::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void ForkTurn::enter_(ksys::act::ai::InlineParamPack* params) {
+void ForkTurnBase::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void ForkTurn::leave_() {
+void ForkTurnBase::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void ForkTurn::loadParams_() {
+void ForkTurnBase::loadParams_() {
     getStaticParam(&mRotSpd_s, "RotSpd");
     getStaticParam(&mFinRotate_s, "FinRotate");
     getStaticParam(&mPosReduceRatio_s, "PosReduceRatio");
@@ -33,7 +33,7 @@ void ForkTurn::loadParams_() {
     getStaticParam(&mIsUpFollow_s, "IsUpFollow");
 }
 
-void ForkTurn::calc_() {
+void ForkTurnBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

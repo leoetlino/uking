@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-PullOut::PullOut(const InitArg& arg) : ActionWithAS(arg) {}
+PullOut::PullOut(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 PullOut::~PullOut() = default;
 
 bool PullOut::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void PullOut::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void PullOut::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void PullOut::loadParams_() {
@@ -25,7 +25,7 @@ void PullOut::loadParams_() {
 }
 
 void PullOut::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

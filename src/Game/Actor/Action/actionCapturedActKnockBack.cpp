@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-CapturedActKnockBack::CapturedActKnockBack(const InitArg& arg) : SmallDamageBase(arg) {}
+CapturedActKnockBack::CapturedActKnockBack(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 CapturedActKnockBack::~CapturedActKnockBack() = default;
 
 bool CapturedActKnockBack::init_(sead::Heap* heap) {
-    return SmallDamageBase::init_(heap);
+    return KnockBackNoRotBase::init_(heap);
 }
 
 void CapturedActKnockBack::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 void CapturedActKnockBack::leave_() {
-    SmallDamageBase::leave_();
+    KnockBackNoRotBase::leave_();
 }
 
 void CapturedActKnockBack::loadParams_() {
@@ -23,7 +23,7 @@ void CapturedActKnockBack::loadParams_() {
 }
 
 void CapturedActKnockBack::calc_() {
-    SmallDamageBase::calc_();
+    KnockBackNoRotBase::calc_();
 }
 
 }  // namespace uking::action

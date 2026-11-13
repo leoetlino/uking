@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionGetItem.h"
+#include "Game/Actor/Action/actionGetItemBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class GetRupee : public GetItem {
-    SEAD_RTTI_OVERRIDE(GetRupee, GetItem)
+class GetRupee : public GetItemBase {
+    SEAD_RTTI_OVERRIDE(GetRupee, GetItemBase)
 public:
     explicit GetRupee(const InitArg& arg);
 

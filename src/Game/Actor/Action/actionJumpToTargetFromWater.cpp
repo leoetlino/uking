@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-JumpToTargetFromWater::JumpToTargetFromWater(const InitArg& arg) : JumpTo(arg) {}
+JumpToTargetFromWater::JumpToTargetFromWater(const InitArg& arg) : JumpToTargetBase(arg) {}
 
 JumpToTargetFromWater::~JumpToTargetFromWater() = default;
 
 bool JumpToTargetFromWater::init_(sead::Heap* heap) {
-    return JumpTo::init_(heap);
+    return JumpToTargetBase::init_(heap);
 }
 
 void JumpToTargetFromWater::enter_(ksys::act::ai::InlineParamPack* params) {
-    JumpTo::enter_(params);
+    JumpToTargetBase::enter_(params);
 }
 
 void JumpToTargetFromWater::leave_() {
-    JumpTo::leave_();
+    JumpToTargetBase::leave_();
 }
 
 void JumpToTargetFromWater::loadParams_() {
-    JumpTo::loadParams_();
+    JumpToTargetBase::loadParams_();
     getStaticParam(&mFloatCycleTime_s, "FloatCycleTime");
     getStaticParam(&mFloatDepth_s, "FloatDepth");
     getStaticParam(&mFloatRadius_s, "FloatRadius");
@@ -29,7 +29,7 @@ void JumpToTargetFromWater::loadParams_() {
 }
 
 void JumpToTargetFromWater::calc_() {
-    JumpTo::calc_();
+    JumpToTargetBase::calc_();
 }
 
 }  // namespace uking::action

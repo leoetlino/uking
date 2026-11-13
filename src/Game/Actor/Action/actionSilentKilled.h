@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRagdoll.h"
+#include "Game/Actor/Action/actionRagdollGetUpBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class SilentKilled : public Ragdoll {
-    SEAD_RTTI_OVERRIDE(SilentKilled, Ragdoll)
+class SilentKilled : public RagdollGetUpBase {
+    SEAD_RTTI_OVERRIDE(SilentKilled, RagdollGetUpBase)
 public:
     explicit SilentKilled(const InitArg& arg);
     ~SilentKilled() override;

@@ -2,22 +2,22 @@
 
 namespace uking::action {
 
-GetSmallKeyItemGet::GetSmallKeyItemGet(const InitArg& arg) : GetItem(arg) {}
+GetSmallKeyItemGet::GetSmallKeyItemGet(const InitArg& arg) : GetItemBase(arg) {}
 
 void GetSmallKeyItemGet::enter_(ksys::act::ai::InlineParamPack* params) {
-    GetItem::enter_(params);
+    GetItemBase::enter_(params);
 }
 
 void GetSmallKeyItemGet::leave_() {
-    GetItem::leave_();
+    GetItemBase::leave_();
 }
 
 void GetSmallKeyItemGet::loadParams_() {
-    GetItem::loadParams_();
+    GetItemBase::loadParams_();
 }
 
 void GetSmallKeyItemGet::calc_() {
-    GetItem::calc_();
+    GetItemBase::calc_();
 }
 
 }  // namespace uking::action

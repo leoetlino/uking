@@ -20,7 +20,7 @@ void PlayerForkDropWeaponWithSpeed::leave_() {
 }
 
 void PlayerForkDropWeaponWithSpeed::loadParams_() {
-    ForkDropWeapon::loadParams_();
+    ForkDropWeaponWithSpeedBase::loadParams_();
 }
 
 void PlayerForkDropWeaponWithSpeed::calc_() {

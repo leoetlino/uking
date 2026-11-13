@@ -5,11 +5,11 @@
 
 namespace uking::action {
 
-class GiantBattleCloseAction : public BattleCloseMoveAction {
-    SEAD_RTTI_OVERRIDE(GiantBattleCloseAction, BattleCloseMoveAction)
+class GiantBattleCloseMoveAction : public BattleCloseMoveAction {
+    SEAD_RTTI_OVERRIDE(GiantBattleCloseMoveAction, BattleCloseMoveAction)
 public:
-    explicit GiantBattleCloseAction(const InitArg& arg);
-    ~GiantBattleCloseAction() override;
+    explicit GiantBattleCloseMoveAction(const InitArg& arg);
+    ~GiantBattleCloseMoveAction() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-AnmDamage::AnmDamage(const InitArg& arg) : SmallDamageBase(arg) {}
+AnmDamage::AnmDamage(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 AnmDamage::~AnmDamage() = default;
 
 bool AnmDamage::init_(sead::Heap* heap) {
-    return SmallDamageBase::init_(heap);
+    return KnockBackNoRotBase::init_(heap);
 }
 
 void AnmDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 void AnmDamage::leave_() {
-    SmallDamageBase::leave_();
+    KnockBackNoRotBase::leave_();
 }
 
 void AnmDamage::loadParams_() {
@@ -24,7 +24,7 @@ void AnmDamage::loadParams_() {
 }
 
 void AnmDamage::calc_() {
-    SmallDamageBase::calc_();
+    KnockBackNoRotBase::calc_();
 }
 
 }  // namespace uking::action

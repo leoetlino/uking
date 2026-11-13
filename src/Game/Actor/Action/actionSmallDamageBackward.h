@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionSmallDamageBackwardBase.h"
+#include "Game/Actor/Action/actionKnockBackBackwardBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class SmallDamageBackward : public SmallDamageBackwardBase {
-    SEAD_RTTI_OVERRIDE(SmallDamageBackward, SmallDamageBackwardBase)
+class SmallDamageBackward : public KnockBackBackwardBase {
+    SEAD_RTTI_OVERRIDE(SmallDamageBackward, KnockBackBackwardBase)
 public:
     explicit SmallDamageBackward(const InitArg& arg);
     ~SmallDamageBackward() override;

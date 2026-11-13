@@ -2,29 +2,29 @@
 
 namespace uking::action {
 
-ThrownDown::ThrownDown(const InitArg& arg) : Ragdoll(arg) {}
+ThrownDown::ThrownDown(const InitArg& arg) : RagdollGetUpBase(arg) {}
 
 ThrownDown::~ThrownDown() = default;
 
 bool ThrownDown::init_(sead::Heap* heap) {
-    return Ragdoll::init_(heap);
+    return RagdollGetUpBase::init_(heap);
 }
 
 void ThrownDown::enter_(ksys::act::ai::InlineParamPack* params) {
-    Ragdoll::enter_(params);
+    RagdollGetUpBase::enter_(params);
 }
 
 void ThrownDown::leave_() {
-    Ragdoll::leave_();
+    RagdollGetUpBase::leave_();
 }
 
 void ThrownDown::loadParams_() {
-    Ragdoll::loadParams_();
+    RagdollGetUpBase::loadParams_();
     getDynamicParam(&mSetupSpeed_d, "SetupSpeed");
 }
 
 void ThrownDown::calc_() {
-    Ragdoll::calc_();
+    RagdollGetUpBase::calc_();
 }
 
 }  // namespace uking::action

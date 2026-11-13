@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-Search::Search(const InitArg& arg) : ActionWithAS(arg) {}
+Search::Search(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 Search::~Search() = default;
 
 void Search::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void Search::loadParams_() {
@@ -16,7 +16,7 @@ void Search::loadParams_() {
 }
 
 void Search::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

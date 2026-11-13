@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRagdoll.h"
+#include "Game/Actor/Action/actionRagdollGetUpBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ThrownDown : public Ragdoll {
-    SEAD_RTTI_OVERRIDE(ThrownDown, Ragdoll)
+class ThrownDown : public RagdollGetUpBase {
+    SEAD_RTTI_OVERRIDE(ThrownDown, RagdollGetUpBase)
 public:
     explicit ThrownDown(const InitArg& arg);
     ~ThrownDown() override;

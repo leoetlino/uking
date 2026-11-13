@@ -2,6 +2,6 @@
 
 namespace uking::action {
 
-NavMeshJump::NavMeshJump(const InitArg& arg) : JumpTo(arg) {}
+NavMeshJump::NavMeshJump(const InitArg& arg) : JumpToTargetBase(arg) {}
 
 }  // namespace uking::action

@@ -2,28 +2,28 @@
 
 namespace uking::action {
 
-SilentKilled::SilentKilled(const InitArg& arg) : Ragdoll(arg) {}
+SilentKilled::SilentKilled(const InitArg& arg) : RagdollGetUpBase(arg) {}
 
 SilentKilled::~SilentKilled() = default;
 
 bool SilentKilled::init_(sead::Heap* heap) {
-    return Ragdoll::init_(heap);
+    return RagdollGetUpBase::init_(heap);
 }
 
 void SilentKilled::enter_(ksys::act::ai::InlineParamPack* params) {
-    Ragdoll::enter_(params);
+    RagdollGetUpBase::enter_(params);
 }
 
 void SilentKilled::leave_() {
-    Ragdoll::leave_();
+    RagdollGetUpBase::leave_();
 }
 
 void SilentKilled::loadParams_() {
-    Ragdoll::loadParams_();
+    RagdollGetUpBase::loadParams_();
 }
 
 void SilentKilled::calc_() {
-    Ragdoll::calc_();
+    RagdollGetUpBase::calc_();
 }
 
 }  // namespace uking::action

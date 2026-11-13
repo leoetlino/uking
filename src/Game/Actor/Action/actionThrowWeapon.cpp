@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-ThrowWeapon::ThrowWeapon(const InitArg& arg) : ActionWithAS(arg) {}
+ThrowWeapon::ThrowWeapon(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 ThrowWeapon::~ThrowWeapon() = default;
 
 void ThrowWeapon::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void ThrowWeapon::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void ThrowWeapon::loadParams_() {
@@ -27,7 +27,7 @@ void ThrowWeapon::loadParams_() {
 }
 
 void ThrowWeapon::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

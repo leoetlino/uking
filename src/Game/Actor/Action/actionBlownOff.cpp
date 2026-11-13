@@ -2,31 +2,31 @@
 
 namespace uking::action {
 
-BlownOff::BlownOff(const InitArg& arg) : Ragdoll(arg) {}
+BlownOff::BlownOff(const InitArg& arg) : RagdollGetUpBase(arg) {}
 
 BlownOff::~BlownOff() = default;
 
 bool BlownOff::init_(sead::Heap* heap) {
-    return Ragdoll::init_(heap);
+    return RagdollGetUpBase::init_(heap);
 }
 
 void BlownOff::enter_(ksys::act::ai::InlineParamPack* params) {
-    Ragdoll::enter_(params);
+    RagdollGetUpBase::enter_(params);
 }
 
 void BlownOff::leave_() {
-    Ragdoll::leave_();
+    RagdollGetUpBase::leave_();
 }
 
 void BlownOff::loadParams_() {
     getStaticParam(&mAddTime_s, "AddTime");
     getStaticParam(&mLifeReflexRatio_s, "LifeReflexRatio");
     getStaticParam(&mImpulseRatio_s, "ImpulseRatio");
-    Ragdoll::loadParams_();
+    RagdollGetUpBase::loadParams_();
 }
 
 void BlownOff::calc_() {
-    Ragdoll::calc_();
+    RagdollGetUpBase::calc_();
 }
 
 }  // namespace uking::action

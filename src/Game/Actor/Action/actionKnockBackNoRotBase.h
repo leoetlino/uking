@@ -5,10 +5,10 @@
 
 namespace uking::action {
 
-class SmallDamageBase : public KnockBackHitImpactForce {
-    SEAD_RTTI_OVERRIDE(SmallDamageBase, KnockBackHitImpactForce)
+class KnockBackNoRotBase : public KnockBackHitImpactForce {
+    SEAD_RTTI_OVERRIDE(KnockBackNoRotBase, KnockBackHitImpactForce)
 public:
-    explicit SmallDamageBase(const InitArg& arg);
+    explicit KnockBackNoRotBase(const InitArg& arg);
 
     void enter_(ksys::act::ai::InlineParamPack* params) override;
 

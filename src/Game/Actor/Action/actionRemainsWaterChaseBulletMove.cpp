@@ -3,24 +3,24 @@
 namespace uking::action {
 
 RemainsWaterChaseBulletMove::RemainsWaterChaseBulletMove(const InitArg& arg)
-    : RemainsWaterBulletAction(arg) {}
+    : RemainsWaterBulletMoveBase(arg) {}
 
 RemainsWaterChaseBulletMove::~RemainsWaterChaseBulletMove() = default;
 
 bool RemainsWaterChaseBulletMove::init_(sead::Heap* heap) {
-    return RemainsWaterBulletAction::init_(heap);
+    return RemainsWaterBulletMoveBase::init_(heap);
 }
 
 void RemainsWaterChaseBulletMove::enter_(ksys::act::ai::InlineParamPack* params) {
-    RemainsWaterBulletAction::enter_(params);
+    RemainsWaterBulletMoveBase::enter_(params);
 }
 
 void RemainsWaterChaseBulletMove::leave_() {
-    RemainsWaterBulletAction::leave_();
+    RemainsWaterBulletMoveBase::leave_();
 }
 
 void RemainsWaterChaseBulletMove::loadParams_() {
-    RemainsWaterBulletAction::loadParams_();
+    RemainsWaterBulletMoveBase::loadParams_();
     getStaticParam(&mBaseChaseSpd_s, "BaseChaseSpd");
     getStaticParam(&mMaxChaseSpd_s, "MaxChaseSpd");
     getStaticParam(&mChaseSpdRate_s, "ChaseSpdRate");
@@ -38,7 +38,7 @@ void RemainsWaterChaseBulletMove::loadParams_() {
 }
 
 void RemainsWaterChaseBulletMove::calc_() {
-    RemainsWaterBulletAction::calc_();
+    RemainsWaterBulletMoveBase::calc_();
 }
 
 }  // namespace uking::action

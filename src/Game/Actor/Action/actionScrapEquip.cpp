@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-ScrapEquip::ScrapEquip(const InitArg& arg) : ActionWithAS(arg) {}
+ScrapEquip::ScrapEquip(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 ScrapEquip::~ScrapEquip() = default;
 
 bool ScrapEquip::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void ScrapEquip::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void ScrapEquip::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void ScrapEquip::loadParams_() {
@@ -25,7 +25,7 @@ void ScrapEquip::loadParams_() {
 }
 
 void ScrapEquip::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

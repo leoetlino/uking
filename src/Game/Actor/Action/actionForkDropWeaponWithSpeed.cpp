@@ -2,12 +2,13 @@
 
 namespace uking::action {
 
-ForkDropWeaponWithSpeed::ForkDropWeaponWithSpeed(const InitArg& arg) : ForkDropWeapon(arg) {}
+ForkDropWeaponWithSpeed::ForkDropWeaponWithSpeed(const InitArg& arg)
+    : ForkDropWeaponWithSpeedBase(arg) {}
 
 ForkDropWeaponWithSpeed::~ForkDropWeaponWithSpeed() = default;
 
 void ForkDropWeaponWithSpeed::calc_() {
-    ForkDropWeapon::calc_();
+    ForkDropWeaponWithSpeedBase::calc_();
 }
 
 }  // namespace uking::action

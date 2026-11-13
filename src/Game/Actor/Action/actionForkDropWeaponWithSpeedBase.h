@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class ForkDropWeapon : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(ForkDropWeapon, ksys::act::ai::Action)
+class ForkDropWeaponWithSpeedBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(ForkDropWeaponWithSpeedBase, ksys::act::ai::Action)
 public:
-    explicit ForkDropWeapon(const InitArg& arg);
-    ~ForkDropWeapon() override;
+    explicit ForkDropWeaponWithSpeedBase(const InitArg& arg);
+    ~ForkDropWeaponWithSpeedBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

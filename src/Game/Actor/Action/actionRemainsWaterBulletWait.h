@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionRemainsWaterBulletAction.h"
+#include "Game/Actor/Action/actionRemainsWaterBulletMoveBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class RemainsWaterBulletWait : public RemainsWaterBulletAction {
-    SEAD_RTTI_OVERRIDE(RemainsWaterBulletWait, RemainsWaterBulletAction)
+class RemainsWaterBulletWait : public RemainsWaterBulletMoveBase {
+    SEAD_RTTI_OVERRIDE(RemainsWaterBulletWait, RemainsWaterBulletMoveBase)
 public:
     explicit RemainsWaterBulletWait(const InitArg& arg);
     ~RemainsWaterBulletWait() override;

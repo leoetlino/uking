@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-ForkKnockBackNoRot::ForkKnockBackNoRot(const InitArg& arg) : SmallDamageBase(arg) {}
+ForkKnockBackNoRot::ForkKnockBackNoRot(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 ForkKnockBackNoRot::~ForkKnockBackNoRot() = default;
 
 bool ForkKnockBackNoRot::init_(sead::Heap* heap) {
-    return SmallDamageBase::init_(heap);
+    return KnockBackNoRotBase::init_(heap);
 }
 
 void ForkKnockBackNoRot::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 void ForkKnockBackNoRot::leave_() {
-    SmallDamageBase::leave_();
+    KnockBackNoRotBase::leave_();
 }
 
 void ForkKnockBackNoRot::loadParams_() {
@@ -23,7 +23,7 @@ void ForkKnockBackNoRot::loadParams_() {
 }
 
 void ForkKnockBackNoRot::calc_() {
-    SmallDamageBase::calc_();
+    KnockBackNoRotBase::calc_();
 }
 
 }  // namespace uking::action

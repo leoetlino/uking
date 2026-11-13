@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Game/Actor/Action/actionSimpleKnockBackShock.h"
+#include "Game/Actor/Action/actionKnockBackHitImpactForce.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class AnmKnockBackShock : public SimpleKnockBackShock {
-    SEAD_RTTI_OVERRIDE(AnmKnockBackShock, SimpleKnockBackShock)
+class KnockBackBackwardBase : public KnockBackHitImpactForce {
+    SEAD_RTTI_OVERRIDE(KnockBackBackwardBase, KnockBackHitImpactForce)
 public:
-    explicit AnmKnockBackShock(const InitArg& arg);
-    ~AnmKnockBackShock() override;
+    explicit KnockBackBackwardBase(const InitArg& arg);
+    ~KnockBackBackwardBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;
@@ -18,9 +18,6 @@ public:
 
 protected:
     void calc_() override;
-
-    // static_param at offset 0x38
-    sead::SafeString mASName_s{};
 };
 
 }  // namespace uking::action

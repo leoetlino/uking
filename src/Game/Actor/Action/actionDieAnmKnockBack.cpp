@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-DieAnmKnockBack::DieAnmKnockBack(const InitArg& arg) : SmallDamageBase(arg) {}
+DieAnmKnockBack::DieAnmKnockBack(const InitArg& arg) : KnockBackNoRotBase(arg) {}
 
 DieAnmKnockBack::~DieAnmKnockBack() = default;
 
 void DieAnmKnockBack::enter_(ksys::act::ai::InlineParamPack* params) {
-    SmallDamageBase::enter_(params);
+    KnockBackNoRotBase::enter_(params);
 }
 
 void DieAnmKnockBack::leave_() {
-    SmallDamageBase::leave_();
+    KnockBackNoRotBase::leave_();
 }
 
 void DieAnmKnockBack::loadParams_() {
@@ -22,7 +22,7 @@ void DieAnmKnockBack::loadParams_() {
 }
 
 void DieAnmKnockBack::calc_() {
-    SmallDamageBase::calc_();
+    KnockBackNoRotBase::calc_();
 }
 
 }  // namespace uking::action

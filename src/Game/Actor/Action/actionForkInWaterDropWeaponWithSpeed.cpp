@@ -3,30 +3,30 @@
 namespace uking::action {
 
 ForkInWaterDropWeaponWithSpeed::ForkInWaterDropWeaponWithSpeed(const InitArg& arg)
-    : ForkDropWeapon(arg) {}
+    : ForkDropWeaponWithSpeedBase(arg) {}
 
 ForkInWaterDropWeaponWithSpeed::~ForkInWaterDropWeaponWithSpeed() = default;
 
 bool ForkInWaterDropWeaponWithSpeed::init_(sead::Heap* heap) {
-    return ForkDropWeapon::init_(heap);
+    return ForkDropWeaponWithSpeedBase::init_(heap);
 }
 
 void ForkInWaterDropWeaponWithSpeed::enter_(ksys::act::ai::InlineParamPack* params) {
-    ForkDropWeapon::enter_(params);
+    ForkDropWeaponWithSpeedBase::enter_(params);
 }
 
 void ForkInWaterDropWeaponWithSpeed::leave_() {
-    ForkDropWeapon::leave_();
+    ForkDropWeaponWithSpeedBase::leave_();
 }
 
 void ForkInWaterDropWeaponWithSpeed::loadParams_() {
-    ForkDropWeapon::loadParams_();
+    ForkDropWeaponWithSpeedBase::loadParams_();
     getStaticParam(&mInWaterDepth_s, "InWaterDepth");
     getStaticParam(&mOutWaterDepth_s, "OutWaterDepth");
 }
 
 void ForkInWaterDropWeaponWithSpeed::calc_() {
-    ForkDropWeapon::calc_();
+    ForkDropWeaponWithSpeedBase::calc_();
 }
 
 }  // namespace uking::action

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class PullOut : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(PullOut, ActionWithAS)
+class PullOut : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(PullOut, OnetimeStopBase)
 public:
     explicit PullOut(const InitArg& arg);
     ~PullOut() override;

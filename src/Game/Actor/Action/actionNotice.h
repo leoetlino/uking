@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class Notice : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(Notice, ActionWithAS)
+class Notice : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(Notice, OnetimeStopBase)
 public:
     explicit Notice(const InitArg& arg);
 

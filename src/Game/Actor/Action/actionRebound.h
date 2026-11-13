@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class Rebound : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(Rebound, ActionWithAS)
+class Rebound : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(Rebound, OnetimeStopBase)
 public:
     explicit Rebound(const InitArg& arg);
 

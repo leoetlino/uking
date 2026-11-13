@@ -1,24 +1,24 @@
-#include "Game/Actor/Action/actionRagdoll.h"
+#include "Game/Actor/Action/actionRagdollGetUpBase.h"
 
 namespace uking::action {
 
-Ragdoll::Ragdoll(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+RagdollGetUpBase::RagdollGetUpBase(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
-Ragdoll::~Ragdoll() = default;
+RagdollGetUpBase::~RagdollGetUpBase() = default;
 
-bool Ragdoll::init_(sead::Heap* heap) {
+bool RagdollGetUpBase::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void Ragdoll::enter_(ksys::act::ai::InlineParamPack* params) {
+void RagdollGetUpBase::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void Ragdoll::leave_() {
+void RagdollGetUpBase::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void Ragdoll::loadParams_() {
+void RagdollGetUpBase::loadParams_() {
     getStaticParam(&mTime_s, "Time");
     getStaticParam(&mInWaterDownTime_s, "InWaterDownTime");
     getStaticParam(&mForceFinishTime_s, "ForceFinishTime");
@@ -39,7 +39,7 @@ void Ragdoll::loadParams_() {
     getAITreeVariable(&mCRBOffsetUnit_a, "CRBOffsetUnit");
 }
 
-void Ragdoll::calc_() {
+void RagdollGetUpBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

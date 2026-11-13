@@ -5,10 +5,10 @@
 
 namespace uking::action {
 
-class ActionWithAS : public StopBase {
-    SEAD_RTTI_OVERRIDE(ActionWithAS, StopBase)
+class OnetimeStopBase : public StopBase {
+    SEAD_RTTI_OVERRIDE(OnetimeStopBase, StopBase)
 public:
-    explicit ActionWithAS(const InitArg& arg);
+    explicit OnetimeStopBase(const InitArg& arg);
 
     void enter_(ksys::act::ai::InlineParamPack* params) override;
 

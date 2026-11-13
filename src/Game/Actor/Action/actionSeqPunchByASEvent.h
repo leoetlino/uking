@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class SeqPunchByASEvent : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(SeqPunchByASEvent, ActionWithAS)
+class SeqPunchByASEvent : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(SeqPunchByASEvent, OnetimeStopBase)
 public:
     explicit SeqPunchByASEvent(const InitArg& arg);
     ~SeqPunchByASEvent() override;

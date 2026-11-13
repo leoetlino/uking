@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class Search : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(Search, ActionWithAS)
+class Search : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(Search, OnetimeStopBase)
 public:
     explicit Search(const InitArg& arg);
     ~Search() override;

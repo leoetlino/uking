@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ScrapEquip : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(ScrapEquip, ActionWithAS)
+class ScrapEquip : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(ScrapEquip, OnetimeStopBase)
 public:
     explicit ScrapEquip(const InitArg& arg);
     ~ScrapEquip() override;

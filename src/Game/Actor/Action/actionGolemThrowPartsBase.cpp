@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-GolemThrowPartsBase::GolemThrowPartsBase(const InitArg& arg) : ActionWithAS(arg) {}
+GolemThrowPartsBase::GolemThrowPartsBase(const InitArg& arg) : OnetimeStopBase(arg) {}
 
 GolemThrowPartsBase::~GolemThrowPartsBase() = default;
 
 bool GolemThrowPartsBase::init_(sead::Heap* heap) {
-    return ActionWithAS::init_(heap);
+    return OnetimeStopBase::init_(heap);
 }
 
 void GolemThrowPartsBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionWithAS::enter_(params);
+    OnetimeStopBase::enter_(params);
 }
 
 void GolemThrowPartsBase::leave_() {
-    ActionWithAS::leave_();
+    OnetimeStopBase::leave_();
 }
 
 void GolemThrowPartsBase::loadParams_() {
@@ -29,7 +29,7 @@ void GolemThrowPartsBase::loadParams_() {
 }
 
 void GolemThrowPartsBase::calc_() {
-    ActionWithAS::calc_();
+    OnetimeStopBase::calc_();
 }
 
 }  // namespace uking::action

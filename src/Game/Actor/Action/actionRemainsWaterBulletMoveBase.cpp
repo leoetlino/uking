@@ -1,25 +1,25 @@
-#include "Game/Actor/Action/actionRemainsWaterBulletAction.h"
+#include "Game/Actor/Action/actionRemainsWaterBulletMoveBase.h"
 
 namespace uking::action {
 
-RemainsWaterBulletAction::RemainsWaterBulletAction(const InitArg& arg)
+RemainsWaterBulletMoveBase::RemainsWaterBulletMoveBase(const InitArg& arg)
     : ksys::act::ai::Action(arg) {}
 
-RemainsWaterBulletAction::~RemainsWaterBulletAction() = default;
+RemainsWaterBulletMoveBase::~RemainsWaterBulletMoveBase() = default;
 
-bool RemainsWaterBulletAction::init_(sead::Heap* heap) {
+bool RemainsWaterBulletMoveBase::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void RemainsWaterBulletAction::enter_(ksys::act::ai::InlineParamPack* params) {
+void RemainsWaterBulletMoveBase::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void RemainsWaterBulletAction::leave_() {
+void RemainsWaterBulletMoveBase::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void RemainsWaterBulletAction::loadParams_() {
+void RemainsWaterBulletMoveBase::loadParams_() {
     getStaticParam(&mSignASFrame_s, "SignASFrame");
     getStaticParam(&mMaxRotSpd_s, "MaxRotSpd");
     getStaticParam(&mMinRotSpd_s, "MinRotSpd");
@@ -30,7 +30,7 @@ void RemainsWaterBulletAction::loadParams_() {
     getStaticParam(&mSignASName_s, "SignASName");
 }
 
-void RemainsWaterBulletAction::calc_() {
+void RemainsWaterBulletMoveBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

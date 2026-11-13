@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionWithAS.h"
+#include "Game/Actor/Action/actionOnetimeStopBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class GolemThrowPartsBase : public ActionWithAS {
-    SEAD_RTTI_OVERRIDE(GolemThrowPartsBase, ActionWithAS)
+class GolemThrowPartsBase : public OnetimeStopBase {
+    SEAD_RTTI_OVERRIDE(GolemThrowPartsBase, OnetimeStopBase)
 public:
     explicit GolemThrowPartsBase(const InitArg& arg);
     ~GolemThrowPartsBase() override;

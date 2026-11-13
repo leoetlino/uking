@@ -2,22 +2,22 @@
 
 namespace uking::action {
 
-GetItemGet::GetItemGet(const InitArg& arg) : GetItem(arg) {}
+GetItemGet::GetItemGet(const InitArg& arg) : GetItemBase(arg) {}
 
 void GetItemGet::enter_(ksys::act::ai::InlineParamPack* params) {
-    GetItem::enter_(params);
+    GetItemBase::enter_(params);
 }
 
 void GetItemGet::leave_() {
-    GetItem::leave_();
+    GetItemBase::leave_();
 }
 
 void GetItemGet::loadParams_() {
-    GetItem::loadParams_();
+    GetItemBase::loadParams_();
 }
 
 void GetItemGet::calc_() {
-    GetItem::calc_();
+    GetItemBase::calc_();
 }
 
 }  // namespace uking::action

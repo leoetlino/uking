@@ -2,29 +2,29 @@
 
 namespace uking::action {
 
-ForkAlwaysTurn::ForkAlwaysTurn(const InitArg& arg) : ForkTurn(arg) {}
+ForkAlwaysTurn::ForkAlwaysTurn(const InitArg& arg) : ForkTurnBase(arg) {}
 
 ForkAlwaysTurn::~ForkAlwaysTurn() = default;
 
 bool ForkAlwaysTurn::init_(sead::Heap* heap) {
-    return ForkTurn::init_(heap);
+    return ForkTurnBase::init_(heap);
 }
 
 void ForkAlwaysTurn::enter_(ksys::act::ai::InlineParamPack* params) {
-    ForkTurn::enter_(params);
+    ForkTurnBase::enter_(params);
 }
 
 void ForkAlwaysTurn::leave_() {
-    ForkTurn::leave_();
+    ForkTurnBase::leave_();
 }
 
 void ForkAlwaysTurn::loadParams_() {
-    ForkTurn::loadParams_();
+    ForkTurnBase::loadParams_();
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }
 
 void ForkAlwaysTurn::calc_() {
-    ForkTurn::calc_();
+    ForkTurnBase::calc_();
 }
 
 }  // namespace uking::action

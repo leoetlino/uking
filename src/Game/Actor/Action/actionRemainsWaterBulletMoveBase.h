@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class RemainsWaterBulletAction : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(RemainsWaterBulletAction, ksys::act::ai::Action)
+class RemainsWaterBulletMoveBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(RemainsWaterBulletMoveBase, ksys::act::ai::Action)
 public:
-    explicit RemainsWaterBulletAction(const InitArg& arg);
-    ~RemainsWaterBulletAction() override;
+    explicit RemainsWaterBulletMoveBase(const InitArg& arg);
+    ~RemainsWaterBulletMoveBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;
