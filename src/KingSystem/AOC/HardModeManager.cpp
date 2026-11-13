@@ -1,11 +1,11 @@
-#include "Game/AOC/aocHardModeManager.h"
+#include "KingSystem/AOC/HardModeManager.h"
 #include <math/seadMathCalcCommon.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actTag.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
-namespace uking::aoc {
+namespace ksys::aoc {
 
 SEAD_SINGLETON_DISPOSER_IMPL(HardModeManager)
 
@@ -332,4 +332,4 @@ bool HardModeManager::rankUpEnemy(const sead::SafeString& actor_name,
     return true;
 }
 
-}  // namespace uking::aoc
+}  // namespace ksys::aoc

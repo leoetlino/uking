@@ -1,6 +1,6 @@
 #include "Game/Actor/AI/aiCookPotRoot.h"
-#include "Game/AOC/aocHardModeManager.h"
 #include "Game/UI/uiPauseMenuDataMgr.h"
+#include "KingSystem/AOC/HardModeManager.h"
 #include "KingSystem/ActorSystem/Attention/actAttention.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/Utils/Thread/Message.h"
@@ -70,11 +70,13 @@ bool CookPotRoot::handleMessage_(const ksys::Message& message) {
                     }
 
                     if (cooking_mgr->cook(mCookArg, mCookItem, boost_arg)) {
-                        if (const auto* hard_mode_manager = aoc::HardModeManager::instance()) {
+                        if (const auto* hard_mode_manager =
+                                ksys::aoc::HardModeManager::instance()) {
                             if (hard_mode_manager->checkFlag(
-                                    aoc::HardModeManager::Flag::EnableHardMode)) {
+                                    ksys::aoc::HardModeManager::Flag::EnableHardMode)) {
                                 if (hard_mode_manager->isHardModeChangeOn(
-                                        aoc::HardModeManager::HardModeChange::NerfHpRestore)) {
+                                        ksys::aoc::HardModeManager::HardModeChange::
+                                            NerfHpRestore)) {
                                     hard_mode_manager->nerfHpRestore(&mCookItem.life_recover);
                                 }
                             }

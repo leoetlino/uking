@@ -1,5 +1,5 @@
 #include "Game/Actor/actDamageManagerBase.h"
-#include "Game/AOC/aocHardModeManager.h"
+#include "KingSystem/AOC/HardModeManager.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
@@ -59,37 +59,39 @@ bool DamageManagerBase::applyDamage(s32& life) {
 }
 
 void DamageManagerBase::tryBuffDamage(s32& damage) {
-    if (!aoc::HardModeManager::instance()) {
+    if (!ksys::aoc::HardModeManager::instance()) {
         return;
     }
 
-    if (!aoc::HardModeManager::instance()->checkFlag(aoc::HardModeManager::Flag::EnableHardMode)) {
+    if (!ksys::aoc::HardModeManager::instance()->checkFlag(
+            ksys::aoc::HardModeManager::Flag::EnableHardMode)) {
         return;
     }
 
-    if (!aoc::HardModeManager::instance()->isHardModeChangeOn(
-            aoc::HardModeManager::HardModeChange::ApplyDamageMultiplier)) {
+    if (!ksys::aoc::HardModeManager::instance()->isHardModeChangeOn(
+            ksys::aoc::HardModeManager::HardModeChange::ApplyDamageMultiplier)) {
         return;
     }
 
     ksys::act::ActorLinkConstDataAccess acc;
     ksys::act::acquireActor(getAttacker(), &acc);
-    if (aoc::HardModeManager::shouldApplyMasterModeDamageMultiplier(acc)) {
-        aoc::HardModeManager::buffDamage(damage);
+    if (ksys::aoc::HardModeManager::shouldApplyMasterModeDamageMultiplier(acc)) {
+        ksys::aoc::HardModeManager::buffDamage(damage);
     }
 }
 
 void DamageManagerBase::tryApplyDamageRecovery(s32& damage) {
-    if (!aoc::HardModeManager::instance()) {
+    if (!ksys::aoc::HardModeManager::instance()) {
         return;
     }
 
-    if (!aoc::HardModeManager::instance()->checkFlag(aoc::HardModeManager::Flag::EnableHardMode)) {
+    if (!ksys::aoc::HardModeManager::instance()->checkFlag(
+            ksys::aoc::HardModeManager::Flag::EnableHardMode)) {
         return;
     }
 
-    if (!aoc::HardModeManager::instance()->isHardModeChangeOn(
-            uking::aoc::HardModeManager::HardModeChange::EnableLifeRegen)) {
+    if (!ksys::aoc::HardModeManager::instance()->isHardModeChangeOn(
+            ksys::aoc::HardModeManager::HardModeChange::EnableLifeRegen)) {
         return;
     }
 

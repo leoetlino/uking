@@ -10,7 +10,7 @@
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace uking::aoc {
+namespace ksys::aoc {
 
 class HardModeManager final {
     SEAD_SINGLETON_DISPOSER(HardModeManager)
@@ -78,4 +78,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(HardModeManager, 0x3b8);
 
-}  // namespace uking::aoc
+}  // namespace ksys::aoc
