@@ -2,22 +2,22 @@
 
 namespace uking::action {
 
-DownSwingAttack::DownSwingAttack(const InitArg& arg) : ActionEx(arg) {}
+DownSwingAttack::DownSwingAttack(const InitArg& arg) : act::ActionEx(arg) {}
 
 DownSwingAttack::~DownSwingAttack() = default;
 
 void DownSwingAttack::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void DownSwingAttack::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void DownSwingAttack::loadParams_() {}
 
 void DownSwingAttack::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-LargeDamage::LargeDamage(const InitArg& arg) : ActionEx(arg) {}
+LargeDamage::LargeDamage(const InitArg& arg) : act::ActionEx(arg) {}
 
 LargeDamage::~LargeDamage() = default;
 
 void LargeDamage::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void LargeDamage::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void LargeDamage::loadParams_() {
@@ -19,7 +19,7 @@ void LargeDamage::loadParams_() {
 }
 
 void LargeDamage::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

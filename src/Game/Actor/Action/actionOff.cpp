@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-Off::Off(const InitArg& arg) : ActionEx(arg) {}
+Off::Off(const InitArg& arg) : act::ActionEx(arg) {}
 
 Off::~Off() = default;
 
 bool Off::init_(sead::Heap* heap) {
-    return ActionEx::init_(heap);
+    return act::ActionEx::init_(heap);
 }
 
 void Off::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void Off::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void Off::loadParams_() {

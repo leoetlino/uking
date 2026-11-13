@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class EscapeBackTurn : public ActionEx {
-    SEAD_RTTI_OVERRIDE(EscapeBackTurn, ActionEx)
+class EscapeBackTurn : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(EscapeBackTurn, act::ActionEx)
 public:
     explicit EscapeBackTurn(const InitArg& arg);
     ~EscapeBackTurn() override;

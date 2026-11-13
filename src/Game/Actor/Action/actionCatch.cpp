@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-Catch::Catch(const InitArg& arg) : ActionEx(arg) {}
+Catch::Catch(const InitArg& arg) : act::ActionEx(arg) {}
 
 Catch::~Catch() = default;
 
 void Catch::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void Catch::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void Catch::loadParams_() {
@@ -22,7 +22,7 @@ void Catch::loadParams_() {
 }
 
 void Catch::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

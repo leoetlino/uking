@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class LargeDamage : public ActionEx {
-    SEAD_RTTI_OVERRIDE(LargeDamage, ActionEx)
+class LargeDamage : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(LargeDamage, act::ActionEx)
 public:
     explicit LargeDamage(const InitArg& arg);
     ~LargeDamage() override;

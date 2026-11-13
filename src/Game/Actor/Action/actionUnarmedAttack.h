@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class UnarmedAttack : public ActionEx {
-    SEAD_RTTI_OVERRIDE(UnarmedAttack, ActionEx)
+class UnarmedAttack : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(UnarmedAttack, act::ActionEx)
 public:
     explicit UnarmedAttack(const InitArg& arg);
     ~UnarmedAttack() override;

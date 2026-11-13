@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class Catch : public ActionEx {
-    SEAD_RTTI_OVERRIDE(Catch, ActionEx)
+class Catch : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(Catch, act::ActionEx)
 public:
     explicit Catch(const InitArg& arg);
     ~Catch() override;

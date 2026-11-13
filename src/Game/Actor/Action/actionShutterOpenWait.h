@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ShutterOpenWait : public ActionEx {
-    SEAD_RTTI_OVERRIDE(ShutterOpenWait, ActionEx)
+class ShutterOpenWait : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(ShutterOpenWait, act::ActionEx)
 public:
     explicit ShutterOpenWait(const InitArg& arg);
     ~ShutterOpenWait() override;

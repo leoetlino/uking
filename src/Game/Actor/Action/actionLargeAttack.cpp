@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-LargeAttack::LargeAttack(const InitArg& arg) : ActionEx(arg) {}
+LargeAttack::LargeAttack(const InitArg& arg) : act::ActionEx(arg) {}
 
 LargeAttack::~LargeAttack() = default;
 
 void LargeAttack::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void LargeAttack::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void LargeAttack::loadParams_() {
@@ -25,7 +25,7 @@ void LargeAttack::loadParams_() {
 }
 
 void LargeAttack::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

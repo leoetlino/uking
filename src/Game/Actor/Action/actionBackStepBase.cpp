@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-BackStepBase::BackStepBase(const InitArg& arg) : ActionEx(arg) {}
+BackStepBase::BackStepBase(const InitArg& arg) : act::ActionEx(arg) {}
 
 BackStepBase::~BackStepBase() = default;
 
 void BackStepBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void BackStepBase::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void BackStepBase::loadParams_() {
@@ -25,7 +25,7 @@ void BackStepBase::loadParams_() {
 }
 
 void BackStepBase::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

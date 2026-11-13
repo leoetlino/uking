@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class MoveBase : public ActionEx {
-    SEAD_RTTI_OVERRIDE(MoveBase, ActionEx)
+class MoveBase : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(MoveBase, act::ActionEx)
 public:
     explicit MoveBase(const InitArg& arg);
     ~MoveBase() override;

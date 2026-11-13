@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-Kick::Kick(const InitArg& arg) : ActionEx(arg) {}
+Kick::Kick(const InitArg& arg) : act::ActionEx(arg) {}
 
 Kick::~Kick() = default;
 
 bool Kick::init_(sead::Heap* heap) {
-    return ActionEx::init_(heap);
+    return act::ActionEx::init_(heap);
 }
 
 void Kick::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void Kick::loadParams_() {
@@ -24,7 +24,7 @@ void Kick::loadParams_() {
 }
 
 void Kick::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

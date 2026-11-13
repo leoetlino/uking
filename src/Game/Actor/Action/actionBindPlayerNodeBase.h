@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class BindPlayerNodeBase : public ActionEx {
-    SEAD_RTTI_OVERRIDE(BindPlayerNodeBase, ActionEx)
+class BindPlayerNodeBase : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(BindPlayerNodeBase, act::ActionEx)
 public:
     explicit BindPlayerNodeBase(const InitArg& arg);
     ~BindPlayerNodeBase() override;

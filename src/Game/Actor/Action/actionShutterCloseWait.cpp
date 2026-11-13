@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-ShutterCloseWait::ShutterCloseWait(const InitArg& arg) : ActionEx(arg) {}
+ShutterCloseWait::ShutterCloseWait(const InitArg& arg) : act::ActionEx(arg) {}
 
 ShutterCloseWait::~ShutterCloseWait() = default;
 
 bool ShutterCloseWait::init_(sead::Heap* heap) {
-    return ActionEx::init_(heap);
+    return act::ActionEx::init_(heap);
 }
 
 void ShutterCloseWait::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void ShutterCloseWait::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void ShutterCloseWait::loadParams_() {
@@ -23,7 +23,7 @@ void ShutterCloseWait::loadParams_() {
 }
 
 void ShutterCloseWait::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

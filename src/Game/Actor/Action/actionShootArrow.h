@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ShootArrow : public ActionEx {
-    SEAD_RTTI_OVERRIDE(ShootArrow, ActionEx)
+class ShootArrow : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(ShootArrow, act::ActionEx)
 public:
     explicit ShootArrow(const InitArg& arg);
     ~ShootArrow() override;

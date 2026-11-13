@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-MoveBase::MoveBase(const InitArg& arg) : ActionEx(arg) {}
+MoveBase::MoveBase(const InitArg& arg) : act::ActionEx(arg) {}
 
 MoveBase::~MoveBase() = default;
 
 void MoveBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void MoveBase::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void MoveBase::loadParams_() {
@@ -33,7 +33,7 @@ void MoveBase::loadParams_() {
 }
 
 void MoveBase::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

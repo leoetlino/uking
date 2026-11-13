@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-TurnBase::TurnBase(const InitArg& arg) : ActionEx(arg) {}
+TurnBase::TurnBase(const InitArg& arg) : act::ActionEx(arg) {}
 
 TurnBase::~TurnBase() = default;
 
 void TurnBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void TurnBase::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void TurnBase::loadParams_() {
@@ -26,7 +26,7 @@ void TurnBase::loadParams_() {
 }
 
 void TurnBase::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

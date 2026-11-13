@@ -2,7 +2,7 @@
 
 #include "KingSystem/ActorSystem/actAiAction.h"
 
-namespace uking::action {
+namespace uking::act {
 
 class ActionEx : public ksys::act::ai::Action {
     SEAD_RTTI_OVERRIDE(ActionEx, ksys::act::ai::Action)
@@ -12,4 +12,4 @@ public:
 protected:
 };
 
-}  // namespace uking::action
+}  // namespace uking::act

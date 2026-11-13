@@ -2,20 +2,20 @@
 
 namespace uking::action {
 
-ShutterClose::ShutterClose(const InitArg& arg) : ActionEx(arg) {}
+ShutterClose::ShutterClose(const InitArg& arg) : act::ActionEx(arg) {}
 
 ShutterClose::~ShutterClose() = default;
 
 bool ShutterClose::init_(sead::Heap* heap) {
-    return ActionEx::init_(heap);
+    return act::ActionEx::init_(heap);
 }
 
 void ShutterClose::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void ShutterClose::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void ShutterClose::loadParams_() {
@@ -26,7 +26,7 @@ void ShutterClose::loadParams_() {
 }
 
 void ShutterClose::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

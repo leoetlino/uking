@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-CameraEdit::CameraEdit(const InitArg& arg) : ActionEx(arg) {}
+CameraEdit::CameraEdit(const InitArg& arg) : act::ActionEx(arg) {}
 
 CameraEdit::~CameraEdit() = default;
 
 void CameraEdit::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void CameraEdit::loadParams_() {

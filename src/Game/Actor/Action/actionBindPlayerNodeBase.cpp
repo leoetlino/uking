@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-BindPlayerNodeBase::BindPlayerNodeBase(const InitArg& arg) : ActionEx(arg) {}
+BindPlayerNodeBase::BindPlayerNodeBase(const InitArg& arg) : act::ActionEx(arg) {}
 
 BindPlayerNodeBase::~BindPlayerNodeBase() = default;
 
 void BindPlayerNodeBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void BindPlayerNodeBase::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void BindPlayerNodeBase::loadParams_() {

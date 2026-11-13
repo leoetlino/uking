@@ -2,12 +2,12 @@
 
 namespace uking::action {
 
-KnockBackHitImpactForce::KnockBackHitImpactForce(const InitArg& arg) : ActionEx(arg) {}
+KnockBackHitImpactForce::KnockBackHitImpactForce(const InitArg& arg) : act::ActionEx(arg) {}
 
 KnockBackHitImpactForce::~KnockBackHitImpactForce() = default;
 
 void KnockBackHitImpactForce::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void KnockBackHitImpactForce::loadParams_() {
@@ -23,7 +23,7 @@ void KnockBackHitImpactForce::loadParams_() {
 }
 
 void KnockBackHitImpactForce::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

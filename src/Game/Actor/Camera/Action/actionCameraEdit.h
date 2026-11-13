@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class CameraEdit : public ActionEx {
-    SEAD_RTTI_OVERRIDE(CameraEdit, ActionEx)
+class CameraEdit : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(CameraEdit, act::ActionEx)
 public:
     explicit CameraEdit(const InitArg& arg);
     ~CameraEdit() override;

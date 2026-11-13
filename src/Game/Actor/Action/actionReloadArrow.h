@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ReloadArrow : public ActionEx {
-    SEAD_RTTI_OVERRIDE(ReloadArrow, ActionEx)
+class ReloadArrow : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(ReloadArrow, act::ActionEx)
 public:
     explicit ReloadArrow(const InitArg& arg);
     ~ReloadArrow() override;

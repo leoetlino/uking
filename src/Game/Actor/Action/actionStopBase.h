@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionActionEx.h"
+#include "Game/Actor/actActionEx.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class StopBase : public ActionEx {
-    SEAD_RTTI_OVERRIDE(StopBase, ActionEx)
+class StopBase : public act::ActionEx {
+    SEAD_RTTI_OVERRIDE(StopBase, act::ActionEx)
 public:
     explicit StopBase(const InitArg& arg);
 

@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-Thrown::Thrown(const InitArg& arg) : ActionEx(arg) {}
+Thrown::Thrown(const InitArg& arg) : act::ActionEx(arg) {}
 
 Thrown::~Thrown() = default;
 
 void Thrown::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void Thrown::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void Thrown::loadParams_() {
@@ -27,7 +27,7 @@ void Thrown::loadParams_() {
 }
 
 void Thrown::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

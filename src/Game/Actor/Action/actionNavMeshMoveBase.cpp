@@ -2,16 +2,16 @@
 
 namespace uking::action {
 
-NavMeshMoveBase::NavMeshMoveBase(const InitArg& arg) : ActionEx(arg) {}
+NavMeshMoveBase::NavMeshMoveBase(const InitArg& arg) : act::ActionEx(arg) {}
 
 NavMeshMoveBase::~NavMeshMoveBase() = default;
 
 void NavMeshMoveBase::enter_(ksys::act::ai::InlineParamPack* params) {
-    ActionEx::enter_(params);
+    act::ActionEx::enter_(params);
 }
 
 void NavMeshMoveBase::leave_() {
-    ActionEx::leave_();
+    act::ActionEx::leave_();
 }
 
 void NavMeshMoveBase::loadParams_() {
@@ -26,7 +26,7 @@ void NavMeshMoveBase::loadParams_() {
 }
 
 void NavMeshMoveBase::calc_() {
-    ActionEx::calc_();
+    act::ActionEx::calc_();
 }
 
 }  // namespace uking::action

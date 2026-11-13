@@ -1,6 +1,4 @@
 target_sources(uking PRIVATE
-  actionActionEx.cpp
-  actionActionEx.h
   actionActivateAttackSensor.cpp
   actionActivateAttackSensor.h
   actionActorInfoToGameDataFloat.cpp
