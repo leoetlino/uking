@@ -14692,9 +14692,9 @@ Address,Quality,Size,Name
 0x0000007100220ff8,O,000092,_ZNK5uking6action13PreJumpAttack18getRuntimeTypeInfoEv
 0x0000007100221054,O,000372,_ZN5uking6action13PreJumpAttack33checkDerivedRuntimeTypeInfoStaticEPKN4sead15RuntimeTypeInfo9InterfaceE
 0x00000071002211c8,O,000140,_ZNK4sead15RuntimeTypeInfo6DeriveIN5uking6action9PreAttackEE9isDerivedEPKNS0_9InterfaceE
-0x0000007100221254,U,000064,uking::action::MessageSenderPullOut::dtor
-0x0000007100221294,U,000052,uking::action::MessageSenderPullOut::dtorDelete
-0x00000071002212c8,U,000008,uking::action::MessageSenderPullOut::getUserData
+0x0000007100221254,U,000064,uking::act::MessageSenderPullOut::dtor
+0x0000007100221294,U,000052,uking::act::MessageSenderPullOut::dtorDelete
+0x00000071002212c8,U,000008,uking::act::MessageSenderPullOut::getUserData
 0x00000071002212d0,U,000052,uking::action::PriestBossCloneFastWarp::ctor
 0x0000007100221304,O,000020,_ZN5uking6action23PriestBossCloneFastWarpD1Ev
 0x0000007100221318,O,000052,_ZN5uking6action23PriestBossCloneFastWarpD0Ev
@@ -46292,7 +46292,7 @@ Address,Quality,Size,Name
 0x000000710070e254,U,000028,uking::ai::MessageSenderLifeRecoverParams::setParams
 0x000000710070e270,U,000076,uking::act::loadValueAndIndexUnderSpinLock
 0x000000710070e2bc,U,000072,uking::act::storeValueAndIndexUnderSpinLock
-0x000000710070e304,U,000076,uking::action::MessageSenderPullOut::ctor
+0x000000710070e304,U,000076,uking::act::MessageSenderPullOut::ctor
 0x000000710070e350,U,000036,uking::act::constructLockedProcLink_0
 0x000000710070e374,U,000100,uking::act::copyBaseProcLinkUnderLock
 0x000000710070e3d8,U,000092,uking::act::acquireProcLinkLocked_0
