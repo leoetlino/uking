@@ -1,4 +1,5 @@
 #include "KingSystem/Event/evtResourceTimeline.h"
+#include <Byaml/Byaml.h>
 #include <evfl/ResEventFlowFile.h>
 #include <evfl/ResTimeline.h>
 #include <evfl/TimelineObj.h>
@@ -7,7 +8,6 @@
 #include "KingSystem/Resource/Event/resEventFlowBinder.h"
 #include "KingSystem/Resource/Event/resResourceEventFlow.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::evt {
 

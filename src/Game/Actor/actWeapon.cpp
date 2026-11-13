@@ -1,4 +1,5 @@
 #include "Game/Actor/actWeapon.h"
+#include <Byaml/Byaml.h>
 #include <random/seadGlobalRandom.h>
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
@@ -10,7 +11,6 @@
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponCommon.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace uking::act {
 

@@ -1,11 +1,11 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <container/seadBuffer.h>
 #include <container/seadSafeArray.h>
 #include <container/seadTreeMap.h>
 #include <heap/seadDisposer.h>
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace uking {

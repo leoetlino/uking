@@ -1,12 +1,12 @@
 #include "KingSystem/ActorSystem/actAiClassDef.h"
+#include <Byaml/ByamlData.h>
+#include <Byaml/ByamlHashIter.h>
 #include <algorithm>
 #include <codec/seadHashCRC32.h>
 #include <prim/seadContainerIterator.h>
 #include <resource/seadResource.h>
 #include "KingSystem/ActorSystem/actAiParam.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/ByamlData.h"
-#include "KingSystem/Utils/Byaml/ByamlHashIter.h"
 
 namespace ksys {
 

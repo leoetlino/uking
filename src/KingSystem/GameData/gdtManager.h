@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <container/seadRingBuffer.h>
 #include <container/seadSafeArray.h>
 #include <filedevice/seadArchiveFileDevice.h>
@@ -14,7 +15,6 @@
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/System/CoreInfo.h"
 #include "KingSystem/System/KingEditor.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace sead {

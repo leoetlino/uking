@@ -1,10 +1,10 @@
 #include "KingSystem/Event/evtInfoData.h"
+#include <Byaml/Byaml.h>
 #include <basis/seadNew.h>
 #include <prim/seadSafeString.h>
 #include <resource/seadResource.h>
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::evt {
 

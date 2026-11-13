@@ -1,6 +1,6 @@
 #include "KingSystem/Sound/sndInfoData.h"
+#include <Byaml/Byaml.h>
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::snd {
 

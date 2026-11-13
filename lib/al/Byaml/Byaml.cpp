@@ -1,11 +1,11 @@
-#include "KingSystem/Utils/Byaml/Byaml.h"
+#include "Byaml/Byaml.h"
 #include <math/seadMathCalcCommon.h>
 #include <prim/seadMemUtil.h>
-#include "KingSystem/Utils/Byaml/ByamlArrayIter.h"
-#include "KingSystem/Utils/Byaml/ByamlData.h"
-#include "KingSystem/Utils/Byaml/ByamlHashIter.h"
-#include "KingSystem/Utils/Byaml/ByamlLocal.h"
-#include "KingSystem/Utils/Byaml/ByamlStringTableIter.h"
+#include "Byaml/ByamlArrayIter.h"
+#include "Byaml/ByamlData.h"
+#include "Byaml/ByamlHashIter.h"
+#include "Byaml/ByamlLocal.h"
+#include "Byaml/ByamlStringTableIter.h"
 
 namespace al {
 

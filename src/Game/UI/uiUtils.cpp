@@ -1,4 +1,5 @@
 #include "Game/UI/uiUtils.h"
+#include <Byaml/Byaml.h>
 #include "Game/AOC/aocHardModeManager.h"
 #include "Game/Actor/Damage/actDamageInfoMgr.h"
 #include "Game/Actor/actPlayerCreateMgr.h"
@@ -8,7 +9,6 @@
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/GameData/gdtCommonFlagsUtils.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace uking::ui {
 

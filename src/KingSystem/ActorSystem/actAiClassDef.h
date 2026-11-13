@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <basis/seadTypes.h>
 #include <container/seadBuffer.h>
 #include <container/seadSafeArray.h>
@@ -8,7 +9,6 @@
 #include <prim/seadSafeString.h>
 #include <prim/seadSizedEnum.h>
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Types.h"
 

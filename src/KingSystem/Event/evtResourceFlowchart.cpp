@@ -1,4 +1,5 @@
 #include "KingSystem/Event/evtResourceFlowchart.h"
+#include <Byaml/Byaml.h>
 #include <array>
 #include <evfl/Flowchart.h>
 #include <evfl/ResEventFlowFile.h>
@@ -9,7 +10,6 @@
 #include "KingSystem/Resource/Event/resResourceEventFlow.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
 namespace ksys::evt {

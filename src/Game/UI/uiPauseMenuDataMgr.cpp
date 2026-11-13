@@ -1,4 +1,5 @@
 #include "Game/UI/uiPauseMenuDataMgr.h"
+#include <Byaml/Byaml.h>
 #include <algorithm>
 #include <container/seadBuffer.h>
 #include <limits>
@@ -26,7 +27,6 @@
 #include "KingSystem/GameData/gdtSpecialFlags.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/System/PlayReportMgr.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 

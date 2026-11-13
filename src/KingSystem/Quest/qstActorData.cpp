@@ -1,5 +1,5 @@
 #include "KingSystem/Quest/qstActorData.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
+#include <Byaml/Byaml.h>
 
 namespace ksys::qst {
 

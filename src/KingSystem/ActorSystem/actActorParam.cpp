@@ -1,4 +1,5 @@
 #include "KingSystem/ActorSystem/actActorParam.h"
+#include <Byaml/Byaml.h>
 #include <basis/seadRawPrint.h>
 #include <prim/seadScopedLock.h>
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
@@ -8,7 +9,6 @@
 #include "KingSystem/Resource/Actor/resResourceAttClient.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfigList.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/ParamIO.h"
 
 namespace ksys::act {

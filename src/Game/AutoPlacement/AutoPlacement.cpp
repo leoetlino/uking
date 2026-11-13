@@ -1,4 +1,5 @@
 #include "Game/AutoPlacement/AutoPlacement.h"
+#include <Byaml/Byaml.h>
 #include "Game/AutoPlacement/AutoPlacementFlowMgr.h"
 #include "Game/AutoPlacement/AutoPlacementMgr.h"
 #include "KingSystem/ActorSystem/actActor.h"
@@ -8,7 +9,6 @@
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physRayCastForRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/World/worldWeatherMgr.h"
 
 namespace uking {

@@ -1,6 +1,6 @@
-#include "KingSystem/Utils/Byaml/ByamlStringTableIter.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlLocal.h"
+#include "Byaml/ByamlStringTableIter.h"
+#include "Byaml/Byaml.h"
+#include "Byaml/ByamlLocal.h"
 
 namespace al {
 

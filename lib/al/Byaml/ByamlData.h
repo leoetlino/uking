@@ -1,8 +1,8 @@
 #pragma once
 
 #include <basis/seadTypes.h>
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlHashIter.h"
+#include "Byaml/Byaml.h"
+#include "Byaml/ByamlHashIter.h"
 
 namespace al {
 

@@ -1,4 +1,5 @@
 #include "KingSystem/GameData/gdtTriggerParam.h"
+#include <Byaml/Byaml.h>
 #include <algorithm>
 #include <devenv/seadStackTrace.h>
 #include <mc/seadCoreInfo.h>
@@ -13,7 +14,6 @@
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Resource/resResourceGameData.h"
 #include "KingSystem/System/PlayReportMgr.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 #include "KingSystem/Utils/SafeDelete.h"

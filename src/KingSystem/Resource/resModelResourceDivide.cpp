@@ -1,8 +1,8 @@
 #include "KingSystem/Resource/resModelResourceDivide.h"
+#include <Byaml/Byaml.h>
 #include "KingSystem/ActorSystem/actDebug.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::res {
 

@@ -1,7 +1,7 @@
-#include "KingSystem/Utils/Byaml/ByamlArrayIter.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlData.h"
-#include "KingSystem/Utils/Byaml/ByamlLocal.h"
+#include "Byaml/ByamlArrayIter.h"
+#include "Byaml/Byaml.h"
+#include "Byaml/ByamlData.h"
+#include "Byaml/ByamlLocal.h"
 
 namespace al {
 ByamlArrayIter::ByamlArrayIter(const u8* data) {

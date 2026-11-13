@@ -1,7 +1,7 @@
 #pragma once
 
 #include <basis/seadTypes.h>
-#include "KingSystem/Utils/Byaml/Byaml.h"
+#include "Byaml/Byaml.h"
 #include "prim/seadEndian.h"
 
 namespace al {

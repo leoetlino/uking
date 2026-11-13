@@ -1,7 +1,7 @@
 #pragma once
 
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlStringTableIter.h"
+#include "Byaml/Byaml.h"
+#include "Byaml/ByamlStringTableIter.h"
 
 #include <basis/seadTypes.h>
 

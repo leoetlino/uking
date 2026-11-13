@@ -52,20 +52,6 @@ target_sources(uking PRIVATE
   Thread/TaskThread.cpp
   Thread/TaskThread.h
 
-  Byaml/Byaml.cpp
-  Byaml/Byaml.h
-  Byaml/ByamlArrayIter.cpp
-  Byaml/ByamlArrayIter.h
-  Byaml/ByamlData.cpp
-  Byaml/ByamlData.h
-  Byaml/ByamlStringTableIter.cpp
-  Byaml/ByamlStringTableIter.h
-  Byaml/ByamlHashIter.cpp
-  Byaml/ByamlHashIter.h
-  Byaml/ByamlLocal.cpp
-  Byaml/ByamlLocal.h
-  Byaml/ByamlUtil.cpp
-
   Container/LockFreeQueue.h
   Container/StrTreeMap.h
   Container/UniqueArrayPtr.h

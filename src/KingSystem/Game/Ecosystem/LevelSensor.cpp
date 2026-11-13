@@ -1,11 +1,11 @@
 #include "KingSystem/Game/Ecosystem/LevelSensor.h"
 
+#include <Byaml/Byaml.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actInstParamPack.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/World/worldManager.h"
 
 namespace ksys::game {

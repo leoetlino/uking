@@ -60,4 +60,6 @@ target_link_libraries(uking PRIVATE xlink2)
 add_subdirectory(lib/hkStubs)
 target_link_libraries(uking PRIVATE hkStubs)
 
+add_subdirectory(lib/al)
+
 add_subdirectory(src)

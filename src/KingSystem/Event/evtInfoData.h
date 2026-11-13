@@ -1,10 +1,10 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::evt {
 

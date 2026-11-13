@@ -1,11 +1,11 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <container/seadObjArray.h>
 #include <container/seadPtrArray.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/GameData/gdtFlagHandle.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {

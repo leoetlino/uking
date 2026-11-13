@@ -1,9 +1,9 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Quest/qstStep.h"
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::qst {
 

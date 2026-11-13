@@ -1,8 +1,8 @@
 #pragma once
 
+#include <Byaml/Byaml.h>
 #include <heap/seadHeap.h>
 #include "KingSystem/Quest/qstManager.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 
 namespace ksys::qst {
 

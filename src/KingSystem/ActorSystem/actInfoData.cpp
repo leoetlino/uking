@@ -1,4 +1,8 @@
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include <Byaml/Byaml.h>
+#include <Byaml/ByamlArrayIter.h>
+#include <Byaml/ByamlData.h>
+#include <Byaml/ByamlHashIter.h>
 #include <KingSystem/Resource/resModelResourceDivide.h>
 #include <codec/seadHashCRC32.h>
 #include <math/seadMathNumbers.h>
@@ -7,10 +11,6 @@
 #include "KingSystem/Event/evtEvent.h"
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/Resource/Actor/resResourceModelList.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlArrayIter.h"
-#include "KingSystem/Utils/Byaml/ByamlData.h"
-#include "KingSystem/Utils/Byaml/ByamlHashIter.h"
 #include "KingSystem/World/worldManager.h"
 
 namespace ksys::act {

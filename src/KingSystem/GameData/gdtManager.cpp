@@ -1,4 +1,6 @@
 #include "KingSystem/GameData/gdtManager.h"
+#include <Byaml/Byaml.h>
+#include <Byaml/ByamlArrayIter.h>
 #include <algorithm>
 #include <cstring>
 #include <devenv/seadEnvUtil.h>
@@ -17,8 +19,6 @@
 #include "KingSystem/Resource/resResourceGameData.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/System/OverlayArenaSystem.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
-#include "KingSystem/Utils/Byaml/ByamlArrayIter.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/InitTimeInfo.h"

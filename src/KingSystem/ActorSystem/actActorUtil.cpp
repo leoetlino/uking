@@ -1,4 +1,5 @@
 #include "KingSystem/ActorSystem/actActorUtil.h"
+#include <Byaml/Byaml.h>
 #include <container/seadSafeArray.h>
 #include <math/seadMathCalcCommon.h>
 #include <random/seadGlobalRandom.h>
@@ -16,7 +17,6 @@
 #include "KingSystem/Resource/Actor/resResourceActorLink.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectNpc.h"
-#include "KingSystem/Utils/Byaml/Byaml.h"
 #include "KingSystem/World/worldManager.h"
 
 namespace ksys::act {
