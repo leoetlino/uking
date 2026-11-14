@@ -9,10 +9,13 @@
 #include "KingSystem/Framework/frmBaseProcJobQue.h"
 #include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Framework/frmBaseProcStageHeapMgr.h"
+#include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::frm {
 
 SEAD_SINGLETON_DISPOSER_IMPL(BaseProcMgr)
+
+static util::InitTimeInfo sInfo;
 
 BaseProcMgr::BaseProcMgr() : mJobRequestArrays() {
     mProcPreDeleteList.initOffset(offsetof(BaseProc, mPreDeleteListNode));

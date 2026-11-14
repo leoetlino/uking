@@ -1,9 +1,6 @@
 #include "KingSystem/Framework/frmBaseProcMgrJob.h"
-#include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::frm {
-
-static util::InitTimeInfo sInfo;
 
 BaseProcJobLink::BaseProcJobLink(BaseProc* proc, u8 priority)
     : TListNode(proc), mPriority(priority), mNewPriority(priority), mSubPriority(3),
