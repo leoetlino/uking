@@ -8,7 +8,7 @@
 
 class hkpStaticCompoundShape;
 
-namespace ksys::map {
+namespace ksys::act {
 class PreActor;
 }
 
@@ -54,7 +54,7 @@ public:
     RigidBody* getRigidBody(StaticCompoundRigidBodyGroup* const& p_group) const;
 
     void getBodyGroupAndMapObject(StaticCompoundRigidBodyGroup** p_group,
-                                  map::PreActor** p_map_object, const hkpStaticCompoundShape& shape,
+                                  act::PreActor** p_map_object, const hkpStaticCompoundShape& shape,
                                   const u32* shape_key) const;
 
     SystemGroupHandler* getGroupHandler() const { return mGroupHandler; }

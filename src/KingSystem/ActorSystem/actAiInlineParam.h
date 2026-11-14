@@ -11,10 +11,9 @@
 
 namespace ksys {
 
-class Rail;
-
 namespace act {
 class Actor;
+class Rail;
 }  // namespace act
 
 namespace frm {

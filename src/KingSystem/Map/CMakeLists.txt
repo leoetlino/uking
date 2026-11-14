@@ -2,28 +2,10 @@ target_sources(uking PRIVATE
   mapTypes.h
   mapDebug.cpp
   mapDebug.h
-  mapLazyTraverseList.cpp
-  mapLazyTraverseList.h
   mapMubinIter.cpp
   mapMubinIter.h
-  mapObjectGenGroup.cpp
-  mapObjectGenGroup.h
-  mapObjectLink.cpp
-  mapObjectLink.h
-  mapPlacementActors.cpp
-  mapPlacementActors.h
-  mapPlacementAreaMgr.cpp
-  mapPlacementAreaMgr.h
-  mapPlacementMap.cpp
-  mapPlacementMap.h
-  mapPlacementMapMgr.cpp
-  mapPlacementMapMgr.h
   mapPlacementMgr.cpp
   mapPlacementMgr.h
   mapPlacementTree.cpp
   mapPlacementTree.h
-  mapPreActor.cpp
-  mapPreActor.h
-  mapRail.cpp
-  mapRail.h
 )

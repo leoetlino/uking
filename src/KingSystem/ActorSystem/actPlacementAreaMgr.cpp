@@ -1,14 +1,14 @@
-#include "KingSystem/Map/mapPlacementAreaMgr.h"
+#include "KingSystem/ActorSystem/actPlacementAreaMgr.h"
 
-#include "KingSystem/Map/mapLazyTraverseList.h"
+#include "KingSystem/ActorSystem/actLazyTraverseList.h"
+#include "KingSystem/ActorSystem/actObjectLink.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Map/mapMubinIter.h"
-#include "KingSystem/Map/mapObjectLink.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/MathUtil.h"
 
 #include <math/seadMatrix.h>
 
-namespace ksys::map {
+namespace ksys::act {
 
 static s32 s_npc_count = 0;
 
@@ -52,10 +52,10 @@ PlacementAreaMgr::~PlacementAreaMgr() {
 
 // NON_MATCHING: many various parts don't match but should be a template
 bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
-                                  const MubinIter& obj_iter) {
+                                  const map::MubinIter& obj_iter) {
     if (unit_config_name == "AreaCulling_InnerHide") {
         auto& area = mInnerHide[mInnerHideCount++];
-        SRT srt;
+        map::SRT srt;
         obj_iter.getSRT(&srt);
 
         bool hide = true;
@@ -226,7 +226,7 @@ bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
         }
 
         auto& area = mNpc[s_npc_count++];
-        SRT srt;
+        map::SRT srt;
 
         obj_iter.getSRT(&srt);
         area.translate = srt.translate;
@@ -242,7 +242,7 @@ bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
             return true;
         }
 
-        SRT srt;
+        map::SRT srt;
         obj_iter.getSRT(&srt);
         area->translate = srt.translate;
 
@@ -264,19 +264,19 @@ bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
         s_unk_flag.set(UnkFlag::_40);
         return true;
     } else if (unit_config_name == "AreaCulling_JudgeArea") {  // no objects
-        SRT srt;
+        map::SRT srt;
         auto& area = mJudgeArea[mJudgeAreaCount++];
 
         obj_iter.getSRT(&srt);
         area.bb.set(srt.translate - srt.scale, srt.translate + srt.scale);
 
-        MubinIter links;
+        map::MubinIter links;
         if (!obj_iter.tryGetParamIterByKey(&links, "LinksToObj")) {
             return true;
         }
 
         for (int i = 0; i < links.getSize(); ++i) {
-            MubinIter iter;
+            map::MubinIter iter;
             if (links.tryGetIterByIndex(&iter, i)) {
                 u32 _id = 0;
                 if (iter.tryGetParamUIntByKey(&_id, "DestUnitHashId")) {
@@ -288,7 +288,7 @@ bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
         return true;
     } else if (unit_config_name.include("AreaCulling_")) {  // only InnerOn?
         auto& area = mGeneralAreas[mGeneralAreasCount++];
-        SRT srt;
+        map::SRT srt;
 
         obj_iter.getSRT(&srt);
         area.bb.set(srt.translate - srt.scale, srt.translate + srt.scale);
@@ -318,7 +318,7 @@ bool PlacementAreaMgr::parseAreas(const sead::SafeString& unit_config_name,
         return true;
     } else if (unit_config_name == "FarModelCullingArea") {
         auto& area = mFarModels[mFarModelsCount++];
-        SRT srt;
+        map::SRT srt;
 
         obj_iter.getSRT(&srt);
         area.translate = srt.translate;
@@ -637,4 +637,4 @@ void PlacementAreaMgr::unloadDemoCulling() {
     }
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

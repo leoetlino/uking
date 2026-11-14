@@ -195,9 +195,9 @@ void HardModeManager::calc() {
 }
 
 bool HardModeManager::rankUpEnemy(const sead::SafeString& actor_name,
-                                  const ksys::map::PreActor& obj, const char** new_name) {
-    if (obj.getFlags().isOn(ksys::map::PreActor::Flag::HasUniqueName) ||
-        obj.getHardModeFlags().isOn(ksys::map::PreActor::HardModeFlag::DisableRankup)) {
+                                  const ksys::act::PreActor& obj, const char** new_name) {
+    if (obj.getFlags().isOn(ksys::act::PreActor::Flag::HasUniqueName) ||
+        obj.getHardModeFlags().isOn(ksys::act::PreActor::HardModeFlag::DisableRankup)) {
         return false;
     }
 

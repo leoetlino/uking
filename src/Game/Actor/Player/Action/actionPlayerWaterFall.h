@@ -21,7 +21,7 @@ protected:
     // static_param at offset 0x20
     const float* mSpeedClimb_s{};
     // dynamic_param at offset 0x28
-    ksys::Rail** mRailPtr_d{};
+    ksys::act::Rail** mRailPtr_d{};
     // dynamic_param at offset 0x30
     sead::Vector3f* mFrontDir_d{};
 };

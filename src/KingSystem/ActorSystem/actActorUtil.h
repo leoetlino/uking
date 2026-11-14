@@ -11,10 +11,6 @@ namespace ksys::game {
 enum class AreaItemType;
 }
 
-namespace ksys::map {
-class PreActor;
-}
-
 namespace ksys::frm {
 class BaseProcLink;
 }
@@ -23,6 +19,7 @@ namespace ksys::act {
 
 class Actor;
 class ActorLinkConstDataAccess;
+class PreActor;
 
 enum class ArrowType {
     /// Wooden arrows.
@@ -68,10 +65,10 @@ bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags);
 bool hasOneTagAtLeast(frm::BaseProcLink* link, const sead::SafeString& tags);
 bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tags);
 
-bool shouldSkipSpawnIfNotRaining(map::PreActor* obj);
-bool shouldSkipSpawnIfGodForestOff(map::PreActor* obj);
-bool shouldSkipSpawnGodForestActor(map::PreActor* obj);
-bool shouldSkipSpawnFairy(map::PreActor* obj);
+bool shouldSkipSpawnIfNotRaining(PreActor* obj);
+bool shouldSkipSpawnIfGodForestOff(PreActor* obj);
+bool shouldSkipSpawnGodForestActor(PreActor* obj);
+bool shouldSkipSpawnFairy(PreActor* obj);
 bool shouldSkipSpawnFairy(const sead::SafeString& actor);
 
 /// Must be called before using any of the "should skip" functions above.

@@ -15,9 +15,12 @@ class Manager;
 }
 
 namespace ksys::map {
+class MubinIter;
+}  // namespace ksys::map
+
+namespace ksys::act {
 
 class LazyTraverseList;
-class MubinIter;
 class PreActor;
 
 class PlacementAreaMgr {
@@ -173,7 +176,7 @@ public:
     ~PlacementAreaMgr();
 
     // d1cecc
-    bool parseAreas(const sead::SafeString& unit_config_name, const MubinIter& obj_iter);
+    bool parseAreas(const sead::SafeString& unit_config_name, const map::MubinIter& obj_iter);
     // d1e578
     void x();
     void addLinkPair(const int& idx, const int& sub_idx);
@@ -242,4 +245,4 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(PlacementAreaMgr, 0x2D5D0);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

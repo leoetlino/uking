@@ -5,9 +5,9 @@
 #include <prim/seadSafeString.h>
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadCriticalSection.h>
+#include "KingSystem/ActorSystem/actObjectLink.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Game/Physics/physMaterialMask.h"
-#include "KingSystem/Map/mapObjectLink.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::phys {
@@ -153,7 +153,7 @@ public:
 
 private:
     struct ObjectRef {
-        ksys::map::PreActor* obj;
+        ksys::act::PreActor* obj;
         void* locator_cache_idx;
     };
 

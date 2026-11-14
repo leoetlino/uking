@@ -11,6 +11,7 @@ namespace ksys {
 
 namespace act {
 class Actor;
+class Rail;
 }  // namespace act
 
 namespace frm {
@@ -19,7 +20,6 @@ class BaseProcLink;
 }  // namespace frm
 
 struct AIDef;
-class Rail;
 enum class AIDefInstParamKind;
 
 enum class AIDefParamType {

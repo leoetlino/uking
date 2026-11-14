@@ -7,9 +7,11 @@
 
 using F32Limits = std::numeric_limits<f32>;
 
-namespace ksys::map {
-
+namespace ksys::act {
 class PreActor;
+}  // namespace ksys::act
+
+namespace ksys::map {
 
 // FIXME
 class PlacementTree {
@@ -29,7 +31,7 @@ public:
     sead::Buffer<TreeObject> mBuffer{};
     sead::Buffer<u32*> mObjects{};
     void* _20{};
-    PreActor** _28{};
+    act::PreActor** _28{};
     u32 _30{};
     f32 _34 = F32Limits::max();
     f32 _38 = F32Limits::max();

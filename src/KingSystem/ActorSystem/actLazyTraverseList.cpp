@@ -1,9 +1,9 @@
-#include "KingSystem/Map/mapLazyTraverseList.h"
+#include "KingSystem/ActorSystem/actLazyTraverseList.h"
 
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/GameData/gdtManager.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 LazyTraverseList::LazyTraverseList(sead::Heap* heap) {
     ksys::res::Handle handle;
@@ -109,4 +109,4 @@ bool LazyTraverseList::wereFlagsUpdated() {
     return updated;
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

@@ -6,10 +6,10 @@
 #include <prim/seadTypedLongBitFlag.h>
 #include <thread/seadAtomic.h>
 #include <thread/seadReadWriteLock.h>
-#include "KingSystem/Map/mapPlacementMap.h"
+#include "KingSystem/ActorSystem/actPlacementMap.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 class PreActor;
 class PlacementMap;
@@ -127,4 +127,4 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(PlacementActors, 0x2A80D0);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

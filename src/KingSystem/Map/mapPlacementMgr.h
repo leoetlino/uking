@@ -12,6 +12,8 @@
 namespace ksys::act {
 class Actor;
 class ClusteredRenderer;
+class PlacementActors;
+class PreActor;
 }  // namespace ksys::act
 
 namespace ksys::frm {
@@ -20,9 +22,7 @@ class ActorInstParamPack;
 
 namespace ksys::map {
 
-class PreActor;
 class PlacementTree;
-class PlacementActors;
 
 class PlacementMgr {
     SEAD_SINGLETON_DISPOSER(PlacementMgr)
@@ -36,7 +36,7 @@ class PlacementMgr {
         sead::PtrArray<u32> _30;
         sead::PtrArray<u32> _40;
         sead::PtrArray<u32> _50;
-        sead::PtrArray<map::PreActor> dragon_item_drop_targets;
+        sead::PtrArray<act::PreActor> dragon_item_drop_targets;
         sead::PtrArray<u32> _70;
     };
     KSYS_CHECK_SIZE_NX150(TraverseResults, 0x80);
@@ -50,7 +50,7 @@ public:
     bool auto1();
     void x_0(sead::Vector3f* pos, frm::ActorInstParamPack* pack);
     void printDebugInfo();
-    void loadModel(PreActor* obj);
+    void loadModel(act::PreActor* obj);
     void incrementCounter();
     void x();
     void auto5();
@@ -59,7 +59,7 @@ public:
 
     void threadFn(sead::Thread* thread, sead::MessageQueue::Element msg);
     // 0x00000071011eb4dc
-    bool auto17(PreActor* obj);
+    bool auto17(act::PreActor* obj);
 
     enum class MgrFlag {
         _1 = 0x1,
@@ -110,7 +110,7 @@ public:
     s32 mMassMemoryUsage;
     s32 mClusteredMemoryUsage;
     void* mDebugHeap;
-    PlacementActors* mPlacementActors;
+    act::PlacementActors* mPlacementActors;
 
     void* mVillagerManager;
 

@@ -7,8 +7,8 @@
 #include <heap/seadHeap.h>
 #include <math/seadMatrix.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Map/mapPlacementActors.h"
-#include "KingSystem/Map/mapPlacementMapMgr.h"
+#include "KingSystem/ActorSystem/actPlacementActors.h"
+#include "KingSystem/ActorSystem/actPlacementMapMgr.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/System/Patrol.h"
@@ -19,7 +19,7 @@ class StaticCompound;
 class StaticCompoundRigidBodyGroup;
 }  // namespace ksys::phys
 
-namespace ksys::map {
+namespace ksys::act {
 
 class PreActor;
 class PlacementMapMgr;
@@ -140,4 +140,4 @@ private:
 
 KSYS_CHECK_SIZE_NX150(PlacementMap, 0x400);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

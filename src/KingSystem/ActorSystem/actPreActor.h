@@ -4,17 +4,13 @@
 #include <heap/seadHeap.h>
 #include <prim/seadTypedBitFlag.h>
 #include "KingSystem/ActorSystem/actDebug.h"
+#include "KingSystem/ActorSystem/actPlacementActors.h"
 #include "KingSystem/Framework/frmBaseProcAccessor.h"
 #include "KingSystem/GameData/gdtFlagHandle.h"
 #include "KingSystem/Map/mapDebug.h"
 #include "KingSystem/Map/mapMubinIter.h"
-#include "KingSystem/Map/mapPlacementActors.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Utils/Types.h"
-
-namespace ksys::act {
-class Actor;
-}  // namespace ksys::act
 
 namespace ksys::frm {
 class BaseProc;
@@ -22,8 +18,9 @@ class BaseProcInitializer;
 class BaseProcCreateTask;
 }  // namespace ksys::frm
 
-namespace ksys::map {
+namespace ksys::act {
 
+class Actor;
 class ObjectLinkData;
 struct ObjectLink;
 struct ObjectLinkArray;
@@ -65,7 +62,7 @@ public:
         _500400 = _400400 | Dead,
         _80002106 = _2 | _4 | LinkTagOn | _2000 | _80000000,
         ResetOnFreed = ResetOnUnlink | _500400 | _20 | _40 | _4000 | _2000000 | _4000000 |
-                       _40000000 | _80000000,
+            _40000000 | _80000000,
     };
 
     enum class Flag {
@@ -99,7 +96,7 @@ public:
     PreActor();
     ~PreActor();
 
-    void initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data);
+    void initData(map::MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data);
     void free();
 
     void registerBaseProc(frm::BaseProc* proc);
@@ -197,12 +194,12 @@ public:
     void setStaticCompoundActorId(s16 id) { mStaticCompoundActorId = id; }
 
     const ActorData& getActorData() const {
-        return PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx];
+        return map::PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx];
     }
 
     u8 getNumLinksPointingToMe() const { return mNumLinksPointingToMe; }
 
-    const MubinIter& getMubinIter() const { return mMubinIter; }
+    const map::MubinIter& getMubinIter() const { return mMubinIter; }
     frm::BaseProc* getProc() const { return mProc; }
     ObjectLinkData* getLinkData() const { return mLinkData; }
 
@@ -226,7 +223,7 @@ private:
     void* _10 = nullptr;
     void* _18 = nullptr;
     void* _20 = nullptr;
-    MubinIter mMubinIter;
+    map::MubinIter mMubinIter;
     frm::BaseProc* mProc = nullptr;
     ObjectLinkData* mLinkData = nullptr;
     gdt::FlagHandle mRevivalGameDataFlagHash = gdt::InvalidHandle;
@@ -239,4 +236,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(PreActor, 0x70);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

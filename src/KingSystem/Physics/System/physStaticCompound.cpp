@@ -158,14 +158,14 @@ void StaticCompound::removeFromWorldImmediately() {
         mFieldBodyGroups[i].removeFromWorldImmediately();
 }
 
-int StaticCompound::setMapObject(u32 hash_id, u32 srt_hash, map::PreActor* object) {
+int StaticCompound::setMapObject(u32 hash_id, u32 srt_hash, act::PreActor* object) {
     int idx = mStaticCompoundInfo->getActorIdx(hash_id, srt_hash);
     if (idx >= 0 && idx < mMapObjects.size())
         mMapObjects[idx] = object;
     return idx;
 }
 
-map::PreActor* StaticCompound::getMapObject(int shape_idx) const {
+act::PreActor* StaticCompound::getMapObject(int shape_idx) const {
     auto* info = mStaticCompoundInfo->getShapeInfo(shape_idx);
     if (!info)
         return nullptr;

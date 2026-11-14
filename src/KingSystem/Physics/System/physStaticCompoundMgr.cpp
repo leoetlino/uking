@@ -151,7 +151,7 @@ RigidBody* StaticCompoundMgr::getRigidBody(StaticCompoundRigidBodyGroup* const& 
 }
 
 void StaticCompoundMgr::getBodyGroupAndMapObject(StaticCompoundRigidBodyGroup** p_group,
-                                                 map::PreActor** p_map_object,
+                                                 act::PreActor** p_map_object,
                                                  const hkpStaticCompoundShape& shape,
                                                  const u32* shape_key) const {
     auto* group = reinterpret_cast<StaticCompoundRigidBodyGroup*>(shape.getUserData());

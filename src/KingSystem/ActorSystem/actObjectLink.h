@@ -5,17 +5,14 @@
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
-class Actor;
-}  // namespace ksys::act
-
 namespace ksys::frm {
 class BaseProcAccessor;
 }  // namespace ksys::frm
 
-namespace ksys::map {
+namespace ksys::act {
 
-class GenGroup;
+class Actor;
+class ObjectLinkGenGroup;
 class PreActor;
 class Rail;
 
@@ -77,7 +74,7 @@ struct ObjectLink {
 
     PreActor* other_obj = nullptr;
     MapLinkDefType type = MapLinkDefType::Invalid;
-    MubinIter iter{};
+    map::MubinIter iter{};
 };
 KSYS_CHECK_SIZE_NX150(ObjectLink, 0x20);
 
@@ -107,7 +104,7 @@ public:
     ObjectLink* findLinkWithType(MapLinkDefType t);
     ObjectLink* findLinkWithType_0(MapLinkDefType t);
 
-    void setGenGroup(GenGroup* group);
+    void setGenGroup(ObjectLinkGenGroup* group);
 
     bool checkCreateOrDeleteLinkObjRevival() const {
         return checkDeleteLinkObjRevival() || checkCreateLinkObjRevival();
@@ -127,9 +124,9 @@ public:
     bool mNoAutoDemoMember = false;
     bool field_57 = false;
 
-    GenGroup* mGenGroup = nullptr;
+    ObjectLinkGenGroup* mGenGroup = nullptr;
     Rail* mRails = nullptr;
 };
 KSYS_CHECK_SIZE_NX150(ObjectLinkData, 0x68);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

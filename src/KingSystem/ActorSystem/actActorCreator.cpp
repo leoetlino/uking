@@ -5,9 +5,9 @@
 #include "KingSystem/ActorSystem/actActorTemplate.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Framework/frmBaseProcCreateTask.h"
 #include "KingSystem/Framework/frmBaseProcMgr.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
@@ -37,7 +37,7 @@ void ActorCreator::onTaskRemoved(const TaskRemoveCallbackContext& context) {
 ActorCreator::~ActorCreator() = default;
 
 bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
-                                         map::MubinIter* mubin_iter, map::PreActor* map_object,
+                                         map::MubinIter* mubin_iter, PreActor* map_object,
                                          frm::BaseProcHandle* handle, int task_lane_id,
                                          frm::ActorInstParamPack* params) {
     const char* actor_profile;
@@ -109,7 +109,7 @@ Actor* ActorCreator::createActor(const char* name, sead::Heap* heap,
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                       map::MubinIter* mubin_iter, map::PreActor* map_object,
+                                       map::MubinIter* mubin_iter, PreActor* map_object,
                                        frm::BaseProcHandle* handle, int task_lane_id,
                                        frm::ActorInstParamPack* params) {
     frm::BaseProcCreateTaskData data;
@@ -133,7 +133,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                       map::PreActor* map_object, frm::BaseProcHandle* handle,
+                                       PreActor* map_object, frm::BaseProcHandle* handle,
                                        int task_lane_id, frm::ActorInstParamPack* params) {
     frm::BaseProcCreateTaskData data;
     data.mHeap = heap;
@@ -156,7 +156,7 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
 
 bool ActorCreator::requestCreateActor(const char* name, sead::Heap* heap,
                                       frm::BaseProcHandle* handle, frm::ActorInstParamPack* params,
-                                      map::PreActor* map_object, int task_lane_id) {
+                                      PreActor* map_object, int task_lane_id) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
         return false;
@@ -250,7 +250,7 @@ Task* BaseProcCreateTaskSelector::selectTask(const TaskSelectionContext& context
         if (task->getLaneId() == u8(frm::BaseProcCreateTask::LaneId::_2))
             return &it;
 
-        if (task->mMapObject && task->mMapObject->getFlags0().isOff(map::PreActor::Flag0::_4))
+        if (task->mMapObject && task->mMapObject->getFlags0().isOff(PreActor::Flag0::_4))
             return &it;
 
         if (task->mDistanceToLoadSphere >= 0.0 && min > task->mDistanceToLoadSphere)

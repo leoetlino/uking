@@ -166,7 +166,7 @@ bool AutoPlacement::isGroupLocatorUnavailable(PlacementGroup* grp, bool check_ex
         return true;
     }
 
-    if (object->getProc() == nullptr && object->getFlags0().isOn(ksys::map::PreActor::Flag0::_80))
+    if (object->getProc() == nullptr && object->getFlags0().isOn(ksys::act::PreActor::Flag0::_80))
         return true;
 
     if (grp->locator_type != 2)

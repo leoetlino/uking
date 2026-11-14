@@ -16,7 +16,7 @@ struct hkpShapeRayCastOutput;
 struct hkpWorldRayCastInput;
 struct hkpWorldRayCastOutput;
 
-namespace ksys::map {
+namespace ksys::act {
 class PreActor;
 }
 
@@ -118,7 +118,7 @@ protected:
     u32 mHitShapeKey;
     bool mHasHitSpecifiedRigidBody;
     StaticCompoundRigidBodyGroup* mHitBodyGroup{};
-    map::PreActor* mHitMapObject;
+    act::PreActor* mHitMapObject;
     sead::SafeArray<sead::BitFlag32, NumContactLayerTypes> mLayerMasks{};
     sead::Atomic<u32> mQueryState;
     NormalCheckingMode mNormalCheckingMode;

@@ -4,7 +4,7 @@
 #include <prim/seadTypedBitFlag.h>
 #include "KingSystem/Map/mapMubinIter.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 class PlacementRailMgr;
 
@@ -22,31 +22,31 @@ public:
         mNextDistance = 0.0;
     }
     virtual ~RailPoint();
-    virtual bool parse(MubinIter* iter, sead::Heap* heap);
+    virtual bool parse(map::MubinIter* iter, sead::Heap* heap);
 
-    const MubinIter& getIter() const;
+    const map::MubinIter& getIter() const;
     const sead::Vector3f& getRotate() const;
     const sead::Vector3f& getTranslate() const;
     f32 getPrevDistance() const;
     f32 getNextDistance() const;
 
 protected:
-    SRT mSRT;
-    ControlPoints mCtrlPoints;
+    map::SRT mSRT;
+    map::ControlPoints mCtrlPoints;
     float mPrevDistance;
     float mNextDistance;
-    MubinIter mIter;
+    map::MubinIter mIter;
 };
 
 class Rail {
 public:
     Rail();
     virtual ~Rail();
-    virtual void init(MubinIter* iter, sead::Heap* heap);
+    virtual void init(map::MubinIter* iter, sead::Heap* heap);
     virtual bool isConnectable() { return false; }
     virtual bool isRoute() { return false; }
     virtual RailPoint* allocPoint(sead::Heap* heap);
-    virtual bool parse(MubinIter* iter);
+    virtual bool parse(map::MubinIter* iter);
     virtual void x_38() {}
 
     RailPoint* allocPointIdx(s32 idx, sead::Heap* heap);
@@ -54,7 +54,7 @@ public:
     const RailPoint* getPoint(s32 idx) const;
     RailPoint* getPoint(s32 idx);
 
-    const SRT& getPointSRT(s32 idx) const;
+    const map::SRT& getPointSRT(s32 idx) const;
     const sead::Vector3f& getPointRotate(s32 idx) const;
     const sead::Vector3f& getPointTranslate(s32 idx) const;
     const sead::Vector3f& getControlPoint(s32 rail_idx, s32 pt_idx) const;
@@ -84,7 +84,7 @@ protected:
     u32 mHashId = sHashBase;
     const char* mUniqueName{};
     sead::Buffer<RailPoint*> mRailPoints{};
-    MubinIter mIter{};
+    map::MubinIter mIter{};
 };
 
 class RailGuidePoint : public RailPoint {
@@ -94,7 +94,7 @@ public:
     RailGuidePoint();
     ~RailGuidePoint() override;
 
-    bool parse(MubinIter* iter, sead::Heap* heap) override;
+    bool parse(map::MubinIter* iter, sead::Heap* heap) override;
 
 protected:
     float mWaitFrame;
@@ -107,7 +107,7 @@ public:
     RailRemainGuidePoint();
     ~RailRemainGuidePoint() override;
 
-    bool parse(MubinIter* iter, sead::Heap* heap) override;
+    bool parse(map::MubinIter* iter, sead::Heap* heap) override;
 
 protected:
     float mMoveSpeed;
@@ -136,7 +136,7 @@ public:
     RailConnectablePoint();
     ~RailConnectablePoint() override;
 
-    bool parse(MubinIter* iter, sead::Heap* heap) override;
+    bool parse(map::MubinIter* iter, sead::Heap* heap) override;
 
     Rail* getJunctionRail() const;
     RailPoint* getJunctionPoint() const;
@@ -162,7 +162,7 @@ public:
     RailRoutePoint();
     ~RailRoutePoint() override;
 
-    bool parse(MubinIter* iter, sead::Heap* heap) override;
+    bool parse(map::MubinIter* iter, sead::Heap* heap) override;
     const char* getCheckPointName() const;
 
 protected:
@@ -176,7 +176,7 @@ public:
     ~RailRoute() override;
 
     bool isRoute() override { return true; }
-    bool parse(MubinIter* iter) override;
+    bool parse(map::MubinIter* iter) override;
     void x_38() override {}
 
     bool isRenderEnabled() const;
@@ -190,4 +190,4 @@ protected:
     const char* mRouteId;
 };
 
-}  // namespace ksys::map
+}  // namespace ksys::act

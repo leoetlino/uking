@@ -1,16 +1,16 @@
-#include "KingSystem/Map/mapPreActor.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/ActorSystem/actObjectLink.h"
 #include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Game/StagePreActorCache.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Graphics/gfxForestRenderer.h"
-#include "KingSystem/Map/mapObjectLink.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Terrain/teraSystem.h"
 #include "KingSystem/Utils/Debug.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 // NON_MATCHING
 PreActor::PreActor() {
@@ -51,7 +51,7 @@ void PreActor::free() {
 }
 
 // NON_MATCHING
-void PreActor::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data) {
+void PreActor::initData(map::MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data) {
     mActorDataIdx = 0xFFFF;
     mFlags0.makeAllZero();
     mRevivalGameDataFlagHash = gdt::InvalidHandle;
@@ -171,7 +171,7 @@ bool PreActor::isEnemyOrNpcOrActiveOrMapPassive() const {
     if (mActorFlags8.isOn(ActorFlag8::EnemyOrNpcOrActiveOrAreaOrAirWall))
         return true;
 
-    auto pa = PlacementMgr::instance()->mPlacementActors;
+    auto pa = map::PlacementMgr::instance()->mPlacementActors;
     if (pa == nullptr)
         return false;
 
@@ -183,7 +183,7 @@ bool PreActor::isNpcOrActiveOrMapPassiveOrFlag1() const {
     if (isFlags8Cleared())
         return true;
 
-    auto pa = PlacementMgr::instance()->mPlacementActors;
+    auto pa = map::PlacementMgr::instance()->mPlacementActors;
     if (pa == nullptr)
         return false;
 
@@ -237,7 +237,7 @@ f32 PreActor::getDispDistance(const PlacementActors* pa, bool get_diameter,
 }
 
 f32 PreActor::getDispDistance(bool get_diameter, bool ignore_radius) const {
-    auto pa = PlacementMgr::instance()->mPlacementActors;
+    auto pa = map::PlacementMgr::instance()->mPlacementActors;
     return getDispDistance(pa, get_diameter, ignore_radius);
 }
 
@@ -270,7 +270,7 @@ f32 PreActor::getDispDistance(bool get_diameter, bool ignore_radius) const {
 
 f32 PreActor::getTraverseDistForLOD() const {
     using DFlag = ActorData::Flag;
-    auto* data = &PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx];
+    auto* data = &map::PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx];
     f32 dist = 0.0;
 
     if (data->mFlags.isOnBit(ActorData::Flag::TraverseDistReset))
@@ -302,7 +302,7 @@ sead::Vector3f PreActor::getScale() const {
 }
 
 const char* PreActor::getUnitConfigName() const {
-    auto* mgr = PlacementMgr::instance();
+    auto* mgr = map::PlacementMgr::instance();
 
     if (mgr != nullptr && mgr->mPlacementActors != nullptr)
         return mgr->mPlacementActors->mActorData[mActorDataIdx].mActorName.cstr();
@@ -364,7 +364,7 @@ void PreActor::unlinkProc(bool force) {
 
     if (force || mFlags0.isOn(Flag0::ActorCreated))
         set = true;
-    else if (checkActorDataFlag(PlacementMgr::instance()->mPlacementActors,
+    else if (checkActorDataFlag(map::PlacementMgr::instance()->mPlacementActors,
                                 ActorData::Flag::RevivalEnable))
         set = isRevivalGameDataFlagOn();
 
@@ -410,9 +410,11 @@ bool PreActor::areLifeConditionsSatisfied() const {
     const char* s;
     auto* id = act::InfoData::instance();
 
-    if (PlacementMgr::instance() != nullptr &&
-        PlacementMgr::instance()->mPlacementActors != nullptr)
-        s = PlacementMgr::instance()->mPlacementActors->mActorData[mActorDataIdx].mActorName.cstr();
+    if (map::PlacementMgr::instance() != nullptr &&
+        map::PlacementMgr::instance()->mPlacementActors != nullptr)
+        s = map::PlacementMgr::instance()
+                ->mPlacementActors->mActorData[mActorDataIdx]
+                .mActorName.cstr();
     else
         s = getUnitConfigNameFromByaml();
     id->getInvalidLifeConditions(s, info);
@@ -521,16 +523,17 @@ void PreActor::incrementLinkNum() {
     if (sead::SafeString(getUnitConfigName()) == "LinkTagNone") {
         // More than 255 actors are specified in one generation group.
         // If it is not a test, consult the programmer.
-        printDebugMsg(this,
-                      "一つの生成グループに 255 以上のアクタが指定されています。"
-                      "テストで無ければプログラマに相談",
-                      nullptr);
+        map::printDebugMsg(this,
+                           "一つの生成グループに 255 以上のアクタが指定されています。"
+                           "テストで無ければプログラマに相談",
+                           nullptr);
         return;
     }
 
     // We have exceeded the expected number of links.
     // If it's not a test, talk to your programmer.
-    printDebugMsg(this, "リンクの想定数を越えました。テストで無ければプログラマに相談", nullptr);
+    map::printDebugMsg(this, "リンクの想定数を越えました。テストで無ければプログラマに相談",
+                       nullptr);
 }
 
 void PreActor::decrementLinkNum() {
@@ -562,4 +565,4 @@ void PreActor::setTranslate(const sead::Vector3f& translate) {
     mTranslate = translate;
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

@@ -7,7 +7,7 @@ namespace ksys::gfx {
 class ForestRenderer;
 }
 
-namespace ksys::map {
+namespace ksys::act {
 class LazyTraverseList;
 }
 
@@ -19,12 +19,12 @@ class StagePreActorCache {
     StagePreActorCache();
 
 public:
-    map::LazyTraverseList* getObjects() const { return mObjects; }
+    act::LazyTraverseList* getObjects() const { return mObjects; }
     auto* getForestRenderer() { return mForestRenderer; }
 
 private:
     char _0[0x20];
-    map::LazyTraverseList* mObjects;
+    act::LazyTraverseList* mObjects;
     gfx::ForestRenderer* mForestRenderer;
 };
 

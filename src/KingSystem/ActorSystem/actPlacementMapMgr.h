@@ -4,16 +4,13 @@
 #include <container/seadBuffer.h>
 #include <container/seadPtrArray.h>
 #include <heap/seadDisposer.h>
-#include "KingSystem/Map/mapPlacementMap.h"
+#include "KingSystem/ActorSystem/actPlacementMap.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
+
 class FarActorMerge;
-}  // namespace ksys::act
-
-namespace ksys::map {
-
 class MapProperties;
 class PlacementActors;
 class PlacementRailMgr;
@@ -61,4 +58,4 @@ private:
 
 KSYS_CHECK_SIZE_NX150(PlacementMapMgr, 0xD0);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

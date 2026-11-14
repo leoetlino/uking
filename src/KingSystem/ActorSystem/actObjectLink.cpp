@@ -1,11 +1,11 @@
-#include "KingSystem/Map/mapObjectLink.h"
+#include "KingSystem/ActorSystem/actObjectLink.h"
 #include <container/seadBuffer.h>
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
-#include "KingSystem/Map/mapObjectGenGroup.h"
-#include "KingSystem/Map/mapPreActor.h"
-#include "KingSystem/Map/mapRail.h"
+#include "KingSystem/ActorSystem/actObjectLinkGenGroup.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
+#include "KingSystem/ActorSystem/actRail.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 struct MapLinkDefinition {
     const char* name;
@@ -180,7 +180,7 @@ ObjectLink* ObjectLinkData::findLinkWithType_0(MapLinkDefType t) {
     }
 }
 
-void ObjectLinkData::setGenGroup(GenGroup* group) {
+void ObjectLinkData::setGenGroup(ObjectLinkGenGroup* group) {
     if (mGenGroup == nullptr)
         mGenGroup = group;
 }
@@ -229,4 +229,4 @@ ObjectLink* ObjectLinkArray::findLinkWithType_0(MapLinkDefType type) {
     return nullptr;
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

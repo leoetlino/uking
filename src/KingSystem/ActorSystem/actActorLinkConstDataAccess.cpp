@@ -9,9 +9,9 @@
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
 #include "KingSystem/Framework/frmBaseProc.h"
-#include "KingSystem/Map/mapPreActor.h"
 
 namespace ksys::act {
 
@@ -279,7 +279,7 @@ s32 ActorLinkConstDataAccess::getAttackPower() const {
     return actor->getParam()->getRes().mGParamList->getAttack()->mPower.ref();
 }
 
-map::ObjectLinkData* ActorLinkConstDataAccess::getMapObjectLinkData() const {
+ObjectLinkData* ActorLinkConstDataAccess::getMapObjectLinkData() const {
     auto* actor = getActor();
     if (!actor)
         return nullptr;
@@ -291,7 +291,7 @@ map::ObjectLinkData* ActorLinkConstDataAccess::getMapObjectLinkData() const {
     return object->getLinkData();
 }
 
-map::PreActor* ActorLinkConstDataAccess::getMapObject() const {
+PreActor* ActorLinkConstDataAccess::getMapObject() const {
     auto* actor = getActor();
     if (!actor)
         return nullptr;

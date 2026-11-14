@@ -1,12 +1,12 @@
-#include "KingSystem/Map/mapRail.h"
+#include "KingSystem/ActorSystem/actRail.h"
 #include <heap/seadHeapMgr.h>
 #include "KingSystem/Utils/SafeDelete.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 RailPoint::~RailPoint() = default;
 
-const MubinIter& RailPoint::getIter() const {
+const map::MubinIter& RailPoint::getIter() const {
     return mIter;
 }
 
@@ -26,7 +26,7 @@ f32 RailPoint::getNextDistance() const {
     return mNextDistance;
 }
 
-bool RailPoint::parse(MubinIter* iter, sead::Heap* heap) {
+bool RailPoint::parse(map::MubinIter* iter, sead::Heap* heap) {
     iter->getScale(&mSRT.scale);
     iter->getRotate(&mSRT.rotate);
 
@@ -45,15 +45,15 @@ Rail::~Rail() {
     mRailPoints.freeBuffer();
 }
 
-void Rail::init(MubinIter* iter, sead::Heap* heap) {
+void Rail::init(map::MubinIter* iter, sead::Heap* heap) {
     parse(iter);
 
-    MubinIter result;
+    map::MubinIter result;
     if (iter->tryGetParamIterByKey(&result, "RailPoints")) {
         s32 size = result.getSize();
         mRailPoints.allocBufferAssert(size, heap);
         for (int i = 0; i < size; ++i) {
-            MubinIter node_iter;
+            map::MubinIter node_iter;
             if (result.tryGetIterByIndex(&node_iter, i)) {
                 RailPoint* point = allocPointIdx(i, heap);
                 point->mIter = node_iter;
@@ -86,7 +86,7 @@ RailPoint* Rail::getPoint(s32 idx) {
     return mRailPoints[idx];
 }
 
-const SRT& Rail::getPointSRT(s32 idx) const {
+const map::SRT& Rail::getPointSRT(s32 idx) const {
     return mRailPoints[idx]->mSRT;
 }
 
@@ -132,7 +132,7 @@ RailPoint* Rail::allocPoint(sead::Heap* heap) {
     return new (heap) RailPoint;
 }
 
-bool Rail::parse(MubinIter* iter) {
+bool Rail::parse(map::MubinIter* iter) {
     bool success = true;
 
     success &= iter->tryGetParamUIntByKey(&mHashId, "HashId");
@@ -157,7 +157,7 @@ bool Rail::parse(MubinIter* iter) {
     return success;
 }
 
-bool RailGuidePoint::parse(MubinIter* iter, sead::Heap* heap) {
+bool RailGuidePoint::parse(map::MubinIter* iter, sead::Heap* heap) {
     bool success = true;
     success &= RailPoint::parse(iter, heap);
     success &= iter->tryGetParamFloatByKey(&mWaitFrame, "WaitFrame");
@@ -172,7 +172,7 @@ RailPoint* RailGuide::allocPoint(sead::Heap* heap) {
     return new (heap) RailGuidePoint;
 }
 
-bool RailRemainGuidePoint::parse(MubinIter* iter, sead::Heap* heap) {
+bool RailRemainGuidePoint::parse(map::MubinIter* iter, sead::Heap* heap) {
     bool success = true;
     success &= RailGuidePoint::parse(iter, heap);
     success &= iter->tryGetParamFloatByKey(&mMoveSpeed, "MoveSpeed");
@@ -204,7 +204,7 @@ RailPoint* RailConnectablePoint::getJunctionPoint() const {
     return mJunctionPoint;
 }
 
-bool RailConnectablePoint::parse(MubinIter* iter, sead::Heap* heap) {
+bool RailConnectablePoint::parse(map::MubinIter* iter, sead::Heap* heap) {
     return RailPoint::parse(iter, heap);
 }
 
@@ -216,7 +216,7 @@ const char* RailRoutePoint::getCheckPointName() const {
     return mCheckPointName;
 }
 
-bool RailRoutePoint::parse(MubinIter* iter, sead::Heap* heap) {
+bool RailRoutePoint::parse(map::MubinIter* iter, sead::Heap* heap) {
     bool success = true;
     success &= RailConnectablePoint::parse(iter, heap);
     iter->tryGetParamStringByKey(&mEntryPointName, "EntryPointName");
@@ -256,7 +256,7 @@ const char* RailRoute::getCheckPointName(s32 idx) const {
 
 RailRoute::~RailRoute() = default;
 
-bool RailRoute::parse(MubinIter* iter) {
+bool RailRoute::parse(map::MubinIter* iter) {
     int success = Rail::parse(iter);
 
     bool result = false;
@@ -300,4 +300,4 @@ bool RailRoute::parse(MubinIter* iter) {
     return success;
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

@@ -10,7 +10,7 @@
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::map {
+namespace ksys::act {
 class PreActor;
 }
 
@@ -35,8 +35,8 @@ public:
     void addToWorld();
     void removeFromWorldImmediately();
 
-    int setMapObject(u32 hash_id, u32 srt_hash, map::PreActor* object);
-    map::PreActor* getMapObject(int shape_idx) const;
+    int setMapObject(u32 hash_id, u32 srt_hash, act::PreActor* object);
+    act::PreActor* getMapObject(int shape_idx) const;
 
     bool setInstanceEnabled(int actor_idx, bool enabled);
 
@@ -70,7 +70,7 @@ private:
     sead::Buffer<StaticCompoundRigidBodyGroup> mFieldBodyGroups;
     sead::FixedSafeString<32> mName;
     sead::Matrix34f mMtx = sead::Matrix34f::ident;
-    sead::Buffer<map::PreActor*> mMapObjects{};
+    sead::Buffer<act::PreActor*> mMapObjects{};
     mutable sead::CriticalSection mCS;
 };
 KSYS_CHECK_SIZE_NX150(StaticCompound, 0x140);

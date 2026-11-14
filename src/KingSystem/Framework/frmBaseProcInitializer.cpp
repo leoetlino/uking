@@ -1,11 +1,11 @@
 #include "KingSystem/Framework/frmBaseProcInitializer.h"
 #include <heap/seadExpHeap.h>
 #include <thread/seadThreadUtil.h>
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Framework/frmBaseProcCreateTask.h"
 #include "KingSystem/Framework/frmBaseProcHandle.h"
 #include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Game/Resource/gameResourceSystem.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Thread/PhysicsTaskThread.h"

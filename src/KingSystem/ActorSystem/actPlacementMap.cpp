@@ -1,13 +1,13 @@
-#include "KingSystem/Map/mapPlacementMap.h"
+#include "KingSystem/ActorSystem/actPlacementMap.h"
 #include <prim/seadScopedLock.h>
 #include <thread/seadReadWriteLock.h>
 #include "KingSystem/AOC/aocManager.h"
-#include "KingSystem/Map/mapPreActor.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Physics/System/physStaticCompound.h"
 #include "KingSystem/Physics/System/physStaticCompoundRigidBodyGroup.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 PlacementMap::PlacementMap() {
     mInitStatus = InitStatus::None;
@@ -72,7 +72,7 @@ bool PlacementMap::tryUnloadStaticCompound(int idx) {
 }
 
 void PlacementMap::bindObjectToStaticCompound(int index, PreActor* obj) {
-    if (PlacementMgr::instance()->auto17(obj)) {
+    if (map::PlacementMgr::instance()->auto17(obj)) {
         return;
     }
     if (getStaticCompoundIdFromPosition(*obj) != index) {
@@ -96,9 +96,8 @@ void PlacementMap::bindObjectToStaticCompound(int index, PreActor* obj) {
         return;
     }
     bool enabled = false;
-    if (obj->shouldSkipSpawn() ||
-        (obj->checkActorDataFlag(mPa, map::ActorData::Flag::MapConstPassive) &&
-         obj->getFlags0().isOn(PreActor::Flag0::ActorInCalc))) {
+    if (obj->shouldSkipSpawn() || (obj->checkActorDataFlag(mPa, ActorData::Flag::MapConstPassive) &&
+                                   obj->getFlags0().isOn(PreActor::Flag0::ActorInCalc))) {
         obj->resetFlags0(PreActor::Flag0::StaticCompoundInstanceEnabled);
         enabled = false;
     } else {
@@ -196,7 +195,7 @@ bool PlacementMap::loadDynamicMap() {
         path.append("_DynamicPast.mubin");
     } else if (Patrol::instance() && Patrol::instance()->mLoadStaticPhysUnstableMapUnit) {
         path.append("_Dynamic_PhysUnstable.mubin");
-    } else if (PlacementMgr::instance()->isGrudgeMerge() || mMgr->isShrineOrDivineBeast()) {
+    } else if (map::PlacementMgr::instance()->isGrudgeMerge() || mMgr->isShrineOrDivineBeast()) {
         path.append("_Dynamic.mubin");
     } else {
         path.append("_Dynamic_NoGrudgeMerge.mubin");
@@ -390,4 +389,4 @@ void PlacementMap::HkscRes::cleanup() {
     }
 }
 
-}  // namespace ksys::map
+}  // namespace ksys::act

@@ -13,15 +13,12 @@ namespace ksys {
 struct MesTransceiverId;
 }  // namespace ksys
 
-namespace ksys::map {
-class PreActor;
-class ObjectLinkData;
-}  // namespace ksys::map
-
 namespace ksys::act {
 
 class Actor;
 class GParamList;
+class ObjectLinkData;
+class PreActor;
 class Shop;
 
 /// Provides read-only access to actor data for safe, multi-threaded access.
@@ -99,8 +96,8 @@ public:
     s32 getAttackPower() const;
 
     bool checkLinkTagActivated(bool a, bool b);
-    map::ObjectLinkData* getMapObjectLinkData() const;
-    map::PreActor* getMapObject() const;
+    ObjectLinkData* getMapObjectLinkData() const;
+    PreActor* getMapObject() const;
 
     s32 getEnemyRank() const;
 

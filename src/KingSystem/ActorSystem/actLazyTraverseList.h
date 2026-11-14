@@ -6,7 +6,7 @@
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::map {
+namespace ksys::act {
 
 class LazyTraverseList {
 public:
@@ -36,4 +36,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(LazyTraverseList, 0x28);
 
-}  // namespace ksys::map
+}  // namespace ksys::act

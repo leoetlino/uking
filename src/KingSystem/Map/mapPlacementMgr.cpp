@@ -4,10 +4,10 @@
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actClusteredRenderer.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/ActorSystem/actPlacementActors.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Framework/frmActorInstParamPack.h"
-#include "KingSystem/Map/mapPlacementActors.h"
 #include "KingSystem/Map/mapPlacementTree.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/System/VFR.h"
 
 namespace ksys::map {

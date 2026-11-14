@@ -169,6 +169,8 @@ target_sources(uking PRIVATE
     actInfoCommon.h
     actInfoData.cpp
     actInfoData.h
+    actLazyTraverseList.cpp
+    actLazyTraverseList.h
     actLifeCondition.cpp
     actLifeCondition.h
     actLifeRecoveryInfo.h
@@ -180,18 +182,34 @@ target_sources(uking PRIVATE
     actModelCallback.h
     actModelList.cpp
     actModelList.h
+    actObjectLink.cpp
+    actObjectLink.h
+    actObjectLinkGenGroup.cpp
+    actObjectLinkGenGroup.h
     actPhysics.cpp
     actPhysics.h
     actPhysicsConstraints.cpp
     actPhysicsConstraints.h
     actPhysicsUserTag.cpp
     actPhysicsUserTag.h
+    actPlacementActors.cpp
+    actPlacementActors.h
+    actPlacementAreaMgr.cpp
+    actPlacementAreaMgr.h
+    actPlacementMap.cpp
+    actPlacementMap.h
+    actPlacementMapMgr.cpp
+    actPlacementMapMgr.h
+    actPreActor.cpp
+    actPreActor.h
     actRagdollBlendWeight.cpp
     actRagdollBlendWeight.h
     actRagdollConfigList.cpp
     actRagdollConfigList.h
     actRagdollConfigResource.cpp
     actRagdollConfigResource.h
+    actRail.cpp
+    actRail.h
     actRecipe.cpp
     actRecipe.h
     actShop.cpp

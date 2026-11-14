@@ -5,8 +5,8 @@
 #include <prim/seadEnum.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -47,7 +47,7 @@ public:
 
     bool isTestOfStrengthShrine() const;
 
-    bool rankUpEnemy(const sead::SafeString& actor_name, const ksys::map::PreActor& obj,
+    bool rankUpEnemy(const sead::SafeString& actor_name, const ksys::act::PreActor& obj,
                      const char** new_name);
 
     void setHardModeChange(HardModeChange flag, bool on) { mHardModeChanges.changeBit(flag, on); }

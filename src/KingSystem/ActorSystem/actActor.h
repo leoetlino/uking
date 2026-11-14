@@ -48,10 +48,6 @@ class ActorChemicals;
 class Object;
 }  // namespace chm
 
-namespace map {
-class PreActor;
-}  // namespace map
-
 namespace mii {
 class HylianInfo;
 class UMii;
@@ -96,6 +92,7 @@ class ImpulseBaseProcLink;
 class IDamageManager;
 class LodState;
 class ModelBindInfo;
+class PreActor;
 class Schedule;
 
 struct ActorUniqueName {
@@ -236,7 +233,7 @@ public:
 
     ai::RootAi* getRootAi() const { return mRootAi; }
     const ActorParam* getParam() const { return mActorParam; }
-    map::PreActor* getMapObject() const { return mMapObject; }
+    PreActor* getMapObject() const { return mMapObject; }
     const map::MubinIter& getMapObjIter() const { return mMapObjIter; }
     as::ASList* getASList() const { return mASList; }
 
@@ -571,7 +568,7 @@ protected:
 
     /* 0x7b0 */ ActorCreator* mCreator{};
     /* 0x7b8 */ sead::ListNode mCreatorActorListNode;
-    /* 0x7c8 */ map::PreActor* mMapObject{};
+    /* 0x7c8 */ PreActor* mMapObject{};
 
     /* 0x7d0 */ void* mEventTransAnimData = nullptr;
     /* 0x7d8 */ bool mActorEditorNodeConnected = false;

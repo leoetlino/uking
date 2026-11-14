@@ -12,7 +12,6 @@
 
 namespace ksys::map {
 class MubinIter;
-class PreActor;
 }  // namespace ksys::map
 
 namespace ksys::frm {
@@ -25,6 +24,7 @@ namespace ksys::act {
 
 class Actor;
 struct ActorCreateArg;
+class PreActor;
 
 class IBaseProcFactory {
 public:
@@ -40,12 +40,12 @@ class ActorCreator {
 
 public:
     bool requestCreateMapActor(const char* name, sead::Heap* heap, map::MubinIter* mubin_iter,
-                               map::PreActor* map_object, frm::BaseProcHandle* handle,
-                               int task_lane_id, frm::ActorInstParamPack* params);
+                               PreActor* map_object, frm::BaseProcHandle* handle, int task_lane_id,
+                               frm::ActorInstParamPack* params);
     Actor* createActor(const char* name, sead::Heap* heap, frm::ActorInstParamPack* params,
                        bool sleep_after_init, bool block_other_synchronous_spawns);
     bool requestCreateActor(const char* name, sead::Heap* heap, frm::BaseProcHandle* handle,
-                            frm::ActorInstParamPack* params, map::PreActor* map_object,
+                            frm::ActorInstParamPack* params, PreActor* map_object,
                             int task_lane_id);
 
     void enableDistanceUnloadChecks();
@@ -73,12 +73,12 @@ public:
 
 private:
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                             map::MubinIter* mubin_iter, map::PreActor* map_object,
+                             map::MubinIter* mubin_iter, PreActor* map_object,
                              frm::BaseProcHandle* handle, int task_lane_id,
                              frm::ActorInstParamPack* params);
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                             map::PreActor* map_object, frm::BaseProcHandle* handle,
-                             int task_lane_id, frm::ActorInstParamPack* params);
+                             PreActor* map_object, frm::BaseProcHandle* handle, int task_lane_id,
+                             frm::ActorInstParamPack* params);
     frm::BaseProc* createActor_(const char* actor_class, const char* name, sead::Heap* heap,
                                 frm::ActorInstParamPack* params, bool sleep_after_init,
                                 bool = false);

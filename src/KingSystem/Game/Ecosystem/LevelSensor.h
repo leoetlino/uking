@@ -1,7 +1,7 @@
 #pragma once
 
-#include <KingSystem/Map/mapPreActor.h>
 #include <basis/seadTypes.h>
+#include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -11,15 +11,12 @@ class ByamlIter;
 
 namespace ksys::act {
 class Actor;
+class PreActor;
 }  // namespace ksys::act
 
 namespace ksys::frm {
 class ActorInstParamPack;
 }  // namespace ksys::frm
-
-namespace ksys::map {
-class PreActor;
-}
 
 namespace ksys::game {
 
@@ -47,7 +44,7 @@ public:
                      const char** scaled_weapon, WeaponModifier* scaled_modifier,
                      const act::Actor* actor) const;
 
-    bool scaleActor(const sead::SafeString& name, map::PreActor* obj, const char** scaled_weapon,
+    bool scaleActor(const sead::SafeString& name, act::PreActor* obj, const char** scaled_weapon,
                     frm::ActorInstParamPack* pack, const sead::Vector3f& position) const;
 
     void calculatePoints();
