@@ -2,9 +2,9 @@
 #include <random/seadGlobalRandom.h>
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorSystem.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/Event/evtMetadata.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/System/VFR.h"
@@ -590,7 +590,7 @@ void TimeMgr::AnimalMasterController::calc() {
 
         if (!player_accessor.hasProc())
             break;
-        if (act::isInSatoriMountainArea(player_accessor.getAttentionPos()))
+        if (game::isInSatoriMountainArea(player_accessor.getAttentionPos()))
             break;
 
         appearance_hour = sead::GlobalRandom::instance()->getU32(23);
@@ -602,7 +602,7 @@ void TimeMgr::AnimalMasterController::calc() {
         if (!player_accessor.hasProc())
             break;
 
-        if (act::isInSatoriMountainArea(player_accessor.getAttentionPos())) {
+        if (game::isInSatoriMountainArea(player_accessor.getAttentionPos())) {
             state = 0;
             break;
         }

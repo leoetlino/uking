@@ -1,7 +1,7 @@
 #include "Game/Actor/Query/queryCheckPorchInItem.h"
 #include <evfl/Query.h>
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actTag.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::query {
 
@@ -10,7 +10,7 @@ CheckPorchInItem::CheckPorchInItem(const InitArg& arg) : ksys::act::ai::Query(ar
 CheckPorchInItem::~CheckPorchInItem() = default;
 
 int CheckPorchInItem::doQuery() {
-    return ksys::act::hasTag(mPorchItemName, ksys::act::tags::CanGetPouch);
+    return ksys::game::hasTag(mPorchItemName, ksys::act::tags::CanGetPouch);
 }
 
 void CheckPorchInItem::loadParams(const evfl::QueryArg& arg) {

@@ -1,4 +1,4 @@
-#include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include <Byaml/Byaml.h>
 #include <container/seadSafeArray.h>
 #include <math/seadMathCalcCommon.h>
@@ -19,18 +19,18 @@
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/World/worldManager.h"
 
-namespace ksys::act {
+namespace ksys::game {
 
 namespace {
 
-ActorLinkConstDataAccess getAccessor(frm::BaseProcLink* link) {
-    ActorLinkConstDataAccess accessor;
+act::ActorLinkConstDataAccess getAccessor(frm::BaseProcLink* link) {
+    act::ActorLinkConstDataAccess accessor;
     acquireActor(link, &accessor);
     return accessor;
 }
 
-ActorLinkConstDataAccess getAccessor(Actor* actor) {
-    ActorLinkConstDataAccess accessor{actor};
+act::ActorLinkConstDataAccess getAccessor(act::Actor* actor) {
+    act::ActorLinkConstDataAccess accessor{actor};
     return accessor;
 }
 
@@ -49,7 +49,7 @@ gdt::FlagHandle sIsGetStopTimerLv2Handle = gdt::InvalidHandle;
 
 }  // namespace
 
-bool hasTag(Actor* actor, const sead::SafeString& tag) {
+bool hasTag(act::Actor* actor, const sead::SafeString& tag) {
     if (!actor)
         return false;
     return actor->getParam()->getRes().mActorLink->hasTag(tag.cstr());
@@ -59,16 +59,16 @@ bool hasTag(frm::BaseProcLink* link, const sead::SafeString& tag) {
     return hasTag(getAccessor(link), tag);
 }
 
-bool hasTag(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tag) {
+bool hasTag(const act::ActorLinkConstDataAccess& accessor, const sead::SafeString& tag) {
     return accessor.hasTag(tag.cstr());
 }
 
 bool hasTag(const sead::SafeString& actor, const sead::SafeString& tag) {
-    auto* data = InfoData::instance();
+    auto* data = act::InfoData::instance();
     return data && data->hasTag(actor.cstr(), tag.cstr());
 }
 
-bool hasTag(Actor* actor, u32 tag) {
+bool hasTag(act::Actor* actor, u32 tag) {
     return actor && actor->getParam()->getRes().mActorLink->hasTag(tag);
 }
 
@@ -76,16 +76,16 @@ bool hasTag(frm::BaseProcLink* link, u32 tag) {
     return hasTag(getAccessor(link), tag);
 }
 
-bool hasTag(const ActorLinkConstDataAccess& accessor, u32 tag) {
+bool hasTag(const act::ActorLinkConstDataAccess& accessor, u32 tag) {
     return accessor.hasTag(tag);
 }
 
 bool hasTag(const sead::SafeString& actor, u32 tag) {
-    auto* data = InfoData::instance();
+    auto* data = act::InfoData::instance();
     return data && data->hasTag(actor.cstr(), tag);
 }
 
-bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags) {
+bool hasOneTagAtLeast(act::Actor* actor, const sead::SafeString& tags) {
     sead::FixedSafeString<32> tag;
     for (auto it = tags.tokenBegin(","); tags.tokenEnd(",") != it; ++it) {
         it.get(&tag);
@@ -105,7 +105,7 @@ bool hasOneTagAtLeast(frm::BaseProcLink* link, const sead::SafeString& tags) {
     return false;
 }
 
-bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tags) {
+bool hasOneTagAtLeast(const act::ActorLinkConstDataAccess& accessor, const sead::SafeString& tags) {
     sead::FixedSafeString<32> tag;
     for (auto it = tags.tokenBegin(","); tags.tokenEnd(",") != it; ++it) {
         it.get(&tag);
@@ -116,8 +116,8 @@ bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::Safe
 }
 
 // NON_MATCHING: this version doesn't have unnecessary register moves.
-bool shouldSkipSpawnIfNotRaining(PreActor* obj) {
-    if (obj->getFlags().isOff(PreActor::Flag::CreateNotRain))
+bool shouldSkipSpawnIfNotRaining(act::PreActor* obj) {
+    if (obj->getFlags().isOff(act::PreActor::Flag::CreateNotRain))
         return false;
 
     if (!world::Manager::instance())
@@ -127,18 +127,18 @@ bool shouldSkipSpawnIfNotRaining(PreActor* obj) {
     return !world::Manager::instance()->isRaining(pos);
 }
 
-bool shouldSkipSpawnIfGodForestOff(PreActor* obj) {
+bool shouldSkipSpawnIfGodForestOff(act::PreActor* obj) {
     bool value = false;
-    if (obj->getFlags().isOff(PreActor::Flag::UnderGodForestOff))
+    if (obj->getFlags().isOff(act::PreActor::Flag::UnderGodForestOff))
         return false;
     if (!gdt::Manager::instance()->getBool(sAnimalMasterAppearanceHandle, &value, true))
         return false;
     return value != 0;
 }
 
-bool shouldSkipSpawnGodForestActor(PreActor* obj) {
+bool shouldSkipSpawnGodForestActor(act::PreActor* obj) {
     bool value = false;
-    if (obj->getFlags().isOn(PreActor::Flag::UnderGodForest) &&
+    if (obj->getFlags().isOn(act::PreActor::Flag::UnderGodForest) &&
         gdt::Manager::instance()->getBool(sAnimalMasterAppearanceHandle, &value, true) && !value) {
         return true;
     }
@@ -150,17 +150,17 @@ static bool isFairyCountCheckEnabled() {
     return gdt::Manager::instance()->getBool(sFairyCountCheckHandle, &value, true) && value;
 }
 
-bool shouldSkipSpawnFairy(PreActor* obj) {
-    const ActorData& actor_data = obj->getActorData();
-    if (!actor_data.mFlags.isOnBit(ActorData::Flag::Fairy))
+bool shouldSkipSpawnFairy(act::PreActor* obj) {
+    const act::ActorData& actor_data = obj->getActorData();
+    if (!actor_data.mFlags.isOnBit(act::ActorData::Flag::Fairy))
         return false;
 
     return isFairyCountCheckEnabled();
 }
 
 bool shouldSkipSpawnFairy(const sead::SafeString& actor) {
-    auto* info = InfoData::instance();
-    if (!info || !info->hasTag(actor.cstr(), tags::Fairy))
+    auto* info = act::InfoData::instance();
+    if (!info || !info->hasTag(actor.cstr(), act::tags::Fairy))
         return false;
 
     return isFairyCountCheckEnabled();
@@ -181,19 +181,19 @@ auto initSpawnConditionGameDataFlags_dummy() {
 
 // NON_MATCHING: redundant branches in the original code.
 bool hasAnyRevivalTag(const sead::SafeString& actor) {
-    auto* info = InfoData::instance();
+    auto* info = act::InfoData::instance();
     al::ByamlIter iter;
     if (!info || !info->getActorIter(&iter, actor.cstr()))
         return false;
 
     for (auto tag : {
-             tags::RevivalBloodyMoon,
-             tags::RevivalRandom,
-             tags::RevivalNone,
-             tags::RevivalNoneForUsed,
-             tags::RevivalRandomForDrop,
-             tags::RevivalNoneForDrop,
-             tags::RevivalUnderGodTime,
+             act::tags::RevivalBloodyMoon,
+             act::tags::RevivalRandom,
+             act::tags::RevivalNone,
+             act::tags::RevivalNoneForUsed,
+             act::tags::RevivalRandomForDrop,
+             act::tags::RevivalNoneForDrop,
+             act::tags::RevivalUnderGodTime,
          }) {
         if (info->hasTag(iter, tag))
             return true;
@@ -201,12 +201,12 @@ bool hasAnyRevivalTag(const sead::SafeString& actor) {
     return false;
 }
 
-bool hasStopTimerMiddleTag(Actor* actor) {
-    return hasTag(actor, tags::StopTimerMiddle);
+bool hasStopTimerMiddleTag(act::Actor* actor) {
+    return hasTag(actor, act::tags::StopTimerMiddle);
 }
 
-bool hasStopTimerShortTag(Actor* actor) {
-    return hasTag(actor, tags::StopTimerShort);
+bool hasStopTimerShortTag(act::Actor* actor) {
+    return hasTag(actor, act::tags::StopTimerShort);
 }
 
 // NON_MATCHING: ???
@@ -226,57 +226,58 @@ ZukanType getZukanType(al::ByamlIter* iter) {
     if (!iter)
         return ZukanType::Invalid;
 
-    auto* info = InfoData::instance();
+    auto* info = act::InfoData::instance();
 
-    if (info->hasTag(*iter, tags::ZukanAnimal))
+    if (info->hasTag(*iter, act::tags::ZukanAnimal))
         return ZukanType::Animal;
 
-    if (info->hasTag(*iter, tags::ZukanEnemy))
+    if (info->hasTag(*iter, act::tags::ZukanEnemy))
         return ZukanType::Enemy;
 
-    if (info->hasTag(*iter, tags::ZukanSozai))
+    if (info->hasTag(*iter, act::tags::ZukanSozai))
         return ZukanType::Sozai;
 
-    if (info->hasTag(*iter, tags::ZukanWeapon))
+    if (info->hasTag(*iter, act::tags::ZukanWeapon))
         return ZukanType::Weapon;
 
-    if (info->hasTag(*iter, tags::ZukanOther))
+    if (info->hasTag(*iter, act::tags::ZukanOther))
         return ZukanType::Other;
 
     return ZukanType::Invalid;
 }
 
-ZukanType getZukanType(Actor* actor) {
+ZukanType getZukanType(act::Actor* actor) {
     if (!actor)
         return ZukanType::Invalid;
 
-    if (hasTag(actor, tags::ZukanAnimal))
+    if (hasTag(actor, act::tags::ZukanAnimal))
         return ZukanType::Animal;
 
-    if (hasTag(actor, tags::ZukanEnemy))
+    if (hasTag(actor, act::tags::ZukanEnemy))
         return ZukanType::Enemy;
 
-    if (hasTag(actor, tags::ZukanSozai))
+    if (hasTag(actor, act::tags::ZukanSozai))
         return ZukanType::Sozai;
 
-    if (hasTag(actor, tags::ZukanWeapon))
+    if (hasTag(actor, act::tags::ZukanWeapon))
         return ZukanType::Weapon;
 
-    if (hasTag(actor, tags::ZukanOther))
+    if (hasTag(actor, act::tags::ZukanOther))
         return ZukanType::Other;
 
     return ZukanType::Invalid;
 }
 
-static bool isProfile(const ActorLinkConstDataAccess& accessor, const sead::SafeString& profile) {
+static bool isProfile(const act::ActorLinkConstDataAccess& accessor,
+                      const sead::SafeString& profile) {
     return accessor.hasProc() && accessor.getProfile() == profile;
 }
 
-bool isPlayerProfile(const ActorLinkConstDataAccess& accessor) {
+bool isPlayerProfile(const act::ActorLinkConstDataAccess& accessor) {
     return isProfile(accessor, "Player");
 }
 
-bool isPlayerProfile(Actor* actor) {
+bool isPlayerProfile(act::Actor* actor) {
     return isPlayerProfile(getAccessor(actor));
 }
 
@@ -288,15 +289,15 @@ const sead::SafeString& getDefaultDropActor() {
     return sDefaultDropActor;
 }
 
-bool isCameraProfile(Actor* actor) {
+bool isCameraProfile(act::Actor* actor) {
     return isProfile(getAccessor(actor), "Camera");
 }
 
-bool isNPCProfile(const ActorLinkConstDataAccess& accessor) {
+bool isNPCProfile(const act::ActorLinkConstDataAccess& accessor) {
     return isProfile(accessor, "NPC");
 }
 
-bool isNPCProfile(Actor* actor) {
+bool isNPCProfile(act::Actor* actor) {
     return isNPCProfile(getAccessor(actor));
 }
 
@@ -304,7 +305,7 @@ bool isNPCProfile(frm::BaseProcLink* link) {
     return isNPCProfile(getAccessor(link));
 }
 
-bool isNPCOffPodFromWeapon(Actor* actor) {
+bool isNPCOffPodFromWeapon(act::Actor* actor) {
     if (!actor)
         return false;
 
@@ -316,11 +317,11 @@ bool isNPCOffPodFromWeapon(Actor* actor) {
     return npc_param && npc_param->mIsOffPodFromWeapon.ref();
 }
 
-bool isDemoNPCProfile(Actor* actor) {
+bool isDemoNPCProfile(act::Actor* actor) {
     return isProfile(getAccessor(actor), "DemoNPC");
 }
 
-bool isEnemyProfile(const ActorLinkConstDataAccess& accessor) {
+bool isEnemyProfile(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
 
@@ -332,7 +333,7 @@ bool isEnemyProfile(const ActorLinkConstDataAccess& accessor) {
            profile == "Dragon";
 }
 
-bool isEnemyProfile(Actor* actor) {
+bool isEnemyProfile(act::Actor* actor) {
     return isEnemyProfile(getAccessor(actor));
 }
 
@@ -349,7 +350,7 @@ bool isGuardianProfile(frm::BaseProcLink* link) {
     return profile == "Guardian" || profile == "GuardianComponent";
 }
 
-bool isLargeEnemy(const ActorLinkConstDataAccess& accessor) {
+bool isLargeEnemy(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
 
@@ -358,11 +359,11 @@ bool isLargeEnemy(const ActorLinkConstDataAccess& accessor) {
            profile == "Sandworm" || profile == "Dragon";
 }
 
-bool isLargeEnemy(Actor* actor) {
+bool isLargeEnemy(act::Actor* actor) {
     return isLargeEnemy(getAccessor(actor));
 }
 
-bool isGanonBeast(const ActorLinkConstDataAccess& accessor) {
+bool isGanonBeast(const act::ActorLinkConstDataAccess& accessor) {
     return accessor.hasProc() && accessor.getName() == "Enemy_GanonBeast";
 }
 
@@ -370,11 +371,11 @@ bool isGanonBeast(frm::BaseProcLink* link) {
     return isGanonBeast(getAccessor(link));
 }
 
-bool isNotLivingCreature(Actor* actor) {
+bool isNotLivingCreature(act::Actor* actor) {
     return isNotLivingCreature(getAccessor(actor));
 }
 
-bool isNotLivingCreature(const ActorLinkConstDataAccess& accessor) {
+bool isNotLivingCreature(const act::ActorLinkConstDataAccess& accessor) {
     if (isPlayerProfile(accessor))
         return false;
     if (isNPCProfile(accessor))
@@ -392,7 +393,7 @@ bool isNotLivingCreature(frm::BaseProcLink* link) {
     return isNotLivingCreature(getAccessor(link));
 }
 
-bool isWeaponProfile(const ActorLinkConstDataAccess& accessor) {
+bool isWeaponProfile(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
     return isWeaponProfile(accessor.getName());
@@ -400,11 +401,11 @@ bool isWeaponProfile(const ActorLinkConstDataAccess& accessor) {
 
 bool isWeaponProfile(const sead::SafeString& actor) {
     const char* profile = nullptr;
-    InfoData::instance()->getActorProfile(&profile, actor.cstr());
+    act::InfoData::instance()->getActorProfile(&profile, actor.cstr());
     return sead::SafeString(profile).startsWith("Weapon");
 }
 
-bool isWeaponProfile(Actor* actor) {
+bool isWeaponProfile(act::Actor* actor) {
     return isWeaponProfile(getAccessor(actor));
 }
 
@@ -412,28 +413,28 @@ bool isWeaponProfile(frm::BaseProcLink* link) {
     return isWeaponProfile(getAccessor(link));
 }
 
-bool isWeaponOrArmor(const ActorLinkConstDataAccess& accessor) {
+bool isWeaponOrArmor(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
 
     const auto& name = accessor.getName();
     const char* profile_cstr = nullptr;
-    InfoData::instance()->getActorProfile(&profile_cstr, name.cstr());
+    act::InfoData::instance()->getActorProfile(&profile_cstr, name.cstr());
 
     const sead::SafeString profile = profile_cstr;
     return profile.startsWith("Weapon") || profile.startsWith("OptionalWeapon") ||
            profile.startsWith("Armor");
 }
 
-bool isWeaponOrArmor(Actor* actor) {
+bool isWeaponOrArmor(act::Actor* actor) {
     return isWeaponOrArmor(getAccessor(actor));
 }
 
-bool isBulletProfile(const ActorLinkConstDataAccess& accessor) {
+bool isBulletProfile(const act::ActorLinkConstDataAccess& accessor) {
     return isProfile(accessor, "Bullet");
 }
 
-bool isBulletProfile(Actor* actor) {
+bool isBulletProfile(act::Actor* actor) {
     return isBulletProfile(getAccessor(actor));
 }
 
@@ -441,11 +442,11 @@ bool isBulletProfile(frm::BaseProcLink* link) {
     return isBulletProfile(getAccessor(link));
 }
 
-bool isHorseProfile(const ActorLinkConstDataAccess& accessor) {
+bool isHorseProfile(const act::ActorLinkConstDataAccess& accessor) {
     return isProfile(accessor, "Horse");
 }
 
-bool isHorseProfile(Actor* actor) {
+bool isHorseProfile(act::Actor* actor) {
     return isHorseProfile(getAccessor(actor));
 }
 
@@ -459,25 +460,25 @@ bool isGrabAttClientEnabled(void*, frm::BaseProcLink* link) {
 
 bool isStalfosParts(frm::BaseProcLink* link) {
     const auto accessor = getAccessor(link);
-    return accessor.hasProc() && accessor.hasTag(tags::StalfosParts);
+    return accessor.hasProc() && accessor.hasTag(act::tags::StalfosParts);
 }
 
-bool isDoor(const ActorLinkConstDataAccess& accessor) {
-    return accessor.hasProc() && accessor.hasTag(tags::Door);
+bool isDoor(const act::ActorLinkConstDataAccess& accessor) {
+    return accessor.hasProc() && accessor.hasTag(act::tags::Door);
 }
 
 bool isDoor(frm::BaseProcLink* link) {
     return isDoor(getAccessor(link));
 }
 
-bool isPreyOrSwarm(const ActorLinkConstDataAccess& accessor) {
+bool isPreyOrSwarm(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
     const auto& profile = accessor.getProfile();
     return profile == "Prey" || profile == "Swarm";
 }
 
-bool isPreyOrSwarm(Actor* actor) {
+bool isPreyOrSwarm(act::Actor* actor) {
     return isPreyOrSwarm(getAccessor(actor));
 }
 
@@ -485,13 +486,13 @@ bool isPreyOrSwarm(frm::BaseProcLink* link) {
     return isPreyOrSwarm(getAccessor(link));
 }
 
-bool isWolfOrBear(const ActorLinkConstDataAccess& accessor) {
+bool isWolfOrBear(const act::ActorLinkConstDataAccess& accessor) {
     if (!accessor.hasProc())
         return false;
-    return accessor.hasTag(tags::AnimalTypeWolf) || accessor.hasTag(tags::AnimalTypeBear);
+    return accessor.hasTag(act::tags::AnimalTypeWolf) || accessor.hasTag(act::tags::AnimalTypeBear);
 }
 
-bool isWolfOrBear(Actor* actor) {
+bool isWolfOrBear(act::Actor* actor) {
     return isWolfOrBear(getAccessor(actor));
 }
 
@@ -499,23 +500,23 @@ bool isWolfOrBear(frm::BaseProcLink* link) {
     return isWolfOrBear(getAccessor(link));
 }
 
-bool isRope(Actor* actor) {
+bool isRope(act::Actor* actor) {
     const auto accessor = getAccessor(actor);
-    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
 }
 
 bool isRope(frm::BaseProcLink* link) {
     const auto accessor = getAccessor(link);
-    return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
+    return accessor.hasProc() && accessor.isDerivedFrom<RopeBase>();
 }
 
-bool isTreeOrScaffoldOrSignboard(Actor* actor) {
+bool isTreeOrScaffoldOrSignboard(act::Actor* actor) {
     const auto accessor = getAccessor(actor);
     if (!accessor.hasProc())
         return false;
 
-    return accessor.hasTag(tags::Tree) || accessor.hasTag(tags::Scaffold) ||
-           accessor.hasTag(tags::Signboard);
+    return accessor.hasTag(act::tags::Tree) || accessor.hasTag(act::tags::Scaffold) ||
+           accessor.hasTag(act::tags::Signboard);
 }
 
 bool isAirOctaPlatform(const sead::SafeString& name) {
@@ -556,13 +557,13 @@ bool getSameGroupActorName(sead::SafeString* name, frm::BaseProcLink* link) {
     return getAccessor(link).getSameGroupActorName(name);
 }
 
-bool getSameGroupActorName(sead::SafeString* name, Actor* actor) {
+bool getSameGroupActorName(sead::SafeString* name, act::Actor* actor) {
     return getAccessor(actor).getSameGroupActorName(name);
 }
 
 bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& default_value,
                            al::ByamlIter* actor_info) {
-    const sead::SafeString value = InfoData::instance()->getSameGroupActorName(*actor_info);
+    const sead::SafeString value = act::InfoData::instance()->getSameGroupActorName(*actor_info);
     if (value.isEmpty()) {
         *name = default_value;
         return false;
@@ -572,7 +573,8 @@ bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& defau
 }
 
 bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& actor_name) {
-    const sead::SafeString value = InfoData::instance()->getSameGroupActorName(actor_name.cstr());
+    const sead::SafeString value =
+        act::InfoData::instance()->getSameGroupActorName(actor_name.cstr());
     if (value.isEmpty()) {
         *name = actor_name;
         return false;
@@ -581,14 +583,14 @@ bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& actor
     return true;
 }
 
-bool getRandomAreaItem(sead::SafeString* item, const game::AreaItemType& type,
+bool getRandomAreaItem(sead::SafeString* item, const AreaItemType& type,
                        const sead::Vector3f& pos) {
-    auto* eco = game::Ecosystem::instance();
+    auto* eco = Ecosystem::instance();
     if (!eco)
         return false;
 
     const int area = eco->getFieldMapArea(pos.x, pos.z);
-    game::AreaItemSet items;
+    AreaItemSet items;
     eco->getAreaItems(area, type, &items);
 
     int chosen_idx = -1;
@@ -611,7 +613,7 @@ bool getRandomAreaItem(sead::SafeString* item, const game::AreaItemType& type,
 }
 
 bool isInSatoriMountainArea(const sead::Vector3f& pos) {
-    return game::Ecosystem::instance()->getFieldMapArea(pos.x, pos.z) == 64;
+    return Ecosystem::instance()->getFieldMapArea(pos.x, pos.z) == 64;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::game

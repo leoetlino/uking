@@ -5,6 +5,7 @@
 #include <heap/seadExpHeap.h>
 #include <math/seadVector.h>
 #include <prim/seadDelegate.h>
+#include <prim/seadSafeString.h>
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadDelegateThread.h>
 #include "KingSystem/Utils/Types.h"
@@ -162,5 +163,7 @@ public:
 };
 KSYS_CHECK_SIZE_NX150(PlacementMgr, 0x818);
 static_assert(offsetof(PlacementMgr, mThreadStarted) == 0x688);
+
+void* makeProjectMapMuuntPath(const sead::SafeString& path, act::PreActor* object);
 
 }  // namespace ksys::map

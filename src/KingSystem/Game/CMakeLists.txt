@@ -14,6 +14,7 @@ add_subdirectory(Rope)
 add_subdirectory(System)
 add_subdirectory(Title)
 add_subdirectory(UI)
+add_subdirectory(Util)
 add_subdirectory(Weapon)
 
 target_sources(uking PRIVATE

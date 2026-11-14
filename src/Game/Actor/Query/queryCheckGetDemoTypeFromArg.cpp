@@ -1,8 +1,8 @@
 #include "Game/Actor/Query/queryCheckGetDemoTypeFromArg.h"
 #include <evfl/Query.h>
 #include "Game/UI/uiPauseMenuDataMgr.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actTag.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::query {
 
@@ -22,9 +22,9 @@ int CheckGetDemoTypeFromArg::doQuery() {
     if (*mUseLastTryGetItemName && ui::PauseMenuDataMgr::instance()) {
         auto* item = ui::PauseMenuDataMgr::instance()->getLastAddedItem();
         if (item->isInInventory()) {
-            if (ksys::act::hasTag(item->getName(), ksys::act::tags::ApplyHighGradeGetDemo))
+            if (ksys::game::hasTag(item->getName(), ksys::act::tags::ApplyHighGradeGetDemo))
                 return Result_HighGrade;
-            if (ksys::act::hasTag(item->getName(), ksys::act::tags::ApplyDeluxeGetDemo))
+            if (ksys::game::hasTag(item->getName(), ksys::act::tags::ApplyDeluxeGetDemo))
                 return Result_Deluxe;
             return Result_Default;
         }
@@ -32,15 +32,15 @@ int CheckGetDemoTypeFromArg::doQuery() {
 
     if (mCheckTargetActorName.isEmpty()) {
         if (auto* actor = mActor) {
-            if (ksys::act::hasTag(actor, ksys::act::tags::ApplyHighGradeGetDemo))
+            if (ksys::game::hasTag(actor, ksys::act::tags::ApplyHighGradeGetDemo))
                 return Result_HighGrade;
-            if (ksys::act::hasTag(actor, ksys::act::tags::ApplyDeluxeGetDemo))
+            if (ksys::game::hasTag(actor, ksys::act::tags::ApplyDeluxeGetDemo))
                 return Result_Deluxe;
         }
     } else {
-        if (ksys::act::hasTag(mCheckTargetActorName, ksys::act::tags::ApplyHighGradeGetDemo))
+        if (ksys::game::hasTag(mCheckTargetActorName, ksys::act::tags::ApplyHighGradeGetDemo))
             return Result_HighGrade;
-        if (ksys::act::hasTag(mCheckTargetActorName, ksys::act::tags::ApplyDeluxeGetDemo))
+        if (ksys::game::hasTag(mCheckTargetActorName, ksys::act::tags::ApplyDeluxeGetDemo))
             return Result_Deluxe;
     }
 

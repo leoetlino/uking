@@ -1,7 +1,7 @@
 #include "Game/Actor/Query/queryCheckContainerItem.h"
 #include <evfl/Query.h>
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actTag.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::query {
 
@@ -10,10 +10,10 @@ CheckContainerItem::CheckContainerItem(const InitArg& arg) : ksys::act::ai::Quer
 CheckContainerItem::~CheckContainerItem() = default;
 
 int CheckContainerItem::doQuery() {
-    if (ksys::act::hasTag(mPorchItemName, ksys::act::tags::HeartContainer))
+    if (ksys::game::hasTag(mPorchItemName, ksys::act::tags::HeartContainer))
         return 1;
 
-    if (ksys::act::hasTag(mPorchItemName, ksys::act::tags::StaminaContainer))
+    if (ksys::game::hasTag(mPorchItemName, ksys::act::tags::StaminaContainer))
         return 1;
 
     return 0;

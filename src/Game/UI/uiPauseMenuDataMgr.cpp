@@ -18,10 +18,10 @@
 #include "Game/gdtCommonFlags.h"
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/Framework/frmBaseProcLink.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/PlayReport/ProductReportMgr.h"
@@ -134,9 +134,9 @@ PouchStaticData sValues;
 void getSameGroupActorName(sead::SafeString* group, const sead::SafeString& item,
                            al::ByamlIter* iter = nullptr) {
     if (iter) {
-        ksys::act::getSameGroupActorName(group, item, iter);
+        ksys::game::getSameGroupActorName(group, item, iter);
     } else {
-        ksys::act::getSameGroupActorName(group, item);
+        ksys::game::getSameGroupActorName(group, item);
     }
 }
 
@@ -927,7 +927,7 @@ void PauseMenuDataMgr::addToPouch(const sead::SafeString& name, PouchItemType ty
     }
 
     sead::SafeString same_group_actor_name;
-    ksys::act::getSameGroupActorName(&same_group_actor_name, name);
+    ksys::game::getSameGroupActorName(&same_group_actor_name, name);
     setIsGetItem(same_group_actor_name, true);
     setIsGetItem2(same_group_actor_name, true);
 }
@@ -939,7 +939,7 @@ void PauseMenuDataMgr::doAddToPouch(PouchItemType type, const sead::SafeString& 
     bool can_stack =
         ksys::act::InfoData::instance()->hasTag(name.cstr(), ksys::act::tags::CanStack);
     sead::FixedSafeString<0x80> item_name_to_add = sead::SafeString::cEmptyString;
-    ksys::act::getSameGroupActorName(&item_name_to_add, name);
+    ksys::game::getSameGroupActorName(&item_name_to_add, name);
 
     if (!is_inventory_load) {
         if (ksys::act::InfoData::instance()->hasTag(item_name_to_add.cstr(),

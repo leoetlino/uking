@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryGeneralChoice4.h"
 #include <evfl/Query.h>
-#include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::query {
 
@@ -10,7 +10,7 @@ GeneralChoice4::~GeneralChoice4() = default;
 
 // FIXME: implement
 int GeneralChoice4::doQuery() {
-    s32 idx = ksys::act::getSelectedChoiceIdx(4, getName());
+    s32 idx = ksys::game::getSelectedChoiceIdx(4, getName());
     if (idx < 0)
         return 0;
 

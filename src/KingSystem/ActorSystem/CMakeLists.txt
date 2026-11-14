@@ -104,8 +104,6 @@ target_sources(uking PRIVATE
     actActorSystem.h
     actActorTemplate.cpp
     actActorTemplate.h
-    actActorUtil.cpp
-    actActorUtil.h
     actAiAction.cpp
     actAiAction.h
     actAiActionBase.cpp

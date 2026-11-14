@@ -2,12 +2,12 @@
 #include "KingSystem/ActorSystem/actAIProgram.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/ActorSystem/actAiClassDef.h"
 #include "KingSystem/ActorSystem/actAiInlineParam.h"
 #include "KingSystem/ActorSystem/aiDummyAi.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace ksys::act::ai {
 
@@ -37,7 +37,8 @@ bool Ai::initChildren_(s32 num_children, const char** names, sead::Buffer<u16>& 
                        sead::Heap* heap) {
     auto* actor = mActor;
 
-    if (indices.size() != num_children && !isPlayerProfile(actor) && !isCameraProfile(actor))
+    if (indices.size() != num_children && !game::isPlayerProfile(actor) &&
+        !game::isCameraProfile(actor))
         return false;
 
     if (num_children <= 0)

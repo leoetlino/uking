@@ -1,7 +1,7 @@
 #include "Game/Actor/Action/actionAddAutoPlacementCreator.h"
 #include "Game/AutoPlacement/AutoPlacementMgr.h"
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/Map/mapDebug.h"
+#include "KingSystem/Game/Util/MapUtil.h"
 #include "KingSystem/Utils/MathUtil.h"
 
 namespace uking::action {
@@ -26,20 +26,20 @@ void AddAutoPlacementCreator::enter_(ksys::act::ai::InlineParamPack* params) {
 
     if (mShape_m == "Sphere") {
         if (!sead::Mathf::equalsEpsilon(actor->getScale().x, actor->getScale().z, 0.01f)) {
-            ksys::map::printDebugMsg(actor, "スケールのXとZは一致していないといけません", nullptr);
+            ksys::game::printDebugMsg(actor, "スケールのXとZは一致していないといけません", nullptr);
             return;
         }
         is_box = false;
     } else if (mShape_m == "Box") {
         is_box = true;
     } else {
-        ksys::map::printDebugMsg(actor, "形状は球か箱以外無効です", nullptr);
+        ksys::game::printDebugMsg(actor, "形状は球か箱以外無効です", nullptr);
         return;
     }
 
     if (!sead::Mathf::equalsEpsilon(ksys::util::dot(sead::Vector3f::ey, actor->getMtx(), 1), 1.0f,
                                     0.01f)) {
-        ksys::map::printDebugMsg(actor, "回転はY以外無効です", nullptr);
+        ksys::game::printDebugMsg(actor, "回転はY以外無効です", nullptr);
         return;
     }
 

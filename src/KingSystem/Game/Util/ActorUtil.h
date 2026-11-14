@@ -7,19 +7,19 @@ namespace al {
 class ByamlIter;
 }
 
-namespace ksys::game {
-enum class AreaItemType;
-}
+namespace ksys::act {
+class Actor;
+class ActorLinkConstDataAccess;
+class PreActor;
+}  // namespace ksys::act
 
 namespace ksys::frm {
 class BaseProcLink;
 }
 
-namespace ksys::act {
+namespace ksys::game {
 
-class Actor;
-class ActorLinkConstDataAccess;
-class PreActor;
+enum class AreaItemType;
 
 enum class ArrowType {
     /// Wooden arrows.
@@ -49,26 +49,26 @@ enum class ZukanType {
     Invalid = 5,
 };
 
-bool hasTag(Actor* actor, const sead::SafeString& tag);
+bool hasTag(act::Actor* actor, const sead::SafeString& tag);
 bool hasTag(frm::BaseProcLink* link, const sead::SafeString& tag);
-bool hasTag(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tag);
+bool hasTag(const act::ActorLinkConstDataAccess& accessor, const sead::SafeString& tag);
 bool hasTag(const sead::SafeString& actor, const sead::SafeString& tag);
 
-bool hasTag(Actor* actor, u32 tag);
+bool hasTag(act::Actor* actor, u32 tag);
 bool hasTag(frm::BaseProcLink* link, u32 tag);
-bool hasTag(const ActorLinkConstDataAccess& accessor, u32 tag);
+bool hasTag(const act::ActorLinkConstDataAccess& accessor, u32 tag);
 bool hasTag(const sead::SafeString& actor, u32 tag);
 
 /// Checks whether the actor has at least one of the specified tags.
 /// @param tags A comma separated list of tags.
-bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags);
+bool hasOneTagAtLeast(act::Actor* actor, const sead::SafeString& tags);
 bool hasOneTagAtLeast(frm::BaseProcLink* link, const sead::SafeString& tags);
-bool hasOneTagAtLeast(const ActorLinkConstDataAccess& accessor, const sead::SafeString& tags);
+bool hasOneTagAtLeast(const act::ActorLinkConstDataAccess& accessor, const sead::SafeString& tags);
 
-bool shouldSkipSpawnIfNotRaining(PreActor* obj);
-bool shouldSkipSpawnIfGodForestOff(PreActor* obj);
-bool shouldSkipSpawnGodForestActor(PreActor* obj);
-bool shouldSkipSpawnFairy(PreActor* obj);
+bool shouldSkipSpawnIfNotRaining(act::PreActor* obj);
+bool shouldSkipSpawnIfGodForestOff(act::PreActor* obj);
+bool shouldSkipSpawnGodForestActor(act::PreActor* obj);
+bool shouldSkipSpawnFairy(act::PreActor* obj);
 bool shouldSkipSpawnFairy(const sead::SafeString& actor);
 
 /// Must be called before using any of the "should skip" functions above.
@@ -76,9 +76,9 @@ void initSpawnConditionGameDataFlags();
 
 bool hasAnyRevivalTag(const sead::SafeString& actor);
 
-bool hasStopTimerMiddleTag(Actor* actor);
-bool hasStopTimerShortTag(Actor* actor);
-bool canBeStasised(Actor* actor, bool force);
+bool hasStopTimerMiddleTag(act::Actor* actor);
+bool hasStopTimerShortTag(act::Actor* actor);
+bool canBeStasised(act::Actor* actor, bool force);
 
 void highlightStasisableActors(bool on);
 
@@ -86,73 +86,73 @@ const char* arrowTypeToString(ArrowType idx);
 ArrowType arrowTypeFromString(const sead::SafeString& name);
 
 ZukanType getZukanType(al::ByamlIter* iter);
-ZukanType getZukanType(Actor* actor);
+ZukanType getZukanType(act::Actor* actor);
 
-bool isPlayerProfile(const ActorLinkConstDataAccess& accessor);
-bool isPlayerProfile(Actor* actor);
+bool isPlayerProfile(const act::ActorLinkConstDataAccess& accessor);
+bool isPlayerProfile(act::Actor* actor);
 bool isPlayerProfile(frm::BaseProcLink* link);
 
-bool isCameraProfile(Actor* actor);
+bool isCameraProfile(act::Actor* actor);
 
-bool isNPCProfile(const ActorLinkConstDataAccess& accessor);
-bool isNPCProfile(Actor* actor);
+bool isNPCProfile(const act::ActorLinkConstDataAccess& accessor);
+bool isNPCProfile(act::Actor* actor);
 bool isNPCProfile(frm::BaseProcLink* link);
-bool isNPCOffPodFromWeapon(Actor* actor);
+bool isNPCOffPodFromWeapon(act::Actor* actor);
 
-bool isDemoNPCProfile(Actor* actor);
+bool isDemoNPCProfile(act::Actor* actor);
 
-bool isEnemyProfile(const ActorLinkConstDataAccess& accessor);
-bool isEnemyProfile(Actor* actor);
+bool isEnemyProfile(const act::ActorLinkConstDataAccess& accessor);
+bool isEnemyProfile(act::Actor* actor);
 bool isEnemyProfile(frm::BaseProcLink* link);
 
 bool isGuardianProfile(frm::BaseProcLink* link);
 
-bool isLargeEnemy(const ActorLinkConstDataAccess& accessor);
-bool isLargeEnemy(Actor* actor);
+bool isLargeEnemy(const act::ActorLinkConstDataAccess& accessor);
+bool isLargeEnemy(act::Actor* actor);
 
-bool isGanonBeast(const ActorLinkConstDataAccess& accessor);
+bool isGanonBeast(const act::ActorLinkConstDataAccess& accessor);
 bool isGanonBeast(frm::BaseProcLink* link);
 
-bool isNotLivingCreature(Actor* actor);
-bool isNotLivingCreature(const ActorLinkConstDataAccess& accessor);
+bool isNotLivingCreature(act::Actor* actor);
+bool isNotLivingCreature(const act::ActorLinkConstDataAccess& accessor);
 bool isNotLivingCreature(frm::BaseProcLink* link);
 
-bool isWeaponProfile(const ActorLinkConstDataAccess& accessor);
+bool isWeaponProfile(const act::ActorLinkConstDataAccess& accessor);
 bool isWeaponProfile(const sead::SafeString& actor);
-bool isWeaponProfile(Actor* actor);
+bool isWeaponProfile(act::Actor* actor);
 bool isWeaponProfile(frm::BaseProcLink* link);
 
-bool isWeaponOrArmor(const ActorLinkConstDataAccess& accessor);
-bool isWeaponOrArmor(Actor* actor);
+bool isWeaponOrArmor(const act::ActorLinkConstDataAccess& accessor);
+bool isWeaponOrArmor(act::Actor* actor);
 
-bool isBulletProfile(const ActorLinkConstDataAccess& accessor);
-bool isBulletProfile(Actor* actor);
+bool isBulletProfile(const act::ActorLinkConstDataAccess& accessor);
+bool isBulletProfile(act::Actor* actor);
 bool isBulletProfile(frm::BaseProcLink* link);
 
-bool isHorseProfile(const ActorLinkConstDataAccess& accessor);
-bool isHorseProfile(Actor* actor);
+bool isHorseProfile(const act::ActorLinkConstDataAccess& accessor);
+bool isHorseProfile(act::Actor* actor);
 bool isHorseProfile(frm::BaseProcLink* link);
 
-bool isAttClientEnabled(Actor* actor, const sead::SafeString& client);
+bool isAttClientEnabled(act::Actor* actor, const sead::SafeString& client);
 bool isGrabAttClientEnabled(void* x, frm::BaseProcLink* link);
 
 bool isStalfosParts(frm::BaseProcLink* link);
 
-bool isDoor(const ActorLinkConstDataAccess& accessor);
+bool isDoor(const act::ActorLinkConstDataAccess& accessor);
 bool isDoor(frm::BaseProcLink* link);
 
-bool isPreyOrSwarm(const ActorLinkConstDataAccess& accessor);
-bool isPreyOrSwarm(Actor* actor);
+bool isPreyOrSwarm(const act::ActorLinkConstDataAccess& accessor);
+bool isPreyOrSwarm(act::Actor* actor);
 bool isPreyOrSwarm(frm::BaseProcLink* link);
 
-bool isWolfOrBear(const ActorLinkConstDataAccess& accessor);
-bool isWolfOrBear(Actor* actor);
+bool isWolfOrBear(const act::ActorLinkConstDataAccess& accessor);
+bool isWolfOrBear(act::Actor* actor);
 bool isWolfOrBear(frm::BaseProcLink* link);
 
-bool isRope(Actor* actor);
+bool isRope(act::Actor* actor);
 bool isRope(frm::BaseProcLink* link);
 
-bool isTreeOrScaffoldOrSignboard(Actor* actor);
+bool isTreeOrScaffoldOrSignboard(act::Actor* actor);
 
 bool isAlive(frm::BaseProcLink* link);
 
@@ -164,15 +164,14 @@ const sead::SafeString& getDefaultDropActor();
 void getRevivalGridPosition(const sead::Vector3f& pos, int* col1, int* row1, int* col2, int* row2);
 
 bool getSameGroupActorName(sead::SafeString* name, frm::BaseProcLink* link);
-bool getSameGroupActorName(sead::SafeString* name, Actor* actor);
+bool getSameGroupActorName(sead::SafeString* name, act::Actor* actor);
 bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& default_value,
                            al::ByamlIter* actor_info);
 bool getSameGroupActorName(sead::SafeString* name, const sead::SafeString& actor_name);
 
 s32 getSelectedChoiceIdx(s32 max, const char* query_name);
 
-bool getRandomAreaItem(sead::SafeString* item, const game::AreaItemType& type,
-                       const sead::Vector3f& pos);
+bool getRandomAreaItem(sead::SafeString* item, const AreaItemType& type, const sead::Vector3f& pos);
 bool isInSatoriMountainArea(const sead::Vector3f& pos);
 
-}  // namespace ksys::act
+}  // namespace ksys::game

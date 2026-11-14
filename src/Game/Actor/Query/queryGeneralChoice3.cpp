@@ -1,6 +1,6 @@
 #include "Game/Actor/Query/queryGeneralChoice3.h"
 #include <evfl/Query.h>
-#include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::query {
 
@@ -9,7 +9,7 @@ GeneralChoice3::GeneralChoice3(const InitArg& arg) : ksys::act::ai::Query(arg) {
 GeneralChoice3::~GeneralChoice3() = default;
 
 int GeneralChoice3::doQuery() {
-    s32 idx = ksys::act::getSelectedChoiceIdx(3, getName());
+    s32 idx = ksys::game::getSelectedChoiceIdx(3, getName());
     if (idx < 0)
         return 0;
 

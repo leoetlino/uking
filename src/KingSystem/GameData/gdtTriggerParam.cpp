@@ -5,11 +5,11 @@
 #include <mc/seadCoreInfo.h>
 #include <time/seadTickTime.h>
 #include "KingSystem/ActorSystem/actActorSystem.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/Game/UI/UIGlue.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/GameData/gdtFlagProxy.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerResource.h"
@@ -1632,11 +1632,11 @@ int TriggerParam::resetFlagsAccordingToPolicy(sead::BitFlag32 policy, int skip) 
     const bool main_field = game::StageInfo::sIsMainField;
 
     if (policy.isOnBit(int(ResetType::ResetAtMidnight))) {
-        act::getRevivalGridPosition(act::ActorSystem::instance()->getPlayerPos(), &col1, &row1,
-                                    &col2, &row2);
+        game::getRevivalGridPosition(act::ActorSystem::instance()->getPlayerPos(), &col1, &row1,
+                                     &col2, &row2);
         for (int i = 0; i < 6; ++i)
             arrows[i] =
-                ksys::game::getPorchNum(act::arrowTypeToString(static_cast<act::ArrowType>(i)));
+                ksys::game::getPorchNum(game::arrowTypeToString(static_cast<game::ArrowType>(i)));
     }
     sead::Buffer<int> arrow_counts(arrows);
 
@@ -1850,10 +1850,10 @@ bool TriggerParam::shouldSkipRevivingShopItem(bool* is_shop_item, u32 flag_hash,
 
     if (info_data->hasTag(item, act::tags::Arrow)) {
         sead::FixedSafeString<64> group_name;
-        act::getSameGroupActorName(&group_name, item);
+        game::getSameGroupActorName(&group_name, item);
 
-        const auto arrow_type = act::arrowTypeFromString(group_name);
-        if (arrow_type == act::ArrowType::Invalid)
+        const auto arrow_type = game::arrowTypeFromString(group_name);
+        if (arrow_type == game::ArrowType::Invalid)
             return false;
 
         const int revival_count = act::getItemSaleRevivalCount(info_data, item);

@@ -7,11 +7,11 @@
 #include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSystem.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
 #include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace ksys::act {
 
@@ -56,19 +56,19 @@ bool ActorLinkConstDataAccess::linkAcquireImmediately(frm::BaseProcLink* link) c
 }
 
 bool ActorLinkConstDataAccess::isPlayerProfile() const {
-    return act::isPlayerProfile(getActor());
+    return game::isPlayerProfile(getActor());
 }
 
 bool ActorLinkConstDataAccess::isWeaponProfile() const {
-    return act::isWeaponProfile(getActor());
+    return game::isWeaponProfile(getActor());
 }
 
 bool ActorLinkConstDataAccess::isNPCProfile() const {
-    return act::isNPCProfile(getActor());
+    return game::isNPCProfile(getActor());
 }
 
 bool ActorLinkConstDataAccess::isEnemyProfile() const {
-    return act::isEnemyProfile(getActor());
+    return game::isEnemyProfile(getActor());
 }
 
 const sead::SafeString& ActorLinkConstDataAccess::getProfile() const {

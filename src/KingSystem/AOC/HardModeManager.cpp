@@ -1,8 +1,8 @@
 #include "KingSystem/AOC/HardModeManager.h"
 #include <math/seadMathCalcCommon.h>
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actTag.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::aoc {
@@ -79,11 +79,11 @@ void HardModeManager::modifyEnemyNoticeDuration(f32* value) const {
 
 bool HardModeManager::shouldCreateLifeRecoverInfo(ksys::act::Actor* actor) {
     // Health regen should only apply to enemy actors.
-    if (!ksys::act::isEnemyProfile(actor))
+    if (!ksys::game::isEnemyProfile(actor))
         return false;
 
     // But not to wolves or bears...
-    if (ksys::act::isWolfOrBear(actor))
+    if (ksys::game::isWolfOrBear(actor))
         return false;
 
     // and not to Dark Beast Ganon...

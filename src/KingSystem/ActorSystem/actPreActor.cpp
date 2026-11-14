@@ -523,17 +523,17 @@ void PreActor::incrementLinkNum() {
     if (sead::SafeString(getUnitConfigName()) == "LinkTagNone") {
         // More than 255 actors are specified in one generation group.
         // If it is not a test, consult the programmer.
-        map::printDebugMsg(this,
-                           "一つの生成グループに 255 以上のアクタが指定されています。"
-                           "テストで無ければプログラマに相談",
-                           nullptr);
+        game::printDebugMsg(this,
+                            "一つの生成グループに 255 以上のアクタが指定されています。"
+                            "テストで無ければプログラマに相談",
+                            nullptr);
         return;
     }
 
     // We have exceeded the expected number of links.
     // If it's not a test, talk to your programmer.
-    map::printDebugMsg(this, "リンクの想定数を越えました。テストで無ければプログラマに相談",
-                       nullptr);
+    game::printDebugMsg(this, "リンクの想定数を越えました。テストで無ければプログラマに相談",
+                        nullptr);
 }
 
 void PreActor::decrementLinkNum() {

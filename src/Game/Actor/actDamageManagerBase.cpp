@@ -4,9 +4,9 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/actLifeRecoveryInfo.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 
 namespace uking::act {
 
@@ -40,7 +40,7 @@ bool DamageManagerBase::applyDamage(s32& life) {
 
     s32 damage = getDamage();
     if (damage >= 1) {
-        if (ksys::act::isPlayerProfile(mActor)) {
+        if (ksys::game::isPlayerProfile(mActor)) {
             if (getAttacker()->hasProc()) {
                 tryBuffDamage(damage);
             }

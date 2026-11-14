@@ -3,10 +3,10 @@
 #include "Game/AutoPlacement/AutoPlacementFlowMgr.h"
 #include "Game/AutoPlacement/AutoPlacementMgr.h"
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actPhysicsUserTag.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physRayCastForRequest.h"
 #include "KingSystem/World/worldWeatherMgr.h"
@@ -312,8 +312,8 @@ void AutoPlacement::onRayHitRigidBody(ksys::phys::RigidBody* rb) {
     if (actor == nullptr)
         return;
 
-    mNearFlag.set(ksys::act::hasTag(actor, ksys::act::tags::Tree) ||
-                  ksys::act::hasTag(actor, ksys::act::tags::AutoPlacementForbidCreate));
+    mNearFlag.set(ksys::game::hasTag(actor, ksys::act::tags::Tree) ||
+                  ksys::game::hasTag(actor, ksys::act::tags::AutoPlacementForbidCreate));
 
     mEquipCategory.set(actor->getName() == "AirWallHorse");
 }

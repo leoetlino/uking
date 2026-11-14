@@ -3,11 +3,11 @@
 #include <prim/seadScopedLock.h>
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorTemplate.h"
-#include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/Framework/frmBaseProcCreateTask.h"
 #include "KingSystem/Framework/frmBaseProcMgr.h"
+#include "KingSystem/Game/Util/ActorUtil.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
@@ -175,7 +175,7 @@ void ActorCreator::enableDistanceUnloadChecks() {
     const auto lock = sead::makeScopedLock(mActorListCS);
     for (auto it = mActorList.robustBegin(); it != mActorList.robustEnd(); ++it) {
         auto& actor = *it;
-        if (!isWeaponOrArmor(&actor) || actor.getProfile().include("ArmorExtra"))
+        if (!game::isWeaponOrArmor(&actor) || actor.getProfile().include("ArmorExtra"))
             actor.getActorFlags2().set(Actor::ActorFlag2::NoDistanceCheck);
     }
     mEnableDistanceChecks = true;
