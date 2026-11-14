@@ -3,4 +3,6 @@ target_sources(uking PRIVATE
   gameScene.h
   gameStageInfo.cpp
   gameStageInfo.h
+  SceneLoadProgress.cpp
+  SceneLoadProgress.h
 )

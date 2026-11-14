@@ -2,12 +2,12 @@
 
 #include <heap/seadDisposer.h>
 
-namespace uking::ui {
+namespace uking {
 
-class FadeProgress {
-    SEAD_SINGLETON_DISPOSER(FadeProgress)
-    FadeProgress() = default;
-    ~FadeProgress() = default;
+class SceneLoadProgress {
+    SEAD_SINGLETON_DISPOSER(SceneLoadProgress)
+    SceneLoadProgress() = default;
+    ~SceneLoadProgress() = default;
 
 public:
     void init();
@@ -25,4 +25,4 @@ private:
     float mSteps = 1.0;
 };
 
-}  // namespace uking::ui
+}  // namespace uking

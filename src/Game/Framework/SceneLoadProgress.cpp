@@ -1,23 +1,23 @@
-#include "Game/UI/uiFadeProgress.h"
+#include "Game/Framework/SceneLoadProgress.h"
 #include "Game/UI/uiUtils.h"
 #include "KingSystem/Game/UI/UIGlue.h"
 
-namespace uking::ui {
+namespace uking {
 
-SEAD_SINGLETON_DISPOSER_IMPL(FadeProgress)
+SEAD_SINGLETON_DISPOSER_IMPL(SceneLoadProgress)
 
-void FadeProgress::init() {
+void SceneLoadProgress::init() {
     mActive = false;
     mProgress = 0.0;
     mGaugeValue = 0.0;
     mSteps = 1.0;
 }
 
-void FadeProgress::reset() {
+void SceneLoadProgress::reset() {
     init();
 }
 
-void FadeProgress::updateFadeScreen() {
+void SceneLoadProgress::updateFadeScreen() {
     if (!mActive)
         return;
 
@@ -41,17 +41,17 @@ void FadeProgress::updateFadeScreen() {
     ksys::ui::applyScreenFade(progress);
 }
 
-void FadeProgress::setProgress(float value) {
+void SceneLoadProgress::setProgress(float value) {
     if (mProgress < value)
         mProgress = value;
 }
 
-float FadeProgress::getGaugeValue() const {
+float SceneLoadProgress::getGaugeValue() const {
     return mGaugeValue;
 }
 
-void FadeProgress::setIsActive() {
+void SceneLoadProgress::setIsActive() {
     mActive = true;
 }
 
-}  // namespace uking::ui
+}  // namespace uking
