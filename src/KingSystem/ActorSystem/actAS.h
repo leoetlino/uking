@@ -9,8 +9,10 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::res {
-
 class ASResource;
+}  // namespace ksys::res
+
+namespace ksys::act {
 
 enum class ASAssetExKindFlags : u8 {
     ShaderParam = 1 << 0,
@@ -21,8 +23,8 @@ enum class ASAssetExKindFlags : u8 {
     MatVisibility = 1 << 5,
 };
 
-class AS : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(AS, Resource)
+class AS : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(AS, res::Resource)
 public:
     AS();
     ~AS() override;
@@ -34,19 +36,19 @@ public:
     bool parse_(u8* data, size_t size, sead::Heap* heap) override;
     void finalize_() override;
 
-    const sead::Buffer<ASResource*>& getElementResources() const { return mElementResources; }
+    const sead::Buffer<res::ASResource*>& getElementResources() const { return mElementResources; }
     const auto& getRandomRateMin() const { return *mRandomRateMin; }
     const auto& getRandomRateMax() const { return *mRandomRateMax; }
     const auto& getForbidPartialDemoAs() const { return *mForbidPartialDemoAS; }
     const auto& getUseIk() const { return *mUseIK; }
 
-    ASResource* getFirstResource() const;
+    res::ASResource* getFirstResource() const;
     float getRandomRate() const;
 
 private:
     friend class ASList;
 
-    sead::Buffer<ASResource*> mElementResources;
+    sead::Buffer<res::ASResource*> mElementResources;
     agl::utl::ParameterList mElementsList;
 
     agl::utl::ParameterObj mCommonParams;
@@ -62,4 +64,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(AS, 0x3c8);
 
-}  // namespace ksys::res
+}  // namespace ksys::act

@@ -1,6 +1,6 @@
 #include "KingSystem/Resource/Event/resDemoASLoader.h"
 #include <Byaml/Byaml.h>
-#include "KingSystem/Resource/Actor/resResourceAS.h"
+#include "KingSystem/ActorSystem/actAS.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 
@@ -61,8 +61,8 @@ const char* DemoASLoader::getName(int idx) const {
     return mNames[idx].cstr();
 }
 
-AS* DemoASLoader::getAS(int idx) const {
-    return sead::DynamicCast<AS>(mHandles[idx].getResource());
+act::AS* DemoASLoader::getAS(int idx) const {
+    return sead::DynamicCast<act::AS>(mHandles[idx].getResource());
 }
 
 bool DemoASLoader::finishLoad() {

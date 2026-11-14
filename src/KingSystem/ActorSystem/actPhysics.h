@@ -4,10 +4,10 @@
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
-class Physics : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(Physics, Resource)
+class Physics : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(Physics, res::Resource)
 public:
     Physics() : ParamIO("physics", 0) {}
 
@@ -21,4 +21,4 @@ private:
     phys::ParamSet mParamSet;
 };
 
-}  // namespace ksys::res
+}  // namespace ksys::act

@@ -7,12 +7,12 @@
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 class AS;
 
-class ASList : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(ASList, Resource)
+class ASList : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(ASList, res::Resource)
 public:
     struct ASDefine {
         const char* getFileName() const { return file_name.ref().cstr(); }
@@ -105,4 +105,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(ASList, 0x410);
 
-}  // namespace ksys::res
+}  // namespace ksys::act

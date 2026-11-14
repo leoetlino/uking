@@ -3,10 +3,10 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
 #include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Map/mapPreActor.h"
-#include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttack.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemy.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseTargetedInfo.h"
@@ -230,7 +230,7 @@ bool ActorLinkConstDataAccess::isDeletedOrDeleting() const {
     return actor && actor->isDeletedOrDeleting();
 }
 
-res::GParamList* ActorLinkConstDataAccess::getGParamList() const {
+GParamList* ActorLinkConstDataAccess::getGParamList() const {
     auto* actor = getActor();
     if (!actor)
         return nullptr;

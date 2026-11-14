@@ -128,9 +128,11 @@ enum class InitAnmDriven {
 
 }  // namespace ksys::as
 
-namespace ksys::res {
-
+namespace ksys::act {
 class AS;
+}  // namespace ksys::act
+
+namespace ksys::res {
 
 class ASResource {
     SEAD_RTTI_BASE(ASResource)
@@ -138,7 +140,7 @@ public:
     struct ParseArgs {
         agl::utl::ResParameterList list;
         sead::Heap* heap;
-        AS* as;
+        act::AS* as;
         int index;
     };
 

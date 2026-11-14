@@ -15,10 +15,10 @@ struct MesTransceiverId;
 struct MessageType;
 }  // namespace ksys
 
-namespace ksys::res {
+namespace ksys::act {
 class AIProgram;
 class GParamList;
-}  // namespace ksys::res
+}  // namespace ksys::act
 
 namespace ksys::frm {
 class BaseProcHandle;
@@ -158,9 +158,9 @@ protected:
         mFlags.reset(Flag::Changeable);
     }
 
-    res::AIProgram* getAIProg() const;
+    act::AIProgram* getAIProg() const;
     auto& getDef() const;
-    res::GParamList* getGParamList() const;
+    act::GParamList* getGParamList() const;
 
     template <typename T>
     bool getStaticParam(T* value, const sead::SafeString& key) const;
@@ -312,7 +312,7 @@ protected:
     sead::TypedBitFlag<Flag> mFlags;
 
 private:
-    void initFlags(res::AIProgram* aiprog, s32 def_idx, ActionType type);
+    void initFlags(act::AIProgram* aiprog, s32 def_idx, ActionType type);
     void updateBehaviorsOnEnter();
     void updateBehaviorsOnLeave();
 };

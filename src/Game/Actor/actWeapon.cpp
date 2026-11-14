@@ -4,11 +4,11 @@
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
+#include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Game/GlobalParameter.h"
-#include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponCommon.h"
 
@@ -393,7 +393,7 @@ bool WeaponModifierInfo::pickRandomModifier(const WeaponModifierRanges& ranges) 
     }
 }
 
-bool WeaponModifierRanges::loadTierBlue(const ksys::res::GParamList& gparamlist) {
+bool WeaponModifierRanges::loadTierBlue(const ksys::act::GParamList& gparamlist) {
     const auto* param = gparamlist.getWeaponCommon();
     addAtkMin = param->mSharpWeaponAddAtkMin.ref();
     addAtkMax = param->mSharpWeaponAddAtkMax.ref();
@@ -438,7 +438,7 @@ bool WeaponModifierInfo::pickRandomYellowModifierTbox(const sead::SafeString& ac
     return pickRandomModifier(ranges);
 }
 
-bool WeaponModifierRanges::loadTierYellow(const ksys::res::GParamList& gparamlist) {
+bool WeaponModifierRanges::loadTierYellow(const ksys::act::GParamList& gparamlist) {
     const auto* param = gparamlist.getWeaponCommon();
     isTierYellow = true;
     addAtkMin = param->mPoweredSharpAddAtkMin.ref();

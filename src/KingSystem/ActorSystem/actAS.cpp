@@ -1,11 +1,11 @@
-#include "KingSystem/Resource/Actor/resResourceAS.h"
+#include "KingSystem/ActorSystem/actAS.h"
 #include <memory>
 #include <random/seadGlobalRandom.h>
+#include "KingSystem/Resource/Actor/resResourceASResource.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/SafeDelete.h"
-#include "resResourceASResource.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 namespace {
 sead::SafeString str_Elements = "Elements";
@@ -48,7 +48,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
 
     mElementResources.fill(nullptr);
 
-    ASResource::ParseArgs args;
+    res::ASResource::ParseArgs args;
     args.list = {};
     args.heap = heap;
     args.as = this;
@@ -63,7 +63,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
     for (auto it = mElementResources.begin(), end = mElementResources.end();
          it != end && res_it != res_end; ++it, ++res_it) {
         args.list = res_it.getList();
-        *it = ASResource::make(args);
+        *it = res::ASResource::make(args);
         if (*it == nullptr) {
             mHeap->adjust();
             return false;
@@ -144,7 +144,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
     return true;
 }
 
-ASResource* AS::getFirstResource() const {
+res::ASResource* AS::getFirstResource() const {
     if (mElementResources.size() == 0)
         return nullptr;
     return mElementResources[0];
@@ -167,4 +167,4 @@ float AS::getRandomRate() const {
     return min;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

@@ -1,8 +1,8 @@
-#include "KingSystem/Resource/Actor/resResourceModelList.h"
+#include "KingSystem/ActorSystem/actModelList.h"
 #include <container/seadSafeArray.h>
 #include "KingSystem/Resource/resModelResourceDivide.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 namespace {
 sead::SafeString str_ModelData{"ModelData"};
@@ -215,7 +215,7 @@ void ModelList::getModelDataInfo(ModelList::ModelDataInfo* info) const {
             }
 
             if (info->unit_names[idx][0]) {
-                const char* name = ModelResourceDivide::instance()->getModelResource(
+                const char* name = res::ModelResourceDivide::instance()->getModelResource(
                     info->folder_name[idx], info->unit_names[idx][0]);
                 if (name)
                     info->folder_name[idx] = name;
@@ -358,4 +358,4 @@ void ModelList::getPartialInfo(PartialInfo* info, int anm_target_idx, int partia
     }
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

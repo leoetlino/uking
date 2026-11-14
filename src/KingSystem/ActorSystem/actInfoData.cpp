@@ -8,9 +8,9 @@
 #include <math/seadMathNumbers.h>
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actDebug.h"
+#include "KingSystem/ActorSystem/actModelList.h"
 #include "KingSystem/Event/evtEvent.h"
 #include "KingSystem/Event/evtManager.h"
-#include "KingSystem/Resource/Actor/resResourceModelList.h"
 #include "KingSystem/World/worldManager.h"
 
 namespace ksys::act {
@@ -247,7 +247,7 @@ void InfoData::getLocators(const char* actor, Locators& info) const {
 
         it.tryGetStringByKey(&type_str, "type");
         locator.type =
-            type_str ? res::ModelList::getLocatorTypeFromStr(type_str) : Locator::Type::Invalid;
+            type_str ? ModelList::getLocatorTypeFromStr(type_str) : Locator::Type::Invalid;
 
         locator.rot *= 2 * sead::numbers::pi / 360.0;
     }

@@ -1,10 +1,10 @@
 #include "KingSystem/ActorSystem/actAiActionBase.h"
+#include "KingSystem/ActorSystem/actAIProgram.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 #include "KingSystem/ActorSystem/actAiInlineParam.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 #include "KingSystem/Utils/Thread/MessageTransceiverId.h"
 
@@ -13,7 +13,7 @@ namespace ksys::act::ai {
 ActionBase::ActionBase(const InitArg& arg)
     : mActor{arg.actor}, mDefinitionIdx{s16(arg.def_idx)}, mRootIdx{s8(arg.root_idx)} {}
 
-inline res::AIProgram* ActionBase::getAIProg() const {
+inline act::AIProgram* ActionBase::getAIProg() const {
     return mActor->getParam()->getRes().mAIProgram;
 }
 
@@ -51,7 +51,7 @@ bool ActionBase::init(sead::Heap* heap, bool skip_loading_map_or_tree_params) {
     return init_(heap);
 }
 
-void ActionBase::initFlags(res::AIProgram* aiprog, s32 def_idx, ActionType type) {
+void ActionBase::initFlags(act::AIProgram* aiprog, s32 def_idx, ActionType type) {
     if (def_idx < 0)
         return;
 
@@ -211,7 +211,7 @@ bool ActionBase::oneShot(InlineParamPack* params) {
     return oneShot_();
 }
 
-res::GParamList* ActionBase::getGParamList() const {
+act::GParamList* ActionBase::getGParamList() const {
     return mActor->getParam()->getRes().mGParamList;
 }
 

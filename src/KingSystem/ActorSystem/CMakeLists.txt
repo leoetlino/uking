@@ -8,6 +8,8 @@ target_sources(uking PRIVATE
     actActorCreator.h
     actActorEditorNode.cpp
     actActorEditorNode.h
+    actActorLink.cpp
+    actActorLink.h
     actActorLinkConstDataAccess.cpp
     actActorLinkConstDataAccess.h
     actActorParam.cpp
@@ -33,16 +35,24 @@ target_sources(uking PRIVATE
     actAiInlineParam.h
     actAiParam.cpp
     actAiParam.h
+    actAIProgram.cpp
+    actAIProgram.h
     actAiQuery.cpp
     actAiQuery.h
     actAiQuerys.cpp
     actAiQuerys.h
+    actAS.cpp
+    actAS.h
+    actASList.cpp
+    actASList.h
     actClusteredRenderer.cpp
     actClusteredRenderer.h
     actDebug.cpp
     actDebug.h
     actDebugFinder.cpp
     actDebugFinder.h
+    actGParamList.cpp
+    actGParamList.h
     actIDamageManager.cpp
     actIDamageManager.h
     actInfoCommon.cpp
@@ -54,6 +64,10 @@ target_sources(uking PRIVATE
     actLodState.h
     actModelCallback.cpp
     actModelCallback.h
+    actModelList.cpp
+    actModelList.h
+    actPhysics.cpp
+    actPhysics.h
     actPhysicsConstraints.cpp
     actPhysicsConstraints.h
     actPhysicsUserTag.cpp

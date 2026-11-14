@@ -132,18 +132,10 @@ target_sources(uking PRIVATE
 
   Actor/resResourceActorCapture.cpp
   Actor/resResourceActorCapture.h
-  Actor/resResourceActorLink.cpp
-  Actor/resResourceActorLink.h
-  Actor/resResourceAIProgram.cpp
-  Actor/resResourceAIProgram.h
   Actor/resResourceAISchedule.cpp
   Actor/resResourceAISchedule.h
   Actor/resResourceAnimInfo.cpp
   Actor/resResourceAnimInfo.h
-  Actor/resResourceAS.cpp
-  Actor/resResourceAS.h
-  Actor/resResourceASList.cpp
-  Actor/resResourceASList.h
   Actor/resResourceASResource.cpp
   Actor/resResourceASResource.h
   Actor/resResourceASResourceExtension.h
@@ -166,16 +158,10 @@ target_sources(uking PRIVATE
   Actor/resResourceDamageParam.h
   Actor/resResourceDrop.cpp
   Actor/resResourceDrop.h
-  Actor/resResourceGParamList.cpp
-  Actor/resResourceGParamList.h
   Actor/resResourceLifeCondition.cpp
   Actor/resResourceLifeCondition.h
   Actor/resResourceLod.cpp
   Actor/resResourceLod.h
-  Actor/resResourceModelList.cpp
-  Actor/resResourceModelList.h
-  Actor/resResourcePhysics.cpp
-  Actor/resResourcePhysics.h
   Actor/resResourceRagdollBlendWeight.cpp
   Actor/resResourceRagdollBlendWeight.h
   Actor/resResourceRagdollConfig.cpp

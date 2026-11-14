@@ -1,8 +1,8 @@
-#include "KingSystem/Resource/Actor/resResourceActorLink.h"
+#include "KingSystem/ActorSystem/actActorLink.h"
 #include <codec/seadHashCRC32.h>
 #include <heap/seadHeapMgr.h>
 
-namespace ksys::res {
+namespace ksys::act {
 
 ActorLink::ActorLink() : ParamIO("xml", 0) {
     const auto init_user = [this](auto& param, const char* key, const char* default_ = "Dummy") {
@@ -100,4 +100,4 @@ bool ActorLink::hasTag(u32 tag) const {
     return mTags.size() >= 1 && mTags.binarySearch(tag) != -1;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

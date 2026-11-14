@@ -19,10 +19,10 @@ enum class AnmTargetType : u8 {
 
 }  // namespace ksys::as
 
-namespace ksys::res {
+namespace ksys::act {
 
-class ModelList : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(ModelList, Resource)
+class ModelList : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(ModelList, res::Resource)
 public:
     struct ControllerInfo {
         agl::utl::Parameter<sead::Color4f> mAddColor;
@@ -176,4 +176,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(ModelList, 0x7d0);
 
-}  // namespace ksys::res
+}  // namespace ksys::act

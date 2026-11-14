@@ -1,16 +1,16 @@
 #include "KingSystem/ActorSystem/actAiQuery.h"
 #include <evfl/Param.h>
+#include "KingSystem/ActorSystem/actAIProgram.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actAiClassDef.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
 
 namespace ksys::act::ai {
 
 Query::Query(const InitArg& arg) : mActor(arg.actor), mDefIdx(arg.def_idx) {}
 
-inline res::AIProgram* Query::getAIProg() const {
+inline act::AIProgram* Query::getAIProg() const {
     return mActor->getParam()->getRes().mAIProgram;
 }
 

@@ -12,9 +12,12 @@ namespace sead {
 class Heap;
 }
 
+namespace ksys::act {
+class AS;
+}  // namespace ksys::act
+
 namespace ksys::res {
 
-class AS;
 class Handle;
 
 class DemoASLoader {
@@ -25,7 +28,7 @@ public:
     void load(const al::ByamlIter& iter, bool synchronous, Handle* pack_handle);
 
     const char* getName(int idx) const;
-    AS* getAS(int idx) const;
+    act::AS* getAS(int idx) const;
 
     /// @return whether the load has finished (succeeded or failed).
     bool finishLoad();

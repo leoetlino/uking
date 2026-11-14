@@ -15,7 +15,7 @@ namespace ksys::act {
 class Actor;
 }
 
-namespace ksys::res {
+namespace ksys::act {
 class AIProgram;
 }
 
@@ -63,7 +63,7 @@ public:
     virtual void onPreDelete() {}
 
 protected:
-    res::AIProgram* getAIProg() const;
+    act::AIProgram* getAIProg() const;
 
     template <typename T>
     bool getDynamicParamImpl(T** value, const sead::SafeString& param, AIDefParamType type,

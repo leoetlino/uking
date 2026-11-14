@@ -13,10 +13,10 @@ namespace ksys::act::ai {
 enum class ActionType : int;
 }
 
-namespace ksys::res {
+namespace ksys::act {
 
-class AIProgram : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(AIProgram, Resource)
+class AIProgram : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(AIProgram, res::Resource)
 public:
     struct Definition {
         const agl::utl::ParameterBase* findSInstParam(u32 name_hash) const;
@@ -141,4 +141,4 @@ inline bool AIProgram::getSInstParam_(const T** value, const AIProgram::Definiti
     return true;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

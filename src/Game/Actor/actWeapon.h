@@ -19,7 +19,7 @@ namespace ksys::evt {
 class OrderParam;
 }
 
-namespace ksys::res {
+namespace ksys::act {
 class GParamList;
 }
 
@@ -118,8 +118,8 @@ struct WeaponModifierRanges {
     bool loadTierBlue(const sead::SafeString& actor);
     bool loadTierYellow(const sead::SafeString& actor);
 
-    bool loadTierBlue(const ksys::res::GParamList& gparamlist);
-    bool loadTierYellow(const ksys::res::GParamList& gparamlist);
+    bool loadTierBlue(const ksys::act::GParamList& gparamlist);
+    bool loadTierYellow(const ksys::act::GParamList& gparamlist);
 
     WeaponModifier getRandomModifier() const;
     bool isConfigValid() const;

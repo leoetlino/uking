@@ -1,4 +1,5 @@
 #include "KingSystem/Physics/System/physParamSet.h"
+#include "KingSystem/ActorSystem/actPhysics.h"
 #include "KingSystem/Game/Physics/System/physCharacterControllerParam.h"
 #include "KingSystem/Game/Physics/System/physContactInfoParam.h"
 #include "KingSystem/Physics/Cloth/physClothParam.h"
@@ -7,7 +8,6 @@
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodySetParam.h"
 #include "KingSystem/Physics/SupportBone/physSupportBoneParam.h"
-#include "KingSystem/Resource/Actor/resResourcePhysics.h"
 
 namespace ksys::phys {
 
@@ -23,7 +23,7 @@ ParamSet::~ParamSet() {
     finalize();
 }
 
-bool ParamSet::parse(res::Physics* bphysics, agl::utl::ResParameterArchive archive,
+bool ParamSet::parse(act::Physics* bphysics, agl::utl::ResParameterArchive archive,
                      sead::Heap* heap) {
     if (!archive.isValid())
         return false;
@@ -59,7 +59,7 @@ void ParamSet::finalize() {
     *use_edge_rigid_body_num = 0;
 }
 
-bool ParamSet::doParse(res::Physics* bphysics, agl::utl::ResParameterArchive archive,
+bool ParamSet::doParse(act::Physics* bphysics, agl::utl::ResParameterArchive archive,
                        sead::Heap* heap) {
     const auto ParamSet = archive.getRootList().getResParameterList(0);
     if (ParamSet.getResParameterObjNum() < 1)

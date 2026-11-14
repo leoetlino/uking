@@ -1,12 +1,15 @@
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
 #include <prim/seadScopedLock.h>
+#include "KingSystem/ActorSystem/actAIProgram.h"
+#include "KingSystem/ActorSystem/actAS.h"
+#include "KingSystem/ActorSystem/actASList.h"
+#include "KingSystem/ActorSystem/actActorLink.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
+#include "KingSystem/ActorSystem/actGParamList.h"
+#include "KingSystem/ActorSystem/actModelList.h"
+#include "KingSystem/ActorSystem/actPhysics.h"
 #include "KingSystem/Resource/Actor/resResourceAISchedule.h"
-#include "KingSystem/Resource/Actor/resResourceAS.h"
-#include "KingSystem/Resource/Actor/resResourceASList.h"
 #include "KingSystem/Resource/Actor/resResourceASSettingMgr.h"
-#include "KingSystem/Resource/Actor/resResourceActorLink.h"
 #include "KingSystem/Resource/Actor/resResourceAnimInfo.h"
 #include "KingSystem/Resource/Actor/resResourceAttClient.h"
 #include "KingSystem/Resource/Actor/resResourceAwareness.h"
@@ -14,11 +17,8 @@
 #include "KingSystem/Resource/Actor/resResourceChemical.h"
 #include "KingSystem/Resource/Actor/resResourceDamageParam.h"
 #include "KingSystem/Resource/Actor/resResourceDrop.h"
-#include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/Actor/resResourceLifeCondition.h"
 #include "KingSystem/Resource/Actor/resResourceLod.h"
-#include "KingSystem/Resource/Actor/resResourceModelList.h"
-#include "KingSystem/Resource/Actor/resResourcePhysics.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollBlendWeight.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfigList.h"
@@ -40,7 +40,7 @@ namespace ksys::act {
 SEAD_SINGLETON_DISPOSER_IMPL(ActorParamMgr)
 
 using Type = ActorParam::ResourceType;
-using User = res::ActorLink::User;
+using User = ActorLink::User;
 
 ActorParamMgr::ActorParamMgr() = default;
 
@@ -52,20 +52,18 @@ void ActorParamMgr::init(sead::Heap* heap, sead::Heap* debug_heap) {
 
     mParams = new (mTempHeap) ActorParam[NumParams];
 
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::ActorLink>(1.0, 0x1000),
-                              "bxml");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::GParamList>(
-                                  1.0, res::GParamList::getResourceFactoryFallbackSize() + 0x800),
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<ActorLink>(1.0, 0x1000), "bxml");
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<GParamList>(
+                                  1.0, GParamList::getResourceFactoryFallbackSize() + 0x800),
                               "bgparamlist");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::ModelList>(2.0), "bmodellist");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::ASList>(0.0, 0x80000),
-                              "baslist");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::AIProgram>(1.0, 0x300000),
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<ModelList>(2.0), "bmodellist");
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<ASList>(0.0, 0x80000), "baslist");
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<AIProgram>(1.0, 0x300000),
                               "baiprog");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::Physics>(6.0), "bphysics");
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<Physics>(6.0), "bphysics");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::Chemical>(0.0, 0x2000),
                               "bchemical");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::AS>(0.0, 0x80000), "bas");
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<AS>(0.0, 0x80000), "bas");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::AttClientList>(1.0, 0x2000),
                               "batcllist");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::AttClient>(1.0, 0x2000),
@@ -126,15 +124,15 @@ void ActorParamMgr::init(sead::Heap* heap, sead::Heap* debug_heap) {
         getDummyResHandle(ResType::UMii).load("Actor/UMii/Dummy.bumii", &req);
         getDummyResHandle(ResType::AnimationInfo).load("Actor/AnimationInfo/Dummy.baniminfo", &req);
 
-        auto* dummy_gparam_factory = new (mTempHeap) res::EntryFactory<res::DummyGParamList>(
-            1.0, res::GParamList::getResourceFactoryFallbackSize() + 0x1400);
+        auto* dummy_gparam_factory = new (mTempHeap) res::EntryFactory<DummyGParamList>(
+            1.0, GParamList::getResourceFactoryFallbackSize() + 0x1400);
         req.mEntryFactory = dummy_gparam_factory;
         getDummyResHandle(ResType::GParamList)
             .load("Actor/GeneralParamList/Dummy.bgparamlist", &req);
         delete dummy_gparam_factory;
 
-        auto* modellist = static_cast<res::ModelList*>(
-            getDummyResHandle(ResType::ModelList).getResourceUnchecked());
+        auto* modellist =
+            static_cast<ModelList*>(getDummyResHandle(ResType::ModelList).getResourceUnchecked());
         modellist->markAsDummy();
     }
 
@@ -210,9 +208,8 @@ void ActorParamMgr::loadFiles(ActorParam* param, sead::Heap* heap, res::Handle* 
     param->allocResHandles(heap, 0, ActorParam::NumResourceTypes + 1);
     param->mActiveBufferIdx = 0;
 
-    const auto* link =
-        loadFile<res::ActorLink>(param, Type::ActorLink, "Actor/ActorLink", "xml",
-                                 param->getActorName().cstr(), pack_handle, x, lane_id);
+    const auto* link = loadFile<ActorLink>(param, Type::ActorLink, "Actor/ActorLink", "xml",
+                                           param->getActorName().cstr(), pack_handle, x, lane_id);
 
     if (link)
         param->setProfileAndPriority(link->getUserName(User::Profile), link->getPriority().cstr());
@@ -223,15 +220,14 @@ void ActorParamMgr::loadFiles(ActorParam* param, sead::Heap* heap, res::Handle* 
 
     param->mActiveBufferIdx = 0;
 
-    loadFile<res::ModelList>(param, Type::ModelList, "Actor/ModelList", "modellist",
-                             actor_link->getUserName(User::Model), pack_handle, x, lane_id);
+    loadFile<ModelList>(param, Type::ModelList, "Actor/ModelList", "modellist",
+                        actor_link->getUserName(User::Model), pack_handle, x, lane_id);
 
     loadFile<res::UMii>(param, Type::UMii, "Actor/UMii", "umii",
                         actor_link->getUserName(User::UMii), pack_handle, x, lane_id);
 
-    loadFile<res::ASList>(param, Type::ASList, "Actor/ASList", "aslist",
-                          actor_link->getUserName(res::ActorLink::User::AS), pack_handle, x,
-                          lane_id);
+    loadFile<ASList>(param, Type::ASList, "Actor/ASList", "aslist",
+                     actor_link->getUserName(ActorLink::User::AS), pack_handle, x, lane_id);
 
     loadFilesStep2(param, heap, pack_handle, x, lane_id);
 }
@@ -262,8 +258,8 @@ ActorParam* ActorParamMgr::loadParamAsync(const char* actor_name, res::Handle* p
     param->allocResHandles(mTempHeap, 0, ActorParam::NumResourceTypes + 1);
     param->mActiveBufferIdx = 0;
 
-    loadFileAsync<res::ActorLink>(param, Type::ActorLink, "Actor/ActorLink", "xml",
-                                  param->getActorName().cstr(), pack_handle, x, lane_id);
+    loadFileAsync<ActorLink>(param, Type::ActorLink, "Actor/ActorLink", "xml",
+                             param->getActorName().cstr(), pack_handle, x, lane_id);
     return param;
 }
 
@@ -331,7 +327,7 @@ T* ActorParamMgr::handleAsyncFileLoad(ActorParam* param, s32* idx, ActorParam::R
 
 bool ActorParamMgr::finishLoadingActorLink(ActorParam* param, void* x) {
     s32 idx = 0;
-    if (!handleAsyncFileLoad<res::ActorLink>(param, &idx, Type::ActorLink, x))
+    if (!handleAsyncFileLoad<ActorLink>(param, &idx, Type::ActorLink, x))
         return param->_a != 0;
 
     const auto* link = param->getRes().mActorLink;
@@ -346,14 +342,14 @@ void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::Handle* pack_han
                                         u32 lane_id) {
     const auto* link = param->getRes().mActorLink;
 
-    loadFileAsync<res::ModelList>(param, Type::ModelList, "Actor/ModelList", "modellist",
-                                  link->getUsers().getModel(), pack_handle, x, lane_id);
+    loadFileAsync<ModelList>(param, Type::ModelList, "Actor/ModelList", "modellist",
+                             link->getUsers().getModel(), pack_handle, x, lane_id);
 
     loadFileAsync<res::UMii>(param, Type::UMii, "Actor/UMii", "umii", link->getUsers().getUMii(),
                              pack_handle, x, lane_id);
 
-    loadFileAsync<res::ASList>(param, Type::ASList, "Actor/ASList", "aslist",
-                               link->getUsers().getAS(), pack_handle, x, lane_id);
+    loadFileAsync<ASList>(param, Type::ASList, "Actor/ASList", "aslist", link->getUsers().getAS(),
+                          pack_handle, x, lane_id);
 
     loadFileAsync<res::AttClientList>(param, Type::AttClientList, "Actor/AttClientList", "atcllist",
                                       link->getUserName(User::Attention), pack_handle, x, lane_id);
@@ -362,14 +358,14 @@ void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::Handle* pack_han
                                           "rgconfiglist", link->getUserName(User::RgConfigList),
                                           pack_handle, x, lane_id);
 
-    loadFileAsync<res::AIProgram>(param, Type::AIProgram, "Actor/AIProgram", "aiprog",
-                                  link->getUsers().getAIProgram(), pack_handle, x, lane_id);
+    loadFileAsync<AIProgram>(param, Type::AIProgram, "Actor/AIProgram", "aiprog",
+                             link->getUsers().getAIProgram(), pack_handle, x, lane_id);
 
-    loadFileAsync<res::GParamList>(param, Type::GParamList, "Actor/GeneralParamList", "gparamlist",
-                                   link->getUsers().getGParam(), pack_handle, x, lane_id);
+    loadFileAsync<GParamList>(param, Type::GParamList, "Actor/GeneralParamList", "gparamlist",
+                              link->getUsers().getGParam(), pack_handle, x, lane_id);
 
-    loadFileAsync<res::Physics>(param, Type::Physics, "Actor/Physics", "physics",
-                                link->getUsers().getPhysics(), pack_handle, x, lane_id);
+    loadFileAsync<Physics>(param, Type::Physics, "Actor/Physics", "physics",
+                           link->getUsers().getPhysics(), pack_handle, x, lane_id);
 
     loadFileAsync<res::Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
                                  link->getUsers().getChemical(), pack_handle, x, lane_id);
@@ -413,13 +409,13 @@ void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::Handle* pack_han
 bool ActorParamMgr::finishLoadingStep2(ActorParam* param, void* x) {
     s32 idx = 1;
 
-    if (!handleAsyncFileLoad<res::ModelList>(param, &idx, Type::ModelList, x))
+    if (!handleAsyncFileLoad<ModelList>(param, &idx, Type::ModelList, x))
         return false;
 
     if (!handleAsyncFileLoad<res::UMii>(param, &idx, Type::UMii, x))
         return false;
 
-    if (!handleAsyncFileLoad<res::ASList>(param, &idx, Type::ASList, x))
+    if (!handleAsyncFileLoad<ASList>(param, &idx, Type::ASList, x))
         return false;
 
     if (!handleAsyncFileLoad<res::AttClientList>(param, &idx, Type::AttClientList, x))
@@ -428,13 +424,13 @@ bool ActorParamMgr::finishLoadingStep2(ActorParam* param, void* x) {
     if (!handleAsyncFileLoad<res::RagdollConfigList>(param, &idx, Type::RagdollConfigList, x))
         return false;
 
-    if (!handleAsyncFileLoad<res::AIProgram>(param, &idx, Type::AIProgram, x))
+    if (!handleAsyncFileLoad<AIProgram>(param, &idx, Type::AIProgram, x))
         return false;
 
-    if (!handleAsyncFileLoad<res::GParamList>(param, &idx, Type::GParamList, x))
+    if (!handleAsyncFileLoad<GParamList>(param, &idx, Type::GParamList, x))
         return false;
 
-    if (!handleAsyncFileLoad<res::Physics>(param, &idx, Type::Physics, x))
+    if (!handleAsyncFileLoad<Physics>(param, &idx, Type::Physics, x))
         return false;
 
     if (!handleAsyncFileLoad<res::Chemical>(param, &idx, Type::Chemical, x))
@@ -491,9 +487,8 @@ void ActorParamMgr::loadExtraResAsync(ActorParam* param, res::Handle* pack_handl
 
     if (aslist) {
         for (s32 i = 0; i < num_as; ++i) {
-            loadFileAsync<res::AS>(param, Type::AS, "Actor/AS", "as",
-                                   aslist->getASDefines()[i].getFileName(), pack_handle, x,
-                                   lane_id);
+            loadFileAsync<AS>(param, Type::AS, "Actor/AS", "as",
+                              aslist->getASDefines()[i].getFileName(), pack_handle, x, lane_id);
         }
     }
 
@@ -522,7 +517,7 @@ bool ActorParamMgr::finishLoadingExtraRes(ActorParam* param, void* x) {
         for (s32 i = 0, n = aslist->getASDefines().size(); i < n; ++i) {
             const sead::SafeString file_name = aslist->getASDefines()[i].getFileName();
             if (file_name == "Dummy" || file_name.isEmpty()) {
-                auto* as = sead::DynamicCast<res::AS>(mDummyResources[u32(Type::AS)].getResource());
+                auto* as = sead::DynamicCast<AS>(mDummyResources[u32(Type::AS)].getResource());
                 as->setIndex(u32(Type::AS));
                 aslist->addAS_(i, as);
                 ++idx;
@@ -533,7 +528,7 @@ bool ActorParamMgr::finishLoadingExtraRes(ActorParam* param, void* x) {
                     continue;
                 }
 
-                auto* as = handleAsyncFileLoad<res::AS>(param, &idx, Type::AS, x);
+                auto* as = handleAsyncFileLoad<AS>(param, &idx, Type::AS, x);
                 if (!as)
                     return false;
 
@@ -643,8 +638,8 @@ void ActorParamMgr::loadFilesStep2(ActorParam* param, sead::Heap* heap, res::Han
     if (auto* aslist = param->getRes().mASList) {
         for (s32 i = 0; i < aslist->getASDefines().size(); ++i) {
             auto* as =
-                loadFile<res::AS>(param, Type::AS, "Actor/AS", "as",
-                                  aslist->getASDefines()[i].getFileName(), pack_handle, x, lane_id);
+                loadFile<AS>(param, Type::AS, "Actor/AS", "as",
+                             aslist->getASDefines()[i].getFileName(), pack_handle, x, lane_id);
             if (as) {
                 as->setIndex(u32(Type::AS));
                 aslist->addAS_(i, as);
@@ -680,14 +675,14 @@ void ActorParamMgr::loadFilesStep2(ActorParam* param, sead::Heap* heap, res::Han
     // Go back to using the main resource handle buffer.
     param->mActiveBufferIdx = 0;
 
-    loadFile<res::AIProgram>(param, Type::AIProgram, "Actor/AIProgram", "aiprog",
-                             link->getUsers().getAIProgram(), pack_handle, x, lane_id);
+    loadFile<AIProgram>(param, Type::AIProgram, "Actor/AIProgram", "aiprog",
+                        link->getUsers().getAIProgram(), pack_handle, x, lane_id);
 
-    loadFile<res::GParamList>(param, Type::GParamList, "Actor/GeneralParamList", "gparamlist",
-                              link->getUsers().getGParam(), pack_handle, x, lane_id);
+    loadFile<GParamList>(param, Type::GParamList, "Actor/GeneralParamList", "gparamlist",
+                         link->getUsers().getGParam(), pack_handle, x, lane_id);
 
-    loadFile<res::Physics>(param, Type::Physics, "Actor/Physics", "physics",
-                           link->getUsers().getPhysics(), pack_handle, x, lane_id);
+    loadFile<Physics>(param, Type::Physics, "Actor/Physics", "physics",
+                      link->getUsers().getPhysics(), pack_handle, x, lane_id);
 
     loadFile<res::Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
                             link->getUsers().getChemical(), pack_handle, x, lane_id);
@@ -914,8 +909,8 @@ void ActorParamMgr::syncData(char* data) {
     }
 }
 
-res::GParamList* ActorParamMgr::getDummyGParamList() const {
-    return static_cast<res::GParamList*>(
+GParamList* ActorParamMgr::getDummyGParamList() const {
+    return static_cast<GParamList*>(
         mDummyResources[u32(ActorParam::ResourceType::GParamList)].getResourceUnchecked());
 }
 

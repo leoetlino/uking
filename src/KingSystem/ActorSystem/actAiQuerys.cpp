@@ -1,10 +1,10 @@
 #include "KingSystem/ActorSystem/actAiQuerys.h"
 #include <codec/seadHashCRC32.h>
+#include "KingSystem/ActorSystem/actAIProgram.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actAiQuery.h"
 #include "KingSystem/ActorSystem/queryDummyQuery.h"
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
 
 namespace ksys::act::ai {
 

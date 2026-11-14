@@ -5,7 +5,7 @@
 #include <utility/aglParameterList.h>
 #include <utility/aglParameterObj.h>
 
-namespace ksys::res {
+namespace ksys::act {
 class Physics;
 }
 
@@ -25,7 +25,7 @@ struct ParamSet : public agl::utl::ParameterList {
     ParamSet(const ParamSet&) = delete;
     auto operator=(const ParamSet&) = delete;
 
-    bool parse(res::Physics* bphysics, agl::utl::ResParameterArchive archive, sead::Heap* heap);
+    bool parse(act::Physics* bphysics, agl::utl::ResParameterArchive archive, sead::Heap* heap);
 
     RigidBodySetParam& getRigidBodySet(int idx);
 
@@ -50,7 +50,7 @@ struct ParamSet : public agl::utl::ParameterList {
 
 private:
     void finalize();
-    bool doParse(res::Physics* bphysics, agl::utl::ResParameterArchive archive, sead::Heap* heap);
+    bool doParse(act::Physics* bphysics, agl::utl::ResParameterArchive archive, sead::Heap* heap);
 };
 
 }  // namespace ksys::phys

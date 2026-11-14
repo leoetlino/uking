@@ -8,10 +8,10 @@
 #include "KingSystem/Utils/ParamIO.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
-class ActorLink : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(ActorLink, Resource)
+class ActorLink : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(ActorLink, res::Resource)
 public:
     enum class User {
         Profile = 0,
@@ -134,4 +134,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(ActorLink, 0x778);
 
-}  // namespace ksys::res
+}  // namespace ksys::act

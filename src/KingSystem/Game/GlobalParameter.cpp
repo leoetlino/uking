@@ -1,7 +1,7 @@
 #include "KingSystem/Game/GlobalParameter.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
-#include "KingSystem/Resource/Actor/resResourceGParamList.h"
+#include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/Resource/resResourceArchive.h"
 
 namespace ksys::game {

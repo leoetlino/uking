@@ -1,7 +1,7 @@
-#include "KingSystem/Resource/Actor/resResourceASList.h"
-#include "KingSystem/Resource/Actor/resResourceAS.h"
+#include "KingSystem/ActorSystem/actASList.h"
+#include "KingSystem/ActorSystem/actAS.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 namespace {
 [[maybe_unused]] sead::SafeArray<sead::FixedSafeString<128>, 3> sStrings;
@@ -250,4 +250,4 @@ bool ASList::getCFDefineInfo(float* frame, float* start_frame_value, const sead:
     return true;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

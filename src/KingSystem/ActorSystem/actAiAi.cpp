@@ -1,4 +1,5 @@
 #include "KingSystem/ActorSystem/actAiAi.h"
+#include "KingSystem/ActorSystem/actAIProgram.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
@@ -7,11 +8,10 @@
 #include "KingSystem/ActorSystem/actAiInlineParam.h"
 #include "KingSystem/ActorSystem/aiDummyAi.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
 
 namespace ksys::act::ai {
 
-inline res::AIProgram* ActionBase::getAIProg() const {
+inline act::AIProgram* ActionBase::getAIProg() const {
     return mActor->getParam()->getRes().mAIProgram;
 }
 

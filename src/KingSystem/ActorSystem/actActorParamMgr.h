@@ -16,11 +16,12 @@ namespace ksys {
 
 namespace res {
 class Archive;
-class GParamList;
 class LoadRequest;
 }  // namespace res
 
 namespace act {
+
+class GParamList;
 
 // FIXME: incomplete
 class ActorParamMgr final : public sead::hostio::Node, public KingEditorComponent {
@@ -54,7 +55,7 @@ public:
     bool finishLoadingStep2(ActorParam* param, void* x);
     void loadExtraResAsync(ActorParam* param, res::Handle* pack_handle, void* x, u32 lane_id);
     bool finishLoadingExtraRes(ActorParam* param, void* x);
-    res::GParamList* getDummyGParamList() const;
+    GParamList* getDummyGParamList() const;
 
 private:
     enum class Flag : u8 {

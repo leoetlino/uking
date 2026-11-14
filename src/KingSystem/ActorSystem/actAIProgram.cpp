@@ -1,4 +1,4 @@
-#include "KingSystem/Resource/Actor/resResourceAIProgram.h"
+#include "KingSystem/ActorSystem/actAIProgram.h"
 #include <heap/seadHeapMgr.h>
 #include <utility/aglParameter.h>
 #include "KingSystem/ActorSystem/actAiActionBase.h"
@@ -6,7 +6,7 @@
 #include "KingSystem/System/CurrentResNameMgr.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 AIProgram::~AIProgram() = default;
 
@@ -461,4 +461,4 @@ bool AIProgram::Definition::addSInstParam_(s32 idx, const char* name, sead::Heap
     return true;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

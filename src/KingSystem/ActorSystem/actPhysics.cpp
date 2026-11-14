@@ -1,6 +1,6 @@
-#include "KingSystem/Resource/Actor/resResourcePhysics.h"
+#include "KingSystem/ActorSystem/actPhysics.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 void Physics::doCreate_(u8* buffer, u32 buffer_size, sead::Heap* heap) {}
 
@@ -12,4 +12,4 @@ bool Physics::parse_(u8* data, size_t size, sead::Heap* heap) {
     return true;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

@@ -2,7 +2,7 @@
 #include <limits>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/AS/ASList.h"
-#include "KingSystem/Resource/Actor/resResourceAS.h"
+#include "KingSystem/ActorSystem/actAS.h"
 
 namespace ksys::as {
 class Element;

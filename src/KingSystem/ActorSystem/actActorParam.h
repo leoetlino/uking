@@ -6,8 +6,8 @@
 #include <hostio/seadHostIONode.h>
 #include <prim/seadSafeString.h>
 #include <thread/seadCriticalSection.h>
+#include "KingSystem/ActorSystem/actActorLink.h"
 #include "KingSystem/Framework/frmBaseProcMgrJob.h"
-#include "KingSystem/Resource/Actor/resResourceActorLink.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Thread/Event.h"
 
@@ -16,10 +16,8 @@ namespace ksys {
 class ParamIO;
 
 namespace res {
-class AIProgram;
 class AISchedule;
 class AnimInfo;
-class ASList;
 class AttClientList;
 class Awareness;
 class BoneControl;
@@ -27,11 +25,8 @@ class Chemical;
 class DamageParam;
 class Drop;
 class EventFlow;
-class GParamList;
 class LifeCondition;
 class Lod;
-class ModelList;
-class Physics;
 class RagdollBlendWeight;
 class RagdollConfig;
 class RagdollConfigList;
@@ -43,6 +38,11 @@ class UMii;
 namespace act {
 
 class ActorParamMgr;
+class AIProgram;
+class ASList;
+class GParamList;
+class ModelList;
+class Physics;
 
 // FIXME: incomplete
 class ActorParam : public sead::hostio::Node {
@@ -85,12 +85,12 @@ public:
 
     union Resources {
         struct {
-            res::ActorLink* mActorLink;
-            res::ModelList* mModelList;
-            res::ASList* mASList;
-            res::AIProgram* mAIProgram;
-            res::GParamList* mGParamList;
-            res::Physics* mPhysics;
+            ActorLink* mActorLink;
+            ModelList* mModelList;
+            ASList* mASList;
+            AIProgram* mAIProgram;
+            GParamList* mGParamList;
+            Physics* mPhysics;
             res::Chemical* mChemical;
             res::AttClientList* mAttClientList;
             res::AISchedule* mAISchedule;
@@ -126,7 +126,7 @@ public:
 
     bool isA() const { return _a; }
 
-    bool isDummyParam(res::ActorLink::User user) const;
+    bool isDummyParam(ActorLink::User user) const;
 
     static void resetDummyResources();
 

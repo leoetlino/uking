@@ -7,10 +7,10 @@
 #include "KingSystem/Utils/ParamIO.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
-class GParamList : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(GParamList, Resource)
+class GParamList : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(GParamList, res::Resource)
 public:
     GParamList() : ParamIO("bgparamlist", 0) {}
     ~GParamList() override = default;
@@ -21,14 +21,16 @@ public:
 
     static u32 getResourceFactoryFallbackSize();
 
-    template <GParamListObjType Type>
+    template <res::GParamListObjType Type>
     const auto* get() const {
-        using Traits = GParamListObjTypeTraits<Type>;
+        using Traits = res::GParamListObjTypeTraits<Type>;
         return reinterpret_cast<const typename Traits::type*>(mObjects[Traits::index]);
     }
 
 #define KSYS_GPARAM_DEFINE_GETTER_(NAME)                                                           \
-    const auto* get##NAME() const { return get<GParamListObjType::NAME>(); }
+    const auto* get##NAME() const {                                                                \
+        return get<res::GParamListObjType::NAME>();                                                \
+    }
 
     KSYS_GPARAM_DEFINE_GETTER_(System)
     KSYS_GPARAM_DEFINE_GETTER_(General)
@@ -117,7 +119,7 @@ protected:
     void finalize_() override;
 
 private:
-    sead::Buffer<GParamListObject*> mObjects;
+    sead::Buffer<res::GParamListObject*> mObjects;
 };
 KSYS_CHECK_SIZE_NX150(GParamList, 0x2c0);
 
@@ -133,4 +135,4 @@ private:
     bool parse_(u8* data, size_t size, sead::Heap* heap) override;
 };
 
-}  // namespace ksys::res
+}  // namespace ksys::act

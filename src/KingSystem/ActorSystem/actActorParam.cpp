@@ -2,10 +2,10 @@
 #include <Byaml/Byaml.h>
 #include <basis/seadRawPrint.h>
 #include <prim/seadScopedLock.h>
+#include "KingSystem/ActorSystem/actAS.h"
+#include "KingSystem/ActorSystem/actASList.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
 #include "KingSystem/ActorSystem/actActorTemplate.h"
-#include "KingSystem/Resource/Actor/resResourceAS.h"
-#include "KingSystem/Resource/Actor/resResourceASList.h"
 #include "KingSystem/Resource/Actor/resResourceAttClient.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
 #include "KingSystem/Resource/Actor/resResourceRagdollConfigList.h"
@@ -55,7 +55,7 @@ void ActorParam::deleteResHandles() {
         handles.freeBuffer();
 }
 
-bool ActorParam::isDummyParam(res::ActorLink::User user) const {
+bool ActorParam::isDummyParam(ActorLink::User user) const {
     return sead::SafeString(mRes.mActorLink->getUserName(user)) == "Dummy";
 }
 
