@@ -1,12 +1,12 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAi.h"
-#include "KingSystem/Game/Horse/AI/aiHorseRiddenByNPCBase.h"
+#include "KingSystem/Game/Fauna/AI/aiDefEscapeAI.h"
 
 namespace uking::ai {
 
-class HorseRiddenByNPC : public ksys::game::HorseRiddenByNPCBase {
-    SEAD_RTTI_OVERRIDE(HorseRiddenByNPC, ksys::game::HorseRiddenByNPCBase)
+class HorseRiddenByNPC : public ksys::game::DefEscapeAI {
+    SEAD_RTTI_OVERRIDE(HorseRiddenByNPC, ksys::game::DefEscapeAI)
 public:
     explicit HorseRiddenByNPC(const InitArg& arg);
     ~HorseRiddenByNPC() override;

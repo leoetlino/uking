@@ -13,8 +13,6 @@ target_sources(uking PRIVATE
   aiHorseRiddenAI.h
   aiHorseRiddenByEnemyAI.cpp
   aiHorseRiddenByEnemyAI.h
-  aiHorseRiddenByNPCBase.cpp
-  aiHorseRiddenByNPCBase.h
   aiHorseWanderAI.cpp
   aiHorseWanderAI.h
   aiRideHorseAI.cpp

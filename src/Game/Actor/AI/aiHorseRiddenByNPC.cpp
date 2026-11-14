@@ -2,24 +2,24 @@
 
 namespace uking::ai {
 
-HorseRiddenByNPC::HorseRiddenByNPC(const InitArg& arg) : HorseRiddenByNPCBase(arg) {}
+HorseRiddenByNPC::HorseRiddenByNPC(const InitArg& arg) : DefEscapeAI(arg) {}
 
 HorseRiddenByNPC::~HorseRiddenByNPC() = default;
 
 bool HorseRiddenByNPC::init_(sead::Heap* heap) {
-    return HorseRiddenByNPCBase::init_(heap);
+    return DefEscapeAI::init_(heap);
 }
 
 void HorseRiddenByNPC::enter_(ksys::act::ai::InlineParamPack* params) {
-    HorseRiddenByNPCBase::enter_(params);
+    DefEscapeAI::enter_(params);
 }
 
 void HorseRiddenByNPC::leave_() {
-    HorseRiddenByNPCBase::leave_();
+    DefEscapeAI::leave_();
 }
 
 void HorseRiddenByNPC::loadParams_() {
-    HorseRiddenByNPCBase::loadParams_();
+    DefEscapeAI::loadParams_();
     getStaticParam(&mNavMeshCharacterScaleAtPrecise_s, "NavMeshCharacterScaleAtPrecise");
 }
 
