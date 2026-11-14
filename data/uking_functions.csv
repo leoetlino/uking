@@ -48877,9 +48877,9 @@ Address,Quality,Size,Name
 0x00000071007a56ec,U,000052,uking::act::CharacterControllerGroundHitContactList::dtorDelete
 0x00000071007a5720,U,000336,sinitActorSteepContactCollectorStatics
 0x00000071007a5870,U,000004,_ZN4sead15FixedSafeStringILi32EED2Ev
-0x00000071007a5874,U,000464,uking::initStageChangeRequestStrings
+0x00000071007a5874,U,000464,uking::initDemoRequest
 0x00000071007a5a44,U,000068,uking::getDemoRequestPos
-0x00000071007a5a88,U,000344,sinitGameSceneStrings
+0x00000071007a5a88,U,000344,sinitDemoRequest
 0x00000071007a5be0,U,000096,uking::DungeonResetPosMgr::SingletonDisposer_::dtor
 0x00000071007a5c40,U,000104,uking::DungeonResetPosMgr::SingletonDisposer_::dtorDelete
 0x00000071007a5ca8,U,000176,uking::DungeonResetPosMgr::createInstance
