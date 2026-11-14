@@ -1,8 +1,8 @@
 #pragma once
 
 #include <container/seadBuffer.h>
-#include "KingSystem/Resource/GeneralParamList/resGParamListObject.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListTraits.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListTraits.h"
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 #include "KingSystem/Utils/Types.h"
@@ -21,15 +21,15 @@ public:
 
     static u32 getResourceFactoryFallbackSize();
 
-    template <res::GParamListObjType Type>
+    template <GParamListObjType Type>
     const auto* get() const {
-        using Traits = res::GParamListObjTypeTraits<Type>;
+        using Traits = GParamListObjTypeTraits<Type>;
         return reinterpret_cast<const typename Traits::type*>(mObjects[Traits::index]);
     }
 
 #define KSYS_GPARAM_DEFINE_GETTER_(NAME)                                                           \
     const auto* get##NAME() const {                                                                \
-        return get<res::GParamListObjType::NAME>();                                                \
+        return get<GParamListObjType::NAME>();                                                     \
     }
 
     KSYS_GPARAM_DEFINE_GETTER_(System)
@@ -119,7 +119,7 @@ protected:
     void finalize_() override;
 
 private:
-    sead::Buffer<res::GParamListObject*> mObjects;
+    sead::Buffer<GParamListObject*> mObjects;
 };
 KSYS_CHECK_SIZE_NX150(GParamList, 0x2c0);
 

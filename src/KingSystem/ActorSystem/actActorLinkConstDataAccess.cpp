@@ -1,5 +1,10 @@
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include <prim/seadRuntimeTypeInfo.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAttack.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEnemy.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseTargetedInfo.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectLiftable.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSystem.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
@@ -7,11 +12,6 @@
 #include "KingSystem/ActorSystem/aiRootAi.h"
 #include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Map/mapPreActor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttack.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemy.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseTargetedInfo.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectLiftable.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSystem.h"
 
 namespace ksys::act {
 

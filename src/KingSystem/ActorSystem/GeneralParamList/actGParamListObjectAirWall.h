@@ -1,0 +1,24 @@
+#pragma once
+
+#include <utility/aglParameter.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
+#include "KingSystem/Utils/Types.h"
+
+namespace ksys::act {
+
+class GParamListObjectAirWall : public GParamListObject {
+public:
+    GParamListObjectAirWall();
+    const char* getName() const override { return "AirWall"; }
+
+    agl::utl::Parameter<sead::SafeString> mLayer;
+};
+KSYS_CHECK_SIZE_NX150(GParamListObjectAirWall, 0x60);
+
+inline GParamListObjectAirWall::GParamListObjectAirWall() {
+    auto* const obj = &mObj;
+
+    mLayer.init("AirWall", "Layer", "", obj);
+}
+
+}  // namespace ksys::act

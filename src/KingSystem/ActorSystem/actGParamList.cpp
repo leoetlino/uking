@@ -1,88 +1,88 @@
 #include "KingSystem/ActorSystem/actGParamList.h"
 #include <prim/seadRuntimeTypeInfo.h>
 #include <utility/aglParameter.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAirWall.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAnimalFollowOffset.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAnimalUnit.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectArmor.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectArmorEffect.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectArmorHead.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectArmorUpper.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectArrow.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAttack.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAttackInterval.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectAutoGen.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectBeam.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectBindActor.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectBindBone.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectBow.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectBullet.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectCamera.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectChemicalType.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectClothReaction.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectCookSpice.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectCureItem.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEatTarget.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEnemy.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEnemyLevel.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEnemyRace.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEnemyShown.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectEvent.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectExtendedEntity.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectFish.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGelEnemy.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGeneral.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGiantArmor.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGiantArmorSlot.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGlobal.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGolem.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGolemIK.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGrab.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGuardian.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGuardianMini.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGuardianMiniWeapon.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorse.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseCreator.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseObject.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseRider.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseTargetedInfo.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectHorseUnit.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectInsect.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectItem.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectLargeSword.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectLiftable.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectLumberjackTree.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectMasterSword.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectMonsterShop.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectMotorcycle.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectNest.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectNpc.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectNpcEquipment.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectPictureBook.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectPlayer.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectPrey.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectRod.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectRope.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectRupee.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSandworm.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSeriesArmor.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectShiekerStone.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectShield.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSmallSword.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSpear.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectStalEnemy.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSwarm.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectSystem.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectTraveler.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWeaponCommon.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWeaponOption.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWeaponThrow.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWizzrobe.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWolfLink.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectZora.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListTraits.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObject.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAirWall.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAnimalFollowOffset.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAnimalUnit.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectArmor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectArmorEffect.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectArmorHead.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectArmorUpper.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectArrow.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttack.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttackInterval.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectAutoGen.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectBeam.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectBindActor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectBindBone.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectBow.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectBullet.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectCamera.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectChemicalType.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectClothReaction.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectCookSpice.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectCureItem.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEatTarget.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemy.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemyLevel.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemyRace.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEnemyShown.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectEvent.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectExtendedEntity.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectFish.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGelEnemy.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGeneral.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGiantArmor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGiantArmorSlot.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGolem.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGolemIK.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGrab.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGuardian.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGuardianMini.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGuardianMiniWeapon.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorse.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseCreator.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseObject.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseRider.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseTargetedInfo.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectHorseUnit.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectInsect.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectItem.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectLargeSword.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectLiftable.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectLumberjackTree.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectMasterSword.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectMonsterShop.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectMotorcycle.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectNest.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectNpc.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectNpcEquipment.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectPictureBook.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectPlayer.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectPrey.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectRod.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectRope.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectRupee.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSandworm.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSeriesArmor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectShiekerStone.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectShield.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSmallSword.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSpear.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectStalEnemy.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSwarm.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectSystem.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectTraveler.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponCommon.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponOption.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponThrow.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWizzrobe.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWolfLink.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectZora.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListTraits.h"
 
 namespace ksys::act {
 
@@ -93,13 +93,13 @@ bool GParamList::parse_(u8* data, size_t, sead::Heap* heap) {
     if (!sead::IsDerivedFrom<DummyGParamList>(this) && act::ActorParamMgr::instance())
         dummy_list = act::ActorParamMgr::instance()->getDummyGParamList();
 
-    mObjects.allocBufferAssert(res::NumGParamListObjTypes, heap);
+    mObjects.allocBufferAssert(NumGParamListObjTypes, heap);
 
     const agl::utl::ResParameterArchive archive{data};
 
 #define KSYS_GPARAM_ADD_(NAME)                                                                     \
     do {                                                                                           \
-        using Traits = res::GParamListObjTypeTraits<res::GParamListObjType::NAME>;                 \
+        using Traits = GParamListObjTypeTraits<GParamListObjType::NAME>;                           \
         const auto pobj = agl::utl::getResParameterObj(archive.getRootList(), #NAME);              \
         if (pobj.ptr()) {                                                                          \
             auto* obj = new (heap) Traits::type;                                                   \
@@ -205,85 +205,85 @@ void GParamList::finalize_() {}
 
 static constexpr size_t getResourceFactoryFallbackSizeConst() {
     size_t size = 0;
-    size += sizeof(res::GParamListObjectSystem);
-    size += sizeof(res::GParamListObjectGeneral);
-    size += sizeof(res::GParamListObjectEnemy);
-    size += sizeof(res::GParamListObjectEnemyLevel);
-    size += sizeof(res::GParamListObjectEnemyRace);
-    size += sizeof(res::GParamListObjectAttackInterval);
-    size += sizeof(res::GParamListObjectEnemyShown);
-    size += sizeof(res::GParamListObjectBindBone);
-    size += sizeof(res::GParamListObjectAttack);
-    size += sizeof(res::GParamListObjectWeaponCommon);
-    size += sizeof(res::GParamListObjectWeaponThrow);
-    size += sizeof(res::GParamListObjectSandworm);
-    size += sizeof(res::GParamListObjectSmallSword);
-    size += sizeof(res::GParamListObjectRod);
-    size += sizeof(res::GParamListObjectLargeSword);
-    size += sizeof(res::GParamListObjectSpear);
-    size += sizeof(res::GParamListObjectShield);
-    size += sizeof(res::GParamListObjectBow);
-    size += sizeof(res::GParamListObjectWeaponOption);
-    size += sizeof(res::GParamListObjectMasterSword);
-    size += sizeof(res::GParamListObjectGuardianMiniWeapon);
-    size += sizeof(res::GParamListObjectPlayer);
-    size += sizeof(res::GParamListObjectCamera);
-    size += sizeof(res::GParamListObjectGrab);
-    size += sizeof(res::GParamListObjectArmor);
-    size += sizeof(res::GParamListObjectArmorEffect);
-    size += sizeof(res::GParamListObjectArmorHead);
-    size += sizeof(res::GParamListObjectArmorUpper);
-    size += sizeof(res::GParamListObjectShiekerStone);
-    size += sizeof(res::GParamListObjectSeriesArmor);
-    size += sizeof(res::GParamListObjectLiftable);
-    size += sizeof(res::GParamListObjectItem);
-    size += sizeof(res::GParamListObjectRupee);
-    size += sizeof(res::GParamListObjectArrow);
-    size += sizeof(res::GParamListObjectBullet);
-    size += sizeof(res::GParamListObjectCureItem);
-    size += sizeof(res::GParamListObjectCookSpice);
-    size += sizeof(res::GParamListObjectLumberjackTree);
-    size += sizeof(res::GParamListObjectNpc);
-    size += sizeof(res::GParamListObjectNpcEquipment);
-    size += sizeof(res::GParamListObjectZora);
-    size += sizeof(res::GParamListObjectTraveler);
-    size += sizeof(res::GParamListObjectPrey);
-    size += sizeof(res::GParamListObjectAnimalFollowOffset);
-    size += sizeof(res::GParamListObjectExtendedEntity);
-    size += sizeof(res::GParamListObjectBindActor);
-    size += sizeof(res::GParamListObjectEatTarget);
-    size += sizeof(res::GParamListObjectAnimalUnit);
-    size += sizeof(res::GParamListObjectInsect);
-    size += sizeof(res::GParamListObjectFish);
-    size += sizeof(res::GParamListObjectRope);
-    size += sizeof(res::GParamListObjectHorse);
-    size += sizeof(res::GParamListObjectHorseUnit);
-    size += sizeof(res::GParamListObjectHorseObject);
-    size += sizeof(res::GParamListObjectHorseRider);
-    size += sizeof(res::GParamListObjectHorseCreator);
-    size += sizeof(res::GParamListObjectGiantArmorSlot);
-    size += sizeof(res::GParamListObjectGiantArmor);
-    size += sizeof(res::GParamListObjectGuardian);
-    size += sizeof(res::GParamListObjectMonsterShop);
-    size += sizeof(res::GParamListObjectSwarm);
-    size += sizeof(res::GParamListObjectGelEnemy);
-    size += sizeof(res::GParamListObjectNest);
-    size += sizeof(res::GParamListObjectWizzrobe);
-    size += sizeof(res::GParamListObjectStalEnemy);
-    size += sizeof(res::GParamListObjectGuardianMini);
-    size += sizeof(res::GParamListObjectClothReaction);
-    size += sizeof(res::GParamListObjectGlobal);
-    size += sizeof(res::GParamListObjectBeam);
-    size += sizeof(res::GParamListObjectAutoGen);
-    size += sizeof(res::GParamListObjectChemicalType);
-    size += sizeof(res::GParamListObjectGolem);
-    size += sizeof(res::GParamListObjectHorseTargetedInfo);
-    size += sizeof(res::GParamListObjectWolfLink);
-    size += sizeof(res::GParamListObjectEvent);
-    size += sizeof(res::GParamListObjectGolemIK);
-    size += sizeof(res::GParamListObjectPictureBook);
-    size += sizeof(res::GParamListObjectAirWall);
-    size += sizeof(res::GParamListObjectMotorcycle);
+    size += sizeof(GParamListObjectSystem);
+    size += sizeof(GParamListObjectGeneral);
+    size += sizeof(GParamListObjectEnemy);
+    size += sizeof(GParamListObjectEnemyLevel);
+    size += sizeof(GParamListObjectEnemyRace);
+    size += sizeof(GParamListObjectAttackInterval);
+    size += sizeof(GParamListObjectEnemyShown);
+    size += sizeof(GParamListObjectBindBone);
+    size += sizeof(GParamListObjectAttack);
+    size += sizeof(GParamListObjectWeaponCommon);
+    size += sizeof(GParamListObjectWeaponThrow);
+    size += sizeof(GParamListObjectSandworm);
+    size += sizeof(GParamListObjectSmallSword);
+    size += sizeof(GParamListObjectRod);
+    size += sizeof(GParamListObjectLargeSword);
+    size += sizeof(GParamListObjectSpear);
+    size += sizeof(GParamListObjectShield);
+    size += sizeof(GParamListObjectBow);
+    size += sizeof(GParamListObjectWeaponOption);
+    size += sizeof(GParamListObjectMasterSword);
+    size += sizeof(GParamListObjectGuardianMiniWeapon);
+    size += sizeof(GParamListObjectPlayer);
+    size += sizeof(GParamListObjectCamera);
+    size += sizeof(GParamListObjectGrab);
+    size += sizeof(GParamListObjectArmor);
+    size += sizeof(GParamListObjectArmorEffect);
+    size += sizeof(GParamListObjectArmorHead);
+    size += sizeof(GParamListObjectArmorUpper);
+    size += sizeof(GParamListObjectShiekerStone);
+    size += sizeof(GParamListObjectSeriesArmor);
+    size += sizeof(GParamListObjectLiftable);
+    size += sizeof(GParamListObjectItem);
+    size += sizeof(GParamListObjectRupee);
+    size += sizeof(GParamListObjectArrow);
+    size += sizeof(GParamListObjectBullet);
+    size += sizeof(GParamListObjectCureItem);
+    size += sizeof(GParamListObjectCookSpice);
+    size += sizeof(GParamListObjectLumberjackTree);
+    size += sizeof(GParamListObjectNpc);
+    size += sizeof(GParamListObjectNpcEquipment);
+    size += sizeof(GParamListObjectZora);
+    size += sizeof(GParamListObjectTraveler);
+    size += sizeof(GParamListObjectPrey);
+    size += sizeof(GParamListObjectAnimalFollowOffset);
+    size += sizeof(GParamListObjectExtendedEntity);
+    size += sizeof(GParamListObjectBindActor);
+    size += sizeof(GParamListObjectEatTarget);
+    size += sizeof(GParamListObjectAnimalUnit);
+    size += sizeof(GParamListObjectInsect);
+    size += sizeof(GParamListObjectFish);
+    size += sizeof(GParamListObjectRope);
+    size += sizeof(GParamListObjectHorse);
+    size += sizeof(GParamListObjectHorseUnit);
+    size += sizeof(GParamListObjectHorseObject);
+    size += sizeof(GParamListObjectHorseRider);
+    size += sizeof(GParamListObjectHorseCreator);
+    size += sizeof(GParamListObjectGiantArmorSlot);
+    size += sizeof(GParamListObjectGiantArmor);
+    size += sizeof(GParamListObjectGuardian);
+    size += sizeof(GParamListObjectMonsterShop);
+    size += sizeof(GParamListObjectSwarm);
+    size += sizeof(GParamListObjectGelEnemy);
+    size += sizeof(GParamListObjectNest);
+    size += sizeof(GParamListObjectWizzrobe);
+    size += sizeof(GParamListObjectStalEnemy);
+    size += sizeof(GParamListObjectGuardianMini);
+    size += sizeof(GParamListObjectClothReaction);
+    size += sizeof(GParamListObjectGlobal);
+    size += sizeof(GParamListObjectBeam);
+    size += sizeof(GParamListObjectAutoGen);
+    size += sizeof(GParamListObjectChemicalType);
+    size += sizeof(GParamListObjectGolem);
+    size += sizeof(GParamListObjectHorseTargetedInfo);
+    size += sizeof(GParamListObjectWolfLink);
+    size += sizeof(GParamListObjectEvent);
+    size += sizeof(GParamListObjectGolemIK);
+    size += sizeof(GParamListObjectPictureBook);
+    size += sizeof(GParamListObjectAirWall);
+    size += sizeof(GParamListObjectMotorcycle);
     size += sizeof(GParamList);
     return size;
 }

@@ -1,12 +1,12 @@
 #include "Game/Actor/actDamageManagerBase.h"
 #include "KingSystem/AOC/HardModeManager.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGeneral.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/actLifeRecoveryInfo.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGeneral.h"
 
 namespace uking::act {
 
@@ -30,7 +30,7 @@ u32 DamageManagerBase::getDamage() {
 bool DamageManagerBase::applyDamage(s32& life) {
     auto* param_list = mActor->getParam()->getRes().mGParamList;
 
-    const ksys::res::GParamListObjectGeneral& params = *param_list->getGeneral();
+    const ksys::act::GParamListObjectGeneral& params = *param_list->getGeneral();
     if (params.mIsLifeInfinite.ref()) {
         // Since life is infinite, we don't need to modify the damage or life.
         // But we still call the "callback" as if damage was done.

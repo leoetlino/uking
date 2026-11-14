@@ -3,6 +3,7 @@
 #include <container/seadSafeArray.h>
 #include <math/seadMathCalcCommon.h>
 #include <random/seadGlobalRandom.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectNpc.h"
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLink.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
@@ -16,7 +17,6 @@
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectNpc.h"
 #include "KingSystem/World/worldManager.h"
 
 namespace ksys::act {

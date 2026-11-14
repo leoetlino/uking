@@ -1,8 +1,8 @@
 #include "Game/DamageInfoMgr.h"
 #include "Game/Framework/gameStageInfo.h"
 #include "Game/gdtCommonFlags.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGlobal.h"
 #include "KingSystem/Game/GlobalParameter.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
 
 namespace uking {
 

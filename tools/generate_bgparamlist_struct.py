@@ -92,10 +92,10 @@ def main() -> None:
 #pragma once
 
 #include <agl/utl/aglParameter.h>
-#include "KingSystem/Resource/GeneralParamList/resGParamListObject.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::res {
+namespace ksys::act {
 """)
 
     # Generate the class definition.
@@ -124,7 +124,7 @@ namespace ksys::res {
     print("}")
 
     print()
-    print("}  // namespace ksys::res")
+    print("}  // namespace ksys::act")
 
 
 if __name__ == "__main__":

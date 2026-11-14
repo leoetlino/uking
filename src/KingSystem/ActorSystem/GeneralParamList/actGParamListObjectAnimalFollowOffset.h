@@ -1,0 +1,24 @@
+#pragma once
+
+#include <utility/aglParameter.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
+#include "KingSystem/Utils/Types.h"
+
+namespace ksys::act {
+
+class GParamListObjectAnimalFollowOffset : public GParamListObject {
+public:
+    GParamListObjectAnimalFollowOffset();
+    const char* getName() const override { return "AnimalFollowOffset"; }
+
+    agl::utl::Parameter<sead::Vector3f> mEatLocalOffset;
+};
+KSYS_CHECK_SIZE_NX150(GParamListObjectAnimalFollowOffset, 0x60);
+
+inline GParamListObjectAnimalFollowOffset::GParamListObjectAnimalFollowOffset() {
+    auto* const obj = &mObj;
+
+    mEatLocalOffset.init({0.0, 0.0, 0.0}, "EatLocalOffset", "", obj);
+}
+
+}  // namespace ksys::act

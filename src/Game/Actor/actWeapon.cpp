@@ -3,14 +3,14 @@
 #include <random/seadGlobalRandom.h>
 #include "Game/UI/uiPauseMenuDataMgr.h"
 #include "Game/gdtCommonFlags.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectGlobal.h"
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObjectWeaponCommon.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/Framework/frmActorInstParamPack.h"
 #include "KingSystem/Game/GlobalParameter.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectGlobal.h"
-#include "KingSystem/Resource/GeneralParamList/resGParamListObjectWeaponCommon.h"
 
 namespace uking::act {
 

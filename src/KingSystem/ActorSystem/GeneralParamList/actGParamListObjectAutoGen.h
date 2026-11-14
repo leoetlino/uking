@@ -1,0 +1,28 @@
+#pragma once
+
+#include <utility/aglParameter.h>
+#include "KingSystem/ActorSystem/GeneralParamList/actGParamListObject.h"
+#include "KingSystem/Utils/Types.h"
+
+namespace ksys::act {
+
+class GParamListObjectAutoGen : public GParamListObject {
+public:
+    GParamListObjectAutoGen();
+    const char* getName() const override { return "AutoGen"; }
+
+    agl::utl::Parameter<sead::SafeString> mSetName;
+    agl::utl::Parameter<sead::SafeString> mKeyActorName;
+    agl::utl::Parameter<f32> mSetRadius;
+};
+KSYS_CHECK_SIZE_NX150(GParamListObjectAutoGen, 0xa8);
+
+inline GParamListObjectAutoGen::GParamListObjectAutoGen() {
+    auto* const obj = &mObj;
+
+    mSetName.init("", "SetName", "", obj);
+    mKeyActorName.init("", "KeyActorName", "", obj);
+    mSetRadius.init(0.0, "SetRadius", "", obj);
+}
+
+}  // namespace ksys::act

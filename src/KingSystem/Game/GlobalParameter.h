@@ -5,11 +5,8 @@
 
 namespace ksys::act {
 class ActorParam;
-}
-
-namespace ksys::res {
 class GParamListObjectGlobal;
-}
+}  // namespace ksys::act
 
 namespace ksys::game {
 
@@ -26,13 +23,13 @@ public:
     bool isActorPackReady() const;
     bool loadActorParams();
 
-    const res::GParamListObjectGlobal* getGlobalParam() const { return mGlobalParam; }
+    const act::GParamListObjectGlobal* getGlobalParam() const { return mGlobalParam; }
 
 private:
     bool loadActorParams_();
 
     act::ActorParam* mActorParam{};
-    const res::GParamListObjectGlobal* mGlobalParam{};
+    const act::GParamListObjectGlobal* mGlobalParam{};
     res::Handle mResHandle{};
 };
 
