@@ -16,7 +16,6 @@ namespace ksys {
 class ParamIO;
 
 namespace res {
-class Chemical;
 class EventFlow;
 }  // namespace res
 
@@ -30,6 +29,7 @@ class ASList;
 class AttClientList;
 class Awareness;
 class BoneControl;
+class Chemical;
 class DamageParam;
 class Drop;
 class GParamList;
@@ -91,7 +91,7 @@ public:
             AIProgram* mAIProgram;
             GParamList* mGParamList;
             Physics* mPhysics;
-            res::Chemical* mChemical;
+            Chemical* mChemical;
             AttClientList* mAttClientList;
             AISchedule* mAISchedule;
             res::EventFlow* mEventFlow;

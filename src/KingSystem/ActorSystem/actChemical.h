@@ -4,10 +4,10 @@
 #include "KingSystem/Resource/resResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
-class Chemical : public ParamIO, public Resource {
-    SEAD_RTTI_OVERRIDE(Chemical, Resource)
+class Chemical : public ParamIO, public res::Resource {
+    SEAD_RTTI_OVERRIDE(Chemical, res::Resource)
 
 public:
     Chemical();
@@ -22,4 +22,4 @@ private:
     chm::Root mRoot;
 };
 
-}  // namespace ksys::res
+}  // namespace ksys::act

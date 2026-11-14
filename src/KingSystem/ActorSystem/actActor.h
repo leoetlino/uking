@@ -45,6 +45,7 @@ class ActorBoneControl;
 
 namespace chm {
 class ActorChemicals;
+class Object;
 }  // namespace chm
 
 namespace map {
@@ -91,7 +92,6 @@ class LifeRecoverInfo;
 class Actor;
 class ActorCreator;
 class ActorParam;
-class Chemical;
 class ImpulseBaseProcLink;
 class IDamageManager;
 class LodState;
@@ -337,7 +337,7 @@ public:
     virtual void getNoticeUIState();
     virtual s32 m95(void* arg, s32 value);
     virtual void getReceivedDamage();
-    virtual Chemical* getMainChemical();
+    virtual chm::Object* getMainChemical();
     virtual void getWeapons();
     virtual void getArmors();
     virtual void getCarriedInfo();

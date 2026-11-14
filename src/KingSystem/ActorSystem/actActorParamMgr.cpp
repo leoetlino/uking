@@ -11,6 +11,7 @@
 #include "KingSystem/ActorSystem/actAttClient.h"
 #include "KingSystem/ActorSystem/actAwareness.h"
 #include "KingSystem/ActorSystem/actBoneControl.h"
+#include "KingSystem/ActorSystem/actChemical.h"
 #include "KingSystem/ActorSystem/actDamageParam.h"
 #include "KingSystem/ActorSystem/actDrop.h"
 #include "KingSystem/ActorSystem/actGParamList.h"
@@ -24,7 +25,6 @@
 #include "KingSystem/ActorSystem/actRecipe.h"
 #include "KingSystem/ActorSystem/actShop.h"
 #include "KingSystem/ActorSystem/actUMii.h"
-#include "KingSystem/Resource/Actor/resResourceChemical.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceArchive.h"
@@ -61,7 +61,7 @@ void ActorParamMgr::init(sead::Heap* heap, sead::Heap* debug_heap) {
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<AIProgram>(1.0, 0x300000),
                               "baiprog");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<Physics>(6.0), "bphysics");
-    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<res::Chemical>(0.0, 0x2000),
+    res::registerEntryFactory(new (mTempHeap) res::EntryFactory<Chemical>(0.0, 0x2000),
                               "bchemical");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<AS>(0.0, 0x80000), "bas");
     res::registerEntryFactory(new (mTempHeap) res::EntryFactory<AttClientList>(1.0, 0x2000),
@@ -365,8 +365,8 @@ void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::Handle* pack_han
     loadFileAsync<Physics>(param, Type::Physics, "Actor/Physics", "physics",
                            link->getUsers().getPhysics(), pack_handle, x, lane_id);
 
-    loadFileAsync<res::Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
-                                 link->getUsers().getChemical(), pack_handle, x, lane_id);
+    loadFileAsync<Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
+                            link->getUsers().getChemical(), pack_handle, x, lane_id);
 
     loadFileAsync<DamageParam>(param, Type::DamageParam, "Actor/DamageParam", "dmgparam",
                                link->getUsers().getDamageParam(), pack_handle, x, lane_id);
@@ -430,7 +430,7 @@ bool ActorParamMgr::finishLoadingStep2(ActorParam* param, void* x) {
     if (!handleAsyncFileLoad<Physics>(param, &idx, Type::Physics, x))
         return false;
 
-    if (!handleAsyncFileLoad<res::Chemical>(param, &idx, Type::Chemical, x))
+    if (!handleAsyncFileLoad<Chemical>(param, &idx, Type::Chemical, x))
         return false;
 
     if (!handleAsyncFileLoad<DamageParam>(param, &idx, Type::DamageParam, x))
@@ -681,8 +681,8 @@ void ActorParamMgr::loadFilesStep2(ActorParam* param, sead::Heap* heap, res::Han
     loadFile<Physics>(param, Type::Physics, "Actor/Physics", "physics",
                       link->getUsers().getPhysics(), pack_handle, x, lane_id);
 
-    loadFile<res::Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
-                            link->getUsers().getChemical(), pack_handle, x, lane_id);
+    loadFile<Chemical>(param, Type::Chemical, "Actor/Chemical", "chemical",
+                       link->getUsers().getChemical(), pack_handle, x, lane_id);
 
     loadFile<DamageParam>(param, Type::DamageParam, "Actor/DamageParam", "dmgparam",
                           link->getUsers().getDamageParam(), pack_handle, x, lane_id);

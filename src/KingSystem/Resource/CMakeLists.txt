@@ -49,9 +49,6 @@ target_sources(uking PRIVATE
   resResourceGameSaveData.cpp
   resResourceGameSaveData.h
 
-  Actor/resResourceChemical.cpp
-  Actor/resResourceChemical.h
-
   Event/resDemoASLoader.cpp
   Event/resDemoASLoader.h
   Event/resResourceDemo.cpp

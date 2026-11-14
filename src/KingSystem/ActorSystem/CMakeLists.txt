@@ -149,6 +149,8 @@ target_sources(uking PRIVATE
     actAwareness.h
     actBoneControl.cpp
     actBoneControl.h
+    actChemical.cpp
+    actChemical.h
     actClusteredRenderer.cpp
     actClusteredRenderer.h
     actDamageParam.cpp

@@ -1,6 +1,6 @@
-#include "KingSystem/Resource/Actor/resResourceChemical.h"
+#include "KingSystem/ActorSystem/actChemical.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 Chemical::Chemical() : ParamIO("chemical", 0) {
     addList(&mRoot, "chemical_root");
@@ -21,4 +21,4 @@ bool Chemical::parse_(u8* data, size_t size, sead::Heap* heap) {
     return true;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act
