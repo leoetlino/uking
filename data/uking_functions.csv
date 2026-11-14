@@ -53243,9 +53243,9 @@ Address,Quality,Size,Name
 0x00000071008a442c,O,000032,_ZN4sead7TreeMapIjN5uking12CookEffectIdEE4Node6erase_Ev
 0x00000071008a444c,O,000004,_ZN4sead11TreeMapNodeINS_14TreeMapKeyImplIjEEED2Ev
 0x00000071008a4450,O,000416,_ZN4sead11TreeMapImplINS_14TreeMapKeyImplIjEEE6insertEPNS_11TreeMapNodeIS2_EES6_
-0x00000071008a45f0,U,000084,uking::initGyroAimOrientation
-0x00000071008a4644,U,000080,uking::resetGyroAimOrientation
-0x00000071008a4694,U,000392,uking::updateGyroAimOrientation
+0x00000071008a45f0,U,000084,uking::initCtrlGyroAim
+0x00000071008a4644,U,000080,uking::resetCtrlGyroAim
+0x00000071008a4694,U,000392,uking::updateCtrlGyroAim
 0x00000071008a481c,U,000216,uking::readGyroSensorOrientationMtx
 0x00000071008a48f4,U,000480,uking::slerpOrientationTowardsTargetByAngle
 0x00000071008a4ad4,U,000672,uking::isValidRotationMtx33
