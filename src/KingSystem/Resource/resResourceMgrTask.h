@@ -21,9 +21,9 @@
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resCounter.h"
 #include "KingSystem/Resource/resInfoContainer.h"
+#include "KingSystem/Resource/resResourceUnitPool.h"
 #include "KingSystem/Resource/resTempResourceLoader.h"
 #include "KingSystem/Resource/resUnit.h"
-#include "KingSystem/Resource/resUnitPool.h"
 #include "KingSystem/System/OverlayArena.h"
 
 namespace sead {
