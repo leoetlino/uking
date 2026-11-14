@@ -26,7 +26,7 @@ protected:
     // static_param at offset 0xa8
     sead::SafeString mAtkColName_s{};
     // dynamic_param at offset 0xb8
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::action

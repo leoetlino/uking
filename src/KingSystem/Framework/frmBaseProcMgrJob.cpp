@@ -1,8 +1,8 @@
-#include "KingSystem/ActorSystem/actBaseProcJob.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcMgrJob.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 static util::InitTimeInfo sInfo;
 
@@ -79,4 +79,4 @@ void BaseProcJob::invoke() {
     BaseProcMgr::instance()->jobInvoked(mJobLink, mNumProcs);
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

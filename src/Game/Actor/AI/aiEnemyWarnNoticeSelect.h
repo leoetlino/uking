@@ -39,7 +39,7 @@ protected:
     // dynamic_param at offset 0x88
     bool* mForceNotice_d{};
     // dynamic_param at offset 0x90
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
     // aitree_variable at offset 0x98
     bool* mIsTrgChangeUnderWaterState_a{};
 };

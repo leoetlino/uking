@@ -19,9 +19,12 @@ class ByamlIter;
 }
 
 namespace ksys::act {
-class BaseProcLink;
 class InfoData;
 }  // namespace ksys::act
+
+namespace ksys::frm {
+class BaseProcLink;
+}  // namespace ksys::frm
 
 namespace uking::act {
 enum class WeaponModifier : u32;
@@ -309,7 +312,7 @@ public:
     PouchItem* getMasterSword() const;
 
     void removeGrabbedItems();
-    bool removeGrabbedItem(ksys::act::BaseProcLink* link);
+    bool removeGrabbedItem(ksys::frm::BaseProcLink* link);
 
     bool getEquippedArrowType(sead::BufferedSafeString* name, int* count) const;
     int getArrowCount(const sead::SafeString& name) const;

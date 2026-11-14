@@ -30,7 +30,7 @@ protected:
     // dynamic_param at offset 0x118
     sead::Vector3f* mConnectRigidOffset_d{};
     // dynamic_param at offset 0x120
-    ksys::act::BaseProcHandle** mRopeActorHandle_d{};
+    ksys::frm::BaseProcHandle** mRopeActorHandle_d{};
 };
 
 }  // namespace uking::action

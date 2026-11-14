@@ -2,7 +2,7 @@
 
 #include <heap/seadDisposer.h>
 #include <math/seadVector.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "container/seadRingBuffer.h"
 
 namespace ksys::act {
@@ -25,12 +25,12 @@ class PlayerInfo : public PlayerInfoBase {
     ~PlayerInfo() override;
 
 public:
-    ksys::act::BaseProcLink& getPlayerLink() { return mPlayerLink; }
+    ksys::frm::BaseProcLink& getPlayerLink() { return mPlayerLink; }
     bool init();
     void setAndAcquirePlayer(PlayerBase* player);  // requires CombatActor and PlayerBase
     void resetPlayer(PlayerBase* player);
-    bool acquireHorse(ksys::act::BaseProc* horse);
-    void setHorseLink(const ksys::act::BaseProcLink& horse_link);
+    bool acquireHorse(ksys::frm::BaseProc* horse);
+    void setHorseLink(const ksys::frm::BaseProcLink& horse_link);
     PlayerBase* getPlayer() const;
     PlayerBase* getPlayer_() const;                // possibly duped by compiler?
     ksys::act::Actor* getRiddenHorse() const;      // requires PlayerBase vtable
@@ -104,8 +104,8 @@ private:
         ~Info7() override;
     } mInfo7;
     PlayerBase* mPlayerActor = nullptr;
-    ksys::act::BaseProcLink mPlayerLink;
-    ksys::act::BaseProcLink mHorseLink;
+    ksys::frm::BaseProcLink mPlayerLink;
+    ksys::frm::BaseProcLink mHorseLink;
     sead::Vector3f mPlayerPos{0, 0, 0};
     sead::Vector3f mPlayerPosForPostCalc{0, 0, 0};
     f32 mMaxHeartValue = 0;

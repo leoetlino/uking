@@ -6,7 +6,7 @@ namespace ksys::game {
 
 void WeaponBase::requestCreateWeaponActor(const char* actor, const sead::Matrix34f& matrix,
                                           f32 scale, sead::Heap* heap,
-                                          ksys::act::BaseProcHandle* handle, s32 life,
+                                          ksys::frm::BaseProcHandle* handle, s32 life,
                                           ksys::frm::ActorInstParamPack* params_in,
                                           s32 task_lane_id) {
     ksys::frm::ActorInstParamPack params;

@@ -37,27 +37,6 @@ target_sources(uking PRIVATE
     actAiQuery.h
     actAiQuerys.cpp
     actAiQuerys.h
-    actBaseProc.cpp
-    actBaseProc.h
-    actBaseProcCreateTask.cpp
-    actBaseProcCreateTask.h
-    actBaseProcDeleter.cpp
-    actBaseProcDeleter.h
-    actBaseProcHandle.cpp
-    actBaseProcHandle.h
-    actBaseProcHeapMgr.cpp
-    actBaseProcHeapMgr.h
-    actBaseProcInitializer.cpp
-    actBaseProcInitializer.h
-    actBaseProcJob.cpp
-    actBaseProcJob.h
-    actBaseProcJobQue.cpp
-    actBaseProcJobQue.h
-    actBaseProcLink.cpp
-    actBaseProcLink.h
-    actBaseProcMap.h
-    actBaseProcMgr.cpp
-    actBaseProcMgr.h
     actClusteredRenderer.cpp
     actClusteredRenderer.h
     actDebug.cpp

@@ -2,8 +2,8 @@
 #include <heap/seadHeapMgr.h>
 #include <thread/seadThread.h>
 #include "KingSystem/ActorSystem/actActorCreator.h"
-#include "KingSystem/ActorSystem/actBaseProcInitializer.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcInitializer.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/System/HavokWorkerMgr.h"
 #include "KingSystem/System/Profiler.h"
 #include "KingSystem/System/UI/LayoutResourceMgr.h"
@@ -13,22 +13,22 @@ namespace ksys {
 void initBaseProcMgr(sead::Heap* heap) {
     sead::ScopedCurrentHeapSetter setter(heap);
 
-    act::BaseProcMgr::createInstance(heap);
+    frm::BaseProcMgr::createInstance(heap);
     act::BaseProcCreateTaskSelector::createInstance(heap);
     auto* worker_mgr = HavokWorkerMgr::instance();
 
-    act::BaseProcInitializerArgs args{};
+    frm::BaseProcInitializerArgs args{};
     args.queue_size = 1024;
     args.thread_name = "ActorCreate";
     args.task_selector = &act::BaseProcCreateTaskSelector::instance()->getDelegate();
-    act::BaseProcMgr::instance()->init(
-        heap, u32(act::JobType::Invalid), sead::ThreadMgr::instance()->getMainThread()->getId(),
+    frm::BaseProcMgr::instance()->init(
+        heap, u32(frm::JobType::Invalid), sead::ThreadMgr::instance()->getMainThread()->getId(),
         worker_mgr->getWorkerThreadId(1), worker_mgr->getWorkerThreadId(2), args);
 
-    act::BaseProcMgr::sPreCalcJobType = u32(act::JobType::PreCalc);
-    act::BaseProcMgr::sPostBgJobType = u32(act::JobType::PostBg);
-    act::BaseProcMgr::sPostSensorJobType = u32(act::JobType::PostSensor);
-    act::BaseProcMgr::sFrameEndJobType = u32(act::JobType::FrameEnd);
+    frm::BaseProcMgr::sPreCalcJobType = u32(frm::JobType::PreCalc);
+    frm::BaseProcMgr::sPostBgJobType = u32(frm::JobType::PostBg);
+    frm::BaseProcMgr::sPostSensorJobType = u32(frm::JobType::PostSensor);
+    frm::BaseProcMgr::sFrameEndJobType = u32(frm::JobType::FrameEnd);
 }
 
 void preInitializeApp(const InitParams& params) {

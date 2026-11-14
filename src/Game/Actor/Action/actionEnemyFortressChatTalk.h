@@ -23,7 +23,7 @@ protected:
     // static_param at offset 0x28
     const int* mTimeOut_s{};
     // dynamic_param at offset 0x30
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
     // aitree_variable at offset 0x38
     void* mRegistedActorUnit_a{};
 };

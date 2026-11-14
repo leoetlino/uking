@@ -1,25 +1,25 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Physics/System/physInstanceSet.h"
 
 namespace ksys::act {
 
 namespace {
-BaseProcLink sDummyBaseProcLink;
+frm::BaseProcLink sDummyBaseProcLink;
 }  // namespace
 
-BaseProcLink& getDummyBaseProcLink() {
+frm::BaseProcLink& getDummyBaseProcLink() {
     return sDummyBaseProcLink;
 }
 
-Actor::Actor(const CreateArg& arg) : BaseProc(arg) {
-    mJobHandlers[BaseProcMgr::getPreCalcJobType()] = &mPreCalcJob;
-    mJobHandlers[BaseProcMgr::getPostBgJobType()] = &mPostBgJob;
-    mJobHandlers[BaseProcMgr::getPostSensorJobType()] = &mPostSensorJob;
-    mJobHandlers[BaseProcMgr::getFrameEndJobType()] = &mFrameEndJob;
+Actor::Actor(const CreateArg& arg) : frm::BaseProc(arg) {
+    mJobHandlers[frm::BaseProcMgr::getPreCalcJobType()] = &mPreCalcJob;
+    mJobHandlers[frm::BaseProcMgr::getPostBgJobType()] = &mPostBgJob;
+    mJobHandlers[frm::BaseProcMgr::getPostSensorJobType()] = &mPostSensorJob;
+    mJobHandlers[frm::BaseProcMgr::getFrameEndJobType()] = &mFrameEndJob;
 
     mModelUserData.actor = this;
     mModelUserData.model_index = 0;

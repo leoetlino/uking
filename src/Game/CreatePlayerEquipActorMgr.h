@@ -7,8 +7,8 @@
 #include <prim/seadBitFlag.h>
 #include <prim/seadSafeString.h>
 #include <prim/seadStringBuilder.h>
-#include "KingSystem/ActorSystem/actBaseProcHandle.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcHandle.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/System/StringBoard.h"
 #include "KingSystem/Utils/Thread/Trace.h"
 #include "KingSystem/Utils/Types.h"
@@ -120,7 +120,7 @@ private:
         friend class CreatePlayerEquipActorMgr;
         sead::FixedStringBuilder<64> mActorName;
         EntryStatus mStatus = EntryStatus::Idle;
-        ksys::act::BaseProcLink mProcLink;
+        ksys::frm::BaseProcLink mProcLink;
 
         void reset() {
             mActorName.clear();
@@ -135,7 +135,7 @@ private:
     void deleteLoadingProc(s32 slot_idx);
     void onSlotLoadingRequested(s32 slot_idx, const sead::SafeString& name);
 
-    Slots<ksys::act::BaseProcHandle> mProcHandles{};
+    Slots<ksys::frm::BaseProcHandle> mProcHandles{};
     sead::BitFlag8 mIsLoading;
     ksys::Tracer mTracer;
     Slots<Entry> mEntries{};

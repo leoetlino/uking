@@ -3,19 +3,23 @@
 #include <basis/seadTypes.h>
 #include <prim/seadDelegate.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/Framework/frmActorInstParamPack.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Utils/Thread/ManagedTask.h"
 #include "KingSystem/Utils/Thread/Task.h"
 #include "KingSystem/Utils/Thread/TaskData.h"
 #include "KingSystem/Utils/Types.h"
 
+namespace ksys::act {
+class BaseProcCreateTaskSelector;
+}  // namespace ksys::act
+
 namespace ksys::map {
 class PreActor;
 }
 
-namespace ksys::act {
+namespace ksys::frm {
 
 class BaseProc;
 class BaseProcHandle;
@@ -28,7 +32,7 @@ struct BaseProcCreateArg {
     sead::SafeString proc_name;
     map::MubinIter* mubin_iter;
     map::PreActor* map_object;
-    frm::ActorInstParamPack::Buffer* params;
+    ActorInstParamPack::Buffer* params;
     BaseProcLink proc_link;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcCreateArg, 0x58);
@@ -47,7 +51,7 @@ public:
     BaseProcHandle* mProcHandle{};
     map::MubinIter* mMubinIter{};
     map::PreActor* mMapObject{};
-    frm::ActorInstParamPack::Buffer* mParams{};
+    ActorInstParamPack::Buffer* mParams{};
     BaseProc* mOtherProc{};
     bool mSleepAfterInit{};
 };
@@ -80,7 +84,7 @@ protected:
     void prepareImpl_(TaskRequest* req) override;
 
 private:
-    friend class BaseProcCreateTaskSelector;
+    friend class act::BaseProcCreateTaskSelector;
 
     bool onTaskDelegateInvoked(void* arg);
     void doPrepare(const BaseProcCreateTaskData* data);
@@ -96,8 +100,8 @@ private:
                                                     &BaseProcCreateTask::onTaskDelegateInvoked};
     BaseProcLink mLink;
     f32 mDistanceToLoadSphere = -1.0;
-    frm::ActorInstParamPack::Buffer mParams;
+    ActorInstParamPack::Buffer mParams;
 };
 KSYS_CHECK_SIZE_NX150(BaseProcCreateTask, 0x298);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

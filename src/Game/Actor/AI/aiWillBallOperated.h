@@ -29,7 +29,7 @@ protected:
     // dynamic_param at offset 0x60
     sead::Vector3f* mBasePos_d{};
     // dynamic_param at offset 0x68
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

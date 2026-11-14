@@ -16,7 +16,7 @@ public:
 
 protected:
     // dynamic_param at offset 0x20
-    ksys::act::BaseProcLink* mHorse_d{};
+    ksys::frm::BaseProcLink* mHorse_d{};
 };
 
 }  // namespace ksys::game

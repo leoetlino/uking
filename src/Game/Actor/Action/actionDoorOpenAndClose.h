@@ -21,7 +21,7 @@ protected:
     // dynamic_param at offset 0x20
     sead::SafeString mDynASKey_d{};
     // dynamic_param at offset 0x30
-    ksys::act::BaseProcLink* mDynOwner_d{};
+    ksys::frm::BaseProcLink* mDynOwner_d{};
 };
 
 }  // namespace uking::action

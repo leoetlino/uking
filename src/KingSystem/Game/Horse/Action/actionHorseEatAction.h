@@ -31,7 +31,7 @@ protected:
     // static_param at offset 0x48
     const float* mDelayFrames_s{};
     // dynamic_param at offset 0x50
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace ksys::game

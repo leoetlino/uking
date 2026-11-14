@@ -11,9 +11,12 @@ namespace ksys {
 
 namespace act {
 class Actor;
+}  // namespace act
+
+namespace frm {
 class BaseProc;
 class BaseProcLink;
-}  // namespace act
+}  // namespace frm
 
 struct AIDef;
 class Rail;
@@ -115,8 +118,8 @@ public:
     bool getString(sead::SafeString* value, const sead::SafeString& key) const;
     bool setString(const sead::SafeString& value, const sead::SafeString& key) const;
 
-    bool getActor(BaseProc* proc, const sead::SafeString& key) const;
-    bool setActor(const BaseProcLink& link, const sead::SafeString& key) const;
+    bool getActor(frm::BaseProc* proc, const sead::SafeString& key) const;
+    bool setActor(const frm::BaseProcLink& link, const sead::SafeString& key) const;
 
     bool load(const Actor& actor, const AIDef& def, sead::Heap* heap, AIDefInstParamKind kind);
 

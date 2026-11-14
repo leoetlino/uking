@@ -11,8 +11,11 @@ class TaskQueue;
 }  // namespace ksys
 
 namespace ksys::act {
-
 class ActorParam;
+}  // namespace ksys::act
+
+namespace ksys::frm {
+
 class BaseProc;
 
 class BaseProcDeleter {
@@ -28,7 +31,7 @@ public:
 
     void init(const InitArg& arg);
     bool requestPreDelete(BaseProc* proc);
-    void requestUnloadActorParam(ActorParam* param);
+    void requestUnloadActorParam(act::ActorParam* param);
     void unblockTasks();
 
 private:
@@ -48,4 +51,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(BaseProcDeleter, 0x68);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

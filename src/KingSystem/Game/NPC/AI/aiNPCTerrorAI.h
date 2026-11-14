@@ -32,7 +32,7 @@ protected:
     // dynamic_param at offset 0x70
     sead::Vector3f* mTargetVel_d{};
     // dynamic_param at offset 0x78
-    ksys::act::BaseProcLink* mTerrorEmitter_d{};
+    ksys::frm::BaseProcLink* mTerrorEmitter_d{};
 };
 
 }  // namespace ksys::game

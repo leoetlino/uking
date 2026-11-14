@@ -22,7 +22,7 @@ protected:
     // static_param at offset 0x48
     const sead::Vector3f* mAttOffset_s{};
     // dynamic_param at offset 0x50
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
     // static_param at offset 0x58
     const float* mChaseItemDist_s{};
     // static_param at offset 0x60

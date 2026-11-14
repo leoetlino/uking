@@ -18,7 +18,7 @@ protected:
     // static_param at offset 0x2d8
     const float* mExplosivesAvoidDist_s{};
     // dynamic_param at offset 0x2e0
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

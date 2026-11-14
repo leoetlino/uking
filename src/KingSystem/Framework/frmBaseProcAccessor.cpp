@@ -1,6 +1,6 @@
 #include "KingSystem/Framework/frmBaseProcAccessor.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Utils/Debug.h"
 
 namespace ksys::frm {
@@ -13,7 +13,7 @@ BaseProcAccessor::~BaseProcAccessor() {
     mProc = nullptr;
 }
 
-bool BaseProcAccessor::acquire(act::BaseProc* proc) {
+bool BaseProcAccessor::acquire(BaseProc* proc) {
     if (mProc) {
         if (mAcquired)
             mProc->release();
@@ -25,8 +25,7 @@ bool BaseProcAccessor::acquire(act::BaseProc* proc) {
     return proc && proc->acquire(*this);
 }
 
-bool acquireProc(BaseProcAccessor* accessor, act::BaseProc* proc, const sead::SafeString& from,
-                 s32) {
+bool acquireProc(BaseProcAccessor* accessor, BaseProc* proc, const sead::SafeString& from, s32) {
     bool acquired = false;
 
     if (accessor) {
@@ -35,7 +34,7 @@ bool acquireProc(BaseProcAccessor* accessor, act::BaseProc* proc, const sead::Sa
             return false;
     }
 
-    if (acquired || act::BaseProcMgr::instance()->isHighPriorityThread())
+    if (acquired || BaseProcMgr::instance()->isHighPriorityThread())
         return true;
 
     sead::FixedSafeString<256> message;

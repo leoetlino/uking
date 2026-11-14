@@ -51,7 +51,7 @@ protected:
     // dynamic_param at offset 0xb8
     float* mDistanceKept_d{};
     // dynamic_param at offset 0xc0
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

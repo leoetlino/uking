@@ -14,10 +14,13 @@
 
 namespace ksys::act {
 class Actor;
+}  // namespace ksys::act
+
+namespace ksys::frm {
 class BaseProc;
 class BaseProcInitializer;
 class BaseProcCreateTask;
-}  // namespace ksys::act
+}  // namespace ksys::frm
 
 namespace ksys::map {
 
@@ -99,10 +102,10 @@ public:
     void initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* data);
     void free();
 
-    void registerBaseProc(act::BaseProc* proc);
-    void setBaseProcDirect(act::BaseProc* proc);
-    void onBaseProcCreated(act::BaseProc* proc);
-    act::BaseProc* tryGetProc(bool force);
+    void registerBaseProc(frm::BaseProc* proc);
+    void setBaseProcDirect(frm::BaseProc* proc);
+    void onBaseProcCreated(frm::BaseProc* proc);
+    frm::BaseProc* tryGetProc(bool force);
     void unlinkProc(bool force);
 
     bool getActorWithAccessor(frm::BaseProcAccessor& accessor);
@@ -200,7 +203,7 @@ public:
     u8 getNumLinksPointingToMe() const { return mNumLinksPointingToMe; }
 
     const MubinIter& getMubinIter() const { return mMubinIter; }
-    act::BaseProc* getProc() const { return mProc; }
+    frm::BaseProc* getProc() const { return mProc; }
     ObjectLinkData* getLinkData() const { return mLinkData; }
 
     gdt::FlagHandle getRevivalGameDataFlagHash() const { return mRevivalGameDataFlagHash; }
@@ -224,7 +227,7 @@ private:
     void* _18 = nullptr;
     void* _20 = nullptr;
     MubinIter mMubinIter;
-    act::BaseProc* mProc = nullptr;
+    frm::BaseProc* mProc = nullptr;
     ObjectLinkData* mLinkData = nullptr;
     gdt::FlagHandle mRevivalGameDataFlagHash = gdt::InvalidHandle;
     void* _50 = nullptr;

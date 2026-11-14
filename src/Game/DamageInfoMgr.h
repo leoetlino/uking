@@ -5,7 +5,7 @@
 #include <container/seadSafeArray.h>
 #include <heap/seadDisposer.h>
 #include <thread/seadReadWriteLock.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Resource/resHandle.h"
 
 namespace uking {
@@ -50,10 +50,10 @@ private:
     /* 0x11e8 */ bool mMasterSwordDetectedEvil;
     /* 0x11e9 */ bool mMasterSwordDisableTrueForm;
     /* 0x11ea */ bool mOneHitObliteratorActive;
-    /* 0x11f0 */ ksys::act::BaseProcLink _11f0;
-    /* 0x1200 */ ksys::act::BaseProcLink _1200;
-    /* 0x1210 */ ksys::act::BaseProcLink _1210;
-    /* 0x1220 */ ksys::act::BaseProcLink _1230;
+    /* 0x11f0 */ ksys::frm::BaseProcLink _11f0;
+    /* 0x1200 */ ksys::frm::BaseProcLink _1200;
+    /* 0x1210 */ ksys::frm::BaseProcLink _1210;
+    /* 0x1220 */ ksys::frm::BaseProcLink _1230;
     /* 0x1230 */ sead::ReadWriteLock mProcLinkLock;
     /* 0x12e8 */ void* _12e8;
 };

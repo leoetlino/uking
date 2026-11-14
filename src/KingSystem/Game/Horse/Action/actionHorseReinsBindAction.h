@@ -24,9 +24,9 @@ protected:
     // dynamic_param at offset 0xf38
     bool* mIsRightBind_d{};
     // dynamic_param at offset 0xf40
-    ksys::act::BaseProcLink* mRider_d{};
+    ksys::frm::BaseProcLink* mRider_d{};
     // dynamic_param at offset 0xf48
-    ksys::act::BaseProcLink* mHorse_d{};
+    ksys::frm::BaseProcLink* mHorse_d{};
 };
 
 }  // namespace ksys::game

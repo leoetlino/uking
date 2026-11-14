@@ -6,9 +6,9 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
 #include "KingSystem/ActorSystem/actTag.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
 #include "KingSystem/Game/Rope/RopeBase.h"
 #include "KingSystem/GameData/gdtManager.h"
@@ -23,7 +23,7 @@ namespace ksys::act {
 
 namespace {
 
-ActorLinkConstDataAccess getAccessor(BaseProcLink* link) {
+ActorLinkConstDataAccess getAccessor(frm::BaseProcLink* link) {
     ActorLinkConstDataAccess accessor;
     acquireActor(link, &accessor);
     return accessor;
@@ -55,7 +55,7 @@ bool hasTag(Actor* actor, const sead::SafeString& tag) {
     return actor->getParam()->getRes().mActorLink->hasTag(tag.cstr());
 }
 
-bool hasTag(BaseProcLink* link, const sead::SafeString& tag) {
+bool hasTag(frm::BaseProcLink* link, const sead::SafeString& tag) {
     return hasTag(getAccessor(link), tag);
 }
 
@@ -72,7 +72,7 @@ bool hasTag(Actor* actor, u32 tag) {
     return actor && actor->getParam()->getRes().mActorLink->hasTag(tag);
 }
 
-bool hasTag(BaseProcLink* link, u32 tag) {
+bool hasTag(frm::BaseProcLink* link, u32 tag) {
     return hasTag(getAccessor(link), tag);
 }
 
@@ -95,7 +95,7 @@ bool hasOneTagAtLeast(Actor* actor, const sead::SafeString& tags) {
     return false;
 }
 
-bool hasOneTagAtLeast(BaseProcLink* link, const sead::SafeString& tags) {
+bool hasOneTagAtLeast(frm::BaseProcLink* link, const sead::SafeString& tags) {
     sead::FixedSafeString<32> tag;
     for (auto it = tags.tokenBegin(","); tags.tokenEnd(",") != it; ++it) {
         it.get(&tag);
@@ -280,7 +280,7 @@ bool isPlayerProfile(Actor* actor) {
     return isPlayerProfile(getAccessor(actor));
 }
 
-bool isPlayerProfile(BaseProcLink* link) {
+bool isPlayerProfile(frm::BaseProcLink* link) {
     return isPlayerProfile(getAccessor(link));
 }
 
@@ -300,7 +300,7 @@ bool isNPCProfile(Actor* actor) {
     return isNPCProfile(getAccessor(actor));
 }
 
-bool isNPCProfile(BaseProcLink* link) {
+bool isNPCProfile(frm::BaseProcLink* link) {
     return isNPCProfile(getAccessor(link));
 }
 
@@ -336,11 +336,11 @@ bool isEnemyProfile(Actor* actor) {
     return isEnemyProfile(getAccessor(actor));
 }
 
-bool isEnemyProfile(BaseProcLink* link) {
+bool isEnemyProfile(frm::BaseProcLink* link) {
     return isEnemyProfile(getAccessor(link));
 }
 
-bool isGuardianProfile(BaseProcLink* link) {
+bool isGuardianProfile(frm::BaseProcLink* link) {
     const auto accessor = getAccessor(link);
     if (!accessor.hasProc())
         return false;
@@ -366,7 +366,7 @@ bool isGanonBeast(const ActorLinkConstDataAccess& accessor) {
     return accessor.hasProc() && accessor.getName() == "Enemy_GanonBeast";
 }
 
-bool isGanonBeast(BaseProcLink* link) {
+bool isGanonBeast(frm::BaseProcLink* link) {
     return isGanonBeast(getAccessor(link));
 }
 
@@ -388,7 +388,7 @@ bool isNotLivingCreature(const ActorLinkConstDataAccess& accessor) {
     return true;
 }
 
-bool isNotLivingCreature(BaseProcLink* link) {
+bool isNotLivingCreature(frm::BaseProcLink* link) {
     return isNotLivingCreature(getAccessor(link));
 }
 
@@ -408,7 +408,7 @@ bool isWeaponProfile(Actor* actor) {
     return isWeaponProfile(getAccessor(actor));
 }
 
-bool isWeaponProfile(BaseProcLink* link) {
+bool isWeaponProfile(frm::BaseProcLink* link) {
     return isWeaponProfile(getAccessor(link));
 }
 
@@ -437,7 +437,7 @@ bool isBulletProfile(Actor* actor) {
     return isBulletProfile(getAccessor(actor));
 }
 
-bool isBulletProfile(BaseProcLink* link) {
+bool isBulletProfile(frm::BaseProcLink* link) {
     return isBulletProfile(getAccessor(link));
 }
 
@@ -449,15 +449,15 @@ bool isHorseProfile(Actor* actor) {
     return isHorseProfile(getAccessor(actor));
 }
 
-bool isHorseProfile(BaseProcLink* link) {
+bool isHorseProfile(frm::BaseProcLink* link) {
     return isHorseProfile(getAccessor(link));
 }
 
-bool isGrabAttClientEnabled(void*, BaseProcLink* link) {
+bool isGrabAttClientEnabled(void*, frm::BaseProcLink* link) {
     return getAccessor(link).isAttClientEnabled("Grab");
 }
 
-bool isStalfosParts(BaseProcLink* link) {
+bool isStalfosParts(frm::BaseProcLink* link) {
     const auto accessor = getAccessor(link);
     return accessor.hasProc() && accessor.hasTag(tags::StalfosParts);
 }
@@ -466,7 +466,7 @@ bool isDoor(const ActorLinkConstDataAccess& accessor) {
     return accessor.hasProc() && accessor.hasTag(tags::Door);
 }
 
-bool isDoor(BaseProcLink* link) {
+bool isDoor(frm::BaseProcLink* link) {
     return isDoor(getAccessor(link));
 }
 
@@ -481,7 +481,7 @@ bool isPreyOrSwarm(Actor* actor) {
     return isPreyOrSwarm(getAccessor(actor));
 }
 
-bool isPreyOrSwarm(BaseProcLink* link) {
+bool isPreyOrSwarm(frm::BaseProcLink* link) {
     return isPreyOrSwarm(getAccessor(link));
 }
 
@@ -495,7 +495,7 @@ bool isWolfOrBear(Actor* actor) {
     return isWolfOrBear(getAccessor(actor));
 }
 
-bool isWolfOrBear(BaseProcLink* link) {
+bool isWolfOrBear(frm::BaseProcLink* link) {
     return isWolfOrBear(getAccessor(link));
 }
 
@@ -504,7 +504,7 @@ bool isRope(Actor* actor) {
     return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
 
-bool isRope(BaseProcLink* link) {
+bool isRope(frm::BaseProcLink* link) {
     const auto accessor = getAccessor(link);
     return accessor.hasProc() && accessor.isDerivedFrom<ksys::game::RopeBase>();
 }
@@ -552,7 +552,7 @@ void getRevivalGridPosition(const sead::Vector3f& pos, int* col1, int* row1, int
     }
 }
 
-bool getSameGroupActorName(sead::SafeString* name, BaseProcLink* link) {
+bool getSameGroupActorName(sead::SafeString* name, frm::BaseProcLink* link) {
     return getAccessor(link).getSameGroupActorName(name);
 }
 

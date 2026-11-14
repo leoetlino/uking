@@ -22,7 +22,7 @@ protected:
     // dynamic_param at offset 0xd8
     bool* mIsKeepParentActor_d{};
     // dynamic_param at offset 0xe0
-    ksys::act::BaseProcLink* mParentActor_d{};
+    ksys::frm::BaseProcLink* mParentActor_d{};
 };
 
 }  // namespace uking::action

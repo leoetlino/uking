@@ -15,18 +15,21 @@ class MubinIter;
 class PreActor;
 }  // namespace ksys::map
 
+namespace ksys::frm {
+class BaseProc;
+struct BaseProcCreateArg;
+class BaseProcHandle;
+}  // namespace ksys::frm
+
 namespace ksys::act {
 
 class Actor;
 struct ActorCreateArg;
-class BaseProc;
-struct BaseProcCreateArg;
-class BaseProcHandle;
 
 class IBaseProcFactory {
 public:
     virtual void dummy() = 0;
-    virtual BaseProc* createActor(const ActorCreateArg& arg) = 0;
+    virtual frm::BaseProc* createActor(const ActorCreateArg& arg) = 0;
     virtual void dummy2() = 0;
 };
 
@@ -37,11 +40,11 @@ class ActorCreator {
 
 public:
     bool requestCreateMapActor(const char* name, sead::Heap* heap, map::MubinIter* mubin_iter,
-                               map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
-                               frm::ActorInstParamPack* params);
+                               map::PreActor* map_object, frm::BaseProcHandle* handle,
+                               int task_lane_id, frm::ActorInstParamPack* params);
     Actor* createActor(const char* name, sead::Heap* heap, frm::ActorInstParamPack* params,
                        bool sleep_after_init, bool block_other_synchronous_spawns);
-    bool requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
+    bool requestCreateActor(const char* name, sead::Heap* heap, frm::BaseProcHandle* handle,
                             frm::ActorInstParamPack* params, map::PreActor* map_object,
                             int task_lane_id);
 
@@ -65,21 +68,22 @@ public:
                                const sead::SafeString& name);
     static void addAITreeParam(frm::ActorInstParamPack& pack, bool value,
                                const sead::SafeString& name);
-    static void setCreatePriorityState1(frm::ActorInstParamPack& pack, BaseProc* proc);
-    static void setCreatePriorityState2(frm::ActorInstParamPack& pack, BaseProc* proc);
+    static void setCreatePriorityState1(frm::ActorInstParamPack& pack, frm::BaseProc* proc);
+    static void setCreatePriorityState2(frm::ActorInstParamPack& pack, frm::BaseProc* proc);
 
 private:
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                              map::MubinIter* mubin_iter, map::PreActor* map_object,
-                             BaseProcHandle* handle, int task_lane_id,
+                             frm::BaseProcHandle* handle, int task_lane_id,
                              frm::ActorInstParamPack* params);
     bool requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                             map::PreActor* map_object, BaseProcHandle* handle, int task_lane_id,
-                             frm::ActorInstParamPack* params);
-    BaseProc* createActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                           frm::ActorInstParamPack* params, bool sleep_after_init, bool = false);
+                             map::PreActor* map_object, frm::BaseProcHandle* handle,
+                             int task_lane_id, frm::ActorInstParamPack* params);
+    frm::BaseProc* createActor_(const char* actor_class, const char* name, sead::Heap* heap,
+                                frm::ActorInstParamPack* params, bool sleep_after_init,
+                                bool = false);
 
-    BaseProc* doCreateProc(BaseProcCreateArg& arg);
+    frm::BaseProc* doCreateProc(frm::BaseProcCreateArg& arg);
     void onTaskRemoved(const TaskRemoveCallbackContext& context);
 
     sead::Heap* mForBaseProcDualHeap;
@@ -90,7 +94,7 @@ private:
     bool mBlockSpawns;
     bool _5a;
     void* _60{};
-    sead::Delegate1R<ActorCreator, BaseProcCreateArg&, BaseProc*> mCreateProcDelegate{
+    sead::Delegate1R<ActorCreator, frm::BaseProcCreateArg&, frm::BaseProc*> mCreateProcDelegate{
         this, &ActorCreator::doCreateProc};
     TaskRemoveCallbackT<ActorCreator> mTaskRemovedDelegate{this, &ActorCreator::onTaskRemoved};
     sead::CriticalSection mActorListCS;

@@ -24,7 +24,7 @@ protected:
     // static_param at offset 0x160
     const float* mNearDist_s{};
     // dynamic_param at offset 0x168
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
     // dynamic_param at offset 0x170
     sead::Vector3f* mHomingTargetPos_d{};
 };

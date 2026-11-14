@@ -4,7 +4,7 @@
 #include <container/seadObjArray.h>
 #include <container/seadPtrArray.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/GameData/gdtFlagHandle.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -20,7 +20,7 @@ struct Indicator;
 struct Step {
     struct ActLink {
         void* _0;
-        act::BaseProcLink link;
+        frm::BaseProcLink link;
         void* _18;
         const char* name;
         void* _28;

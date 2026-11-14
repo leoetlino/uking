@@ -15,7 +15,7 @@ public:
 
 protected:
     // dynamic_param at offset 0x38
-    ksys::act::BaseProcLink* mTargetWeapon_d{};
+    ksys::frm::BaseProcLink* mTargetWeapon_d{};
     // static_param at offset 0x40
     const int* mEquipItemSearchIdx_s{};
     // static_param at offset 0x48

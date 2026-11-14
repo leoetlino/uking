@@ -19,9 +19,9 @@
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/PlayReport/ProductReportMgr.h"
@@ -1601,7 +1601,7 @@ void PauseMenuDataMgr::removeGrabbedItems() {
     saveToGameData(items);
 }
 
-bool PauseMenuDataMgr::removeGrabbedItem(ksys::act::BaseProcLink* link) {
+bool PauseMenuDataMgr::removeGrabbedItem(ksys::frm::BaseProcLink* link) {
     bool found = false;
     if (link && link->hasProc()) {
         ksys::act::ActorLinkConstDataAccess accessor;

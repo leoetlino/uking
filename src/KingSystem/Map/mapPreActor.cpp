@@ -1,7 +1,7 @@
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Game/StagePreActorCache.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Graphics/gfxForestRenderer.h"
@@ -102,14 +102,14 @@ void PreActor::initData(MubinIter* iter, u8 idx, u32 actor_data_idx, ActorData* 
     initRevivalGameDataFlagAndMiscFlags(data, false);
 }
 
-act::BaseProc* PreActor::tryGetProc(bool force) {
-    auto* bpm = act::BaseProcMgr::instance();
+frm::BaseProc* PreActor::tryGetProc(bool force) {
+    auto* bpm = frm::BaseProcMgr::instance();
     if (bpm == nullptr || !bpm->isHighPriorityThread())
         return nullptr;
     if (mProc == nullptr)
         return nullptr;
 
-    act::BaseProc* result = nullptr;
+    frm::BaseProc* result = nullptr;
     if (!mProc->isDeleteOrInvalid())
         result = mProc;
     if (mProc->isDeleteOrInvalid() || force)
@@ -126,7 +126,7 @@ act::Actor* PreActor::tryGetActor(bool force) {
 }
 
 bool PreActor::getActorWithAccessor(frm::BaseProcAccessor& accessor) {
-    act::BaseProcMgr* instance = act::BaseProcMgr::instance();
+    frm::BaseProcMgr* instance = frm::BaseProcMgr::instance();
 
     if (instance == nullptr || !instance->isHighPriorityThread() || mProc == nullptr)
         return accessor.acquire(nullptr);
@@ -141,7 +141,7 @@ act::Actor* PreActor::getActor() {
     return sead::DynamicCast<act::Actor>(mProc);
 }
 
-void PreActor::registerBaseProc(act::BaseProc* proc) {
+void PreActor::registerBaseProc(frm::BaseProc* proc) {
     static const char* sActorStateStrings[4] = {"Init", "Calc", "Sleep", "Delete"};
 
     if (mProc != nullptr && mProc != proc) {
@@ -159,7 +159,7 @@ void PreActor::registerBaseProc(act::BaseProc* proc) {
     mHardModeFlags.set(HardModeFlag::ActorCreated);
 }
 
-void PreActor::setBaseProcDirect(act::BaseProc* proc) {
+void PreActor::setBaseProcDirect(frm::BaseProc* proc) {
     mProc = proc;
 }
 
@@ -469,7 +469,7 @@ bool PreActor::shouldSpawnOnTraverse() const {
     return false;
 }
 
-void PreActor::onBaseProcCreated(act::BaseProc* actor) {
+void PreActor::onBaseProcCreated(frm::BaseProc* actor) {
     if (actor != nullptr) {
         registerBaseProc(actor);
         mFlags0.set(Flag0::ActorCreated);

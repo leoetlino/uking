@@ -10,11 +10,9 @@
 #include <prim/seadSizedEnum.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
-class BaseProc;
-}  // namespace ksys::act
-
 namespace ksys::frm {
+
+class BaseProc;
 
 class ActorInstParamPack {
 public:
@@ -37,7 +35,7 @@ public:
         Matrix34 = 7,
     };
 
-    using ActorCallback = sead::IDelegate1<act::BaseProc*>;
+    using ActorCallback = sead::IDelegate1<BaseProc*>;
 
     struct Entry {
         union Data {
@@ -154,14 +152,14 @@ public:
     Buffer& getBuffer() { return mBuffer; }
     const Buffer& getBuffer() const { return mBuffer; }
 
-    act::BaseProc* getProc() const { return mProc; }
-    void setProc(act::BaseProc* proc) { mProc = proc; }
+    BaseProc* getProc() const { return mProc; }
+    void setProc(BaseProc* proc) { mProc = proc; }
 
     Buffer* operator->() { return &mBuffer; }
     const Buffer* operator->() const { return &mBuffer; }
 
 private:
-    act::BaseProc* mProc = nullptr;
+    BaseProc* mProc = nullptr;
     Buffer mBuffer;
 };
 KSYS_CHECK_SIZE_NX150(ActorInstParamPack, 0xd8);

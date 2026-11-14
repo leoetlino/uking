@@ -19,7 +19,7 @@ protected:
     // static_param at offset 0x68
     const int* mRepathTime_s{};
     // dynamic_param at offset 0x70
-    ksys::act::BaseProcLink* mTargetBait_d{};
+    ksys::frm::BaseProcLink* mTargetBait_d{};
     // static_param at offset 0x78
     const bool* mIsDropWeapon_s{};
     // static_param at offset 0x80

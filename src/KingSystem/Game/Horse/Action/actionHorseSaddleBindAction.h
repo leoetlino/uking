@@ -26,9 +26,9 @@ protected:
     // dynamic_param at offset 0x1a50
     bool* mIsZelda_d{};
     // dynamic_param at offset 0x1a58
-    ksys::act::BaseProcLink* mRider_d{};
+    ksys::frm::BaseProcLink* mRider_d{};
     // dynamic_param at offset 0x1a60
-    ksys::act::BaseProcLink* mHorse_d{};
+    ksys::frm::BaseProcLink* mHorse_d{};
 };
 
 }  // namespace ksys::game

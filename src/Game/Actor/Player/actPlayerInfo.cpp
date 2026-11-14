@@ -2,8 +2,8 @@
 #include "Game/Actor/Player/actPlayerBase.h"
 #include "Game/gdtCommonFlags.h"
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/ksys.h"
 
 namespace uking::act {
@@ -24,11 +24,11 @@ void PlayerInfo::resetPlayer(PlayerBase* player) {
     }
 }
 
-bool PlayerInfo::acquireHorse(ksys::act::BaseProc* horse) {
+bool PlayerInfo::acquireHorse(ksys::frm::BaseProc* horse) {
     return mHorseLink.acquire(horse, false);
 }
 
-void PlayerInfo::setHorseLink(const ksys::act::BaseProcLink& horse_link) {
+void PlayerInfo::setHorseLink(const ksys::frm::BaseProcLink& horse_link) {
     mHorseLink = horse_link;
 }
 
@@ -36,7 +36,7 @@ PlayerBase* PlayerInfo::getPlayer() const {
     if (!mPlayerActor) {
         return nullptr;
     }
-    ksys::act::BaseProcMgr::instance()->isAccessingProcSafe(mPlayerActor, nullptr);
+    ksys::frm::BaseProcMgr::instance()->isAccessingProcSafe(mPlayerActor, nullptr);
     return mPlayerActor;
 }
 
@@ -44,7 +44,7 @@ PlayerBase* PlayerInfo::getPlayer_() const {
     if (!mPlayerActor) {
         return nullptr;
     }
-    ksys::act::BaseProcMgr::instance()->isAccessingProcSafe(mPlayerActor, nullptr);
+    ksys::frm::BaseProcMgr::instance()->isAccessingProcSafe(mPlayerActor, nullptr);
     return mPlayerActor;
 }
 

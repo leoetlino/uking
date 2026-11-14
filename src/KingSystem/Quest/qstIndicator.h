@@ -12,7 +12,7 @@ struct IndicatorActor {
     IndicatorActor();
     virtual ~IndicatorActor();
 
-    act::BaseProcLink link;
+    frm::BaseProcLink link;
     bool has_far;
     const char* instance_name;
     sead::Vector3f location;

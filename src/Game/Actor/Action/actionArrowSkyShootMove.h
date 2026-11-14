@@ -23,7 +23,7 @@ protected:
     // static_param at offset 0x158
     const float* mSkyShootDist_s{};
     // dynamic_param at offset 0x160
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
     // dynamic_param at offset 0x168
     sead::Vector3f* mPosOffset_d{};
 };

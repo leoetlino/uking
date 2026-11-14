@@ -1,10 +1,10 @@
-#include "KingSystem/ActorSystem/actBaseProcHandle.h"
+#include "KingSystem/Framework/frmBaseProcHandle.h"
 #include <prim/seadScopedLock.h>
-#include "KingSystem/ActorSystem/actBaseProc.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Framework/frmBaseProcAccessor.h"
 #include "KingSystem/Utils/Debug.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcUnitPool gUnitPool{};
 BaseProcHandle gDummyProcHandle;
@@ -80,7 +80,7 @@ BaseProc* BaseProcHandle::releaseProc() {
     BaseProc* proc = nullptr;
 
     {
-        frm::BaseProcAccessor accessor;
+        BaseProcAccessor accessor;
         {
             const auto lock = sead::makeScopedLock(unit->getCS());
             if (unit->compareExchangeHandle(this, &gDummyProcHandle)) {
@@ -106,7 +106,7 @@ BaseProc* BaseProcHandle::releaseAndWakeProc() {
     BaseProc* proc = nullptr;
 
     {
-        frm::BaseProcAccessor accessor;
+        BaseProcAccessor accessor;
         {
             const auto lock = sead::makeScopedLock(unit->getCS());
             if (unit->compareExchangeHandle(this, &gDummyProcHandle)) {
@@ -172,7 +172,7 @@ bool BaseProcUnit::deleteProc([[maybe_unused]] u32 x, BaseProcHandle* handle) {
     __builtin_assume(x);
 #endif
 
-    frm::BaseProcAccessor accessor;
+    BaseProcAccessor accessor;
 
     {
         const auto lock = sead::makeScopedLock(mCS);
@@ -289,4 +289,4 @@ bool BaseProcUnit::isParentHandleDefault() const {
     return mHandle == &gDummyProcHandle;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

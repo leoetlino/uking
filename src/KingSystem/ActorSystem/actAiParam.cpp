@@ -4,7 +4,7 @@
 #include "KingSystem/ActorSystem/actAiClassDef.h"
 #include "KingSystem/ActorSystem/actAiInlineParam.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 class BaseProcHandle;
 }
 
@@ -42,13 +42,13 @@ ParamPack::~ParamPack() {
                 delete static_cast<MesTransceiverId*>(param->data);
                 break;
             case AIDefParamType::BaseProcHandle:
-                delete static_cast<BaseProcHandle**>(param->data);
+                delete static_cast<frm::BaseProcHandle**>(param->data);
                 break;
             case AIDefParamType::Rail:
                 delete static_cast<Rail**>(param->data);
                 break;
             case AIDefParamType::BaseProcLink:
-                delete static_cast<BaseProcLink*>(param->data);
+                delete static_cast<frm::BaseProcLink*>(param->data);
                 break;
             default:
                 break;
@@ -134,7 +134,7 @@ void ParamPack::copy(InlineParamPack* dest, bool x) const {
             dest->addUInt(*static_cast<u32*>(param->data), param->name, dest_idx);
             break;
         case AIDefParamType::BaseProcLink:
-            dest->addActor(*static_cast<BaseProcLink*>(param->data), param->name, dest_idx);
+            dest->addActor(*static_cast<frm::BaseProcLink*>(param->data), param->name, dest_idx);
             break;
         case AIDefParamType::MesTransceiverId:
             if (!x) {
@@ -145,7 +145,7 @@ void ParamPack::copy(InlineParamPack* dest, bool x) const {
             [[fallthrough]];
         case AIDefParamType::BaseProcHandle:
             if (!x) {
-                dest->addPointer(*static_cast<BaseProcHandle**>(param->data), param->name,
+                dest->addPointer(*static_cast<frm::BaseProcHandle**>(param->data), param->name,
                                  AIDefParamType::BaseProcHandle, dest_idx);
                 break;
             }
@@ -204,7 +204,8 @@ void InlineParamPack::addUInt(u32 value, const sead::SafeString& key, s32 idx) {
     param.type = AIDefParamType::UInt;
 }
 
-void InlineParamPack::addActor(const BaseProcLink& value, const sead::SafeString& key, s32 idx) {
+void InlineParamPack::addActor(const frm::BaseProcLink& value, const sead::SafeString& key,
+                               s32 idx) {
     auto& param = getParam(idx);
     param.key = key.cstr();
     param.baseProcLink = value;
@@ -263,16 +264,16 @@ bool ParamPack::setString(const sead::SafeString& value, const sead::SafeString&
     return true;
 }
 
-bool ParamPack::getActor(BaseProc* proc, const sead::SafeString& key) const {
-    auto* link = getVariable<BaseProcLink>(key, AIDefParamType::BaseProcLink);
+bool ParamPack::getActor(frm::BaseProc* proc, const sead::SafeString& key) const {
+    auto* link = getVariable<frm::BaseProcLink>(key, AIDefParamType::BaseProcLink);
     if (!link)
         return false;
     link->acquire(proc, false);
     return true;
 }
 
-bool ParamPack::setActor(const BaseProcLink& new_link, const sead::SafeString& key) const {
-    auto* link = getVariable<BaseProcLink>(key, AIDefParamType::BaseProcLink);
+bool ParamPack::setActor(const frm::BaseProcLink& new_link, const sead::SafeString& key) const {
+    auto* link = getVariable<frm::BaseProcLink>(key, AIDefParamType::BaseProcLink);
     if (!link)
         return false;
     *link = new_link;
@@ -364,7 +365,7 @@ bool ParamPack::load(const Actor& actor, const AIDef& def, sead::Heap* heap,
         }
         case AIDefParamType::BaseProcLink:
             if (kind == AIDefInstParamKind::Dynamic)
-                entry->data = new (heap) BaseProcLink();
+                entry->data = new (heap) frm::BaseProcLink();
             break;
         case AIDefParamType::MesTransceiverId:
             if (kind == AIDefInstParamKind::Dynamic)
@@ -372,7 +373,7 @@ bool ParamPack::load(const Actor& actor, const AIDef& def, sead::Heap* heap,
             break;
         case AIDefParamType::BaseProcHandle:
             if (kind == AIDefInstParamKind::Dynamic)
-                entry->data = new (heap) BaseProcHandle*();
+                entry->data = new (heap) frm::BaseProcHandle*();
             break;
         case AIDefParamType::Rail:
             if (kind == AIDefInstParamKind::Dynamic)
@@ -404,7 +405,7 @@ void InlineParamPack::addPointer(void* value, const sead::SafeString& key, AIDef
     param.type = type;
 }
 
-void InlineParamPack::acquireActor(BaseProc* proc, const sead::SafeString& key, s32 idx) {
+void InlineParamPack::acquireActor(frm::BaseProc* proc, const sead::SafeString& key, s32 idx) {
     auto& param = getParam(idx);
     param.key = key.cstr();
     param.baseProcLink.acquire(proc, false);
@@ -450,7 +451,7 @@ void InlineParamPack::copyToParamPack(ParamPack& pack) const {
             pack.setVariable(param->key, AIDefParamType::MesTransceiverId, param->mesTransceiverId);
             break;
         case AIDefParamType::BaseProcHandle: {
-            auto* baseProcHandle = static_cast<BaseProcHandle*>(param->ptr);
+            auto* baseProcHandle = static_cast<frm::BaseProcHandle*>(param->ptr);
             pack.setVariable(param->key, AIDefParamType::BaseProcHandle, baseProcHandle);
             break;
         }

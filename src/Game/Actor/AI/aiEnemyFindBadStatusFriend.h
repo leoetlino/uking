@@ -17,7 +17,7 @@ public:
 
 protected:
     // dynamic_param at offset 0x38
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

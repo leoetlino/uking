@@ -1,9 +1,9 @@
-#include "KingSystem/ActorSystem/actBaseProcInitializer.h"
+#include "KingSystem/Framework/frmBaseProcInitializer.h"
 #include <heap/seadExpHeap.h>
 #include <thread/seadThreadUtil.h>
-#include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
-#include "KingSystem/ActorSystem/actBaseProcHandle.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcCreateTask.h"
+#include "KingSystem/Framework/frmBaseProcHandle.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Game/Resource/gameResourceSystem.h"
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/Debug.h"
@@ -14,7 +14,7 @@
 #include "KingSystem/Utils/Thread/TaskQueueLock.h"
 #include "KingSystem/Utils/Thread/TaskThread.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcInitializer::BaseProcInitializer() = default;
 
@@ -286,4 +286,4 @@ void BaseProcInitializer::setActorGenerationEnabled(bool enabled) {
     mActorGenerationEnabled = enabled;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

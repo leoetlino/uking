@@ -4,7 +4,7 @@
 #include <codec/seadHashCRC32.h>
 #include <container/seadBuffer.h>
 #include <heap/seadExpHeap.h>
-#include "KingSystem/ActorSystem/actBaseProc.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 
 namespace ksys::evt {
 
@@ -48,7 +48,7 @@ public:
     bool addParamFloat(f32 val, const sead::SafeString& name);
     bool addParamString(const sead::SafeString& val, const sead::SafeString& name);
     bool addParamBool(bool val, const sead::SafeString& name);
-    bool addParamActor(ksys::act::BaseProc* actor, sead::SafeString& name);
+    bool addParamActor(ksys::frm::BaseProc* actor, sead::SafeString& name);
     bool addParamArray(char* array, u32 size, sead::SafeString& name);
 
     OrderParamEntry* tryAlloc(OrderParamType type, u32 size, const sead::SafeString& name);

@@ -4,10 +4,10 @@
 #include <container/seadSafeArray.h>
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
+#include "KingSystem/Framework/frmBaseProcCreateTask.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 class BaseProc;
 class BaseProcCreateTask;
@@ -113,4 +113,4 @@ struct BaseProcUnitPool {
 extern BaseProcUnitPool gUnitPool;
 extern BaseProcHandle gDummyProcHandle;
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

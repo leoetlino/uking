@@ -8,8 +8,8 @@
 
 #include "Game/Actor/actStruct20.h"
 #include "Game/DamageInfoMgr.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actIDamageManager.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 
 namespace ksys {
 class Message;
@@ -76,7 +76,7 @@ public:
     virtual bool getAttackSourceMtx(sead::Matrix34f* mtx) { return false; }
 
     // FIXME: incomplete. Return dummy Base Proc Link
-    virtual ksys::act::BaseProcLink* getAttacker();
+    virtual ksys::frm::BaseProcLink* getAttacker();
 
     // FIXME: incomplete. Same as getAttacker, but return different Actor ProcLink I assume.
     virtual s64 getDamageSourceProcLink();

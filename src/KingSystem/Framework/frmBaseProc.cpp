@@ -1,14 +1,14 @@
-#include "KingSystem/ActorSystem/actBaseProc.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 #include <thread/seadThread.h>
 #include <time/seadTickSpan.h>
-#include "KingSystem/ActorSystem/actBaseProcHandle.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/Framework/frmBaseProcAccessor.h"
+#include "KingSystem/Framework/frmBaseProcHandle.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Terrain/teraSystem.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 static util::InitTimeInfo sInfo;
 
@@ -596,7 +596,7 @@ bool BaseProc::setStateFlag(u32 flag_bit) {
     return BaseProcMgr::instance()->setProcFlag(*this, flag_bit);
 }
 
-bool BaseProc::acquire(frm::BaseProcAccessor& accessor) {
+bool BaseProc::acquire(BaseProcAccessor& accessor) {
     if (mState == State::Delete)
         return false;
 
@@ -749,4 +749,4 @@ void BaseProc::setCreatePriorityState2() {
     mCreatePriorityState = 2;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

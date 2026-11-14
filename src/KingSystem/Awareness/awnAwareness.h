@@ -8,7 +8,7 @@
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::awn {
@@ -102,7 +102,7 @@ private:
 
     // FIXME: rename
     struct Link {
-        act::BaseProcLink link;
+        frm::BaseProcLink link;
         // TODO: physics body?
         void* _10{};
     };
@@ -110,7 +110,7 @@ private:
     // FIXME: rename
     struct Link2 {
         Link2() { _10 = 0; }
-        act::BaseProcLink link;
+        frm::BaseProcLink link;
         u8 _10{};
         u32 _14{};
         void* _18{};

@@ -7,14 +7,14 @@
 #include <mc/seadJobQueue.h>
 #include <thread/seadAtomic.h>
 #include <utility/aglAtomicPtrArray.h>
-#include "KingSystem/ActorSystem/actBaseProcJob.h"
+#include "KingSystem/Framework/frmBaseProcMgrJob.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace sead {
 class WorkerMgr;
 }
 
-namespace ksys::act {
+namespace ksys::frm {
 
 class BaseProcJobQue {
 public:
@@ -44,4 +44,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(BaseProcJobQue, 0xbc38);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

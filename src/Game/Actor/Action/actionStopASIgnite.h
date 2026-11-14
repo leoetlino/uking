@@ -29,7 +29,7 @@ protected:
     // static_param at offset 0x68
     const sead::Vector3f* mIgniteRotSpeed_s{};
     // dynamic_param at offset 0x70
-    ksys::act::BaseProcHandle** mIgniteHandle_d{};
+    ksys::frm::BaseProcHandle** mIgniteHandle_d{};
     // aitree_variable at offset 0x78
     void* mGeneratedActorLink_a{};
 };

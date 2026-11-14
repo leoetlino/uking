@@ -5,7 +5,7 @@
 #include <container/seadSafeArray.h>
 #include <heap/seadDisposer.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::game {
@@ -34,12 +34,12 @@ public:
         ~List() { mNodes.freeBuffer(); }
 
         bool init(sead::Heap* heap, int capacity);
-        bool addActor(act::BaseProc* proc, bool allow_evicting_old_actors);
+        bool addActor(frm::BaseProc* proc, bool allow_evicting_old_actors);
 
     private:
         struct Node {
             sead::ListNode node;
-            act::BaseProcLink proc_link;
+            frm::BaseProcLink proc_link;
         };
 
         sead::Buffer<Node> mNodes;

@@ -10,18 +10,15 @@
 #include <prim/seadSafeString.h>
 #include <prim/seadTypedBitFlag.h>
 #include <thread/seadAtomic.h>
-#include "KingSystem/ActorSystem/actBaseProcJob.h"
-#include "KingSystem/ActorSystem/actBaseProcMap.h"
+#include "KingSystem/Framework/frmBaseProcMap.h"
+#include "KingSystem/Framework/frmBaseProcMgrJob.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::frm {
-class BaseProcAccessor;
-}  // namespace ksys::frm
-
-namespace ksys::act {
 
 class BaseProc;
+class BaseProcAccessor;
 class BaseProcLinkData;
 class BaseProcJobHandler;
 class BaseProcUnit;
@@ -121,10 +118,10 @@ public:
     bool isDeletedOrDeleting() const {
         return mState == State::Delete || mStateFlags.isOn(StateFlags::RequestDelete);
     }
-    bool isDeleteOrInvalid() const { return mState >= act::BaseProc::State::Delete; }
+    bool isDeleteOrInvalid() const { return mState >= BaseProc::State::Delete; }
 
     /// For BaseProcLink or BaseProcAccessor.
-    bool acquire(frm::BaseProcAccessor& accessor);
+    bool acquire(BaseProcAccessor& accessor);
     BaseProcLinkData* getBaseProcLinkData() const { return mBaseProcLinkData; }
     /// For BaseProcLink or BaseProcAccessor.
     void release();
@@ -182,8 +179,8 @@ protected:
         SleepWakeReason1 = 0x800,
         SleepWakeReason2 = 0x1000,
         SleepWakeReason3 = 0x2000,
-        SleepWakeReasonAny =
-            SleepWakeReason0 | SleepWakeReason1 | SleepWakeReason2 | SleepWakeReason3,
+        SleepWakeReasonAny = SleepWakeReason0 | SleepWakeReason1 | SleepWakeReason2 |
+            SleepWakeReason3,
     };
 
     enum class StateFlags : u32 {
@@ -398,4 +395,4 @@ private:
     sead::Delegate<T> mDelegatePaused;
 };
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

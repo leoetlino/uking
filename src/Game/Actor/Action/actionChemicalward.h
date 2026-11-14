@@ -40,7 +40,7 @@ protected:
     // dynamic_param at offset 0x80
     sead::Vector3f* mTargetPos_d{};
     // dynamic_param at offset 0x88
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::action

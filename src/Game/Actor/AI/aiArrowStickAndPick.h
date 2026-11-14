@@ -20,7 +20,7 @@ protected:
     // dynamic_param at offset 0xf0
     sead::Vector3f* mStickPosDiv_d{};
     // dynamic_param at offset 0xf8
-    ksys::act::BaseProcLink* mStickActor_d{};
+    ksys::frm::BaseProcLink* mStickActor_d{};
     // dynamic_param at offset 0x100
     sead::SafeString* mStickBodyName_d{};
 };

@@ -1,16 +1,16 @@
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include <mc/seadWorkerMgr.h>
 #include <prim/seadScopedLock.h>
 #include <thread/seadThread.h>
 #include "KingSystem/ActorSystem/actActorSystem.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcDeleter.h"
-#include "KingSystem/ActorSystem/actBaseProcHeapMgr.h"
-#include "KingSystem/ActorSystem/actBaseProcInitializer.h"
-#include "KingSystem/ActorSystem/actBaseProcJobQue.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcDeleter.h"
+#include "KingSystem/Framework/frmBaseProcInitializer.h"
+#include "KingSystem/Framework/frmBaseProcJobQue.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcStageHeapMgr.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 SEAD_SINGLETON_DISPOSER_IMPL(BaseProcMgr)
 
@@ -37,7 +37,7 @@ BaseProcMgr::~BaseProcMgr() {
         mProcDeleter = nullptr;
     }
 
-    BaseProcHeapMgr::deleteInstance();
+    BaseProcStageHeapMgr::deleteInstance();
 }
 
 // NON_MATCHING: mJobLists.allocBufferAssert - BaseProcJobLists ctor
@@ -63,7 +63,7 @@ void BaseProcMgr::init(sead::Heap* heap, s32 num_job_types, u32 main_thread_id,
     mWorkerThreadId1 = worker_thread_id1;
     mWorkerThreadId2 = worker_thread_id2;
 
-    BaseProcHeapMgr::createInstance(heap);
+    BaseProcStageHeapMgr::createInstance(heap);
     BaseProcLinkDataMgr::createInstance(heap);
 }
 
@@ -97,7 +97,7 @@ bool BaseProcMgr::requestPreDelete(BaseProc& proc) {
     return mProcDeleter->requestPreDelete(&proc);
 }
 
-void BaseProcMgr::requestUnloadActorParam(ActorParam* param) {
+void BaseProcMgr::requestUnloadActorParam(act::ActorParam* param) {
     return mProcDeleter->requestUnloadActorParam(param);
 }
 
@@ -305,7 +305,7 @@ void BaseProcMgr::resumeJobTypes(u16 mask) {
 }
 
 void BaseProcMgr::calc() {
-    ActorSystem::instance()->updatePlayerPosAndCameraPos();
+    act::ActorSystem::instance()->updatePlayerPosAndCameraPos();
     mProcInitializer->deleteThreadIfPaused();
 
     if (mIsInitializingQuestMgr)
@@ -668,4 +668,4 @@ void BaseProcMgr::clearJobRequests() {
     mJobRequestArrays[1].clear();
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

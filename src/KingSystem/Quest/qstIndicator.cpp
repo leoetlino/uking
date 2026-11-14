@@ -153,7 +153,7 @@ void Indicator::acquireActors() {
         if (actor == nullptr)
             continue;
 
-        act::BaseProc* proc = Manager::findNearestActorToPlayer(actor->name, actor->instance_name);
+        frm::BaseProc* proc = Manager::findNearestActorToPlayer(actor->name, actor->instance_name);
         if (proc != nullptr) {
             if (actor->is_remains == 1) {
                 actor->link.acquire(proc, false);

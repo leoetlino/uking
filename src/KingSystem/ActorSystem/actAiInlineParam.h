@@ -5,7 +5,7 @@
 #include <prim/seadSafeString.h>
 
 #include "KingSystem/ActorSystem/actAiClassDef.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Utils/Thread/MessageTransceiverId.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -15,8 +15,11 @@ class Rail;
 
 namespace act {
 class Actor;
-class BaseProc;
 }  // namespace act
+
+namespace frm {
+class BaseProc;
+}  // namespace frm
 
 namespace act::ai {
 
@@ -29,7 +32,7 @@ struct InlineParam {
         const char* cstr;
         void* ptr;
     };
-    BaseProcLink baseProcLink;
+    frm::BaseProcLink baseProcLink;
     sead::Vector3f vec3;
     MesTransceiverId mesTransceiverId;
     AIDefParamType type;
@@ -68,10 +71,10 @@ struct InlineParamPack {
     void addVec3(const sead::Vector3f& value, const sead::SafeString& key, s32 idx);
     void addBool(bool value, const sead::SafeString& key, s32 idx);
     void addUInt(u32 value, const sead::SafeString& key, s32 idx);
-    void addActor(const BaseProcLink& value, const sead::SafeString& key, s32 idx);
+    void addActor(const frm::BaseProcLink& value, const sead::SafeString& key, s32 idx);
     void addMesTransceiverId(const MesTransceiverId& value, const sead::SafeString& key, s32 idx);
     void addPointer(void* value, const sead::SafeString& key, AIDefParamType type, s32 idx);
-    void acquireActor(BaseProc* proc, const sead::SafeString& key, s32 idx);
+    void acquireActor(frm::BaseProc* proc, const sead::SafeString& key, s32 idx);
     void copyToParamPack(ParamPack& pack) const;
 
     static constexpr s32 NumParamsMax = 32;

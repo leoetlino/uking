@@ -21,7 +21,7 @@ protected:
     // static_param at offset 0x40
     const float* mOverlapDistance_s{};
     // dynamic_param at offset 0x48
-    ksys::act::BaseProcLink* mLeaderActor_d{};
+    ksys::frm::BaseProcLink* mLeaderActor_d{};
 };
 
 }  // namespace uking::ai

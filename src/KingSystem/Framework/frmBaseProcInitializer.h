@@ -16,7 +16,7 @@ class TaskQueue;
 class TaskThread;
 }  // namespace ksys
 
-namespace ksys::act {
+namespace ksys::frm {
 
 class BaseProc;
 struct BaseProcCreateRequest;
@@ -82,4 +82,4 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(BaseProcInitializer, 0x38);
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

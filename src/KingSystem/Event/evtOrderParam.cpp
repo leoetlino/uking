@@ -3,7 +3,7 @@
 #include <container/seadBuffer.h>
 #include <heap/seadExpHeap.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 
 namespace ksys::evt {
 
@@ -56,7 +56,7 @@ void OrderParam::uninitialize() {
                 delete static_cast<bool*>(ptr);
                 break;
             case OrderParamType::Actor:
-                delete static_cast<act::BaseProcLink*>(ptr);
+                delete static_cast<frm::BaseProcLink*>(ptr);
                 break;
             case OrderParamType::Array:
                 mHeap->free(ptr);
@@ -101,8 +101,8 @@ bool OrderParam::doAssign(const OrderParam& other) {
         if (other_entry) {
             auto* other_ptr = other_entry->data;
             auto* other_name = other_entry->name;
-            ksys::act::BaseProcLink* link_ptr;
-            ksys::act::BaseProc* actor_ptr;
+            ksys::frm::BaseProcLink* link_ptr;
+            ksys::frm::BaseProc* actor_ptr;
             if (other_ptr && other_name) {
                 switch (other_entry->type) {
                 case OrderParamType::Int:
@@ -122,9 +122,9 @@ bool OrderParam::doAssign(const OrderParam& other) {
                         return false;
                     break;
                 case OrderParamType::Actor:
-                    link_ptr = static_cast<ksys::act::BaseProcLink*>(other_ptr);
+                    link_ptr = static_cast<ksys::frm::BaseProcLink*>(other_ptr);
                     actor_ptr =
-                        sead::DynamicCast<ksys::act::BaseProc>(link_ptr->getProc(nullptr, nullptr));
+                        sead::DynamicCast<ksys::frm::BaseProc>(link_ptr->getProc(nullptr, nullptr));
                     if (!addParamActor(actor_ptr, *other_name))
                         return false;
                     break;
@@ -178,8 +178,8 @@ bool OrderParam::addParamBool(bool val, const sead::SafeString& name) {
     return true;
 }
 
-bool OrderParam::addParamActor(ksys::act::BaseProc* actor, sead::SafeString& name) {
-    auto* entry_ptr = tryAllocParam<ksys::act::BaseProcLink>(name, OrderParamType::Actor);
+bool OrderParam::addParamActor(ksys::frm::BaseProc* actor, sead::SafeString& name) {
+    auto* entry_ptr = tryAllocParam<ksys::frm::BaseProcLink>(name, OrderParamType::Actor);
     if (!entry_ptr)
         return false;
     if (!entry_ptr->acquire(actor, false))
@@ -253,8 +253,8 @@ OrderParamEntry* OrderParam::tryAlloc(OrderParamType type, u32 size, const sead:
         entry->size = sizeof(bool);
         break;
     case OrderParamType::Actor:
-        entry->data = new (heap, std::nothrow_t()) ksys::act::BaseProcLink;
-        entry->size = sizeof(act::BaseProcLink);
+        entry->data = new (heap, std::nothrow_t()) ksys::frm::BaseProcLink;
+        entry->size = sizeof(frm::BaseProcLink);
         break;
     case OrderParamType::Array:
         entry->data = new (heap, std::nothrow_t()) char[size];

@@ -19,11 +19,11 @@ protected:
     void calc_() override;
 
     // dynamic_param at offset 0x48
-    ksys::act::BaseProcHandle** mIgniteHandle_d{};
+    ksys::frm::BaseProcHandle** mIgniteHandle_d{};
     // dynamic_param at offset 0x50
-    ksys::act::BaseProcHandle** mIgniteHandle2_d{};
+    ksys::frm::BaseProcHandle** mIgniteHandle2_d{};
     // dynamic_param at offset 0x58
-    ksys::act::BaseProcHandle** mIgniteHandle3_d{};
+    ksys::frm::BaseProcHandle** mIgniteHandle3_d{};
     // static_param at offset 0x60
     sead::SafeString mBaseNode_s{};
     // static_param at offset 0x70

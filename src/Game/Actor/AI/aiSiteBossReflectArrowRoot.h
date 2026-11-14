@@ -20,7 +20,7 @@ protected:
     // dynamic_param at offset 0x338
     bool* mIsReflectAmongChild_d{};
     // dynamic_param at offset 0x340
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

@@ -2,8 +2,8 @@
 #include <container/seadObjArray.h>
 #include <random/seadGlobalRandom.h>
 #include "KingSystem/ActorSystem/actActorCreator.h"
-#include "KingSystem/ActorSystem/actBaseProcHeapMgr.h"
 #include "KingSystem/Framework/frmActorInstParamPack.h"
+#include "KingSystem/Framework/frmBaseProcStageHeapMgr.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/World/worldManager.h"
 
@@ -122,9 +122,9 @@ void ShootingStarMgr::spawnStar() {
     tryGetStarPosition(&pos);
 
     pack->addPosition(pos);
-    act::ActorCreator::instance()->requestCreateActor("FldObj_ShootingStar",
-                                                      act::BaseProcHeapMgr::instance()->getHeap(),
-                                                      nullptr, &pack, nullptr, 1);
+    act::ActorCreator::instance()->requestCreateActor(
+        "FldObj_ShootingStar", frm::BaseProcStageHeapMgr::instance()->getHeap(), nullptr, &pack,
+        nullptr, 1);
 }
 
 bool ShootingStarMgr::isStarPositionValid() {

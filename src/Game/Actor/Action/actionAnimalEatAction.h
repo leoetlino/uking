@@ -21,7 +21,7 @@ protected:
     // static_param at offset 0x20
     const float* mMinFramesPlayWaitAS_s{};
     // dynamic_param at offset 0x28
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::action

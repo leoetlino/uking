@@ -19,7 +19,7 @@ protected:
     void calc_() override;
 
     // dynamic_param at offset 0x78
-    ksys::act::BaseProcLink* mDropWeapon_d{};
+    ksys::frm::BaseProcLink* mDropWeapon_d{};
     // dynamic_param at offset 0x80
     sead::Vector3f* mDropDir_d{};
 };

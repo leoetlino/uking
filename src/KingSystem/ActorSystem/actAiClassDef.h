@@ -14,7 +14,7 @@
 
 namespace ksys {
 
-namespace act {
+namespace frm {
 class BaseProcLink;
 }
 
@@ -60,7 +60,7 @@ struct AIDef {
         void* tree;
         void* variable_ptr;
         u32 u;
-        act::BaseProcLink* proc_link;
+        frm::BaseProcLink* proc_link;
     };
 
     static constexpr size_t NumParametersMax = 64;

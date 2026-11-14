@@ -8,7 +8,7 @@ namespace uking::act {
 class BaseProcFactory : public ksys::act::IBaseProcFactory {
 public:
     void dummy() override;
-    ksys::act::BaseProc* createActor(const ksys::act::ActorCreateArg& arg) override;
+    ksys::frm::BaseProc* createActor(const ksys::act::ActorCreateArg& arg) override;
     void dummy2() override;
 };
 

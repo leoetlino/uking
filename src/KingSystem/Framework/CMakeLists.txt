@@ -1,8 +1,29 @@
 target_sources(uking PRIVATE
   frmActorInstParamPack.cpp
   frmActorInstParamPack.h
+  frmBaseProc.cpp
+  frmBaseProc.h
   frmBaseProcAccessor.cpp
   frmBaseProcAccessor.h
+  frmBaseProcCreateTask.cpp
+  frmBaseProcCreateTask.h
+  frmBaseProcDeleter.cpp
+  frmBaseProcDeleter.h
+  frmBaseProcHandle.cpp
+  frmBaseProcHandle.h
+  frmBaseProcInitializer.cpp
+  frmBaseProcInitializer.h
+  frmBaseProcJobQue.cpp
+  frmBaseProcJobQue.h
+  frmBaseProcLink.cpp
+  frmBaseProcLink.h
+  frmBaseProcMap.h
+  frmBaseProcMgr.cpp
+  frmBaseProcMgr.h
+  frmBaseProcMgrJob.cpp
+  frmBaseProcMgrJob.h
+  frmBaseProcStageHeapMgr.cpp
+  frmBaseProcStageHeapMgr.h
   frmFramework.cpp
   frmFramework.h
   frmRootTaskParam.h

@@ -9,7 +9,7 @@ namespace uking {
 class AirOctaDataMgr {
     SEAD_RTTI_BASE(AirOctaDataMgr)
 public:
-    ksys::act::BaseProcLink& getProc() { return mBaseProcLink; }
+    ksys::frm::BaseProcLink& getProc() { return mBaseProcLink; }
     void changeOctasYheightMaybe();
 
     struct MessageData {
@@ -17,8 +17,8 @@ public:
         u64 unk_08;
     };
 
-    /* 0x08 */ ksys::act::BaseProcLink mBaseProcLink;
-    /* 0x18 */ ksys::act::BaseProcLink mBaseProcLink2;
+    /* 0x08 */ ksys::frm::BaseProcLink mBaseProcLink;
+    /* 0x18 */ ksys::frm::BaseProcLink mBaseProcLink2;
     /* 0x28 */ void* unk_28{};
     /* 0x30 */ u32 unk_30{};
     /* 0x34 */ sead::Vector3f unk_34{sead::Vector3f::zero};

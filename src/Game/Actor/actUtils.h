@@ -8,12 +8,9 @@ namespace sead {
 class Heap;
 }
 
-namespace ksys::act {
-class BaseProcHandle;
-}  // namespace ksys::act
-
 namespace ksys::frm {
 class ActorInstParamPack;
+class BaseProcHandle;
 }  // namespace ksys::frm
 
 namespace uking {
@@ -28,7 +25,7 @@ namespace uking::act {
 
 struct WeaponModifierInfo;
 void requestCreateWeaponByRawLife(const char* actor_class, const sead::Matrix34f& matrix, f32 scale,
-                                  sead::Heap* heap, ksys::act::BaseProcHandle* handle, s32 life,
+                                  sead::Heap* heap, ksys::frm::BaseProcHandle* handle, s32 life,
                                   bool is_player_put, const WeaponModifierInfo* modifier,
                                   s32 task_lane_id, s32 res_lane_id);
 

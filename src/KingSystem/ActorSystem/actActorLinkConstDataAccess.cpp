@@ -3,8 +3,8 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
 #include "KingSystem/ActorSystem/aiRootAi.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/Actor/resResourceGParamList.h"
 #include "KingSystem/Resource/GeneralParamList/resGParamListObjectAttack.h"
@@ -15,7 +15,7 @@
 
 namespace ksys::act {
 
-static BaseProc* getProcIfActor(BaseProc* proc) {
+static frm::BaseProc* getProcIfActor(frm::BaseProc* proc) {
     if (proc && sead::IsDerivedFrom<Actor>(proc))
         return proc;
     return nullptr;
@@ -29,15 +29,15 @@ bool ActorLinkConstDataAccess::acquireActor(const frm::BaseProcAccessor& other) 
     return acquire(getProcIfActor(other.mProc));
 }
 
-bool ActorLinkConstDataAccess::hasProc(BaseProc* proc) const {
+bool ActorLinkConstDataAccess::hasProc(frm::BaseProc* proc) const {
     return mProc == proc;
 }
 
-bool ActorLinkConstDataAccess::hasProc(const BaseProcLink& link) const {
+bool ActorLinkConstDataAccess::hasProc(const frm::BaseProcLink& link) const {
     return link.hasProcById(getActor());
 }
 
-bool ActorLinkConstDataAccess::linkAcquire(BaseProcLink* link) const {
+bool ActorLinkConstDataAccess::linkAcquire(frm::BaseProcLink* link) const {
     auto* proc = getActor();
     if (proc)
         return link->acquire(proc, false);
@@ -46,7 +46,7 @@ bool ActorLinkConstDataAccess::linkAcquire(BaseProcLink* link) const {
     return false;
 }
 
-bool ActorLinkConstDataAccess::linkAcquireImmediately(BaseProcLink* link) const {
+bool ActorLinkConstDataAccess::linkAcquireImmediately(frm::BaseProcLink* link) const {
     auto* proc = getActor();
     if (proc)
         return link->acquire(proc, true);
@@ -166,21 +166,21 @@ bool ActorLinkConstDataAccess::isInvisible() const {
     return actor->checkFlag(Actor::ActorFlag::Invisible);
 }
 
-bool ActorLinkConstDataAccess::deleteLater(BaseProc::DeleteReason reason) const {
+bool ActorLinkConstDataAccess::deleteLater(frm::BaseProc::DeleteReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
     return actor->deleteLater(reason);
 }
 
-bool ActorLinkConstDataAccess::fadeoutDelete(BaseProc::DeleteReason reason) const {
+bool ActorLinkConstDataAccess::fadeoutDelete(frm::BaseProc::DeleteReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
     return actor->fadeoutDelete(Actor::DeleteType::Normal, reason);
 }
 
-bool ActorLinkConstDataAccess::sleep(BaseProc::SleepWakeReason reason) const {
+bool ActorLinkConstDataAccess::sleep(frm::BaseProc::SleepWakeReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
@@ -188,7 +188,7 @@ bool ActorLinkConstDataAccess::sleep(BaseProc::SleepWakeReason reason) const {
     return true;
 }
 
-bool ActorLinkConstDataAccess::wakeUp(BaseProc::SleepWakeReason reason) const {
+bool ActorLinkConstDataAccess::wakeUp(frm::BaseProc::SleepWakeReason reason) const {
     auto* actor = getActor();
     if (!actor)
         return false;
@@ -350,14 +350,16 @@ bool ActorLinkConstDataAccess::isPlayerTheConnectedParent() const {
     return parent->getProfile() == "Player";
 }
 
-void ActorLinkConstDataAccess::setThisActorAsParent(BaseProc* child, bool delete_parent_on_delete) {
+void ActorLinkConstDataAccess::setThisActorAsParent(frm::BaseProc* child,
+                                                    bool delete_parent_on_delete) {
     auto* actor = getActor();
     if (!actor)
         return;
     child->setConnectedCalcParent(actor, delete_parent_on_delete);
 }
 
-void ActorLinkConstDataAccess::setThisActorAsChild(BaseProc* parent, bool delete_child_on_delete) {
+void ActorLinkConstDataAccess::setThisActorAsChild(frm::BaseProc* parent,
+                                                   bool delete_child_on_delete) {
     auto* actor = getActor();
     if (!actor)
         return;

@@ -6,7 +6,7 @@
 #include <hostio/seadHostIONode.h>
 #include <prim/seadSafeString.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/ActorSystem/actBaseProcJob.h"
+#include "KingSystem/Framework/frmBaseProcMgrJob.h"
 #include "KingSystem/Resource/Actor/resResourceActorLink.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Utils/Thread/Event.h"
@@ -121,7 +121,7 @@ public:
     const sead::SafeString& getActorName() const { return mActorName; }
     const sead::SafeString& getProfile() const { return mProfile; }
     const char* getClassName() const { return mClassName; }
-    CalcPrio getPriority() const { return mPriority; }
+    frm::CalcPrio getPriority() const { return mPriority; }
     const Resources& getRes() const { return mRes; }
 
     bool isA() const { return _a; }
@@ -168,7 +168,7 @@ private:
     sead::FixedSafeString<64> mActorName;
     sead::SafeString mProfile;
     const char* mClassName{};
-    CalcPrio mPriority = CalcPrio::AllAfter;
+    frm::CalcPrio mPriority = frm::CalcPrio::AllAfter;
     u32 mActiveBufferIdx = 2;
     Resources mRes;
     std::array<sead::Buffer<res::Handle>, 2> mHandles;

@@ -21,7 +21,7 @@ protected:
     // static_param at offset 0x20
     const bool* mIsUseTornadoAttack_s{};
     // dynamic_param at offset 0x28
-    ksys::act::BaseProcHandle** mAttackActor_d{};
+    ksys::frm::BaseProcHandle** mAttackActor_d{};
 };
 
 }  // namespace uking::action

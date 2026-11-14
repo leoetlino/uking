@@ -37,7 +37,7 @@ void PlacementMgr::deleteActorsOfUnloadingStaticObjs() {
         auto list = ac->getActorList();
         for (act::Actor& node : list) {
             if (node.getMapObject() == mPlacementActors->getStaticObj_2(mNumStaticObjs)) {
-                node.deleteLater(act::BaseProc::DeleteReason::Default);
+                node.deleteLater(frm::BaseProc::DeleteReason::Default);
             }
         }
     }

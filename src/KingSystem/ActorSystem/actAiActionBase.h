@@ -20,10 +20,13 @@ class AIProgram;
 class GParamList;
 }  // namespace ksys::res
 
+namespace ksys::frm {
+class BaseProcHandle;
+}  // namespace ksys::frm
+
 namespace ksys::act {
 
 class Actor;
-class BaseProcHandle;
 
 namespace ai {
 
@@ -42,9 +45,9 @@ s32* getDefaultInt();
 f32* getDefaultFloat();
 sead::Vector3f* getDefaultVec3();
 bool* getDefaultBool();
-BaseProcLink* getDefaultBaseProcLink();
+frm::BaseProcLink* getDefaultBaseProcLink();
 MesTransceiverId* getDefaultMesTransceiverId();
-BaseProcHandle** getDefaultBaseProcHandle();
+frm::BaseProcHandle** getDefaultBaseProcHandle();
 Rail** getDefaultRail();
 sead::FixedSafeString<32>* getDefaultString32();
 
@@ -251,7 +254,7 @@ protected:
         return getDynamicParamPtrImpl<AIDefParamType::Bool>(value, key, getDefaultBool());
     }
 
-    bool getDynamicParam(BaseProcLink** value, const sead::SafeString& key) const {
+    bool getDynamicParam(frm::BaseProcLink** value, const sead::SafeString& key) const {
         return getDynamicParamPtrImpl<AIDefParamType::BaseProcLink>(value, key,
                                                                     getDefaultBaseProcLink());
     }
@@ -261,7 +264,7 @@ protected:
             value, key, getDefaultMesTransceiverId());
     }
 
-    bool getDynamicParam(BaseProcHandle*** value, const sead::SafeString& key) const {
+    bool getDynamicParam(frm::BaseProcHandle*** value, const sead::SafeString& key) const {
         return getDynamicParamPtrImpl<AIDefParamType::BaseProcHandle>(value, key,
                                                                       getDefaultBaseProcHandle());
     }

@@ -19,7 +19,7 @@ protected:
     // static_param at offset 0x38
     const float* mTurnThreshold_s{};
     // dynamic_param at offset 0x40
-    ksys::act::BaseProcLink* mLeaderActor_d{};
+    ksys::frm::BaseProcLink* mLeaderActor_d{};
 };
 
 }  // namespace uking::ai

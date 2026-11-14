@@ -22,7 +22,7 @@ protected:
     // dynamic_param at offset 0xc0
     float* mDistanceKept_d{};
     // dynamic_param at offset 0xc8
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::action

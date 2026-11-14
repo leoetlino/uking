@@ -10,12 +10,9 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::frm {
-class BaseProcAccessor;
-}  // namespace ksys::frm
-
-namespace ksys::act {
 
 class BaseProc;
+class BaseProcAccessor;
 class BaseProcLinkData;
 
 class BaseProcLink {
@@ -32,8 +29,8 @@ public:
     bool hasProcInCalcState() const;
     bool hasProcById(BaseProc* proc) const;
 
-    BaseProc* getProc(frm::BaseProcAccessor* accessor, BaseProc* other_proc) const;
-    BaseProc* getProc(frm::BaseProcAccessor* accessor) const;
+    BaseProc* getProc(BaseProcAccessor* accessor, BaseProc* other_proc) const;
+    BaseProc* getProc(BaseProcAccessor* accessor) const;
 
     /// Acquire the specified BaseProc.
     /// If a BaseProc has already been specified, it is released.
@@ -120,4 +117,4 @@ inline auto BaseProcLink::getProcInContext(const Function& function) const {
     return function(getProc(), true);
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

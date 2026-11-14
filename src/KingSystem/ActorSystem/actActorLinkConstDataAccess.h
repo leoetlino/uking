@@ -4,9 +4,9 @@
 #include <math/seadVector.h>
 #include <prim/seadRuntimeTypeInfo.h>
 #include "KingSystem/ActorSystem/actActor.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Framework/frmBaseProcAccessor.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys {
@@ -31,18 +31,18 @@ class Actor;
 class ActorLinkConstDataAccess : public frm::BaseProcAccessor {
 public:
     ActorLinkConstDataAccess() = default;
-    explicit ActorLinkConstDataAccess(BaseProc* proc) : frm::BaseProcAccessor(proc) {}
+    explicit ActorLinkConstDataAccess(frm::BaseProc* proc) : frm::BaseProcAccessor(proc) {}
 
     bool acquireActor(const frm::BaseProcAccessor& other);
 
     bool hasProc() const { return frm::BaseProcAccessor::hasProc(); }
 
     /// Checks whether the acquired BaseProc is `proc`.
-    bool hasProc(BaseProc* proc) const;
+    bool hasProc(frm::BaseProc* proc) const;
 
     /// Checks whether the acquired BaseProc and the BaseProcLink's actor are the same
     /// by comparing the IDs.
-    bool hasProc(const BaseProcLink& link) const;
+    bool hasProc(const frm::BaseProcLink& link) const;
 
     template <typename T>
     bool isDerivedFrom() const {
@@ -52,8 +52,8 @@ public:
     const MesTransceiverId* getMessageTransceiverId() const;
     const sead::Matrix34f& getActorMtx();
 
-    bool linkAcquire(BaseProcLink* link) const;
-    bool linkAcquireImmediately(BaseProcLink* link) const;
+    bool linkAcquire(frm::BaseProcLink* link) const;
+    bool linkAcquireImmediately(frm::BaseProcLink* link) const;
 
     void debugLog(s32, const sead::SafeString& method_name) const;
 
@@ -78,10 +78,10 @@ public:
     bool hasConnectedCalcParent() const;
     bool isInvisible() const;
 
-    bool deleteLater(BaseProc::DeleteReason reason) const;
-    bool fadeoutDelete(BaseProc::DeleteReason reason) const;
-    bool sleep(BaseProc::SleepWakeReason reason) const;
-    bool wakeUp(BaseProc::SleepWakeReason reason) const;
+    bool deleteLater(frm::BaseProc::DeleteReason reason) const;
+    bool fadeoutDelete(frm::BaseProc::DeleteReason reason) const;
+    bool sleep(frm::BaseProc::SleepWakeReason reason) const;
+    bool wakeUp(frm::BaseProc::SleepWakeReason reason) const;
     bool setProperties(int x, const sead::Matrix34f& mtx, const sead::Vector3f& vel,
                        const sead::Vector3f& ang_vel, const sead::Vector3f& scale, bool keep_life,
                        int i, int life) const;
@@ -114,8 +114,8 @@ public:
 
     const sead::Vector3f& getAttentionPos() const;
 
-    void setThisActorAsParent(BaseProc* child, bool delete_parent_on_delete);
-    void setThisActorAsChild(BaseProc* parent, bool delete_child_on_delete);
+    void setThisActorAsParent(frm::BaseProc* child, bool delete_parent_on_delete);
+    void setThisActorAsChild(frm::BaseProc* parent, bool delete_child_on_delete);
 
     bool isAttClientEnabled(const sead::SafeString& client) const;
 
@@ -135,8 +135,8 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(ActorLinkConstDataAccess, 0x18);
 
-inline bool acquireActor(BaseProcLink* link, ActorLinkConstDataAccess* accessor) {
-    return link->getProcInContext([accessor](BaseProc* proc, bool valid) {
+inline bool acquireActor(frm::BaseProcLink* link, ActorLinkConstDataAccess* accessor) {
+    return link->getProcInContext([accessor](frm::BaseProc* proc, bool valid) {
         if (!proc) {
             if (!valid)
                 accessor->acquire(nullptr);

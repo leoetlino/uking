@@ -1,9 +1,9 @@
-#include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcHandle.h"
+#include "KingSystem/Framework/frmBaseProcCreateTask.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcHandle.h"
 #include "KingSystem/Map/mapPreActor.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcCreateTask::BaseProcCreateTask(sead::Heap* heap) : ManagedTask(heap) {}
 
@@ -80,4 +80,4 @@ void BaseProcCreateTask::prepareImpl_(TaskRequest* req) {
     setDelegateInternal_(&mTaskDelegate);
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

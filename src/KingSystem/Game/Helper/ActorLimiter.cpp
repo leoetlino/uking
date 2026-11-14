@@ -15,7 +15,7 @@ bool ActorLimiter::List::init(sead::Heap* heap, int capacity) {
     return true;
 }
 
-bool ActorLimiter::List::addActor(act::BaseProc* proc, bool allow_evicting_old_actors) {
+bool ActorLimiter::List::addActor(frm::BaseProc* proc, bool allow_evicting_old_actors) {
     const auto lock = sead::makeScopedLock(mCritSection);
 
     // Find a free node.
@@ -46,7 +46,7 @@ bool ActorLimiter::List::addActor(act::BaseProc* proc, bool allow_evicting_old_a
                     acquireActor(&target_node->proc_link, &acc);
             }
 
-            acc.fadeoutDelete(act::BaseProc::DeleteReason::ActorLimiter);
+            acc.fadeoutDelete(frm::BaseProc::DeleteReason::ActorLimiter);
         }
 
         if (target_node == nullptr)

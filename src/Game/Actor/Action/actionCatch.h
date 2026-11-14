@@ -23,7 +23,7 @@ protected:
     // static_param at offset 0x28
     const float* mRotSpd_s{};
     // dynamic_param at offset 0x30
-    ksys::act::BaseProcLink* mTargetWeapon_d{};
+    ksys::frm::BaseProcLink* mTargetWeapon_d{};
     // static_param at offset 0x38
     sead::SafeString mASName_s{};
 };

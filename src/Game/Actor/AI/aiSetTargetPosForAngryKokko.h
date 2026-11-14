@@ -29,7 +29,7 @@ protected:
     // static_param at offset 0x60
     const float* mRandRate_s{};
     // dynamic_param at offset 0x68
-    ksys::act::BaseProcLink* mTargetActor_d{};
+    ksys::frm::BaseProcLink* mTargetActor_d{};
 };
 
 }  // namespace uking::ai

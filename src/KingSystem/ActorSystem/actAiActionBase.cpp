@@ -318,7 +318,7 @@ template bool ActionBase::getAITreeVariable(void**, const sead::SafeString&) con
 
 namespace {
 
-BaseProcLink sDefaultBaseProcLink;
+frm::BaseProcLink sDefaultBaseProcLink;
 sead::FixedSafeString<32> sDefaultString32;
 int sDefaultInt;
 float sDefaultFloat;
@@ -326,7 +326,7 @@ bool sDefaultBool;
 Rail* sDefaultRail;
 struct ComplexDefaults {
     util::InitConstants init_constants;
-    BaseProcHandle* base_proc_handle;
+    frm::BaseProcHandle* base_proc_handle;
     sead::Vector3f vec3{0, 0, 0};
     sead::SafeString string;
     MesTransceiverId transceiver_id;
@@ -355,7 +355,7 @@ bool* getDefaultBool() {
     return &sDefaultBool;
 }
 
-BaseProcLink* getDefaultBaseProcLink() {
+frm::BaseProcLink* getDefaultBaseProcLink() {
     return &sDefaultBaseProcLink;
 }
 
@@ -363,7 +363,7 @@ MesTransceiverId* getDefaultMesTransceiverId() {
     return &sDefaults.transceiver_id;
 }
 
-BaseProcHandle** getDefaultBaseProcHandle() {
+frm::BaseProcHandle** getDefaultBaseProcHandle() {
     return &sDefaults.base_proc_handle;
 }
 

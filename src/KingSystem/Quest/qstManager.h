@@ -34,7 +34,7 @@ public:
                       bool copy_name, bool force_run_telop, bool setAocVersionFlag1);
 
     bool isQuestActor(act::Actor* actor) const;
-    static act::BaseProc* findNearestActorToPlayer(const sead::SafeString& s1,
+    static frm::BaseProc* findNearestActorToPlayer(const sead::SafeString& s1,
                                                    const sead::SafeString& s2);
 
 private:

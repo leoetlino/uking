@@ -2,7 +2,7 @@
 
 #include "Game/Cooking/cookManager.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 
 namespace uking::ai {
 
@@ -38,7 +38,7 @@ protected:
     u8 _25C[4];
     u8 _260[8];
     u32 _268;
-    ksys::act::BaseProcLink mProcLink;
+    ksys::frm::BaseProcLink mProcLink;
     s32 _280;
     // vtable
     void* _288;

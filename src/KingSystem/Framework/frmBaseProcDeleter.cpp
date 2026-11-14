@@ -1,12 +1,12 @@
-#include "KingSystem/ActorSystem/actBaseProcDeleter.h"
+#include "KingSystem/Framework/frmBaseProcDeleter.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Thread/ManagedTask.h"
 #include "KingSystem/Utils/Thread/TaskMgr.h"
 #include "KingSystem/Utils/Thread/TaskQueue.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcDeleter::BaseProcDeleter() = default;
 
@@ -17,7 +17,7 @@ bool BaseProcDeleter::doPreDelete(void* proc) {
 }
 
 bool BaseProcDeleter::doUnloadParam(void* actor_param) {
-    ActorParamMgr::instance()->unloadParam(static_cast<ActorParam*>(actor_param));
+    act::ActorParamMgr::instance()->unloadParam(static_cast<act::ActorParam*>(actor_param));
     return true;
 }
 
@@ -49,7 +49,7 @@ bool BaseProcDeleter::requestPreDelete(BaseProc* proc) {
     return mTaskMgr->trySubmitRequest(req);
 }
 
-void BaseProcDeleter::requestUnloadActorParam(ActorParam* param) {
+void BaseProcDeleter::requestUnloadActorParam(act::ActorParam* param) {
     TaskRequest request{false};
     request.mSynchronous = false;
     request.mQueue = mTaskQueue;
@@ -68,4 +68,4 @@ void BaseProcDeleter::unblockTasks() {
     mTaskQueue->unblockTasks(u8(TaskLane::UnloadActorParam));
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

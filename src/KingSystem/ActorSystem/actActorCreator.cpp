@@ -4,9 +4,9 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorTemplate.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
-#include "KingSystem/ActorSystem/actBaseProcCreateTask.h"
-#include "KingSystem/ActorSystem/actBaseProcMgr.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/Framework/frmBaseProcCreateTask.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Utils/HeapUtil.h"
@@ -29,7 +29,7 @@ void ActorCreator::onTaskRemoved(const TaskRemoveCallbackContext& context) {
     if (!context.mTask)
         return;
 
-    auto* task = sead::DynamicCast<BaseProcCreateTask>(context.mTask);
+    auto* task = sead::DynamicCast<frm::BaseProcCreateTask>(context.mTask);
     if (task)
         task->onBaseProcCreationFailed(nullptr, true);
 }
@@ -38,7 +38,7 @@ ActorCreator::~ActorCreator() = default;
 
 bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
                                          map::MubinIter* mubin_iter, map::PreActor* map_object,
-                                         BaseProcHandle* handle, int task_lane_id,
+                                         frm::BaseProcHandle* handle, int task_lane_id,
                                          frm::ActorInstParamPack* params) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
@@ -51,8 +51,9 @@ bool ActorCreator::requestCreateMapActor(const char* name, sead::Heap* heap,
                                task_lane_id, params);
 }
 
-BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                     frm::ActorInstParamPack* params, bool sleep_after_init, bool) {
+frm::BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name,
+                                          sead::Heap* heap, frm::ActorInstParamPack* params,
+                                          bool sleep_after_init, bool) {
     auto* debug_heap = util::getDebugHeap();
     bool has_debug_heap = false;
     if (debug_heap && (debug_heap == heap || debug_heap->isInclude(heap))) {
@@ -60,10 +61,10 @@ BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, 
         has_debug_heap = true;
     }
 
-    const bool is_high_priority_thread = BaseProcMgr::instance()->isHighPriorityThread();
+    const bool is_high_priority_thread = frm::BaseProcMgr::instance()->isHighPriorityThread();
     SEAD_ASSERT(is_high_priority_thread);
 
-    BaseProcCreateTaskData data;
+    frm::BaseProcCreateTaskData data;
     data.mHeap = heap;
     data.mProcClass = actor_class;
     data.mProcName = name;
@@ -74,11 +75,11 @@ BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, 
         data.mOtherProc = params->getProc();
     }
 
-    BaseProcCreateRequest req;
+    frm::BaseProcCreateRequest req;
     req.task_remove_callback = nullptr;
-    req.task_lane_id = static_cast<u32>(BaseProcCreateTask::LaneId::_1);
+    req.task_lane_id = static_cast<u32>(frm::BaseProcCreateTask::LaneId::_1);
     req.task_data = &data;
-    auto* actor = BaseProcMgr::instance()->createProc(req);
+    auto* actor = frm::BaseProcMgr::instance()->createProc(req);
     if (has_debug_heap)
         res::ResourceMgrTask::instance()->controlField9c0d88(true);
     return actor;
@@ -87,7 +88,7 @@ BaseProc* ActorCreator::createActor_(const char* actor_class, const char* name, 
 Actor* ActorCreator::createActor(const char* name, sead::Heap* heap,
                                  frm::ActorInstParamPack* params, bool sleep_after_init,
                                  bool block_other_synchronous_spawns) {
-    BaseProc* proc = nullptr;
+    frm::BaseProc* proc = nullptr;
     if (block_other_synchronous_spawns)
         mBlockSpawns = true;
 
@@ -102,16 +103,16 @@ Actor* ActorCreator::createActor(const char* name, sead::Heap* heap,
 
     auto* actor = sead::DynamicCast<Actor>(proc);
     if (!actor && proc)
-        proc->deleteLater(BaseProc::DeleteReason::Default);
+        proc->deleteLater(frm::BaseProc::DeleteReason::Default);
 
     return actor;
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
                                        map::MubinIter* mubin_iter, map::PreActor* map_object,
-                                       BaseProcHandle* handle, int task_lane_id,
+                                       frm::BaseProcHandle* handle, int task_lane_id,
                                        frm::ActorInstParamPack* params) {
-    BaseProcCreateTaskData data;
+    frm::BaseProcCreateTaskData data;
     data.mHeap = heap;
     data.mProcClass = actor_class;
     data.mProcName = name;
@@ -124,17 +125,17 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
         data.mOtherProc = params->getProc();
     }
 
-    BaseProcCreateRequest req;
+    frm::BaseProcCreateRequest req;
     req.task_lane_id = task_lane_id;
     req.task_data = &data;
     req.task_remove_callback = &mTaskRemovedDelegate;
-    return BaseProcMgr::instance()->requestCreateProc(req);
+    return frm::BaseProcMgr::instance()->requestCreateProc(req);
 }
 
 bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name, sead::Heap* heap,
-                                       map::PreActor* map_object, BaseProcHandle* handle,
+                                       map::PreActor* map_object, frm::BaseProcHandle* handle,
                                        int task_lane_id, frm::ActorInstParamPack* params) {
-    BaseProcCreateTaskData data;
+    frm::BaseProcCreateTaskData data;
     data.mHeap = heap;
     data.mProcClass = actor_class;
     data.mProcName = name;
@@ -146,16 +147,16 @@ bool ActorCreator::requestCreateActor_(const char* actor_class, const char* name
         data.mOtherProc = params->getProc();
     }
 
-    BaseProcCreateRequest req;
+    frm::BaseProcCreateRequest req;
     req.task_lane_id = task_lane_id;
     req.task_data = &data;
     req.task_remove_callback = &mTaskRemovedDelegate;
-    return BaseProcMgr::instance()->requestCreateProc(req);
+    return frm::BaseProcMgr::instance()->requestCreateProc(req);
 }
 
-bool ActorCreator::requestCreateActor(const char* name, sead::Heap* heap, BaseProcHandle* handle,
-                                      frm::ActorInstParamPack* params, map::PreActor* map_object,
-                                      int task_lane_id) {
+bool ActorCreator::requestCreateActor(const char* name, sead::Heap* heap,
+                                      frm::BaseProcHandle* handle, frm::ActorInstParamPack* params,
+                                      map::PreActor* map_object, int task_lane_id) {
     const char* actor_profile;
     if (!InfoData::instance()->getActorProfile(&actor_profile, name))
         return false;
@@ -223,12 +224,12 @@ void ActorCreator::addAITreeParam(frm::ActorInstParamPack& pack, bool value,
     pack.getBuffer().add(value, name);
 }
 
-void ActorCreator::setCreatePriorityState1(frm::ActorInstParamPack& pack, BaseProc* proc) {
+void ActorCreator::setCreatePriorityState1(frm::ActorInstParamPack& pack, frm::BaseProc* proc) {
     pack.setProc(proc);
     proc->setCreatePriorityState1();
 }
 
-void ActorCreator::setCreatePriorityState2(frm::ActorInstParamPack& pack, BaseProc* proc) {
+void ActorCreator::setCreatePriorityState2(frm::ActorInstParamPack& pack, frm::BaseProc* proc) {
     pack.setProc(proc);
     proc->setCreatePriorityState2();
     pack->addWait();
@@ -242,11 +243,11 @@ Task* BaseProcCreateTaskSelector::selectTask(const TaskSelectionContext& context
     auto min = std::numeric_limits<float>::max();
 
     for (auto& it : context) {
-        auto* task = sead::DynamicCast<BaseProcCreateTask>(&it);
+        auto* task = sead::DynamicCast<frm::BaseProcCreateTask>(&it);
         if (!task)
             return &it;
 
-        if (task->getLaneId() == u8(BaseProcCreateTask::LaneId::_2))
+        if (task->getLaneId() == u8(frm::BaseProcCreateTask::LaneId::_2))
             return &it;
 
         if (task->mMapObject && task->mMapObject->getFlags0().isOff(map::PreActor::Flag0::_4))
@@ -258,7 +259,7 @@ Task* BaseProcCreateTaskSelector::selectTask(const TaskSelectionContext& context
         if (task->mDistanceToLoadSphere >= 0.0 && min > task->mDistanceToLoadSphere)
             min = task->mDistanceToLoadSphere;
 
-        if (task->getLaneId() == u8(BaseProcCreateTask::LaneId::_1))
+        if (task->getLaneId() == u8(frm::BaseProcCreateTask::LaneId::_1))
             lane1_task = &it;
     }
 

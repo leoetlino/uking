@@ -40,7 +40,7 @@ protected:
     // dynamic_param at offset 0x98
     sead::Vector3f* mTargetPos_d{};
     // dynamic_param at offset 0xa0
-    ksys::act::BaseProcHandle** mIgniteHandle_d{};
+    ksys::frm::BaseProcHandle** mIgniteHandle_d{};
 };
 
 }  // namespace uking::action

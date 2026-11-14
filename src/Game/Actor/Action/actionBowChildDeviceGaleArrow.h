@@ -33,7 +33,7 @@ protected:
     // dynamic_param at offset 0x50
     float* mXRotateAngle_d{};
     // dynamic_param at offset 0x58
-    ksys::act::BaseProcLink* mParentActor_d{};
+    ksys::frm::BaseProcLink* mParentActor_d{};
 };
 
 }  // namespace uking::action

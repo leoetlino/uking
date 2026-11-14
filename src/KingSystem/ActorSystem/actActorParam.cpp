@@ -157,23 +157,23 @@ void ActorParam::setResource(ResourceType type, ParamIO* param_io) {
 
 bool ActorParam::setPriority(const sead::SafeString& priority) {
     if (priority == "PlayerBefore") {
-        mPriority = CalcPrio::PlayerBefore;
+        mPriority = frm::CalcPrio::PlayerBefore;
         return true;
     }
 
     if (priority == "Player") {
         // "Player" is stored as PlayerAfter.
-        mPriority = CalcPrio::PlayerAfter;
+        mPriority = frm::CalcPrio::PlayerAfter;
         return true;
     }
 
     if (priority == "PlayerAfter") {
-        mPriority = CalcPrio::PlayerAfter;
+        mPriority = frm::CalcPrio::PlayerAfter;
         return true;
     }
 
     if (priority == "AllAfter") {
-        mPriority = CalcPrio::AllAfter;
+        mPriority = frm::CalcPrio::AllAfter;
         return true;
     }
 

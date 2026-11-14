@@ -12,9 +12,9 @@
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
 #include <utility/aglAtomicPtrArray.h>
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcJob.h"
-#include "KingSystem/ActorSystem/actBaseProcMap.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcMap.h"
+#include "KingSystem/Framework/frmBaseProcMgrJob.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Thread/Task.h"
 #include "KingSystem/Utils/Types.h"
@@ -25,8 +25,11 @@ class WorkerMgr;
 }  // namespace sead
 
 namespace ksys::act {
-
 class ActorParam;
+}  // namespace ksys::act
+
+namespace ksys::frm {
+
 class BaseProcCreateTaskData;
 class BaseProcDeleter;
 class BaseProcInitializer;
@@ -132,7 +135,7 @@ public:
     // endregion
 
     bool requestPreDelete(BaseProc& proc);
-    void requestUnloadActorParam(ActorParam* param);
+    void requestUnloadActorParam(act::ActorParam* param);
 
     // region Job processing
 
@@ -306,4 +309,4 @@ inline bool BaseProcMgr::setProcFlag(BaseProc& proc, u32 flag_bit) {
     return proc.mStateFlags.getStorage().setBitOn(flag_bit);
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

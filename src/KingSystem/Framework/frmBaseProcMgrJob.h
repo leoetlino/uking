@@ -5,7 +5,7 @@
 #include <mc/seadJob.h>
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 class BaseProc;
 
@@ -96,4 +96,4 @@ private:
     int mNumProcs = 0;
 };
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

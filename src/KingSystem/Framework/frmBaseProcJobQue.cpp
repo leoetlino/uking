@@ -1,8 +1,8 @@
-#include "KingSystem/ActorSystem/actBaseProcJobQue.h"
+#include "KingSystem/Framework/frmBaseProcJobQue.h"
 #include <mc/seadWorkerMgr.h>
-#include "KingSystem/ActorSystem/actBaseProc.h"
+#include "KingSystem/Framework/frmBaseProc.h"
 
-namespace ksys::act {
+namespace ksys::frm {
 
 BaseProcJobQue::BaseProcJobQue() : mPool() {}
 
@@ -125,4 +125,4 @@ bool BaseProcJobQue::enqueueJobRequests(sead::FixedSizeJQ* queue,
     return true;
 }
 
-}  // namespace ksys::act
+}  // namespace ksys::frm

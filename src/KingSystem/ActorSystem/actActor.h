@@ -11,11 +11,11 @@
 #include <thread/seadAtomic.h>
 #include <xlink2/xlink2Handle.h>
 #include "KingSystem/ActorSystem/actActorEditorNode.h"
-#include "KingSystem/ActorSystem/actBaseProc.h"
-#include "KingSystem/ActorSystem/actBaseProcLink.h"
 #include "KingSystem/ActorSystem/actModelCallback.h"
 #include "KingSystem/ActorSystem/actPhysicsConstraints.h"
 #include "KingSystem/ActorSystem/actPhysicsUserTag.h"
+#include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcLink.h"
 #include "KingSystem/Map/mapMubinIter.h"
 #include "KingSystem/Utils/AtomicLongBitFlag.h"
 #include "KingSystem/Utils/Thread/ActorMessageTransceiver.h"
@@ -77,6 +77,10 @@ namespace xlink {
 class ActorEffects;
 }  // namespace xlink
 
+namespace frm {
+class BaseProcLink;
+}  // namespace frm
+
 namespace act {
 
 namespace ai {
@@ -87,7 +91,6 @@ class LifeRecoverInfo;
 class Actor;
 class ActorCreator;
 class ActorParam;
-class BaseProcLink;
 class Chemical;
 class ImpulseBaseProcLink;
 class IDamageManager;
@@ -101,7 +104,7 @@ struct ActorUniqueName {
 };
 KSYS_CHECK_SIZE_NX150(ActorUniqueName, 0x30);
 
-class Actor : public BaseProc, public ActorMessageTransceiver::IHandler {
+class Actor : public frm::BaseProc, public ActorMessageTransceiver::IHandler {
 public:
     enum class ModelObjectAttribute {
         MagneTarget = 0x1,
@@ -225,7 +228,7 @@ public:
     explicit Actor(const CreateArg& arg);
     ~Actor() override;
 
-    SEAD_RTTI_OVERRIDE(Actor, BaseProc)
+    SEAD_RTTI_OVERRIDE(Actor, frm::BaseProc)
 
 public:
     const sead::SafeString& getProfile() const;
@@ -427,13 +430,13 @@ protected:
     /* 0x1b0 */ ModelUserData mModelUserData;
     /* 0x1c0 */ u32 _1c0 = 3;
 
-    /* 0x1c8 */ BaseProcJobHandlerDualT<Actor> mPreCalcJob{this, &Actor::preCalcJob,
-                                                           &Actor::preCalcPausedJob};
-    /* 0x238 */ BaseProcJobHandlerDualT<Actor> mPostBgJob{this, &Actor::postBgJob,
-                                                          &Actor::postBgPausedJob};
-    /* 0x2a8 */ BaseProcJobHandlerDualT<Actor> mPostSensorJob{this, &Actor::postSensorJob,
-                                                              &Actor::postSensorPausedJob};
-    /* 0x318 */ BaseProcJobHandlerT<Actor> mFrameEndJob{this, &Actor::frameEndJob};
+    /* 0x1c8 */ frm::BaseProcJobHandlerDualT<Actor> mPreCalcJob{this, &Actor::preCalcJob,
+                                                                &Actor::preCalcPausedJob};
+    /* 0x238 */ frm::BaseProcJobHandlerDualT<Actor> mPostBgJob{this, &Actor::postBgJob,
+                                                               &Actor::postBgPausedJob};
+    /* 0x2a8 */ frm::BaseProcJobHandlerDualT<Actor> mPostSensorJob{this, &Actor::postSensorJob,
+                                                                   &Actor::postSensorPausedJob};
+    /* 0x318 */ frm::BaseProcJobHandlerT<Actor> mFrameEndJob{this, &Actor::frameEndJob};
 
     /* 0x368 */ sead::ListNode mActiveActorListNode;
     /* 0x378 */ sead::ListNode mActorsThatLostPreActorListNode;
@@ -557,8 +560,8 @@ protected:
     /* 0x728 */ void* mEventExtraAnimHolder = nullptr;
     /* 0x730 */ u16 mFrustumCullRadius = 0;
     /* 0x732 */ sead::BitFlag16 mDrawDistanceFlags;
-    /* 0x738 */ BaseProcLink mReplacementActorLink;
-    /* 0x748 */ BaseProcLink mCreateArgBaseProcLink;
+    /* 0x738 */ frm::BaseProcLink mReplacementActorLink;
+    /* 0x748 */ frm::BaseProcLink mCreateArgBaseProcLink;
     /* 0x758 */ void* mSpawnerCallback = nullptr;
     /* 0x760 */ xlink2::Handle mAlwaysEffectHandle;
     /* 0x770 */ xlink2::Handle _770;
@@ -593,7 +596,7 @@ private:
 };
 KSYS_CHECK_SIZE_NX150(Actor, 0x840);
 
-BaseProcLink& getDummyBaseProcLink();
+frm::BaseProcLink& getDummyBaseProcLink();
 
 }  // namespace act
 
