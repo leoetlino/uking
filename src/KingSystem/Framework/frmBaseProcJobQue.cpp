@@ -1,6 +1,7 @@
 #include "KingSystem/Framework/frmBaseProcJobQue.h"
 #include <mc/seadWorkerMgr.h>
 #include "KingSystem/Framework/frmBaseProc.h"
+#include "KingSystem/Framework/frmBaseProcMgr.h"
 
 namespace ksys::frm {
 
@@ -123,6 +124,10 @@ bool BaseProcJobQue::enqueueJobRequests(sead::FixedSizeJQ* queue,
     }
 
     return true;
+}
+
+void BaseProcJob::invoke() {
+    BaseProcMgr::instance()->jobInvoked(mJobLink, mNumProcs);
 }
 
 }  // namespace ksys::frm

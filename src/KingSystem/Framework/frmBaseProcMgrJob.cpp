@@ -1,5 +1,4 @@
 #include "KingSystem/Framework/frmBaseProcMgrJob.h"
-#include "KingSystem/Framework/frmBaseProcMgr.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::frm {
@@ -73,10 +72,6 @@ BaseProcJobLists::getNextJobWithTopPriority(BaseProcJobLink* link) const {
 
 sead::TListNode<BaseProc*>* BaseProcJobLists::getNextJob(BaseProcJobLink* link) const {
     return mLists[link->getPriority()].next(link);
-}
-
-void BaseProcJob::invoke() {
-    BaseProcMgr::instance()->jobInvoked(mJobLink, mNumProcs);
 }
 
 }  // namespace ksys::frm

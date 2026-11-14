@@ -16,6 +16,23 @@ class WorkerMgr;
 
 namespace ksys::frm {
 
+class BaseProcJob final : public sead::Job {
+public:
+    BaseProcJob() = default;
+    void invoke() override;
+
+    void set(BaseProcJobLink* link, int num_procs) {
+        mJobLink = link;
+        mNumProcs = num_procs;
+    }
+
+private:
+    friend class BaseProcJobQue;
+
+    BaseProcJobLink* mJobLink = nullptr;
+    int mNumProcs = 0;
+};
+
 class BaseProcJobQue {
 public:
     BaseProcJobQue();

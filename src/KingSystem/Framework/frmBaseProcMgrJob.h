@@ -2,7 +2,6 @@
 
 #include <container/seadSafeArray.h>
 #include <container/seadTList.h>
-#include <mc/seadJob.h>
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::frm {
@@ -77,23 +76,6 @@ public:
 
 private:
     sead::SafeArray<BaseProcJobList, 8> mLists{};
-};
-
-class BaseProcJob final : public sead::Job {
-public:
-    BaseProcJob() = default;
-    void invoke() override;
-
-    void set(BaseProcJobLink* link, int num_procs) {
-        mJobLink = link;
-        mNumProcs = num_procs;
-    }
-
-private:
-    friend class BaseProcJobQue;
-
-    BaseProcJobLink* mJobLink = nullptr;
-    int mNumProcs = 0;
 };
 
 }  // namespace ksys::frm
