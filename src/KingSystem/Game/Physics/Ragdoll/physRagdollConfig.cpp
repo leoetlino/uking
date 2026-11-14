@@ -1,5 +1,5 @@
 #include "KingSystem/Game/Physics/Ragdoll/physRagdollConfig.h"
-#include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
+#include "KingSystem/ActorSystem/actRagdollConfigResource.h"
 
 namespace ksys::phys {
 
@@ -20,12 +20,12 @@ RagdollConfig::PartImpulseInfo::PartImpulseInfo()
     : mIsUseReceiveImpulse(true, "IsUseReceiveImpulse", "攻撃インパルスを反映させるかどうか",
                            &mObj),
       mIsUseFixedImpulse(true, "IsUseFixedImpulse", "固定インパルスを反映させるかどうか", &mObj) {
-    for (int i = 0; i < res::RagdollConfig::cNumReceiveObjs; ++i) {
+    for (int i = 0; i < act::RagdollConfigResource::cNumReceiveObjs; ++i) {
         sead::FormatFixedSafeString<128> name("ReceiveObj%02d", i + 1);
         addObj(&mReceiveObjs(i), name);
     }
 
-    for (int i = 0; i < res::RagdollConfig::cNumImpulseObjs; ++i) {
+    for (int i = 0; i < act::RagdollConfigResource::cNumImpulseObjs; ++i) {
         sead::FormatFixedSafeString<128> name("ImpulseObj%02d", i + 1);
         addObj(&mImpulseObjs(i), name);
     }

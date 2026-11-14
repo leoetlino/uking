@@ -21,7 +21,7 @@ ActorCaptureMgr::~ActorCaptureMgr() {
 }
 
 void ActorCaptureMgr::init(const InitArg& arg) {
-    mFactory = new (arg.heap) ksys::res::EntryFactory<ksys::res::ActorCapture>(1.0, 0x1000);
+    mFactory = new (arg.heap) ksys::res::EntryFactory<ksys::act::ActorCapture>(1.0, 0x1000);
     ksys::res::registerEntryFactory(mFactory, "bactcapt");
 
     ksys::res::LoadRequest req;
@@ -43,19 +43,19 @@ void ActorCaptureMgr::loadCaptureParam() {
     if (!name)
         return;
 
-    ksys::res::ActorCapture* param = nullptr;
+    ksys::act::ActorCapture* param = nullptr;
 
     {
         ksys::res::LoadRequest req;
         req.mRequester = "ActorCaptureMgr";
         sead::FormatFixedSafeString<128> path("Actor/ActorCapture/%s.bactcapt", name);
         ksys::res::ResourceMgrTask::instance()->controlField9c0d88(false);
-        auto* file = sead::DynamicCast<ksys::res::ActorCapture>(mCaptureParamFile.load(path, &req));
+        auto* file = sead::DynamicCast<ksys::act::ActorCapture>(mCaptureParamFile.load(path, &req));
         ksys::res::ResourceMgrTask::instance()->controlField9c0d88(true);
         if (file)
             param = file;
         if (!param)
-            param = sead::DynamicCast<ksys::res::ActorCapture>(mDummyFile.getResource());
+            param = sead::DynamicCast<ksys::act::ActorCapture>(mDummyFile.getResource());
     }
 
     mRes.mCameraInfoObj.copy(param->mCameraInfoObj);

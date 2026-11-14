@@ -16,33 +16,33 @@ namespace ksys {
 class ParamIO;
 
 namespace res {
-class AISchedule;
-class AnimInfo;
-class AttClientList;
-class Awareness;
-class BoneControl;
 class Chemical;
-class DamageParam;
-class Drop;
 class EventFlow;
-class LifeCondition;
-class Lod;
-class RagdollBlendWeight;
-class RagdollConfig;
-class RagdollConfigList;
-class Recipe;
-class Shop;
-class UMii;
 }  // namespace res
 
 namespace act {
 
 class ActorParamMgr;
 class AIProgram;
+class AISchedule;
+class AnimInfo;
 class ASList;
+class AttClientList;
+class Awareness;
+class BoneControl;
+class DamageParam;
+class Drop;
 class GParamList;
+class LifeCondition;
+class Lod;
 class ModelList;
 class Physics;
+class RagdollBlendWeight;
+class RagdollConfigResource;
+class RagdollConfigList;
+class Recipe;
+class Shop;
+class UMii;
 
 // FIXME: incomplete
 class ActorParam : public sead::hostio::Node {
@@ -92,24 +92,24 @@ public:
             GParamList* mGParamList;
             Physics* mPhysics;
             res::Chemical* mChemical;
-            res::AttClientList* mAttClientList;
-            res::AISchedule* mAISchedule;
+            AttClientList* mAttClientList;
+            AISchedule* mAISchedule;
             res::EventFlow* mEventFlow;
-            res::DamageParam* mDamageParam;
-            res::RagdollConfigList* mRagdollConfigList;
-            res::RagdollBlendWeight* mRagdollBlendWeight;
-            res::Awareness* mAwareness;
+            DamageParam* mDamageParam;
+            RagdollConfigList* mRagdollConfigList;
+            RagdollBlendWeight* mRagdollBlendWeight;
+            Awareness* mAwareness;
             void* mResource14;
             void* mResource15;
             void* mResource16;
-            res::Drop* mDropTable;
-            res::Shop* mShopData;
-            res::Recipe* mRecipe;
-            res::Lod* mLod;
-            res::BoneControl* mBoneControl;
-            res::LifeCondition* mLifeCondition;
-            res::UMii* mUMii;
-            res::AnimInfo* mAnimationInfo;
+            Drop* mDropTable;
+            Shop* mShopData;
+            Recipe* mRecipe;
+            Lod* mLod;
+            BoneControl* mBoneControl;
+            LifeCondition* mLifeCondition;
+            UMii* mUMii;
+            AnimInfo* mAnimationInfo;
         };
         sead::SafeArray<ParamIO*, 25> mArray;
     };

@@ -20,9 +20,12 @@ class DirectResource;
 
 namespace ksys::res {
 class Handle;
+}  // namespace ksys::res
+
+namespace ksys::act {
 class RagdollBlendWeight;
 class RagdollConfigList;
-}  // namespace ksys::res
+}  // namespace ksys::act
 
 namespace ksys::phys {
 
@@ -151,8 +154,8 @@ private:
     sead::Buffer<RagdollController*> mRagdollControllers;
     ContactPointInfo* mRagdollContactPointInfo{};
     res::Handle* mRagdollResHandle{};
-    res::RagdollBlendWeight* mRagdollBlendWt;
-    res::RagdollConfigList* mRagdollConfigList;
+    act::RagdollBlendWeight* mRagdollBlendWt;
+    act::RagdollConfigList* mRagdollConfigList;
 
     res::Handle* mClothResHandle{};
     sead::DirectResource* mClothRes{};

@@ -18,14 +18,11 @@ class PreActor;
 class ObjectLinkData;
 }  // namespace ksys::map
 
-namespace ksys::res {
-class Shop;
-}  // namespace ksys::res
-
 namespace ksys::act {
 
 class Actor;
 class GParamList;
+class Shop;
 
 /// Provides read-only access to actor data for safe, multi-threaded access.
 class ActorLinkConstDataAccess : public frm::BaseProcAccessor {
@@ -93,7 +90,7 @@ public:
     bool isDeletedOrDeleting() const;
 
     GParamList* getGParamList() const;
-    res::Shop* getShopData() const;
+    Shop* getShopData() const;
 
     const sead::SafeString& getAttackSpHitActor() const;
     const sead::SafeString& getAttackSpHitTag() const;

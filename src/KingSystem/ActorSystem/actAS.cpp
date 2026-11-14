@@ -1,7 +1,7 @@
 #include "KingSystem/ActorSystem/actAS.h"
 #include <memory>
 #include <random/seadGlobalRandom.h>
-#include "KingSystem/Resource/Actor/resResourceASResource.h"
+#include "KingSystem/ActorSystem/actASResource.h"
 #include "KingSystem/Utils/HeapUtil.h"
 #include "KingSystem/Utils/SafeDelete.h"
 
@@ -48,7 +48,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
 
     mElementResources.fill(nullptr);
 
-    res::ASResource::ParseArgs args;
+    ASResource::ParseArgs args;
     args.list = {};
     args.heap = heap;
     args.as = this;
@@ -63,7 +63,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
     for (auto it = mElementResources.begin(), end = mElementResources.end();
          it != end && res_it != res_end; ++it, ++res_it) {
         args.list = res_it.getList();
-        *it = res::ASResource::make(args);
+        *it = ASResource::make(args);
         if (*it == nullptr) {
             mHeap->adjust();
             return false;
@@ -144,7 +144,7 @@ bool AS::parse_(u8* data, size_t size, sead::Heap* parent_heap) {
     return true;
 }
 
-res::ASResource* AS::getFirstResource() const {
+ASResource* AS::getFirstResource() const {
     if (mElementResources.size() == 0)
         return nullptr;
     return mElementResources[0];

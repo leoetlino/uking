@@ -237,7 +237,7 @@ GParamList* ActorLinkConstDataAccess::getGParamList() const {
     return actor->getParam()->getRes().mGParamList;
 }
 
-res::Shop* ActorLinkConstDataAccess::getShopData() const {
+Shop* ActorLinkConstDataAccess::getShopData() const {
     auto* actor = getActor();
     if (!actor)
         return nullptr;

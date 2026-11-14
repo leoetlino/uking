@@ -2,8 +2,8 @@
 #include <container/seadSafeArray.h>
 #include <random/seadGlobalRandom.h>
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
+#include "KingSystem/ActorSystem/actUMii.h"
 #include "KingSystem/Mii/miiModelCreator.h"
-#include "KingSystem/Resource/Actor/resResourceUMii.h"
 #include "KingSystem/Utils/InitTimeInfo.h"
 
 namespace ksys::mii {
@@ -224,7 +224,7 @@ void UMii::doLoad(const u32& load_req_c) {
                                                                 load_req_c);
 
         if (mActorParam) {
-            res::UMii* umii = nullptr;
+            act::UMii* umii = nullptr;
             if (!mActorParam->isA()) {
                 umii = act::ActorParam::sDummyResources.mUMii;
                 if (!umii)

@@ -6,9 +6,9 @@
 #include "KingSystem/ActorSystem/actASList.h"
 #include "KingSystem/ActorSystem/actActorParamMgr.h"
 #include "KingSystem/ActorSystem/actActorTemplate.h"
-#include "KingSystem/Resource/Actor/resResourceAttClient.h"
-#include "KingSystem/Resource/Actor/resResourceRagdollConfig.h"
-#include "KingSystem/Resource/Actor/resResourceRagdollConfigList.h"
+#include "KingSystem/ActorSystem/actAttClient.h"
+#include "KingSystem/ActorSystem/actRagdollConfigList.h"
+#include "KingSystem/ActorSystem/actRagdollConfigResource.h"
 #include "KingSystem/Utils/ParamIO.h"
 
 namespace ksys::act {

@@ -8,11 +8,9 @@
 #include "KingSystem/Utils/ParamIO.h"
 #include "KingSystem/Utils/Types.h"
 
-namespace ksys::res {
-class ASResource;
-}  // namespace ksys::res
-
 namespace ksys::act {
+
+class ASResource;
 
 enum class ASAssetExKindFlags : u8 {
     ShaderParam = 1 << 0,
@@ -36,19 +34,19 @@ public:
     bool parse_(u8* data, size_t size, sead::Heap* heap) override;
     void finalize_() override;
 
-    const sead::Buffer<res::ASResource*>& getElementResources() const { return mElementResources; }
+    const sead::Buffer<ASResource*>& getElementResources() const { return mElementResources; }
     const auto& getRandomRateMin() const { return *mRandomRateMin; }
     const auto& getRandomRateMax() const { return *mRandomRateMax; }
     const auto& getForbidPartialDemoAs() const { return *mForbidPartialDemoAS; }
     const auto& getUseIk() const { return *mUseIK; }
 
-    res::ASResource* getFirstResource() const;
+    ASResource* getFirstResource() const;
     float getRandomRate() const;
 
 private:
     friend class ASList;
 
-    sead::Buffer<res::ASResource*> mElementResources;
+    sead::Buffer<ASResource*> mElementResources;
     agl::utl::ParameterList mElementsList;
 
     agl::utl::ParameterObj mCommonParams;

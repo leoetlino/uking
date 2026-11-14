@@ -2,7 +2,7 @@
 
 #include <basis/seadTypes.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/Actor/resResourceActorCapture.h"
+#include "KingSystem/ActorSystem/actActorCapture.h"
 #include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/System/Timer.h"
 #include "KingSystem/Utils/Types.h"
@@ -41,7 +41,7 @@ private:
     ksys::res::Handle mCaptureParamFile;
     sead::FixedSafeString<64> mStr;
     sead::FixedSafeString<256> mStr2;
-    ksys::res::ActorCapture mRes;
+    ksys::act::ActorCapture mRes;
     struct Field768 {
         Field768() {
             _76c = 0;

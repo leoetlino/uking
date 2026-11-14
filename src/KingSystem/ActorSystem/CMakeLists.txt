@@ -86,6 +86,8 @@ target_sources(uking PRIVATE
     
     actActor.cpp
     actActor.h
+    actActorCapture.cpp
+    actActorCapture.h
     actActorCreator.cpp
     actActorCreator.h
     actActorEditorNode.cpp
@@ -123,16 +125,40 @@ target_sources(uking PRIVATE
     actAiQuery.h
     actAiQuerys.cpp
     actAiQuerys.h
+    actAISchedule.cpp
+    actAISchedule.h
+    actAnimInfo.cpp
+    actAnimInfo.h
     actAS.cpp
     actAS.h
     actASList.cpp
     actASList.h
+    actASResource.cpp
+    actASResource.h
+    actASResourceExtension.h
+    actASSetting.cpp
+    actASSetting.h
+    actASSettingMgr.h
+    actAttCheck.cpp
+    actAttCheck.h
+    actAttClient.cpp
+    actAttClient.h
+    actAttPos.cpp
+    actAttPos.h
+    actAwareness.cpp
+    actAwareness.h
+    actBoneControl.cpp
+    actBoneControl.h
     actClusteredRenderer.cpp
     actClusteredRenderer.h
+    actDamageParam.cpp
+    actDamageParam.h
     actDebug.cpp
     actDebug.h
     actDebugFinder.cpp
     actDebugFinder.h
+    actDrop.cpp
+    actDrop.h
     actGParamList.cpp
     actGParamList.h
     actIDamageManager.cpp
@@ -141,7 +167,11 @@ target_sources(uking PRIVATE
     actInfoCommon.h
     actInfoData.cpp
     actInfoData.h
+    actLifeCondition.cpp
+    actLifeCondition.h
     actLifeRecoveryInfo.h
+    actLod.cpp
+    actLod.h
     actLodState.cpp
     actLodState.h
     actModelCallback.cpp
@@ -154,7 +184,19 @@ target_sources(uking PRIVATE
     actPhysicsConstraints.h
     actPhysicsUserTag.cpp
     actPhysicsUserTag.h
+    actRagdollBlendWeight.cpp
+    actRagdollBlendWeight.h
+    actRagdollConfigList.cpp
+    actRagdollConfigList.h
+    actRagdollConfigResource.cpp
+    actRagdollConfigResource.h
+    actRecipe.cpp
+    actRecipe.h
+    actShop.cpp
+    actShop.h
     actTag.h
+    actUMii.cpp
+    actUMii.h
 
     actionDemoGetItem.cpp
     actionDemoGetItem.h

@@ -49,50 +49,8 @@ target_sources(uking PRIVATE
   resResourceGameSaveData.cpp
   resResourceGameSaveData.h
 
-  Actor/resResourceActorCapture.cpp
-  Actor/resResourceActorCapture.h
-  Actor/resResourceAISchedule.cpp
-  Actor/resResourceAISchedule.h
-  Actor/resResourceAnimInfo.cpp
-  Actor/resResourceAnimInfo.h
-  Actor/resResourceASResource.cpp
-  Actor/resResourceASResource.h
-  Actor/resResourceASResourceExtension.h
-  Actor/resResourceASSetting.cpp
-  Actor/resResourceASSetting.h
-  Actor/resResourceASSettingMgr.h
-  Actor/resResourceAttCheck.cpp
-  Actor/resResourceAttCheck.h
-  Actor/resResourceAttClient.cpp
-  Actor/resResourceAttClient.h
-  Actor/resResourceAttPos.cpp
-  Actor/resResourceAttPos.h
-  Actor/resResourceAwareness.cpp
-  Actor/resResourceAwareness.h
-  Actor/resResourceBoneControl.cpp
-  Actor/resResourceBoneControl.h
   Actor/resResourceChemical.cpp
   Actor/resResourceChemical.h
-  Actor/resResourceDamageParam.cpp
-  Actor/resResourceDamageParam.h
-  Actor/resResourceDrop.cpp
-  Actor/resResourceDrop.h
-  Actor/resResourceLifeCondition.cpp
-  Actor/resResourceLifeCondition.h
-  Actor/resResourceLod.cpp
-  Actor/resResourceLod.h
-  Actor/resResourceRagdollBlendWeight.cpp
-  Actor/resResourceRagdollBlendWeight.h
-  Actor/resResourceRagdollConfig.cpp
-  Actor/resResourceRagdollConfig.h
-  Actor/resResourceRagdollConfigList.cpp
-  Actor/resResourceRagdollConfigList.h
-  Actor/resResourceRecipe.cpp
-  Actor/resResourceRecipe.h
-  Actor/resResourceShop.cpp
-  Actor/resResourceShop.h
-  Actor/resResourceUMii.cpp
-  Actor/resResourceUMii.h
 
   Event/resDemoASLoader.cpp
   Event/resDemoASLoader.h

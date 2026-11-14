@@ -1,10 +1,10 @@
 #include "KingSystem/Physics/System/physInstanceSet.h"
+#include "KingSystem/ActorSystem/actRagdollBlendWeight.h"
 #include "KingSystem/Physics/CharacterController/physCharacterController.h"
 #include "KingSystem/Physics/Ragdoll/physRagdollInstance.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodySet.h"
 #include "KingSystem/Physics/System/physCollisionInfo.h"
 #include "KingSystem/Physics/System/physContactPointInfo.h"
-#include "KingSystem/Resource/Actor/resResourceRagdollBlendWeight.h"
 
 namespace ksys::phys {
 

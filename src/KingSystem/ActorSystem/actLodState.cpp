@@ -2,11 +2,11 @@
 #include "KingSystem/ActorSystem/actActor.h"
 #include "KingSystem/ActorSystem/actActorParam.h"
 #include "KingSystem/ActorSystem/actActorUtil.h"
+#include "KingSystem/ActorSystem/actLod.h"
 #include "KingSystem/Graphics/gfxOcclusionQueryCylinder.h"
 #include "KingSystem/Map/mapPlacementAreaMgr.h"
 #include "KingSystem/Map/mapPlacementMgr.h"
 #include "KingSystem/Map/mapPreActor.h"
-#include "KingSystem/Resource/Actor/resResourceLod.h"
 
 namespace ksys::act {
 
