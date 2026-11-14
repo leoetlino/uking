@@ -97869,7 +97869,7 @@ Address,Quality,Size,Name
 0x0000007101317d3c,U,000348,ksys::as::Blender::calcBoneMtx
 0x0000007101317e98,U,000056,ksys::as::Blender::getValue
 0x0000007101317ed0,U,000484,ksys::as::Blender::calcBlendIndices
-0x00000071013180b4,U,000012,
+0x00000071013180b4,U,000012,_ZN4ksys2as7Blender26getBlendRatioSnapThresholdEv
 0x00000071013180c0,U,000240,ksys::as::Blender::getHeaviestSkeletalAnimSlot
 0x00000071013181b0,U,000232,ksys::as::Blender::getMaterialAnimSlot
 0x0000007101318298,U,000392,ksys::as::Blender::addWeightedMotionScale
