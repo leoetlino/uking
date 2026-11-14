@@ -82358,10 +82358,10 @@ Address,Quality,Size,Name
 0x0000007100f42bd0,U,000432,_ZN4sead11TreeMapImplINS_14TreeMapKeyImplINS_14SafeStringBaseIcEEEEE6insertEPNS_11TreeMapNodeIS4_EES8_
 0x0000007100f42d80,U,000312,_ZNK4sead14TreeMapKeyImplINS_14SafeStringBaseIcEEE7compareERKS3_
 0x0000007100f42eb8,U,000004,_ZN4sead9SafeArrayINS_15FixedSafeStringILi64EEELi8EED2Ev
-0x0000007100f42ebc,U,002368,ksys::act::Actor::shouldResetAtSystemReset
-0x0000007100f437fc,U,003812,ksys::act::deleteAllActors
-0x0000007100f446e0,U,000480,ksys::act::restoreActorsAfterDeleteAllActorsEvent
-0x0000007100f448c0,U,000436,ksys::act::areAllActorsDeletedForReset
+0x0000007100f42ebc,U,002368,ksys::shouldResetActorAtSystemReset
+0x0000007100f437fc,U,003812,ksys::deleteAllActors
+0x0000007100f446e0,U,000480,ksys::restoreActorsAfterDeleteAllActorsEvent
+0x0000007100f448c0,U,000436,ksys::areAllActorsDeletedForReset
 0x0000007100f44a74,U,000100,sinitResetActorStrings
 0x0000007100f44ad8,O,000004,_ZN4ksys3map9MubinIterC1Ev
 0x0000007100f44adc,O,000004,_ZN4ksys3map9MubinIterC1EPKh
