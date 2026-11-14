@@ -1,14 +1,14 @@
-#include "Game/AOC/aocChampionBalladManager.h"
+#include "Game/SiteBossRematchMgr.h"
 
-namespace uking::aoc {
+namespace uking {
 
-SEAD_SINGLETON_DISPOSER_IMPL(ChampionBalladManager)
+SEAD_SINGLETON_DISPOSER_IMPL(SiteBossRematchMgr)
 
-void ChampionBalladManager::init() {
+void SiteBossRematchMgr::init() {
     mBlightCounts = {};
 }
 
-void ChampionBalladManager::setBlightRematchCount(s8 count, BlightType blight_type) {
+void SiteBossRematchMgr::setBlightRematchCount(s8 count, BlightType blight_type) {
     if (count >= 0 && blight_type <= BlightType::Water) {
         if (count >= 30) {
             count = 30;
@@ -17,16 +17,16 @@ void ChampionBalladManager::setBlightRematchCount(s8 count, BlightType blight_ty
     }
 }
 
-void ChampionBalladManager::incrementBlightRematchCount(BlightType blight_type) {
+void SiteBossRematchMgr::incrementBlightRematchCount(BlightType blight_type) {
     if (blight_type <= BlightType::Water) {
         s8 count = mBlightCounts[u32(blight_type)] + 1;
         setBlightRematchCount(count, blight_type);
     }
 }
 
-s8 ChampionBalladManager::getBlightRematchCount(BlightType blight_type) const {
+s8 SiteBossRematchMgr::getBlightRematchCount(BlightType blight_type) const {
     if (blight_type <= BlightType::Water)
         return mBlightCounts[u32(blight_type)];
     return 0;
 }
-}  // namespace uking::aoc
+}  // namespace uking

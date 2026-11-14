@@ -28,6 +28,8 @@ target_sources(uking PRIVATE
   gdtCommonFlagsHandleDefs.inc
   NXArgs.cpp
   NXArgs.h
+  SiteBossRematchMgr.cpp
+  SiteBossRematchMgr.h
   SystemPauseMgr.cpp
   SystemPauseMgr.h
 )

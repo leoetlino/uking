@@ -4,14 +4,14 @@
 #include <container/seadSafeArray.h>
 #include <heap/seadDisposer.h>
 
-namespace uking::aoc {
+namespace uking {
 
 enum class BlightType : u32 { Wind, Electric, Fire, Water };
 
-class ChampionBalladManager {
-    SEAD_SINGLETON_DISPOSER(ChampionBalladManager)
-    ChampionBalladManager() = default;
-    virtual ~ChampionBalladManager() = default;
+class SiteBossRematchMgr {
+    SEAD_SINGLETON_DISPOSER(SiteBossRematchMgr)
+    SiteBossRematchMgr() = default;
+    virtual ~SiteBossRematchMgr() = default;
 
 public:
     void init();
@@ -23,4 +23,4 @@ private:
     sead::SafeArray<u8, 4> mBlightCounts;
 };
 
-}  // namespace uking::aoc
+}  // namespace uking

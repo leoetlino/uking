@@ -1,5 +1,5 @@
 #include "Game/Actor/Action/actionCurseRRematchCount.h"
-#include "Game/AOC/aocChampionBalladManager.h"
+#include "Game/SiteBossRematchMgr.h"
 #include "KingSystem/GameData/gdtManager.h"
 
 namespace uking::action {
@@ -19,12 +19,12 @@ void CurseRRematchCount::loadParams_() {
 }
 
 bool CurseRRematchCount::oneShot_() {
-    auto* manager = aoc::ChampionBalladManager::instance();
+    auto* manager = SiteBossRematchMgr::instance();
     if (!manager)
         return false;
 
-    auto blight = aoc::BlightType(*mCurseRType_d);
-    if (blight > aoc::BlightType::Water)
+    auto blight = BlightType(*mCurseRType_d);
+    if (blight > BlightType::Water)
         return false;
 
     if (*mRematchCount_d == 0)
