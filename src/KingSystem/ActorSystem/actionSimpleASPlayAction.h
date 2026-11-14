@@ -1,15 +1,15 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAction.h"
-#include "KingSystem/ActorSystem/actionTurnToActorBase.h"
+#include "KingSystem/ActorSystem/actionSimpleASPlayActionBase.h"
 
 namespace ksys::act::ai {
 
-class TurnToActor : public TurnToActorBase {
-    SEAD_RTTI_OVERRIDE(TurnToActor, TurnToActorBase)
+class SimpleASPlayAction : public SimpleASPlayActionBase {
+    SEAD_RTTI_OVERRIDE(SimpleASPlayAction, SimpleASPlayActionBase)
 public:
-    explicit TurnToActor(const InitArg& arg);
-    ~TurnToActor() override;
+    explicit SimpleASPlayAction(const InitArg& arg);
+    ~SimpleASPlayAction() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(InlineParamPack* params) override;

@@ -2,30 +2,30 @@
 
 namespace uking::action {
 
-DemoTurnToActor::DemoTurnToActor(const InitArg& arg) : TurnToActor(arg) {}
+DemoTurnToActor::DemoTurnToActor(const InitArg& arg) : SimpleASPlayAction(arg) {}
 
 DemoTurnToActor::~DemoTurnToActor() = default;
 
 bool DemoTurnToActor::init_(sead::Heap* heap) {
-    return TurnToActor::init_(heap);
+    return SimpleASPlayAction::init_(heap);
 }
 
 void DemoTurnToActor::enter_(ksys::act::ai::InlineParamPack* params) {
-    TurnToActor::enter_(params);
+    SimpleASPlayAction::enter_(params);
 }
 
 void DemoTurnToActor::leave_() {
-    TurnToActor::leave_();
+    SimpleASPlayAction::leave_();
 }
 
 void DemoTurnToActor::loadParams_() {
-    TurnToActor::loadParams_();
+    SimpleASPlayAction::loadParams_();
     getDynamicParam(&mActorName_d, "ActorName");
     getDynamicParam(&mUniqueName_d, "UniqueName");
 }
 
 void DemoTurnToActor::calc_() {
-    TurnToActor::calc_();
+    SimpleASPlayAction::calc_();
 }
 
 }  // namespace uking::action

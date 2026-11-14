@@ -4,11 +4,11 @@
 
 namespace ksys::act::ai {
 
-class TurnToActorBase : public Action {
-    SEAD_RTTI_OVERRIDE(TurnToActorBase, Action)
+class SimpleASPlayActionBase : public Action {
+    SEAD_RTTI_OVERRIDE(SimpleASPlayActionBase, Action)
 public:
-    explicit TurnToActorBase(const InitArg& arg);
-    ~TurnToActorBase() override;
+    explicit SimpleASPlayActionBase(const InitArg& arg);
+    ~SimpleASPlayActionBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(InlineParamPack* params) override;

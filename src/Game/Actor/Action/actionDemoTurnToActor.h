@@ -1,12 +1,12 @@
 #pragma once
 
 #include "KingSystem/ActorSystem/actAiAction.h"
-#include "KingSystem/ActorSystem/actionTurnToActor.h"
+#include "KingSystem/ActorSystem/actionSimpleASPlayAction.h"
 
 namespace uking::action {
 
-class DemoTurnToActor : public ksys::act::ai::TurnToActor {
-    SEAD_RTTI_OVERRIDE(DemoTurnToActor, ksys::act::ai::TurnToActor)
+class DemoTurnToActor : public ksys::act::ai::SimpleASPlayAction {
+    SEAD_RTTI_OVERRIDE(DemoTurnToActor, ksys::act::ai::SimpleASPlayAction)
 public:
     explicit DemoTurnToActor(const InitArg& arg);
     ~DemoTurnToActor() override;

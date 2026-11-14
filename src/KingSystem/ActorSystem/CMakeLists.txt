@@ -124,14 +124,14 @@ target_sources(uking PRIVATE
     actionRandomMoveAction.h
     actionSendSignalAction.cpp
     actionSendSignalAction.h
+    actionSimpleASPlayAction.cpp
+    actionSimpleASPlayAction.h
+    actionSimpleASPlayActionBase.cpp
+    actionSimpleASPlayActionBase.h
     actionSimpleOpenMessageDialogAction.cpp
     actionSimpleOpenMessageDialogAction.h
     actionTestAction.cpp
     actionTestAction.h
-    actionTurnToActor.cpp
-    actionTurnToActor.h
-    actionTurnToActorBase.cpp
-    actionTurnToActorBase.h
     actionUpdateDataByGetDemoAction.cpp
     actionUpdateDataByGetDemoAction.h
     actionXLinkEventCreateAction.cpp
