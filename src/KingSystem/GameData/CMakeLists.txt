@@ -2,6 +2,8 @@ target_sources(uking PRIVATE
   gdtFlag.cpp
   gdtFlag.h
   gdtFlagHandle.h
+  gdtFlagIncreaseQueue.cpp
+  gdtFlagIncreaseQueue.h
   gdtFlagProxy.h
   gdtFlagUtils.h
   gdtManager.cpp

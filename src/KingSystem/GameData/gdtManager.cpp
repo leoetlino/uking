@@ -83,7 +83,7 @@ void Manager::init(sead::Heap* heap, sead::Framework* framework) {
 
     mGameDataHeap = util::DualHeap::create(0xf00000, "GameDataHeap", heap, nullptr, sizeof(void*),
                                            sead::Heap::cHeapDirection_Forward, true);
-    mDeferredFlagWriter = new (mGameDataHeap) DeferredFlagWriter;
+    mFlagIncreaseQueue = new (mGameDataHeap) FlagIncreaseQueue;
     SaveMgr::createInstance(mGameDataHeap);
 
     SaveMgr::InitArg arg;
@@ -556,8 +556,8 @@ void Manager::incrementS32NoCheck(s32 value, const sead::SafeString& name) {
         s32 current = 0;
         if (getParamBypassPerm().get().getS32(&current, name))
             setS32NoCheck(current + value, name);
-    } else if (mDeferredFlagWriter) {
-        mDeferredFlagWriter->addRecord(value, name, -1, true);
+    } else if (mFlagIncreaseQueue) {
+        mFlagIncreaseQueue->addRecord(value, name, -1, true);
     }
 }
 
@@ -569,23 +569,9 @@ void Manager::incrementS32(s32 value, const sead::SafeString& name) {
         s32 current = 0;
         if (getParam().get().getS32(&current, name))
             setS32(current + value, name);
-    } else if (mDeferredFlagWriter) {
-        mDeferredFlagWriter->addRecord(value, name, -1, false);
+    } else if (mFlagIncreaseQueue) {
+        mFlagIncreaseQueue->addRecord(value, name, -1, false);
     }
-}
-
-void Manager::DeferredFlagWriter::addRecord(s32 value, const sead::SafeString& name, s32 sub_idx,
-                                            bool debug) {
-    const u32 name_hash = sead::HashCRC32::calcStringHash(name);
-    const auto core = sead::CoreInfo::getCurrentCoreId();
-    const u32 platform_core_id = sead::CoreInfo::getPlatformCoreId(core);
-
-    Record record;
-    record.debug = debug;
-    record.name_hash = name_hash;
-    record.sub_idx = sub_idx;
-    record.value = value;
-    ring_buffers[0][platform_core_id].pushBack(record);
 }
 
 bool Manager::wasFlagCopied(const sead::SafeString& name) {

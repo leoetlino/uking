@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Byaml/Byaml.h>
-#include <container/seadRingBuffer.h>
 #include <container/seadSafeArray.h>
 #include <filedevice/seadArchiveFileDevice.h>
 #include <framework/seadMethodTree.h>
@@ -11,9 +10,9 @@
 #include <thread/seadMutex.h>
 #include <type_traits>
 #include "KingSystem/GameData/gdtFlagHandle.h"
+#include "KingSystem/GameData/gdtFlagIncreaseQueue.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/System/CoreInfo.h"
 #include "KingSystem/System/KingEditor.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -485,10 +484,10 @@ public:
     void incrementS32(s32 value, const sead::SafeString& name);
 
     void increaseS32CommonFlag(s32 value, const sead::SafeString& name, s32 sub_idx, bool debug) {
-        if (!mDeferredFlagWriter)
+        if (!mFlagIncreaseQueue)
             return;
 
-        mDeferredFlagWriter->addRecord(value, name, sub_idx, debug);
+        mFlagIncreaseQueue->addRecord(value, name, sub_idx, debug);
         if (debug)
             onChangedByDebug();
     }
@@ -556,22 +555,6 @@ private:
         virtual ~MethodTreeNode() = default;
         sead::MethodTreeNode node{nullptr};
         sead::MethodTreeMgr* method_tree_mgr = nullptr;
-    };
-
-    struct DeferredFlagWriter {
-        struct Record {
-            bool debug = false;
-            u32 name_hash = 0;
-            s32 sub_idx = -1;
-            s32 value = 0;
-        };
-        KSYS_CHECK_SIZE_NX150(Record, 0x10);
-
-        void addRecord(s32 value, const sead::SafeString& name, s32 sub_idx, bool debug);
-
-        u64 counts = 0;
-        sead::SafeArray<sead::FixedRingBuffer<Record, 64>, NumCores> ring_buffers[2];
-        sead::SafeArray<Record, 0xc0> arrays[2]{};
     };
 
     static FlagHandle makeFlagHandle(u32 prefix, s32 idx) {
@@ -650,7 +633,7 @@ private:
     TriggerParamRef mParamBypassPerm{&mFlagBuffer1, &mFlagBuffer, false, false, false};
     TriggerParamRef mParam{&mFlagBuffer1, &mFlagBuffer, true, false, false};
 
-    DeferredFlagWriter* mDeferredFlagWriter = nullptr;
+    FlagIncreaseQueue* mFlagIncreaseQueue = nullptr;
 
     TriggerParam* mFlagBuffer1;
     TriggerParam* mFlagBuffer;
