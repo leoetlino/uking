@@ -4,8 +4,8 @@
 #include "KingSystem/ActorSystem/actBaseProcCreateTaskSelector.h"
 #include "KingSystem/ActorSystem/actBaseProcInitializer.h"
 #include "KingSystem/ActorSystem/actBaseProcMgr.h"
-#include "KingSystem/System/BasicProfiler.h"
 #include "KingSystem/System/HavokWorkerMgr.h"
+#include "KingSystem/System/Profiler.h"
 #include "KingSystem/System/UI/LayoutResourceMgr.h"
 
 namespace ksys {
@@ -32,12 +32,12 @@ void initBaseProcMgr(sead::Heap* heap) {
 }
 
 void preInitializeApp(const InitParams& params) {
-    ksys::BasicProfiler::Scope profiler_scope("ksys::PreInitializeApp");
+    ksys::Profiler::Scope profiler_scope("ksys::PreInitializeApp");
 
     // TODO - other parts
 
     {
-        ksys::BasicProfiler::Scope profiler_scope("RequestFontLoad");
+        ksys::Profiler::Scope profiler_scope("RequestFontLoad");
         // TODO: FontMgr::createInstance()
         ui::LayoutResourceMgr::createInstance(params.king_sys_heap);
         ui::LayoutResourceMgr::instance()->init(params.king_sys_heap);

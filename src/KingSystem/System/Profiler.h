@@ -2,7 +2,7 @@
 
 namespace ksys {
 
-class BasicProfiler {
+class Profiler {
 public:
     class Scope {
     public:

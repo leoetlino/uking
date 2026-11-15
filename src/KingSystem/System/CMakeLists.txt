@@ -6,8 +6,6 @@ target_sources(uking PRIVATE
 
     AutoDim.cpp
     AutoDim.h
-    BasicProfiler.cpp
-    BasicProfiler.h
     CameraEditor.cpp
     CameraEditor.h
     CoreInfo.h
@@ -29,6 +27,8 @@ target_sources(uking PRIVATE
     OverlayArena.h
     Patrol.cpp
     Patrol.h
+    Profiler.cpp
+    Profiler.h
     Revision.cpp
     Revision.h
     StringBoard.h

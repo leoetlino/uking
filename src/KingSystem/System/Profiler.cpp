@@ -1,4 +1,4 @@
-#include "KingSystem/System/BasicProfiler.h"
+#include "KingSystem/System/Profiler.h"
 #include <container/seadObjList.h>
 #include <devenv/seadEnvUtil.h>
 #include <prim/seadSafeString.h>
@@ -25,13 +25,13 @@ ProfilerInitInfo sProfilerInitInfo;
 sead::Atomic<bool> sProfilerUnusedBool = true;
 sead::FixedObjList<ProfilerRecord, 10> sProfilerRecords;
 
-void BasicProfiler::push(const char* description) {
+void Profiler::push(const char* description) {
     auto* record = sProfilerRecords.emplaceBack();
     record->enter_time->setNow();
     record->description = description;
 }
 
-void BasicProfiler::pop(const char* description) {
+void Profiler::pop(const char* description) {
     if (sProfilerRecords.isEmpty())
         return;
 
