@@ -17,22 +17,22 @@ public:
 
     virtual void init();
     // Resume resource compaction
-    virtual void m3();
-    virtual void m4();
+    virtual void onReleaseForegroundForShutdown();
+    virtual void prepareShutdown();
     // Resume resource compaction + EventMgr
-    virtual void m5();
+    virtual void onReleaseForeground();
     // Stop threads, clear cache, etc.
-    virtual void m6();
-    virtual bool m7();
-    virtual void m8();
-    virtual void m9();
+    virtual void prepareDestroy();
+    virtual bool destroy();
+    virtual void restore();
+    virtual void waitForRestore();
     // Does nothing
-    virtual void m10();
-    virtual bool m11();
-    virtual void m12();
-    virtual void m13();
+    virtual void finishRestore();
+    virtual bool enterMovieMode();
+    virtual void leaveMovieMode();
+    virtual void waitForLeaveMovieMode();
     // Does nothing
-    virtual void m14();
+    virtual void finishLeaveMovieMode();
 };
 KSYS_CHECK_SIZE_NX150(CoordinatorForOverlayArena, 0x8);
 

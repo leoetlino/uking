@@ -10,19 +10,19 @@ public:
     OverlayArenaCoordinator();
     ~OverlayArenaCoordinator() override;
 
-    void m2() override;
-    void waitForOnUiActorMgrAndBlockSaveMaybe() override;
-    void stopNfpAndWaitForSaveMgr() override;
-    void waitForOnUiActorMgr() override;
-    void pauseGameSceneAndWait() override;
-    bool releaseScreensAndShowMainLayer() override;
-    void onSystemPauseResume() override;
-    void waitForStageGenFinalStep() override;
-    void restoreMainLayerAndResumeGameScene() override;
-    bool hideMainLayer() override;
-    void openFadeScreen() override;
-    void showMainLayerAndPauseProcJobs() override;
-    void clearHideMainLayerAndResumeEvents() override;
+    void init() override;
+    void onReleaseForegroundForShutdown() override;
+    void prepareShutdown() override;
+    void onReleaseForeground() override;
+    void prepareDestroy() override;
+    bool destroy() override;
+    void restore() override;
+    void waitForRestore() override;
+    void finishRestore() override;
+    bool enterMovieMode() override;
+    void leaveMovieMode() override;
+    void waitForLeaveMovieMode() override;
+    void finishLeaveMovieMode() override;
 
     bool wasMainLayerVisible() const { return mMainLayerWasVisible; }
 

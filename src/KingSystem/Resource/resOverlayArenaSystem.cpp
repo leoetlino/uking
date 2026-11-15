@@ -118,7 +118,7 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
 
     if (mGameCoordinator) {
         res::stubbedLogFunction();
-        mGameCoordinator->m2();
+        mGameCoordinator->init();
         res::stubbedLogFunction();
     }
 

@@ -27,19 +27,19 @@ class IOverlayArenaCoordinator {
 public:
     virtual ~IOverlayArenaCoordinator() = default;
 
-    virtual void m2() = 0;
-    virtual void waitForOnUiActorMgrAndBlockSaveMaybe() = 0;
-    virtual void stopNfpAndWaitForSaveMgr() = 0;
-    virtual void waitForOnUiActorMgr() = 0;
-    virtual void pauseGameSceneAndWait() = 0;
-    virtual bool releaseScreensAndShowMainLayer() = 0;
-    virtual void onSystemPauseResume() = 0;
-    virtual void waitForStageGenFinalStep() = 0;
-    virtual void restoreMainLayerAndResumeGameScene() = 0;
-    virtual bool hideMainLayer() = 0;
-    virtual void openFadeScreen() = 0;
-    virtual void showMainLayerAndPauseProcJobs() = 0;
-    virtual void clearHideMainLayerAndResumeEvents() = 0;
+    virtual void init() = 0;
+    virtual void onReleaseForegroundForShutdown() = 0;
+    virtual void prepareShutdown() = 0;
+    virtual void onReleaseForeground() = 0;
+    virtual void prepareDestroy() = 0;
+    virtual bool destroy() = 0;
+    virtual void restore() = 0;
+    virtual void waitForRestore() = 0;
+    virtual void finishRestore() = 0;
+    virtual bool enterMovieMode() = 0;
+    virtual void leaveMovieMode() = 0;
+    virtual void waitForLeaveMovieMode() = 0;
+    virtual void finishLeaveMovieMode() = 0;
 };
 
 // FIXME: incomplete
