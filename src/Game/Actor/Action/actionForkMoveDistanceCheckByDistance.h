@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkMoveDistanceCheckByDistance : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkMoveDistanceCheckByDistance, Fork)
+class ForkMoveDistanceCheckByDistance : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkMoveDistanceCheckByDistance, ForkSetEndState)
 public:
     explicit ForkMoveDistanceCheckByDistance(const InitArg& arg);
     ~ForkMoveDistanceCheckByDistance() override;

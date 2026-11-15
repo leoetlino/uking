@@ -2,6 +2,6 @@
 
 namespace uking::action {
 
-CameraEventIdling::CameraEventIdling(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventIdling::CameraEventIdling(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 }  // namespace uking::action

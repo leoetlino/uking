@@ -2,24 +2,25 @@
 
 namespace uking::action {
 
-ForkSwapPartsItemFromDropTable::ForkSwapPartsItemFromDropTable(const InitArg& arg) : Fork(arg) {}
+ForkSwapPartsItemFromDropTable::ForkSwapPartsItemFromDropTable(const InitArg& arg)
+    : ForkSetEndState(arg) {}
 
 ForkSwapPartsItemFromDropTable::~ForkSwapPartsItemFromDropTable() = default;
 
 bool ForkSwapPartsItemFromDropTable::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkSwapPartsItemFromDropTable::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkSwapPartsItemFromDropTable::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkSwapPartsItemFromDropTable::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mPartsKey0_s, "PartsKey0");
     getStaticParam(&mPartsKey1_s, "PartsKey1");
     getStaticParam(&mPartsKey2_s, "PartsKey2");
@@ -28,7 +29,7 @@ void ForkSwapPartsItemFromDropTable::loadParams_() {
 }
 
 void ForkSwapPartsItemFromDropTable::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

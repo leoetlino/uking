@@ -2,26 +2,26 @@
 
 namespace uking::action {
 
-TargetCircleGuardWalk::TargetCircleGuardWalk(const InitArg& arg) : TargetCircle(arg) {}
+TargetCircleGuardWalk::TargetCircleGuardWalk(const InitArg& arg) : TargetCircleMove(arg) {}
 
 bool TargetCircleGuardWalk::init_(sead::Heap* heap) {
-    return TargetCircle::init_(heap);
+    return TargetCircleMove::init_(heap);
 }
 
 void TargetCircleGuardWalk::enter_(ksys::act::ai::InlineParamPack* params) {
-    TargetCircle::enter_(params);
+    TargetCircleMove::enter_(params);
 }
 
 void TargetCircleGuardWalk::leave_() {
-    TargetCircle::leave_();
+    TargetCircleMove::leave_();
 }
 
 void TargetCircleGuardWalk::loadParams_() {
-    TargetCircle::loadParams_();
+    TargetCircleMove::loadParams_();
 }
 
 void TargetCircleGuardWalk::calc_() {
-    TargetCircle::calc_();
+    TargetCircleMove::calc_();
 }
 
 }  // namespace uking::action

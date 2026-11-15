@@ -2,29 +2,29 @@
 
 namespace uking::action {
 
-ForkLodTimer::ForkLodTimer(const InitArg& arg) : Fork(arg) {}
+ForkLodTimer::ForkLodTimer(const InitArg& arg) : ForkSetEndState(arg) {}
 
 ForkLodTimer::~ForkLodTimer() = default;
 
 bool ForkLodTimer::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkLodTimer::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkLodTimer::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkLodTimer::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mWaitFrame_s, "WaitFrame");
 }
 
 void ForkLodTimer::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

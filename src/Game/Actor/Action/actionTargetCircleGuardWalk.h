@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionTargetCircle.h"
+#include "Game/Actor/Action/actionTargetCircleMove.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class TargetCircleGuardWalk : public TargetCircle {
-    SEAD_RTTI_OVERRIDE(TargetCircleGuardWalk, TargetCircle)
+class TargetCircleGuardWalk : public TargetCircleMove {
+    SEAD_RTTI_OVERRIDE(TargetCircleGuardWalk, TargetCircleMove)
 public:
     explicit TargetCircleGuardWalk(const InitArg& arg);
 

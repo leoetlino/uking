@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventGameOver::CameraEventGameOver(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventGameOver::CameraEventGameOver(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventGameOver::~CameraEventGameOver() = default;
 

@@ -13,8 +13,6 @@ target_sources(uking PRIVATE
   actionCameraClimbObj.h
   actionCameraEdit.cpp
   actionCameraEdit.h
-  actionCameraEvent.cpp
-  actionCameraEvent.h
   actionCameraEventAnim.cpp
   actionCameraEventAnim.h
   actionCameraEventAnimBase.cpp
@@ -29,6 +27,8 @@ target_sources(uking PRIVATE
   actionCameraEventAnimFlowForMapTower.h
   actionCameraEventConnectTypeSpecify.cpp
   actionCameraEventConnectTypeSpecify.h
+  actionCameraEventDefaultBase.cpp
+  actionCameraEventDefaultBase.h
   actionCameraEventFocusDistSetting.cpp
   actionCameraEventFocusDistSetting.h
   actionCameraEventGameOver.cpp

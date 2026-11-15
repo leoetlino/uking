@@ -1,34 +1,34 @@
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 
 namespace uking::action {
 
-Fork::Fork(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+ForkSetEndState::ForkSetEndState(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
-Fork::~Fork() = default;
+ForkSetEndState::~ForkSetEndState() = default;
 
-bool Fork::init_(sead::Heap* heap) {
+bool ForkSetEndState::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void Fork::enter_(ksys::act::ai::InlineParamPack* params) {
+void ForkSetEndState::enter_(ksys::act::ai::InlineParamPack* params) {
     if (*mIsChangeable_s)
         mFlags.set(Flag::Changeable);
 }
 
-void Fork::leave_() {
+void ForkSetEndState::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void Fork::loadParams_() {
+void ForkSetEndState::loadParams_() {
     getStaticParam(&mEndState_s, "EndState");
     getStaticParam(&mIsChangeable_s, "IsChangeable");
 }
 
-void Fork::calc_() {
+void ForkSetEndState::calc_() {
     ksys::act::ai::Action::calc_();
 }
 
-void Fork::setEndState() {
+void ForkSetEndState::setEndState() {
     switch (*mEndState_s) {
     case 0:
         setFinished();

@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventMove::CameraEventMove(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventMove::CameraEventMove(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventMove::~CameraEventMove() = default;
 

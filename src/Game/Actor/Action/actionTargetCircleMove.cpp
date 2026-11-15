@@ -1,24 +1,24 @@
-#include "Game/Actor/Action/actionTargetCircle.h"
+#include "Game/Actor/Action/actionTargetCircleMove.h"
 
 namespace uking::action {
 
-TargetCircle::TargetCircle(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+TargetCircleMove::TargetCircleMove(const InitArg& arg) : ksys::act::ai::Action(arg) {}
 
-TargetCircle::~TargetCircle() = default;
+TargetCircleMove::~TargetCircleMove() = default;
 
-bool TargetCircle::init_(sead::Heap* heap) {
+bool TargetCircleMove::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void TargetCircle::enter_(ksys::act::ai::InlineParamPack* params) {
+void TargetCircleMove::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void TargetCircle::leave_() {
+void TargetCircleMove::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void TargetCircle::loadParams_() {
+void TargetCircleMove::loadParams_() {
     getStaticParam(&mSpeed_s, "Speed");
     getStaticParam(&mRotSpd_s, "RotSpd");
     getStaticParam(&mRotDist_s, "RotDist");
@@ -26,7 +26,7 @@ void TargetCircle::loadParams_() {
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }
 
-void TargetCircle::calc_() {
+void TargetCircleMove::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

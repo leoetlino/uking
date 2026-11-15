@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkModelVisibleOff : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkModelVisibleOff, Fork)
+class ForkModelVisibleOff : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkModelVisibleOff, ForkSetEndState)
 public:
     explicit ForkModelVisibleOff(const InitArg& arg);
     ~ForkModelVisibleOff() override;

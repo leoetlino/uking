@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class Fork : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(Fork, ksys::act::ai::Action)
+class ForkSetEndState : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(ForkSetEndState, ksys::act::ai::Action)
 public:
-    explicit Fork(const InitArg& arg);
-    ~Fork() override;
+    explicit ForkSetEndState(const InitArg& arg);
+    ~ForkSetEndState() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

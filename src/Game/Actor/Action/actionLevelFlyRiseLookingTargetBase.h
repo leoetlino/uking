@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class LevelFlyLook : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(LevelFlyLook, ksys::act::ai::Action)
+class LevelFlyRiseLookingTargetBase : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(LevelFlyRiseLookingTargetBase, ksys::act::ai::Action)
 public:
-    explicit LevelFlyLook(const InitArg& arg);
-    ~LevelFlyLook() override;
+    explicit LevelFlyRiseLookingTargetBase(const InitArg& arg);
+    ~LevelFlyRiseLookingTargetBase() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

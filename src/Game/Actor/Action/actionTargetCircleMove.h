@@ -4,11 +4,11 @@
 
 namespace uking::action {
 
-class TargetCircle : public ksys::act::ai::Action {
-    SEAD_RTTI_OVERRIDE(TargetCircle, ksys::act::ai::Action)
+class TargetCircleMove : public ksys::act::ai::Action {
+    SEAD_RTTI_OVERRIDE(TargetCircleMove, ksys::act::ai::Action)
 public:
-    explicit TargetCircle(const InitArg& arg);
-    ~TargetCircle() override;
+    explicit TargetCircleMove(const InitArg& arg);
+    ~TargetCircleMove() override;
 
     bool init_(sead::Heap* heap) override;
     void enter_(ksys::act::ai::InlineParamPack* params) override;

@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventLookBase::CameraEventLookBase(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventLookBase::CameraEventLookBase(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventLookBase::~CameraEventLookBase() = default;
 

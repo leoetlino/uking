@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkSwapPartsItemFromDropTable : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkSwapPartsItemFromDropTable, Fork)
+class ForkSwapPartsItemFromDropTable : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkSwapPartsItemFromDropTable, ForkSetEndState)
 public:
     explicit ForkSwapPartsItemFromDropTable(const InitArg& arg);
     ~ForkSwapPartsItemFromDropTable() override;

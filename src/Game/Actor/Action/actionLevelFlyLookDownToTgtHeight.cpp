@@ -2,28 +2,29 @@
 
 namespace uking::action {
 
-LevelFlyLookDownToTgtHeight::LevelFlyLookDownToTgtHeight(const InitArg& arg) : LevelFlyLook(arg) {}
+LevelFlyLookDownToTgtHeight::LevelFlyLookDownToTgtHeight(const InitArg& arg)
+    : LevelFlyRiseLookingTargetBase(arg) {}
 
 LevelFlyLookDownToTgtHeight::~LevelFlyLookDownToTgtHeight() = default;
 
 bool LevelFlyLookDownToTgtHeight::init_(sead::Heap* heap) {
-    return LevelFlyLook::init_(heap);
+    return LevelFlyRiseLookingTargetBase::init_(heap);
 }
 
 void LevelFlyLookDownToTgtHeight::enter_(ksys::act::ai::InlineParamPack* params) {
-    LevelFlyLook::enter_(params);
+    LevelFlyRiseLookingTargetBase::enter_(params);
 }
 
 void LevelFlyLookDownToTgtHeight::leave_() {
-    LevelFlyLook::leave_();
+    LevelFlyRiseLookingTargetBase::leave_();
 }
 
 void LevelFlyLookDownToTgtHeight::loadParams_() {
-    LevelFlyLook::loadParams_();
+    LevelFlyRiseLookingTargetBase::loadParams_();
 }
 
 void LevelFlyLookDownToTgtHeight::calc_() {
-    LevelFlyLook::calc_();
+    LevelFlyRiseLookingTargetBase::calc_();
 }
 
 }  // namespace uking::action

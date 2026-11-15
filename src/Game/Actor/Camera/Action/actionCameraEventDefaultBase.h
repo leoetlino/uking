@@ -5,10 +5,10 @@
 
 namespace uking::action {
 
-class CameraEvent : public CameraAction {
-    SEAD_RTTI_OVERRIDE(CameraEvent, CameraAction)
+class CameraEventDefaultBase : public CameraAction {
+    SEAD_RTTI_OVERRIDE(CameraEventDefaultBase, CameraAction)
 public:
-    explicit CameraEvent(const InitArg& arg);
+    explicit CameraEventDefaultBase(const InitArg& arg);
 
 protected:
 };

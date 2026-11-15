@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-ForkEndByDistance::ForkEndByDistance(const InitArg& arg) : Fork(arg) {}
+ForkEndByDistance::ForkEndByDistance(const InitArg& arg) : ForkSetEndState(arg) {}
 
 ForkEndByDistance::~ForkEndByDistance() = default;
 
 bool ForkEndByDistance::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkEndByDistance::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkEndByDistance::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkEndByDistance::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mWeaponIdx_s, "WeaponIdx");
     getStaticParam(&mEndMode_s, "EndMode");
     getStaticParam(&mEndDist_s, "EndDist");
@@ -28,7 +28,7 @@ void ForkEndByDistance::loadParams_() {
 }
 
 void ForkEndByDistance::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

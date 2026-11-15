@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventMovePosBase::CameraEventMovePosBase(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventMovePosBase::CameraEventMovePosBase(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventMovePosBase::~CameraEventMovePosBase() = default;
 

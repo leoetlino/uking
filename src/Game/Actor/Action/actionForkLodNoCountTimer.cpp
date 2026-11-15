@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-ForkLodNoCountTimer::ForkLodNoCountTimer(const InitArg& arg) : Fork(arg) {}
+ForkLodNoCountTimer::ForkLodNoCountTimer(const InitArg& arg) : ForkSetEndState(arg) {}
 
 ForkLodNoCountTimer::~ForkLodNoCountTimer() = default;
 
 bool ForkLodNoCountTimer::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkLodNoCountTimer::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkLodNoCountTimer::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkLodNoCountTimer::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mWaitFrame_s, "WaitFrame");
     getStaticParam(&mWaitFrameRand_s, "WaitFrameRand");
     getStaticParam(&mCamDist_s, "CamDist");
@@ -27,7 +27,7 @@ void ForkLodNoCountTimer::loadParams_() {
 }
 
 void ForkLodNoCountTimer::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

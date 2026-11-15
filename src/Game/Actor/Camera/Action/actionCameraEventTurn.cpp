@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventTurn::CameraEventTurn(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventTurn::CameraEventTurn(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventTurn::~CameraEventTurn() = default;
 

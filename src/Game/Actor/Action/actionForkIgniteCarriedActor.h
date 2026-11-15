@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkIgniteCarriedActor : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkIgniteCarriedActor, Fork)
+class ForkIgniteCarriedActor : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkIgniteCarriedActor, ForkSetEndState)
 public:
     explicit ForkIgniteCarriedActor(const InitArg& arg);
     ~ForkIgniteCarriedActor() override;

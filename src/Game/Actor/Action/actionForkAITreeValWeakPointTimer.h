@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkAITreeValWeakPointTimer : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkAITreeValWeakPointTimer, Fork)
+class ForkAITreeValWeakPointTimer : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkAITreeValWeakPointTimer, ForkSetEndState)
 public:
     explicit ForkAITreeValWeakPointTimer(const InitArg& arg);
     ~ForkAITreeValWeakPointTimer() override;

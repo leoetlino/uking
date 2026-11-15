@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Camera/Action/actionCameraEvent.h"
+#include "Game/Actor/Camera/Action/actionCameraEventDefaultBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class CameraEventMultiTalk : public CameraEvent {
-    SEAD_RTTI_OVERRIDE(CameraEventMultiTalk, CameraEvent)
+class CameraEventMultiTalk : public CameraEventDefaultBase {
+    SEAD_RTTI_OVERRIDE(CameraEventMultiTalk, CameraEventDefaultBase)
 public:
     explicit CameraEventMultiTalk(const InitArg& arg);
     ~CameraEventMultiTalk() override;

@@ -3,7 +3,7 @@
 namespace uking::action {
 
 CameraEventTalkManualCtrlBase::CameraEventTalkManualCtrlBase(const InitArg& arg)
-    : CameraEvent(arg) {}
+    : CameraEventDefaultBase(arg) {}
 
 CameraEventTalkManualCtrlBase::~CameraEventTalkManualCtrlBase() = default;
 

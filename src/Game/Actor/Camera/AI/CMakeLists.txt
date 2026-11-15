@@ -9,10 +9,10 @@ target_sources(uking PRIVATE
   aiCameraEvent.h
   aiCameraEventReturnSavePoint.cpp
   aiCameraEventReturnSavePoint.h
-  aiCameraEventTalk.cpp
-  aiCameraEventTalk.h
   aiCameraEventTalkAI.cpp
   aiCameraEventTalkAI.h
+  aiCameraEventTalkAIBase.cpp
+  aiCameraEventTalkAIBase.h
   aiCameraEventTalkAIRet.cpp
   aiCameraEventTalkAIRet.h
   aiCameraGameRoot.cpp

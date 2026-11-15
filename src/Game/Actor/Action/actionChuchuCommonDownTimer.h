@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ChuchuCommonDownTimer : public Fork {
-    SEAD_RTTI_OVERRIDE(ChuchuCommonDownTimer, Fork)
+class ChuchuCommonDownTimer : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ChuchuCommonDownTimer, ForkSetEndState)
 public:
     explicit ChuchuCommonDownTimer(const InitArg& arg);
     ~ChuchuCommonDownTimer() override;

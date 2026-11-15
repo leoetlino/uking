@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionLevelFlyLook.h"
+#include "Game/Actor/Action/actionLevelFlyRiseLookingTargetBase.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class LevelFlyLookDownToTgtHeight : public LevelFlyLook {
-    SEAD_RTTI_OVERRIDE(LevelFlyLookDownToTgtHeight, LevelFlyLook)
+class LevelFlyLookDownToTgtHeight : public LevelFlyRiseLookingTargetBase {
+    SEAD_RTTI_OVERRIDE(LevelFlyLookDownToTgtHeight, LevelFlyRiseLookingTargetBase)
 public:
     explicit LevelFlyLookDownToTgtHeight(const InitArg& arg);
     ~LevelFlyLookDownToTgtHeight() override;

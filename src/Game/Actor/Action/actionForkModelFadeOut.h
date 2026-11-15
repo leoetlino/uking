@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkModelFadeOut : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkModelFadeOut, Fork)
+class ForkModelFadeOut : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkModelFadeOut, ForkSetEndState)
 public:
     explicit ForkModelFadeOut(const InitArg& arg);
     ~ForkModelFadeOut() override;

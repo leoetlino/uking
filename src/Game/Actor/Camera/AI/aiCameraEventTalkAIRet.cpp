@@ -2,6 +2,6 @@
 
 namespace uking::ai {
 
-CameraEventTalkAIRet::CameraEventTalkAIRet(const InitArg& arg) : CameraEventTalk(arg) {}
+CameraEventTalkAIRet::CameraEventTalkAIRet(const InitArg& arg) : CameraEventTalkAIBase(arg) {}
 
 }  // namespace uking::ai

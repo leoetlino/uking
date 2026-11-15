@@ -2,30 +2,31 @@
 
 namespace uking::action {
 
-ForkAITreeValWeakPointTimer::ForkAITreeValWeakPointTimer(const InitArg& arg) : Fork(arg) {}
+ForkAITreeValWeakPointTimer::ForkAITreeValWeakPointTimer(const InitArg& arg)
+    : ForkSetEndState(arg) {}
 
 ForkAITreeValWeakPointTimer::~ForkAITreeValWeakPointTimer() = default;
 
 bool ForkAITreeValWeakPointTimer::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkAITreeValWeakPointTimer::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkAITreeValWeakPointTimer::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkAITreeValWeakPointTimer::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mTimer_s, "Timer");
     getAITreeVariable(&mWeakPointCounter_a, "WeakPointCounter");
 }
 
 void ForkAITreeValWeakPointTimer::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

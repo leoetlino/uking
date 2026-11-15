@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkAddCalcScaleMapUnit : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkAddCalcScaleMapUnit, Fork)
+class ForkAddCalcScaleMapUnit : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkAddCalcScaleMapUnit, ForkSetEndState)
 public:
     explicit ForkAddCalcScaleMapUnit(const InitArg& arg);
     ~ForkAddCalcScaleMapUnit() override;

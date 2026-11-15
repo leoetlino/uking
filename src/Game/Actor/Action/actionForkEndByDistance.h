@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkEndByDistance : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkEndByDistance, Fork)
+class ForkEndByDistance : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkEndByDistance, ForkSetEndState)
 public:
     explicit ForkEndByDistance(const InitArg& arg);
     ~ForkEndByDistance() override;

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class OnEnterSwapActorBase : public Fork {
-    SEAD_RTTI_OVERRIDE(OnEnterSwapActorBase, Fork)
+class OnEnterSwapActorBase : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(OnEnterSwapActorBase, ForkSetEndState)
 public:
     explicit OnEnterSwapActorBase(const InitArg& arg);
     ~OnEnterSwapActorBase() override;

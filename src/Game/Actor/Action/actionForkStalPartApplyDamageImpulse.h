@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkStalPartApplyDamageImpulse : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkStalPartApplyDamageImpulse, Fork)
+class ForkStalPartApplyDamageImpulse : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkStalPartApplyDamageImpulse, ForkSetEndState)
 public:
     explicit ForkStalPartApplyDamageImpulse(const InitArg& arg);
     ~ForkStalPartApplyDamageImpulse() override;

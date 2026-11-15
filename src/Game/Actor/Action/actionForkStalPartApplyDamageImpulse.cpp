@@ -2,24 +2,25 @@
 
 namespace uking::action {
 
-ForkStalPartApplyDamageImpulse::ForkStalPartApplyDamageImpulse(const InitArg& arg) : Fork(arg) {}
+ForkStalPartApplyDamageImpulse::ForkStalPartApplyDamageImpulse(const InitArg& arg)
+    : ForkSetEndState(arg) {}
 
 ForkStalPartApplyDamageImpulse::~ForkStalPartApplyDamageImpulse() = default;
 
 bool ForkStalPartApplyDamageImpulse::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkStalPartApplyDamageImpulse::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkStalPartApplyDamageImpulse::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkStalPartApplyDamageImpulse::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mMaxAddSpeed_s, "MaxAddSpeed");
     getStaticParam(&mSwordRate_s, "SwordRate");
     getStaticParam(&mSpearRate_s, "SpearRate");
@@ -38,7 +39,7 @@ void ForkStalPartApplyDamageImpulse::loadParams_() {
 }
 
 void ForkStalPartApplyDamageImpulse::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

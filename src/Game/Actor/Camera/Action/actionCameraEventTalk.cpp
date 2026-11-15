@@ -2,7 +2,7 @@
 
 namespace uking::action {
 
-CameraEventTalk::CameraEventTalk(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventTalk::CameraEventTalk(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 CameraEventTalk::~CameraEventTalk() = default;
 

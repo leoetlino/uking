@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkLodNoCountTimer : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkLodNoCountTimer, Fork)
+class ForkLodNoCountTimer : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkLodNoCountTimer, ForkSetEndState)
 public:
     explicit ForkLodNoCountTimer(const InitArg& arg);
     ~ForkLodNoCountTimer() override;

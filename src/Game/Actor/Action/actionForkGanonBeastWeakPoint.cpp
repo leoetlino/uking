@@ -2,24 +2,24 @@
 
 namespace uking::action {
 
-ForkGanonBeastWeakPoint::ForkGanonBeastWeakPoint(const InitArg& arg) : Fork(arg) {}
+ForkGanonBeastWeakPoint::ForkGanonBeastWeakPoint(const InitArg& arg) : ForkSetEndState(arg) {}
 
 ForkGanonBeastWeakPoint::~ForkGanonBeastWeakPoint() = default;
 
 bool ForkGanonBeastWeakPoint::init_(sead::Heap* heap) {
-    return Fork::init_(heap);
+    return ForkSetEndState::init_(heap);
 }
 
 void ForkGanonBeastWeakPoint::enter_(ksys::act::ai::InlineParamPack* params) {
-    Fork::enter_(params);
+    ForkSetEndState::enter_(params);
 }
 
 void ForkGanonBeastWeakPoint::leave_() {
-    Fork::leave_();
+    ForkSetEndState::leave_();
 }
 
 void ForkGanonBeastWeakPoint::loadParams_() {
-    Fork::loadParams_();
+    ForkSetEndState::loadParams_();
     getStaticParam(&mTargetSlotIdx_s, "TargetSlotIdx");
     getAITreeVariable(&mIsWeakPointAppearMode_a, "IsWeakPointAppearMode");
     getAITreeVariable(&mWeakPointActiveFlag_a, "WeakPointActiveFlag");
@@ -27,7 +27,7 @@ void ForkGanonBeastWeakPoint::loadParams_() {
 }
 
 void ForkGanonBeastWeakPoint::calc_() {
-    Fork::calc_();
+    ForkSetEndState::calc_();
 }
 
 }  // namespace uking::action

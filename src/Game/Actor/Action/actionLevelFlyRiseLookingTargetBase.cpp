@@ -1,24 +1,25 @@
-#include "Game/Actor/Action/actionLevelFlyLook.h"
+#include "Game/Actor/Action/actionLevelFlyRiseLookingTargetBase.h"
 
 namespace uking::action {
 
-LevelFlyLook::LevelFlyLook(const InitArg& arg) : ksys::act::ai::Action(arg) {}
+LevelFlyRiseLookingTargetBase::LevelFlyRiseLookingTargetBase(const InitArg& arg)
+    : ksys::act::ai::Action(arg) {}
 
-LevelFlyLook::~LevelFlyLook() = default;
+LevelFlyRiseLookingTargetBase::~LevelFlyRiseLookingTargetBase() = default;
 
-bool LevelFlyLook::init_(sead::Heap* heap) {
+bool LevelFlyRiseLookingTargetBase::init_(sead::Heap* heap) {
     return ksys::act::ai::Action::init_(heap);
 }
 
-void LevelFlyLook::enter_(ksys::act::ai::InlineParamPack* params) {
+void LevelFlyRiseLookingTargetBase::enter_(ksys::act::ai::InlineParamPack* params) {
     ksys::act::ai::Action::enter_(params);
 }
 
-void LevelFlyLook::leave_() {
+void LevelFlyRiseLookingTargetBase::leave_() {
     ksys::act::ai::Action::leave_();
 }
 
-void LevelFlyLook::loadParams_() {
+void LevelFlyRiseLookingTargetBase::loadParams_() {
     getStaticParam(&mHeight_s, "Height");
     getStaticParam(&mSpeed_s, "Speed");
     getStaticParam(&mRotSpeed_s, "RotSpeed");
@@ -28,7 +29,7 @@ void LevelFlyLook::loadParams_() {
     getDynamicParam(&mTargetPos_d, "TargetPos");
 }
 
-void LevelFlyLook::calc_() {
+void LevelFlyRiseLookingTargetBase::calc_() {
     ksys::act::ai::Action::calc_();
 }
 

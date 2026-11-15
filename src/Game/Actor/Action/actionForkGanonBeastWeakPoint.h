@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Action/actionFork.h"
+#include "Game/Actor/Action/actionForkSetEndState.h"
 #include "KingSystem/ActorSystem/actAiAction.h"
 
 namespace uking::action {
 
-class ForkGanonBeastWeakPoint : public Fork {
-    SEAD_RTTI_OVERRIDE(ForkGanonBeastWeakPoint, Fork)
+class ForkGanonBeastWeakPoint : public ForkSetEndState {
+    SEAD_RTTI_OVERRIDE(ForkGanonBeastWeakPoint, ForkSetEndState)
 public:
     explicit ForkGanonBeastWeakPoint(const InitArg& arg);
     ~ForkGanonBeastWeakPoint() override;

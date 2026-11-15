@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Game/Actor/Camera/AI/aiCameraEventTalk.h"
+#include "Game/Actor/Camera/AI/aiCameraEventTalkAIBase.h"
 #include "KingSystem/ActorSystem/actAiAi.h"
 
 namespace uking::ai {
 
-class CameraEventTalkAIRet : public CameraEventTalk {
-    SEAD_RTTI_OVERRIDE(CameraEventTalkAIRet, CameraEventTalk)
+class CameraEventTalkAIRet : public CameraEventTalkAIBase {
+    SEAD_RTTI_OVERRIDE(CameraEventTalkAIRet, CameraEventTalkAIBase)
 public:
     explicit CameraEventTalkAIRet(const InitArg& arg);
 

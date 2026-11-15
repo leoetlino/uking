@@ -999,8 +999,6 @@ target_sources(uking PRIVATE
   actionForceSystemFadeOut.h
   actionForestGiantWakeUp.cpp
   actionForestGiantWakeUp.h
-  actionFork.cpp
-  actionFork.h
   actionForkAddCalcScaleMapUnit.cpp
   actionForkAddCalcScaleMapUnit.h
   actionForkAddLinearImpulse.cpp
@@ -1283,6 +1281,8 @@ target_sources(uking PRIVATE
   actionForkSetCustomPallete.h
   actionForkSetCustomWeather.cpp
   actionForkSetCustomWeather.h
+  actionForkSetEndState.cpp
+  actionForkSetEndState.h
   actionForkSetJustAvoid.cpp
   actionForkSetJustAvoid.h
   actionForkSetJustAvoidFromBone.cpp
@@ -1845,8 +1845,6 @@ target_sources(uking PRIVATE
   actionLastBossThunderAppear.h
   actionLastBossThunderSign.cpp
   actionLastBossThunderSign.h
-  actionLevelFlyLook.cpp
-  actionLevelFlyLook.h
   actionLevelFlyLookDownToTgtHeight.cpp
   actionLevelFlyLookDownToTgtHeight.h
   actionLevelFlyLookRisingToTgtHeight.cpp
@@ -1859,6 +1857,8 @@ target_sources(uking PRIVATE
   actionLevelFlyRise.h
   actionLevelFlyRiseLookingTarget.cpp
   actionLevelFlyRiseLookingTarget.h
+  actionLevelFlyRiseLookingTargetBase.cpp
+  actionLevelFlyRiseLookingTargetBase.h
   actionLiftTurn.cpp
   actionLiftTurn.h
   actionLiftWalk.cpp
@@ -2865,10 +2865,10 @@ target_sources(uking PRIVATE
   actionTakeoffFromCeilLook.h
   actionTakeoffFromCeilLookTarget.cpp
   actionTakeoffFromCeilLookTarget.h
-  actionTargetCircle.cpp
-  actionTargetCircle.h
   actionTargetCircleGuardWalk.cpp
   actionTargetCircleGuardWalk.h
+  actionTargetCircleMove.cpp
+  actionTargetCircleMove.h
   actionTargetCircleMoveKeepDist.cpp
   actionTargetCircleMoveKeepDist.h
   actionTargetCircleSwim.cpp

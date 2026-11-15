@@ -2,6 +2,6 @@
 
 namespace uking::action {
 
-CameraEventPolarCoord::CameraEventPolarCoord(const InitArg& arg) : CameraEvent(arg) {}
+CameraEventPolarCoord::CameraEventPolarCoord(const InitArg& arg) : CameraEventDefaultBase(arg) {}
 
 }  // namespace uking::action
