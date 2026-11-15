@@ -4,6 +4,7 @@
 #include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
+#include "KingSystem/PlayReport/ProductReportMgr.h"
 #include "KingSystem/PlayReport/ProductReporter.h"
 #include "KingSystem/Quest/qstQuest.h"
 
