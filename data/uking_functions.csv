@@ -87326,7 +87326,7 @@ Address,Quality,Size,Name
 0x000000710103d0d8,U,000588,ksys::snd::EventSoundCtrl::onFadeRequestAdded
 0x000000710103d324,U,000244,ksys::snd::EventSoundCtrl::onFadeRequestRemoved
 0x000000710103d418,U,000024,ksys::snd::EventSoundCtrl::activateTmlnLoadingDucking
-0x000000710103d430,U,000248,sinit_sndSceneSoundCtrl
+0x000000710103d430,U,000248,sinit_sndEventSoundCtrl
 0x000000710103d528,O,000100,_ZN4ksys3snd8InfoData18SingletonDisposer_D1Ev
 0x000000710103d58c,O,000108,_ZN4ksys3snd8InfoData18SingletonDisposer_D0Ev
 0x000000710103d5f8,O,000156,_ZN4ksys3snd8InfoData14createInstanceEPN4sead4HeapE
