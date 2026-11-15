@@ -15,7 +15,7 @@
 #include <prim/seadScopeGuard.h>
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physCollisionPhantom.h"
-#include "KingSystem/Physics/System/physEntityContactListener.h"
+#include "KingSystem/Physics/System/physEntityWorldContactListener.h"
 #include "KingSystem/Physics/System/physGroupFilter.h"
 #include "KingSystem/Physics/System/physSystem.h"
 #include "KingSystem/Physics/System/physUtil.h"
@@ -502,7 +502,7 @@ void RayHitCollector::addRayHit(const hkpCdBody& cdBody,
 
     if (System::instance()->isIgnoringObjectAndNpcContacts() &&
         mLayerType == ContactLayerType::Entity &&
-        EntityContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
+        EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
         // XXX: Similar checks show up in various other collectors. Can this be refactored?
         return;
     }
@@ -532,7 +532,7 @@ void NormalCheckingRayHitCollector::addRayHit(const hkpCdBody& cdBody,
 
     if (System::instance()->isIgnoringObjectAndNpcContacts() &&
         mLayerType == ContactLayerType::Entity &&
-        EntityContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
+        EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(cdBody)) {
         return;
     }
 

@@ -4,7 +4,7 @@
 #include <Havok/Physics2012/Collide/Query/CastUtil/hkpLinearCastInput.h>
 #include <Havok/Physics2012/Collide/Query/Collector/PointCollector/hkpAllCdPointCollector.h>
 #include "KingSystem/Physics/System/physContactMgr.h"
-#include "KingSystem/Physics/System/physEntityContactListener.h"
+#include "KingSystem/Physics/System/physEntityWorldContactListener.h"
 #include "KingSystem/Physics/System/physGroupFilter.h"
 #include "KingSystem/Physics/System/physQueryContactPointInfo.h"
 #include "KingSystem/Physics/System/physSystem.h"
@@ -159,7 +159,7 @@ bool ShapeCast::registerContactPoint(const hkpRootCdPoint& point, RigidBody* bod
     auto* hit_body = getRigidBody(*hit_entity);
 
     if (System::instance()->isIgnoringObjectAndNpcContacts() && hit_body->isEntity() &&
-        EntityContactListener::isObjectOrGroundOrNPCOrTree(*hit_body)) {
+        EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(*hit_body)) {
         return false;
     }
 
@@ -219,7 +219,7 @@ void FilteredClosestCdPointCollector::addCdPoint(const hkpCdPoint& point) {
     auto* hit_body = getRigidBody(*hit_entity);
 
     if (System::instance()->isIgnoringObjectAndNpcContacts() && hit_body->isEntity() &&
-        EntityContactListener::isObjectOrGroundOrNPCOrTree(*hit_body)) {
+        EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(*hit_body)) {
         return;
     }
 

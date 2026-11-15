@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/System/physEntityContactListener.h"
+#include "KingSystem/Physics/System/physEntityWorldContactListener.h"
 #include <Havok/Physics2012/Collide/Agent/Collidable/hkpCdBody.h>
 #include <Havok/Physics2012/Dynamics/Collide/ContactListener/hkpContactPointEvent.h>
 #include <Havok/Physics2012/Dynamics/Collide/hkpResponseModifier.h>
@@ -67,18 +67,18 @@ static bool hasEntityWithMotionFlag80(const hkpCollisionEvent& event) {
     return has_flag_80;
 }
 
-EntityContactListener* EntityContactListener::make(ContactMgr* mgr, sead::Heap* heap) {
-    auto* listener = new (heap) EntityContactListener(mgr, heap);
+EntityWorldContactListener* EntityWorldContactListener::make(ContactMgr* mgr, sead::Heap* heap) {
+    auto* listener = new (heap) EntityWorldContactListener(mgr, heap);
     listener->init(heap);
     return listener;
 }
 
-EntityContactListener::EntityContactListener(ContactMgr* mgr, sead::Heap* heap)
+EntityWorldContactListener::EntityWorldContactListener(ContactMgr* mgr, sead::Heap* heap)
     : ContactListener(mgr, ContactLayerType::Entity, MaxNumLayersPerType) {}
 
-EntityContactListener::~EntityContactListener() = default;
+EntityWorldContactListener::~EntityWorldContactListener() = default;
 
-void EntityContactListener::collisionAddedCallback(const hkpCollisionEvent& event) {
+void EntityWorldContactListener::collisionAddedCallback(const hkpCollisionEvent& event) {
     auto* body_a = getRigidBody(*event.getBody(0));
     auto* body_b = getRigidBody(*event.getBody(1));
 
@@ -110,7 +110,7 @@ void EntityContactListener::collisionAddedCallback(const hkpCollisionEvent& even
     }
 }
 
-void EntityContactListener::collisionRemovedCallback(const hkpCollisionEvent& event) {
+void EntityWorldContactListener::collisionRemovedCallback(const hkpCollisionEvent& event) {
     auto* body_a = getRigidBody(*event.getBody(0));
     auto* body_b = getRigidBody(*event.getBody(1));
 
@@ -119,7 +119,7 @@ void EntityContactListener::collisionRemovedCallback(const hkpCollisionEvent& ev
     removeMassChangerModifier(event, body_a, body_b);
 }
 
-bool EntityContactListener::shouldRecordImpulseEntry(RigidBody* body_a, RigidBody* body_b) {
+bool EntityWorldContactListener::shouldRecordImpulseEntry(RigidBody* body_a, RigidBody* body_b) {
     if (body_a->isIgnoreMaxImpulseOff() && body_b->isIgnoreMaxImpulseOff() &&
         (body_a->getMaxImpulse() >= 0 || body_b->getMaxImpulse() >= 0)) {
         return true;
@@ -132,7 +132,7 @@ bool EntityContactListener::shouldRecordImpulseEntry(RigidBody* body_a, RigidBod
     return false;
 }
 
-bool EntityContactListener::isObjectOrGroundOrNPCOrTree(const RigidBody& body) {
+bool EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(const RigidBody& body) {
     switch (body.getContactLayer().value()) {
     case ContactLayer::EntityObject:
     case ContactLayer::EntityGroundObject:
@@ -147,7 +147,7 @@ bool EntityContactListener::isObjectOrGroundOrNPCOrTree(const RigidBody& body) {
     return false;
 }
 
-bool EntityContactListener::isObjectOrGroundOrNPCOrTree(const hkpCdBody& cd_body) {
+bool EntityWorldContactListener::isObjectOrGroundOrNPCOrTree(const hkpCdBody& cd_body) {
     auto* body = getRigidBody(*cd_body.getRootCollidable());
     if (!body)
         return false;
@@ -191,10 +191,11 @@ static bool isPlayerOrNpcVsObjectOrCharacter(const RigidBody* body_a, const Rigi
     return false;
 }
 
-bool EntityContactListener::contactPointCallbackImpl(u32 ignored_layers_a, u32 ignored_layers_b,
-                                                     RigidBody* body_a, RigidBody* body_b,
-                                                     ContactLayer layer_a, ContactLayer layer_b,
-                                                     const hkpContactPointEvent& event) {
+bool EntityWorldContactListener::contactPointCallbackImpl(u32 ignored_layers_a,
+                                                          u32 ignored_layers_b, RigidBody* body_a,
+                                                          RigidBody* body_b, ContactLayer layer_a,
+                                                          ContactLayer layer_b,
+                                                          const hkpContactPointEvent& event) {
     if (shouldProcessEntityContact(ignored_layers_a, ignored_layers_b, layer_a, layer_b) ||
         (mIgnoreObjectAndNpcContacts &&
          isPlayerOrNpcVsObjectOrCharacter(body_a, body_b, layer_a, layer_b))) {
@@ -220,10 +221,9 @@ bool EntityContactListener::contactPointCallbackImpl(u32 ignored_layers_a, u32 i
     return true;
 }
 
-void EntityContactListener::applyContactMaterialProperties(const hkpContactPointEvent& event,
-                                                           const RigidBodyCollisionMasks& masks_a,
-                                                           const RigidBodyCollisionMasks& masks_b,
-                                                           RigidBody* body_a, RigidBody* body_b) {
+void EntityWorldContactListener::applyContactMaterialProperties(
+    const hkpContactPointEvent& event, const RigidBodyCollisionMasks& masks_a,
+    const RigidBodyCollisionMasks& masks_b, RigidBody* body_a, RigidBody* body_b) {
     auto* hk_point_properties = event.m_contactPointProperties;
 
     const MaterialMask mat_mask_a{masks_a.material_mask};
@@ -281,9 +281,8 @@ static void updateMotionAccessorFlagsForMagneMassScaling(RigidBody* body_a, Rigi
         ContactFlag::LeftMagneMassScalingGroup);
 }
 
-void EntityContactListener::setMagneMassScalingForContactIfNeeded(const hkpCollisionEvent& event,
-                                                                  RigidBody* body_a,
-                                                                  RigidBody* body_b) {
+void EntityWorldContactListener::setMagneMassScalingForContactIfNeeded(
+    const hkpCollisionEvent& event, RigidBody* body_a, RigidBody* body_b) {
     if (!System::instance()->isMagneMassScalingActive())
         return;
 
@@ -294,9 +293,9 @@ void EntityContactListener::setMagneMassScalingForContactIfNeeded(const hkpColli
     setMagneMassScalingForContact(event, body_a, body_b);
 }
 
-void EntityContactListener::setImpulseScalingForTerrainContact(const hkpCollisionEvent& event,
-                                                               RigidBody* body_a,
-                                                               RigidBody* body_b) {
+void EntityWorldContactListener::setImpulseScalingForTerrainContact(const hkpCollisionEvent& event,
+                                                                    RigidBody* body_a,
+                                                                    RigidBody* body_b) {
     if (body_a->getType() != RigidBody::Type::TerrainHeightField &&
         body_b->getType() != RigidBody::Type::TerrainHeightField) {
         return;
@@ -338,7 +337,7 @@ static bool removeViscousSurfaceModifier(const hkpCollisionEvent& event) {
     return true;
 }
 
-inline void EntityContactListener::removeViscousSurfaceModifierAndCollision(
+inline void EntityWorldContactListener::removeViscousSurfaceModifierAndCollision(
     const hkpCollisionEvent& event, RigidBody* body_a, RigidBody* body_b) {
     if (!removeViscousSurfaceModifier(event))
         return;
@@ -367,8 +366,8 @@ inline void EntityContactListener::removeViscousSurfaceModifierAndCollision(
 }
 
 KSYS_ALWAYS_INLINE inline void
-EntityContactListener::removeMassChangerModifier(const hkpCollisionEvent& event, RigidBody* body_a,
-                                                 RigidBody* body_b) {
+EntityWorldContactListener::removeMassChangerModifier(const hkpCollisionEvent& event,
+                                                      RigidBody* body_a, RigidBody* body_b) {
     constexpr auto type = hkpConstraintAtom::TYPE_MODIFIER_MASS_CHANGER;
     auto* constraint = event.m_contactMgr->getConstraintInstance();
     if (hkpWorldConstraintUtil::findModifier(constraint, type)) {
@@ -388,9 +387,9 @@ EntityContactListener::removeMassChangerModifier(const hkpCollisionEvent& event,
     }
 }
 
-inline void EntityContactListener::setMagneMassScalingForContact(const hkpCollisionEvent& event,
-                                                                 RigidBody* body_a,
-                                                                 RigidBody* body_b) {
+inline void
+EntityWorldContactListener::setMagneMassScalingForContact(const hkpCollisionEvent& event,
+                                                          RigidBody* body_a, RigidBody* body_b) {
     const auto factor_a = body_a->getMagneMassScalingFactor();
     const auto factor_b = body_b->getMagneMassScalingFactor();
 
@@ -503,9 +502,9 @@ static void updateMotionFlagsAtEndOfStep(const hkpCollisionEvent& event, RigidBo
 }
 
 // NON_MATCHING: branching (body_a->getEntityMotionAccessor() call not merged)
-bool EntityContactListener::regularContactPointCallback(const hkpContactPointEvent& event,
-                                                        RigidBody* body_a, RigidBody* body_b,
-                                                        sead::SafeArray<u32, 2>*) {
+bool EntityWorldContactListener::regularContactPointCallback(const hkpContactPointEvent& event,
+                                                             RigidBody* body_a, RigidBody* body_b,
+                                                             sead::SafeArray<u32, 2>*) {
     if (event.m_type == hkpContactPointEvent::TYPE_MANIFOLD_AT_END_OF_STEP) {
         auto* constraint = event.m_contactMgr->getConstraintInstance();
 

@@ -6,12 +6,12 @@ class hkpCdBody;
 
 namespace ksys::phys {
 
-class EntityContactListener : public ContactListener {
-    SEAD_RTTI_OVERRIDE(EntityContactListener, ContactListener)
+class EntityWorldContactListener : public ContactListener {
+    SEAD_RTTI_OVERRIDE(EntityWorldContactListener, ContactListener)
 public:
-    static EntityContactListener* make(ContactMgr* mgr, sead::Heap* heap);
+    static EntityWorldContactListener* make(ContactMgr* mgr, sead::Heap* heap);
 
-    ~EntityContactListener() override;
+    ~EntityWorldContactListener() override;
     void collisionAddedCallback(const hkpCollisionEvent& event) override;
     void collisionRemovedCallback(const hkpCollisionEvent& event) override;
 
@@ -19,7 +19,7 @@ public:
     static bool isObjectOrGroundOrNPCOrTree(const hkpCdBody& cd_body);
 
 protected:
-    EntityContactListener(ContactMgr* mgr, sead::Heap* heap);
+    EntityWorldContactListener(ContactMgr* mgr, sead::Heap* heap);
 
     bool contactPointCallbackImpl(u32 ignored_layers_a, u32 ignored_layers_b, RigidBody* body_a,
                                   RigidBody* body_b, ContactLayer layer_a, ContactLayer layer_b,

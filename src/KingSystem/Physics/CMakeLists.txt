@@ -130,12 +130,12 @@ target_sources(uking PRIVATE
     System/physContactMgr.h
     System/physContactPointInfo.cpp
     System/physContactPointInfo.h
+    System/physEntityWorldContactListener.cpp
+    System/physEntityWorldContactListener.h
     System/physHavokMemoryAllocator.cpp
     System/physHavokMemoryAllocator.h
     System/physLayerContactPointInfo.cpp
     System/physLayerContactPointInfo.h
-    System/physEntityContactListener.cpp
-    System/physEntityContactListener.h
     System/physEntityGroupFilter.cpp
     System/physEntityGroupFilter.h
     System/physGroupFilter.cpp

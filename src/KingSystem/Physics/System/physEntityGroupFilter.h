@@ -80,7 +80,7 @@ private:
 
     /// A ContactLayer::size() x ContactLayer::size() matrix such that M[i][j] indicates
     /// whether contact between layers i and layers j can be ignored.
-    /// \see EntityContactListener and shouldContactNeverBeIgnored
+    /// \see EntityWorldContactListener and shouldContactNeverBeIgnored
     sead::SafeArray<u32, ContactLayer::size()> mLayersThatCanBeIgnored;
 };
 
