@@ -13,7 +13,7 @@ public:
 
     bool worldRayCast(ContactLayerType layer_type);
     bool shapeRayCast(RigidBody* rigid_body);
-    bool phantomRayCast(Phantom* phantom);
+    bool phantomRayCast(CollisionPhantom* phantom);
 
     RigidBody* getHitRigidBody() const { return mHitRigidBody; }
 

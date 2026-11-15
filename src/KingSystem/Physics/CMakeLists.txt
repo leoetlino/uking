@@ -118,6 +118,8 @@ target_sources(uking PRIVATE
     System/physClosestPointQueryWithInfo.h
     System/physCollisionInfo.cpp
     System/physCollisionInfo.h
+    System/physCollisionPhantom.cpp
+    System/physCollisionPhantom.h
     System/physContactLayerCollisionInfo.cpp
     System/physContactLayerCollisionInfo.h
     System/physContactLayerCollisionInfoGroup.cpp
@@ -144,8 +146,6 @@ target_sources(uking PRIVATE
     System/physMaterialTable.h
     System/physParamSet.cpp
     System/physParamSet.h
-    System/physPhantom.cpp
-    System/physPhantom.h
     System/physQueryContactPointInfo.cpp
     System/physQueryContactPointInfo.h
     System/physRayCast.cpp

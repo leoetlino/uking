@@ -11,18 +11,19 @@ namespace ksys::phys {
 
 class LayerMaskBuilder;
 
-class Phantom {
-    SEAD_RTTI_BASE(Phantom)
+class CollisionPhantom {
+    SEAD_RTTI_BASE(CollisionPhantom)
 public:
     /// @param havok_phantom If null, a hkpAabbPhantom will be automatically created.
-    static Phantom* make(sead::Heap* heap, const sead::BoundBox3f& aabb,
-                         ContactLayerType layer_type, const LayerMaskBuilder* layer_mask_builder,
-                         hkpAabbPhantom* havok_phantom = nullptr);
-    static void free(Phantom* phantom);
+    static CollisionPhantom* make(sead::Heap* heap, const sead::BoundBox3f& aabb,
+                                  ContactLayerType layer_type,
+                                  const LayerMaskBuilder* layer_mask_builder,
+                                  hkpAabbPhantom* havok_phantom = nullptr);
+    static void free(CollisionPhantom* phantom);
 
-    Phantom(const sead::BoundBox3f& aabb, ContactLayerType layer_type);
+    CollisionPhantom(const sead::BoundBox3f& aabb, ContactLayerType layer_type);
 
-    virtual ~Phantom() = default;
+    virtual ~CollisionPhantom() = default;
 
     hkpAabbPhantom* getHavokPhantom() const { return mHavokPhantom; }
     const sead::BoundBox3f& getAabb() const { return mAabb; }

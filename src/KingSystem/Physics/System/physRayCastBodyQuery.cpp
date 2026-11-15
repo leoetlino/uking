@@ -17,7 +17,7 @@ bool RayCastBodyQuery::shapeRayCast(RigidBody* rigid_body) {
     return RayCast::shapeRayCast(rigid_body);
 }
 
-bool RayCastBodyQuery::phantomRayCast(Phantom* phantom) {
+bool RayCastBodyQuery::phantomRayCast(CollisionPhantom* phantom) {
     mHitRigidBody = nullptr;
     return RayCast::phantomRayCast(phantom);
 }

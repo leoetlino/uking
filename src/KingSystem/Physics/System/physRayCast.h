@@ -25,7 +25,7 @@ namespace ksys::phys {
 struct ActorInfo;
 class StaticCompoundRigidBodyGroup;
 class LayerMaskBuilder;
-class Phantom;
+class CollisionPhantom;
 class RigidBody;
 class SystemGroupHandler;
 
@@ -77,7 +77,7 @@ public:
 
     bool worldRayCast(ContactLayerType layer_type);
     bool shapeRayCast(RigidBody* rigid_body);
-    bool phantomRayCast(Phantom* phantom);
+    bool phantomRayCast(CollisionPhantom* phantom);
 
     void getHitPosition(sead::Vector3f* position) const;
     bool getHitTriangleNormal(sead::Vector3f* normal, const hkpShape* hit_shape,
@@ -94,7 +94,7 @@ protected:
 
     void worldRayCastImpl(hkpWorldRayCastOutput* output, ContactLayerType layer_type);
     void shapeRayCastImpl(hkpWorldRayCastOutput* output, RigidBody* body);
-    void phantomRayCastImpl(hkpWorldRayCastOutput* output, Phantom* phantom);
+    void phantomRayCastImpl(hkpWorldRayCastOutput* output, CollisionPhantom* phantom);
 
     void updateStaticCompoundObjectInfo(const hkpWorldRayCastOutput& output);
 

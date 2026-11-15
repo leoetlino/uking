@@ -20,6 +20,7 @@ namespace ksys::phys {
 
 class CharacterController;
 class CollisionInfo;
+class CollisionPhantom;
 class ContactLayerCollisionInfo;
 class ContactLayerCollisionInfoGroup;
 class ContactListener;
@@ -29,7 +30,6 @@ class GroupFilter;
 class HavokMemoryAllocator;
 class LayerContactPointInfo;
 class MaterialTable;
-class Phantom;
 class RayCastForRequest;
 class RayCastRequestMgr;
 class RagdollControllerKeyList;
@@ -185,7 +185,7 @@ private:
     RayCastRequestMgr* mRayCastRequestMgr{};
     RigidBody* mSystemDummyBody{};
     void* mTeraScene{};
-    Phantom* mWorldBorderPhantom{};
+    CollisionPhantom* mWorldBorderPhantom{};
     sead::Heap* mPhysicsSystemHeap{};
     sead::Heap* mDebugHeap{};
     sead::Heap* mPhysicsTempDefaultHeap{};

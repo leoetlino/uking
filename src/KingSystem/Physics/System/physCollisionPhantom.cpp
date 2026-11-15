@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/System/physPhantom.h"
+#include "KingSystem/Physics/System/physCollisionPhantom.h"
 #include <Havok/Physics2012/Dynamics/World/hkpWorld.h>
 #include <math/seadVector.h>
 #include <prim/seadSafeString.h>
@@ -11,9 +11,11 @@
 
 namespace ksys::phys {
 
-Phantom* Phantom::make(sead::Heap* heap, const sead::BoundBox3f& aabb, ContactLayerType layer_type,
-                       const LayerMaskBuilder* layer_mask_builder, hkpAabbPhantom* havok_phantom) {
-    auto* phantom = util::allocWithAlign<Phantom>(heap, 0x10, aabb, layer_type);
+CollisionPhantom* CollisionPhantom::make(sead::Heap* heap, const sead::BoundBox3f& aabb,
+                                         ContactLayerType layer_type,
+                                         const LayerMaskBuilder* layer_mask_builder,
+                                         hkpAabbPhantom* havok_phantom) {
+    auto* phantom = util::allocWithAlign<CollisionPhantom>(heap, 0x10, aabb, layer_type);
 
     phantom->initHavokPhantom(havok_phantom);
 
@@ -23,16 +25,16 @@ Phantom* Phantom::make(sead::Heap* heap, const sead::BoundBox3f& aabb, ContactLa
     return phantom;
 }
 
-void Phantom::free(Phantom* phantom) {
+void CollisionPhantom::free(CollisionPhantom* phantom) {
     phantom->removePhantomFromWorld();
     phantom->mHavokPhantom->removeReference();
     delete phantom;
 }
 
-Phantom::Phantom(const sead::BoundBox3f& aabb, ContactLayerType layer_type)
+CollisionPhantom::CollisionPhantom(const sead::BoundBox3f& aabb, ContactLayerType layer_type)
     : mAabb(aabb), mLayerType(layer_type) {}
 
-void Phantom::initHavokPhantom(hkpAabbPhantom* havok_phantom) {
+void CollisionPhantom::initHavokPhantom(hkpAabbPhantom* havok_phantom) {
     hkAabb aabb;
     loadFromVec3(&aabb.m_min, mAabb.getMin());
     loadFromVec3(&aabb.m_max, mAabb.getMax());
@@ -45,17 +47,17 @@ void Phantom::initHavokPhantom(hkpAabbPhantom* havok_phantom) {
     }
 }
 
-void Phantom::setLayerMask(const LayerMaskBuilder& builder) {
+void CollisionPhantom::setLayerMask(const LayerMaskBuilder& builder) {
     mLayerMask = builder.getMasks()[int(mLayerType)].layers;
     mDirtyLayerMask = true;
     mHavokPhantom->getCollidableRw()->setCollisionFilterInfo(mLayerMask);
 }
 
-bool Phantom::isAddedToWorld() const {
+bool CollisionPhantom::isAddedToWorld() const {
     return mHavokPhantom->isAddedToWorld();
 }
 
-void Phantom::addPhantomToWorld() {
+void CollisionPhantom::addPhantomToWorld() {
     if (isAddedToWorld())
         return;
 
@@ -64,7 +66,7 @@ void Phantom::addPhantomToWorld() {
     System::instance()->unlockWorld(mLayerType);
 }
 
-void Phantom::removePhantomFromWorld() {
+void CollisionPhantom::removePhantomFromWorld() {
     if (!isAddedToWorld())
         return;
 
@@ -73,7 +75,7 @@ void Phantom::removePhantomFromWorld() {
     System::instance()->unlockWorld(mLayerType);
 }
 
-void Phantom::updateHavokFilterInfoAndAabb() {
+void CollisionPhantom::updateHavokFilterInfoAndAabb() {
     bool added = isAddedToWorld();
     if (added)
         System::instance()->lockWorld(mLayerType);
