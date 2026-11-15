@@ -23,9 +23,9 @@ class OverlayArena;
 
 namespace res {
 
-class ISystemPauseMgr {
+class IOverlayArenaCoordinator {
 public:
-    virtual ~ISystemPauseMgr() = default;
+    virtual ~IOverlayArenaCoordinator() = default;
 
     virtual void m2() = 0;
     virtual void waitForOnUiActorMgrAndBlockSaveMaybe() = 0;
@@ -51,7 +51,7 @@ class OverlayArenaSystem {
 
 public:
     struct InitArg {
-        ISystemPauseMgr* system_pause_mgr;
+        IOverlayArenaCoordinator* game_coordinator;
     };
 
     bool init(const InitArg& arg, sead::Heap* heap);
@@ -112,7 +112,7 @@ private:
     OverlayArena* mAudioArena = nullptr;
     OverlayArena* mUnknownArena = nullptr;
     sead::Heap* mJpegHeap = nullptr;
-    ISystemPauseMgr* mSystemPauseMgr = nullptr;
+    IOverlayArenaCoordinator* mGameCoordinator = nullptr;
     CoordinatorForOverlayArena mSystemCoordinator;
     u32 _b8 = 0;
     TaskThread* mPrepareThread = nullptr;

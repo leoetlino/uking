@@ -6,14 +6,14 @@
 namespace ksys::res {
 
 class CoordinatorForOverlayArena;
-class ISystemPauseMgr;
+class IOverlayArenaCoordinator;
 
 // FIXME: incomplete
 class CoordinatorDeferredRequest {
 public:
     struct InitArg {
         CoordinatorForOverlayArena* system_coordinator;
-        ISystemPauseMgr* system_pause_mgr;
+        IOverlayArenaCoordinator* game_coordinator;
     };
 
     CoordinatorDeferredRequest();

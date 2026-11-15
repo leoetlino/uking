@@ -5,7 +5,7 @@
 
 namespace uking {
 
-class OverlayArenaCoordinator : public ksys::res::ISystemPauseMgr {
+class OverlayArenaCoordinator : public ksys::res::IOverlayArenaCoordinator {
 public:
     OverlayArenaCoordinator();
     ~OverlayArenaCoordinator() override;

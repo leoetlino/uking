@@ -64,7 +64,7 @@ void OverlayArenaSystem::destroyHeaps() {
 
 // NON_MATCHING: reordering for TaskThread::InitArg
 bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
-    mSystemPauseMgr = arg.system_pause_mgr;
+    mGameCoordinator = arg.game_coordinator;
 
     mPrepareThread = new (heap) TaskThread(
         "OverlayArena Prepare", heap, sead::ThreadUtil::ConvertPrioritySeadToPlatform(17),
@@ -92,7 +92,7 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
     {
         CoordinatorDeferredRequest::InitArg arg_;
         arg_.system_coordinator = &mSystemCoordinator;
-        arg_.system_pause_mgr = mSystemPauseMgr;
+        arg_.game_coordinator = mGameCoordinator;
         mDeferredRequest.init(arg_);
     }
 
@@ -116,9 +116,9 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
     mSystemCoordinator.init();
     res::stubbedLogFunction();
 
-    if (mSystemPauseMgr) {
+    if (mGameCoordinator) {
         res::stubbedLogFunction();
-        mSystemPauseMgr->m2();
+        mGameCoordinator->m2();
         res::stubbedLogFunction();
     }
 
