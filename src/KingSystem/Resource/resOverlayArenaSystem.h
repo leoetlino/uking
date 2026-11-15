@@ -79,7 +79,7 @@ public:
 private:
     enum class Flag {
         _1 = 0x1,
-        _2 = 0x2,
+        HeapsDestroyed = 0x2,
     };
 
     void createHeaps();
@@ -96,7 +96,7 @@ private:
     bool delegatedFunction();
 
     sead::TypedBitFlag<Flag, u8> mFlags;
-    u32 _2c = 0;
+    u32 mMovieMode = 0;
     sead::Heap* mFixedHeap = nullptr;
     sead::Heap* mMovableMemoryHeap = nullptr;
     sead::Heap* mGameDataWorkHeap = nullptr;

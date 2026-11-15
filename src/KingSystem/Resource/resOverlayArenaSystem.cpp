@@ -59,7 +59,7 @@ void OverlayArenaSystem::destroyHeaps() {
     }
     res::stubbedLogFunction();
 
-    mFlags.set(Flag::_2);
+    mFlags.set(Flag::HeapsDestroyed);
 }
 
 // NON_MATCHING: reordering for TaskThread::InitArg
@@ -101,7 +101,7 @@ bool OverlayArenaSystem::init(const InitArg& arg, sead::Heap* heap) {
         sizeof(void*), sead::Heap::cHeapDirection_Forward, true);
 
     if (heap) {
-        mFlags.reset(Flag::_2);
+        mFlags.reset(Flag::HeapsDestroyed);
         mFixedHeap = sead::ExpHeap::tryCreate(0x17600000, "FixedHeap", heap, sizeof(void*),
                                               sead::Heap::cHeapDirection_Forward, false);
         if (mFixedHeap) {
