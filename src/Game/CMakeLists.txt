@@ -27,8 +27,8 @@ target_sources(uking PRIVATE
   gdtCommonFlagsHandleDefs.inc
   NXArgs.cpp
   NXArgs.h
+  OverlayArenaCoordinator.cpp
+  OverlayArenaCoordinator.h
   SiteBossRematchMgr.cpp
   SiteBossRematchMgr.h
-  SystemPauseMgr.cpp
-  SystemPauseMgr.h
 )

@@ -5,10 +5,10 @@
 
 namespace uking {
 
-class SystemPauseMgr : public ksys::res::ISystemPauseMgr {
+class OverlayArenaCoordinator : public ksys::res::ISystemPauseMgr {
 public:
-    SystemPauseMgr();
-    ~SystemPauseMgr() override;
+    OverlayArenaCoordinator();
+    ~OverlayArenaCoordinator() override;
 
     void m2() override;
     void waitForOnUiActorMgrAndBlockSaveMaybe() override;
@@ -29,6 +29,6 @@ public:
 private:
     bool mMainLayerWasVisible = true;
 };
-KSYS_CHECK_SIZE_NX150(SystemPauseMgr, 0x10);
+KSYS_CHECK_SIZE_NX150(OverlayArenaCoordinator, 0x10);
 
 }  // namespace uking

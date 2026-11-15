@@ -10,7 +10,7 @@ public:
     CoordinatorForOverlayArena();
     virtual ~CoordinatorForOverlayArena();
 
-    // TODO: figure out if this is the same interface as SystemPauseMgr.
+    // TODO: figure out if this is the same interface as OverlayArenaCoordinator.
     // Both have the exact same number of virtual functions and some of the functions
     // look somewhat similar (suspending threads, looping while waiting for their status to
     // change).
