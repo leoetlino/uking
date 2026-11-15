@@ -12,6 +12,7 @@ target_sources(uking PRIVATE
   resEntryFactory.h
   resInfoContainer.cpp
   resInfoContainer.h
+  resIOverlayArenaCoordinator.h
   resLoadRequest.h
   resOffsetReadFileDevice.cpp
   resOffsetReadFileDevice.h

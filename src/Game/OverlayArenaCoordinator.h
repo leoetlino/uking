@@ -1,6 +1,6 @@
 #pragma once
 
-#include "KingSystem/Resource/resOverlayArenaSystem.h"
+#include "KingSystem/Resource/resIOverlayArenaCoordinator.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace uking {

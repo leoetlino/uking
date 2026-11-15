@@ -5,14 +5,13 @@
 
 namespace ksys::res {
 
-class CoordinatorForOverlayArena;
 class IOverlayArenaCoordinator;
 
 // FIXME: incomplete
 class CoordinatorDeferredRequest {
 public:
     struct InitArg {
-        CoordinatorForOverlayArena* system_coordinator;
+        IOverlayArenaCoordinator* system_coordinator;
         IOverlayArenaCoordinator* game_coordinator;
     };
 
@@ -24,8 +23,8 @@ private:
     u32 _0 = 0;
     sead::Delegate1R<CoordinatorDeferredRequest, void*, bool> mDelegate;
     u32 _28 = 1;
-    void* _30 = nullptr;
-    void* _38 = nullptr;
+    IOverlayArenaCoordinator* mSystemCoordinator = nullptr;
+    IOverlayArenaCoordinator* mGameCoordinator = nullptr;
 };
 KSYS_CHECK_SIZE_NX150(CoordinatorDeferredRequest, 0x40);
 

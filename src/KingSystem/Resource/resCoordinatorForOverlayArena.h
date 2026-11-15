@@ -1,38 +1,34 @@
 #pragma once
 
+#include "KingSystem/Resource/resIOverlayArenaCoordinator.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::res {
 
 // FIXME: incomplete
-class CoordinatorForOverlayArena final {
+class CoordinatorForOverlayArena : public IOverlayArenaCoordinator {
 public:
     CoordinatorForOverlayArena();
-    virtual ~CoordinatorForOverlayArena();
+    ~CoordinatorForOverlayArena() override;
 
-    // TODO: figure out if this is the same interface as OverlayArenaCoordinator.
-    // Both have the exact same number of virtual functions and some of the functions
-    // look somewhat similar (suspending threads, looping while waiting for their status to
-    // change).
-
-    virtual void init();
+    void init() override;
     // Resume resource compaction
-    virtual void onReleaseForegroundForShutdown();
-    virtual void prepareShutdown();
+    void onReleaseForegroundForShutdown() override;
+    void prepareShutdown() override;
     // Resume resource compaction + EventMgr
-    virtual void onReleaseForeground();
+    void onReleaseForeground() override;
     // Stop threads, clear cache, etc.
-    virtual void prepareDestroy();
-    virtual bool destroy();
-    virtual void restore();
-    virtual void waitForRestore();
+    void prepareDestroy() override;
+    bool destroy() override;
+    void restore() override;
+    void waitForRestore() override;
     // Does nothing
-    virtual void finishRestore();
-    virtual bool enterMovieMode();
-    virtual void leaveMovieMode();
-    virtual void waitForLeaveMovieMode();
+    void finishRestore() override;
+    bool enterMovieMode() override;
+    void leaveMovieMode() override;
+    void waitForLeaveMovieMode() override;
     // Does nothing
-    virtual void finishLeaveMovieMode();
+    void finishLeaveMovieMode() override;
 };
 KSYS_CHECK_SIZE_NX150(CoordinatorForOverlayArena, 0x8);
 
