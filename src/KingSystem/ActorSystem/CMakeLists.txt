@@ -180,6 +180,8 @@ target_sources(uking PRIVATE
     actModelCallback.h
     actModelList.cpp
     actModelList.h
+    actModelResourceDivide.cpp
+    actModelResourceDivide.h
     actObjectLink.cpp
     actObjectLink.h
     actObjectLinkGenGroup.cpp

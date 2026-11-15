@@ -3,12 +3,12 @@
 #include <Byaml/ByamlArrayIter.h>
 #include <Byaml/ByamlData.h>
 #include <Byaml/ByamlHashIter.h>
-#include <KingSystem/Resource/resModelResourceDivide.h>
 #include <codec/seadHashCRC32.h>
 #include <math/seadMathNumbers.h>
 #include "KingSystem/ActorSystem/actActorCreator.h"
 #include "KingSystem/ActorSystem/actDebug.h"
 #include "KingSystem/ActorSystem/actModelList.h"
+#include "KingSystem/ActorSystem/actModelResourceDivide.h"
 #include "KingSystem/Event/evtEvent.h"
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/World/worldManager.h"
@@ -107,7 +107,7 @@ void InfoData::getModelInfo(const char* actor, InfoData::ModelInfo& info) const 
 
         if (info.mainModel) {
             const char* model_resource =
-                res::ModelResourceDivide::instance()->getModelResource(info.bfres, info.mainModel);
+                ModelResourceDivide::instance()->getModelResource(info.bfres, info.mainModel);
             if (model_resource)
                 info.bfres = model_resource;
         }

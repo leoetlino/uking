@@ -17,8 +17,6 @@ target_sources(uking PRIVATE
   resInfoContainer.cpp
   resInfoContainer.h
   resLoadRequest.h
-  resModelResourceDivide.cpp
-  resModelResourceDivide.h
   resOffsetReadFileDevice.cpp
   resOffsetReadFileDevice.h
   resOverlayArenaSystem.cpp

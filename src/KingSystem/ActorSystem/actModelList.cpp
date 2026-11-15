@@ -1,6 +1,6 @@
 #include "KingSystem/ActorSystem/actModelList.h"
 #include <container/seadSafeArray.h>
-#include "KingSystem/Resource/resModelResourceDivide.h"
+#include "KingSystem/ActorSystem/actModelResourceDivide.h"
 
 namespace ksys::act {
 
@@ -215,7 +215,7 @@ void ModelList::getModelDataInfo(ModelList::ModelDataInfo* info) const {
             }
 
             if (info->unit_names[idx][0]) {
-                const char* name = res::ModelResourceDivide::instance()->getModelResource(
+                const char* name = ModelResourceDivide::instance()->getModelResource(
                     info->folder_name[idx], info->unit_names[idx][0]);
                 if (name)
                     info->folder_name[idx] = name;

@@ -1,10 +1,10 @@
-#include "KingSystem/Resource/resModelResourceDivide.h"
+#include "KingSystem/ActorSystem/actModelResourceDivide.h"
 #include <Byaml/Byaml.h>
 #include "KingSystem/ActorSystem/actDebug.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 
-namespace ksys::res {
+namespace ksys::act {
 
 SEAD_SINGLETON_DISPOSER_IMPL(ModelResourceDivide)
 
@@ -14,7 +14,7 @@ ModelResourceDivide::~ModelResourceDivide() {
 }
 
 void ModelResourceDivide::init(sead::Heap* heap) {
-    auto load_request = LoadRequest();
+    auto load_request = res::LoadRequest();
     load_request.mRequester = "ModelResourceDivide";
     load_request.mLoadCompressed = true;
     mHandle.load("System/Resource/ModelDivideTable.byml", &load_request);
@@ -25,12 +25,12 @@ void ModelResourceDivide::init(sead::Heap* heap) {
 
 const char* ModelResourceDivide::getModelResource(const sead::SafeString& model_name,
                                                   const sead::SafeString& fmdb_name) const {
-    auto* debug = act::ActorDebug::instance();
-    if (debug && !debug->hasFlag(act::ActorDebug::Flag::_20000000))
+    auto* debug = ActorDebug::instance();
+    if (debug && !debug->hasFlag(ActorDebug::Flag::_20000000))
         return nullptr;
 
     sead::FormatFixedSafeString<128> model_path("Model/%s.bfres", model_name.cstr());
-    if (ResourceMgrTask::instance()->isHostPath(model_path))
+    if (res::ResourceMgrTask::instance()->isHostPath(model_path))
         return nullptr;
 
     al::ByamlIter model_iter{};
@@ -57,4 +57,4 @@ const char* ModelResourceDivide::getModelResource(const sead::SafeString& model_
     return nullptr;
 }
 
-}  // namespace ksys::res
+}  // namespace ksys::act

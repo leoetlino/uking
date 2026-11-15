@@ -8,7 +8,7 @@ namespace al {
 class ByamlIter;
 }
 
-namespace ksys::res {
+namespace ksys::act {
 
 class ModelResourceDivide {
     SEAD_SINGLETON_DISPOSER(ModelResourceDivide)
@@ -23,8 +23,8 @@ public:
 
 private:
     al::ByamlIter* mIter{};
-    Handle mHandle;
+    res::Handle mHandle;
 };
 KSYS_CHECK_SIZE_NX150(ModelResourceDivide, 0x80);
 
-}  // namespace ksys::res
+}  // namespace ksys::act
