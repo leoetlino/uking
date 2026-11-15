@@ -6,11 +6,11 @@
 
 namespace ksys::game {
 
-class SystemTimers {
-    SEAD_SINGLETON_DISPOSER(SystemTimers)
+class GlobalFrameCounter {
+    SEAD_SINGLETON_DISPOSER(GlobalFrameCounter)
 
-    SystemTimers() = default;
-    virtual ~SystemTimers();
+    GlobalFrameCounter() = default;
+    virtual ~GlobalFrameCounter();
 
 public:
     void init();
@@ -26,6 +26,6 @@ public:
     float mVfrTimer2 = 0;
     int mFrameCounterB2 = 0;
 };
-KSYS_CHECK_SIZE_NX150(SystemTimers, 0x40);
+KSYS_CHECK_SIZE_NX150(GlobalFrameCounter, 0x40);
 
 }  // namespace ksys::game

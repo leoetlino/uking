@@ -1,14 +1,14 @@
-#include "KingSystem/Game/System/SystemTimers.h"
+#include "KingSystem/Game/System/GlobalFrameCounter.h"
 
 #include "KingSystem/System/VFR.h"
 
 namespace ksys::game {
 
-SEAD_SINGLETON_DISPOSER_IMPL(SystemTimers)
+SEAD_SINGLETON_DISPOSER_IMPL(GlobalFrameCounter)
 
-SystemTimers::~SystemTimers() = default;
+GlobalFrameCounter::~GlobalFrameCounter() = default;
 
-void SystemTimers::init() {
+void GlobalFrameCounter::init() {
     mVfrTimer = 0;
     mFrameCounterB = 0;
     mVfrTimer2 = 0;
@@ -17,13 +17,13 @@ void SystemTimers::init() {
     mFrameCounter2 = 0;
 }
 
-void SystemTimers::init2() {
+void GlobalFrameCounter::init2() {
     init();
 }
 
-void SystemTimers::prepareStageUnload() {}
+void GlobalFrameCounter::prepareStageUnload() {}
 
-void SystemTimers::incrementCountersAndUpdate() {
+void GlobalFrameCounter::incrementCountersAndUpdate() {
     mFrameCounter++;
     mFrameCounter2++;
     f32 deltaTime = VFR::instance()->getDeltaFrame();
@@ -41,7 +41,7 @@ void SystemTimers::incrementCountersAndUpdate() {
     }
 }
 
-void SystemTimers::incrementCounters() {
+void GlobalFrameCounter::incrementCounters() {
     mFrameCounter++;
     mFrameCounterB++;
 }
