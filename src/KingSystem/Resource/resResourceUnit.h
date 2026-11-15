@@ -25,7 +25,7 @@ class OverlayArena;
 
 namespace ksys::res {
 
-class Cache;
+class ResourceMgr;
 class Context;
 class Handle;
 class LoadRequest;
@@ -54,8 +54,8 @@ public:
     struct InitArg {
         InitArg() = default;
         InitArg(bool set_flag_1, bool set_flag_2, bool set_flag_4, bool load_req_field_26,
-                bool load_req_field_28, Handle* handle, Cache* cache, void* _18, sead::Heap* heap,
-                const LoadRequest* load_req, OverlayArena* arena, u32 alloc_size,
+                bool load_req_field_28, Handle* handle, ResourceMgr* cache, void* _18,
+                sead::Heap* heap, const LoadRequest* load_req, OverlayArena* arena, u32 alloc_size,
                 sead::SafeString path)
             : set_flag_1(set_flag_1), set_flag_2(set_flag_2), set_flag_4(set_flag_4),
               load_req_field_26(load_req_field_26), load_req_field_28(load_req_field_28),
@@ -68,7 +68,7 @@ public:
         bool load_req_field_26 = false;
         bool load_req_field_28 = false;
         Handle* handle = nullptr;
-        Cache* cache = nullptr;
+        ResourceMgr* cache = nullptr;
         void* _18 = nullptr;
         sead::Heap* heap = nullptr;
         const LoadRequest* load_req = nullptr;
@@ -115,7 +115,7 @@ public:
 
     bool isLinkedToCache() const;
     void setIsLinkedToCache(bool linked);
-    Cache* getCache() const { return mCache; }
+    ResourceMgr* getCache() const { return mCache; }
     const auto& getCacheKey() const { return mMapNode.key(); }
     void removeFromCache();
 
@@ -150,7 +150,7 @@ public:
     }
 
 private:
-    friend class Cache;
+    friend class ResourceMgr;
     friend class Handle;
     friend class ResourceMgrTask;
 
@@ -217,7 +217,7 @@ private:
     Handle mArchiveResHandle;
     sead::ArchiveRes* mArchiveRes = nullptr;
     void* mLoadReqField68 = nullptr;
-    Cache* mCache = nullptr;
+    ResourceMgr* mCache = nullptr;
     sead::FileDevice* mFileDevice = nullptr;
     u32 mLoadReqAllocSize = 0;
     u32 mAllocSize = 0;

@@ -1,10 +1,10 @@
 #include "KingSystem/Resource/resResourceUnit.h"
 #include <filedevice/seadArchiveFileDevice.h>
 #include <resource/seadArchiveRes.h>
-#include "KingSystem/Resource/resCache.h"
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceMgr.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resSystem.h"
 

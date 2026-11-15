@@ -11,10 +11,10 @@ namespace ksys::res {
 
 class ControlTaskData;
 
-class Cache : public sead::hostio::Node {
+class ResourceMgr : public sead::hostio::Node {
 public:
-    Cache();
-    virtual ~Cache();
+    ResourceMgr();
+    virtual ~ResourceMgr();
 
     void init();
     ResourceUnit* findUnit(const ResourceUnitMapNode::KeyType& key) const;
@@ -30,7 +30,7 @@ private:
     [[maybe_unused]] u8 _8 = 2;
     util::StrTreeMap<ResourceUnitMapNode> mMap;
 };
-KSYS_CHECK_SIZE_NX150(Cache, 0x18);
+KSYS_CHECK_SIZE_NX150(ResourceMgr, 0x18);
 
 extern sead::CriticalSection gCacheCriticalSection;
 

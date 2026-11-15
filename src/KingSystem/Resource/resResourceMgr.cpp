@@ -1,4 +1,4 @@
-#include "KingSystem/Resource/resCache.h"
+#include "KingSystem/Resource/resResourceMgr.h"
 #include <prim/seadScopedLock.h>
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
@@ -8,19 +8,19 @@
 
 namespace ksys::res {
 
-Cache::Cache() = default;
+ResourceMgr::ResourceMgr() = default;
 
-Cache::~Cache() = default;
+ResourceMgr::~ResourceMgr() = default;
 
-void Cache::init() {}
+void ResourceMgr::init() {}
 
-ResourceUnit* Cache::findUnit(const util::StrTreeMapNode::KeyType& key) const {
+ResourceUnit* ResourceMgr::findUnit(const util::StrTreeMapNode::KeyType& key) const {
     auto lock = sead::makeScopedLock(gCacheCriticalSection);
     ResourceUnitMapNode* node = mMap.find(key);
     return node ? node->getUnit() : nullptr;
 }
 
-Handle::Status Cache::loadResource(const ControlTaskData& data) {
+Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
     auto* handle = data.mResHandle;
     if (handle->isLinked()) {
         stubbedLogFunction();
@@ -140,7 +140,7 @@ Handle::Status Cache::loadResource(const ControlTaskData& data) {
     return Handle::Status::RequestOk;
 }
 
-void Cache::eraseUnit(ResourceUnit* unit) {
+void ResourceMgr::eraseUnit(ResourceUnit* unit) {
     auto lock = sead::makeScopedLock(gCacheCriticalSection);
     if (unit->isLinkedToCache()) {
         mMap.erase(unit->getCacheKey());
@@ -148,7 +148,7 @@ void Cache::eraseUnit(ResourceUnit* unit) {
     }
 }
 
-void Cache::removeUnitAndClearCache_(ResourceUnit* unit) {
+void ResourceMgr::removeUnitAndClearCache_(ResourceUnit* unit) {
     unit->mStatusFlags.reset(ResourceUnit::StatusFlag::_20000);
     if (unit->isStatusFlag8000Set()) {
         ResourceMgrTask::instance()->deregisterUnit(unit);
@@ -164,8 +164,8 @@ struct ForEachContextData {
         (value->getCache()->*fn)(value);
     }
 
-    void (Cache::*fn0)(ResourceUnit* unit);
-    void (Cache::*fn)(ResourceUnit* unit);
+    void (ResourceMgr::*fn0)(ResourceUnit* unit);
+    void (ResourceMgr::*fn)(ResourceUnit* unit);
 };
 KSYS_CHECK_SIZE_NX150(ForEachContextData, 0x28);
 
@@ -180,10 +180,10 @@ struct ForEachContext {
 KSYS_CHECK_SIZE_NX150(ForEachContext, 0x8);
 }  // namespace detail::cache
 
-void Cache::eraseUnits() {
+void ResourceMgr::eraseUnits() {
     using namespace detail::cache;
     ForEachContextData data{};
-    data.fn = &Cache::removeUnitAndClearCache_;
+    data.fn = &ResourceMgr::removeUnitAndClearCache_;
     auto lock = sead::makeScopedLock(gCacheCriticalSection);
     ForEachContext context{&data};
     sead::Delegate1<ForEachContext, util::StrTreeMapNode*> delegate{&context,

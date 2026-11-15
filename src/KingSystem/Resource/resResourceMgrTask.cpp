@@ -5,11 +5,11 @@
 #include <resource/seadSZSDecompressor.h>
 #include <thread/seadThreadUtil.h>
 #include "KingSystem/Framework/frmWorkerSupportThreadMgr.h"
-#include "KingSystem/Resource/resCache.h"
 #include "KingSystem/Resource/resCompactedHeap.h"
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resOverlayArenaSystem.h"
+#include "KingSystem/Resource/resResourceMgr.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Resource/resTextureHandleList.h"
 #include "KingSystem/Resource/resTextureHandleMgr.h"

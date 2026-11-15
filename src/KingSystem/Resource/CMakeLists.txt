@@ -1,7 +1,5 @@
 target_sources(uking PRIVATE
 
-  resCache.cpp
-  resCache.h
   resCompactedHeap.cpp
   resCompactedHeap.h
   resControlTask.cpp
@@ -23,6 +21,8 @@ target_sources(uking PRIVATE
   resOverlayArenaSystem.h
   resPlacement.cpp
   resPlacement.h
+  resResourceMgr.cpp
+  resResourceMgr.h
   resResourceMgrTask.cpp
   resResourceMgrTask.h
   resResourceUnit.cpp

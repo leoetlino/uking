@@ -42,7 +42,7 @@ class TaskThread;
 
 namespace ksys::res {
 
-class Cache;
+class ResourceMgr;
 class CompactedHeap;
 class ControlTaskData;
 class EntryFactoryBase;
@@ -327,7 +327,7 @@ private:
     EntryFactoryBase* mEntryFactoryBase = nullptr;
     EntryFactoryBase* mDefaultEntryFactory = nullptr;
 
-    sead::Buffer<Cache*> mCaches;
+    sead::Buffer<ResourceMgr*> mCaches;
     sead::FixedObjArray<s32, 4> mThreadIds;
     u8* mOffsetReadBuf = nullptr;
     mutable sead::CriticalSection mSzsDecompressorCS;
