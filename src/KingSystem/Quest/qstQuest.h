@@ -3,7 +3,7 @@
 #include <Byaml/Byaml.h>
 #include "KingSystem/GameData/gdtManager.h"
 #include "KingSystem/Quest/qstStep.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::qst {
 

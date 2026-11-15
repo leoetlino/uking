@@ -5,7 +5,7 @@
 #include <container/seadPtrArray.h>
 #include <heap/seadDisposer.h>
 #include "KingSystem/ActorSystem/actPlacementMap.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
@@ -29,7 +29,7 @@ class PlacementMapMgr {
         sead::PtrArray<PlacementMap> mPtrs;
         PlacementActors* mPa;
         s64 _28;
-        res::Handle mRes;
+        res::ResourceBinder mRes;
         PlacementRailMgr* mP18;
         s32 _88;
         s32 _8c;

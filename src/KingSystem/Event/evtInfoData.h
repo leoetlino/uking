@@ -3,8 +3,8 @@
 #include <Byaml/Byaml.h>
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::evt {
 
@@ -27,7 +27,7 @@ public:
 private:
     void doInit(sead::Heap* heap, OverlayArena* arena);
     al::ByamlIter* mRootIter = nullptr;
-    ksys::res::Handle mHandle;
+    ksys::res::ResourceBinder mHandle;
     InfoDataUnknownType* _80 = nullptr;
 };
 

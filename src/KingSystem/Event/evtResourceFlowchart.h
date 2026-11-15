@@ -2,7 +2,7 @@
 
 #include <container/seadBuffer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace evfl {
 class FlowchartContext;
@@ -20,7 +20,7 @@ public:
     virtual ~ResourceFlowchart();
 
     /// Loads event flowchart resource files asynchronously.
-    void loadEventFlow(sead::Heap* heap, res::Handle* pack_handle);
+    void loadEventFlow(sead::Heap* heap, res::ResourceBinder* pack_handle);
 
     /// @return true if the load completed (succeeded or failed), false if it is still ongoing.
     bool finishLoad();
@@ -35,7 +35,7 @@ public:
 
 private:
     struct Res {
-        res::Handle handle;
+        res::ResourceBinder handle;
         const evfl::ResEventFlowFile* res_event_flow_file;
         const evfl::ResFlowchart* res_flowchart;
         bool loaded;

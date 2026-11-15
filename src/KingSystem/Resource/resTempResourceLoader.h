@@ -3,8 +3,8 @@
 #include <basis/seadTypes.h>
 #include <prim/seadSafeString.h>
 #include <prim/seadTypedBitFlag.h>
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -41,7 +41,7 @@ public:
     sead::DirectResource* getResourceForLoadRequest(Context* context);
     sead::DirectResource* load(LoadArg& arg);
     sead::DirectResource* getResource() const;
-    Handle::Status getHandleStatus() const;
+    ResourceBinder::Status getHandleStatus() const;
     sead::FileDevice* getHandleFileDevice() const;
     u32 getWorkHeapSize() const;
 
@@ -78,7 +78,7 @@ private:
     sead::TypedBitFlag<Flag> mFlags;
     sead::DirectResource* mResource{};
     TextureArchiveWork* mWork{};
-    Handle mHandle;
+    ResourceBinder mHandle;
     LoadArg mLoadArg;
     sead::FixedSafeString<128> mPath;
 };

@@ -7,7 +7,7 @@
 #include <prim/seadEnum.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -43,7 +43,7 @@ public:
     void unloadAocMainFieldPack();
 
     sead::FileDevice* getFileDeviceForMapFile(const sead::SafeString& path) const;
-    bool getFileDeviceForMap(sead::FileDevice** p_file_device, res::Handle** p_handle,
+    bool getFileDeviceForMap(sead::FileDevice** p_file_device, res::ResourceBinder** p_handle,
                              const sead::SafeString& path);
     sead::FileDevice* getFileDeviceForStaticCompound(const sead::SafeString& path) const;
     sead::FileDevice* getFileDeviceForTeraMesh(const sead::SafeString& path) const;
@@ -61,7 +61,7 @@ public:
     static bool isAocField(const sead::SafeString& map_type);
 
     sead::FileDevice* getFileDeviceForDungeonPack(const sead::SafeString& path) const;
-    void registerAocPack(res::Handle* pack);
+    void registerAocPack(res::ResourceBinder* pack);
     bool aocPackHasFile(const sead::SafeString& path) const;
 
     bool changeMoviePath(sead::BufferedSafeString& path) const;
@@ -89,7 +89,7 @@ private:
     struct VersionFile {
         bool readVersion();
 
-        res::Handle file_handle;
+        res::ResourceBinder file_handle;
         sead::FixedSafeString<16> string;
     };
     KSYS_CHECK_SIZE_NX150(VersionFile, 0x78);
@@ -108,9 +108,9 @@ private:
     VersionFile mVersionFile{};
     u32 mVersion{};
 
-    res::Handle mAocMainFieldPack;
+    res::ResourceBinder mAocMainFieldPack;
     res::FileDevicePrefix mAocMainFieldPackPrefix;
-    res::Handle* mAocPack{};
+    res::ResourceBinder* mAocPack{};
     res::FileDevicePrefix mAocPackPrefix;
 
     sead::SafeArray<DLCPosition, 20> mDLCPositions;

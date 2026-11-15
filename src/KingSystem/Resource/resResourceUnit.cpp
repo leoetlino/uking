@@ -127,7 +127,7 @@ void ResourceUnit::unloadArchiveRes() {
     }
 }
 
-void ResourceUnit::attachHandle(Handle* handle) {
+void ResourceUnit::attachHandle(ResourceBinder* handle) {
     handle->setUnit(this);
     mRefCount.increment();
     mStatusFlags.reset(StatusFlag::NeedToIncrementRefCount);
@@ -393,7 +393,7 @@ bool ResourceUnit::waitForTask1(const sead::TickSpan& span) {
     return mTask1.wait(span);
 }
 
-void ResourceUnit::detachFromHandle_(Handle* handle) {
+void ResourceUnit::detachFromHandle_(ResourceBinder* handle) {
     handle->setUnit(nullptr);
 }
 

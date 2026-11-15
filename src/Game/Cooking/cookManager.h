@@ -5,7 +5,7 @@
 #include <container/seadSafeArray.h>
 #include <container/seadTreeMap.h>
 #include <heap/seadDisposer.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace uking {
@@ -139,7 +139,7 @@ public:
 private:
     al::ByamlIter* mConfig = nullptr;
 
-    ksys::res::Handle mResHandle;
+    ksys::res::ResourceBinder mResHandle;
 
     sead::FixedSafeString<64> mFailActorName;
     sead::FixedSafeString<64> mFairyTonicName;

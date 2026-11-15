@@ -3,8 +3,8 @@
 #include "KingSystem/Physics/System/physContactMgr.h"
 #include "KingSystem/Physics/System/physGroupFilter.h"
 #include "KingSystem/Physics/System/physMaterialTable.h"
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::phys {
 
@@ -73,25 +73,25 @@ void SystemData::loadLayerTable(sead::Heap* heap, GroupFilter* filter, ContactLa
         }
     }
 
-    matrix.mResHandle = new (heap) res::Handle;
+    matrix.mResHandle = new (heap) res::ResourceBinder;
     const auto res = loadLayerTableRes(matrix, type);
     matrix.mParamIO.applyResParameterArchive(res);
 }
 
 void SystemData::loadMaterialTable(sead::Heap* heap, MaterialTable* table) {
-    mMaterialTableHandle = new (heap) res::Handle;
+    mMaterialTableHandle = new (heap) res::ResourceBinder;
     const auto res = loadMaterialTableRes();
     table->loadMaterialTable(heap, res);
 }
 
 void SystemData::loadSubMaterialTable(sead::Heap* heap, MaterialTable* table) {
-    mSubMaterialTableHandle = new (heap) res::Handle;
+    mSubMaterialTableHandle = new (heap) res::ResourceBinder;
     const auto res = loadSubMaterialTableRes();
     table->loadSubMaterialTable(heap, res);
 }
 
 void SystemData::loadContactInfoTable(sead::Heap* heap, ContactMgr* mgr, ContactLayerType type) {
-    mContactInfoTableHandles[int(type)] = new (heap) res::Handle;
+    mContactInfoTableHandles[int(type)] = new (heap) res::ResourceBinder;
     const auto res = loadContactInfoTableRes(type);
     mgr->loadContactInfoTable(heap, res, type);
 }
@@ -108,13 +108,13 @@ void SystemData::loadCharacterCtrlTable(sead::Heap* heap) {
         obj.params[i].init(0.0, material_text, material_text, &obj);
     }
 
-    mCharacterCtrlTable.mResHandle = new (heap) res::Handle;
+    mCharacterCtrlTable.mResHandle = new (heap) res::ResourceBinder;
     const auto res = loadCharacterCtrlTableRes();
     mCharacterCtrlTable.mParamIO.applyResParameterArchive(res);
 }
 
 void SystemData::loadRagdollCtrlKeyList(sead::Heap* heap) {
-    mRagdollCtrlKeyListHandle = new (heap) res::Handle;
+    mRagdollCtrlKeyListHandle = new (heap) res::ResourceBinder;
 
     res::LoadRequest request;
     request.mRequester = "physSystemData";

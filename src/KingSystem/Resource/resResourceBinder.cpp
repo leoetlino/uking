@@ -1,4 +1,4 @@
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include <container/seadBuffer.h>
 #include <prim/seadSafeString.h>
 #include <time/seadTickTime.h>
@@ -58,13 +58,13 @@ SimpleLoadRequest::SimpleLoadRequest() = default;
 
 SimplePackedLoadRequest::SimplePackedLoadRequest() = default;
 
-Handle::Handle() = default;
+ResourceBinder::ResourceBinder() = default;
 
-Handle::~Handle() {
+ResourceBinder::~ResourceBinder() {
     requestUnload();
 }
 
-void Handle::requestUnload() {
+void ResourceBinder::requestUnload() {
     if (!mFlags.isOn(Flag::LoadRequested))
         return;
 
@@ -87,13 +87,13 @@ void Handle::requestUnload() {
         ResourceMgrTask::instance()->requestUnload(this);
 }
 
-sead::DirectResource* Handle::getResource() const {
+sead::DirectResource* ResourceBinder::getResource() const {
     if (!isSuccess())
         return nullptr;
     return mUnit->mResource;
 }
 
-bool Handle::isSuccess() const {
+bool ResourceBinder::isSuccess() const {
     if (mFlags.isOff(Flag::LoadRequested))
         return false;
 
@@ -106,19 +106,19 @@ bool Handle::isSuccess() const {
     return true;
 }
 
-sead::DirectResource* Handle::getResourceUnchecked() const {
+sead::DirectResource* ResourceBinder::getResourceUnchecked() const {
     return mUnit->mResource;
 }
 
-Handle::Status Handle::getStatus() const {
+ResourceBinder::Status ResourceBinder::getStatus() const {
     return mStatus;
 }
 
-void Handle::setStatusForResourceMgr_(const Status& status) {
+void ResourceBinder::setStatusForResourceMgr_(const Status& status) {
     mStatus = status;
 }
 
-inline bool Handle::checkPathChange_(const sead::SafeString& path) {
+inline bool ResourceBinder::checkPathChange_(const sead::SafeString& path) {
     if (!mFlags.isOn(Flag::LoadRequested))
         return true;
 
@@ -129,8 +129,9 @@ inline bool Handle::checkPathChange_(const sead::SafeString& path) {
     return false;
 }
 
-sead::DirectResource* Handle::load(const sead::SafeString& path, const ILoadRequest* request,
-                                   Handle::Status* out_status) {
+sead::DirectResource* ResourceBinder::load(const sead::SafeString& path,
+                                           const ILoadRequest* request,
+                                           ResourceBinder::Status* out_status) {
     if (checkPathChange_(path)) {
         mFlags.reset(Flag::AllStatusFlags);
         mFlags.set(Flag::LoadRequested);
@@ -151,18 +152,18 @@ sead::DirectResource* Handle::load(const sead::SafeString& path, const ILoadRequ
     return getResource();
 }
 
-bool Handle::requestedLoad() const {
+bool ResourceBinder::requestedLoad() const {
     return mFlags.isOn(Flag::LoadRequested);
 }
 
-bool Handle::requestLoad(const sead::SafeString& path, const ILoadRequest* request,
-                         Handle::Status* out_status) {
+bool ResourceBinder::requestLoad(const sead::SafeString& path, const ILoadRequest* request,
+                                 ResourceBinder::Status* out_status) {
     if (checkPathChange_(path)) {
         mFlags.reset(Flag::AllStatusFlags);
         mFlags.set(Flag::LoadRequested);
         mStatus = Status::NoFile;
 
-        Handle::Status ret;
+        ResourceBinder::Status ret;
         if (request) {
             ret = ResourceMgrTask::instance()->requestLoad(this, path, *request);
         } else {
@@ -182,7 +183,7 @@ bool Handle::requestLoad(const sead::SafeString& path, const ILoadRequest* reque
     return false;
 }
 
-bool Handle::waitForReady() {
+bool ResourceBinder::waitForReady() {
     if (mTaskHandle.isTaskAttached())
         mTaskHandle.wait();
 
@@ -192,7 +193,7 @@ bool Handle::waitForReady() {
     return true;
 }
 
-bool Handle::waitForReady(const sead::TickSpan& span) {
+bool ResourceBinder::waitForReady(const sead::TickSpan& span) {
     if (mTaskHandle.isTaskAttached() && !mTaskHandle.wait(span))
         return false;
 
@@ -202,7 +203,7 @@ bool Handle::waitForReady(const sead::TickSpan& span) {
     return true;
 }
 
-bool Handle::parseResource(Context* context) {
+bool ResourceBinder::parseResource(Context* context) {
     if (mFlags.isOn(Flag::Parsed))
         return true;
 
@@ -271,12 +272,12 @@ bool Handle::parseResource(Context* context) {
     return true;
 }
 
-bool Handle::hasParsedResource() const {
+bool ResourceBinder::hasParsedResource() const {
     return mFlags.isOn(Flag::Parsed);
 }
 
 // NON_MATCHING: switch
-void Handle::updateResourceMgrFlag_() {
+void ResourceBinder::updateResourceMgrFlag_() {
     sead::FixedSafeString<128> path("***");
     if (mUnit)
         path = mUnit->mPath;
@@ -323,7 +324,7 @@ void Handle::updateResourceMgrFlag_() {
     res::ResourceMgrTask::instance()->setFlag2000Or5000(type);
 }
 
-void Handle::updateStatusAndUnload_() {
+void ResourceBinder::updateStatusAndUnload_() {
     auto* unit = mUnit;
     if (unit && unit->isStatus9_12_15()) {
         mStatus = [&] {
@@ -352,11 +353,11 @@ void Handle::updateStatusAndUnload_() {
     requestUnload();
 }
 
-void Handle::requestUnload2() {
+void ResourceBinder::requestUnload2() {
     requestUnload();
 }
 
-void Handle::unload() {
+void ResourceBinder::unload() {
     if (!mFlags.isOn(Flag::LoadRequested))
         return;
 
@@ -376,7 +377,7 @@ void Handle::unload() {
         ResourceMgrTask::instance()->requestUnloadForSync(this);
 }
 
-void Handle::unloadAndResetUnitFlag20000() {
+void ResourceBinder::unloadAndResetUnitFlag20000() {
     if (!mFlags.isOn(Flag::LoadRequested))
         return;
 
@@ -401,7 +402,7 @@ void Handle::unloadAndResetUnitFlag20000() {
     ResourceMgrTask::instance()->requestUnloadForSync(this);
 }
 
-void Handle::resetUnitFlag20000IfSuccess() {
+void ResourceBinder::resetUnitFlag20000IfSuccess() {
     if (mFlags.isOff(Flag::LoadRequested))
         return;
 
@@ -417,7 +418,7 @@ void Handle::resetUnitFlag20000IfSuccess() {
         unit->mStatusFlags.reset(ResourceUnit::StatusFlag::_20000);
 }
 
-bool Handle::isBusy() const {
+bool ResourceBinder::isBusy() const {
     if (mTaskHandle.isTaskAttached())
         return true;
 
@@ -427,7 +428,7 @@ bool Handle::isBusy() const {
     return false;
 }
 
-bool Handle::isReadyOrNeedsParse() const {
+bool ResourceBinder::isReadyOrNeedsParse() const {
     if ((mFlags.getDirect() & 0xA) != u32(Flag::LoadRequested) || isBusy())
         return false;
 
@@ -437,14 +438,14 @@ bool Handle::isReadyOrNeedsParse() const {
     return mUnit && mUnit->needsParse();
 }
 
-bool Handle::isReady() const {
+bool ResourceBinder::isReady() const {
     if (isSuccess())
         return true;
 
     return checkLoadStatus();
 }
 
-bool Handle::checkLoadStatus() const {
+bool ResourceBinder::checkLoadStatus() const {
     if (isBusy())
         return false;
 
@@ -461,11 +462,11 @@ bool Handle::checkLoadStatus() const {
     return ok;
 }
 
-sead::SafeString Handle::makeEmptyString() {
+sead::SafeString ResourceBinder::makeEmptyString() {
     return sead::SafeString::cEmptyString;
 }
 
-void Handle::waitForResourceAndParse_(Context* context) {
+void ResourceBinder::waitForResourceAndParse_(Context* context) {
     if (!mUnit) {
         updateResourceMgrFlag_();
         return;

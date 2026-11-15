@@ -6,7 +6,7 @@
 #include <thread/seadAtomic.h>
 #include "KingSystem/Resource/resCoordinatorDeferredRequest.h"
 #include "KingSystem/Resource/resCoordinatorForOverlayArena.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Thread/Event.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -121,7 +121,7 @@ private:
     CoordinatorDeferredRequest mDeferredRequest;
     sead::Atomic<u32> _130 = 0;
     sead::Atomic<u32> _134 = 0;
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
     Event mEvent;
 };
 KSYS_CHECK_SIZE_NX150(OverlayArenaSystem, 0x1c8);

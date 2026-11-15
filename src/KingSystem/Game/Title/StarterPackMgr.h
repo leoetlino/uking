@@ -5,9 +5,9 @@
 #include <prim/seadSafeString.h>
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/Resource/resEntryFactory.h"
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceArchive.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/System/GameConfig.h"
@@ -42,17 +42,17 @@ public:
     void setPackToTitleBGPack();
     void unloadTitleBGAndAocMainFieldPacksAndStuff();
     void failedLoadTitlePack();
-    res::Handle* getBootupLangPack();
-    res::Handle* getTitleBGLangPack();
+    res::ResourceBinder* getBootupLangPack();
+    res::ResourceBinder* getTitleBGLangPack();
 
 private:
-    res::Handle mBootupGfxPack;
-    res::Handle mBootupPack;
-    res::Handle mUnusedPack;
-    res::Handle mBootupLangPack;
-    res::Handle mTitlePack;
-    res::Handle mTitleBGPack;
-    res::Handle mTitleBGLangPack;
+    res::ResourceBinder mBootupGfxPack;
+    res::ResourceBinder mBootupPack;
+    res::ResourceBinder mUnusedPack;
+    res::ResourceBinder mBootupLangPack;
+    res::ResourceBinder mTitlePack;
+    res::ResourceBinder mTitleBGPack;
+    res::ResourceBinder mTitleBGLangPack;
     OverlayArena* mOverlayArena = nullptr;
     sead::ExpHeap* mExpHeap = nullptr;
     res::EntryFactory<res::Archive> mArchiveFac;

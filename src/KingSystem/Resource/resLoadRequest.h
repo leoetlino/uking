@@ -16,7 +16,7 @@ class OverlayArena;
 
 namespace ksys::res {
 
-class Handle;
+class ResourceBinder;
 
 class EntryFactoryBase;
 
@@ -59,7 +59,7 @@ public:
     EntryFactoryBase* mEntryFactory = nullptr;
     sead::FileDevice* mAocFileDevice = nullptr;
     OverlayArena* mArena = nullptr;
-    Handle* mPackHandle = nullptr;
+    ResourceBinder* mPackHandle = nullptr;
     void* mFilePathContainer = nullptr;
     void* _68 = nullptr;
     sead::SafeString mPath;
@@ -87,7 +87,7 @@ public:
     SimplePackedLoadRequest(const SimplePackedLoadRequest&) = default;
     SimplePackedLoadRequest& operator=(const SimplePackedLoadRequest&) = default;
 
-    Handle* mPack = nullptr;
+    ResourceBinder* mPack = nullptr;
     void* _30 = nullptr;
 };
 KSYS_CHECK_SIZE_NX150(SimplePackedLoadRequest, 0x30);

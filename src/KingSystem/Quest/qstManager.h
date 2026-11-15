@@ -5,7 +5,7 @@
 #include <prim/seadSafeString.h>
 #include <utility/aglParameter.h>
 #include "KingSystem/Quest/qstQuest.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::qst {
 
@@ -48,7 +48,7 @@ private:
     u32 _58;
     u32 temp3;
     u32 temp4;
-    res::Handle mHandle;
+    res::ResourceBinder mHandle;
     sead::ObjArray<Quest> mQuests;
     sead::Heap* mHeap = nullptr;
     u16 mFlags;

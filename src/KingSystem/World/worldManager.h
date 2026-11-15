@@ -11,7 +11,7 @@
 #include <utility/aglParameterIO.h>
 #include <utility/aglParameterObj.h>
 #include "KingSystem/Game/StageInfo.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 #include "KingSystem/World/worldChemicalMgr.h"
 #include "KingSystem/World/worldCollaboShootingStarMgr.h"
@@ -70,7 +70,7 @@ public:
     WorldInfo() : agl::utl::IParameterIO("winfo", 0) {}
 
     u8 _1d8[0x20];
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
     sead::Buffer<ClimateInfo> mClimates;
 };
 KSYS_CHECK_SIZE_NX150(WorldInfo, 0x258);
@@ -80,7 +80,7 @@ public:
     DungeonEnv() : agl::utl::IParameterIO("dgnenv", 0) {}
 
     u8 _1d8[0x20];
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
     agl::utl::Parameter<float> mLightLongitude;
     agl::utl::Parameter<sead::FixedSafeString<32>> mDungeonSize;
     agl::utl::Parameter<sead::FixedSafeString<32>> mDungeonType;

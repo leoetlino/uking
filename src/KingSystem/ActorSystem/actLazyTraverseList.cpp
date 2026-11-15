@@ -6,7 +6,7 @@
 namespace ksys::act {
 
 LazyTraverseList::LazyTraverseList(sead::Heap* heap) {
-    ksys::res::Handle handle;
+    ksys::res::ResourceBinder handle;
     sead::SafeString path = "Map/MainField/LazyTraverseList.mubin";
     ksys::res::LoadRequest request;
 

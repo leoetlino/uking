@@ -11,7 +11,7 @@
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::res {
-class Handle;
+class ResourceBinder;
 }
 
 namespace ksys::phys {
@@ -55,7 +55,7 @@ public:
         sead::SafeArray<Table, Count> mTables;
         agl::utl::ParameterList mParamList;
         agl::utl::IParameterIO mParamIO;
-        res::Handle* mResHandle = nullptr;
+        res::ResourceBinder* mResHandle = nullptr;
     };
 
     SystemData();
@@ -84,12 +84,12 @@ private:
     agl::utl::ResParameterArchive loadCharacterCtrlTableRes();
 
     sead::SafeArray<LayerMatrix, 2> mLayerMatrices{};
-    res::Handle* mMaterialTableHandle{};
-    res::Handle* mSubMaterialTableHandle{};
-    sead::SafeArray<res::Handle*, 2> mContactInfoTableHandles{};
+    res::ResourceBinder* mMaterialTableHandle{};
+    res::ResourceBinder* mSubMaterialTableHandle{};
+    sead::SafeArray<res::ResourceBinder*, 2> mContactInfoTableHandles{};
     Tables<CharacterControllerTable, 1> mCharacterCtrlTable;
     RagdollControllerKeyList* mRagdollCtrlKeyList{};
-    res::Handle* mRagdollCtrlKeyListHandle{};
+    res::ResourceBinder* mRagdollCtrlKeyListHandle{};
 };
 KSYS_CHECK_SIZE_NX150(SystemData, 0x11b48);
 

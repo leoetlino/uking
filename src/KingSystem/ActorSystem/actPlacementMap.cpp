@@ -208,7 +208,7 @@ bool PlacementMap::loadDynamicMap() {
 
 // Objects: Static and Dynamic
 PlacementMap::MapObjStatus PlacementMap::parseStaticCompoundAndBindObjects(int hksc_idx) {
-    res::Handle* handle = &mRes[hksc_idx].mRes;
+    res::ResourceBinder* handle = &mRes[hksc_idx].mRes;
     if (!handle->isReadyOrNeedsParse()) {
         return MapObjStatus::NotReady;
     }

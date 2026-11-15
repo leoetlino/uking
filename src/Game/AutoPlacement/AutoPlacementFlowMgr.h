@@ -4,7 +4,7 @@
 #include <evfl/Flowchart.h>
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace uking {
 
@@ -13,7 +13,7 @@ class AutoPlacement;
 struct AutoPlacementFlowRes {
     void start(AutoPlacement* placement, const sead::SafeString& unit_name, int*);
 
-    ksys::res::Handle handle;
+    ksys::res::ResourceBinder handle;
     sead::SafeString evfl_name;
     evfl::FlowchartContext flowchart_ctx;
     AutoPlacement* placement;

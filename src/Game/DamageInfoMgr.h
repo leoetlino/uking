@@ -6,7 +6,7 @@
 #include <heap/seadDisposer.h>
 #include <thread/seadReadWriteLock.h>
 #include "KingSystem/Framework/frmBaseProcLink.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace uking {
 
@@ -41,7 +41,7 @@ public:
 
 private:
     /* 0x0028 */ u8 TEMP_8[0x5d0 - 0x28];
-    /* 0x05d0 */ ksys::res::Handle mReactionTable;
+    /* 0x05d0 */ ksys::res::ResourceBinder mReactionTable;
     /* 0x0620 */ sead::Buffer<DamageItem> mDamagesArray;
     /* 0x0630 */ u8 TEMP_630[0xd00 - 0x630];
     /* 0x0d00 */ sead::ReadWriteLock mLock;

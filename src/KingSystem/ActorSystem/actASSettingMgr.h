@@ -3,7 +3,7 @@
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actASSetting.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
@@ -19,7 +19,7 @@ public:
     ASParamParser* getBoneParams(const sead::SafeString& key) const;
 
 private:
-    res::Handle mHandle;
+    res::ResourceBinder mHandle;
 };
 KSYS_CHECK_SIZE_NX150(ASSettingMgr, 0x78);
 

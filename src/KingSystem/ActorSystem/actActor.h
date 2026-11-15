@@ -65,7 +65,7 @@ class ReactionSet;
 }  // namespace reaction
 
 namespace res {
-class Handle;
+class ResourceBinder;
 class ModelResourceTextureCache;
 class ModelTextureBinding;
 }  // namespace res
@@ -511,7 +511,7 @@ protected:
 
     /* 0x658 */ res::ModelResourceTextureCache* mModelTextureCache = nullptr;
     /* 0x660 */ sead::Buffer<res::ModelTextureBinding*> mModelTextureBindings;
-    /* 0x670 */ sead::Buffer<res::Handle> mModelResHandles;
+    /* 0x670 */ sead::Buffer<res::ResourceBinder> mModelResHandles;
     /* 0x680 */ u8 mNumLoadedModelRes = 0;
     /* 0x681 */ u8 mNumModelBfres = 0;
     /* 0x682 */ u8 mPreDeleteModelReadyFrames = 0;

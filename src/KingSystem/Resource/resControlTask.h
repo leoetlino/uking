@@ -9,7 +9,7 @@
 
 namespace ksys::res {
 
-class Handle;
+class ResourceBinder;
 class ResourceUnit;
 
 class ControlTaskData : public TaskData {
@@ -19,7 +19,7 @@ public:
 
     bool mHasResLoadReq = false;
     ResourceUnit* mPackResUnit = nullptr;
-    Handle* mResHandle = nullptr;
+    ResourceBinder* mResHandle = nullptr;
     sead::FixedSafeString<128> mResPath;
     LoadRequest mResLoadReq;
 };
@@ -46,7 +46,7 @@ public:
 
     bool mHasResLoadReq = false;
     ResourceUnit* mPackResUnit = nullptr;
-    Handle* mResHandle = nullptr;
+    ResourceBinder* mResHandle = nullptr;
     sead::FixedSafeString<128> mResPath;
     LoadRequest mResLoadReq;
 };

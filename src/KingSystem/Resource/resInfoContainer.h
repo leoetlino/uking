@@ -3,7 +3,7 @@
 #include <basis/seadTypes.h>
 #include <container/seadBuffer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::res {
@@ -45,7 +45,7 @@ private:
         s32 res_size;
     };
 
-    Handle mRstbHandle;
+    ResourceBinder mRstbHandle;
     sead::Buffer<const ResEntry> mEntries;
     sead::Buffer<const ResStringEntry> mStringEntries;
 };

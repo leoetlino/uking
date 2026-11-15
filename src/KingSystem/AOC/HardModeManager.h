@@ -7,7 +7,7 @@
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
 #include "KingSystem/ActorSystem/actPreActor.h"
 #include "KingSystem/GameData/gdtManager.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::aoc {
@@ -69,7 +69,7 @@ private:
     ksys::gdt::Manager::ResetSignal::Slot mGdtResetSlot;
     ksys::gdt::Manager::ReinitSignal::Slot mGdtReinitSlot;
     void* _120 = nullptr;
-    ksys::res::Handle mFileHandle;
+    ksys::res::ResourceBinder mFileHandle;
     ksys::gdt::FlagHandle mHardModeHighScoreFlag = ksys::gdt::InvalidHandle;
     ksys::gdt::FlagHandle mAoCHardModeEnabledFlag = ksys::gdt::InvalidHandle;
     ksys::gdt::FlagHandle mIsLastPlayHardModeFlag = ksys::gdt::InvalidHandle;

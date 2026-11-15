@@ -185,8 +185,8 @@ ActorParam* ActorParamMgr::getParam(const char* actor_name, ActorParam** out_fre
     return nullptr;
 }
 
-ActorParam* ActorParamMgr::loadParam(const char* actor_name, res::Handle* pack_handle, void* x,
-                                     u32 lane_id) {
+ActorParam* ActorParamMgr::loadParam(const char* actor_name, res::ResourceBinder* pack_handle,
+                                     void* x, u32 lane_id) {
     bool allocated_new = false;
     ActorParam* param = allocParam(actor_name, &allocated_new);
 
@@ -200,7 +200,7 @@ ActorParam* ActorParamMgr::loadParam(const char* actor_name, res::Handle* pack_h
     return param;
 }
 
-void ActorParamMgr::loadFiles(ActorParam* param, sead::Heap* heap, res::Handle* pack_handle,
+void ActorParamMgr::loadFiles(ActorParam* param, sead::Heap* heap, res::ResourceBinder* pack_handle,
                               void* x, u32 lane_id) {
     param->deleteResHandles();
     param->allocResHandles(heap, 0, ActorParam::NumResourceTypes + 1);
@@ -230,8 +230,8 @@ void ActorParamMgr::loadFiles(ActorParam* param, sead::Heap* heap, res::Handle* 
     loadFilesStep2(param, heap, pack_handle, x, lane_id);
 }
 
-bool ActorParamMgr::requestLoadActorPack(res::Handle* handle, const sead::SafeString& actor_name,
-                                         u32 lane_id) {
+bool ActorParamMgr::requestLoadActorPack(res::ResourceBinder* handle,
+                                         const sead::SafeString& actor_name, u32 lane_id) {
     sead::FixedSafeString<128> path;
     res::LoadRequest req;
 
@@ -246,7 +246,7 @@ bool ActorParamMgr::requestLoadActorPack(res::Handle* handle, const sead::SafeSt
     return handle->requestLoad(path, &req);
 }
 
-ActorParam* ActorParamMgr::loadParamAsync(const char* actor_name, res::Handle* pack_handle,
+ActorParam* ActorParamMgr::loadParamAsync(const char* actor_name, res::ResourceBinder* pack_handle,
                                           bool* allocated_new, void* x, u32 lane_id) {
     auto* param = allocParam(actor_name, allocated_new);
     if (!*allocated_new)
@@ -265,7 +265,7 @@ template <typename T>
 bool ActorParamMgr::loadFileAsync(ActorParam* param, ActorParam::ResourceType type,
                                   const sead::SafeString& dir_name,
                                   const sead::SafeString& extension, const sead::SafeString& name,
-                                  res::Handle* pack_handle, void* x, u32 lane_id) {
+                                  res::ResourceBinder* pack_handle, void* x, u32 lane_id) {
     auto* handle = param->allocHandle();
 
     if (name != "Dummy" && !name.isEmpty()) {
@@ -336,8 +336,8 @@ bool ActorParamMgr::finishLoadingActorLink(ActorParam* param, void* x) {
     return true;
 }
 
-void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::Handle* pack_handle, void* x,
-                                        u32 lane_id) {
+void ActorParamMgr::loadParamAsyncStep2(ActorParam* param, res::ResourceBinder* pack_handle,
+                                        void* x, u32 lane_id) {
     const auto* link = param->getRes().mActorLink;
 
     loadFileAsync<ModelList>(param, Type::ModelList, "Actor/ModelList", "modellist",
@@ -469,7 +469,7 @@ bool ActorParamMgr::finishLoadingStep2(ActorParam* param, void* x) {
     return true;
 }
 
-void ActorParamMgr::loadExtraResAsync(ActorParam* param, res::Handle* pack_handle, void* x,
+void ActorParamMgr::loadExtraResAsync(ActorParam* param, res::ResourceBinder* pack_handle, void* x,
                                       u32 lane_id) {
     const auto* aslist = param->getRes().mASList;
     const auto* atcllist = param->getRes().mAttClientList;
@@ -519,7 +519,7 @@ bool ActorParamMgr::finishLoadingExtraRes(ActorParam* param, void* x) {
                 aslist->addAS_(i, as);
                 ++idx;
             } else {
-                const res::Handle& handle = param->mHandles[1][idx];
+                const res::ResourceBinder& handle = param->mHandles[1][idx];
                 if (handle.hasParsedResource()) {
                     ++idx;
                     continue;
@@ -547,7 +547,7 @@ bool ActorParamMgr::finishLoadingExtraRes(ActorParam* param, void* x) {
                 atcllist->addClient_(i, res);
                 ++idx;
             } else {
-                const res::Handle& handle = param->mHandles[1][idx];
+                const res::ResourceBinder& handle = param->mHandles[1][idx];
                 if (handle.hasParsedResource()) {
                     ++idx;
                     continue;
@@ -574,7 +574,7 @@ bool ActorParamMgr::finishLoadingExtraRes(ActorParam* param, void* x) {
                 rgconfiglist->addImpulseParamConfig_(i, res);
                 ++idx;
             } else {
-                const res::Handle& handle = param->mHandles[1][idx];
+                const res::ResourceBinder& handle = param->mHandles[1][idx];
                 if (handle.hasParsedResource()) {
                     ++idx;
                     continue;
@@ -616,8 +616,8 @@ void ActorParamMgr::allocExtraResHandles(ActorParam* param, sead::Heap* heap) co
     param->allocResHandles(heap, 1, num_extra_handles);
 }
 
-void ActorParamMgr::loadFilesStep2(ActorParam* param, sead::Heap* heap, res::Handle* pack_handle,
-                                   void* x, u32 lane_id) {
+void ActorParamMgr::loadFilesStep2(ActorParam* param, sead::Heap* heap,
+                                   res::ResourceBinder* pack_handle, void* x, u32 lane_id) {
     const auto* link = param->getRes().mActorLink;
     param->mActiveBufferIdx = 0;
 
@@ -731,7 +731,7 @@ bool ActorParamMgr::prepareLoadFromActorPack(sead::BufferedSafeString* path, res
                                              void*, const sead::SafeString& dir_name,
                                              const sead::SafeString& extension,
                                              const sead::SafeString& file_name,
-                                             res::Handle* pack_handle, u32 lane_id,
+                                             res::ResourceBinder* pack_handle, u32 lane_id,
                                              const sead::SafeString& requester) {
     path->format("%s/%s.b%s", dir_name.cstr(), file_name.cstr(), extension.cstr());
 
@@ -760,8 +760,8 @@ bool ActorParamMgr::prepareLoadFromActorPack(sead::BufferedSafeString* path, res
     return ret;
 }
 
-res::Archive* ActorParamMgr::loadActorPack(res::Handle* handle, const sead::SafeString& actor_name,
-                                           u32 lane_id) {
+res::Archive* ActorParamMgr::loadActorPack(res::ResourceBinder* handle,
+                                           const sead::SafeString& actor_name, u32 lane_id) {
     sead::FixedSafeString<128> path;
     res::TempResourceLoader::LoadArg arg;
     arg.retry_on_failure = true;
@@ -793,8 +793,8 @@ res::Archive* ActorParamMgr::loadActorPack(res::Handle* handle, const sead::Safe
 
 template <typename T>
 T* ActorParamMgr::loadFile(ActorParam* param, ActorParam::ResourceType type, const char* dir_name_c,
-                           const char* extension_c, const char* name_c, res::Handle* pack_handle,
-                           void* x, u32 lane_id) {
+                           const char* extension_c, const char* name_c,
+                           res::ResourceBinder* pack_handle, void* x, u32 lane_id) {
     const sead::SafeString name = name_c;
     const sead::SafeString extension = extension_c;
     sead::FixedSafeString<128> path;

@@ -3,7 +3,7 @@
 #include <basis/seadTypes.h>
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actActorCapture.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/System/Timer.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -37,8 +37,8 @@ private:
     ksys::act::Actor* mActor{};
     ksys::act::Actor* mCamera{};
     ksys::res::EntryFactoryBase* mFactory{};
-    ksys::res::Handle mDummyFile;
-    ksys::res::Handle mCaptureParamFile;
+    ksys::res::ResourceBinder mDummyFile;
+    ksys::res::ResourceBinder mCaptureParamFile;
     sead::FixedSafeString<64> mStr;
     sead::FixedSafeString<256> mStr2;
     ksys::act::ActorCapture mRes;

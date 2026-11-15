@@ -8,7 +8,7 @@
 #include <time/seadTickSpan.h>
 #include <time/seadTickTime.h>
 
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace uking {
 
@@ -79,7 +79,7 @@ private:
 
     sead::FixedSafeString<32> mStr;
 
-    ksys::res::Handle mHandle;
+    ksys::res::ResourceBinder mHandle;
 
     s32 mDemoStage = -1;
 };

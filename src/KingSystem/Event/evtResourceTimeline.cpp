@@ -23,7 +23,7 @@ ResourceTimeline::~ResourceTimeline() {
 }
 
 void ResourceTimeline::loadEventFlow(sead::Heap* heap, const al::ByamlIter& event_info,
-                                     res::Handle* pack_handle) {
+                                     res::ResourceBinder* pack_handle) {
     al::ByamlIter sub_timelines;
     int num_sub_timelines = 0;
     if (event_info.tryGetIterByKey(&sub_timelines, "sub_timelines"))

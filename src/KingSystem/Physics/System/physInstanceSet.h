@@ -19,7 +19,7 @@ class DirectResource;
 }
 
 namespace ksys::res {
-class Handle;
+class ResourceBinder;
 }  // namespace ksys::res
 
 namespace ksys::act {
@@ -145,7 +145,7 @@ private:
     sead::PtrArray<RigidBodySet> mRigidBodySets;
     sead::PtrArray<CollisionInfo> mCollisionInfo;
     sead::PtrArray<ContactPointInfo> mContactPointInfo;
-    sead::Buffer<res::Handle*> mRigidBodySetResHandles;
+    sead::Buffer<res::ResourceBinder*> mRigidBodySetResHandles;
 
     CharacterController* mCharacterController{};
     CharacterFormSet* mCharacterFormSet{};
@@ -153,15 +153,15 @@ private:
     RagdollInstance* mRagdollInstance{};
     sead::Buffer<RagdollController*> mRagdollControllers;
     ContactPointInfo* mRagdollContactPointInfo{};
-    res::Handle* mRagdollResHandle{};
+    res::ResourceBinder* mRagdollResHandle{};
     act::RagdollBlendWeight* mRagdollBlendWt;
     act::RagdollConfigList* mRagdollConfigList;
 
-    res::Handle* mClothResHandle{};
+    res::ResourceBinder* mClothResHandle{};
     sead::DirectResource* mClothRes{};
     ClothSet* mClothSet;
 
-    res::Handle* mSupportBoneResHandle{};
+    res::ResourceBinder* mSupportBoneResHandle{};
     SupportBoneWork* mSupportBoneWork{};
     SkeletonModelPose* mSkeletonModelPose{};
 

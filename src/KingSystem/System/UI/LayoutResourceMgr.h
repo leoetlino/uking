@@ -5,7 +5,7 @@
 #include <hostio/seadHostIONode.h>
 #include <prim/seadSafeString.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/System/UI/ArcResource.h"
 #include "KingSystem/System/UI/ArcResourceMgr.h"
 #include "KingSystem/Utils/Types.h"
@@ -27,7 +27,7 @@ private:
 
     public:
         void allocate(sead::Heap* heap) {
-            mHandle = new (heap) res::Handle;
+            mHandle = new (heap) res::ResourceBinder;
             mResourceStorage = new (heap) u8[sizeof(ArcResource)];
         }
         void deallocate() {
@@ -42,13 +42,13 @@ private:
             mResourceStorage = nullptr;
         }
 
-        res::Handle* getHandle() { return mHandle; }
-        const res::Handle* getHandle() const { return mHandle; }
+        res::ResourceBinder* getHandle() { return mHandle; }
+        const res::ResourceBinder* getHandle() const { return mHandle; }
         ArcResource* getResource() { return mResource; }
         const ArcResource* getResource() const { return mResource; }
 
     private:
-        res::Handle* mHandle = nullptr;
+        res::ResourceBinder* mHandle = nullptr;
         ArcResource* mResource = nullptr;
         u8* mResourceStorage = nullptr;
     };
@@ -76,11 +76,11 @@ public:
     bool loadArcResource(Archive& archive, const char* name);
 
 private:
-    res::Handle* mMsgPackHandle = nullptr;
-    res::Handle* mLangFontHandle = nullptr;
-    res::Handle* mVersionHandle = nullptr;
-    sead::FixedPtrArray<res::Handle, 8> mExtraLangFontHandles;
-    res::Handle* mZeldaGlyphHandle = nullptr;
+    res::ResourceBinder* mMsgPackHandle = nullptr;
+    res::ResourceBinder* mLangFontHandle = nullptr;
+    res::ResourceBinder* mVersionHandle = nullptr;
+    sead::FixedPtrArray<res::ResourceBinder, 8> mExtraLangFontHandles;
+    res::ResourceBinder* mZeldaGlyphHandle = nullptr;
     ArcResourceMgr* mArcResourceMgr = nullptr;
     sead::DirectResource* mLangFontResource = nullptr;
     Archive _a8;

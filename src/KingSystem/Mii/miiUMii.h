@@ -4,7 +4,7 @@
 #include <utility/aglParameter.h>
 #include <utility/aglParameterIO.h>
 #include <utility/aglParameterObj.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::act {
@@ -297,7 +297,7 @@ private:
 
     act::Actor* mActor = nullptr;
     act::ActorParam* mActorParam = nullptr;
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
     sead::SafeString mActorName = sead::SafeString::cEmptyString;
 };
 KSYS_CHECK_SIZE_NX150(UMii, 0x10e0);

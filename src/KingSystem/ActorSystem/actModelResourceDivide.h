@@ -2,7 +2,7 @@
 
 #include <heap/seadDisposer.h>
 #include <prim/seadSafeString.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace al {
 class ByamlIter;
@@ -23,7 +23,7 @@ public:
 
 private:
     al::ByamlIter* mIter{};
-    res::Handle mHandle;
+    res::ResourceBinder mHandle;
 };
 KSYS_CHECK_SIZE_NX150(ModelResourceDivide, 0x80);
 

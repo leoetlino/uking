@@ -32,7 +32,7 @@ ResourceFlowchart::~ResourceFlowchart() {
     }
 }
 
-void ResourceFlowchart::loadEventFlow(sead::Heap* heap, res::Handle* pack_handle) {
+void ResourceFlowchart::loadEventFlow(sead::Heap* heap, res::ResourceBinder* pack_handle) {
     al::ByamlIter event_info;
     al::ByamlIter subfiles;
     int num_flowcharts = 1;

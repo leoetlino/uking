@@ -2,7 +2,7 @@
 
 #include <hostio/seadHostIONode.h>
 #include <thread/seadCriticalSection.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Types.h"
@@ -18,7 +18,7 @@ public:
 
     void init();
     ResourceUnit* findUnit(const ResourceUnitMapNode::KeyType& key) const;
-    Handle::Status loadResource(const ControlTaskData& data);
+    ResourceBinder::Status loadResource(const ControlTaskData& data);
 
     void eraseUnit(ResourceUnit* unit);
     void eraseUnits();

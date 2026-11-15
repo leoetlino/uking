@@ -18,14 +18,14 @@ class AS;
 
 namespace ksys::res {
 
-class Handle;
+class ResourceBinder;
 
 class DemoASLoader {
 public:
     DemoASLoader(const sead::SafeString& event_name, sead::Heap* heap);
     virtual ~DemoASLoader();
 
-    void load(const al::ByamlIter& iter, bool synchronous, Handle* pack_handle);
+    void load(const al::ByamlIter& iter, bool synchronous, ResourceBinder* pack_handle);
 
     const char* getName(int idx) const;
     act::AS* getAS(int idx) const;
@@ -42,7 +42,7 @@ private:
     };
 
     sead::Heap* mHeap = nullptr;
-    sead::Buffer<Handle> mHandles;
+    sead::Buffer<ResourceBinder> mHandles;
     sead::Buffer<sead::FixedSafeString<64>> mNames;
     sead::FixedSafeString<64> mEventName;
     int mNumAS = 0;

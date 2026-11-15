@@ -6,8 +6,8 @@
 #include <utility/aglResParameter.h>
 #include "KingSystem/Awareness/awnAwarenessDefs.h"
 #include "KingSystem/Awareness/awnAwarenessInstance.h"
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::awn {
 
@@ -74,7 +74,7 @@ bool Awareness::loadSystemData() {
     if (!mHeap)
         return false;
 
-    res::Handle handle;
+    res::ResourceBinder handle;
     res::LoadRequest req;
     req.mRequester = "AwarenessSystemData";
     req._26 = false;

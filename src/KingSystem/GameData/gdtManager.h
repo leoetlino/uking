@@ -12,7 +12,7 @@
 #include "KingSystem/GameData/gdtFlagHandle.h"
 #include "KingSystem/GameData/gdtFlagIncreaseQueue.h"
 #include "KingSystem/GameData/gdtTriggerParam.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/System/KingEditor.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -620,11 +620,11 @@ private:
     sead::Heap* mGameDataHeap = nullptr;
     sead::Heap* mSaveAreaHeap = nullptr;
     sead::Heap* mGameDataComHeap = nullptr;
-    res::Handle mGameDataArcHandle;
-    sead::SafeArray<res::Handle, 32> mBgdataHandles;
+    res::ResourceBinder mGameDataArcHandle;
+    sead::SafeArray<res::ResourceBinder, 32> mBgdataHandles;
     sead::ArchiveFileDevice mGameDataArc{nullptr};
 
-    res::Handle mShopGameDataInfoHandle;
+    res::ResourceBinder mShopGameDataInfoHandle;
     al::ByamlIter mShopAreaInfoValues;
     const u32* mShopAreaInfoHashes = nullptr;
     al::ByamlIter mShopSoldOutInfoValues;

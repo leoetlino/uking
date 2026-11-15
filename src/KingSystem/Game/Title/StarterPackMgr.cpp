@@ -221,13 +221,13 @@ void StarterPackMgr::failedLoadTitlePack() {
     mTitlePack.requestedLoad();
 }
 
-res::Handle* StarterPackMgr::getTitleBGLangPack() {
+res::ResourceBinder* StarterPackMgr::getTitleBGLangPack() {
     if (!mTitleBGLangPack.hasParsedResource())
         return nullptr;
     return &mTitleBGLangPack;
 }
 
-res::Handle* StarterPackMgr::getBootupLangPack() {
+res::ResourceBinder* StarterPackMgr::getBootupLangPack() {
     if (!mBootupLangPack.hasParsedResource())
         return nullptr;
     return &mBootupLangPack;

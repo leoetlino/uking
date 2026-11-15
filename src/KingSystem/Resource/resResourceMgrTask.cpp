@@ -752,7 +752,7 @@ void ResourceMgrTask::removeOverlayArena(OverlayArena* arena) {
     }
 }
 
-void ResourceMgrTask::setPack(Handle* pack) {
+void ResourceMgrTask::setPack(ResourceBinder* pack) {
     mPackHandle = pack;
     res::stubbedLogFunction();
 }

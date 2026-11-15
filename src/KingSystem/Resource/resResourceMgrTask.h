@@ -143,13 +143,13 @@ public:
 
     bool isFlag4Set() const;
 
-    Handle::Status requestLoad(Handle* handle, const sead::SafeString& path,
-                               const ILoadRequest& request);
+    ResourceBinder::Status requestLoad(ResourceBinder* handle, const sead::SafeString& path,
+                                       const ILoadRequest& request);
     void addSExtensionPrefix(sead::StringBuilder& builder) const;
-    Handle::Status requestLoadForSync(Handle* handle, const sead::SafeString& path,
-                                      const ILoadRequest& request);
-    void requestUnload(Handle* handle);
-    void requestUnloadForSync(Handle* handle);
+    ResourceBinder::Status requestLoadForSync(ResourceBinder* handle, const sead::SafeString& path,
+                                              const ILoadRequest& request);
+    void requestUnload(ResourceBinder* handle);
+    void requestUnloadForSync(ResourceBinder* handle);
 
     void registerUnit(ResourceUnit* unit);
     void deregisterUnit(ResourceUnit* unit);
@@ -268,7 +268,7 @@ public:
 
     OverlayArena* getArenaForResourceL() { return &mArenaForResourceL; }
 
-    void setPack(Handle* pack);
+    void setPack(ResourceBinder* pack);
 
 private:
     enum class Flag {
@@ -364,7 +364,7 @@ private:
 
     sead::FileDevice* mSeadMainFileDevice = nullptr;
     OffsetReadFileDevice* mOffsetReadFileDevice = nullptr;
-    Handle* mPackHandle = nullptr;
+    ResourceBinder* mPackHandle = nullptr;
     sead::ArchiveFileDevice mArchiveFileDev1{nullptr};  // TODO: rename
     sead::ArchiveFileDevice mArchiveFileDev2{nullptr};  // TODO: rename
     sead::ArchiveFileDevice mArchiveFileDev3{nullptr};  // TODO: rename

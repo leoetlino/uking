@@ -9,8 +9,8 @@
 #include <prim/seadSafeString.h>
 #include "KingSystem/ActorSystem/actPlacementActors.h"
 #include "KingSystem/ActorSystem/actPlacementMapMgr.h"
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resResource.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/System/Patrol.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -42,7 +42,7 @@ class PlacementMap {
 
         void cleanup();
 
-        res::Handle mRes;
+        res::ResourceBinder mRes;
         Status mStatus;
     };
     KSYS_CHECK_SIZE_NX150(HkscRes, 0x58);
@@ -116,8 +116,8 @@ private:
     sead::FixedSafeString<128> mFolderAndFile;
     u32 mIdx;
     sead::SafeArray<HkscRes, 4> mRes;
-    res::Handle mStaticMubinRes;
-    res::Handle mDynamicMubinRes;
+    res::ResourceBinder mStaticMubinRes;
+    res::ResourceBinder mDynamicMubinRes;
     int mDynamicGroupIdx;
     int mParsedNumStaticObjs;
     int mNumStaticObjs;

@@ -2,7 +2,7 @@
 
 #include <basis/seadTypes.h>
 #include "KingSystem/ActorSystem/actPreActor.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace al {
@@ -59,7 +59,7 @@ private:
     bool _14{};
     f32 mDefaultPoints = -1;
     al::ByamlIter* mRootIter = nullptr;
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
 };
 KSYS_CHECK_SIZE_NX150(LevelSensor, 0x78);
 

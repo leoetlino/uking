@@ -1,7 +1,7 @@
 #pragma once
 
 #include <prim/seadSafeString.h>
-#include "resHandle.h"
+#include "resResourceBinder.h"
 
 namespace ksys::res {
 
@@ -36,6 +36,6 @@ void registerPackExtension(bool has_extension, const sead::SafeString& extension
 // TODO: figure out what this is used for. Stubbed log function?
 void stubbedBool(bool);
 
-void setResourceMgrPack(Handle* pack);
+void setResourceMgrPack(ResourceBinder* pack);
 
 }  // namespace ksys::res

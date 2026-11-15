@@ -166,7 +166,7 @@ sead::FileDevice* Manager::getFileDeviceForMapFile(const sead::SafeString& path)
     return nullptr;
 }
 
-bool Manager::getFileDeviceForMap(sead::FileDevice** p_file_device, res::Handle** p_handle,
+bool Manager::getFileDeviceForMap(sead::FileDevice** p_file_device, res::ResourceBinder** p_handle,
                                   const sead::SafeString& path) {
     if (!hasAoc2())
         return false;
@@ -363,7 +363,7 @@ sead::FileDevice* Manager::getFileDeviceForDungeonPack(const sead::SafeString& p
     return device;
 }
 
-void Manager::registerAocPack(res::Handle* pack) {
+void Manager::registerAocPack(res::ResourceBinder* pack) {
     mAocPack = pack;
     if (pack) {
         mAocPackPrefix.registerPrefix("Aoc/0010/", pack->getResource(), true);

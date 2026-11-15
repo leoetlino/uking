@@ -2,7 +2,7 @@
 
 #include <Byaml/Byaml.h>
 #include <heap/seadDisposer.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::xlink {
 
@@ -30,7 +30,7 @@ private:
     void loadInfo(sead::Heap* heap);
 
     al::ByamlIter* mRootIter{};
-    res::Handle mResHandle{};
+    res::ResourceBinder mResHandle{};
 };
 
 }  // namespace ksys::xlink

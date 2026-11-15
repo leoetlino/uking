@@ -8,7 +8,7 @@
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/ActorSystem/actActorLink.h"
 #include "KingSystem/Framework/frmBaseProcMgrJob.h"
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Thread/Event.h"
 
 namespace ksys {
@@ -148,7 +148,7 @@ private:
     bool isSignalSet() const;
     int updateResource(const char* data, char* data1, char* data2);
 
-    res::Handle* allocHandle();
+    res::ResourceBinder* allocHandle();
     void freeLastHandle();
 
     void setResource(ResourceType type, ParamIO* param_io);
@@ -171,7 +171,7 @@ private:
     frm::CalcPrio mPriority = frm::CalcPrio::AllAfter;
     u32 mActiveBufferIdx = 2;
     Resources mRes;
-    std::array<sead::Buffer<res::Handle>, 2> mHandles;
+    std::array<sead::Buffer<res::ResourceBinder>, 2> mHandles;
     std::array<s32, 2> mNumHandles;
     s32 mRefCount{};
     sead::CriticalSection mCS{nullptr};

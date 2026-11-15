@@ -139,7 +139,7 @@ int ActorParam::updateResource(const char* data, char* data1, char* data2) {
     return 2;
 }
 
-res::Handle* ActorParam::allocHandle() {
+res::ResourceBinder* ActorParam::allocHandle() {
     const auto idx = mNumHandles[mActiveBufferIdx];
     ++mNumHandles[mActiveBufferIdx];
     return &mHandles[mActiveBufferIdx][idx];

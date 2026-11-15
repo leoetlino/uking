@@ -10,8 +10,6 @@ target_sources(uking PRIVATE
   resCounter.h
   resEntryFactory.cpp
   resEntryFactory.h
-  resHandle.cpp
-  resHandle.h
   resInfoContainer.cpp
   resInfoContainer.h
   resLoadRequest.h
@@ -21,6 +19,8 @@ target_sources(uking PRIVATE
   resOverlayArenaSystem.h
   resPlacement.cpp
   resPlacement.h
+  resResourceBinder.cpp
+  resResourceBinder.h
   resResourceMgr.cpp
   resResourceMgr.h
   resResourceMgrTask.cpp

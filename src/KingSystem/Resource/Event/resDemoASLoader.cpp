@@ -1,8 +1,8 @@
 #include "KingSystem/Resource/Event/resDemoASLoader.h"
 #include <Byaml/Byaml.h>
 #include "KingSystem/ActorSystem/actAS.h"
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::res {
 
@@ -14,7 +14,7 @@ DemoASLoader::~DemoASLoader() {
     mNames.freeBuffer();
 }
 
-void DemoASLoader::load(const al::ByamlIter& iter, bool synchronous, Handle* pack_handle) {
+void DemoASLoader::load(const al::ByamlIter& iter, bool synchronous, ResourceBinder* pack_handle) {
     al::ByamlIter as_list;
     if (!iter.tryGetIterByKey(&as_list, "as"))
         return;
@@ -44,7 +44,7 @@ void DemoASLoader::load(const al::ByamlIter& iter, bool synchronous, Handle* pac
             request.mRequester = "DemoASLoader";
             request.mPackHandle = pack_handle;
             request._22 = true;
-            Handle::Status status = Handle::Status::Unknown;
+            ResourceBinder::Status status = ResourceBinder::Status::Unknown;
             if (synchronous)
                 mHandles[mNumAS].load(path, &request, &status);
             else

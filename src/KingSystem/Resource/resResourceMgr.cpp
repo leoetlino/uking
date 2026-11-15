@@ -20,11 +20,11 @@ ResourceUnit* ResourceMgr::findUnit(const util::StrTreeMapNode::KeyType& key) co
     return node ? node->getUnit() : nullptr;
 }
 
-Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
+ResourceBinder::Status ResourceMgr::loadResource(const ControlTaskData& data) {
     auto* handle = data.mResHandle;
     if (handle->isLinked()) {
         stubbedLogFunction();
-        return Handle::Status::AlreadyRequested;
+        return ResourceBinder::Status::AlreadyRequested;
     }
 
     {
@@ -68,14 +68,14 @@ Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
             } else if (removed) {
                 unit->updateStatus();
                 unit->attachHandle(handle);
-                return unit->getRefCount() == 1 ? Handle::Status::FromCacheUnreferenced :
-                                                  Handle::Status::FromCache;
+                return unit->getRefCount() == 1 ? ResourceBinder::Status::FromCacheUnreferenced :
+                                                  ResourceBinder::Status::FromCache;
             }
         }
     }
 
     if (data.mHasResLoadReq)
-        return Handle::Status::AlreadyRequested;
+        return ResourceBinder::Status::AlreadyRequested;
 
     ResourceUnit* result;
 
@@ -87,7 +87,7 @@ Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
         if (data.mResLoadReq.mLoadCompressed) {
             auto it = data.mResLoadReq.mPath.rfindIterator(".");
             if (it.getIndex() == -1)
-                return Handle::Status::_1;
+                return ResourceBinder::Status::_1;
 
             ++it;
             sead::SafeString extension;
@@ -112,7 +112,7 @@ Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
     }
 
     if (!result)
-        return Handle::Status::NoMemory;
+        return ResourceBinder::Status::NoMemory;
 
     {
         auto lock = sead::makeScopedLock(gCacheCriticalSection);
@@ -137,7 +137,7 @@ Handle::Status ResourceMgr::loadResource(const ControlTaskData& data) {
     load_arg.lane_id = lane_id;
     load_arg.has_handle = data.mResLoadReq.mInitLoadSignalsEvent;
     result->requestInitLoad(load_arg);
-    return Handle::Status::RequestOk;
+    return ResourceBinder::Status::RequestOk;
 }
 
 void ResourceMgr::eraseUnit(ResourceUnit* unit) {

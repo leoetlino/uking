@@ -158,11 +158,11 @@ public:
 
 private:
     struct Handles {
-        res::Handle mFieldMapArea;
-        res::Handle mAreaData;
-        res::Handle mMapTower;
-        res::Handle mStatusEffectList;
-        res::Handle mLoadBalancer;
+        res::ResourceBinder mFieldMapArea;
+        res::ResourceBinder mAreaData;
+        res::ResourceBinder mMapTower;
+        res::ResourceBinder mStatusEffectList;
+        res::ResourceBinder mLoadBalancer;
     };
     Handles mHandles;
 

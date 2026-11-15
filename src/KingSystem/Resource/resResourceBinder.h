@@ -17,8 +17,8 @@ class Context;
 class ILoadRequest;
 class ResourceUnit;
 
-class Handle {
-    SEAD_RTTI_BASE(Handle)
+class ResourceBinder {
+    SEAD_RTTI_BASE(ResourceBinder)
 public:
     enum class Status {
         /// "No File" (2)
@@ -48,8 +48,8 @@ public:
         Unknown = 15,
     };
 
-    Handle();
-    virtual ~Handle();
+    ResourceBinder();
+    virtual ~ResourceBinder();
 
     Status getStatus() const;
 
@@ -90,7 +90,7 @@ public:
 
     void setStatusForResourceMgr_(const Status& status);
 
-    static size_t getListNodeOffset() { return offsetof(Handle, mListNode); }
+    static size_t getListNodeOffset() { return offsetof(ResourceBinder, mListNode); }
 
 private:
     enum class Flag : u8 {
@@ -114,6 +114,6 @@ private:
     ManagedTaskHandle mTaskHandle;
     sead::ListNode mListNode;
 };
-KSYS_CHECK_SIZE_NX150(Handle, 0x50);
+KSYS_CHECK_SIZE_NX150(ResourceBinder, 0x50);
 
 }  // namespace ksys::res

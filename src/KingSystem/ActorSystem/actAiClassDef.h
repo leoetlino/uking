@@ -8,7 +8,7 @@
 #include <math/seadVector.h>
 #include <prim/seadSafeString.h>
 #include <prim/seadSizedEnum.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Types.h"
 
@@ -139,7 +139,7 @@ private:
                   AIDefType class_type, s32 key_idx) const;
 
     Data* mData = nullptr;
-    res::Handle mResHandle;
+    res::ResourceBinder mResHandle;
 };
 KSYS_CHECK_SIZE_NX150(AIClassDef, 0x78);
 

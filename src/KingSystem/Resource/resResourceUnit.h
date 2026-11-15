@@ -7,7 +7,7 @@
 #include <prim/seadTypedBitFlag.h>
 #include <resource/seadResourceMgr.h>
 #include <thread/seadAtomic.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Thread/Event.h"
 #include "KingSystem/Utils/Thread/Task.h"
@@ -27,7 +27,7 @@ namespace ksys::res {
 
 class ResourceMgr;
 class Context;
-class Handle;
+class ResourceBinder;
 class LoadRequest;
 class ResourceUnit;
 
@@ -54,7 +54,7 @@ public:
     struct InitArg {
         InitArg() = default;
         InitArg(bool set_flag_1, bool set_flag_2, bool set_flag_4, bool load_req_field_26,
-                bool load_req_field_28, Handle* handle, ResourceMgr* cache, void* _18,
+                bool load_req_field_28, ResourceBinder* handle, ResourceMgr* cache, void* _18,
                 sead::Heap* heap, const LoadRequest* load_req, OverlayArena* arena, u32 alloc_size,
                 sead::SafeString path)
             : set_flag_1(set_flag_1), set_flag_2(set_flag_2), set_flag_4(set_flag_4),
@@ -67,7 +67,7 @@ public:
         bool set_flag_4 = false;
         bool load_req_field_26 = false;
         bool load_req_field_28 = false;
-        Handle* handle = nullptr;
+        ResourceBinder* handle = nullptr;
         ResourceMgr* cache = nullptr;
         void* _18 = nullptr;
         sead::Heap* heap = nullptr;
@@ -92,7 +92,7 @@ public:
 
     void unloadArchiveRes();
 
-    void attachHandle(Handle* handle);
+    void attachHandle(ResourceBinder* handle);
 
     const sead::SafeString& getPath() const { return mPath; }
     const sead::ResourceMgr::LoadArg& getLoadArg() const { return mLoadArg; }
@@ -135,7 +135,7 @@ public:
     u32 determineHeapSize();
     u32 determineHeapSize(const sead::SafeString& path, bool flag4, bool flag1, bool flag2);
 
-    void detachFromHandle_(Handle* handle);
+    void detachFromHandle_(ResourceBinder* handle);
 
     static size_t getArenaUnitListNodeOffset() {
         return offsetof(ResourceUnit, mArenaUnitListNode);
@@ -151,7 +151,7 @@ public:
 
 private:
     friend class ResourceMgr;
-    friend class Handle;
+    friend class ResourceBinder;
     friend class ResourceMgrTask;
 
     enum class CacheFlag : u8 {
@@ -214,7 +214,7 @@ private:
     OverlayArena* mArena2 = nullptr;
     OverlayArena* mLoadReqArena = nullptr;
     sead::DirectResource* mResource = nullptr;
-    Handle mArchiveResHandle;
+    ResourceBinder mArchiveResHandle;
     sead::ArchiveRes* mArchiveRes = nullptr;
     void* mLoadReqField68 = nullptr;
     ResourceMgr* mCache = nullptr;

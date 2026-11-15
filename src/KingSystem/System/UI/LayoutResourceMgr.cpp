@@ -12,9 +12,9 @@ namespace ksys::ui {
 SEAD_SINGLETON_DISPOSER_IMPL(LayoutResourceMgr)
 
 void LayoutResourceMgr::init(sead::Heap* heap) {
-    mMsgPackHandle = new (heap) res::Handle;
-    mLangFontHandle = new (heap) res::Handle;
-    mVersionHandle = new (heap) res::Handle;
+    mMsgPackHandle = new (heap) res::ResourceBinder;
+    mLangFontHandle = new (heap) res::ResourceBinder;
+    mVersionHandle = new (heap) res::ResourceBinder;
 
     int count;
     switch (sead::EnvUtil::getRegionLanguage().value()) {
@@ -28,10 +28,10 @@ void LayoutResourceMgr::init(sead::Heap* heap) {
         break;
     }
     for (int i = 0; i < count; i++) {
-        mExtraLangFontHandles.pushBack(new (heap) res::Handle);
+        mExtraLangFontHandles.pushBack(new (heap) res::ResourceBinder);
     }
     if (count > 0) {
-        mZeldaGlyphHandle = new (heap) res::Handle;
+        mZeldaGlyphHandle = new (heap) res::ResourceBinder;
     }
 }
 
@@ -50,7 +50,7 @@ u8* LayoutResourceMgr::loadMsgPack(u32* size) {
     sead::FixedSafeString<0x20> path;
     path.format("Message/Msg_%s.product.sarc", sead::EnvUtil::getRegionLanguage().text());
 
-    res::Handle::Status status;
+    res::ResourceBinder::Status status;
     auto* resource =
         sead::DynamicCast<sead::DirectResource>(mMsgPackHandle->load(path, &req, &status));
 
@@ -97,7 +97,7 @@ void LayoutResourceMgr::loadExtraLangFonts(sead::Heap* heap) {
     req.mRequester = "ui::LayoutResourceMgr";
     req._26 = false;
 
-    res::Handle::Status status = res::Handle::Status::NoFile;
+    res::ResourceBinder::Status status = res::ResourceBinder::Status::NoFile;
     for (int i = 0; i < cExtraLangFontCount; ++i) {
         auto* handle = mExtraLangFontHandles[i];
         sead::FixedSafeString<0x20> path;
@@ -181,7 +181,7 @@ void LayoutResourceMgr::loadTitleLayout(sead::Heap* heap) {
     req._26 = false;
     req.mLaneId = 2;
 
-    res::Handle::Status status = res::Handle::Status::NoFile;
+    res::ResourceBinder::Status status = res::ResourceBinder::Status::NoFile;
     mTitleLayout.getHandle()->requestLoad("Layout/Title.blarc", &req, &status);
 }
 
@@ -209,7 +209,7 @@ bool LayoutResourceMgr::loadHorseLayout(sead::Heap* heap) {
     req._26 = true;
     req.mLaneId = 2;
 
-    res::Handle::Status status = res::Handle::Status::NoFile;
+    res::ResourceBinder::Status status = res::ResourceBinder::Status::NoFile;
     mHorseLayout.getHandle()->requestLoad("Layout/Horse.blarc", &req, &status);
 
     return true;

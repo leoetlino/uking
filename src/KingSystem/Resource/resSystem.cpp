@@ -40,7 +40,7 @@ void registerPackExtension(bool has_extension, const sead::SafeString& extension
 
 void stubbedBool(bool) {}
 
-void setResourceMgrPack(Handle* pack) {
+void setResourceMgrPack(ResourceBinder* pack) {
     ResourceMgrTask::instance()->setPack(pack);
 }
 

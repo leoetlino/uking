@@ -3,8 +3,8 @@
 #include <basis/seadNew.h>
 #include <prim/seadSafeString.h>
 #include <resource/seadResource.h>
-#include "KingSystem/Resource/resHandle.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::evt {
 

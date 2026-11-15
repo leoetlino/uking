@@ -1,7 +1,7 @@
 #pragma once
 
 #include <heap/seadDisposer.h>
-#include "KingSystem/Resource/resHandle.h"
+#include "KingSystem/Resource/resResourceBinder.h"
 
 namespace ksys::act {
 class ActorParam;
@@ -30,7 +30,7 @@ private:
 
     act::ActorParam* mActorParam{};
     const act::GParamListObjectGlobal* mGlobalParam{};
-    res::Handle mResHandle{};
+    res::ResourceBinder mResHandle{};
 };
 
 }  // namespace ksys::game
