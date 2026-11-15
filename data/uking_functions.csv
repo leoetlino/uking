@@ -90631,7 +90631,7 @@ Address,Quality,Size,Name
 0x00000071011200e8,U,000412,sead::PtrArrayImpl::heapSort_0
 0x0000007101120284,U,000052,sead::Delegate1R_Scene_markMissingTerrainImageEntries::invoke
 0x00000071011202b8,U,000092,sead::Delegate1R_Scene_markMissingTerrainImageEntries::clone
-0x0000007101120314,U,000096,ksys::tera::Core::makeHeap
+0x0000007101120314,U,000096,ksys::tera::makeHeap
 0x0000007101120374,U,000544,ksys::tera::findAncestorTeraNodeWithLoadedResource
 0x0000007101120594,U,000004,j_ksys::tera::findAncestorTeraNodeWithLoadedResource
 0x0000007101120598,U,000332,ksys::tera::findAncestorTeraNodeWithResource
@@ -90655,7 +90655,7 @@ Address,Quality,Size,Name
 0x0000007101123260,U,002112,ksys::tera::calcSymmetricMatrix33Eigenvectors
 0x0000007101123aa0,U,001440,ksys::tera::findPolynomialRootsInRange
 0x0000007101124040,U,000612,ksys::tera::refinePolynomialRootBrent
-0x00000071011242a4,U,000096,sinit_teraUtilMaybe
+0x00000071011242a4,U,000096,sinit_teraTeraUtilMaybe
 0x0000007101124304,U,000408,ksys::tera::getTerrainPatchMeshIdTable
 0x000000710112449c,U,000544,ksys::tera::TerrainPatchRenderer::ctor
 0x00000071011246bc,U,000172,_ZN4sead9SafeArrayIN3agl12UniformBlockELi19EEC2Ev
