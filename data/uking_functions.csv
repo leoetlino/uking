@@ -87774,7 +87774,7 @@ Address,Quality,Size,Name
 0x000000710105a9b4,U,000288,ksys::snd::SoundSystemActor::checkDerivedRuntimeTypeInfo
 0x000000710105aad4,U,000092,ksys::snd::SoundSystemActor::getRuntimeTypeInfo
 0x000000710105ab30,U,000004,sinitDemo143BgmNameStatics_atexitNop
-0x000000710105ab34,U,000140,sinit_sndSceneBgmEmitter
+0x000000710105ab34,U,000140,sinit_sndSoundTrackEmitter
 0x000000710105abc0,U,000156,ksys::snd::SoundTrackEmitter::ctor
 0x000000710105ac5c,U,000072,ksys::snd::soundTrackEmitterDtor
 0x000000710105aca4,U,000072,ksys::snd::SoundTrackEmitter::dtorDelete
