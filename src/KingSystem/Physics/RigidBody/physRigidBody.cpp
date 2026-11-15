@@ -31,7 +31,7 @@ constexpr float MinInertia = 0.001;
 
 RigidBody::RigidBody(Type type, ContactLayerType layer_type, hkpRigidBody* hk_body,
                      const sead::SafeString& name, sead::Heap* heap, bool owns_shape)
-    : mCS(heap), mHkBody(hk_body), mRigidBodyAccessor(hk_body), mType(type) {
+    : mCS(heap), mHkBody(hk_body), mRigidBodyStateAccessor(hk_body), mType(type) {
     if (!name.isEmpty()) {
         mHkBody->setName(name.cstr());
     }
@@ -352,7 +352,7 @@ MotionType RigidBody::getMotionType() const {
         return MotionType::Keyframed;
     if (mMotionFlags.isOn(MotionFlag::Fixed))
         return MotionType::Fixed;
-    return mRigidBodyAccessor.getMotionType();
+    return mRigidBodyStateAccessor.getMotionType();
 }
 
 void RigidBody::replaceMotionObject() {
@@ -847,7 +847,7 @@ void RigidBody::getPosition(sead::Vector3f* position) const {
     if (mMotionAccessor)
         mMotionAccessor->getPosition(position);
     else
-        mRigidBodyAccessor.getPosition(position);
+        mRigidBodyStateAccessor.getPosition(position);
 }
 
 sead::Vector3f RigidBody::getPosition() const {
@@ -860,7 +860,7 @@ void RigidBody::getRotation(sead::Quatf* rotation) const {
     if (mMotionAccessor)
         mMotionAccessor->getRotation(rotation);
     else
-        mRigidBodyAccessor.getRotation(rotation);
+        mRigidBodyStateAccessor.getRotation(rotation);
 }
 
 sead::Quatf RigidBody::getRotation() const {
@@ -878,7 +878,7 @@ void RigidBody::getTransform(sead::Matrix34f* mtx) const {
     if (mMotionAccessor)
         mMotionAccessor->getTransform(mtx);
     else
-        mRigidBodyAccessor.getTransform(mtx);
+        mRigidBodyStateAccessor.getTransform(mtx);
 }
 
 sead::Matrix34f RigidBody::getTransform() const {
@@ -1054,7 +1054,7 @@ void RigidBody::getLinearVelocity(sead::Vector3f* velocity) const {
     if (mMotionAccessor)
         mMotionAccessor->getLinearVelocity(velocity);
     else
-        mRigidBodyAccessor.getLinearVelocity(velocity);
+        mRigidBodyStateAccessor.getLinearVelocity(velocity);
 }
 
 sead::Vector3f RigidBody::getLinearVelocity() const {
@@ -1076,7 +1076,7 @@ void RigidBody::getAngularVelocity(sead::Vector3f* velocity) const {
     if (mMotionAccessor)
         mMotionAccessor->getAngularVelocity(velocity);
     else
-        mRigidBodyAccessor.getAngularVelocity(velocity);
+        mRigidBodyStateAccessor.getAngularVelocity(velocity);
 }
 
 sead::Vector3f RigidBody::getAngularVelocity() const {
@@ -1861,9 +1861,9 @@ void RigidBody::assertLayerType(ContactLayer layer) const {
 
 void RigidBody::onInvalidParameter(int code) {
     sead::Vector3f pos, lin_vel, ang_vel;
-    mRigidBodyAccessor.getPosition(&pos);
-    mRigidBodyAccessor.getLinearVelocity(&lin_vel);
-    mRigidBodyAccessor.getAngularVelocity(&ang_vel);
+    mRigidBodyStateAccessor.getPosition(&pos);
+    mRigidBodyStateAccessor.getLinearVelocity(&lin_vel);
+    mRigidBodyStateAccessor.getAngularVelocity(&ang_vel);
     // debug prints?
     notifyUserTag(code);
 }

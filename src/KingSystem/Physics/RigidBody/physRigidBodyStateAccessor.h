@@ -9,10 +9,10 @@ class hkpRigidBody;
 
 namespace ksys::phys {
 
-class RigidBodyAccessor {
+class RigidBodyStateAccessor {
 public:
-    explicit RigidBodyAccessor(hkpRigidBody* body);
-    virtual ~RigidBodyAccessor();
+    explicit RigidBodyStateAccessor(hkpRigidBody* body);
+    virtual ~RigidBodyStateAccessor();
 
     hkpRigidBody* getBody() const { return mBody; }
 

@@ -37,8 +37,6 @@ target_sources(uking PRIVATE
     RigidBody/physMotionAccessor.h
     RigidBody/physRigidBody.cpp
     RigidBody/physRigidBody.h
-    RigidBody/physRigidBodyAccessor.cpp
-    RigidBody/physRigidBodyAccessor.h
     RigidBody/physRigidBodyBox.cpp
     RigidBody/physRigidBodyBox.h
     RigidBody/physRigidBodyBoxWater.cpp
@@ -78,6 +76,8 @@ target_sources(uking PRIVATE
     RigidBody/physRigidBodySetParam.h
     RigidBody/physRigidBodySphere.cpp
     RigidBody/physRigidBodySphere.h
+    RigidBody/physRigidBodyStateAccessor.cpp
+    RigidBody/physRigidBodyStateAccessor.h
 
     RigidBody/Shape/physBoxShape.cpp
     RigidBody/Shape/physBoxShape.h

@@ -1,14 +1,14 @@
-#include "KingSystem/Physics/RigidBody/physRigidBodyAccessor.h"
+#include "KingSystem/Physics/RigidBody/physRigidBodyStateAccessor.h"
 #include <Havok/Physics2012/Dynamics/Entity/hkpRigidBody.h>
 #include "KingSystem/Physics/physConversions.h"
 
 namespace ksys::phys {
 
-RigidBodyAccessor::RigidBodyAccessor(hkpRigidBody* body) : mBody(body) {}
+RigidBodyStateAccessor::RigidBodyStateAccessor(hkpRigidBody* body) : mBody(body) {}
 
-RigidBodyAccessor::~RigidBodyAccessor() = default;
+RigidBodyStateAccessor::~RigidBodyStateAccessor() = default;
 
-MotionType RigidBodyAccessor::getMotionType() const {
+MotionType RigidBodyStateAccessor::getMotionType() const {
     switch (getBody()->getMotionType()) {
     case hkpMotion::MOTION_INVALID:
         break;
@@ -30,27 +30,27 @@ MotionType RigidBodyAccessor::getMotionType() const {
     return MotionType::Invalid;
 }
 
-void RigidBodyAccessor::getPosition(sead::Vector3f* pos) const {
+void RigidBodyStateAccessor::getPosition(sead::Vector3f* pos) const {
     toVec3(pos, getBody()->getPosition());
 }
 
-void RigidBodyAccessor::getRotation(sead::Quatf* rot) const {
+void RigidBodyStateAccessor::getRotation(sead::Quatf* rot) const {
     toQuat(rot, getBody()->getRotation());
 }
 
-void RigidBodyAccessor::getTransform(sead::Matrix34f* mtx) const {
+void RigidBodyStateAccessor::getTransform(sead::Matrix34f* mtx) const {
     toMtx34(mtx, getBody()->getTransform());
 }
 
-void RigidBodyAccessor::getLinearVelocity(sead::Vector3f* vel) const {
+void RigidBodyStateAccessor::getLinearVelocity(sead::Vector3f* vel) const {
     toVec3(vel, getBody()->getLinearVelocity());
 }
 
-void RigidBodyAccessor::getAngularVelocity(sead::Vector3f* vel) const {
+void RigidBodyStateAccessor::getAngularVelocity(sead::Vector3f* vel) const {
     toVec3(vel, getBody()->getAngularVelocity());
 }
 
-bool RigidBodyAccessor::isVelocityGreaterEqual(float vel) const {
+bool RigidBodyStateAccessor::isVelocityGreaterEqual(float vel) const {
     hkVector4f v;
     v.setAll(vel);
 
@@ -64,19 +64,20 @@ bool RigidBodyAccessor::isVelocityGreaterEqual(float vel) const {
            v.greaterEqual(angvel).allAreSet<hkVector4fComparison::MASK_XYZ>();
 }
 
-void RigidBodyAccessor::getPointVelocity(sead::Vector3f* vel, const sead::Vector3f& point) const {
+void RigidBodyStateAccessor::getPointVelocity(sead::Vector3f* vel,
+                                              const sead::Vector3f& point) const {
     const auto p = toHkVec4(point);
     hkVector4f out;
     getBody()->getPointVelocity(p, out);
     toVec3(vel, out);
 }
 
-float RigidBodyAccessor::getTimeFactor() const {
+float RigidBodyStateAccessor::getTimeFactor() const {
     return getBody()->getTimeFactor();
 }
 
-void RigidBodyAccessor::getDeltaCenterOfMass(sead::Vector3f* out_delta_pos,
-                                             sead::Vector3f* out_delta_angle) const {
+void RigidBodyStateAccessor::getDeltaCenterOfMass(sead::Vector3f* out_delta_pos,
+                                                  sead::Vector3f* out_delta_angle) const {
     const hkMotionState* state = getBody()->getMotion()->getMotionState();
     const auto center1 = state->getSweptTransform().m_centerOfMass1;
     const auto center0 = state->getSweptTransform().m_centerOfMass0;

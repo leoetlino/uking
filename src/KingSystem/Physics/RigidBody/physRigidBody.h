@@ -10,8 +10,8 @@
 #include <thread/seadAtomic.h>
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/Game/Physics/physDefines.h"
-#include "KingSystem/Physics/RigidBody/physRigidBodyAccessor.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyContactEvent.h"
+#include "KingSystem/Physics/RigidBody/physRigidBodyStateAccessor.h"
 #include "KingSystem/Utils/Types.h"
 
 enum hkpCollidableQualityType : int;
@@ -631,7 +631,7 @@ protected:
     ContactPointInfo* mContactPointInfo = nullptr;
     CollisionInfo* mCollisionInfo = nullptr;
     u16 _98 = 0;
-    RigidBodyAccessor mRigidBodyAccessor;
+    RigidBodyStateAccessor mRigidBodyStateAccessor;
     f32 mScale = 1.0f;
     Type mType{};
     MotionAccessor* mMotionAccessor = nullptr;
