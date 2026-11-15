@@ -3,8 +3,6 @@ target_sources(uking PRIVATE
   Thread/ActorMessageTransceiver.h
   Thread/Event.cpp
   Thread/Event.h
-  Thread/GameTaskThread.cpp
-  Thread/GameTaskThread.h
   Thread/LowPrioThreadMgr.h
   Thread/LowPrioThreadMgr.cpp
   Thread/ManagedTask.cpp
@@ -38,6 +36,8 @@ target_sources(uking PRIVATE
   Thread/MessageTransceiverRxOnly.h
   Thread/MessageTransceiverTxOnly.cpp
   Thread/MessageTransceiverTxOnly.h
+  Thread/PhysicsTaskThread.cpp
+  Thread/PhysicsTaskThread.h
   Thread/Task.cpp
   Thread/Task.h
   Thread/TaskData.h

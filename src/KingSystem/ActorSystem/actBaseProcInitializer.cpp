@@ -8,7 +8,7 @@
 #include "KingSystem/Map/mapPreActor.h"
 #include "KingSystem/Utils/Debug.h"
 #include "KingSystem/Utils/SafeDelete.h"
-#include "KingSystem/Utils/Thread/GameTaskThread.h"
+#include "KingSystem/Utils/Thread/PhysicsTaskThread.h"
 #include "KingSystem/Utils/Thread/TaskMgr.h"
 #include "KingSystem/Utils/Thread/TaskQueue.h"
 #include "KingSystem/Utils/Thread/TaskQueueLock.h"
@@ -58,7 +58,7 @@ void BaseProcInitializer::init(sead::Heap* parent_heap, const BaseProcInitialize
 
     for (int i = 0; i < NumThreads; ++i) {
         mThreads[i].thread_name.format("%s", args.thread_name.cstr());
-        mThreads[i].thread = new (mHeap) GameTaskThread(
+        mThreads[i].thread = new (mHeap) PhysicsTaskThread(
             mThreads[i].thread_name, mHeap, sead::ThreadUtil::ConvertPrioritySeadToPlatform(20),
             sead::MessageQueue::BlockType::Blocking, 0x7FFFFFFF, 0x100000, 64);
         {
@@ -214,7 +214,7 @@ void BaseProcInitializer::pauseMainThread() {
 void BaseProcInitializer::resumeMainThread() {
     mThreads[0].valid = true;
     if (!mThreads[0].thread) {
-        mThreads[0].thread = new (mHeap) GameTaskThread(
+        mThreads[0].thread = new (mHeap) PhysicsTaskThread(
             mThreads[0].thread_name, mHeap, sead::ThreadUtil::ConvertPrioritySeadToPlatform(20),
             sead::MessageQueue::BlockType::Blocking, 0x7FFFFFFF, 0x100000, 64);
         {

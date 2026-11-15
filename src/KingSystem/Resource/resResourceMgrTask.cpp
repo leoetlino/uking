@@ -14,7 +14,7 @@
 #include "KingSystem/Resource/resTextureHandleList.h"
 #include "KingSystem/Resource/resTextureHandleMgr.h"
 #include "KingSystem/Utils/SafeDelete.h"
-#include "KingSystem/Utils/Thread/GameTaskThread.h"
+#include "KingSystem/Utils/Thread/PhysicsTaskThread.h"
 #include "KingSystem/Utils/Thread/TaskMgr.h"
 #include "KingSystem/Utils/Thread/TaskQueueBase.h"
 #include "KingSystem/Utils/Thread/TaskQueueLock.h"
@@ -107,9 +107,9 @@ void ResourceMgrTask::insertOverlayArena(OverlayArena* arena) {
 }
 
 TaskThread* ResourceMgrTask::makeResourceLoadingThread(sead::Heap* heap,
-                                                       bool use_game_task_thread) {
-    if (use_game_task_thread) {
-        return new (heap) GameTaskThread(
+                                                       bool use_physics_task_thread) {
+    if (use_physics_task_thread) {
+        return new (heap) PhysicsTaskThread(
             "Resource Loading", heap, sead::ThreadUtil::ConvertPrioritySeadToPlatform(19),
             sead::MessageQueue::BlockType::Blocking, 0x7fffffff, 0xfa000, 32);
     }

@@ -12,9 +12,9 @@ class Thread;
 }  // namespace sead
 
 namespace ksys {
-class GameTaskThread;
 class ManagedTask;
 class ManagedTaskHandle;
+class PhysicsTaskThread;
 class TaskMgr;
 }  // namespace ksys
 
@@ -39,7 +39,7 @@ private:
     static constexpr int NumTasks = 5;
 
     struct Worker {
-        GameTaskThread* task_thread = nullptr;
+        PhysicsTaskThread* task_thread = nullptr;
         sead::DelegateThread* thread;
         ManagedTask* tasks[NumTasks];
         TaskMgr* task_mgr = nullptr;

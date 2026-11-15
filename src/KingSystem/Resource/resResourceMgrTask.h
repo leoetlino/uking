@@ -111,7 +111,7 @@ public:
 
     void insertOverlayArena(OverlayArena* arena);
 
-    TaskThread* makeResourceLoadingThread(sead::Heap* heap, bool use_game_task_thread);
+    TaskThread* makeResourceLoadingThread(sead::Heap* heap, bool use_physics_task_thread);
 
     void clearAllCaches(OverlayArena* arena);
     OverlayArena* getTexHandleMgrArena() const;

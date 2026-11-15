@@ -3,9 +3,9 @@
 #include <thread/seadDelegateThread.h>
 #include <thread/seadThreadUtil.h>
 #include "KingSystem/Utils/SafeDelete.h"
-#include "KingSystem/Utils/Thread/GameTaskThread.h"
 #include "KingSystem/Utils/Thread/ManagedTask.h"
 #include "KingSystem/Utils/Thread/ManagedTaskHandle.h"
+#include "KingSystem/Utils/Thread/PhysicsTaskThread.h"
 #include "KingSystem/Utils/Thread/TaskMgr.h"
 
 namespace ksys::frm {
@@ -30,7 +30,7 @@ void WorkerSupportThreadMgr::init(sead::Heap* heap) {
         }();
 
         worker->thread_name.format("WorkerSupport[%d]", int(i));
-        worker->task_thread = new (heap) GameTaskThread(
+        worker->task_thread = new (heap) PhysicsTaskThread(
             worker->thread_name, heap, sead::ThreadUtil::ConvertPrioritySeadToPlatform(17),
             sead::MessageQueue::BlockType::Blocking, 0x7fffffff, 0x20000, 32);
 
