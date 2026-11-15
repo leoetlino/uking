@@ -14,7 +14,7 @@ class Heap;
 
 namespace ksys::phys {
 
-class BoneAccessor : public sead::hostio::Node {
+class SkeletonPose : public sead::hostio::Node {
 public:
     enum class Propagate : bool { Yes = true, No = false };
 
@@ -26,8 +26,8 @@ public:
         s16 havok_index;
     };
 
-    BoneAccessor();
-    virtual ~BoneAccessor();
+    SkeletonPose();
+    virtual ~SkeletonPose();
 
     bool init(const hkaSkeleton* skeleton, sead::Heap* heap);
     virtual void finalize();

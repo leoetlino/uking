@@ -32,13 +32,13 @@ class ClothSet;
 class CollisionInfo;
 class Constraint;
 class ContactPointInfo;
-class ModelBoneAccessor;
 class NavMeshCharacter;
 class NavMeshObj;
 class ParamSet;
 class RagdollController;
 class RagdollInstance;
 class RigidBodySet;
+class SkeletonModelPose;
 class SupportBoneWork;
 class SystemGroupHandler;
 class UserTag;
@@ -52,7 +52,7 @@ public:
         TransformResetThisFrame = 1 << 3,
         ClothResetThisFrame = 1 << 4,
         SkipCopyHavokPoseToModel = 1 << 5,
-        OwnsModelBoneAccessor = 1 << 6,
+        OwnsSkeletonModelPose = 1 << 6,
         IsMapConst = 1 << 7,
         MapConstPassive = 1 << 8,
         MapConstActive = 1 << 9,
@@ -160,7 +160,7 @@ private:
 
     res::Handle* mSupportBoneResHandle{};
     SupportBoneWork* mSupportBoneWork{};
-    ModelBoneAccessor* mModelBoneAccessor{};
+    SkeletonModelPose* mSkeletonModelPose{};
 
     NavMeshCharacter* mNavMeshCharacter;
     sead::Buffer<NavMeshObj> mNavMeshObjs;

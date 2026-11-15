@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/Rig/physBoneAccessor.h"
+#include "KingSystem/Physics/System/physSkeletonPose.h"
 #include <Havok/Animation/Animation/Playback/Utilities/hkaSampleAndCombineUtils.h>
 #include <Havok/Animation/Animation/Rig/hkaPose.h>
 #include <Havok/Animation/Animation/Rig/hkaSkeleton.h>
@@ -7,13 +7,13 @@
 
 namespace ksys::phys {
 
-BoneAccessor::BoneAccessor() = default;
+SkeletonPose::SkeletonPose() = default;
 
-BoneAccessor::~BoneAccessor() {
-    BoneAccessor::finalize();
+SkeletonPose::~SkeletonPose() {
+    SkeletonPose::finalize();
 }
 
-bool BoneAccessor::init(const hkaSkeleton* skeleton, sead::Heap* heap) {
+bool SkeletonPose::init(const hkaSkeleton* skeleton, sead::Heap* heap) {
     static constexpr int Alignment = 0x20;
 
     mPoseDataSize = sead::Mathu::roundUp(u32(hkaPose::getRequiredMemorySize(skeleton)), Alignment);
@@ -32,7 +32,7 @@ bool BoneAccessor::init(const hkaSkeleton* skeleton, sead::Heap* heap) {
     return true;
 }
 
-void BoneAccessor::finalize() {
+void SkeletonPose::finalize() {
     if (!mPose)
         return;
 
@@ -43,29 +43,29 @@ void BoneAccessor::finalize() {
     mPoseData = nullptr;
 }
 
-void BoneAccessor::resetPoseData() {
+void SkeletonPose::resetPoseData() {
     sead::MemUtil::fillZero(mPoseData, mPoseDataSize);
 }
 
-const hkaSkeleton* BoneAccessor::getSkeleton() const {
+const hkaSkeleton* SkeletonPose::getSkeleton() const {
     return mPose->getSkeleton();
 }
 
-hkaPose* BoneAccessor::getPoseInternal() const {
+hkaPose* SkeletonPose::getPoseInternal() const {
     return mPose;
 }
 
-hkaPose* BoneAccessor::getPose() const {
+hkaPose* SkeletonPose::getPose() const {
     return mPose;
 }
 
-void BoneAccessor::setScale(float scale) {
+void SkeletonPose::setScale(float scale) {
     hkaSampleAndCombineUtils::scaleTranslations(
         scale, const_cast<hkQsTransform*>(getSkeleton()->m_referencePose.data()),
         getSkeleton()->m_bones.getSize());
 }
 
-BoneAccessor::Indices BoneAccessor::getBoneIndex(const sead::SafeString& name) const {
+SkeletonPose::Indices SkeletonPose::getBoneIndex(const sead::SafeString& name) const {
     const sead::SafeString actual_name = getBoneName(name);
 
     for (int i = 0, n = getSkeleton()->m_bones.getSize(); i < n; ++i) {
@@ -76,30 +76,30 @@ BoneAccessor::Indices BoneAccessor::getBoneIndex(const sead::SafeString& name) c
     return {-1, -1};
 }
 
-void BoneAccessor::setBoneLocalSpace(const BoneAccessor::Indices& index,
+void SkeletonPose::setBoneLocalSpace(const SkeletonPose::Indices& index,
                                      const hkQsTransformf& bone) {
     mPose->setBoneLocalSpace(index.havok_index, bone);
 }
 
-const hkQsTransformf& BoneAccessor::getBoneLocalSpace(const BoneAccessor::Indices& index) const {
+const hkQsTransformf& SkeletonPose::getBoneLocalSpace(const SkeletonPose::Indices& index) const {
     return mPose->getBoneLocalSpace(index.havok_index);
 }
 
 // NON_MATCHING: regalloc
-void BoneAccessor::setBoneModelSpace(const BoneAccessor::Indices& index,
+void SkeletonPose::setBoneModelSpace(const SkeletonPose::Indices& index,
                                      const hkQsTransformf& bone_model, Propagate propagate) {
     const auto havok_index = index.havok_index;
     mPose->setBoneModelSpace(havok_index, bone_model, hkaPose::PropagateOrNot(propagate));
 }
 
-const hkQsTransformf& BoneAccessor::getBoneModelSpace(const BoneAccessor::Indices& index) const {
+const hkQsTransformf& SkeletonPose::getBoneModelSpace(const SkeletonPose::Indices& index) const {
     return mPose->getBoneModelSpace(index.havok_index);
 }
 
 #ifdef MATCHING_HACK_NX_CLANG
 [[gnu::noinline]]
 #endif
-sead::SafeString BoneAccessor::getBoneName(const sead::SafeString& name) {
+sead::SafeString SkeletonPose::getBoneName(const sead::SafeString& name) {
     int substr_index = 0;
 
     int separator_index = name.rfindIndex(":");

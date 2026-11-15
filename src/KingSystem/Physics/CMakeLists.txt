@@ -24,13 +24,6 @@ target_sources(uking PRIVATE
     Ragdoll/physRagdollRigidBody.cpp
     Ragdoll/physRagdollRigidBody.h
 
-    Rig/physBoneAccessor.cpp
-    Rig/physBoneAccessor.h
-    Rig/physModelBoneAccessor.cpp
-    Rig/physModelBoneAccessor.h
-    Rig/physSkeletonMapper.cpp
-    Rig/physSkeletonMapper.h
-
     RigidBody/physEdgeRigidBodyParam.cpp
     RigidBody/physEdgeRigidBodyParam.h
     RigidBody/physMotionAccessor.cpp
@@ -164,6 +157,12 @@ target_sources(uking PRIVATE
     System/physShapeCast.h
     System/physShapeCastWithInfo.cpp
     System/physShapeCastWithInfo.h
+    System/physSkeletonMapper.cpp
+    System/physSkeletonMapper.h
+    System/physSkeletonModelPose.cpp
+    System/physSkeletonModelPose.h
+    System/physSkeletonPose.cpp
+    System/physSkeletonPose.h
     System/physStaticCompound.cpp
     System/physStaticCompound.h
     System/physStaticCompoundInfo.cpp

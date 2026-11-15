@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/Rig/physModelBoneAccessor.h"
+#include "KingSystem/Physics/System/physSkeletonModelPose.h"
 #include <Havok/Animation/Animation/Rig/hkaPose.h>
 #include <Havok/Animation/Animation/Rig/hkaSkeleton.h>
 #include <Havok/Common/Base/Memory/Allocator/Malloc/hkMallocAllocator.h>
@@ -33,7 +33,7 @@ public:
     virtual ~ModelSkeleton();
 
     /// Construct a Havok skeleton from a gsys model.
-    bool constructFromModel(ModelBoneAccessor::ModelBoneFilter* bone_filter,
+    bool constructFromModel(SkeletonModelPose::ModelBoneFilter* bone_filter,
                             const gsys::ModelNW& model_unit, sead::Heap* heap);
 
     /// Construct a Havok skeleton from a gsys model. Fast path, no support for filtering.
@@ -106,7 +106,7 @@ bool ModelSkeleton::constructFromModel(const gsys::ModelNW& model_unit, sead::He
     return true;
 }
 
-bool ModelSkeleton::constructFromModel(ModelBoneAccessor::ModelBoneFilter* bone_filter,
+bool ModelSkeleton::constructFromModel(SkeletonModelPose::ModelBoneFilter* bone_filter,
                                        const gsys::ModelNW& model_unit, sead::Heap* heap) {
     if (bone_filter == nullptr)
         return constructFromModel(model_unit, heap);
@@ -115,7 +115,7 @@ bool ModelSkeleton::constructFromModel(ModelBoneAccessor::ModelBoneFilter* bone_
 
     const nn::g3d::ResSkeleton* skel = model_unit.getSkeletonObj()->GetRes();
 
-    ModelBoneAccessor::ModelBoneFilter::BoneBitSet bones_to_keep;
+    SkeletonModelPose::ModelBoneFilter::BoneBitSet bones_to_keep;
     const int num_bones = bone_filter->filter(&bones_to_keep, model_unit);
 
     if (num_bones <= 1)
@@ -163,20 +163,20 @@ bool ModelSkeleton::constructFromModel(ModelBoneAccessor::ModelBoneFilter* bone_
 
 }  // namespace detail
 
-static int sModelBoneAccessorScaleModeOverride;
-static bool sModelBoneAccessorDebugCheckBoneScale;
+static int sSkeletonModelPoseScaleModeOverride;
+static bool sSkeletonModelPoseDebugCheckBoneScale;
 
-ModelBoneAccessor::ModelBoneAccessor() = default;
+SkeletonModelPose::SkeletonModelPose() = default;
 
-ModelBoneAccessor::~ModelBoneAccessor() {
-    ModelBoneAccessor::finalize();
+SkeletonModelPose::~SkeletonModelPose() {
+    SkeletonModelPose::finalize();
 }
 
-bool ModelBoneAccessor::init(const hkaSkeleton* skeleton, gsys::Model* model, sead::Heap* heap) {
+bool SkeletonModelPose::init(const hkaSkeleton* skeleton, gsys::Model* model, sead::Heap* heap) {
     if (!skeleton || !model)
         return false;
 
-    if (!BoneAccessor::init(skeleton, heap))
+    if (!SkeletonPose::init(skeleton, heap))
         return false;
 
     const int num_bones = skeleton->m_bones.getSize();
@@ -199,8 +199,8 @@ bool ModelBoneAccessor::init(const hkaSkeleton* skeleton, gsys::Model* model, se
     return true;
 }
 
-bool ModelBoneAccessor::init(gsys::Model* model, int model_unit_index, sead::Heap* heap,
-                             ModelBoneAccessor::ModelBoneFilter* bone_filter) {
+bool SkeletonModelPose::init(gsys::Model* model, int model_unit_index, sead::Heap* heap,
+                             SkeletonModelPose::ModelBoneFilter* bone_filter) {
     if (!model)
         return false;
 
@@ -226,14 +226,14 @@ bool ModelBoneAccessor::init(gsys::Model* model, int model_unit_index, sead::Hea
     return init(mModelSkeleton->mHavokSkeleton, model, heap);
 }
 
-void ModelBoneAccessor::finalize() {
+void SkeletonModelPose::finalize() {
     mBoneAccessKeys.freeBuffer();
-    BoneAccessor::finalize();
+    SkeletonPose::finalize();
     if (mModelSkeleton)
         util::safeDelete(mModelSkeleton);
 }
 
-int ModelBoneAccessor::findBoneIndex(const gsys::BoneAccessKey& key) const {
+int SkeletonModelPose::findBoneIndex(const gsys::BoneAccessKey& key) const {
     for (int i = 0, n = mBoneAccessKeys.size(); i < n; ++i) {
         if (key == mBoneAccessKeys[i].key.getKey())
             return i;
@@ -241,14 +241,14 @@ int ModelBoneAccessor::findBoneIndex(const gsys::BoneAccessKey& key) const {
     return -1;
 }
 
-const char* ModelBoneAccessor::getBoneName(int index) const {
+const char* SkeletonModelPose::getBoneName(int index) const {
     if (index < 0 || index >= getSkeleton()->m_bones.getSize())
         return nullptr;
     return getSkeleton()->m_bones[index].m_name.cString();
 }
 
 // NON_MATCHING: two loop induction variables (bone_idx) swapped
-void ModelBoneAccessor::copyModelPoseToHavok(EnableScale enable_scale) const {
+void SkeletonModelPose::copyModelPoseToHavok(EnableScale enable_scale) const {
     auto& hk_bones = getPose()->accessUnsyncedPoseLocalSpace();
 
     switch (getScaleModeOverride()) {
@@ -296,7 +296,7 @@ void ModelBoneAccessor::copyModelPoseToHavok(EnableScale enable_scale) const {
     }
 }
 
-void ModelBoneAccessor::copyHavokPoseToModel(EnableScale enable_scale) const {
+void SkeletonModelPose::copyHavokPoseToModel(EnableScale enable_scale) const {
     const auto& hk_bones = getPoseInternal()->getSyncedPoseLocalSpace();
 
     bool not_first_bone = false;
@@ -351,15 +351,15 @@ void ModelBoneAccessor::copyHavokPoseToModel(EnableScale enable_scale) const {
     }
 }
 
-int& ModelBoneAccessor::getScaleModeOverride() {
-    return sModelBoneAccessorScaleModeOverride;
+int& SkeletonModelPose::getScaleModeOverride() {
+    return sSkeletonModelPoseScaleModeOverride;
 }
 
-bool& ModelBoneAccessor::getDebugCheckBoneScale() {
-    return sModelBoneAccessorDebugCheckBoneScale;
+bool& SkeletonModelPose::getDebugCheckBoneScale() {
+    return sSkeletonModelPoseDebugCheckBoneScale;
 }
 
-gsys::ModelUnit* ModelBoneAccessor::getModelUnit(int bone_idx) const {
+gsys::ModelUnit* SkeletonModelPose::getModelUnit(int bone_idx) const {
     const auto key = mBoneAccessKeys[bone_idx].key.getKey();
     return mModel->getUnits()[key.model_unit_index]->mModelUnit;
 }

@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/Rig/physSkeletonMapper.h"
+#include "KingSystem/Physics/System/physSkeletonMapper.h"
 #include <Havok/Animation/Animation/Mapper/hkaSkeletonMapper.h>
 #include <Havok/Animation/Animation/Rig/hkaPose.h>
 
@@ -7,8 +7,8 @@ namespace ksys::phys {
 SkeletonMapper::SkeletonMapper() = default;
 
 SkeletonMapper::~SkeletonMapper() {
-    mModelBoneAccessor.finalize();
-    mBoneAccessor.finalize();
+    mSkeletonModelPose.finalize();
+    mSkeletonPose.finalize();
 }
 
 bool SkeletonMapper::init(hkaSkeletonMapper* skeleton_mapper,
@@ -31,8 +31,8 @@ bool SkeletonMapper::init(hkaSkeletonMapper* skeleton_mapper,
         return false;
 
     const auto cleanup = [this] {
-        mModelBoneAccessor.finalize();
-        mBoneAccessor.finalize();
+        mSkeletonModelPose.finalize();
+        mSkeletonPose.finalize();
         return false;
     };
 
@@ -40,16 +40,16 @@ bool SkeletonMapper::init(hkaSkeletonMapper* skeleton_mapper,
         mMapperA = model_skeleton_mapper;
         mMapperB = skeleton_mapper;
 
-        if (!mModelBoneAccessor.init(skeleton_mapper->m_mapping.m_skeletonB.val(), model, heap) ||
-            !mBoneAccessor.init(skeleton_mapper->m_mapping.m_skeletonA.val(), heap)) {
+        if (!mSkeletonModelPose.init(skeleton_mapper->m_mapping.m_skeletonB.val(), model, heap) ||
+            !mSkeletonPose.init(skeleton_mapper->m_mapping.m_skeletonA.val(), heap)) {
             return cleanup();
         }
     } else {
         mMapperA = skeleton_mapper;
         mMapperB = model_skeleton_mapper;
 
-        if (!mModelBoneAccessor.init(skeleton_mapper->m_mapping.m_skeletonA.val(), model, heap) ||
-            !mBoneAccessor.init(skeleton_mapper->m_mapping.m_skeletonB.val(), heap)) {
+        if (!mSkeletonModelPose.init(skeleton_mapper->m_mapping.m_skeletonA.val(), model, heap) ||
+            !mSkeletonPose.init(skeleton_mapper->m_mapping.m_skeletonB.val(), heap)) {
             return cleanup();
         }
     }
@@ -58,17 +58,17 @@ bool SkeletonMapper::init(hkaSkeletonMapper* skeleton_mapper,
 }
 
 void SkeletonMapper::mapPoseA() {
-    mBoneAccessor.resetPoseData();
-    mMapperA->mapPose(mModelBoneAccessor.getPose()->getSyncedPoseModelSpace().data(),
-                      mBoneAccessor.getPose()->getSkeleton()->m_referencePose.data(),
-                      mBoneAccessor.getPose()->accessUnsyncedPoseModelSpace().data(),
+    mSkeletonPose.resetPoseData();
+    mMapperA->mapPose(mSkeletonModelPose.getPose()->getSyncedPoseModelSpace().data(),
+                      mSkeletonPose.getPose()->getSkeleton()->m_referencePose.data(),
+                      mSkeletonPose.getPose()->accessUnsyncedPoseModelSpace().data(),
                       hkaSkeletonMapper::REFERENCE_POSE);
 }
 
 void SkeletonMapper::mapPoseB() {
-    const auto* original = mModelBoneAccessor.getPose()->getSyncedPoseLocalSpace().data();
-    auto* out = mModelBoneAccessor.getPose()->accessUnsyncedPoseModelSpace().data();
-    mMapperB->mapPose(mBoneAccessor.getPose()->getSyncedPoseModelSpace().data(), original, out,
+    const auto* original = mSkeletonModelPose.getPose()->getSyncedPoseLocalSpace().data();
+    auto* out = mSkeletonModelPose.getPose()->accessUnsyncedPoseModelSpace().data();
+    mMapperB->mapPose(mSkeletonPose.getPose()->getSyncedPoseModelSpace().data(), original, out,
                       hkaSkeletonMapper::NO_CONSTRAINTS);
 }
 

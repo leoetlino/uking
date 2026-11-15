@@ -16,11 +16,11 @@
 #include <resource/seadResource.h>
 #include "KingSystem/Physics/Ragdoll/physRagdollInstanceMgr.h"
 #include "KingSystem/Physics/Ragdoll/physRagdollRigidBody.h"
-#include "KingSystem/Physics/Rig/physModelBoneAccessor.h"
-#include "KingSystem/Physics/Rig/physSkeletonMapper.h"
 #include "KingSystem/Physics/RigidBody/physRigidBody.h"
 #include "KingSystem/Physics/System/physEntityGroupFilter.h"
 #include "KingSystem/Physics/System/physGroupFilter.h"
+#include "KingSystem/Physics/System/physSkeletonMapper.h"
+#include "KingSystem/Physics/System/physSkeletonModelPose.h"
 #include "KingSystem/Physics/System/physSystem.h"
 #include "KingSystem/Physics/physConversions.h"
 #include "KingSystem/Utils/Debug.h"
@@ -85,8 +85,8 @@ bool RagdollInstance::doInit(const RagdollParam* param, sead::DirectResource* re
             return false;
         }
     } else {
-        mModelBoneAccessor = new (heap) ModelBoneAccessor;
-        if (!mModelBoneAccessor->init(skeleton, model, heap)) {
+        mSkeletonModelPose = new (heap) SkeletonModelPose;
+        if (!mSkeletonModelPose->init(skeleton, model, heap)) {
             return false;
         }
     }
@@ -193,8 +193,8 @@ void RagdollInstance::finalize() {
     if (mSkeletonMapper)
         util::safeDelete(mSkeletonMapper);
 
-    if (mModelBoneAccessor)
-        util::safeDelete(mModelBoneAccessor);
+    if (mSkeletonModelPose)
+        util::safeDelete(mSkeletonModelPose);
 
     if (mRagdollData) {
         hkNativePackfileUtils::unloadInPlace(mRagdollData, static_cast<int>(mRagdollDataSize));
@@ -272,7 +272,7 @@ void RagdollInstance::setTransform(const hkQsTransformf& transform) {
         mSkeletonMapper->mapPoseA();
 
     mRagdollInstance->setPoseModelSpace(
-        getBoneAccessor()->getPose()->getSyncedPoseModelSpace().data(), transform);
+        getSkeletonPose()->getPose()->getSyncedPoseModelSpace().data(), transform);
 
     if (mExtraRigidBody) {
         sead::Matrix34f old_transform;
@@ -330,7 +330,7 @@ void RagdollInstance::setScale(float scale) {
     }
 
     if (mSkeletonMapper)
-        mSkeletonMapper->getBoneAccessor().setScale(scale);
+        mSkeletonMapper->getSkeletonPose().setScale(scale);
 }
 
 void RagdollInstance::setFixedAndPreserveImpulse(Fixed fixed,
@@ -364,11 +364,11 @@ void RagdollInstance::setFixed(Fixed fixed, PreserveVelocities preserve_velociti
         body->setFixed(fixed, preserve_velocities);
 }
 
-ModelBoneAccessor* RagdollInstance::getModelBoneAccessor() const {
+SkeletonModelPose* RagdollInstance::getSkeletonModelPose() const {
     if (mSkeletonMapper)
-        return &mSkeletonMapper->getModelBoneAccessor();
+        return &mSkeletonMapper->getSkeletonModelPose();
 
-    return mModelBoneAccessor;
+    return mSkeletonModelPose;
 }
 
 void RagdollInstance::m3() {}
@@ -428,8 +428,8 @@ void RagdollInstance::changeWorldState(RagdollInstance::WorldState state) {
 
     if (state == WorldState::AddedToWorld) {
         if (mModel) {
-            if (auto* accessor = getModelBoneAccessor())
-                accessor->copyModelPoseToHavok(ModelBoneAccessor::EnableScale::No);
+            if (auto* accessor = getSkeletonModelPose())
+                accessor->copyModelPoseToHavok(SkeletonModelPose::EnableScale::No);
 
             setTransform(mModel->getMatrix());
         }
@@ -495,9 +495,9 @@ RagdollRigidBody* RagdollInstance::getBoneRigidBodyByName(const sead::SafeString
 }
 
 int RagdollInstance::getBoneIndexByModelKey(const gsys::BoneAccessKey& key) const {
-    const int model_bone_index = getModelBoneAccessor()->findBoneIndex(key);
+    const int model_bone_index = getSkeletonModelPose()->findBoneIndex(key);
 
-    const char* bone_name = getModelBoneAccessor()->getBoneName(model_bone_index);
+    const char* bone_name = getSkeletonModelPose()->getBoneName(model_bone_index);
     if (bone_name == nullptr)
         return -1;
 
@@ -744,11 +744,11 @@ RagdollInstance::ScopedPhysicsLock::~ScopedPhysicsLock() {
         body.get()->unlock(RigidBody::AlsoLockWorld::No);
 }
 
-BoneAccessor* RagdollInstance::getBoneAccessor() const {
+SkeletonPose* RagdollInstance::getSkeletonPose() const {
     if (mSkeletonMapper)
-        return &mSkeletonMapper->getBoneAccessor();
+        return &mSkeletonMapper->getSkeletonPose();
 
-    return mModelBoneAccessor;
+    return mSkeletonModelPose;
 }
 
 }  // namespace ksys::phys

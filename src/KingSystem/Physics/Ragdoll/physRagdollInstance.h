@@ -25,12 +25,12 @@ class DirectResource;
 
 namespace ksys::phys {
 
-class BoneAccessor;
-class ModelBoneAccessor;
 class RagdollParam;
 class RagdollRigidBody;
 class RigidBody;
 class SkeletonMapper;
+class SkeletonModelPose;
+class SkeletonPose;
 class SystemGroupHandler;
 class UserTag;
 
@@ -74,7 +74,7 @@ public:
     void setStopTimerSmallMass(bool set);
     void setFixed(Fixed fixed, PreserveVelocities preserve_velocities);
 
-    ModelBoneAccessor* getModelBoneAccessor() const;
+    SkeletonModelPose* getSkeletonModelPose() const;
 
     // TODO: rename
     virtual void m3();
@@ -176,10 +176,10 @@ private:
 
     void updateGravityFactorOverride();
 
-    BoneAccessor* getBoneAccessor() const;
+    SkeletonPose* getSkeletonPose() const;
 
     SkeletonMapper* mSkeletonMapper = nullptr;
-    ModelBoneAccessor* mModelBoneAccessor = nullptr;
+    SkeletonModelPose* mSkeletonModelPose = nullptr;
     hkaRagdollInstance* mRagdollInstance = nullptr;
     SystemGroupHandler* mGroupHandler = nullptr;
     /// The rigid bodies of bones.

@@ -4,7 +4,7 @@
 #include <gsys/gsysModelAccessKey.h>
 #include <math/seadVector.h>
 #include <prim/seadLongBitFlag.h>
-#include "KingSystem/Physics/Rig/physBoneAccessor.h"
+#include "KingSystem/Physics/System/physSkeletonPose.h"
 
 namespace gsys {
 class Model;
@@ -17,7 +17,7 @@ namespace detail {
 class ModelSkeleton;
 }
 
-class ModelBoneAccessor : public BoneAccessor {
+class SkeletonModelPose : public SkeletonPose {
 public:
     enum class EnableScale : bool { Yes = true, No = false };
 
@@ -29,8 +29,8 @@ public:
         virtual int filter(BoneBitSet* bones_to_keep, const gsys::ModelUnit& model_unit) = 0;
     };
 
-    ModelBoneAccessor();
-    ~ModelBoneAccessor() override;
+    SkeletonModelPose();
+    ~SkeletonModelPose() override;
 
     bool init(const hkaSkeleton* skeleton, gsys::Model* model, sead::Heap* heap);
 

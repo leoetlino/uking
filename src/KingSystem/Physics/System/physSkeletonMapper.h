@@ -1,8 +1,8 @@
 #pragma once
 
 #include <hostio/seadHostIONode.h>
-#include "KingSystem/Physics/Rig/physBoneAccessor.h"
-#include "KingSystem/Physics/Rig/physModelBoneAccessor.h"
+#include "KingSystem/Physics/System/physSkeletonModelPose.h"
+#include "KingSystem/Physics/System/physSkeletonPose.h"
 
 class hkaSkeletonMapper;
 
@@ -19,12 +19,12 @@ public:
     void mapPoseA();
     void mapPoseB();
 
-    BoneAccessor& getBoneAccessor() { return mBoneAccessor; }
-    ModelBoneAccessor& getModelBoneAccessor() { return mModelBoneAccessor; }
+    SkeletonPose& getSkeletonPose() { return mSkeletonPose; }
+    SkeletonModelPose& getSkeletonModelPose() { return mSkeletonModelPose; }
 
 private:
-    BoneAccessor mBoneAccessor;
-    ModelBoneAccessor mModelBoneAccessor;
+    SkeletonPose mSkeletonPose;
+    SkeletonModelPose mSkeletonModelPose;
     hkaSkeletonMapper* mMapperA{};
     hkaSkeletonMapper* mMapperB{};
 };
