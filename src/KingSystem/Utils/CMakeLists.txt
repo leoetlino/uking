@@ -25,10 +25,10 @@ target_sources(uking PRIVATE
   Thread/MessageProcessor.h
   Thread/MessageReceiver.cpp
   Thread/MessageReceiver.h
-  Thread/MessageReceiverAdapter.cpp
-  Thread/MessageReceiverAdapter.h
   Thread/MessageReceiverEx.cpp
   Thread/MessageReceiverEx.h
+  Thread/MessageReceiverExAdapter.cpp
+  Thread/MessageReceiverExAdapter.h
   Thread/MessageTransceiverBase.cpp
   Thread/MessageTransceiverBase.h
   Thread/MessageTransceiverCommon.h

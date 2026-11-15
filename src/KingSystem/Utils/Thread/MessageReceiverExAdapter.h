@@ -4,11 +4,11 @@
 
 namespace ksys {
 
-class MessageReceiverAdapter : public MessageReceiverEx {
-    SEAD_RTTI_OVERRIDE(MessageReceiverAdapter, MessageReceiverEx)
+class MessageReceiverExAdapter : public MessageReceiverEx {
+    SEAD_RTTI_OVERRIDE(MessageReceiverExAdapter, MessageReceiverEx)
 public:
-    explicit MessageReceiverAdapter(MessageReceiver* wrapped);
-    ~MessageReceiverAdapter() override;
+    explicit MessageReceiverExAdapter(MessageReceiver* wrapped);
+    ~MessageReceiverExAdapter() override;
 
 protected:
     int handleMessage(const Message& message) override;
