@@ -27,6 +27,8 @@ target_sources(uking PRIVATE
   Thread/MessageReceiverEx.h
   Thread/MessageReceiverExAdapter.cpp
   Thread/MessageReceiverExAdapter.h
+  Thread/MessageTransceiver.cpp
+  Thread/MessageTransceiver.h
   Thread/MessageTransceiverBase.cpp
   Thread/MessageTransceiverBase.h
   Thread/MessageTransceiverCommon.h
@@ -34,8 +36,6 @@ target_sources(uking PRIVATE
   Thread/MessageTransceiverId.h
   Thread/MessageTransceiverRxOnly.cpp
   Thread/MessageTransceiverRxOnly.h
-  Thread/MessageTransceiverTxOnly.cpp
-  Thread/MessageTransceiverTxOnly.h
   Thread/PhysicsTaskThread.cpp
   Thread/PhysicsTaskThread.h
   Thread/Task.cpp

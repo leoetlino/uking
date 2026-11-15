@@ -1,8 +1,8 @@
 #pragma once
 
+#include "KingSystem/Utils/Thread/MessageTransceiver.h"
 #include "KingSystem/Utils/Thread/MessageTransceiverBase.h"
 #include "KingSystem/Utils/Thread/MessageTransceiverRxOnly.h"
-#include "KingSystem/Utils/Thread/MessageTransceiverTxOnly.h"
 
 namespace ksys {
 
@@ -13,7 +13,7 @@ class Actor;
 class ActorMessageTransceiver final : public MessageTransceiverBase {
 public:
     class IHandler : public MessageTransceiverRxOnly::IHandler,
-                     public MessageTransceiverTxOnly::IHandler {};
+                     public MessageTransceiver::IHandler {};
     KSYS_CHECK_SIZE_NX150(IHandler, 0x10);
 
     explicit ActorMessageTransceiver(IHandler& handler);

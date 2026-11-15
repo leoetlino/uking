@@ -7,7 +7,7 @@ namespace ksys {
 
 class Message;
 
-class MessageTransceiverTxOnly final : public MessageTransceiverBase {
+class MessageTransceiver final : public MessageTransceiverBase {
 public:
     class IHandler {
     public:
@@ -15,8 +15,8 @@ public:
         virtual void handleAck(const MessageAck& ack) {}
     };
 
-    explicit MessageTransceiverTxOnly(IHandler& handler);
-    ~MessageTransceiverTxOnly() override;
+    explicit MessageTransceiver(IHandler& handler);
+    ~MessageTransceiver() override;
     bool sendMessage(const MesTransceiverId& dest, const MessageType& type, void* user_data,
                      bool ack) override;
     bool sendMessageOnProcessingThread(const MesTransceiverId& dest, const MessageType& type,
