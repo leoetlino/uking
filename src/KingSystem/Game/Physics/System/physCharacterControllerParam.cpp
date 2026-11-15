@@ -4,8 +4,8 @@
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCharacterPrismShape.h"
+#include "KingSystem/Physics/RigidBody/Shape/physCompoundShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderShape.h"
-#include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physPolytopeShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physSphereShape.h"
@@ -156,7 +156,7 @@ Shape* CharacterControllerParam::Form::createShape(sead::Heap* heap) const {
             return CharacterPrismShape::make(param, heap);
         }
 
-        case ShapeType::List:
+        case ShapeType::Compound:
         case ShapeType::BoxWater:
         case ShapeType::CylinderWater:
         case ShapeType::Unknown:
@@ -167,10 +167,10 @@ Shape* CharacterControllerParam::Form::createShape(sead::Heap* heap) const {
         return nullptr;
     }
 
-    ListShapeParam list_param;
+    CompoundShapeParam list_param;
     list_param.num_shapes = static_cast<decltype(list_param.num_shapes)>(*shape_num);
 
-    auto* list_shape = ListShape::make(list_param, heap);
+    auto* list_shape = CompoundShape::make(list_param, heap);
 
     for (int i = 0; i < int(list_param.num_shapes); ++i) {
         switch (shape_params[i].getShapeType()) {
@@ -221,7 +221,7 @@ Shape* CharacterControllerParam::Form::createShape(sead::Heap* heap) const {
             continue;
         }
 
-        case ShapeType::List:
+        case ShapeType::Compound:
         case ShapeType::BoxWater:
         case ShapeType::CylinderWater:
         case ShapeType::Unknown:

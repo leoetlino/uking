@@ -5,17 +5,17 @@
 #include "KingSystem/Physics/RigidBody/Shape/physBoxShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physBoxWaterShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
+#include "KingSystem/Physics/RigidBody/Shape/physCompoundShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderWaterShape.h"
-#include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physPolytopeShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physSphereShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBox.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBoxWater.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCapsule.h"
+#include "KingSystem/Physics/RigidBody/physRigidBodyCompoundShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCylinder.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCylinderWater.h"
-#include "KingSystem/Physics/RigidBody/physRigidBodyListShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyPolytope.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodySphere.h"
 #include "KingSystem/Physics/System/physEntityGroupFilter.h"
@@ -223,7 +223,7 @@ RigidBodyParam::createRigidBody(SystemGroupHandler* group_handler, sead::Heap* h
             return body;
         }
 
-        case ShapeType::List:
+        case ShapeType::Compound:
         case ShapeType::CharacterPrism:
         case ShapeType::BoxWater:
         case ShapeType::CylinderWater:
@@ -234,14 +234,14 @@ RigidBodyParam::createRigidBody(SystemGroupHandler* group_handler, sead::Heap* h
         return nullptr;
     }
 
-    // Multiple shapes. Use a ListShape.
+    // Multiple shapes. Use a CompoundShape.
 
-    ListShapeRigidBodyParam list_param;
+    CompoundShapeRigidBodyParam list_param;
     makeInstanceParam(&list_param);
     list_param.system_group_handler = group_handler;
     list_param.num_shapes = num_shapes;
 
-    auto* list_body = ListShapeRigidBody::make(&list_param, heap);
+    auto* list_body = CompoundShapeRigidBody::make(&list_param, heap);
     list_body->setUpdateRequestedFlag();
 
     for (int i = 0; i < num_shapes; ++i) {
@@ -284,14 +284,14 @@ RigidBodyParam::createRigidBody(SystemGroupHandler* group_handler, sead::Heap* h
             continue;
         }
 
-        case ShapeType::List:
+        case ShapeType::Compound:
         case ShapeType::CharacterPrism:
         case ShapeType::BoxWater:
         case ShapeType::CylinderWater:
         case ShapeType::Unknown:
             break;
         }
-        SEAD_ASSERT_MSG(false, "unexpected shape type for list shape");
+        SEAD_ASSERT_MSG(false, "unexpected shape type for compound shape");
         util::safeDelete(list_body);
     }
 
@@ -339,7 +339,7 @@ MotionType RigidBodyParam::getMotionType() const {
 
 ShapeType RigidBodyParam::getShapeType() const {
     if (*info.shape_num > 1)
-        return ShapeType::List;
+        return ShapeType::Compound;
 
     return shapes[0].getShapeType();
 }

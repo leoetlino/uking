@@ -7,17 +7,17 @@
 #include "KingSystem/Physics/RigidBody/Shape/physBoxWaterShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCapsuleShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCharacterPrismShape.h"
+#include "KingSystem/Physics/RigidBody/Shape/physCompoundShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physCylinderWaterShape.h"
-#include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physPolytopeShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physShape.h"
 #include "KingSystem/Physics/RigidBody/Shape/physSphereShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBox.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyBoxWater.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCapsule.h"
+#include "KingSystem/Physics/RigidBody/physRigidBodyCompoundShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCylinder.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyCylinderWater.h"
-#include "KingSystem/Physics/RigidBody/physRigidBodyListShape.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyParam.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodyPolytope.h"
 #include "KingSystem/Physics/RigidBody/physRigidBodySphere.h"
@@ -60,9 +60,9 @@ PolytopeRigidBody* RigidBodyFromShape::createPolytope(RigidBodyInstanceParam* pa
     return make<PolytopeRigidBody, PolytopeShape, PolytopeParam>(param, heap);
 }
 
-ListShapeRigidBody* RigidBodyFromShape::createList(RigidBodyInstanceParam* param,
-                                                   sead::Heap* heap) {
-    return make<ListShapeRigidBody, ListShape, ListShapeRigidBodyParam>(param, heap);
+CompoundShapeRigidBody* RigidBodyFromShape::createCompound(RigidBodyInstanceParam* param,
+                                                           sead::Heap* heap) {
+    return make<CompoundShapeRigidBody, CompoundShape, CompoundShapeRigidBodyParam>(param, heap);
 }
 
 RigidBody* RigidBodyFromShape::clone(sead::Heap* heap, SystemGroupHandler* group_handler) const {
@@ -82,9 +82,9 @@ RigidBody* RigidBodyFromShape::clone(sead::Heap* heap, SystemGroupHandler* group
         return cloneImpl<BoxWaterRigidBody, BoxWaterShape, BoxParam>(heap, group_handler);
     case ShapeType::Polytope:
         return cloneImpl<PolytopeRigidBody, PolytopeShape, PolytopeParam>(heap, group_handler);
-    case ShapeType::List:
-        return cloneImpl<ListShapeRigidBody, ListShape, ListShapeRigidBodyParam>(heap,
-                                                                                 group_handler);
+    case ShapeType::Compound:
+        return cloneImpl<CompoundShapeRigidBody, CompoundShape, CompoundShapeRigidBodyParam>(
+            heap, group_handler);
     case ShapeType::CharacterPrism:
     case ShapeType::Unknown:
         break;
@@ -109,8 +109,8 @@ RigidBody* RigidBodyFromShape::create(const Shape& shape, RigidBodyInstanceParam
         return make<BoxWaterRigidBody, BoxWaterShape>(shape, param, heap, group_handler);
     case ShapeType::Polytope:
         return make<PolytopeRigidBody, PolytopeShape>(shape, param, heap, group_handler);
-    case ShapeType::List:
-        return make<ListShapeRigidBody, ListShape>(shape, param, heap, group_handler);
+    case ShapeType::Compound:
+        return make<CompoundShapeRigidBody, CompoundShape>(shape, param, heap, group_handler);
     case ShapeType::CharacterPrism: {
         auto* prism = sead::DynamicCast<const CharacterPrismShape>(&shape);
         if (!prism || !prism->getUnderlyingShape())
@@ -150,9 +150,10 @@ RigidBody* RigidBodyFromShape::createEntityShapeBody(const sead::SafeString& nam
     case ShapeType::Polytope:
         return createEntityShapeBodyImpl<PolytopeRigidBody, PolytopeShape, PolytopeParam>(
             name, layer, linked_body, heap, group_handler);
-    case ShapeType::List:
-        return createEntityShapeBodyImpl<ListShapeRigidBody, ListShape, ListShapeRigidBodyParam>(
-            name, layer, linked_body, heap, group_handler);
+    case ShapeType::Compound:
+        return createEntityShapeBodyImpl<CompoundShapeRigidBody, CompoundShape,
+                                         CompoundShapeRigidBodyParam>(name, layer, linked_body,
+                                                                      heap, group_handler);
     case ShapeType::CharacterPrism:
     case ShapeType::Unknown:
         break;
@@ -190,8 +191,8 @@ const MaterialMask* RigidBodyFromShape::tryGetMaterialMask() const {
         return &sead::DynamicCast<const CylinderRigidBody>(this)->getMaterialMask();
     case ShapeType::Polytope:
         return &sead::DynamicCast<const PolytopeRigidBody>(this)->getMaterialMask();
-    case ShapeType::List:
-        return &sead::DynamicCast<const ListShapeRigidBody>(this)->getMaterialMask(0);
+    case ShapeType::Compound:
+        return &sead::DynamicCast<const CompoundShapeRigidBody>(this)->getMaterialMask(0);
     case ShapeType::BoxWater:
         return &sead::DynamicCast<const BoxWaterRigidBody>(this)->getMaterialMask();
     case ShapeType::CylinderWater:

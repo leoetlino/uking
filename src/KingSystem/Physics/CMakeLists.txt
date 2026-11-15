@@ -43,6 +43,8 @@ target_sources(uking PRIVATE
     RigidBody/physRigidBodyBoxWater.h
     RigidBody/physRigidBodyCapsule.cpp
     RigidBody/physRigidBodyCapsule.h
+    RigidBody/physRigidBodyCompoundShape.cpp
+    RigidBody/physRigidBodyCompoundShape.h
     RigidBody/physRigidBodyContactEvent.h
     RigidBody/physRigidBodyCylinder.cpp
     RigidBody/physRigidBodyCylinder.h
@@ -52,8 +54,6 @@ target_sources(uking PRIVATE
     RigidBody/physRigidBodyFromResource.h
     RigidBody/physRigidBodyFromShape.cpp
     RigidBody/physRigidBodyFromShape.h
-    RigidBody/physRigidBodyListShape.cpp
-    RigidBody/physRigidBodyListShape.h
     RigidBody/physRigidBodyMotionEntity.cpp
     RigidBody/physRigidBodyMotionEntity.h
     RigidBody/physRigidBodyMotionSensor.cpp
@@ -87,12 +87,12 @@ target_sources(uking PRIVATE
     RigidBody/Shape/physCapsuleShape.h
     RigidBody/Shape/physCharacterPrismShape.cpp
     RigidBody/Shape/physCharacterPrismShape.h
+    RigidBody/Shape/physCompoundShape.cpp
+    RigidBody/Shape/physCompoundShape.h
     RigidBody/Shape/physCylinderShape.cpp
     RigidBody/Shape/physCylinderShape.h
     RigidBody/Shape/physCylinderWaterShape.cpp
     RigidBody/Shape/physCylinderWaterShape.h
-    RigidBody/Shape/physListShape.cpp
-    RigidBody/Shape/physListShape.h
     RigidBody/Shape/physPolytopeShape.cpp
     RigidBody/Shape/physPolytopeShape.h
     RigidBody/Shape/physShape.h

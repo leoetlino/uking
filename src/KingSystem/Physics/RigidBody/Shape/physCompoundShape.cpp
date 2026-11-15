@@ -1,4 +1,4 @@
-#include "KingSystem/Physics/RigidBody/Shape/physListShape.h"
+#include "KingSystem/Physics/RigidBody/Shape/physCompoundShape.h"
 #include <Havok/Physics2012/Collide/Shape/Compound/Collection/List/hkpListShape.h>
 #include <Havok/Physics2012/Collide/Shape/Convex/Sphere/hkpSphereShape.h>
 #include <basis/seadRawPrint.h>
@@ -13,7 +13,7 @@
 
 namespace ksys::phys {
 
-ListShape* ListShape::make(const ListShapeParam& param, sead::Heap* heap) {
+CompoundShape* CompoundShape::make(const CompoundShapeParam& param, sead::Heap* heap) {
     auto* sphere = new hkpSphereShape(1.0);
     if (!sphere)
         return nullptr;
@@ -25,11 +25,11 @@ ListShape* ListShape::make(const ListShapeParam& param, sead::Heap* heap) {
     if (!list_shape)
         return nullptr;
 
-    return new (heap) ListShape(param, list_shape, heap);
+    return new (heap) CompoundShape(param, list_shape, heap);
 }
 
-ListShape* ListShape::clone(sead::Heap* heap) const {
-    ListShapeParam param;
+CompoundShape* CompoundShape::clone(sead::Heap* heap) const {
+    CompoundShapeParam param;
     param.num_shapes = static_cast<decltype(param.num_shapes)>(mShapes.size());
 
     auto* cloned = make(param, heap);
@@ -42,14 +42,14 @@ ListShape* ListShape::clone(sead::Heap* heap) const {
     return cloned;
 }
 
-ListShape::ListShape(const ListShapeParam& param, hkpListShape* shape, sead::Heap* heap)
+CompoundShape::CompoundShape(const CompoundShapeParam& param, hkpListShape* shape, sead::Heap* heap)
     : mHavokShape(shape) {
     mShapes.allocBufferAssert(param.num_shapes, heap);
     for (int i = 0; i < int(param.num_shapes); ++i)
         mShapes[i] = nullptr;
 }
 
-ListShape::~ListShape() {
+CompoundShape::~CompoundShape() {
     deleteRefCountedHavokObject(mHavokShape);
 
     for (int i = 0, n = mShapes.size(); i < n; ++i) {
@@ -62,7 +62,7 @@ ListShape::~ListShape() {
     mShapes.freeBuffer();
 }
 
-Shape* ListShape::replaceWithClone(int index, const Shape* shape_to_clone, sead::Heap* heap) {
+Shape* CompoundShape::replaceWithClone(int index, const Shape* shape_to_clone, sead::Heap* heap) {
     delete mShapes[index];
 
     switch (shape_to_clone->getType()) {
@@ -84,7 +84,7 @@ Shape* ListShape::replaceWithClone(int index, const Shape* shape_to_clone, sead:
     case ShapeType::CharacterPrism:
         mShapes[index] = sead::DynamicCast<const CharacterPrismShape>(shape_to_clone)->clone(heap);
         break;
-    case ShapeType::List:
+    case ShapeType::Compound:
     case ShapeType::BoxWater:
     case ShapeType::CylinderWater:
     case ShapeType::Unknown:
@@ -96,35 +96,36 @@ Shape* ListShape::replaceWithClone(int index, const Shape* shape_to_clone, sead:
     return mShapes[index];
 }
 
-Shape* ListShape::replaceWithNewSphere(int index, const SphereShapeParam& param, sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewSphere(int index, const SphereShapeParam& param,
+                                           sead::Heap* heap) {
     return replaceWithNewShape<SphereShape, SphereShapeParam>(index, param, heap);
 }
 
-Shape* ListShape::replaceWithNewCapsule(int index, const CapsuleShapeParam& param,
-                                        sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewCapsule(int index, const CapsuleShapeParam& param,
+                                            sead::Heap* heap) {
     return replaceWithNewShape<CapsuleShape, CapsuleShapeParam>(index, param, heap);
 }
 
-Shape* ListShape::replaceWithNewCylinder(int index, const CylinderShapeParam& param,
-                                         sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewCylinder(int index, const CylinderShapeParam& param,
+                                             sead::Heap* heap) {
     return replaceWithNewShape<CylinderShape, CylinderShapeParam>(index, param, heap);
 }
 
-Shape* ListShape::replaceWithNewBox(int index, const BoxShapeParam& param, sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewBox(int index, const BoxShapeParam& param, sead::Heap* heap) {
     return replaceWithNewShape<BoxShape, BoxShapeParam>(index, param, heap);
 }
 
-Shape* ListShape::replaceWithNewPolytope(int index, const PolytopeShapeParam& param,
-                                         sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewPolytope(int index, const PolytopeShapeParam& param,
+                                             sead::Heap* heap) {
     return replaceWithNewShape<PolytopeShape, PolytopeShapeParam>(index, param, heap);
 }
 
-Shape* ListShape::replaceWithNewCharacterPrism(int index, const CharacterPrismShapeParam& param,
-                                               sead::Heap* heap) {
+Shape* CompoundShape::replaceWithNewCharacterPrism(int index, const CharacterPrismShapeParam& param,
+                                                   sead::Heap* heap) {
     return replaceWithNewShape<CharacterPrismShape, CharacterPrismShapeParam>(index, param, heap);
 }
 
-void ListShape::setMaterialMask(const MaterialMask& mask, int index) {
+void CompoundShape::setMaterialMask(const MaterialMask& mask, int index) {
     switch (mShapes[index]->getType()) {
     case ShapeType::Sphere:
         sead::DynamicCast<SphereShape>(mShapes[index])->setMaterialMask(mask);
@@ -144,7 +145,7 @@ void ListShape::setMaterialMask(const MaterialMask& mask, int index) {
     case ShapeType::CharacterPrism:
         sead::DynamicCast<CharacterPrismShape>(mShapes[index])->setMaterialMask(mask);
         break;
-    case ShapeType::List:
+    case ShapeType::Compound:
     case ShapeType::BoxWater:
     case ShapeType::CylinderWater:
     case ShapeType::Unknown:
@@ -153,7 +154,7 @@ void ListShape::setMaterialMask(const MaterialMask& mask, int index) {
     }
 }
 
-const MaterialMask& ListShape::getMaterialMask(int index) const {
+const MaterialMask& CompoundShape::getMaterialMask(int index) const {
     if (index >= mShapes.size())
         index = 0;
 
@@ -170,7 +171,7 @@ const MaterialMask& ListShape::getMaterialMask(int index) const {
         return sead::DynamicCast<PolytopeShape>(mShapes[index])->getMaterialMask();
     case ShapeType::CharacterPrism:
         return sead::DynamicCast<CharacterPrismShape>(mShapes[index])->getMaterialMask();
-    case ShapeType::List:
+    case ShapeType::Compound:
     case ShapeType::BoxWater:
     case ShapeType::CylinderWater:
     case ShapeType::Unknown:
@@ -180,7 +181,7 @@ const MaterialMask& ListShape::getMaterialMask(int index) const {
     return sead::DynamicCast<SphereShape>(mShapes[index])->getMaterialMask();
 }
 
-float ListShape::getVolume() const {
+float CompoundShape::getVolume() const {
     float volume = 0.0;
     for (int i = 0, n = mShapes.size(); i < n; ++i) {
         if (mShapes[i])
@@ -189,15 +190,15 @@ float ListShape::getVolume() const {
     return volume;
 }
 
-hkpShape* ListShape::getHavokShape() {
+hkpShape* CompoundShape::getHavokShape() {
     return mHavokShape;
 }
 
-const hkpShape* ListShape::getHavokShape() const {
+const hkpShape* CompoundShape::getHavokShape() const {
     return mHavokShape;
 }
 
-const hkpShape* ListShape::updateHavokShape() {
+const hkpShape* CompoundShape::updateHavokShape() {
     bool updated = false;
 
     if (mFlags.isOn(Flag::NeedsHavokShapeUpdate)) {
@@ -248,7 +249,7 @@ const hkpShape* ListShape::updateHavokShape() {
     return updated ? mHavokShape : nullptr;
 }
 
-void ListShape::setScale(float scale) {
+void CompoundShape::setScale(float scale) {
     for (int i = 0, n = mShapes.size(); i < n; ++i) {
         if (mShapes[i])
             mShapes[i]->setScale(scale);

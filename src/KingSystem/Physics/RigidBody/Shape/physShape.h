@@ -15,7 +15,7 @@ enum class ShapeType {
     Box = 2,
     Cylinder = 3,
     Polytope = 4,
-    List = 5,
+    Compound = 5,
     CharacterPrism = 6,
     BoxWater = 7,
     CylinderWater = 8,

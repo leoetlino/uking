@@ -11,16 +11,16 @@ struct CylinderShapeParam;
 struct PolytopeShapeParam;
 struct SphereShapeParam;
 
-class ListShape;
+class CompoundShape;
 
-class ListShapeRigidBody : public RigidBodyFromShape {
-    SEAD_RTTI_OVERRIDE(ListShapeRigidBody, RigidBodyFromShape)
+class CompoundShapeRigidBody : public RigidBodyFromShape {
+    SEAD_RTTI_OVERRIDE(CompoundShapeRigidBody, RigidBodyFromShape)
 public:
-    static ListShapeRigidBody* make(RigidBodyInstanceParam* param, sead::Heap* heap);
+    static CompoundShapeRigidBody* make(RigidBodyInstanceParam* param, sead::Heap* heap);
 
-    ListShapeRigidBody(hkpRigidBody* hk_body, ListShape* shape, ContactLayerType layer_type,
-                       const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
-    ~ListShapeRigidBody() override;
+    CompoundShapeRigidBody(hkpRigidBody* hk_body, CompoundShape* shape, ContactLayerType layer_type,
+                           const sead::SafeString& name, bool owns_shape, sead::Heap* heap);
+    ~CompoundShapeRigidBody() override;
 
     /// Replace the shape at the specified index with a new sphere shape.
     /// The shape that is being replaced will be deleted.
@@ -62,7 +62,7 @@ protected:
                           const sead::Vector3f& contact_point) override;
 
 private:
-    ListShape* mShape{};
+    CompoundShape* mShape{};
 };
 
 }  // namespace ksys::phys

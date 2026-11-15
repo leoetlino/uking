@@ -12,18 +12,18 @@ struct RigidBodyInstanceParam;
 class BoxRigidBody;
 class BoxWaterRigidBody;
 class CapsuleRigidBody;
+class CompoundShapeRigidBody;
 class CylinderRigidBody;
 class CylinderWaterRigidBody;
-class ListShapeRigidBody;
 class PolytopeRigidBody;
 class SphereRigidBody;
 
 class BoxShape;
 class BoxWaterShape;
 struct CapsuleShape;
+class CompoundShape;
 class CylinderShape;
 class CylinderWaterShape;
-class ListShape;
 class PolytopeShape;
 class SphereShape;
 
@@ -38,7 +38,7 @@ public:
     static BoxRigidBody* createBox(RigidBodyInstanceParam* param, sead::Heap* heap);
     static BoxWaterRigidBody* createBoxWater(RigidBodyInstanceParam* param, sead::Heap* heap);
     static PolytopeRigidBody* createPolytope(RigidBodyInstanceParam* param, sead::Heap* heap);
-    static ListShapeRigidBody* createList(RigidBodyInstanceParam* param, sead::Heap* heap);
+    static CompoundShapeRigidBody* createCompound(RigidBodyInstanceParam* param, sead::Heap* heap);
 
     RigidBody* clone(sead::Heap* heap, SystemGroupHandler* group_handler) const;
 

@@ -19,18 +19,18 @@ struct SphereShapeParam;
 
 class MaterialMask;
 
-struct ListShapeParam {
+struct CompoundShapeParam {
     u8 num_shapes = 4;
 };
 
-class ListShape : public Shape {
-    SEAD_RTTI_OVERRIDE(ListShape, Shape)
+class CompoundShape : public Shape {
+    SEAD_RTTI_OVERRIDE(CompoundShape, Shape)
 public:
-    static ListShape* make(const ListShapeParam& param, sead::Heap* heap);
-    ListShape* clone(sead::Heap* heap) const;
+    static CompoundShape* make(const CompoundShapeParam& param, sead::Heap* heap);
+    CompoundShape* clone(sead::Heap* heap) const;
 
-    ListShape(const ListShapeParam& param, hkpListShape* shape, sead::Heap* heap);
-    ~ListShape() override;
+    CompoundShape(const CompoundShapeParam& param, hkpListShape* shape, sead::Heap* heap);
+    ~CompoundShape() override;
 
     /// Replace the shape at the specified index with a clone of `shape_to_clone`.
     /// The shape that is being replaced will be deleted.
@@ -68,7 +68,7 @@ public:
     /// Get the material mask for the shape at the specified index.
     const MaterialMask& getMaterialMask(int index) const;
 
-    ShapeType getType() const override { return ShapeType::List; }
+    ShapeType getType() const override { return ShapeType::Compound; }
     float getVolume() const override;
     hkpShape* getHavokShape() override;
     const hkpShape* getHavokShape() const override;
@@ -97,10 +97,10 @@ private:
     sead::TypedBitFlag<Flag, sead::Atomic<u32>> mFlags{Flag::NeedsHavokShapeUpdate};
 };
 
-class ListShapeRigidBodyParam : public RigidBodyInstanceParam, public ListShapeParam {
-    SEAD_RTTI_OVERRIDE(ListShapeRigidBodyParam, RigidBodyInstanceParam)
+class CompoundShapeRigidBodyParam : public RigidBodyInstanceParam, public CompoundShapeParam {
+    SEAD_RTTI_OVERRIDE(CompoundShapeRigidBodyParam, RigidBodyInstanceParam)
 public:
-    ListShapeRigidBodyParam() : RigidBodyInstanceParam(ShapeType::List) {}
+    CompoundShapeRigidBodyParam() : RigidBodyInstanceParam(ShapeType::Compound) {}
 };
 
 }  // namespace ksys::phys
