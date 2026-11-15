@@ -8,10 +8,10 @@ target_sources(uking PRIVATE
   actActionEx.h
   actActionFactories.cpp
   actActionFactories.h
-  actActorFactory.cpp
-  actActorFactory.h
   actAiFactories.cpp
   actAiFactories.h
+  actBaseProcFactory.cpp
+  actBaseProcFactory.h
   actDamageManagerBase.cpp
   actDamageManagerBase.h
   actDamageMgr.cpp

@@ -15,7 +15,7 @@ SEAD_SINGLETON_DISPOSER_IMPL(ActorCreator)
 
 ActorCreator::ActorCreator() {
     mActorList.initOffset(Actor::getCreatorListNodeOffset());
-    mActorFactory = nullptr;
+    mBaseProcFactory = nullptr;
     mEnableDistanceChecks = false;
     mBlockSpawns = false;
     _5a = true;

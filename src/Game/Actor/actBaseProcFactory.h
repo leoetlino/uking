@@ -5,23 +5,23 @@
 
 namespace uking::act {
 
-class ActorFactory : public ksys::act::IActorFactory {
+class BaseProcFactory : public ksys::act::IBaseProcFactory {
 public:
     void dummy() override;
     ksys::act::BaseProc* createActor(const ksys::act::ActorCreateArg& arg) override;
     void dummy2() override;
 };
 
-class ActorFactoryHolder {
-    SEAD_SINGLETON_DISPOSER(ActorFactoryHolder)
-    ActorFactoryHolder() = default;
-    virtual ~ActorFactoryHolder();
+class BaseProcFactoryHolder {
+    SEAD_SINGLETON_DISPOSER(BaseProcFactoryHolder)
+    BaseProcFactoryHolder() = default;
+    virtual ~BaseProcFactoryHolder();
 
 public:
     void init(sead::Heap* heap);
 
 private:
-    ActorFactory mFactory;
+    BaseProcFactory mFactory;
 };
 
 }  // namespace uking::act

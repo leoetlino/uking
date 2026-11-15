@@ -22,7 +22,7 @@ class BaseProc;
 struct BaseProcCreateArg;
 class BaseProcHandle;
 
-class IActorFactory {
+class IBaseProcFactory {
 public:
     virtual void dummy() = 0;
     virtual BaseProc* createActor(const ActorCreateArg& arg) = 0;
@@ -46,7 +46,7 @@ public:
     void enableDistanceUnloadChecks();
     void eraseActor(Actor* actor);
 
-    void setActorFactory(IActorFactory* factory) { mActorFactory = factory; }
+    void setBaseProcFactory(IBaseProcFactory* factory) { mBaseProcFactory = factory; }
     bool get5a() const { return _5a; }
 
     sead::OffsetList<Actor>& getActorList() { return mActorList; }
@@ -88,7 +88,7 @@ private:
         this, &ActorCreator::doCreateProc};
     TaskRemoveCallbackT<ActorCreator> mTaskRemovedDelegate{this, &ActorCreator::onTaskRemoved};
     sead::CriticalSection mActorListCS;
-    IActorFactory* mActorFactory;
+    IBaseProcFactory* mBaseProcFactory;
 };
 KSYS_CHECK_SIZE_NX150(ActorCreator, 0xf0);
 
