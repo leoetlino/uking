@@ -1,4 +1,4 @@
-#include "KingSystem/Resource/resUnit.h"
+#include "KingSystem/Resource/resResourceUnit.h"
 #include <filedevice/seadArchiveFileDevice.h>
 #include <resource/seadArchiveRes.h>
 #include "KingSystem/Resource/resCache.h"

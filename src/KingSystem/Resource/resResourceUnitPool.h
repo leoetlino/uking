@@ -1,7 +1,7 @@
 #pragma once
 
 #include <container/seadRingBuffer.h>
-#include "KingSystem/Resource/resUnit.h"
+#include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::res {

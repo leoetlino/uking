@@ -27,6 +27,8 @@ target_sources(uking PRIVATE
   resPlacement.h
   resResourceMgrTask.cpp
   resResourceMgrTask.h
+  resResourceUnit.cpp
+  resResourceUnit.h
   resResourceUnitPool.cpp
   resResourceUnitPool.h
   resSystem.cpp
@@ -39,8 +41,6 @@ target_sources(uking PRIVATE
   resTextureHandleList.h
   resTextureHandleMgr.cpp
   resTextureHandleMgr.h
-  resUnit.cpp
-  resUnit.h
 
   resResource.cpp
   resResource.h

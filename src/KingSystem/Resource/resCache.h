@@ -3,7 +3,7 @@
 #include <hostio/seadHostIONode.h>
 #include <thread/seadCriticalSection.h>
 #include "KingSystem/Resource/resHandle.h"
-#include "KingSystem/Resource/resUnit.h"
+#include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Utils/Container/StrTreeMap.h"
 #include "KingSystem/Utils/Types.h"
 

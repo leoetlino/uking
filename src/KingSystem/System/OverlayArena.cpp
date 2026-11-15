@@ -1,8 +1,8 @@
 #include "KingSystem/System/OverlayArena.h"
 #include <heap/seadExpHeap.h>
 #include "KingSystem/Resource/resResourceMgrTask.h"
+#include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Resource/resSystem.h"
-#include "KingSystem/Resource/resUnit.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
 namespace ksys {
