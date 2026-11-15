@@ -93,7 +93,7 @@ class IDamageManager;
 class LodState;
 class ModelBindInfo;
 class PreActor;
-class Schedule;
+class AIScheduler;
 
 struct ActorUniqueName {
     sead::BufferedSafeString* unique_name;
@@ -504,7 +504,7 @@ protected:
     /* 0x5d0 */ ActorUniqueName* mUniqueName = nullptr;
     /* 0x5d8 */ att::AttClientList* mAttention = nullptr;
     /* 0x5e0 */ ActorMessageTransceiver mMsgTransceiver{*this, this};
-    /* 0x638 */ Schedule* mSchedule = nullptr;
+    /* 0x638 */ AIScheduler* mSchedule = nullptr;
 
     /* 0x640 */ u32 mHashId = 0;
     /* 0x648 */ map::MubinIter mMapObjIter;
