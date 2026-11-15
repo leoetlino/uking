@@ -4,8 +4,8 @@
 #include <evfl/ResTimeline.h>
 #include <evfl/TimelineObj.h>
 #include "KingSystem/Event/evtActorBindings.h"
+#include "KingSystem/Event/evtEventFlowBinder.h"
 #include "KingSystem/Event/evtEventResource.h"
-#include "KingSystem/Resource/Event/resEventFlowBinder.h"
 #include "KingSystem/Resource/Event/resResourceEventFlow.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 
@@ -85,7 +85,7 @@ bool ResourceTimeline::finishLoad() {
     return ready;
 }
 
-long bindActorActions(evfl::TimelineObj& obj, res::EventFlowActionBinder binder) {
+long bindActorActions(evfl::TimelineObj& obj, EventFlowActionBinder binder) {
     auto* res_timeline = obj.GetTimeline();
 
     ore::Array<const evfl::ResActor> actors{res_timeline->actors.Get(), res_timeline->num_actors};
@@ -132,7 +132,7 @@ bool ResourceTimeline::setUpBindings(ActorBindings* bindings, sead::Heap* heap) 
     const auto bind_actors = [&] {
         for (int i = 0; i < mTimelines.size(); ++i) {
             auto& obj = timeline_objs[i];
-            res::EventFlowActorBinder binder(bindings, heap);
+            EventFlowActorBinder binder(bindings, heap);
             bool ok = false;
             bool failed = false;
 
@@ -151,10 +151,10 @@ bool ResourceTimeline::setUpBindings(ActorBindings* bindings, sead::Heap* heap) 
 
     // Bind actions.
     for (int i = 0; i < mTimelines.size(); ++i)
-        bindActorActions(timeline_objs[i], res::EventFlowActionBinder(bindings, heap));
+        bindActorActions(timeline_objs[i], EventFlowActionBinder(bindings, heap));
     bindings->allocBindingsActions(heap);
     for (int i = 0; i < mTimelines.size(); ++i)
-        bindActorActions(timeline_objs[i], res::EventFlowActionBinder(bindings, heap));
+        bindActorActions(timeline_objs[i], EventFlowActionBinder(bindings, heap));
 
     for (int i = 0; i < mTimelines.size(); ++i)
         timeline_objs[i].GetActBinder().UnbindAll();

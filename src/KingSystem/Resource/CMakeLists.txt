@@ -192,8 +192,6 @@ target_sources(uking PRIVATE
   Actor/resResourceUMii.cpp
   Actor/resResourceUMii.h
 
-  Event/resEventFlowBinder.cpp
-  Event/resEventFlowBinder.h
   Event/resDemoASLoader.cpp
   Event/resDemoASLoader.h
   Event/resResourceDemo.cpp

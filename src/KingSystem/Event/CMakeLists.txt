@@ -9,6 +9,8 @@ target_sources(uking PRIVATE
   evtDemoInfo.h
   evtEvent.cpp
   evtEvent.h
+  evtEventFlowBinder.cpp
+  evtEventFlowBinder.h
   evtEventResource.cpp
   evtEventResource.h
   evtInfoData.cpp

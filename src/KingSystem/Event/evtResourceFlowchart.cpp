@@ -4,9 +4,9 @@
 #include <evfl/Flowchart.h>
 #include <evfl/ResEventFlowFile.h>
 #include "KingSystem/Event/evtActorBindings.h"
+#include "KingSystem/Event/evtEventFlowBinder.h"
 #include "KingSystem/Event/evtEventResource.h"
 #include "KingSystem/Event/evtInfoData.h"
-#include "KingSystem/Resource/Event/resEventFlowBinder.h"
 #include "KingSystem/Resource/Event/resResourceEventFlow.h"
 #include "KingSystem/Resource/resLoadRequest.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
@@ -97,7 +97,7 @@ bool ResourceFlowchart::finishLoad() {
     return ready;
 }
 
-long bindActorActions(evfl::FlowchartContext& context, res::EventFlowActionBinder binder) {
+long bindActorActions(evfl::FlowchartContext& context, EventFlowActionBinder binder) {
     u8 any_ok = 0;
     u8 any_failed = 0;
 
@@ -130,7 +130,7 @@ long bindActorActions(evfl::FlowchartContext& context, res::EventFlowActionBinde
     return (int(any_failed) << 8) | int(any_ok);
 }
 
-long bindActorQueries(evfl::FlowchartContext& context, res::EventFlowQueryBinder binder) {
+long bindActorQueries(evfl::FlowchartContext& context, EventFlowQueryBinder binder) {
     u8 any_ok = 0;
     u8 any_failed = 0;
 
@@ -174,7 +174,7 @@ bool ResourceFlowchart::setUpBindings(ActorBindings* bindings, sead::Heap* heap)
         for (auto it = context.GetObjs().begin(); it != context.GetObjs().end(); ++it) {
             bool ok;
             bool failed;
-            res::EventFlowActorBinder binder{bindings, heap};
+            EventFlowActorBinder binder{bindings, heap};
 
             ok = false;
             failed = false;
@@ -193,17 +193,17 @@ bool ResourceFlowchart::setUpBindings(ActorBindings* bindings, sead::Heap* heap)
     bind_actors();
 
     // Bind actions.
-    res::EventFlowActionBinder action_binder_1{bindings, heap};
+    EventFlowActionBinder action_binder_1{bindings, heap};
     bindActorActions(context, action_binder_1);
     bindings->allocBindingsActions(heap);
-    res::EventFlowActionBinder action_binder_2{bindings, heap};
+    EventFlowActionBinder action_binder_2{bindings, heap};
     bindActorActions(context, action_binder_2);
 
     // Bind queries.
-    res::EventFlowQueryBinder query_binder_1{bindings, heap};
+    EventFlowQueryBinder query_binder_1{bindings, heap};
     bindActorQueries(context, query_binder_1);
     bindings->allocBindingsQueries(heap);
-    res::EventFlowQueryBinder query_binder_2{bindings, heap};
+    EventFlowQueryBinder query_binder_2{bindings, heap};
     bindActorQueries(context, query_binder_2);
 
     context.UnbindAll();
