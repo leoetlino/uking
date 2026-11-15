@@ -1,7 +1,7 @@
 #include "KingSystem/World/worldTimeMgr.h"
 #include <random/seadGlobalRandom.h>
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
-#include "KingSystem/ActorSystem/actActorSystem.h"
+#include "KingSystem/ActorSystem/actSystem.h"
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/Event/evtMetadata.h"
 #include "KingSystem/Game/Util/ActorUtil.h"
@@ -571,7 +571,7 @@ void TimeMgr::AnimalMasterController::calc() {
     const auto num_days = Manager::instance()->getTimeMgr()->getNumberOfDays();
 
     act::ActorLinkConstDataAccess player_accessor;
-    act::ActorSystem::instance()->getPlayer(&player_accessor);
+    act::System::instance()->getPlayer(&player_accessor);
 
     const int day_of_week = num_days % 7;
 

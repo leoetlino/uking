@@ -100,8 +100,6 @@ target_sources(uking PRIVATE
     actActorParam.h
     actActorParamMgr.cpp
     actActorParamMgr.h
-    actActorSystem.cpp
-    actActorSystem.h
     actActorTemplate.cpp
     actActorTemplate.h
     actAiAction.cpp
@@ -214,6 +212,8 @@ target_sources(uking PRIVATE
     actRecipe.h
     actShop.cpp
     actShop.h
+    actSystem.cpp
+    actSystem.h
     actTag.h
     actUMii.cpp
     actUMii.h

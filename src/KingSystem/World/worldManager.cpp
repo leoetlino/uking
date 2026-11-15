@@ -5,7 +5,7 @@
 #include <math/seadMathCalcCommon.h>
 #include <mc/seadWorkerMgr.h>
 #include "KingSystem/ActorSystem/actActorLinkConstDataAccess.h"
-#include "KingSystem/ActorSystem/actActorSystem.h"
+#include "KingSystem/ActorSystem/actSystem.h"
 #include "KingSystem/Camera/CameraMgr.h"
 #include "KingSystem/Event/evtManager.h"
 #include "KingSystem/Game/Ecosystem/Ecosystem.h"
@@ -410,7 +410,7 @@ void Manager::onStageInit(game::StageType stage_type, bool is_demo, bool is_main
         mPrevCameraPos.y += 200.0f;
         mCurrentClimate = getClimate(mCameraPos);
         act::ActorLinkConstDataAccess accessor;
-        act::ActorSystem::instance()->getPlayer(&accessor);
+        act::System::instance()->getPlayer(&accessor);
         if (accessor.hasProc()) {
             mPlayerPos = accessor.getAttentionPos();
             mPrevPlayerPos = mPlayerPos;

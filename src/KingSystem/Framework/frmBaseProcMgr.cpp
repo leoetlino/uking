@@ -2,7 +2,7 @@
 #include <mc/seadWorkerMgr.h>
 #include <prim/seadScopedLock.h>
 #include <thread/seadThread.h>
-#include "KingSystem/ActorSystem/actActorSystem.h"
+#include "KingSystem/ActorSystem/actSystem.h"
 #include "KingSystem/Framework/frmBaseProc.h"
 #include "KingSystem/Framework/frmBaseProcDeleter.h"
 #include "KingSystem/Framework/frmBaseProcInitializer.h"
@@ -308,7 +308,7 @@ void BaseProcMgr::resumeJobTypes(u16 mask) {
 }
 
 void BaseProcMgr::calc() {
-    act::ActorSystem::instance()->updatePlayerPosAndCameraPos();
+    act::System::instance()->updatePlayerPosAndCameraPos();
     mProcInitializer->deleteThreadIfPaused();
 
     if (mIsInitializingQuestMgr)

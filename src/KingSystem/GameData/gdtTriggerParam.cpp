@@ -4,9 +4,9 @@
 #include <devenv/seadStackTrace.h>
 #include <mc/seadCoreInfo.h>
 #include <time/seadTickTime.h>
-#include "KingSystem/ActorSystem/actActorSystem.h"
 #include "KingSystem/ActorSystem/actInfoCommon.h"
 #include "KingSystem/ActorSystem/actInfoData.h"
+#include "KingSystem/ActorSystem/actSystem.h"
 #include "KingSystem/Game/StageInfo.h"
 #include "KingSystem/Game/UI/UIGlue.h"
 #include "KingSystem/Game/Util/ActorUtil.h"
@@ -1632,8 +1632,8 @@ int TriggerParam::resetFlagsAccordingToPolicy(sead::BitFlag32 policy, int skip) 
     const bool main_field = game::StageInfo::sIsMainField;
 
     if (policy.isOnBit(int(ResetType::ResetAtMidnight))) {
-        game::getRevivalGridPosition(act::ActorSystem::instance()->getPlayerPos(), &col1, &row1,
-                                     &col2, &row2);
+        game::getRevivalGridPosition(act::System::instance()->getPlayerPos(), &col1, &row1, &col2,
+                                     &row2);
         for (int i = 0; i < 6; ++i)
             arrows[i] =
                 ksys::game::getPorchNum(game::arrowTypeToString(static_cast<game::ArrowType>(i)));
@@ -1815,7 +1815,7 @@ bool TriggerParam::shouldSkipRevivingShopItem(bool* is_shop_item, u32 flag_hash,
                 return false;
 
             sead::Vector3f pos;
-            if (!act::ActorSystem::instance()->getAutoPlacementActorPos(dealer, &pos))
+            if (!act::System::instance()->getAutoPlacementActorPos(dealer, &pos))
                 return false;
 
             col = sead::Mathi::clamp((int(pos.x) + 5000) / 1000, 0, 9);

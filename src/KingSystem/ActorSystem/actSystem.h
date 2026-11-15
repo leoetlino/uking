@@ -9,9 +9,9 @@ namespace ksys::act {
 class ActorLinkConstDataAccess;
 
 // TODO: incomplete
-class ActorSystem {
-    SEAD_SINGLETON_DISPOSER(ActorSystem)
-    ActorSystem();
+class System {
+    SEAD_SINGLETON_DISPOSER(System)
+    System();
 
 public:
     void updatePlayerPosAndCameraPos();
