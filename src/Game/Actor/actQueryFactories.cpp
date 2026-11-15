@@ -1,4 +1,4 @@
-#include "Game/Actor/aiQueryFactories.h"
+#include "Game/Actor/actQueryFactories.h"
 #include <array>
 #include "Game/Actor/Query/queryBranchByDyeColor.h"
 #include "Game/Actor/Query/queryBranchByGameOver.h"

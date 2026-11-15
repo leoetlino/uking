@@ -5,22 +5,22 @@ add_subdirectory(Damage)
 add_subdirectory(Player)
 add_subdirectory(Query)
 target_sources(uking PRIVATE
-  aiActionFactories.cpp
-  aiActionFactories.h
-  aiAiFactories.cpp
-  aiAiFactories.h
-  aiQueryFactories.cpp
-  aiQueryFactories.h
   actActionEx.cpp
   actActionEx.h
+  actActionFactories.cpp
+  actActionFactories.h
   actActorFactory.cpp
   actActorFactory.h
+  actAiFactories.cpp
+  actAiFactories.h
   actDragon.cpp
   actDragon.h
   actPlayerCreateMgr.cpp
   actPlayerCreateMgr.h
   actPlayerCreateTrace.cpp
   actPlayerCreateTrace.h
+  actQueryFactories.cpp
+  actQueryFactories.h
   actTemporaryMotionTypeChanger.h
   actUtils.cpp
   actUtils.h
