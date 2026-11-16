@@ -21,10 +21,10 @@
 #include "KingSystem/Resource/resControlTask.h"
 #include "KingSystem/Resource/resCounter.h"
 #include "KingSystem/Resource/resInfoContainer.h"
+#include "KingSystem/Resource/resMemoryMgr.h"
 #include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Resource/resResourceUnitPool.h"
 #include "KingSystem/Resource/resTempResourceLoader.h"
-#include "KingSystem/System/OverlayArena.h"
 
 namespace sead {
 class Heap;
@@ -33,8 +33,6 @@ class SZSDecompressor;
 }  // namespace sead
 
 namespace ksys {
-class OverlayArena;
-
 class TaskMgr;
 class TaskPostRunResult;
 class TaskThread;
@@ -109,12 +107,12 @@ public:
 
     void prepare() override;
 
-    void insertOverlayArena(OverlayArena* arena);
+    void insertMemoryMgr(MemoryMgr* arena);
 
     TaskThread* makeResourceLoadingThread(sead::Heap* heap, bool use_physics_task_thread);
 
-    void clearAllCaches(OverlayArena* arena);
-    OverlayArena* getTexHandleMgrArena() const;
+    void clearAllCaches(MemoryMgr* arena);
+    MemoryMgr* getTexHandleMgrArena() const;
 
     void requestDefragAllMemoryMgr();
     bool isDefragDone() const;
@@ -189,16 +187,16 @@ public:
         u32 heap_size = 0;
         ResourceUnit* unit = nullptr;
         sead::SafeString path;
-        OverlayArena* arena = nullptr;
-        OverlayArena** out_arena1 = nullptr;
-        OverlayArena** out_arena2 = nullptr;
+        MemoryMgr* arena = nullptr;
+        MemoryMgr** out_arena1 = nullptr;
+        MemoryMgr** out_arena2 = nullptr;
     };
     KSYS_CHECK_SIZE_NX150(MakeHeapArg, 0x38);
     sead::Heap* makeHeapForUnit(const MakeHeapArg& arg);
 
     struct GetUnitArg {
         const ResourceUnit::InitArg* unit_init_arg;
-        OverlayArena* arena;
+        MemoryMgr* arena;
     };
     ResourceUnit* clearCachesAndGetUnit(const GetUnitArg& arg);
 
@@ -228,7 +226,7 @@ public:
     bool returnTrue1();
 
     void clearCacheWithFileExtension(const sead::SafeString& extension);
-    void clearAllCachesSynchronously(OverlayArena* arena);
+    void clearAllCachesSynchronously(MemoryMgr* arena);
 
     bool returnTrue();
 
@@ -256,7 +254,7 @@ public:
 
     void getResourceSizeInfo(ResourceSizeInfo* info, const GetResourceSizeInfoArg& arg);
 
-    void removeOverlayArena(OverlayArena* arena);
+    void removeMemoryMgr(MemoryMgr* arena);
 
     TaskThread* getResourceLoadingThread() const { return mResourceLoadingThread; }
     TaskThread* getResourceControlThread() const { return mResourceControlThread; }
@@ -266,7 +264,7 @@ public:
     ResourceUnitDelegatePair& getUnitInitLoadFn() { return mUnitInitLoadFn; }
     auto& getUnitAdjustHeapFn() { return mUnitAdjustHeapFn; }
 
-    OverlayArena* getArenaForResourceL() { return &mArenaForResourceL; }
+    MemoryMgr* getArenaForResourceL() { return &mArenaForResourceL; }
 
     void setPack(ResourceBinder* pack);
 
@@ -374,11 +372,11 @@ private:
     sead::ObjArray<sead::SafeString> mExtensions1;  // TODO: rename
     sead::ObjArray<sead::SafeString> mExtensions2;  // TODO: rename
 
-    sead::OffsetList<OverlayArena> mArenas;
-    mutable sead::CriticalSection mArenasCS;
+    sead::OffsetList<MemoryMgr> mMemoryMgrs;
+    mutable sead::CriticalSection mMemoryMgrsCS;
 
-    OverlayArena mArenaForResourceS;
-    OverlayArena mArenaForResourceL;
+    MemoryMgr mArenaForResourceS;
+    MemoryMgr mArenaForResourceL;
 
     ResourceInfoContainer mResourceInfoContainer;
 

@@ -10,12 +10,9 @@ namespace sead {
 class FileDevice;
 }
 
-namespace ksys {
-class OverlayArena;
-}
-
 namespace ksys::res {
 
+class MemoryMgr;
 class ResourceBinder;
 
 class EntryFactoryBase;
@@ -58,7 +55,7 @@ public:
     sead::FileDevice* mFileDevice = nullptr;
     EntryFactoryBase* mEntryFactory = nullptr;
     sead::FileDevice* mAocFileDevice = nullptr;
-    OverlayArena* mArena = nullptr;
+    MemoryMgr* mArena = nullptr;
     ResourceBinder* mPackHandle = nullptr;
     void* mFilePathContainer = nullptr;
     void* _68 = nullptr;

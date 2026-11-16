@@ -14,6 +14,8 @@ target_sources(uking PRIVATE
   resInfoContainer.h
   resIOverlayArenaCoordinator.h
   resLoadRequest.h
+  resMemoryMgr.cpp
+  resMemoryMgr.h
   resOffsetReadFileDevice.cpp
   resOffsetReadFileDevice.h
   resOverlayArenaSystem.cpp

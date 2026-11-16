@@ -16,7 +16,7 @@ void InfoData::init(sead::Heap* heap) {
     doInit(heap, nullptr);
 }
 
-void InfoData::doInit(sead::Heap* heap, OverlayArena* arena) {
+void InfoData::doInit(sead::Heap* heap, res::MemoryMgr* arena) {
     ksys::res::LoadRequest load_request;
 
     load_request.mRequester = "evt::InfoData";

@@ -25,7 +25,7 @@ public:
     void init(sead::Heap* heap);
 
 private:
-    void doInit(sead::Heap* heap, OverlayArena* arena);
+    void doInit(sead::Heap* heap, res::MemoryMgr* arena);
     al::ByamlIter* mRootIter = nullptr;
     ksys::res::ResourceBinder mHandle;
     InfoDataUnknownType* _80 = nullptr;

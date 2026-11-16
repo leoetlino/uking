@@ -116,7 +116,7 @@ void Manager::loadVersionFile() {
     mVersionFile.file_handle.requestLoad(path, &req);
 }
 
-void Manager::loadAocMainFieldPack(OverlayArena* arena) {
+void Manager::loadAocMainFieldPack(res::MemoryMgr* arena) {
     if (!hasAoc3())
         return;
 

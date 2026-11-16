@@ -37,7 +37,7 @@ public:
 };
 
 enum class PanicReason {
-    OverlayArenaFull = 0,
+    MemoryMgrFull = 0,
     HavokMainHeapFull = 1,
     ActorCreateHeapFull = 2,
     ResourceSHeapFull = 3,

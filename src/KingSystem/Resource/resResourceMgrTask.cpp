@@ -46,7 +46,7 @@ ResourceMgrTask::ResourceMgrTask(const sead::TaskConstructArg& arg)
     : sead::CalculateTask(arg, "res::ResourceMgrTask"),
       mSzsDecompressorCS(arg.heap_array->getPrimaryHeap()),
       mCounter(arg.heap_array->getPrimaryHeap()), mTask(arg.heap_array->getPrimaryHeap()) {
-    mArenas.initOffset(OverlayArena::getListNodeOffset());
+    mMemoryMgrs.initOffset(MemoryMgr::getListNodeOffset());
     mUnits.initOffset(ResourceUnit::getResMgrUnitListNodeOffset());
     mSomeList.initOffset(0x188);  // TODO: replace this with a "get offset" call
     mSystemCalcFn.bind(this, &ResourceMgrTask::callSystemCalc_);
@@ -98,10 +98,10 @@ ResourceMgrTask::~ResourceMgrTask() {
     mResSystemHeap->destroy();
 }
 
-void ResourceMgrTask::insertOverlayArena(OverlayArena* arena) {
-    auto lock = sead::makeScopedLock(mArenasCS);
-    if (!mArenas.isNodeLinked(arena)) {
-        mArenas.pushBack(arena);
+void ResourceMgrTask::insertMemoryMgr(MemoryMgr* arena) {
+    auto lock = sead::makeScopedLock(mMemoryMgrsCS);
+    if (!mMemoryMgrs.isNodeLinked(arena)) {
+        mMemoryMgrs.pushBack(arena);
         stubbedLogFunction();
     }
 }
@@ -119,7 +119,7 @@ TaskThread* ResourceMgrTask::makeResourceLoadingThread(sead::Heap* heap,
                    sead::MessageQueue::BlockType::Blocking, 0x7fffffff, 0xa000, 32);
 }
 
-void ResourceMgrTask::clearAllCaches(OverlayArena* arena) {
+void ResourceMgrTask::clearAllCaches(MemoryMgr* arena) {
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_5));
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_4));
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_3));
@@ -145,7 +145,7 @@ bool ResourceMgrTask::isDefragDone() const {
 }
 
 f32 ResourceMgrTask::getDefragProgress() const {
-    auto lock = sead::makeScopedLock(mArenasCS);
+    auto lock = sead::makeScopedLock(mMemoryMgrsCS);
     if (_4c8 == -1)
         return 0;
     return f32(_4cc) / f32(_4c8);
@@ -476,8 +476,8 @@ void ResourceMgrTask::deregisterFileDevicePrefix(FileDevicePrefix& prefix) {
 }
 
 void ResourceMgrTask::callStubbedFunctionOnArenas() {
-    auto lock = sead::makeScopedLock(mArenasCS);
-    for (OverlayArena& arena : mArenas) {
+    auto lock = sead::makeScopedLock(mMemoryMgrsCS);
+    for (MemoryMgr& arena : mMemoryMgrs) {
         if (arena.isFlag8Set())
             arena.stubbed();
     }
@@ -493,7 +493,7 @@ sead::Heap* ResourceMgrTask::makeHeapForUnit(const MakeHeapArg& arg) {
     const auto heap_size = arg.heap_size;
     const auto path = arg.path;
 
-    OverlayArena* arena = arg.arena;
+    MemoryMgr* arena = arg.arena;
     if (!arena) {
         if (heap_size > 0x80000)
             arena = &mArenaForResourceL;
@@ -716,7 +716,7 @@ void ResourceMgrTask::clearCacheWithFileExtension(const sead::SafeString& extens
     mCaches[idx]->eraseUnits();
 }
 
-void ResourceMgrTask::clearAllCachesSynchronously(OverlayArena* arena) {
+void ResourceMgrTask::clearAllCachesSynchronously(MemoryMgr* arena) {
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_5));
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_4));
     mResourceControlThread->getTaskQueue()->waitForLaneToEmpty(u8(LaneId::_3));
@@ -741,13 +741,13 @@ bool ResourceMgrTask::returnTrue() {
     return true;
 }
 
-void ResourceMgrTask::removeOverlayArena(OverlayArena* arena) {
+void ResourceMgrTask::removeMemoryMgr(MemoryMgr* arena) {
     mTask.removeFromQueue();
 
-    auto lock = sead::makeScopedLock(mArenasCS);
+    auto lock = sead::makeScopedLock(mMemoryMgrsCS);
     mArenaIdx = 0;
-    if (mArenas.isNodeLinked(arena)) {
-        mArenas.erase(arena);
+    if (mMemoryMgrs.isNodeLinked(arena)) {
+        mMemoryMgrs.erase(arena);
         stubbedLogFunction();
     }
 }

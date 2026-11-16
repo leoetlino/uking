@@ -13,15 +13,16 @@
 
 namespace ksys {
 
-namespace res {
-class OverlayArenaSystem;
-class ResourceUnit;
-}  // namespace res
 namespace util {
 class DualHeap;
 }
 
-class OverlayArena {
+namespace res {
+
+class OverlayArenaSystem;
+class ResourceUnit;
+
+class MemoryMgr {
 public:
     struct InitArg {
         bool set_flag_1 = false;
@@ -40,8 +41,8 @@ public:
     };
     KSYS_CHECK_SIZE_NX150(InitArg, 0x38);
 
-    OverlayArena();
-    virtual ~OverlayArena();
+    MemoryMgr();
+    virtual ~MemoryMgr();
 
     bool init(const InitArg& arg);
     void stubbed();
@@ -63,18 +64,17 @@ public:
     bool checkIsOom() const;
 
     util::DualHeap* makeDualHeap(u32 size, const sead::SafeString& name,
-                                 sead::Heap::HeapDirection direction, res::ResourceUnit* unit,
-                                 bool x);
+                                 sead::Heap::HeapDirection direction, ResourceUnit* unit, bool x);
 
     void addSize(s32 size);
     void addSize2(s32 size);
 
     sead::Heap* getHeap() const { return mHeap; }
     sead::Heap* getHeap2() const { return mHeap2; }
-    static constexpr size_t getListNodeOffset() { return offsetof(OverlayArena, mListNode); }
+    static constexpr size_t getListNodeOffset() { return offsetof(MemoryMgr, mListNode); }
 
 private:
-    friend class res::OverlayArenaSystem;
+    friend class OverlayArenaSystem;
 
     enum class Flag : u8 {
         _1 = 0x1,
@@ -99,8 +99,8 @@ private:
     sead::ExpHeap* mHeap = nullptr;
     f32 mMinFreePercentage = 0.0;
     sead::Heap* mHeap2 = nullptr;
-    sead::OffsetList<res::ResourceUnit> mUnits;
-    sead::OffsetList<res::ResourceUnit> mUnits2;  // TODO: rename
+    sead::OffsetList<ResourceUnit> mUnits;
+    sead::OffsetList<ResourceUnit> mUnits2;  // TODO: rename
     sead::CriticalSection mCS;
     size_t mUsage2 = 0;
     void* _b0 = nullptr;
@@ -116,6 +116,8 @@ private:
     StringBoard mStringBoard;
     u8 _f8 = 0;
 };
-KSYS_CHECK_SIZE_NX150(OverlayArena, 0x100);
+KSYS_CHECK_SIZE_NX150(MemoryMgr, 0x100);
+
+}  // namespace res
 
 }  // namespace ksys

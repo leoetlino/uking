@@ -3,9 +3,9 @@
 #include <heap/seadExpHeap.h>
 #include <heap/seadHeap.h>
 #include <thread/seadThreadUtil.h>
+#include "KingSystem/Resource/resMemoryMgr.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Sound/sndSound.h"
-#include "KingSystem/System/OverlayArena.h"
 #include "KingSystem/Terrain/teraSystem.h"
 #include "KingSystem/Utils/Thread/Task.h"
 #include "KingSystem/Utils/Thread/TaskThread.h"
@@ -130,19 +130,19 @@ void OverlayArenaSystem::getSzsDecompressor(sead::SZSDecompressor** decompressor
         *decompressor = mSzsDecompressor;
 }
 
-OverlayArena* OverlayArenaSystem::getArena() const {
+MemoryMgr* OverlayArenaSystem::getArena() const {
     return mArena;
 }
 
-OverlayArena* OverlayArenaSystem::getTeraSzsWorkArena() const {
+MemoryMgr* OverlayArenaSystem::getTeraSzsWorkArena() const {
     return mTeraSzsWorkArena;
 }
 
-OverlayArena* OverlayArenaSystem::getAudioArena() const {
+MemoryMgr* OverlayArenaSystem::getAudioArena() const {
     return mAudioArena;
 }
 
-OverlayArena* OverlayArenaSystem::getUnknownArena() const {
+MemoryMgr* OverlayArenaSystem::getUnknownArena() const {
     return mUnknownArena;
 }
 
@@ -194,13 +194,13 @@ void OverlayArenaSystem::createArena() {
     if (!mFixedHeap)
         return;
 
-    mArena = new (mFixedHeap, std::nothrow) OverlayArena;
+    mArena = new (mFixedHeap, std::nothrow) MemoryMgr;
     if (!mArena) {
         mArena = nullptr;
         return;
     }
 
-    OverlayArena::InitArg arg;
+    MemoryMgr::InitArg arg;
     arg.size = 0x3affee0;
     arg.set_flag_1 = true;
     arg.set_flag_8 = true;
@@ -223,13 +223,13 @@ void OverlayArenaSystem::createTeraSzsWorkArena() {
     if (!mFixedHeap)
         return;
 
-    mTeraSzsWorkArena = new (mFixedHeap, std::nothrow) OverlayArena;
+    mTeraSzsWorkArena = new (mFixedHeap, std::nothrow) MemoryMgr;
     if (!mTeraSzsWorkArena) {
         mTeraSzsWorkArena = nullptr;
         return;
     }
 
-    OverlayArena::InitArg arg;
+    MemoryMgr::InitArg arg;
     arg.size = 0x9ffee0;
     arg.set_flag_1 = true;
     arg.set_flag_8 = true;
@@ -252,13 +252,13 @@ void OverlayArenaSystem::createAudioArena() {
     if (!mFixedHeap)
         return;
 
-    mAudioArena = new (mFixedHeap, std::nothrow) OverlayArena;
+    mAudioArena = new (mFixedHeap, std::nothrow) MemoryMgr;
     if (!mAudioArena) {
         mAudioArena = nullptr;
         return;
     }
 
-    OverlayArena::InitArg arg;
+    MemoryMgr::InitArg arg;
     arg.size = 0x2e00000;
     arg.set_flag_8 = true;
     arg.use_best_fit_alloc_mode = false;

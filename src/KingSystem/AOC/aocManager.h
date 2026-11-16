@@ -15,8 +15,8 @@ namespace sead {
 class FileDevice;
 }
 
-namespace ksys {
-class OverlayArena;
+namespace ksys::res {
+class MemoryMgr;
 }
 
 namespace ksys::aoc {
@@ -38,7 +38,7 @@ public:
     /// @return Whether the Champion's Ballad DLC is supported.
     bool hasAoc3() const { return mVersion >= 0x300; }
 
-    void loadAocMainFieldPack(OverlayArena* arena);
+    void loadAocMainFieldPack(res::MemoryMgr* arena);
     void registerAocMainFieldPack();
     void unloadAocMainFieldPack();
 

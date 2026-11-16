@@ -23,8 +23,6 @@ target_sources(uking PRIVATE
     MemoryProfiler.h
     MessageCapture.cpp
     MessageCapture.h
-    OverlayArena.cpp
-    OverlayArena.h
     Patrol.cpp
     Patrol.h
     Profiler.cpp

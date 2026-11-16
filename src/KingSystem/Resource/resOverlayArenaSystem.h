@@ -20,9 +20,10 @@ namespace ksys {
 
 class Task;
 class TaskThread;
-class OverlayArena;
 
 namespace res {
+
+class MemoryMgr;
 
 // FIXME: incomplete
 class OverlayArenaSystem {
@@ -39,10 +40,10 @@ public:
     bool init(const InitArg& arg, sead::Heap* heap);
 
     void getSzsDecompressor(sead::SZSDecompressor** decompressor) const;
-    OverlayArena* getArena() const;
-    OverlayArena* getTeraSzsWorkArena() const;
-    OverlayArena* getAudioArena() const;
-    OverlayArena* getUnknownArena() const;
+    MemoryMgr* getArena() const;
+    MemoryMgr* getTeraSzsWorkArena() const;
+    MemoryMgr* getAudioArena() const;
+    MemoryMgr* getUnknownArena() const;
 
     sead::Heap* getFixedHeap() const { return mFixedHeap; }
     sead::Heap* getMovableMemoryHeap() const { return mMovableMemoryHeap; }
@@ -89,10 +90,10 @@ private:
     sead::Heap* mSzsHeap = nullptr;
     sead::SZSDecompressor* mSzsDecompressor = nullptr;
     sead::Heap* mTexArcWorkHeap = nullptr;
-    OverlayArena* mArena = nullptr;
-    OverlayArena* mTeraSzsWorkArena = nullptr;
-    OverlayArena* mAudioArena = nullptr;
-    OverlayArena* mUnknownArena = nullptr;
+    MemoryMgr* mArena = nullptr;
+    MemoryMgr* mTeraSzsWorkArena = nullptr;
+    MemoryMgr* mAudioArena = nullptr;
+    MemoryMgr* mUnknownArena = nullptr;
     sead::Heap* mJpegHeap = nullptr;
     IOverlayArenaCoordinator* mGameCoordinator = nullptr;
     CoordinatorForOverlayArena mSystemCoordinator;

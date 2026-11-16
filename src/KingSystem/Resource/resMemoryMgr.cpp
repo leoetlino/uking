@@ -1,30 +1,30 @@
-#include "KingSystem/System/OverlayArena.h"
+#include "KingSystem/Resource/resMemoryMgr.h"
 #include <heap/seadExpHeap.h>
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resResourceUnit.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/Utils/HeapUtil.h"
 
-namespace ksys {
+namespace ksys::res {
 
-OverlayArena::OverlayArena() {
-    mUnits.initOffset(res::ResourceUnit::getArenaUnitListNodeOffset());
-    mUnits2.initOffset(res::ResourceUnit::getArenaUnitListNode2Offset());
+MemoryMgr::MemoryMgr() {
+    mUnits.initOffset(ResourceUnit::getArenaUnitListNodeOffset());
+    mUnits2.initOffset(ResourceUnit::getArenaUnitListNode2Offset());
 }
 
-OverlayArena::~OverlayArena() {
+MemoryMgr::~MemoryMgr() {
     destroy();
 }
 
 // NON_MATCHING: branching at the end (csel instead of a branch)
-bool OverlayArena::init(const OverlayArena::InitArg& arg) {
+bool MemoryMgr::init(const MemoryMgr::InitArg& arg) {
     if (!arg.heap) {
-        res::stubbedLogFunction();
+        stubbedLogFunction();
         return false;
     }
 
     if (arg.size == 0)
-        res::stubbedLogFunction();
+        stubbedLogFunction();
 
     mFlags.change(Flag::_1, arg.set_flag_1);
 
@@ -42,8 +42,8 @@ bool OverlayArena::init(const OverlayArena::InitArg& arg) {
     _c8 = 0;
     mMinFreePercentage = arg.min_free_percentage;
 
-    if (res::ResourceMgrTask::instance())
-        res::ResourceMgrTask::instance()->insertOverlayArena(this);
+    if (ResourceMgrTask::instance())
+        ResourceMgrTask::instance()->insertMemoryMgr(this);
 
     mFlags.change(Flag::_20, arg.set_flag_20);
     mFlags.change(Flag::_10, arg.set_flag_10);
@@ -60,49 +60,49 @@ bool OverlayArena::init(const OverlayArena::InitArg& arg) {
     return true;
 }
 
-void OverlayArena::stubbed() {}
+void MemoryMgr::stubbed() {}
 
-void OverlayArena::updateFlag8(bool on) {
+void MemoryMgr::updateFlag8(bool on) {
     if (on != mFlags.isOn(Flag::_8) && mHeap)
         mFlags.change(Flag::_8, on);
 }
 
-void OverlayArena::clearUnits() {
+void MemoryMgr::clearUnits() {
     if (!mHeap)
         return;
 
-    res::stubbedLogFunction();
+    stubbedLogFunction();
     auto lock = sead::makeScopedLock(mCS);
     for (auto& unit_ref : mUnits.robustRange()) {
-        res::ResourceUnit* unit = &unit_ref;
-        res::stubbedLogFunction();
-        res::ResourceMgrTask::instance()->deregisterUnit(unit);
-        res::ResourceMgrTask::instance()->requestClearCacheForSync(&unit, true, false);
+        ResourceUnit* unit = &unit_ref;
+        stubbedLogFunction();
+        ResourceMgrTask::instance()->deregisterUnit(unit);
+        ResourceMgrTask::instance()->requestClearCacheForSync(&unit, true, false);
     }
-    res::stubbedLogFunction();
+    stubbedLogFunction();
 }
 
-bool OverlayArena::isFlag1Set() const {
+bool MemoryMgr::isFlag1Set() const {
     return mFlags.isOn(Flag::_1);
 }
 
-bool OverlayArena::hasNoUnits() const {
+bool MemoryMgr::hasNoUnits() const {
     return mUnits.isEmpty();
 }
 
-s32 OverlayArena::getNumUnits() const {
+s32 MemoryMgr::getNumUnits() const {
     return mUnits.size();
 }
 
-bool OverlayArena::isFlag10Set() const {
+bool MemoryMgr::isFlag10Set() const {
     return mFlags.isOn(Flag::_10);
 }
 
-bool OverlayArena::isFlag8Set() const {
+bool MemoryMgr::isFlag8Set() const {
     return mFlags.isOn(Flag::_8);
 }
 
-bool OverlayArena::checkIsOom() const {
+bool MemoryMgr::checkIsOom() const {
     if (!mHeap)
         return false;
 
@@ -113,8 +113,8 @@ bool OverlayArena::checkIsOom() const {
         std::max<f32>(1.0 - used_size / (heap_size - sead::ExpHeap::getManagementAreaSize(8)), 0);
 
     if (free_percentage < mMinFreePercentage) {
-        if (res::returnFalse())
-            res::stubbedLogFunction();
+        if (returnFalse())
+            stubbedLogFunction();
 
         setBloodyMoonReasonForOom_();
         return true;
@@ -127,19 +127,19 @@ bool OverlayArena::checkIsOom() const {
 bool seadCheckPointer(void* ptr);
 
 // NON_MATCHING: branching
-util::DualHeap* OverlayArena::makeDualHeap(u32 size, const sead::SafeString& name,
-                                           sead::Heap::HeapDirection direction,
-                                           res::ResourceUnit* unit, bool) {
+util::DualHeap* MemoryMgr::makeDualHeap(u32 size, const sead::SafeString& name,
+                                        sead::Heap::HeapDirection direction, ResourceUnit* unit,
+                                        bool) {
     if (!mHeap)
         return nullptr;
 
-    const auto alignment = res::getDefaultAlignment();
+    const auto alignment = getDefaultAlignment();
     const auto lock = sead::makeScopedLock(mCS);
 
     auto* heap = util::DualHeap::tryCreate(size, name, mHeap, mHeap2, alignment, direction, false);
     if (!heap) {
-        if (res::returnFalse())
-            res::stubbedLogFunction();
+        if (returnFalse())
+            stubbedLogFunction();
 
         if (!clearCachedResources(size))
             return nullptr;
@@ -158,12 +158,12 @@ util::DualHeap* OverlayArena::makeDualHeap(u32 size, const sead::SafeString& nam
     return heap;
 }
 
-void OverlayArena::addSize(s32 size) {
+void MemoryMgr::addSize(s32 size) {
     mSize += size;
 }
 
-void OverlayArena::addSize2(s32 size) {
+void MemoryMgr::addSize2(s32 size) {
     mUsage1 += size;
 }
 
-}  // namespace ksys
+}  // namespace ksys::res

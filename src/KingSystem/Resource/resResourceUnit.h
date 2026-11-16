@@ -19,12 +19,9 @@ class DirectResource;
 class FileDevice;
 }  // namespace sead
 
-namespace ksys {
-class OverlayArena;
-}
-
 namespace ksys::res {
 
+class MemoryMgr;
 class ResourceMgr;
 class Context;
 class ResourceBinder;
@@ -55,7 +52,7 @@ public:
         InitArg() = default;
         InitArg(bool set_flag_1, bool set_flag_2, bool set_flag_4, bool load_req_field_26,
                 bool load_req_field_28, ResourceBinder* handle, ResourceMgr* cache, void* _18,
-                sead::Heap* heap, const LoadRequest* load_req, OverlayArena* arena, u32 alloc_size,
+                sead::Heap* heap, const LoadRequest* load_req, MemoryMgr* arena, u32 alloc_size,
                 sead::SafeString path)
             : set_flag_1(set_flag_1), set_flag_2(set_flag_2), set_flag_4(set_flag_4),
               load_req_field_26(load_req_field_26), load_req_field_28(load_req_field_28),
@@ -72,7 +69,7 @@ public:
         void* _18 = nullptr;
         sead::Heap* heap = nullptr;
         const LoadRequest* load_req = nullptr;
-        OverlayArena* arena = nullptr;
+        MemoryMgr* arena = nullptr;
         u32 alloc_size = 0;
         sead::SafeString path;
     };
@@ -209,10 +206,10 @@ private:
     sead::TypedBitFlag<Flag> mFlags;
     sead::TypedBitFlag<StatusFlag> mStatusFlags;
     Status mStatus = Status::_0;
-    OverlayArena* mArena = nullptr;
-    OverlayArena* mArena1 = nullptr;
-    OverlayArena* mArena2 = nullptr;
-    OverlayArena* mLoadReqArena = nullptr;
+    MemoryMgr* mArena = nullptr;
+    MemoryMgr* mArena1 = nullptr;
+    MemoryMgr* mArena2 = nullptr;
+    MemoryMgr* mLoadReqArena = nullptr;
     sead::DirectResource* mResource = nullptr;
     ResourceBinder mArchiveResHandle;
     sead::ArchiveRes* mArchiveRes = nullptr;

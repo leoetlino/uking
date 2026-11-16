@@ -10,11 +10,11 @@ class Heap;
 
 namespace ksys {
 
-class OverlayArena;
-
 class Event;
 
 namespace res {
+
+class MemoryMgr;
 
 class TextureArchiveWork {
 public:
@@ -33,14 +33,14 @@ public:
 
     bool init(const InitArg& arg);
     u32 getHeapSize() const;
-    OverlayArena* getArena() const;
+    MemoryMgr* getArena() const;
 
     bool waitForEvent(u32 milliseconds = 0);
     void setEvent();
 
 private:
     Event* mEvent = nullptr;
-    OverlayArena* mArena = nullptr;
+    MemoryMgr* mArena = nullptr;
 };
 KSYS_CHECK_SIZE_NX150(TextureArchiveWork, 0x10);
 

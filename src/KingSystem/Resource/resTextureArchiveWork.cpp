@@ -1,5 +1,5 @@
 #include "KingSystem/Resource/resTextureArchiveWork.h"
-#include "KingSystem/System/OverlayArena.h"
+#include "KingSystem/Resource/resMemoryMgr.h"
 #include "KingSystem/Utils/SafeDelete.h"
 #include "KingSystem/Utils/Thread/Event.h"
 
@@ -20,9 +20,9 @@ bool TextureArchiveWork::init(const TextureArchiveWork::InitArg& arg) {
         nullptr, sead::IDisposer::HeapNullOption::DoNotAppendDisposerIfNoHeapSpecified, false);
     mEvent->resetSignal();
 
-    mArena = new (arg.heap) OverlayArena;
+    mArena = new (arg.heap) MemoryMgr;
 
-    OverlayArena::InitArg arena_arg;
+    MemoryMgr::InitArg arena_arg;
     arena_arg.set_flag_1 = true;
     arena_arg.size = arg.arena_size;
     arena_arg.use_best_fit_alloc_mode = false;
@@ -38,7 +38,7 @@ u32 TextureArchiveWork::getHeapSize() const {
     return mArena->getHeap()->getSize();
 }
 
-OverlayArena* TextureArchiveWork::getArena() const {
+MemoryMgr* TextureArchiveWork::getArena() const {
     return mArena;
 }
 

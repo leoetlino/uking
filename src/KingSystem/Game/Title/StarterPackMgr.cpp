@@ -7,7 +7,7 @@ StarterPackMgr::StarterPackMgr() = default;
 
 StarterPackMgr::~StarterPackMgr() = default;
 
-void StarterPackMgr::registerPackFactoryAndMakeOverlayArena(bool reduced_heap_size) {
+void StarterPackMgr::registerPackFactoryAndMakeMemoryMgr(bool reduced_heap_size) {
     if (!mExpHeap) {
         res::registerEntryFactory(&mArchiveFac, "pack");
         sead::Heap* heap = res::ResourceMgrTask::instance()->getArenaForResourceL()->getHeap();
@@ -19,8 +19,8 @@ void StarterPackMgr::registerPackFactoryAndMakeOverlayArena(bool reduced_heap_si
         }
         mExpHeap = sead::ExpHeap::create(heap_size, "StarterPackMgr", heap, -8,
                                          sead::Heap::cHeapDirection_Forward, true);
-        mOverlayArena = new (mExpHeap, 8) OverlayArena;
-        OverlayArena::InitArg arg;
+        mMemoryMgr = new (mExpHeap, 8) res::MemoryMgr;
+        res::MemoryMgr::InitArg arg;
         arg.size = mExpHeap->getMaxAllocatableSize(8);
         arg.use_best_fit_alloc_mode = false;
         arg.set_flag_1 = true;
@@ -30,15 +30,15 @@ void StarterPackMgr::registerPackFactoryAndMakeOverlayArena(bool reduced_heap_si
         arg.heap2 = nullptr;
         arg._6 = false;
         arg.set_flag_10 = false;
-        mOverlayArena->init(arg);
+        mMemoryMgr->init(arg);
     }
 }
 
 void StarterPackMgr::deleteArenaAndHeapAndUnregisterFactory() {
     if (!GameConfig::getInstance()->_419) {
-        if (mOverlayArena) {
-            delete mOverlayArena;
-            mOverlayArena = nullptr;
+        if (mMemoryMgr) {
+            delete mMemoryMgr;
+            mMemoryMgr = nullptr;
         }
         if (mExpHeap) {
             mExpHeap->destroy();
@@ -57,7 +57,7 @@ void StarterPackMgr::loadBootupGraphicsPack() {
         load_req.mRequester = "StarterPackMgr";
         load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
-        load_req.mArena = mOverlayArena;
+        load_req.mArena = mMemoryMgr;
 
         mBootupGfxPack.requestLoad("Pack/Bootup_Graphics.pack", &load_req, nullptr);
     }
@@ -72,7 +72,7 @@ void StarterPackMgr::loadBootupPacks() {
         load_req.mRequester = "StarterPackMgr";
         load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
-        load_req.mArena = mOverlayArena;
+        load_req.mArena = mMemoryMgr;
 
         mBootupPack.requestLoad("Pack/Bootup.pack", &load_req, nullptr);
         sead::FixedSafeString<128> lang_pack;
@@ -91,7 +91,7 @@ void StarterPackMgr::loadTitlePack() {
         load_req.mRequester = "StarterPackMgr";
         load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
-        load_req.mArena = mOverlayArena;
+        load_req.mArena = mMemoryMgr;
 
         mTitlePack.requestLoad("Pack/Title.pack", &load_req, nullptr);
     }
@@ -106,7 +106,7 @@ void StarterPackMgr::loadTitleBGPacks() {
         load_req.mRequester = "StarterPackMgr";
         load_req.mInitLoadSignalsEvent = true;
         load_req._26 = false;
-        load_req.mArena = mOverlayArena;
+        load_req.mArena = mMemoryMgr;
 
         mTitleBGPack.requestLoad("Pack/TitleBG.pack", &load_req, nullptr);
         sead::FixedSafeString<128> lang_pack;
@@ -118,7 +118,7 @@ void StarterPackMgr::loadTitleBGPacks() {
 
 void StarterPackMgr::loadAocMainFieldPack() {
     if (aoc::Manager::instance())
-        aoc::Manager::instance()->loadAocMainFieldPack(mOverlayArena);
+        aoc::Manager::instance()->loadAocMainFieldPack(mMemoryMgr);
 }
 
 void StarterPackMgr::unloadBootupGraphicsPack() {

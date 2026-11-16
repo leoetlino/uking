@@ -6,12 +6,12 @@
 #include "KingSystem/AOC/aocManager.h"
 #include "KingSystem/Resource/resEntryFactory.h"
 #include "KingSystem/Resource/resLoadRequest.h"
+#include "KingSystem/Resource/resMemoryMgr.h"
 #include "KingSystem/Resource/resResourceArchive.h"
 #include "KingSystem/Resource/resResourceBinder.h"
 #include "KingSystem/Resource/resResourceMgrTask.h"
 #include "KingSystem/Resource/resSystem.h"
 #include "KingSystem/System/GameConfig.h"
-#include "KingSystem/System/OverlayArena.h"
 #include "KingSystem/Utils/Types.h"
 
 namespace ksys::game {
@@ -22,7 +22,7 @@ class StarterPackMgr {
     ~StarterPackMgr();
 
 public:
-    void registerPackFactoryAndMakeOverlayArena(bool reduced_heap_size);
+    void registerPackFactoryAndMakeMemoryMgr(bool reduced_heap_size);
     void deleteArenaAndHeapAndUnregisterFactory();
     void loadBootupGraphicsPack();
     void loadBootupPacks();
@@ -53,7 +53,7 @@ private:
     res::ResourceBinder mTitlePack;
     res::ResourceBinder mTitleBGPack;
     res::ResourceBinder mTitleBGLangPack;
-    OverlayArena* mOverlayArena = nullptr;
+    res::MemoryMgr* mMemoryMgr = nullptr;
     sead::ExpHeap* mExpHeap = nullptr;
     res::EntryFactory<res::Archive> mArchiveFac;
 };
